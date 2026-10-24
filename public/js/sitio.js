@@ -1,7 +1,6 @@
 /* Sitio web — Municipalidad de Melipeuco. Mejora progresiva: todo funciona sin JavaScript;
    esto agrega menú móvil, buscador con sugerencias, accesibilidad, carruseles, visor de
-   imágenes, videos livianos, clima, horas disponibles en vivo, la hora y el cielo de Melipeuco
-   en el paisaje de portada, y animaciones que respetan «reducir movimiento». */
+   imágenes, videos livianos, clima, horas disponibles en vivo y utilidades. */
 (function () {
   'use strict';
   var d = document, raiz = d.documentElement;
@@ -220,23 +219,23 @@
 
   // ---------------- Clima (Open-Meteo, sin cookies ni llaves) con íconos animados
   var clima = $('[data-clima]');
-  function iconoClima(tipo) {
-    var sol = '<g class="sol-rayos" stroke="#FFD166" stroke-width="2.4" stroke-linecap="round"><path d="M24 5v5M24 38v5M5 24h5M38 24h5M10.6 10.6l3.5 3.5M33.9 33.9l3.5 3.5M10.6 37.4l3.5-3.5M33.9 14.1l3.5-3.5"/></g><circle cx="24" cy="24" r="8.5" fill="#FFD166"/>';
-    var nube = '<path class="nube-mov" d="M14 36h20a8 8 0 0 0 0-16 11 11 0 0 0-21 3 6.5 6.5 0 0 0 1 13z" fill="#EAF1F7"/>';
-    var gotas = '<g stroke="#8FD3FF" stroke-width="2.4" stroke-linecap="round"><path class="gota" style="--i:0" d="M17 39l-2 5"/><path class="gota" style="--i:1" d="M25 39l-2 5"/><path class="gota" style="--i:2" d="M33 39l-2 5"/></g>';
-    var copos = '<g fill="#fff"><circle class="copo" style="--i:0" cx="17" cy="42" r="1.8"/><circle class="copo" style="--i:1" cx="25" cy="42" r="1.8"/><circle class="copo" style="--i:2" cx="33" cy="42" r="1.8"/></g>';
-    var dentro = tipo === 'sol' ? sol : tipo === 'parcial' ? '<g transform="translate(-6 -6) scale(.8)">' + sol + '</g>' + nube : tipo === 'lluvia' ? '<g transform="translate(0 -6)">' + nube + '</g>' + gotas : tipo === 'nieve' ? '<g transform="translate(0 -6)">' + nube + '</g>' + copos : nube;
-    return '<svg class="clima-ico" viewBox="0 0 48 48" aria-hidden="true">' + dentro + '</svg>';
-  }
+  var ICONOS_CLIMA = {
+    sol: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    parcial: '<path d="M8 3v1.5M3.6 5.6l1 1M2 10h1.5M12.4 5.6l-1 1"/><path d="M5.3 12.5A3.5 3.5 0 1 1 11 8.4"/><path d="M9 20h8a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.4 2A3 3 0 0 0 9 20z"/>',
+    nube: '<path d="M7 19h10a4.5 4.5 0 0 0 .5-9A6 6 0 0 0 6 11.5 3.8 3.8 0 0 0 7 19z"/>',
+    lluvia: '<path d="M7 15h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 3.3 3.3 0 0 0 7 15z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>',
+    nieve: '<path d="M7 15h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 3.3 3.3 0 0 0 7 15z"/><path d="M8 19h.01M12 21h.01M16 19h.01"/>'
+  };
+  function iconoClima(tipo) { return '<svg class="clima-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONOS_CLIMA[tipo] || ICONOS_CLIMA.nube) + '</svg>'; }
   if (clima) {
     var CODIGOS = { 0: ['Despejado', 'sol'], 1: ['Mayormente despejado', 'sol'], 2: ['Parcialmente nublado', 'parcial'], 3: ['Nublado', 'nube'], 45: ['Niebla', 'nube'], 48: ['Niebla', 'nube'], 51: ['Llovizna', 'lluvia'], 53: ['Llovizna', 'lluvia'], 55: ['Llovizna', 'lluvia'], 61: ['Lluvia débil', 'lluvia'], 63: ['Lluvia', 'lluvia'], 65: ['Lluvia fuerte', 'lluvia'], 66: ['Lluvia helada', 'lluvia'], 67: ['Lluvia helada', 'lluvia'], 71: ['Nieve', 'nieve'], 73: ['Nieve', 'nieve'], 75: ['Nieve intensa', 'nieve'], 77: ['Nieve', 'nieve'], 80: ['Chubascos', 'lluvia'], 81: ['Chubascos', 'lluvia'], 82: ['Chubascos fuertes', 'lluvia'], 85: ['Chubascos de nieve', 'nieve'], 86: ['Chubascos de nieve', 'nieve'], 95: ['Tormenta', 'lluvia'], 96: ['Tormenta', 'lluvia'], 99: ['Tormenta', 'lluvia'] };
     var u = 'https://api.open-meteo.com/v1/forecast?latitude=' + clima.getAttribute('data-lat') + '&longitude=' + clima.getAttribute('data-lng') + '&current=temperature_2m,weather_code,wind_speed_10m,precipitation&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FSantiago&forecast_days=1';
     fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
       var c = j.current, dd = j.daily || {}, cod = CODIGOS[c.weather_code] || ['', 'nube'];
       var max = dd.temperature_2m_max ? Math.round(dd.temperature_2m_max[0]) : null, min = dd.temperature_2m_min ? Math.round(dd.temperature_2m_min[0]) : null;
-      clima.innerHTML = iconoClima(cod[1]) + '<div><span class="clima-temp">' + Math.round(c.temperature_2m) + '°</span><small>' + esc(cod[0]) + (max != null ? '. Hoy ' + max + '° / ' + min + '°' : '') + '</small><small>Viento ' + Math.round(c.wind_speed_10m) + ' km/h' + (c.precipitation ? ', ' + c.precipitation + ' mm' : '') + '</small></div>';
-      clima.setAttribute('title', 'Fuente: Open-Meteo');
-    }).catch(function () { var p = $('.clima-cargando', clima); p && (p.textContent = 'No se pudo obtener el pronóstico.'); });
+      clima.innerHTML = iconoClima(cod[1]) + '<span><b>Tiempo en Melipeuco</b>' + Math.round(c.temperature_2m) + '°C, ' + esc(cod[0].toLowerCase()) + (max != null ? ' (máx. ' + max + '°, mín. ' + min + '°)' : '') + '</span>';
+      clima.setAttribute('title', 'Fuente: Open-Meteo. Viento ' + Math.round(c.wind_speed_10m) + ' km/h');
+    }).catch(function () { clima.hidden = true; });
   }
 
   // ---------------- Próxima hora disponible (Plataforma de Trámites)
@@ -276,74 +275,6 @@
   $$('form').forEach(function (f) {
     if ((f.getAttribute('method') || '').toLowerCase() !== 'post') return;
     f.addEventListener('submit', function () { var b = $('button[type="submit"], button:not([type])', f); if (b) { setTimeout(function () { b.disabled = true; b.textContent = 'Enviando…'; }, 0); } });
-  });
-
-  // ---------------- Hora de Melipeuco: reloj y cielo del paisaje
-  var horaChile = function () {
-    try { var p = new Intl.DateTimeFormat('es-CL', { timeZone: 'America/Santiago', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date()); var g = function (t) { return (p.filter(function (x) { return x.type === t; })[0] || {}).value; }; return { h: Number(g('hour')), m: g('minute') }; }
-    catch (e) { var n = new Date(); return { h: n.getHours(), m: String(n.getMinutes()).padStart(2, '0') }; }
-  };
-  var TEXTO_MOMENTO = { amanecer: 'amanece en el Llaima', dia: 'buen día', atardecer: 'atardece en la cordillera', noche: 'noche estrellada' };
-  function actualizarHora() {
-    var t = horaChile(), h = t.h;
-    var m = h >= 6 && h < 8 ? 'amanecer' : h >= 8 && h < 18 ? 'dia' : h >= 18 && h < 21 ? 'atardecer' : 'noche';
-    if (raiz.dataset.momento !== m) raiz.dataset.momento = m;
-    $$('[data-reloj]').forEach(function (r) { r.textContent = String(h).padStart(2, '0') + ':' + t.m; });
-    $$('[data-momento-texto]').forEach(function (s) { s.textContent = TEXTO_MOMENTO[m]; });
-  }
-  actualizarHora();
-  setInterval(actualizarHora, 30000);
-
-  // ---------------- Cabecera compacta al desplazarse
-  var cab = $('.cabecera');
-  if (cab) {
-    var compacta = false;
-    var revisar = function () { var c = window.scrollY > 80; if (c !== compacta) { compacta = c; cab.classList.toggle('compacta', c); } };
-    window.addEventListener('scroll', revisar, { passive: true }); revisar();
-  }
-
-  // ---------------- Paralaje suave del paisaje de portada
-  var escena = $('[data-parallax]');
-  if (escena && !reducido) {
-    var capas = ['.pz-lejos', '.pz-volcan', '.pz-medio', '.pz-cerca', '.pz-bosque', '.pz-cercanas'].map(function (s, n) { return { el: $(s, escena), f: (n + 1) * .045 }; }).filter(function (c) { return c.el; });
-    var pendiente = false;
-    var mover = function () {
-      pendiente = false;
-      var y = Math.min(window.scrollY, 900);
-      capas.forEach(function (c) { c.el.style.translate = '0 ' + (-y * c.f).toFixed(1) + 'px'; });
-      escena.style.transform = 'translateY(' + (y * .35).toFixed(1) + 'px)';
-    };
-    window.addEventListener('scroll', function () { if (!pendiente) { pendiente = true; requestAnimationFrame(mover); } }, { passive: true });
-  }
-
-  // ---------------- Revelado al desplazarse (con escalonado) y dibujo de íconos
-  raiz.classList.add('js');
-  if ('IntersectionObserver' in window && !reducido) {
-    var grupos = ['.accesos > li', '.lista-tramites > *', '.acciones-tramites > *', '.grilla-noticias > *', '.noticias-portada > .tarjeta-noticia', '.lista-eventos > *', '.tarjetas-areas > *', '.tarjetas > *', '.lista-documentos > li', '.autoridades > *', '.lista-sesiones > li', '.resultados > li', '.contactos > *', '.pie-columnas > section'];
-    var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        // También se revela lo que quedó atrás tras un salto rápido (tecla Fin, enlaces internos).
-        if (!e.isIntersecting && e.boundingClientRect.top > 0) return;
-        e.target.classList.add('revelado');
-        if (e.target.querySelector('.ico [pathLength]')) e.target.classList.add('dibuja');
-        obs.unobserve(e.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
-    var vigilar = function (el, i) { if (el.closest('.hero')) return; el.classList.add('revelar'); el.style.setProperty('--i', Math.min(i, 8)); obs.observe(el); };
-    grupos.forEach(function (sel) { $$(sel).forEach(function (el) { vigilar(el, Array.prototype.indexOf.call(el.parentNode.children, el)); }); });
-    $$('.seccion-cabecera, .ficha-seccion, .lateral-bloque, .emergencias-portada, .horas-disponibles, .banda-turismo .contenedor, .boletin, .encuesta, .caja, .calendario, .campanas').forEach(function (el) { vigilar(el, 0); });
-  }
-
-  // ---------------- Cifras que cuentan hasta su valor
-  $$('[data-contar]').forEach(function (el) {
-    var fin = Number(el.getAttribute('data-contar')) || 0;
-    if (reducido || !('IntersectionObserver' in window)) { el.textContent = fin.toLocaleString('es-CL'); return; }
-    var o = new IntersectionObserver(function (e) {
-      if (!e[0].isIntersecting) return; o.disconnect();
-      var t0 = performance.now();
-      (function paso(t) { var p = Math.min(1, (t - t0) / 1200); el.textContent = Math.round(fin * (1 - Math.pow(1 - p, 3))).toLocaleString('es-CL'); if (p < 1) requestAnimationFrame(paso); })(t0);
-    });
-    o.observe(el);
   });
 
   // ---------------- Aplicación instalable y lectura sin conexión

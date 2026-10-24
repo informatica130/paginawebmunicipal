@@ -83,9 +83,7 @@ const P = {
 };
 
 export function icono(nombre, { clase = '', tam = 20, titulo = '' } = {}) {
-  // pathLength="1" permite animar el trazado (los íconos se dibujan al aparecer o al pasar el cursor).
-  const d = (P[nombre] || P.estrella).replace(/<(path|circle|rect|ellipse|line|polyline)\b/g, '<$1 pathLength="1"');
-  return `<svg class="ico ico-${nombre} ${clase}" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${titulo ? `role="img" aria-label="${titulo}"` : 'aria-hidden="true" focusable="false"'}>${d}</svg>`;
+  return `<svg class="ico ${clase}" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${titulo ? `role="img" aria-label="${titulo}"` : 'aria-hidden="true" focusable="false"'}>${P[nombre] || P.estrella}</svg>`;
 }
 
 export const NOMBRES_ICONOS = Object.keys(P);

@@ -18,22 +18,22 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - 59 eventos de la agenda, 1.789 archivos de la biblioteca de medios, 50 transmisiones del Concejo convertidas en sesiones, y el directorio telefónico y de correos;
 - las páginas del menú que estaban vacías (Municipio, Salud, Educación, Udel, Social, Deporte, Turismo, Juzgado, PLADECO…) ahora tienen contenido: noticias de su área, trámites, contactos y documentos.
 
-**Diseño «Cordillera» (2026)**
-- Identidad propia tomada del territorio: azul noche y crema del escudo, verde pehuén, turquesa de la laguna Icalma y ámbar del piñón; títulos en Big Shoulders Display (estilo señalética de parques) y textos en Atkinson Hyperlegible.
-- **Escudo vectorizado** (`public/img/escudo-*.svg`, `emblema-*.svg`): nítido en cualquier tamaño, se dibuja trazo a trazo en la portada.
-- **Paisaje vectorial animado** del volcán Llaima con fumarola, araucarias, nubes y laguna (`server/render/paisaje.js`). Sus colores siguen la **hora real de Melipeuco** (amanecer, día, atardecer, noche con estrellas) y las capas se mueven con el desplazamiento.
-- Crestas de cordillera entre secciones, curvas de nivel como textura y la guarda textil del escudo en el pie.
-- Íconos que se dibujan al aparecer, revelado escalonado al desplazarse, cabecera que se compacta, transiciones entre páginas y microanimaciones en botones y tarjetas. Todo se desactiva con «reducir movimiento» del sistema.
+**Diseño**
+- Institucional y sobrio: blanco, azul y ámbar de la marca municipal (configurables en el panel), bordes finos y una cuadrícula ordenada.
+- Portada con una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima), el buscador «¿Qué necesita hacer?», una franja con horario de atención, teléfono, tiempo actual y emergencias, y accesos rápidos.
+- Una sola familia tipográfica, Public Sans, servida desde el propio sitio (sin depender de Google Fonts).
+- Rápido: sin ilustraciones ni animaciones decorativas; la foto principal pesa entre 44 y 216 KB según la pantalla, y el HTML de la portada pesa unos 12 KB comprimido.
+- Escudo municipal vectorizado (`public/img/escudo-*.svg`, `emblema-*.svg`).
 
 **Mejoras del sitio público**
-- Portada nueva: avisos de emergencia, paisaje del volcán Llaima con reloj y tiempo actual, campañas, buscador «¿Qué necesita hacer hoy?», accesos rápidos, trámites en línea con **próximas horas disponibles en vivo**, noticias, agenda, clima, teléfonos de emergencia, áreas municipales, turismo, encuesta, video y boletín.
+- Portada nueva: avisos de emergencia, foto de Melipeuco con buscador, horario y tiempo actual, campañas, buscador «¿Qué necesita hacer hoy?», accesos rápidos, trámites en línea con **próximas horas disponibles en vivo**, noticias, agenda, clima, teléfonos de emergencia, áreas municipales, turismo, encuesta, video y boletín.
 - **Catálogo de trámites** con fichas claras (requisitos, documentos, paso a paso, costo, plazo, dónde y cuándo) y filtros por área y modalidad. Se mezclan las fichas del sitio y los trámites en línea de la Plataforma.
 - **63 áreas municipales** según el Reglamento de Organización Interna N° 12/2025 (el mismo organigrama de la Plataforma), cada una con funciones, contacto, trámites y noticias.
 - **Concejo Municipal**: autoridades, sesiones con tabla, acuerdos, acta y transmisión.
 - **OIRS en línea**: consultas, reclamos y sugerencias con código de seguimiento; con RUN, el mensaje entra además como solicitud a la Oficina de Partes de la Plataforma.
 - Agenda con calendario mensual y exportación a calendario (ICS), documentos por colección, transparencia, directorio con buscador, encuestas ciudadanas, boletín por correo, mapa del sitio.
 - Buscador de texto completo con sugerencias al escribir (incluye los trámites en línea).
-- **Accesibilidad**: tipografía Atkinson Hyperlegible, contraste AA, tamaño de texto, alto contraste, modo oscuro, navegación con teclado, «saltar al contenido», textos alternativos, enlaces externos anunciados.
+- **Accesibilidad**: contraste AA, tamaño de texto, alto contraste, modo oscuro, navegación con teclado, «saltar al contenido», textos alternativos, enlaces externos anunciados.
 - SEO: metadatos, Open Graph, datos estructurados (organización, noticias, eventos, servicios), sitemap, RSS, URLs canónicas y redirecciones 301 de las direcciones antiguas.
 - Rápido: páginas generadas en el servidor (5–15 ms), caché, compresión, imágenes en varios tamaños, videos livianos y aplicación instalable con lectura sin conexión.
 - API pública de datos abiertos (`/api/public/`): noticias, avisos, eventos, trámites, áreas, documentos.

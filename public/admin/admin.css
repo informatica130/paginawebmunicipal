@@ -1,12 +1,13 @@
-/* Panel de administración del sitio web — Municipalidad de Melipeuco · diseño «Cordillera» */
+/* Panel de administración del sitio web — Municipalidad de Melipeuco */
+@font-face { font-family: 'Public Sans'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fuentes/public-sans-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Public Sans'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fuentes/public-sans-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 :root {
-  --primario: #14284A; --primario-osc: #0C1A33; --primario-suave: #E6ECF4; --acento: #E3A33A; --oscuro: #0C1A33; --laguna: #0E7C86; --crema: #F4EAD2;
+  --primario: #0B4F7C; --primario-osc: #083B5D; --primario-suave: #E9F1F8; --acento: #F2A900; --oscuro: #062B45;
   --fondo: #F1F4F6; --superficie: #fff; --superficie-2: #f8fafc; --borde: #dde3ea; --borde-fuerte: #b9c4d0;
   --texto: #162133; --texto-2: #4a5768; --texto-3: #66758a;
   --ok: #157347; --alerta: #a35a00; --peligro: #b42318; --info: #1d5f9a;
   --radio: 10px; --sombra: 0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08); --sombra-alta: 0 18px 40px -14px rgba(16,24,40,.35);
-  --fuente: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --fuente-titulo: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --fuente: 'Public Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --curva: cubic-bezier(.2, .8, .2, 1);
   --lateral: 250px;
   color-scheme: light;
@@ -22,7 +23,7 @@ html { font-size: 15px; }
 body { margin: 0; font-family: var(--fuente); background: var(--fondo); color: var(--texto); line-height: 1.5; -webkit-font-smoothing: antialiased; }
 a { color: var(--primario); }
 h1, h2, h3 { line-height: 1.2; margin: 0 0 .6em; letter-spacing: -.01em; }
-h1 { font-family: var(--fuente-titulo); font-weight: 800; font-size: 2.15rem; letter-spacing: .005em; line-height: 1.05; } h2 { font-size: 1.2rem; } h3 { font-size: 1.04rem; }
+h1 { font-weight: 800; font-size: 1.6rem; letter-spacing: -.02em; } h2 { font-size: 1.2rem; } h3 { font-size: 1.04rem; }
 :focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
 [hidden] { display: none !important; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -32,13 +33,11 @@ h1 { font-family: var(--fuente-titulo); font-weight: 800; font-size: 2.15rem; le
 .chico { font-size: .88rem; }
 
 /* Ingreso */
-.ingreso { position: relative; min-height: 100vh; display: grid; place-items: center; padding: 20px; background: #070F24 url('/img/paisaje.svg') center bottom / cover no-repeat; overflow: hidden; }
-.ingreso::before { content: ''; position: absolute; inset: 0; background: radial-gradient(600px 500px at 50% 45%, rgba(7, 15, 36, .55), transparent 70%); }
-.ingreso-caja { position: relative; width: min(420px, 100%); background: var(--superficie); border-radius: 24px; padding: 30px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6); animation: ingreso-subir .8s var(--curva) both; }
-.ingreso-caja::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 6px; border-radius: 24px 24px 0 0; background: linear-gradient(90deg, var(--acento), var(--laguna)); }
-@keyframes ingreso-subir { from { opacity: 0; transform: translateY(30px) scale(.98); } }
-.ingreso-caja img { width: 120px; display: block; margin: 0 auto 6px; }
-.ingreso-caja h1 { text-align: center; font-size: 2rem; margin-bottom: .3em; }
+.ingreso { position: relative; min-height: 100vh; display: grid; place-items: center; padding: 20px; background: var(--oscuro) url('/img/plaza-melipeuco-1536.webp') center / cover no-repeat; }
+.ingreso::before { content: ''; position: absolute; inset: 0; background: rgba(6, 34, 56, .72); }
+.ingreso-caja { position: relative; width: min(400px, 100%); background: var(--superficie); border-radius: 10px; padding: 32px 30px; box-shadow: 0 24px 48px -16px rgba(0, 0, 0, .55); }
+.ingreso-caja img { width: 96px; display: block; margin: 0 auto 10px; }
+.ingreso-caja h1 { text-align: center; font-size: 1.4rem; margin-bottom: .3em; }
 .ingreso-caja p.sub { text-align: center; color: var(--texto-2); margin-top: -6px; }
 
 /* Estructura */
@@ -46,12 +45,11 @@ h1 { font-family: var(--fuente-titulo); font-weight: 800; font-size: 2.15rem; le
 .lateral { background: var(--oscuro); color: #cdd7e4; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; }
 .lateral .marca { display: flex; gap: 10px; align-items: center; padding: 16px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.08); }
 .lateral .marca img { width: 44px; height: auto; }
-.lateral .marca b { display: block; font-family: var(--fuente-titulo); font-weight: 800; font-size: 1.3rem; line-height: 1; color: var(--crema); }
+.lateral .marca b { display: block; font-weight: 750; font-size: 1rem; line-height: 1.15; color: #fff; }
 .lateral .marca small { color: #9fb2c8; font-size: .78rem; }
 .lateral nav { padding: 10px 8px; flex: 1; }
 .lateral .grupo { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; color: #8496ad; padding: 14px 10px 6px; }
-.lateral a.item { position: relative; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; color: #dbe4ef; text-decoration: none; font-weight: 500; transition: background .2s, transform .25s var(--curva); }
-.lateral a.item:hover { transform: translateX(3px); }
+.lateral a.item { position: relative; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 6px; color: #dbe4ef; text-decoration: none; font-weight: 500; transition: background-color .15s; }
 .lateral a.item:hover { background: rgba(255,255,255,.07); color: #fff; }
 .lateral a.item.activo { background: rgba(255, 255, 255, .1); color: #fff; box-shadow: inset 4px 0 0 var(--acento); }
 .lateral a.item .num { margin-left: auto; background: var(--acento); color: #1b1300; font-size: .74rem; font-weight: 800; padding: 1px 7px; border-radius: 999px; }
@@ -250,11 +248,4 @@ a.indicador:hover { border-color: var(--primario); }
   .secciones-portada li { grid-template-columns: 1fr; }
 }
 
-/* Movimiento: entrada de cada vista y del contenido */
-.vista > * { animation: vista-entrar .45s var(--curva); }
 :root[data-tema="oscuro"] .ingreso-caja img { filter: brightness(0) invert(.93); }
-@keyframes vista-entrar { from { opacity: 0; transform: translateY(10px); } }
-.btn { transition: transform .2s var(--curva), box-shadow .2s, background .2s; }
-.btn:hover:not([disabled]) { transform: translateY(-1px); }
-.btn:active:not([disabled]) { transform: translateY(0) scale(.98); }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

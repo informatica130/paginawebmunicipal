@@ -14,9 +14,9 @@ export default async function (vista) {
         <div class="fila"><label class="campo"><span>Nombre oficial</span><input name="nombre" value="${a.nombre}"></label><label class="campo"><span>Nombre corto</span><input name="nombreCorto" value="${a.nombreCorto}"></label><label class="campo"><span>Lema</span><input name="lema" value="${a.lema}"></label></div>
         <label class="campo"><span>Descripción (buscadores y redes sociales)</span><textarea name="descripcion" rows="2">${a.descripcion}</textarea></label>
         <h3>Colores institucionales</h3><div class="fila">
-          <label class="campo"><span>Principal (azul noche)</span><input type="color" name="c_primario" value="${a.colores?.primario || '#14284A'}"></label>
-          <label class="campo"><span>Acento (botones destacados)</span><input type="color" name="c_acento" value="${a.colores?.acento || '#E3A33A'}"></label>
-          <label class="campo"><span>Fondo profundo (pie)</span><input type="color" name="c_oscuro" value="${a.colores?.oscuro || '#0C1A33'}"></label></div>
+          <label class="campo"><span>Principal (azul institucional)</span><input type="color" name="c_primario" value="${a.colores?.primario || '#0B4F7C'}"></label>
+          <label class="campo"><span>Acento (botones destacados)</span><input type="color" name="c_acento" value="${a.colores?.acento || '#F2A900'}"></label>
+          <label class="campo"><span>Fondo profundo (pie)</span><input type="color" name="c_oscuro" value="${a.colores?.oscuro || '#062B45'}"></label></div>
         <p class="chico muted">Mantenga buen contraste: el texto blanco debe leerse bien sobre el color principal y el oscuro.</p>
         <label class="campo"><span>Texto del pie (use {anio} para el año)</span><input name="pie" value="${a.pie?.texto || ''}"></label>
       </section>

@@ -32,7 +32,7 @@ export const AJUSTES_BASE = {
     { nombre: 'Bomberos', telefono: '+56938708549' },
     { nombre: 'Ambulancia SAMU', telefono: '131' },
   ],
-  colores: { primario: '#14284A', acento: '#E3A33A', oscuro: '#0C1A33' },
+  colores: { primario: '#0B4F7C', acento: '#F2A900', oscuro: '#062B45' },
   codigos: { transparencia: 'MU172', sem: '70766500' },
   turismo: { titulo: 'Melipeuco, Capital del Trekking', texto: 'Volcanes, lagunas, araucarias y senderos para toda la familia.', url: 'https://melipeucocapitaldeltrekking.cl/', imagen: '/wp-content/uploads/2025/05/capital-del-trekking-05-1024x307.png' },
   video: { titulo: 'Último video', url: 'https://www.youtube.com/watch?v=K6y_Gbza-Cw' },
@@ -64,11 +64,11 @@ const L = (texto, url, extra = {}) => ({ texto, url, hijos: [], ...extra });
 
 export const MENUS_BASE = {
   superior: { nombre: 'Barra de transparencia', items: [
-    L('Solicitar información Ley del Lobby', 'https://www.leylobby.gob.cl/instituciones/MU172', { icono: 'personas', nueva: true }),
-    L('Solicitar información Ley de Transparencia', 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrg=608', { icono: 'mano', nueva: true }),
+    L('Ley del Lobby', 'https://www.leylobby.gob.cl/instituciones/MU172', { icono: 'personas', nueva: true }),
+    L('Solicitud de información', 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrg=608', { icono: 'mano', nueva: true }),
     L('Transparencia Activa', 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU172', { icono: 'documento', nueva: true }),
     L('Transparencia Pasiva', 'https://www.portaltransparencia.cl/PortalPdT/web/guest/directorio-de-organismos-regulados?p_p_id=pdtorganismos_WAR_pdtorganismosportlet&orgcode=dc0e9af73fe176a43258f68dcddab714', { icono: 'carpeta', nueva: true }),
-    L('Declaraciones de intereses y patrimonio', 'https://www.declaracionjurada.cl/pubsistema/patrimonio.web.publico/pu/index.html?sid=399', { icono: 'balanza', nueva: true }),
+    L('Declaraciones de patrimonio', 'https://www.declaracionjurada.cl/pubsistema/patrimonio.web.publico/pu/index.html?sid=399', { icono: 'balanza', nueva: true }),
   ] },
   principal: { nombre: 'Menú principal', items: [
     { ...L('Municipio', '/municipio/'), hijos: [
@@ -355,10 +355,14 @@ export function fechaDesdeTitulo(t) {
 export function sembrarBase(db, repo) {
   const hecho = db.ajuste('semilla_base', null);
   if (!db.ajuste('sitio')) db.guardarAjuste('sitio', AJUSTES_BASE);
-  // Rediseño 2026: si nadie cambió los colores de la primera versión, se adoptan los nuevos.
   const sitio = db.ajuste('sitio');
-  if (sitio?.colores && sitio.colores.primario === '#0b5a8c' && sitio.colores.acento === '#ffaa02' && sitio.colores.oscuro === '#001035') db.guardarAjuste('sitio', { ...sitio, colores: AJUSTES_BASE.colores });
+  // Paletas predeterminadas anteriores: se actualizan a la actual (no se tocan colores elegidos a mano).
+  const anteriores = ['#0b5a8c|#ffaa02|#001035', '#14284A|#E3A33A|#0C1A33'];
+  if (sitio?.colores && anteriores.includes([sitio.colores.primario, sitio.colores.acento, sitio.colores.oscuro].join('|'))) db.guardarAjuste('sitio', { ...sitio, colores: AJUSTES_BASE.colores });
   for (const [clave, m] of Object.entries(MENUS_BASE)) if (!db.get('SELECT 1 FROM menus WHERE clave = ?', clave)) repo.guardarMenu(clave, m.nombre, m.items);
+  // Barra de transparencia con los nombres largos de la primera versión (no cabían en una línea).
+  const largos = ['Solicitar información Ley del Lobby', 'Solicitar información Ley de Transparencia', 'Transparencia Activa', 'Transparencia Pasiva', 'Declaraciones de intereses y patrimonio'];
+  if (repo.menu('superior').map((i) => i.texto).join('|') === largos.join('|')) repo.guardarMenu('superior', MENUS_BASE.superior.nombre, MENUS_BASE.superior.items);
   if (hecho) return false;
 
   db.tx(() => {

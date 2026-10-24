@@ -212,7 +212,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
 
   function manifest() {
     const s = ajustes();
-    return JSON.stringify({ name: s.nombre, short_name: 'Melipeuco', description: s.descripcion, lang: 'es-CL', start_url: '/', display: 'standalone', background_color: '#ffffff', theme_color: s.colores?.oscuro || '#001035', icons: [{ src: '/img/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: '/img/icon-512.png', sizes: '512x512', type: 'image/png' }, { src: '/img/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }], shortcuts: [{ name: 'Trámites', url: '/tramites/' }, { name: 'Noticias', url: '/noticias/' }, { name: 'Contacto', url: '/contacto/' }] });
+    return JSON.stringify({ name: s.nombre, short_name: 'Melipeuco', description: s.descripcion, lang: 'es-CL', start_url: '/', display: 'standalone', background_color: '#ffffff', theme_color: s.colores?.primario || '#0B4F7C', icons: [{ src: '/img/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: '/img/icon-512.png', sizes: '512x512', type: 'image/png' }, { src: '/img/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }], shortcuts: [{ name: 'Trámites', url: '/tramites/' }, { name: 'Noticias', url: '/noticias/' }, { name: 'Contacto', url: '/contacto/' }] });
   }
 
   // Bloque HTML aislado: se sirve en su propio documento con CSP «sandbox» (origen opaco):

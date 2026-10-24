@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const destino = path.join(RAIZ, 'estatico');
 fs.rmSync(destino, { recursive: true, force: true });
-for (const dir of ['css', 'js', 'img', 'admin']) {
+for (const dir of ['css', 'js', 'img', 'fuentes', 'admin']) {
   fs.cpSync(path.join(RAIZ, 'public', dir), path.join(destino, dir), { recursive: true, filter: (f) => !f.endsWith(path.join('admin', 'index.html')) });
 }
 const [mayor, menor] = process.versions.node.split('.').map(Number);

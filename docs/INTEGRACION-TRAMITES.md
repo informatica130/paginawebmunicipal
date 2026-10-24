@@ -1,6 +1,6 @@
 # Integración con la Plataforma Municipal de Trámites
 
-El sitio web y la Plataforma Municipal de Trámites (repositorio `Transito`) son **dos aplicaciones hermanas**: comparten organigrama, identidad visual (Atkinson Hyperlegible, escudo, mismos tokens de color) y se comunican por sus API públicas. El sitio **no duplica trámites**: los lee en vivo.
+El sitio web y la Plataforma Municipal de Trámites (repositorio `Transito`) son **dos aplicaciones hermanas**: comparten organigrama y escudo, y se comunican por sus API públicas. El sitio **no duplica trámites**: los lee en vivo.
 
 ```
  Ciudadanía ──► municipalidadmelipeuco.cl (este sitio)          tramites.municipalidadmelipeuco.cl (Plataforma)

@@ -212,7 +212,7 @@ async function bloqueTramiteEnLinea(ctx, b) {
   const t = ctx.tramites;
   if (!t.configurado) return '';
   const atributo = b.vista === 'seguimiento' ? crudo('data-melipeuco-vista="seguimiento"') : b.vista === 'catalogo' ? crudo(`data-melipeuco-dependencia="${esc(b.dependencia || '')}"`) : crudo(`data-melipeuco-tramite="${esc(b.tramite)}"`);
-  return html`${titulo(b.titulo)}<div class="widget-tramite" ${atributo} data-color="${ctx.ajustes.colores?.primario || '#14284A'}">
+  return html`${titulo(b.titulo)}<div class="widget-tramite" ${atributo} data-color="${ctx.ajustes.colores?.primario || '#0B4F7C'}">
     <p><a class="boton boton-primario" href="${b.vista === 'seguimiento' ? t.enlaces.seguimiento() : b.vista === 'catalogo' ? t.enlaces.catalogo(b.dependencia) : t.enlaces.tramite(b.tramite)}">Abrir en la Plataforma de Trámites</a></p>
   </div><script src="${t.enlaces.widget()}" defer></script>`;
 }

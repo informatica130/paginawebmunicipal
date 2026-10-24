@@ -5,7 +5,6 @@ import { documento, encabezado } from './layout.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
-import { paisaje, emblemaAnimado, cresta, curvasDeNivel } from './paisaje.js';
 
 // ------------------------------------------------------------------ Portada
 export async function portada(ctx) {
@@ -27,32 +26,29 @@ async function seccionPortada(ctx, sec) {
     case 'banners': {
       const dest = await ctx.tramites.destacados();
       const proxima = dest?.proximas?.[0];
-      const letras = [...'Melipeuco'].map((l, i) => html`<span style="--i:${i}">${l}</span>`);
+      const urgencia = (s.emergencias || [])[0];
+      const foto = (w) => `/img/plaza-melipeuco-${w}.webp`;
       return html`<section class="hero" aria-labelledby="hero-titulo">
-        <div class="hero-escena" data-parallax>${crudo(paisaje())}</div>
+        <img class="hero-foto" src="${foto(1536)}" srcset="${foto(640)} 640w, ${foto(1024)} 1024w, ${foto(1536)} 1536w" sizes="100vw" width="1536" height="800" alt="" fetchpriority="high" decoding="async">
         <div class="contenedor hero-contenido">
-          <div class="hero-texto">
-            ${crudo(emblemaAnimado())}
-            <p class="hero-antetitulo">Ilustre Municipalidad de</p>
-            <h1 id="hero-titulo" class="hero-titulo" aria-label="Melipeuco"><span aria-hidden="true">${letras}</span></h1>
-            <p class="hero-lema">${s.lema}. Al pie del volcán Llaima, en la puerta del Parque Nacional Conguillío.</p>
-            <form class="hero-buscar" action="/buscar/" method="get" role="search">
-              <label for="q-portada">¿Qué necesita hacer hoy?</label>
-              <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Licencia, patente, horario de buses…" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
-              <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
-            </form>
-            <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>
-          </div>
-          <aside class="hero-ahora" aria-label="Ahora en Melipeuco">
-            <p class="ahora-titulo">Ahora en Melipeuco</p>
-            <p class="ahora-hora"><time data-reloj>--:--</time><span data-momento-texto></span></p>
-            ${s.clima?.activo ? html`<div class="ahora-clima" data-clima data-lat="${s.mapa?.lat || -38.85}" data-lng="${s.mapa?.lng || -71.69}"><p class="clima-cargando">Consultando el tiempo…</p></div>` : ''}
-            ${proxima ? html`<a class="ahora-dato" href="${proxima.url}" target="_blank" rel="noopener"><span class="en-vivo">En vivo</span><b>Próxima hora disponible</b><span>${proxima.name}</span><span class="ahora-fecha">${fecha(proxima.date, { largo: true, diaSemana: true })}${proxima.time ? `, ${proxima.time} hrs.` : ''}</span></a>` : ''}
-            <a class="ahora-dato ahora-emergencias" href="/contacto/#emergencias"><b>Emergencias</b><span>Urgencias CESFAM ${telefonoTexto((s.emergencias || [])[0]?.telefono || '')}</span></a>
-          </aside>
+          <h1 id="hero-titulo">Municipalidad de Melipeuco</h1>
+          <p class="hero-lema">${s.lema}. Trámites, servicios e información para las vecinas y vecinos de la comuna.</p>
+          <form class="hero-buscar" action="/buscar/" method="get" role="search">
+            <label for="q-portada">¿Qué necesita hacer?</label>
+            <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Ej.: licencia de conducir, patente, horario de buses" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
+            <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
+          </form>
+          <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>
         </div>
-        ${crudo(cresta('cresta-hero'))}
-      </section>`;
+        <p class="hero-credito">Plaza de Melipeuco y volcán Llaima</p>
+      </section>
+      <div class="franja-datos"><div class="contenedor">
+        <div class="dato">${crudo(icono('reloj', { tam: 22 }))}<span><b>Horario de atención</b>${s.horario}</span></div>
+        <a class="dato" href="${telefonoHref(s.telefono)}">${crudo(icono('telefono', { tam: 22 }))}<span><b>Teléfono municipal</b>${s.telefono}</span></a>
+        ${proxima ? html`<a class="dato" href="${proxima.url}" target="_blank" rel="noopener">${crudo(icono('calendario', { tam: 22 }))}<span><b>Próxima hora disponible</b>${proxima.name}: ${fecha(proxima.date, { diaSemana: true })}${proxima.time ? `, ${proxima.time} hrs.` : ''}</span></a>` : ''}
+        ${s.clima?.activo ? html`<div class="dato" data-clima data-lat="${s.mapa?.lat || -38.85}" data-lng="${s.mapa?.lng || -71.69}">${crudo(icono('sol', { tam: 22 }))}<span><b>Tiempo en Melipeuco</b><span class="clima-cargando">Consultando…</span></span></div>` : ''}
+        ${urgencia ? html`<a class="dato dato-emergencia" href="/contacto/#emergencias">${crudo(icono('alerta', { tam: 22 }))}<span><b>Emergencias</b>${urgencia.nombre} ${telefonoTexto(urgencia.telefono)}</span></a>` : ''}
+      </div></div>`;
     }
     case 'campanas': {
       const slides = ctx.repo.vigentes('slide');
@@ -126,7 +122,7 @@ async function seccionPortada(ctx, sec) {
     case 'areas': {
       const lista = ctx.repo.listar({ tipo: 'area', publico: true, orden: 'orden', limite: 300 }).items.filter((a) => ['direccion', 'alcaldia', 'juzgado', 'concejo'].includes(a.datos.tipoUnidad) || ['dep-salud', 'dep-educacion', 'dep-transito'].includes(a.datos.transitoDepartamento)).filter((a) => a.datos.enMenu !== false).slice(0, 16);
       if (!lista.length) return '';
-      return html`<section class="seccion seccion-areas"><div class="areas-fondo" aria-hidden="true">${crudo(curvasDeNivel())}</div><div class="contenedor">
+      return html`<section class="seccion seccion-areas"><div class="contenedor">
         <div class="seccion-cabecera"><h2>${sec.titulo || 'Áreas municipales'}</h2><a class="ver-todo" href="/areas/">Todas las áreas</a></div>
         ${tarjetasAreas(ctx, lista)}
       </div></section>`;
@@ -134,7 +130,7 @@ async function seccionPortada(ctx, sec) {
     case 'turismo': {
       const t = ctx.ajustes.turismo;
       if (!t?.url) return '';
-      return html`<section class="banda-turismo"><div class="turismo-fondo" aria-hidden="true">${crudo(curvasDeNivel())}</div><div class="contenedor">
+      return html`<section class="banda-turismo"><div class="contenedor">
         ${t.imagen ? html`<img src="${t.imagen}" alt="${t.titulo}" loading="lazy" class="turismo-logo">` : html`<h2>${t.titulo}</h2>`}
         <p>${t.texto}</p>
         <a class="boton boton-acento" ${attrsEnlace(t.url)}>${crudo(icono('montana', { tam: 18 }))} Visite el sitio web${avisoExterno(t.url)}</a>
