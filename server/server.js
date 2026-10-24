@@ -48,9 +48,17 @@ export async function iniciar(opciones = {}) {
   const mailer = createMailer(cfg.SMTP);
   const limitador = new Limitador();
 
-  // Versión de los archivos estáticos para invalidar la caché del navegador.
+  // Versión de los archivos estáticos para invalidar la caché del navegador. Se calcula con el
+  // contenido (no con la fecha: en Vercel todos los archivos llegan con la misma fecha y la
+  // versión no cambiaba entre despliegues, así que el navegador seguía con el CSS antiguo).
   const PUB = path.join(RAIZ, 'public');
-  const version = crypto.createHash('sha1').update(['css/sitio.css', 'js/sitio.js', 'admin/admin.js', 'admin/admin.css'].map((f) => { try { return fs.statSync(path.join(PUB, f)).mtimeMs; } catch { return 0; } }).join('|')).digest('hex').slice(0, 10);
+  const huella = crypto.createHash('sha1');
+  for (const dir of ['css', 'js', 'admin']) {
+    let archivos = [];
+    try { archivos = fs.readdirSync(path.join(PUB, dir), { recursive: true }).map(String).sort(); } catch {}
+    for (const f of archivos) { try { huella.update(f).update(fs.readFileSync(path.join(PUB, dir, f))); } catch {} }
+  }
+  const version = huella.digest('hex').slice(0, 10);
 
   const leerUsuario = (req) => {
     if (req._usuario !== undefined) return req._usuario;
