@@ -802,3 +802,64 @@ mark { padding: 0 2px; border-radius: 2px; background: color-mix(in srgb, var(--
   a { color: #000; }
   .prosa a[href^="http"]::after { content: ' (' attr(href) ')'; font-size: 9pt; }
 }
+
+/* =====================================================================
+   Movimiento (lo anima public/js/movimiento.js con la API nativa).
+   Con «reducir movimiento» nada de esto se activa.
+   ===================================================================== */
+
+/* Pantalla de carga de la portada */
+.con-intro { overflow: hidden; }
+.con-intro .marca-emblema { visibility: hidden; }
+.intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: var(--fondo); animation: intro-seguro .3s ease 4.4s forwards; }
+.intro-escudo { width: min(300px, 64vw); will-change: transform; }
+.intro-escudo svg { display: block; width: 100%; height: auto; overflow: visible; }
+.intro .pz { opacity: 0; transform-box: fill-box; fill: #14284A; fill-rule: evenodd; }
+:root[data-tema="oscuro"] .intro .pz { fill: #F4EAD2; }
+.intro-emblema { opacity: 0; }
+.intro-ondas { fill: none; stroke: #14284A; stroke-width: 3; }
+:root[data-tema="oscuro"] .intro-ondas { stroke: #F4EAD2; }
+.intro-ondas circle { opacity: 0; }
+.intro-barra { position: absolute; left: 50%; bottom: max(10vh, 56px); width: 168px; height: 3px; overflow: hidden; border-radius: 3px; background: var(--borde); transform: translateX(-50%); }
+.intro-barra span { display: block; height: 100%; background: var(--ambar); transform-origin: left; animation: intro-progreso 1.6s cubic-bezier(.6, 0, .25, 1) forwards; }
+.intro-saltar { position: absolute; left: 0; right: 0; bottom: max(10vh, 56px); margin: 0 0 -32px; color: var(--texto-3); font-size: .8125rem; text-align: center; animation: intro-aparecer .4s ease 1s both; }
+@keyframes intro-progreso { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes intro-aparecer { from { opacity: 0; } }
+@keyframes intro-seguro { to { opacity: 0; visibility: hidden; } }
+
+/* Barra de carga al navegar entre páginas */
+.carga { position: fixed; top: 0; left: 0; z-index: 900; width: 100%; height: 3px; background: linear-gradient(90deg, var(--ambar), #FFD166); transform: scaleX(0); transform-origin: left; opacity: 0; pointer-events: none; }
+.carga.activa { opacity: 1; animation: carga-avance 8s cubic-bezier(.1, .7, .1, 1) forwards; box-shadow: 0 0 8px rgba(242, 169, 0, .6); }
+@keyframes carga-avance { 0% { transform: scaleX(0); } 10% { transform: scaleX(.45); } 40% { transform: scaleX(.75); } 100% { transform: scaleX(.94); } }
+
+/* Contenido que aparecerá al desplazarse (la clase la pone y quita el script) */
+.por-aparecer { opacity: 0; }
+
+/* Inclinación 3D con el cursor, con un brillo que sigue al puntero */
+.accesos a, .tarjeta-area, a.tarjeta, .tarjeta-accion { transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .45s cubic-bezier(.16, 1, .3, 1), border-color .15s, background-color .15s, box-shadow .3s; }
+.inclinado { transition-duration: .12s, .15s, .15s, .3s; box-shadow: 0 14px 28px -16px rgba(6, 43, 69, .45); background-image: radial-gradient(circle at var(--bx, 50%) var(--by, 50%), rgba(255, 255, 255, .55), transparent 55%) !important; }
+:root[data-tema="oscuro"] .inclinado { background-image: radial-gradient(circle at var(--bx, 50%) var(--by, 50%), rgba(255, 255, 255, .07), transparent 55%) !important; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Transición entre páginas: la cabecera queda fija y el contenido se desliza */
+  @view-transition { navigation: auto; }
+  .cabecera { view-transition-name: cabecera; }
+  ::view-transition-group(cabecera) { animation: none; }
+  ::view-transition-old(root) { animation: vt-salida .22s cubic-bezier(.4, 0, 1, 1) both; }
+  ::view-transition-new(root) { animation: vt-entrada .42s cubic-bezier(.16, 1, .3, 1) both; }
+  @keyframes vt-salida { to { opacity: 0; transform: translateY(-14px) scale(.99); filter: blur(2px); } }
+  @keyframes vt-entrada { from { opacity: 0; transform: translateY(22px); } }
+
+  /* Menús, sugerencias y botones */
+  .nav-boton[aria-expanded="true"] + .submenu { animation: abrir-menu .22s cubic-bezier(.16, 1, .3, 1); transform-origin: top; }
+  .sugerencias:not([hidden]) { animation: abrir-menu .18s cubic-bezier(.16, 1, .3, 1); transform-origin: top; }
+  .buscador:not([hidden]) { animation: abrir-menu .2s cubic-bezier(.16, 1, .3, 1); }
+  @keyframes abrir-menu { from { opacity: 0; transform: translateY(-6px) scaleY(.97); } }
+  .boton, .boton-icono { transition: background-color .15s, border-color .15s, color .15s, transform .12s; }
+  .boton:active, .boton-icono:active { transform: scale(.97); }
+  .hero .campo-buscar { transition: transform .25s cubic-bezier(.16, 1, .3, 1), box-shadow .25s; }
+  .hero .campo-buscar:focus-within { transform: translateY(-2px); }
+  .aviso { animation: abrir-menu .4s cubic-bezier(.16, 1, .3, 1) both; }
+  .arriba { transition: opacity .2s, transform .3s cubic-bezier(.34, 1.45, .64, 1); transform: translateY(12px); }
+  .arriba.visible { transform: none; }
+}

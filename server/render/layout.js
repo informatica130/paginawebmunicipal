@@ -3,6 +3,7 @@
 
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, telefonoHref, telefonoTexto } from './comun.js';
 import { textoPlano, recortar } from '../../src/util.js';
+import { plantillaIntro, SCRIPT_INTRO } from './intro.js';
 
 const NIVELES = { info: 'info', alerta: 'alerta', emergencia: 'alerta', exito: 'check' };
 
@@ -176,6 +177,7 @@ ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
 </head>
 <body class="${clase}${portada ? ' es-portada' : ''}">
+${portada ? html`${crudo(plantillaIntro())}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 ${ctx.usuario ? html`<div class="barra-admin"><div class="contenedor"><span>${crudo(icono('usuario', { tam: 16 }))} ${ctx.usuario.nombre}</span><a href="/admin/">Panel de administración</a>${editar ? html`<a href="/admin/#/editar/${editar}">${crudo(icono('herramienta', { tam: 16 }))} Editar esta página</a>` : ''}</div></div>` : ''}
 ${cabecera(ctx)}
@@ -186,6 +188,7 @@ ${cuerpo}
 ${pie(ctx)}
 <button type="button" class="arriba" data-arriba aria-label="Volver arriba">${crudo(icono('flecha', { tam: 20, clase: 'arriba-ico' }))}</button>
 <script src="/js/sitio.js?v=${ctx.version}" defer></script>
+<script src="/js/movimiento.js?v=${ctx.version}" defer></script>
 </body>
 </html>`;
 }

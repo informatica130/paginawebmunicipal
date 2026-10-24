@@ -25,6 +25,13 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - Rápido: sin ilustraciones ni animaciones decorativas; la foto principal pesa entre 44 y 216 KB según la pantalla, y el HTML de la portada pesa unos 12 KB comprimido.
 - Escudo municipal vectorizado (`public/img/escudo-*.svg`, `emblema-*.svg`).
 
+**Movimiento** (API de animación nativa del navegador, sin librerías; se apaga con «reducir movimiento»)
+- **Pantalla de carga** de la portada (primera visita de cada sesión, se salta con un clic o una tecla): el escudo se arma pieza por pieza. El volcán y el terreno se elevan, las araucarias crecen desde la raíz, el kultrún llega girando, las trutrucas se deslizan por su diagonal y suenan, los laureles con copihues brotan, las aves llegan volando y la cinta se despliega. Luego el escudo vuela al logo de la cabecera mientras la pantalla se cierra en un círculo sobre él. Las piezas salen de `public/img/escudo-piezas.svg`, generado desde el escudo con `herramientas/piezas-escudo.py`.
+- **Entrada de la portada**: la foto se acerca, el título se descubre y el buscador sube.
+- **Aparición al desplazarse**: los accesos giran en 3D, las noticias descubren su foto, las listas se deslizan y el escudo del pie gira como moneda. Todo dura menos de 0,7 s.
+- **Cursor**: los mosaicos se inclinan en 3D con un brillo que sigue al puntero, y el logo de la cabecera gira.
+- **Navegación**: barra de carga al cambiar de página y transición entre páginas con la cabecera fija (en navegadores compatibles).
+
 **Mejoras del sitio público**
 - Portada nueva: avisos de emergencia, foto de Melipeuco con buscador, horario y tiempo actual, campañas, buscador «¿Qué necesita hacer hoy?», accesos rápidos, trámites en línea con **próximas horas disponibles en vivo**, noticias, agenda, clima, teléfonos de emergencia, áreas municipales, turismo, encuesta, video y boletín.
 - **Catálogo de trámites** con fichas claras (requisitos, documentos, paso a paso, costo, plazo, dónde y cuándo) y filtros por área y modalidad. Se mezclan las fichas del sitio y los trámites en línea de la Plataforma.
