@@ -12,6 +12,7 @@ import { Db } from '../server/db.js';
 import { crearRepositorio } from '../server/contenidos.js';
 import { fechaDesdeTitulo } from '../server/semilla.js';
 import { iniciar } from '../server/server.js';
+import { normalizar as normalizarDiseno, aplicarEstilo, variablesCss } from '../public/js/diseno.js';
 
 // ------------------------------------------------------------------ Unidades
 test('saneador: elimina scripts, eventos y URLs peligrosas', () => {
@@ -59,6 +60,21 @@ test('utilidades: slug, RUN y fechas de sesiones', () => {
   assert.ok(!rutValido('11.111.111-2'));
   assert.equal(fechaDesdeTitulo('Concejo Municipal Viernes 26 de Septiembre 2025 - Municipalidad'), '2025-09-26');
   assert.equal(fechaDesdeTitulo('Concejo Municipal (03 de octubre 2025)'), '2025-10-03');
+});
+
+test('diseño: sólo acepta colores, opciones, números e imágenes válidos', () => {
+  const d = normalizarDiseno({ colores: { primario: 'red;}</style><script>', acento: '#123abc' }, forma: { radio: 999, tarjetas: 'otra' }, tipografia: { cuerpo: 'comic' }, portada: { imagen: 'javascript:alert(1)', titulo: '<b>Hola</b>' }, cabecera: { logoUrl: '//malo.cl/x.png' }, avanzado: { css: 'a{}</style><script>' } }, { permitirCss: false, previo: { avanzado: { css: '.x{}' } } });
+  assert.equal(d.colores.primario, '#0B4F7C');
+  assert.equal(d.colores.acento, '#123ABC');
+  assert.equal(d.forma.radio, 24);
+  assert.equal(d.forma.tarjetas, 'borde');
+  assert.equal(d.tipografia.cuerpo, 'public-sans');
+  assert.equal(d.portada.imagen, '');
+  assert.equal(d.portada.titulo, 'bHola/b');
+  assert.equal(d.cabecera.logoUrl, '');
+  assert.equal(d.avanzado.css, '.x{}');
+  assert.doesNotMatch(variablesCss(aplicarEstilo(d, 'moderno')), /[<>]/);
+  assert.equal(aplicarEstilo(d, 'moderno').cabecera.estilo, 'color');
 });
 
 test('repositorio: guardar, URLs, búsqueda, programación y bloques protegidos', () => {
@@ -193,6 +209,18 @@ async function ingresar(email = 'admin@munimelipeuco.cl', clave = CLAVE) {
   return { r, cookie, csrf: s?.csrf, s };
 }
 const api = (sesion, metodo, ruta, cuerpo, extra = {}) => pedir('/api/admin/' + ruta, { method: metodo, headers: { cookie: sesion.cookie, 'X-CSRF': sesion.csrf, ...(cuerpo !== undefined ? { 'Content-Type': 'application/json' } : {}), ...extra }, body: cuerpo === undefined ? undefined : JSON.stringify(cuerpo) });
+
+test('panel: el diseño guardado cambia el sitio publicado', async () => {
+  const s = await ingresar();
+  const r = await api(s, 'PUT', 'ajustes', { diseno: { estilo: 'personalizado', colores: { primario: '#7A1F2B' }, cabecera: { estilo: 'oscura' }, portada: { titulo: 'Bienvenidos' }, animaciones: { activas: false } } });
+  assert.equal(r.status, 200);
+  const html = await (await pedir('/')).text();
+  assert.match(html, /--azul:#7A1F2B/);
+  assert.match(html, /data-cabecera="oscura"/);
+  assert.match(html, /data-anim="no"/);
+  assert.match(html, />Bienvenidos</);
+  await api(s, 'PUT', 'ajustes', { diseno: {} });
+});
 
 test('panel: ingreso, cookie segura y protección CSRF', async () => {
   const malo = await ingresar('admin@munimelipeuco.cl', 'incorrecta');

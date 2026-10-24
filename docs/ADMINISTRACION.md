@@ -47,6 +47,22 @@ Para enviar la noticia por correo a los suscriptores: *Más acciones → Enviar 
 - **Accesos rápidos**: los botones de colores bajo el carrusel. Ordénelos con las flechas.
 - **Secciones**: en *Ajustes → Portada* se activan, ordenan y renombran (trámites, noticias, agenda, áreas, turismo, video, boletín…).
 
+## Diseño del sitio
+
+*Administración → Diseño del sitio* cambia el aspecto de todo el sitio, con una vista previa en vivo (computador, tablet o celular) que no se publica hasta presionar **Guardar y publicar**.
+
+- **Estilos prediseñados**: Institucional, Bosque de araucarias, Moderno, Clásico, Claro y amplio, Alto contraste. Cambian colores, letras y formas de una vez; después se puede ajustar cada detalle.
+- **Colores**: principal, acento, profundo, fondos, texto, etiquetas y emergencias. El color del texto sobre los botones se elige solo para que se lea bien.
+- **Tipografía**: letra del texto y de los títulos (nueve opciones), tamaño, grosor y espaciado de los títulos, menú en mayúsculas.
+- **Formas y espacios**: redondeo de esquinas, tarjetas con borde, con sombra o planas, forma de los botones, espacio entre secciones y ancho del contenido.
+- **Cabecera y logo**: fondo blanco, de color u oscuro; emblema con nombre, escudo completo o una imagen propia; tamaño del logo; cabecera fija; barra de transparencia y botón «Trámites».
+- **Portada**: foto principal, título, texto, pie de foto, altura, alineación, cuánto se oscurece la foto, franja de datos y «Lo más buscado».
+- **Pie de página**: fondo oscuro, de color o claro; teléfonos de emergencia, boletín y escudo.
+- **Animaciones**: activarlas o no, intensidad, velocidad, pantalla de carga (primera visita, siempre o nunca), aparición al bajar, inclinación 3D, transición entre páginas y barra de carga. Quien pide «reducir movimiento» en su equipo nunca ve animaciones.
+- **CSS propio** (sólo Super Administrador): reglas que se agregan al final de la hoja de estilos.
+
+**Deshacer** revierte el último cambio y **Volver al diseño original** restablece todo (sin publicar hasta guardar).
+
 ## Trámites
 
 Cada **ficha de trámite** tiene requisitos, documentos, paso a paso, costo, plazo, horario, lugar, formularios descargables y preguntas frecuentes.

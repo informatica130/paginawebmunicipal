@@ -13,11 +13,7 @@ export default async function (vista) {
       <section data-panel="identidad" class="tarjeta">
         <div class="fila"><label class="campo"><span>Nombre oficial</span><input name="nombre" value="${a.nombre}"></label><label class="campo"><span>Nombre corto</span><input name="nombreCorto" value="${a.nombreCorto}"></label><label class="campo"><span>Lema</span><input name="lema" value="${a.lema}"></label></div>
         <label class="campo"><span>Descripción (buscadores y redes sociales)</span><textarea name="descripcion" rows="2">${a.descripcion}</textarea></label>
-        <h3>Colores institucionales</h3><div class="fila">
-          <label class="campo"><span>Principal (azul institucional)</span><input type="color" name="c_primario" value="${a.colores?.primario || '#0B4F7C'}"></label>
-          <label class="campo"><span>Acento (botones destacados)</span><input type="color" name="c_acento" value="${a.colores?.acento || '#F2A900'}"></label>
-          <label class="campo"><span>Fondo profundo (pie)</span><input type="color" name="c_oscuro" value="${a.colores?.oscuro || '#062B45'}"></label></div>
-        <p class="chico muted">Mantenga buen contraste: el texto blanco debe leerse bien sobre el color principal y el oscuro.</p>
+        <p class="caja info chico">Los colores, el logo, la tipografía, la portada y las animaciones se cambian en <a href="#/diseno">Diseño del sitio</a>, con vista previa en vivo.</p>
         <label class="campo"><span>Texto del pie (use {anio} para el año)</span><input name="pie" value="${a.pie?.texto || ''}"></label>
       </section>
       <section data-panel="contacto" class="tarjeta" hidden>
@@ -70,7 +66,7 @@ export default async function (vista) {
   const f = $('[data-form]', vista);
   const recoger = () => ({
     nombre: f.nombre.value, nombreCorto: f.nombreCorto.value, lema: f.lema.value, descripcion: f.descripcion.value,
-    colores: { primario: f.c_primario.value, acento: f.c_acento.value, oscuro: f.c_oscuro.value }, pie: { texto: f.pie.value },
+    pie: { texto: f.pie.value },
     direccion: f.direccion.value, horario: f.horario.value, telefono: f.telefono.value, whatsapp: f.whatsapp.value, email: f.email.value, emailContacto: f.emailContacto.value,
     mapa: { lat: f.lat.value, lng: f.lng.value, enlace: f.mapaEnlace.value },
     redes: Object.fromEntries(['facebook', 'instagram', 'youtube', 'x', 'tiktok'].map((r) => [r, f['r_' + r].value])),

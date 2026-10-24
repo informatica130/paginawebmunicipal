@@ -19,7 +19,7 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - las páginas del menú que estaban vacías (Municipio, Salud, Educación, Udel, Social, Deporte, Turismo, Juzgado, PLADECO…) ahora tienen contenido: noticias de su área, trámites, contactos y documentos.
 
 **Diseño**
-- Institucional y sobrio: blanco, azul y ámbar de la marca municipal (configurables en el panel), bordes finos y una cuadrícula ordenada.
+- Institucional y sobrio: blanco, azul y ámbar de la marca municipal, bordes finos y una cuadrícula ordenada. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada con una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima), el buscador «¿Qué necesita hacer?», una franja con horario de atención, teléfono, tiempo actual y emergencias, y accesos rápidos.
 - Una sola familia tipográfica, Public Sans, servida desde el propio sitio (sin depender de Google Fonts).
 - Rápido: sin ilustraciones ni animaciones decorativas; la foto principal pesa entre 44 y 216 KB según la pantalla, y el HTML de la portada pesa unos 12 KB comprimido.
@@ -46,6 +46,7 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - API pública de datos abiertos (`/api/public/`): noticias, avisos, eventos, trámites, áreas, documentos.
 
 **Panel de administración** (`/admin/`)
+- **Diseño del sitio con vista previa en vivo**: estilos prediseñados; colores, tipografía, formas, cabecera y logo, portada, pie y animaciones; CSS propio para el Super Administrador. Ver [docs/ADMINISTRACION.md](docs/ADMINISTRACION.md#diseño-del-sitio).
 - Escritorio con mensajes pendientes, visitas, publicaciones programadas, cambios recientes y estado de la Plataforma.
 - 14 tipos de contenido: noticias, páginas, trámites, eventos, documentos, avisos, banners, accesos rápidos, áreas, autoridades, sesiones del Concejo, directorio, lugares turísticos y encuestas. Cada uno con sus propios campos.
 - Editor de texto enriquecido y **editor de bloques** (galerías, botones, tarjetas, preguntas frecuentes, videos, mapas, documentos, trámites en línea, formularios, directorio…).

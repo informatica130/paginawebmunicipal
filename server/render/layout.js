@@ -4,6 +4,14 @@
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, telefonoHref, telefonoTexto } from './comun.js';
 import { textoPlano, recortar } from '../../src/util.js';
 import { plantillaIntro, SCRIPT_INTRO } from './intro.js';
+import { normalizar, variablesCss, atributos, urlFuentes, logoCabecera } from '../../public/js/diseno.js';
+
+// Diseño personalizado desde el panel (Diseño del sitio), normalizado una vez por versión de ajustes.
+const cacheDiseno = new WeakMap();
+export function disenoDe(s) {
+  if (!cacheDiseno.has(s)) cacheDiseno.set(s, normalizar(s.diseno || { colores: { ...(s.colores?.primario ? { primario: s.colores.primario, acento: s.colores.acento, oscuro: s.colores.oscuro } : {}) } }));
+  return cacheDiseno.get(s);
+}
 
 const NIVELES = { info: 'info', alerta: 'alerta', emergencia: 'alerta', exito: 'check' };
 
@@ -58,13 +66,15 @@ function barraSuperior(ctx) {
 
 function cabecera(ctx) {
   const s = ctx.ajustes;
+  const dz = disenoDe(s), logo = logoCabecera(dz);
   return html`<header class="cabecera" id="cabecera">
     ${barraSuperior(ctx)}
     <div class="cabecera-principal">
       <div class="contenedor">
         <a class="marca" href="/" aria-label="${s.nombre}: ir al inicio">
-          <img class="marca-emblema" src="/img/emblema-azul.svg" alt="" width="54" height="44">
-          <span class="marca-texto"><small>Ilustre Municipalidad de</small><b>Melipeuco</b></span>
+          <img class="marca-emblema logo-claro" src="${logo.src}" alt="" data-diseno-logo="claro">
+          <img class="marca-emblema logo-oscuro" src="${logo.oscuro}" alt="" data-diseno-logo="oscuro">
+          <span class="marca-texto"${logo.conTexto ? '' : crudo(' hidden')}><small data-diseno="cabecera.subtitulo">${dz.cabecera.subtitulo}</small><b data-diseno="cabecera.nombre">${dz.cabecera.nombre}</b></span>
         </a>
         <nav class="nav" id="nav" aria-label="Menú principal">${menuPrincipal(ctx)}</nav>
         <div class="cabecera-acciones">
@@ -143,10 +153,11 @@ export function documento(ctx, { titulo, descripcion = '', cuerpo, imagen = '', 
   const base = ctx.cfg.PUBLIC_URL.replace(/\/$/, '');
   const canon = base + (canonical || ctx.ruta);
   const img = imagen ? (imagen.startsWith('http') ? imagen : base + imagen) : base + '/img/icon-512.png';
-  const c = s.colores || {};
+  const dz = disenoDe(s), fuentes = urlFuentes(dz);
+  const attrs = Object.entries(atributos(dz)).map(([k, v]) => `${k}="${esc(v)}"`).join(' ');
   const ld = [{ '@context': 'https://schema.org', '@type': 'GovernmentOrganization', name: s.nombre, url: base + '/', logo: base + '/img/icon-512.png', telephone: s.telefono, email: s.email, address: { '@type': 'PostalAddress', streetAddress: 'Pedro Aguirre Cerda 14', addressLocality: 'Melipeuco', addressRegion: 'La Araucanía', addressCountry: 'CL' }, sameAs: Object.values(s.redes || {}).filter(Boolean) }];
   if (jsonLd) ld.push(...[jsonLd].flat());
-  return '<!doctype html>\n' + html`<html lang="es-CL">
+  return '<!doctype html>\n' + html`<html lang="es-CL" ${crudo(attrs)}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -162,15 +173,17 @@ ${noindex ? crudo('<meta name="robots" content="noindex">') : ''}
 <meta property="og:image" content="${img}">
 <meta property="og:locale" content="es_CL">
 <meta name="twitter:card" content="${imagen ? 'summary_large_image' : 'summary'}">
-<meta name="theme-color" content="${c.primario || '#0B4F7C'}">
+<meta name="theme-color" content="${dz.colores.primario}">
 <link rel="icon" href="/img/favicon.png">
 <link rel="apple-touch-icon" href="/img/icon-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Noticias de ${s.nombreCorto}" href="/feed/">
-<link rel="preload" href="/fuentes/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+${[dz.tipografia.cuerpo, dz.tipografia.titulos].includes('public-sans') ? crudo('<link rel="preload" href="/fuentes/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>') : ''}
+${fuentes ? html`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="${fuentes}" id="diseno-fuentes">` : ''}
 <link rel="icon" type="image/svg+xml" href="/img/emblema-azul.svg">
 <link rel="stylesheet" href="/css/sitio.css?v=${ctx.version}">
-<style>:root{--azul:${c.primario || '#0B4F7C'};--ambar:${c.acento || '#F2A900'};--azul-profundo:${c.oscuro || '#062B45'}}</style>
+<style id="diseno-vars">${crudo(variablesCss(dz))}</style>
+${dz.avanzado.css ? html`<style id="diseno-propio">${crudo(dz.avanzado.css)}</style>` : ''}
 <script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto'}catch(e){}})();</script>
 <script type="application/ld+json" nonce="${ctx.nonce}">${crudo(JSON.stringify(ld).replace(/</g, '\\u003c'))}</script>
 ${crudo(cabeceraExtra)}

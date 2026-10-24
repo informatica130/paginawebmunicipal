@@ -122,7 +122,12 @@
   $$('[data-aviso]').forEach(function (a) {
     if (ocultos.indexOf(a.getAttribute('data-aviso')) >= 0 && !a.classList.contains('aviso-emergencia')) a.hidden = true;
     var b = $('[data-cerrar-aviso]', a);
-    b && b.addEventListener('click', function () { a.hidden = true; ocultos.push(a.getAttribute('data-aviso')); try { sessionStorage.setItem('mlp-avisos', JSON.stringify(ocultos)); } catch (e) {} });
+    b && b.addEventListener('click', function () {
+      ocultos.push(a.getAttribute('data-aviso')); try { sessionStorage.setItem('mlp-avisos', JSON.stringify(ocultos)); } catch (e) {}
+      // Se pliega hacia arriba antes de desaparecer.
+      if (!reducido && a.animate && raiz.dataset.anim !== 'no') a.animate([{ height: a.offsetHeight + 'px', opacity: 1 }, { height: 0, opacity: 0, paddingTop: 0, paddingBottom: 0 }], { duration: 280, easing: 'cubic-bezier(.4, 0, .2, 1)' }).finished.then(function () { a.hidden = true; });
+      else a.hidden = true;
+    });
   });
 
   // ---------------- Carruseles
@@ -141,8 +146,9 @@
     ant && ant.addEventListener('click', function () { ir(i - 1); detener(); });
     sig && sig.addEventListener('click', function () { ir(i + 1); detener(); });
     var ms = Number(c.getAttribute('data-auto')) || 0;
-    function iniciar() { if (ms && !pausado) { clearInterval(timer); timer = setInterval(function () { ir(i + 1); }, ms); } }
-    function detener() { clearInterval(timer); }
+    if (ms) c.style.setProperty('--dur', ms + 'ms');
+    function iniciar() { if (ms && !pausado) { clearInterval(timer); timer = setInterval(function () { ir(i + 1); }, ms); c.classList.remove('en-pausa'); } }
+    function detener() { clearInterval(timer); c.classList.add('en-pausa'); }
     if (pausa) {
       if (!ms) pausa.hidden = true;
       pausa.addEventListener('click', function () { pausado = !pausado; pausa.setAttribute('aria-label', pausado ? 'Reanudar el carrusel' : 'Pausar el carrusel'); pausado ? detener() : iniciar(); });
@@ -213,7 +219,15 @@
   // ---------------- Volver arriba
   var arriba = $('[data-arriba]');
   if (arriba) {
-    window.addEventListener('scroll', function () { arriba.classList.toggle('visible', window.scrollY > 700); }, { passive: true });
+    var marcoArriba = 0;
+    window.addEventListener('scroll', function () {
+      cancelAnimationFrame(marcoArriba);
+      marcoArriba = requestAnimationFrame(function () {
+        var alto = d.documentElement.scrollHeight - innerHeight;
+        arriba.classList.toggle('visible', window.scrollY > 700);
+        arriba.style.setProperty('--progreso', alto > 0 ? Math.min(1, scrollY / alto).toFixed(3) : 0);
+      });
+    }, { passive: true });
     arriba.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reducido ? 'auto' : 'smooth' }); var m = $('#contenido'); m && m.focus({ preventScroll: true }); });
   }
 
@@ -276,6 +290,34 @@
     if ((f.getAttribute('method') || '').toLowerCase() !== 'post') return;
     f.addEventListener('submit', function () { var b = $('button[type="submit"], button:not([type])', f); if (b) { setTimeout(function () { b.disabled = true; b.textContent = 'Enviando…'; }, 0); } });
   });
+
+  // ---------------- Cabecera fija que se compacta al bajar
+  var cab = $('.cabecera');
+  if (cab && raiz.getAttribute('data-cabecera-fija') === 'si') {
+    var compacta = false;
+    var revisarCabecera = function () { var c = scrollY > 120 || (compacta && scrollY > 40); if (c !== compacta) { compacta = c; cab.classList.toggle('compacta', c); } };
+    addEventListener('scroll', revisarCabecera, { passive: true }); revisarCabecera();
+  }
+
+  // ---------------- Vista previa del panel «Diseño del sitio»
+  // Cuando la página se muestra dentro del panel, recibe el diseño en edición y lo aplica en vivo.
+  if (window.parent !== window) {
+    window.addEventListener('message', function (e) {
+      if (e.origin !== location.origin || e.source !== window.parent || !e.data || e.data.tipo !== 'mlp-diseno') return;
+      var m = e.data;
+      var est = d.getElementById('diseno-vars'); if (est) est.textContent = m.css;
+      var propio = d.getElementById('diseno-propio');
+      if (!propio) { propio = d.createElement('style'); propio.id = 'diseno-propio'; d.head.appendChild(propio); }
+      propio.textContent = m.cssPropio || '';
+      Object.keys(m.atributos || {}).forEach(function (k) { raiz.setAttribute(k, m.atributos[k]); });
+      var f = d.getElementById('diseno-fuentes');
+      if (m.fuentes) { if (!f) { f = d.createElement('link'); f.rel = 'stylesheet'; f.id = 'diseno-fuentes'; d.head.appendChild(f); } if (f.getAttribute('href') !== m.fuentes) f.href = m.fuentes; }
+      $$('[data-diseno]').forEach(function (el) { var v = (m.textos || {})[el.getAttribute('data-diseno')]; if (v != null) { el.textContent = v; el.hidden = !v; } });
+      $$('[data-diseno-img]').forEach(function (img) { var v = (m.imagenes || {})[img.getAttribute('data-diseno-img')]; if (v && img.getAttribute('src') !== v) { img.removeAttribute('srcset'); img.src = v; } });
+      if (m.logo) { $$('[data-diseno-logo]').forEach(function (img) { img.src = m.logo[img.getAttribute('data-diseno-logo')]; }); var mt = $('.marca-texto'); if (mt) mt.hidden = !m.logo.conTexto; }
+    });
+    window.parent.postMessage({ tipo: 'mlp-vista-lista' }, location.origin);
+  }
 
   // ---------------- Aplicación instalable y lectura sin conexión
   if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('/sw.js').catch(function () {});

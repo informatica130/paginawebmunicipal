@@ -13,6 +13,16 @@
   var reducido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var puede = typeof Element !== 'undefined' && 'animate' in Element.prototype && !reducido;
 
+  // Preferencias del panel «Diseño del sitio» (atributos de <html>).
+  var nivel = raiz.getAttribute('data-anim') || 'normal';
+  if (nivel === 'no') puede = false;
+  var F = { sutil: .5, normal: 1, expresiva: 1.6 }[nivel] || 1;        // amplitud de los movimientos
+  var VEL = parseFloat(getComputedStyle(raiz).getPropertyValue('--anim-vel')) || 1;  // velocidad
+  var activo = function (k) { return raiz.getAttribute('data-anim-' + k) !== 'no'; };
+  // Escala distancias y ángulos de una transformación según la intensidad elegida.
+  function escalar(v) { return typeof v === 'string' ? v.replace(/(-?\d*\.?\d+)(px|deg)/g, function (_, n, u) { return (parseFloat(n) * F).toFixed(2) + u; }) : v; }
+  function escalarCuadros(cuadros) { return cuadros.map(function (c) { var o = Object.assign({}, c); if (o.transform) o.transform = escalar(o.transform); return o; }); }
+
   // Curvas de aceleración
   var SALIDA = 'cubic-bezier(.16, 1, .3, 1)';      // desacelera largo (llegadas)
   var REBOTE = 'cubic-bezier(.34, 1.45, .64, 1)';  // sobrepasa un poco y vuelve
@@ -20,7 +30,9 @@
 
   function anim(el, cuadros, op) {
     if (!el || !puede) return null;
-    return el.animate(cuadros, Object.assign({ fill: 'both' }, op));
+    var o = Object.assign({ fill: 'both' }, op);
+    o.duration = (o.duration || 0) / VEL; if (o.delay) o.delay /= VEL;
+    return el.animate(cuadros, o);
   }
 
   // ================================================================ Pantalla de carga
@@ -84,17 +96,20 @@
     temporizadores.push(setTimeout(function () {
       emblema.style.opacity = 1;
       $$('.pz', capa).forEach(function (g) { if (!/^(municipalidad|cinta|chile)$/.test(g.getAttribute('data-pieza'))) g.style.visibility = 'hidden'; });
-    }, FIN_ARMADO + 50));
-    temporizadores.push(setTimeout(salir, FIN_ARMADO + 180));
+    }, (FIN_ARMADO + 50) / VEL));
+    temporizadores.push(setTimeout(salir, (FIN_ARMADO + 180) / VEL));
 
     // Salida: el escudo vuela al logo de la cabecera y la pantalla se cierra en un círculo sobre él.
     function salir() {
       if (terminado) return;
       terminado = true;
       d.dispatchEvent(new CustomEvent('intro:salida'));
-      var logo = $('.marca-emblema'), r = logo && logo.getBoundingClientRect();
+      // El logo visible (claro u oscuro según la cabecera y el tema).
+      var logo = $$('.marca-emblema').filter(function (l) { return l.offsetWidth; })[0], r = logo && logo.getBoundingClientRect();
+      var conTexto = logo && /escudo-/.test(logo.getAttribute('src') || ''), propio = logo && !/(emblema|escudo)-/.test(logo.getAttribute('src') || '');
+      if (propio) r = null;
       var e = svg.getBoundingClientRect();
-      $$('.pz[data-pieza="municipalidad"], .pz[data-pieza="cinta"], .pz[data-pieza="chile"], .intro-barra, .intro-saltar', capa).forEach(function (el) {
+      $$((conTexto ? '' : '.pz[data-pieza="municipalidad"], .pz[data-pieza="cinta"], .pz[data-pieza="chile"], ') + '.intro-barra, .intro-saltar', capa).forEach(function (el) {
         anim(el, [{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: 'ease-out' });
       });
       if (!r || !r.width || r.bottom < 0) return quitar(anim(capa, [{ opacity: 1 }, { opacity: 0 }], { duration: 350 }));
@@ -109,7 +124,7 @@
     function quitar(a) {
       var fin = function () {
         capa.remove(); raiz.classList.remove('con-intro');
-        var logo = $('.marca-emblema');
+        var logo = $$('.marca-emblema').filter(function (l) { return l.offsetWidth; })[0];
         anim(logo, [{ transform: 'scale(1.18)' }, { transform: 'scale(.94)' }, { transform: 'none' }], { duration: 420, easing: 'ease-out', fill: 'none' });
         d.dispatchEvent(new CustomEvent('intro:fin'));
       };
@@ -133,12 +148,12 @@
     if (!hero || !puede) return;
     anim($('.hero-foto', hero), [{ transform: 'scale(1.12)', filter: 'saturate(.6) brightness(.8)' }, { transform: 'scale(1)', filter: 'none' }], { duration: 2200, easing: SALIDA });
     var h1 = $('h1', hero);
-    anim(h1, [{ clipPath: 'inset(0 0 100% 0)', transform: 'translateY(28px)' }, { clipPath: 'inset(0 0 -10% 0)', transform: 'none' }], { duration: 900, delay: 120, easing: SALIDA });
+    anim(h1, [{ clipPath: 'inset(0 0 100% 0)', transform: escalar('translateY(28px)') }, { clipPath: 'inset(0 0 -10% 0)', transform: 'none' }], { duration: 900, delay: 120, easing: SALIDA });
     [['.hero-lema', 300], ['.hero-buscar', 420], ['.populares', 560]].forEach(function (x) {
-      anim($(x[0], hero), [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: x[1], easing: SALIDA });
+      anim($(x[0], hero), [{ opacity: 0, transform: escalar('translateY(18px)') }, { opacity: 1, transform: 'none' }], { duration: 700, delay: x[1], easing: SALIDA });
     });
     $$('.franja-datos .dato').forEach(function (el, i) {
-      anim(el, [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 600 + i * 90, easing: SALIDA });
+      anim(el, [{ opacity: 0, transform: escalar('translateY(12px)') }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 600 + i * 90, easing: SALIDA });
     });
     var sos = $('.dato-emergencia > .ico');
     anim(sos, [{ transform: 'scale(1)' }, { transform: 'scale(1.35)' }, { transform: 'scale(1)' }, { transform: 'scale(1.2)' }, { transform: 'scale(1)' }], { duration: 900, delay: 1300, easing: 'ease-in-out', fill: 'none' });
@@ -167,7 +182,7 @@
   ];
 
   function aparicion() {
-    if (!puede || !('IntersectionObserver' in window)) return;
+    if (!puede || !activo('aparicion') || !('IntersectionObserver' in window)) return;
     var pendientes = new Map();
     var obs = new IntersectionObserver(function (entradas) {
       // Los que entran juntos se escalonan según su orden en pantalla.
@@ -180,7 +195,7 @@
         pendientes.delete(el);
         var n = orden[ef.sel] = (orden[ef.sel] || 0) + 1;
         var retraso = Math.min(n - 1, 8) * ef.paso;
-        var a = anim(el, ef.cuadros, { duration: ef.dur, delay: retraso, easing: ef.curva });
+        var a = anim(el, escalarCuadros(ef.cuadros), { duration: ef.dur, delay: retraso, easing: ef.curva });
         if (ef.extra) ef.extra(el, retraso);
         el.classList.remove('por-aparecer');
         // Al terminar se quita la animación para que no interfiera con los efectos del cursor.
@@ -204,15 +219,15 @@
 
   // ================================================================ Inclinación 3D con el cursor
   function inclinacion() {
-    if (!puede || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (!puede || !activo('inclinacion') || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     $$('.accesos a, .tarjeta-area, a.tarjeta, .tarjeta-accion').forEach(function (el) {
       var marco = 0;
       el.addEventListener('pointermove', function (e) {
         cancelAnimationFrame(marco);
         marco = requestAnimationFrame(function () {
           var r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-          el.style.setProperty('--rx', (-y * 7).toFixed(2) + 'deg');
-          el.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg');
+          el.style.setProperty('--rx', (-y * 7 * F).toFixed(2) + 'deg');
+          el.style.setProperty('--ry', (x * 9 * F).toFixed(2) + 'deg');
           el.style.setProperty('--bx', ((x + .5) * 100).toFixed(1) + '%');
           el.style.setProperty('--by', ((y + .5) * 100).toFixed(1) + '%');
           el.classList.add('inclinado');
@@ -230,6 +245,7 @@
 
   // ================================================================ Barra de carga al navegar
   function barraCarga() {
+    if (!activo('carga')) return;
     var barra = d.createElement('div');
     barra.className = 'carga'; barra.setAttribute('aria-hidden', 'true');
     d.body.appendChild(barra);
