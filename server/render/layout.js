@@ -137,6 +137,7 @@ function pie(ctx) {
         <p class="pie-rss"><a href="/feed/">${crudo(icono('rss', { tam: 16 }))} Noticias por RSS</a></p>
       </section>
     </div>
+    <div class="contenedor pie-marca-grande" aria-hidden="true">${disenoDe(s).cabecera.nombre || s.nombreCorto}</div>
     <div class="pie-legal">
       <div class="contenedor">
         <p>${(s.pie?.texto || '© {anio} ' + s.nombre).replace('{anio}', anio)}</p>

@@ -294,9 +294,16 @@
   // ---------------- Cabecera fija que se compacta al bajar
   var cab = $('.cabecera');
   if (cab && raiz.getAttribute('data-cabecera-fija') === 'si') {
-    var compacta = false;
-    var revisarCabecera = function () { var c = scrollY > 120 || (compacta && scrollY > 40); if (c !== compacta) { compacta = c; cab.classList.toggle('compacta', c); } };
-    addEventListener('scroll', revisarCabecera, { passive: true }); revisarCabecera();
+    // Se compacta al bajar, se oculta al seguir bajando y vuelve apenas se sube.
+    var compacta = false, previo = scrollY, marcoCab = 0;
+    var ocupada = function () { return (nav && nav.classList.contains('abierto')) || (buscador && !buscador.hidden) || cab.contains(d.activeElement) || $('.nav-boton[aria-expanded="true"]'); };
+    var revisarCabecera = function () {
+      var y = scrollY, c = y > 120 || (compacta && y > 40);
+      if (c !== compacta) { compacta = c; cab.classList.toggle('compacta', c); }
+      if (Math.abs(y - previo) > 6) { cab.classList.toggle('oculta', y > previo && y > 420 && !ocupada()); previo = y; }
+    };
+    addEventListener('scroll', function () { cancelAnimationFrame(marcoCab); marcoCab = requestAnimationFrame(revisarCabecera); }, { passive: true });
+    revisarCabecera();
   }
 
   // ---------------- Vista previa del panel «Diseño del sitio»

@@ -30,18 +30,22 @@ async function seccionPortada(ctx, sec) {
       const foto = (w) => `/img/plaza-melipeuco-${w}.webp`;
       const dp = disenoDe(s).portada;
       return html`<section class="hero" aria-labelledby="hero-titulo">
-        ${dp.imagen ? html`<img class="hero-foto" src="${dp.imagen}" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">` : html`<img class="hero-foto" src="${foto(1536)}" srcset="${foto(640)} 640w, ${foto(1024)} 1024w, ${foto(1536)} 1536w" sizes="100vw" width="1536" height="800" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">`}
         <div class="contenedor hero-contenido">
-          <h1 id="hero-titulo" data-diseno="portada.titulo">${dp.titulo}</h1>
-          <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`}</p>
-          <form class="hero-buscar" action="/buscar/" method="get" role="search">
-            <label for="q-portada">¿Qué necesita hacer?</label>
-            <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Ej.: licencia de conducir, patente, horario de buses" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
-            <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
-          </form>
-          <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>
+          <div class="hero-texto">
+            <h1 id="hero-titulo" data-diseno="portada.titulo">${dp.titulo}</h1>
+            <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`}</p>
+            <form class="hero-buscar" action="/buscar/" method="get" role="search">
+              <label for="q-portada">¿Qué necesita hacer?</label>
+              <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Ej.: licencia, patente, horario de buses" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
+              <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
+            </form>
+            <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>
+          </div>
+          <figure class="hero-figura">
+            ${dp.imagen ? html`<img class="hero-foto" src="${dp.imagen}" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">` : html`<img class="hero-foto" src="${foto(1536)}" srcset="${foto(640)} 640w, ${foto(1024)} 1024w, ${foto(1536)} 1536w" sizes="(max-width: 900px) 100vw, 60vw" width="1536" height="800" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">`}
+            <figcaption class="hero-credito" data-diseno="portada.credito"${dp.credito ? '' : crudo(' hidden')}>${dp.credito}</figcaption>
+          </figure>
         </div>
-        <p class="hero-credito" data-diseno="portada.credito"${dp.credito ? '' : crudo(' hidden')}>${dp.credito}</p>
       </section>
       <div class="franja-datos"><div class="contenedor">
         <div class="dato">${crudo(icono('reloj', { tam: 22 }))}<span><b>Horario de atención</b>${s.horario}</span></div>

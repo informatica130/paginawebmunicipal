@@ -67,7 +67,7 @@ test('diseño: sólo acepta colores, opciones, números e imágenes válidos', (
   assert.equal(d.colores.primario, '#0B4F7C');
   assert.equal(d.colores.acento, '#123ABC');
   assert.equal(d.forma.radio, 24);
-  assert.equal(d.forma.tarjetas, 'borde');
+  assert.equal(d.forma.tarjetas, 'linea');
   assert.equal(d.tipografia.cuerpo, 'public-sans');
   assert.equal(d.portada.imagen, '');
   assert.equal(d.portada.titulo, 'bHola/b');

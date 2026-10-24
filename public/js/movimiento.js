@@ -146,7 +146,15 @@
   function entradaPortada() {
     var hero = $('.hero');
     if (!hero || !puede) return;
-    anim($('.hero-foto', hero), [{ transform: 'scale(1.12)', filter: 'saturate(.6) brightness(.8)' }, { transform: 'scale(1)', filter: 'none' }], { duration: 2200, easing: SALIDA });
+    var foto = $('.hero-foto', hero);
+    if (raiz.getAttribute('data-portada') === 'foto') {
+      anim(foto, [{ transform: 'scale(1.12)', filter: 'saturate(.6) brightness(.8)' }, { transform: 'scale(1)', filter: 'none' }], { duration: 2200, easing: SALIDA });
+    } else {
+      // La foto se descubre desde abajo dentro de su marco mientras se aleja suavemente.
+      anim($('.hero-figura', hero), [{ clipPath: 'inset(100% 0 0 0 round 16px)' }, { clipPath: 'inset(0 0 0 0 round 0px)' }], { duration: 1300, delay: 150, easing: SALIDA });
+      anim(foto, [{ transform: 'scale(1.18)' }, { transform: 'scale(1)' }], { duration: 2000, delay: 150, easing: SALIDA });
+      anim($('.hero-credito', hero), [{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: 1100, easing: 'ease-out' });
+    }
     var h1 = $('h1', hero);
     anim(h1, [{ clipPath: 'inset(0 0 100% 0)', transform: escalar('translateY(28px)') }, { clipPath: 'inset(0 0 -10% 0)', transform: 'none' }], { duration: 900, delay: 120, easing: SALIDA });
     [['.hero-lema', 300], ['.hero-buscar', 420], ['.populares', 560]].forEach(function (x) {
@@ -163,7 +171,7 @@
   // Cada tipo de elemento entra a su manera; todo dura menos de 0,7 s y no retrasa la lectura.
   var EFECTOS = [
     // Mosaicos de accesos: se levantan girando en 3D, en cascada.
-    { sel: '.accesos > li', cuadros: [{ opacity: 0, transform: 'perspective(800px) rotateX(-55deg) translateY(24px)' }, { opacity: 1, transform: 'perspective(800px) rotateX(0) translateY(0)' }], dur: 650, paso: 55, curva: SALIDA },
+    { sel: '.accesos > li', cuadros: [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], dur: 700, paso: 45, curva: SALIDA },
     // Listas (trámites, agenda, documentos, sesiones, directorio): se deslizan desde la izquierda.
     { sel: '.fila-tramite, .tarjeta-accion, .tarjeta-evento, .lista-documentos > li, .lista-sesiones > li, .directorio-fila, .resultados > li, .emergencias-portada li, .horas-disponibles li', cuadros: [{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'none' }], dur: 520, paso: 45, curva: SALIDA },
     // Noticias: suben y la foto se descubre de abajo hacia arriba.
@@ -172,13 +180,15 @@
       anim($('.tn-img img', el), [{ transform: 'scale(1.18)' }, { transform: 'scale(1)' }], { duration: 1100, delay: retraso, easing: SALIDA });
     } },
     // Tarjetas de áreas y genéricas: crecen desde un poco más pequeñas.
-    { sel: '.tarjeta-area, .tarjetas > .tarjeta, .autoridad, .contacto-boton, .arbol.nivel-0 > li', cuadros: [{ opacity: 0, transform: 'scale(.92) translateY(14px)' }, { opacity: 1, transform: 'none' }], dur: 560, paso: 35, curva: SALIDA },
+    { sel: '.tarjeta-area, .tarjetas > .tarjeta, .autoridad, .contacto-boton, .arbol.nivel-0 > li', cuadros: [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], dur: 600, paso: 35, curva: SALIDA },
     // Títulos de sección: el texto sube desde una máscara.
     { sel: '.seccion-cabecera h2, .bloque-cabecera h2, .ficha-seccion h2, .grupo-tramites h2', cuadros: [{ clipPath: 'inset(0 0 100% 0)', transform: 'translateY(60%)' }, { clipPath: 'inset(0 0 -20% 0)', transform: 'none' }], dur: 700, paso: 0, curva: SALIDA },
     // Bloques destacados: aparecen y suben.
     { sel: '.lateral-bloque, .caja, .campanas, .video, .calendario, .encuesta, .boletin, .banda-turismo .contenedor > *, .acordeon, .galeria-item, .lista-check li, .pasos li', cuadros: [{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'none' }], dur: 600, paso: 50, curva: SALIDA },
     // Escudo del pie: gira como una moneda.
-    { sel: '.pie-escudo', cuadros: [{ opacity: 0, transform: 'perspective(600px) rotateY(-180deg) scale(.7)' }, { opacity: 1, transform: 'perspective(600px) rotateY(0) scale(1)' }], dur: 1100, paso: 0, curva: REBOTE },
+    { sel: '.pie-escudo', cuadros: [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], dur: 800, paso: 0, curva: SALIDA },
+    // Firma gigante del pie: las letras suben desde la base.
+    { sel: '.pie-marca-grande', cuadros: [{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }], dur: 1400, paso: 0, curva: SALIDA },
   ];
 
   function aparicion() {

@@ -18,19 +18,19 @@ export const FUENTES = {
 
 export const PREDETERMINADO = {
   estilo: 'institucional',
-  colores: { primario: '#0B4F7C', acento: '#F2A900', oscuro: '#062B45', fondo: '#FFFFFF', fondoAlterno: '#F3F6F9', texto: '#17212C', exito: '#1E7B4F', peligro: '#C62828' },
+  colores: { primario: '#0B4F7C', acento: '#F2A900', oscuro: '#0D1B2A', fondo: '#FFFFFF', fondoAlterno: '#F4F5F7', texto: '#121A23', exito: '#1E7B4F', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'public-sans', tamano: 17, pesoTitulos: 800, espaciadoTitulos: -2, menuMayusculas: false },
-  forma: { radio: 8, tarjetas: 'borde', botones: 'redondeados', densidad: 'normal', ancho: 1200 },
+  forma: { radio: 10, tarjetas: 'linea', botones: 'redondeados', densidad: 'normal', ancho: 1240 },
   cabecera: { estilo: 'blanca', fija: true, barraSuperior: true, botonTramites: true, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
-  portada: { imagen: '', credito: 'Plaza de Melipeuco y volcán Llaima', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'medio', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: true },
-  pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true },
-  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: true, barraCarga: true },
+  portada: { composicion: 'dividida', imagen: '', credito: 'Plaza de Melipeuco y volcán Llaima', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'medio', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: true },
+  pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
+  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true },
   avanzado: { css: '' },
 };
 
 // Estilos prediseñados: cambian colores, tipografía, forma, cabecera y pie (no los textos ni las fotos).
 export const ESTILOS = {
-  institucional: { nombre: 'Institucional', descripcion: 'Azul y ámbar municipal, bordes finos.', valores: {} },
+  institucional: { nombre: 'Institucional', descripcion: 'Minimalista: blanco, tinta y azul municipal, sólo líneas finas.', valores: {} },
   bosque: { nombre: 'Bosque de araucarias', descripcion: 'Verde pehuén y tonos de madera.', valores: {
     colores: { primario: '#1F5A45', acento: '#D89A2B', oscuro: '#12352A', fondoAlterno: '#F2F5F1', exito: '#2F7D4F' },
     tipografia: { cuerpo: 'source-sans', titulos: 'source-sans', pesoTitulos: 700 },
@@ -56,11 +56,12 @@ export const ESTILOS = {
 
 // Opciones de las listas cerradas (lo que no esté aquí se descarta).
 export const OPCIONES = {
-  tarjetas: { borde: 'Con borde', sombra: 'Con sombra', plano: 'Planas (fondo gris)' },
+  tarjetas: { linea: 'Minimalistas (sólo líneas)', borde: 'Con borde', sombra: 'Con sombra', plano: 'Planas (fondo gris)' },
   botones: { redondeados: 'Esquinas suaves', pildora: 'Redondos (píldora)', rectos: 'Rectos' },
   densidad: { compacta: 'Compacta', normal: 'Normal', amplia: 'Amplia' },
   cabeceraEstilo: { blanca: 'Blanca', color: 'Color principal', oscura: 'Oscura' },
   logo: { emblema: 'Emblema (sin texto) y nombre', escudo: 'Escudo completo', personalizado: 'Imagen propia' },
+  composicion: { dividida: 'Texto y foto lado a lado', foto: 'Foto de fondo completa' },
   alto: { bajo: 'Baja', medio: 'Media', alto: 'Alta', pantalla: 'Pantalla completa' },
   alineacion: { izquierda: 'A la izquierda', centro: 'Centrada' },
   pieEstilo: { oscuro: 'Oscuro', color: 'Color principal', claro: 'Claro' },
@@ -103,8 +104,8 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       menuMayusculas: bool(t.menuMayusculas, false),
     },
     forma: {
-      radio: numero(f.radio, 8, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, 'borde'), botones: opcion(f.botones, OPCIONES.botones, 'redondeados'),
-      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1200, 1040, 1440),
+      radio: numero(f.radio, 10, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, 'linea'), botones: opcion(f.botones, OPCIONES.botones, 'redondeados'),
+      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1240, 1040, 1440),
     },
     cabecera: {
       estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, 'blanca'), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, true), botonTramites: bool(ca.botonTramites, true),
@@ -112,15 +113,15 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       subtitulo: texto(ca.subtitulo, P.cabecera.subtitulo, 60), nombre: texto(ca.nombre, P.cabecera.nombre, 60),
     },
     portada: {
-      imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
+      composicion: opcion(po.composicion, OPCIONES.composicion, 'dividida'), imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
       alto: opcion(po.alto, OPCIONES.alto, 'medio'), alineacion: opcion(po.alineacion, OPCIONES.alineacion, 'izquierda'), velo: numero(po.velo, 80, 0, 100),
       franjaDatos: bool(po.franjaDatos, true), populares: bool(po.populares, true),
     },
-    pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true) },
+    pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
       intro: opcion(an.intro, OPCIONES.intro, 'primera'), transiciones: bool(an.transiciones, true), aparicion: bool(an.aparicion, true),
-      inclinacion: bool(an.inclinacion, true), barraCarga: bool(an.barraCarga, true),
+      inclinacion: bool(an.inclinacion, false), barraCarga: bool(an.barraCarga, true),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
     avanzado: { css: permitirCss ? String(e.avanzado?.css || '').replace(/<\/?style/gi, '').slice(0, 20000) : String(previo?.avanzado?.css || '') },
@@ -162,8 +163,8 @@ export function atributos(cfg) {
     'data-barra-superior': cfg.cabecera.barraSuperior ? 'si' : 'no', 'data-boton-tramites': cfg.cabecera.botonTramites ? 'si' : 'no',
     'data-menu-mayusculas': cfg.tipografia.menuMayusculas ? 'si' : 'no',
     'data-tarjetas': cfg.forma.tarjetas, 'data-botones': cfg.forma.botones, 'data-densidad': cfg.forma.densidad,
-    'data-hero-alinear': cfg.portada.alineacion, 'data-franja': cfg.portada.franjaDatos ? 'si' : 'no', 'data-populares': cfg.portada.populares ? 'si' : 'no',
-    'data-pie': cfg.pie.estilo, 'data-pie-emergencias': cfg.pie.emergencias ? 'si' : 'no', 'data-pie-boletin': cfg.pie.boletin ? 'si' : 'no', 'data-pie-escudo': cfg.pie.escudo ? 'si' : 'no',
+    'data-portada': cfg.portada.composicion, 'data-hero-alinear': cfg.portada.alineacion, 'data-franja': cfg.portada.franjaDatos ? 'si' : 'no', 'data-populares': cfg.portada.populares ? 'si' : 'no',
+    'data-pie': cfg.pie.estilo, 'data-pie-emergencias': cfg.pie.emergencias ? 'si' : 'no', 'data-pie-boletin': cfg.pie.boletin ? 'si' : 'no', 'data-pie-escudo': cfg.pie.escudo ? 'si' : 'no', 'data-pie-marca': cfg.pie.marcaGrande ? 'si' : 'no',
     'data-anim': a.activas ? a.intensidad : 'no', 'data-intro': a.activas ? a.intro : 'nunca',
     'data-anim-transiciones': a.activas && a.transiciones ? 'si' : 'no', 'data-anim-aparicion': a.activas && a.aparicion ? 'si' : 'no',
     'data-anim-inclinacion': a.activas && a.inclinacion ? 'si' : 'no', 'data-anim-carga': a.activas && a.barraCarga ? 'si' : 'no',

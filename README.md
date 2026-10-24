@@ -19,17 +19,20 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - las páginas del menú que estaban vacías (Municipio, Salud, Educación, Udel, Social, Deporte, Turismo, Juzgado, PLADECO…) ahora tienen contenido: noticias de su área, trámites, contactos y documentos.
 
 **Diseño**
-- Institucional y sobrio: blanco, azul y ámbar de la marca municipal, bordes finos y una cuadrícula ordenada. Todo se puede cambiar desde *Diseño del sitio* en el panel.
-- Portada con una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima), el buscador «¿Qué necesita hacer?», una franja con horario de atención, teléfono, tiempo actual y emergencias, y accesos rápidos.
+- Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
+- Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.
+- Franja con horario de atención, teléfono, tiempo actual y emergencias; accesos rápidos en una cuadrícula con divisiones de un pixel; listas de trámites, agenda y documentos sin marcos.
+- Pie con el nombre de la comuna en letra gigante como firma.
 - Una sola familia tipográfica, Public Sans, servida desde el propio sitio (sin depender de Google Fonts).
-- Rápido: sin ilustraciones ni animaciones decorativas; la foto principal pesa entre 44 y 216 KB según la pantalla, y el HTML de la portada pesa unos 12 KB comprimido.
+- Rápido: sin ilustraciones decorativas; la foto principal pesa entre 44 y 216 KB según la pantalla, y el HTML de la portada pesa unos 12 KB comprimido.
 - Escudo municipal vectorizado (`public/img/escudo-*.svg`, `emblema-*.svg`).
 
 **Movimiento** (API de animación nativa del navegador, sin librerías; se apaga con «reducir movimiento»)
 - **Pantalla de carga** de la portada (primera visita de cada sesión, se salta con un clic o una tecla): el escudo se arma pieza por pieza. El volcán y el terreno se elevan, las araucarias crecen desde la raíz, el kultrún llega girando, las trutrucas se deslizan por su diagonal y suenan, los laureles con copihues brotan, las aves llegan volando y la cinta se despliega. Luego el escudo vuela al logo de la cabecera mientras la pantalla se cierra en un círculo sobre él. Las piezas salen de `public/img/escudo-piezas.svg`, generado desde el escudo con `herramientas/piezas-escudo.py`.
-- **Entrada de la portada**: la foto se acerca, el título se descubre y el buscador sube.
-- **Aparición al desplazarse**: los accesos giran en 3D, las noticias descubren su foto, las listas se deslizan y el escudo del pie gira como moneda. Todo dura menos de 0,7 s.
-- **Cursor**: los mosaicos se inclinan en 3D con un brillo que sigue al puntero, y el logo de la cabecera gira.
+- **Entrada de la portada**: el título se descubre, la foto sube dentro de su marco y aparecen el buscador y el pie de foto.
+- **Cabecera** que se oculta al bajar y reaparece apenas se sube; flechas que se deslizan en filas y mosaicos al pasar el cursor.
+- **Aparición al desplazarse**: los accesos y las listas aparecen en cascada, las noticias descubren su foto, los títulos suben desde una máscara y la firma del pie se eleva. Todo dura menos de 0,7 s, salvo la firma.
+- **Cursor**: el logo de la cabecera gira; la inclinación 3D de los mosaicos se puede activar en el panel.
 - **Navegación**: barra de carga al cambiar de página y transición entre páginas con la cabecera fija (en navegadores compatibles).
 
 **Mejoras del sitio público**
