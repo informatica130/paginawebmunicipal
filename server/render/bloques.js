@@ -61,12 +61,12 @@ async function bloque(ctx, b, contenido) {
       if (b.categoria && !cat) return '';
       const lista = ctx.repo.listar({ tipo: 'noticia', publico: true, categoria: cat?.id, limite: b.cantidad }).items;
       if (!lista.length) return '';
-      return html`<div class="bloque-cabecera">${titulo(b.titulo || 'Noticias')}<a class="ver-todo" href="${cat ? `/categoria/${cat.slug}/` : '/noticias/'}">Ver todas ${crudo(icono('flecha', { tam: 16 }))}</a></div>
+      return html`<div class="bloque-cabecera">${titulo(b.titulo || 'Noticias')}<a class="ver-todo" href="${cat ? `/categoria/${cat.slug}/` : '/noticias/'}">Ver todas</a></div>
         <div class="grilla-noticias">${lista.map((c) => tarjetaNoticia(ctx, c))}</div>`;
     }
     case 'eventos': {
       const lista = ctx.repo.eventosProximos(b.cantidad);
-      return html`<div class="bloque-cabecera">${titulo(b.titulo || 'Próximos eventos')}<a class="ver-todo" href="/eventos/">Agenda completa ${crudo(icono('flecha', { tam: 16 }))}</a></div>
+      return html`<div class="bloque-cabecera">${titulo(b.titulo || 'Próximos eventos')}<a class="ver-todo" href="/eventos/">Agenda completa</a></div>
         ${lista.length ? html`<div class="lista-eventos">${lista.map((c) => tarjetaEvento(ctx, c))}</div>` : vacio('No hay eventos programados por ahora. Revise la agenda completa o las noticias.', 'calendario')}`;
     }
     case 'tramites': return bloqueTramites(ctx, b);
@@ -212,7 +212,7 @@ async function bloqueTramiteEnLinea(ctx, b) {
   const t = ctx.tramites;
   if (!t.configurado) return '';
   const atributo = b.vista === 'seguimiento' ? crudo('data-melipeuco-vista="seguimiento"') : b.vista === 'catalogo' ? crudo(`data-melipeuco-dependencia="${esc(b.dependencia || '')}"`) : crudo(`data-melipeuco-tramite="${esc(b.tramite)}"`);
-  return html`${titulo(b.titulo)}<div class="widget-tramite" ${atributo} data-color="${ctx.ajustes.colores?.primario || '#0b5a8c'}">
+  return html`${titulo(b.titulo)}<div class="widget-tramite" ${atributo} data-color="${ctx.ajustes.colores?.primario || '#14284A'}">
     <p><a class="boton boton-primario" href="${b.vista === 'seguimiento' ? t.enlaces.seguimiento() : b.vista === 'catalogo' ? t.enlaces.catalogo(b.dependencia) : t.enlaces.tramite(b.tramite)}">Abrir en la Plataforma de Trámites</a></p>
   </div><script src="${t.enlaces.widget()}" defer></script>`;
 }

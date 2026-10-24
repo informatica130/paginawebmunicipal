@@ -3,6 +3,7 @@
 
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, telefonoHref, telefonoTexto } from './comun.js';
 import { textoPlano, recortar } from '../../src/util.js';
+import { curvasDeNivel, cresta, franjaTextil, momentoDelDia } from './paisaje.js';
 
 const NIVELES = { info: 'info', alerta: 'alerta', emergencia: 'alerta', exito: 'check' };
 
@@ -62,8 +63,8 @@ function cabecera(ctx) {
     <div class="cabecera-principal">
       <div class="contenedor">
         <a class="marca" href="/" aria-label="${s.nombre}: ir al inicio">
-          <img src="/img/logo-claro.webp" alt="" width="64" height="64">
-          <span><small>Ilustre</small><b>${s.nombreCorto || s.nombre}</b><em>${s.lema}</em></span>
+          <img class="marca-emblema" src="/img/emblema-crema.svg" alt="" width="58" height="52">
+          <span class="marca-texto"><small>Ilustre Municipalidad de</small><b>Melipeuco</b></span>
         </a>
         <nav class="nav" id="nav" aria-label="Menú principal">${menuPrincipal(ctx)}</nav>
         <div class="cabecera-acciones">
@@ -95,6 +96,8 @@ function pie(ctx) {
   const redes = [['facebook', r.facebook, 'Facebook'], ['instagram', r.instagram, 'Instagram'], ['youtube', r.youtube, 'YouTube'], ['x', r.x, 'X (Twitter)']].filter((x) => x[1]);
   const lista = (clave) => ctx.repo.menu(clave).map((i) => html`<li><a ${attrsEnlace(i.url, i.nueva)}>${i.texto}${avisoExterno(i.url, i.nueva)}</a></li>`);
   return html`<footer class="pie" id="pie">
+    ${crudo(cresta('cresta-pie'))}
+    <div class="pie-fondo" aria-hidden="true">${crudo(curvasDeNivel())}</div>
     <div class="pie-emergencias" id="emergencias-pie">
       <div class="contenedor">
         <strong>${crudo(icono('telefono', { tam: 18 }))} Teléfonos de emergencia</strong>
@@ -103,8 +106,8 @@ function pie(ctx) {
     </div>
     <div class="contenedor pie-columnas">
       <section class="pie-marca">
-        <img src="/img/logo-oscuro.webp" alt="" width="72" height="72">
-        <h2>${s.nombre}</h2>
+        <img class="pie-escudo" src="/img/escudo-crema.svg" alt="Escudo de la Municipalidad de Melipeuco" width="150" height="142" loading="lazy">
+        <h2 class="sr">${s.nombre}</h2>
         <address>
           <p>${crudo(icono('ubicacion', { tam: 16 }))} <a ${attrsEnlace(s.mapa?.enlace || '#')}>${s.direccion}</a></p>
           <p>${crudo(icono('telefono', { tam: 16 }))} <a href="${telefonoHref(s.telefono)}">${s.telefono}</a> (sólo consultas)</p>
@@ -126,6 +129,7 @@ function pie(ctx) {
         <p class="pie-rss"><a href="/feed/">${crudo(icono('rss', { tam: 16 }))} Noticias por RSS</a></p>
       </section>
     </div>
+    ${crudo(franjaTextil('franja-pie'))}
     <div class="pie-legal">
       <div class="contenedor">
         <p>${(s.pie?.texto || '© {anio} ' + s.nombre).replace('{anio}', anio)}</p>
@@ -145,7 +149,7 @@ export function documento(ctx, { titulo, descripcion = '', cuerpo, imagen = '', 
   const c = s.colores || {};
   const ld = [{ '@context': 'https://schema.org', '@type': 'GovernmentOrganization', name: s.nombre, url: base + '/', logo: base + '/img/icon-512.png', telephone: s.telefono, email: s.email, address: { '@type': 'PostalAddress', streetAddress: 'Pedro Aguirre Cerda 14', addressLocality: 'Melipeuco', addressRegion: 'La Araucanía', addressCountry: 'CL' }, sameAs: Object.values(s.redes || {}).filter(Boolean) }];
   if (jsonLd) ld.push(...[jsonLd].flat());
-  return '<!doctype html>\n' + html`<html lang="es-CL">
+  return '<!doctype html>\n' + html`<html lang="es-CL" data-momento="${momentoDelDia()}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -161,22 +165,23 @@ ${noindex ? crudo('<meta name="robots" content="noindex">') : ''}
 <meta property="og:image" content="${img}">
 <meta property="og:locale" content="es_CL">
 <meta name="twitter:card" content="${imagen ? 'summary_large_image' : 'summary'}">
-<meta name="theme-color" content="${c.oscuro || '#001035'}">
+<meta name="theme-color" content="${c.primario || '#14284A'}">
 <link rel="icon" href="/img/favicon.png">
 <link rel="apple-touch-icon" href="/img/icon-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Noticias de ${s.nombreCorto}" href="/feed/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700;800&family=Big+Shoulders+Display:wght@600;700;800;900&display=swap">
+<link rel="icon" type="image/svg+xml" href="/img/emblema-azul.svg">
 <link rel="stylesheet" href="/css/sitio.css?v=${ctx.version}">
-<style>:root{--primario:${c.primario || '#0b5a8c'};--acento:${c.acento || '#ffaa02'};--oscuro:${c.oscuro || '#001035'}}</style>
+<style>:root{--noche:${c.primario || '#14284A'};--pinon:${c.acento || '#E3A33A'};--noche-2:${c.oscuro || '#0C1A33'}}</style>
 <script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto'}catch(e){}})();</script>
 <script type="application/ld+json" nonce="${ctx.nonce}">${crudo(JSON.stringify(ld).replace(/</g, '\\u003c'))}</script>
 ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
 </head>
-<body class="${clase}">
+<body class="${clase}${portada ? ' es-portada' : ''}">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 ${ctx.usuario ? html`<div class="barra-admin"><div class="contenedor"><span>${crudo(icono('usuario', { tam: 16 }))} ${ctx.usuario.nombre}</span><a href="/admin/">Panel de administración</a>${editar ? html`<a href="/admin/#/editar/${editar}">${crudo(icono('herramienta', { tam: 16 }))} Editar esta página</a>` : ''}</div></div>` : ''}
 ${cabecera(ctx)}
@@ -194,7 +199,9 @@ ${pie(ctx)}
 // Encabezado de página interior (título, bajada, migas).
 export function encabezado({ titulo, bajada = '', migas = '', imagen = '', ctx, extra = '' }) {
   return html`<section class="encabezado${imagen ? ' con-imagen' : ''}">
+    <div class="encabezado-curvas" aria-hidden="true">${crudo(curvasDeNivel())}</div>
     ${imagen ? html`<div class="encabezado-fondo">${ctx.img.imagen(imagen, { alt: '', sizes: '100vw', prioridad: true })}</div>` : ''}
+    ${crudo(cresta('cresta-encabezado'))}
     <div class="contenedor">
       ${migas}
       <h1>${titulo}</h1>

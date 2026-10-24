@@ -5,11 +5,14 @@ import { documento, encabezado } from './layout.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
+import { paisaje, emblemaAnimado, cresta, curvasDeNivel } from './paisaje.js';
 
 // ------------------------------------------------------------------ Portada
 export async function portada(ctx) {
   const s = ctx.ajustes;
-  const secciones = (s.portada?.secciones || []).filter((x) => x.activo);
+  const todas = [...(s.portada?.secciones || [])];
+  if (!todas.some((x) => x.id === 'campanas')) todas.splice(Math.max(0, todas.findIndex((x) => x.id === 'accesos') + 1), 0, { id: 'campanas', activo: true });
+  const secciones = todas.filter((x) => x.activo);
   const partes = [];
   for (const sec of secciones) {
     const r = await seccionPortada(ctx, sec);
@@ -22,26 +25,48 @@ async function seccionPortada(ctx, sec) {
   const s = ctx.ajustes;
   switch (sec.id) {
     case 'banners': {
-      const slides = ctx.repo.vigentes('slide');
-      return html`<section class="portada-hero" aria-label="Destacados">
-        ${slides.length ? html`<div class="hero-carrusel" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Banners destacados">
-          <div class="carrusel-pista">${slides.map((sl, i) => {
-            const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes: '100vw', prioridad: i === 0 })}</picture>`;
-            return html`<div class="carrusel-item" aria-roledescription="diapositiva" aria-label="${i + 1} de ${slides.length}">${sl.datos.enlace ? html`<a ${attrsEnlace(sl.datos.enlace)}>${img}${avisoExterno(sl.datos.enlace)}</a>` : img}${sl.datos.textoBoton ? html`<a class="boton boton-acento hero-boton" ${attrsEnlace(sl.datos.enlace)}>${sl.datos.textoBoton}</a>` : ''}</div>`;
-          })}</div>
-          ${slides.length > 1 ? html`<button type="button" class="carrusel-ant" aria-label="Banner anterior">${crudo(icono('flechaIzq'))}</button><button type="button" class="carrusel-sig" aria-label="Banner siguiente">${crudo(icono('flecha'))}</button><button type="button" class="carrusel-pausa" aria-label="Pausar el carrusel">${crudo(icono('pausa', { tam: 16 }))}</button><div class="carrusel-puntos" role="tablist"></div>` : ''}
-        </div>` : ''}
-        <div class="hero-buscar">
-          <div class="contenedor">
-            <form action="/buscar/" method="get" role="search">
-              <label for="q-portada"><b>¿Qué necesita hacer hoy?</b></label>
-              <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Busque un trámite, una noticia o un servicio" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-primario" type="submit">Buscar</button></div>
+      const dest = await ctx.tramites.destacados();
+      const proxima = dest?.proximas?.[0];
+      const letras = [...'Melipeuco'].map((l, i) => html`<span style="--i:${i}">${l}</span>`);
+      return html`<section class="hero" aria-labelledby="hero-titulo">
+        <div class="hero-escena" data-parallax>${crudo(paisaje())}</div>
+        <div class="contenedor hero-contenido">
+          <div class="hero-texto">
+            ${crudo(emblemaAnimado())}
+            <p class="hero-antetitulo">Ilustre Municipalidad de</p>
+            <h1 id="hero-titulo" class="hero-titulo" aria-label="Melipeuco"><span aria-hidden="true">${letras}</span></h1>
+            <p class="hero-lema">${s.lema}. Al pie del volcán Llaima, en la puerta del Parque Nacional Conguillío.</p>
+            <form class="hero-buscar" action="/buscar/" method="get" role="search">
+              <label for="q-portada">¿Qué necesita hacer hoy?</label>
+              <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Licencia, patente, horario de buses…" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
               <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
             </form>
             <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>
           </div>
+          <aside class="hero-ahora" aria-label="Ahora en Melipeuco">
+            <p class="ahora-titulo">Ahora en Melipeuco</p>
+            <p class="ahora-hora"><time data-reloj>--:--</time><span data-momento-texto></span></p>
+            ${s.clima?.activo ? html`<div class="ahora-clima" data-clima data-lat="${s.mapa?.lat || -38.85}" data-lng="${s.mapa?.lng || -71.69}"><p class="clima-cargando">Consultando el tiempo…</p></div>` : ''}
+            ${proxima ? html`<a class="ahora-dato" href="${proxima.url}" target="_blank" rel="noopener"><span class="en-vivo">En vivo</span><b>Próxima hora disponible</b><span>${proxima.name}</span><span class="ahora-fecha">${fecha(proxima.date, { largo: true, diaSemana: true })}${proxima.time ? `, ${proxima.time} hrs.` : ''}</span></a>` : ''}
+            <a class="ahora-dato ahora-emergencias" href="/contacto/#emergencias"><b>Emergencias</b><span>Urgencias CESFAM ${telefonoTexto((s.emergencias || [])[0]?.telefono || '')}</span></a>
+          </aside>
         </div>
+        ${crudo(cresta('cresta-hero'))}
       </section>`;
+    }
+    case 'campanas': {
+      const slides = ctx.repo.vigentes('slide');
+      if (!slides.length) return '';
+      return html`<section class="seccion seccion-campanas" aria-labelledby="campanas-titulo"><div class="contenedor">
+        <div class="seccion-cabecera"><h2 id="campanas-titulo">${sec.titulo || 'Campañas municipales'}</h2></div>
+        <div class="campanas" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Campañas municipales">
+          <div class="carrusel-pista">${slides.map((sl, i) => {
+            const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes: '(max-width: 1240px) 100vw, 1200px' })}</picture>`;
+            return html`<div class="carrusel-item" aria-roledescription="diapositiva" aria-label="${i + 1} de ${slides.length}">${sl.datos.enlace ? html`<a ${attrsEnlace(sl.datos.enlace)}>${img}${avisoExterno(sl.datos.enlace)}</a>` : img}</div>`;
+          })}</div>
+          ${slides.length > 1 ? html`<button type="button" class="carrusel-ant" aria-label="Campaña anterior">${crudo(icono('flechaIzq'))}</button><button type="button" class="carrusel-sig" aria-label="Campaña siguiente">${crudo(icono('flecha'))}</button><button type="button" class="carrusel-pausa" aria-label="Pausar el carrusel">${crudo(icono('pausa', { tam: 16 }))}</button><div class="carrusel-puntos" role="tablist"></div>` : ''}
+        </div>
+      </div></section>`;
     }
     case 'accesos': {
       const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items;
@@ -57,7 +82,7 @@ async function seccionPortada(ctx, sec) {
       const proximas = dest?.proximas?.slice(0, 3) || [];
       const enl = ctx.tramites.enlaces;
       return html`<section class="seccion seccion-tramites"><div class="contenedor">
-        <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Trámites en línea'}</h2>${sec.texto ? html`<p>${sec.texto}</p>` : ''}</div><a class="ver-todo" href="/tramites/">Todos los trámites ${crudo(icono('flecha', { tam: 16 }))}</a></div>
+        <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Trámites en línea'}</h2>${sec.texto ? html`<p>${sec.texto}</p>` : ''}</div><a class="ver-todo" href="/tramites/">Todos los trámites</a></div>
         <div class="tramites-portada">
           <div class="lista-tramites">${fichas.map((t) => filaTramite(ctx, t))}</div>
           <aside class="panel-tramites">
@@ -80,7 +105,7 @@ async function seccionPortada(ctx, sec) {
       const lado = resto.slice(0, 4);
       const mas = resto.slice(4);
       return html`<section class="seccion seccion-noticias"><div class="contenedor">
-        <div class="seccion-cabecera"><h2>${sec.titulo || 'Últimas noticias'}</h2><a class="ver-todo" href="/noticias/">Todas las noticias ${crudo(icono('flecha', { tam: 16 }))}</a></div>
+        <div class="seccion-cabecera"><h2>${sec.titulo || 'Últimas noticias'}</h2><a class="ver-todo" href="/noticias/">Todas las noticias</a></div>
         <div class="noticias-portada">${tarjetaNoticia(ctx, destacada, { grande: true })}<div class="grilla-noticias compacta">${lado.map((c) => tarjetaNoticia(ctx, c))}</div></div>
         ${mas.length ? html`<div class="grilla-noticias noticias-mas">${mas.map((c) => tarjetaNoticia(ctx, c))}</div>` : ''}
       </div></section>`;
@@ -90,11 +115,10 @@ async function seccionPortada(ctx, sec) {
       const s2 = ctx.ajustes;
       return html`<section class="seccion seccion-agenda"><div class="contenedor agenda-portada">
         <div>
-          <div class="seccion-cabecera"><h2>${sec.titulo || 'Agenda comunal'}</h2><a class="ver-todo" href="/eventos/">Ver agenda ${crudo(icono('flecha', { tam: 16 }))}</a></div>
+          <div class="seccion-cabecera"><h2>${sec.titulo || 'Agenda comunal'}</h2><a class="ver-todo" href="/eventos/">Ver agenda</a></div>
           ${lista.length ? html`<div class="lista-eventos">${lista.map((c) => tarjetaEvento(ctx, c))}</div>` : vacio('No hay actividades programadas en este momento. Revise la agenda o síganos en redes sociales.', 'calendario')}
         </div>
         <aside class="lateral-portada">
-          ${s2.clima?.activo ? html`<div class="clima" data-clima data-lat="${s2.mapa?.lat || -38.85}" data-lng="${s2.mapa?.lng || -71.69}"><h3>${crudo(icono('sol', { tam: 20 }))} El tiempo en ${s2.clima.lugar || 'Melipeuco'}</h3><p class="clima-cargando">Consultando el pronóstico…</p></div>` : ''}
           <div class="emergencias-portada"><h3>${crudo(icono('telefono', { tam: 20 }))} Emergencias</h3><ul>${(s2.emergencias || []).map((e) => html`<li><a href="${telefonoHref(e.telefono)}"><span>${e.nombre}</span><b>${telefonoTexto(e.telefono)}</b></a></li>`)}</ul></div>
         </aside>
       </div></section>`;
@@ -102,15 +126,15 @@ async function seccionPortada(ctx, sec) {
     case 'areas': {
       const lista = ctx.repo.listar({ tipo: 'area', publico: true, orden: 'orden', limite: 300 }).items.filter((a) => ['direccion', 'alcaldia', 'juzgado', 'concejo'].includes(a.datos.tipoUnidad) || ['dep-salud', 'dep-educacion', 'dep-transito'].includes(a.datos.transitoDepartamento)).filter((a) => a.datos.enMenu !== false).slice(0, 16);
       if (!lista.length) return '';
-      return html`<section class="seccion seccion-areas"><div class="contenedor">
-        <div class="seccion-cabecera"><h2>${sec.titulo || 'Áreas municipales'}</h2><a class="ver-todo" href="/areas/">Todas las áreas ${crudo(icono('flecha', { tam: 16 }))}</a></div>
+      return html`<section class="seccion seccion-areas"><div class="areas-fondo" aria-hidden="true">${crudo(curvasDeNivel())}</div><div class="contenedor">
+        <div class="seccion-cabecera"><h2>${sec.titulo || 'Áreas municipales'}</h2><a class="ver-todo" href="/areas/">Todas las áreas</a></div>
         ${tarjetasAreas(ctx, lista)}
       </div></section>`;
     }
     case 'turismo': {
       const t = ctx.ajustes.turismo;
       if (!t?.url) return '';
-      return html`<section class="banda-turismo"><div class="contenedor">
+      return html`<section class="banda-turismo"><div class="turismo-fondo" aria-hidden="true">${crudo(curvasDeNivel())}</div><div class="contenedor">
         ${t.imagen ? html`<img src="${t.imagen}" alt="${t.titulo}" loading="lazy" class="turismo-logo">` : html`<h2>${t.titulo}</h2>`}
         <p>${t.texto}</p>
         <a class="boton boton-acento" ${attrsEnlace(t.url)}>${crudo(icono('montana', { tam: 18 }))} Visite el sitio web${avisoExterno(t.url)}</a>
@@ -126,7 +150,7 @@ async function seccionPortada(ctx, sec) {
       const ultima = ctx.repo.listar({ tipo: 'sesion', publico: true, orden: 'sesion', limite: 4 }).items;
       return html`<section class="seccion seccion-video"><div class="contenedor video-portada">
         <div><h2>${v.titulo || 'Último video'}</h2>${video(v.url, v.titulo)}</div>
-        ${ultima.length ? html`<aside><h3>Sesiones del Concejo</h3><ul class="lista-sesiones compacta">${ultima.map((s) => filaSesion(ctx, s))}</ul><a class="ver-todo" href="/concejo/sesiones/">Todas las sesiones ${crudo(icono('flecha', { tam: 16 }))}</a></aside>` : ''}
+        ${ultima.length ? html`<aside><h3>Sesiones del Concejo</h3><ul class="lista-sesiones compacta">${ultima.map((s) => filaSesion(ctx, s))}</ul><a class="ver-todo" href="/concejo/sesiones/">Todas las sesiones</a></aside>` : ''}
       </div></section>`;
     }
     case 'boletin':
@@ -684,5 +708,5 @@ export function noEncontrado(ctx, sugerencias = []) {
 }
 
 export function mantenimiento(ctx) {
-  return `<!doctype html><html lang="es-CL"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(ctx.ajustes.nombre)}</title><link rel="stylesheet" href="/css/sitio.css?v=${ctx.version}"></head><body class="mantenimiento"><main class="contenedor angosto centrado"><img src="/img/logo-claro.webp" alt="" width="120" height="120"><h1>${esc(ctx.ajustes.nombre)}</h1><p>${esc(ctx.ajustes.mantenimiento?.mensaje || 'Sitio en mantenimiento.')}</p><p>Teléfono: <a href="tel:+56233848813">${esc(ctx.ajustes.telefono)}</a></p></main></body></html>`;
+  return `<!doctype html><html lang="es-CL"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(ctx.ajustes.nombre)}</title><link rel="stylesheet" href="/css/sitio.css?v=${ctx.version}"></head><body class="mantenimiento"><main class="contenedor angosto centrado"><img src="/img/escudo-azul.svg" alt="" width="160" height="150" style="width:160px;height:auto"><h1>${esc(ctx.ajustes.nombre)}</h1><p>${esc(ctx.ajustes.mantenimiento?.mensaje || 'Sitio en mantenimiento.')}</p><p>Teléfono: <a href="tel:+56233848813">${esc(ctx.ajustes.telefono)}</a></p></main></body></html>`;
 }

@@ -2,7 +2,7 @@ import { h, raw, $, $$, api, aviso, fallo, estado } from '../ui.js';
 import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
 
-const SECCIONES = { avisos: 'Avisos y alertas', banners: 'Carrusel de banners y buscador', accesos: 'Accesos rápidos', tramites: 'Trámites en línea', noticias: 'Últimas noticias', eventos: 'Agenda, clima y emergencias', areas: 'Áreas municipales', turismo: 'Banda de turismo', encuesta: 'Encuesta activa', video: 'Último video y Concejo', boletin: 'Suscripción al boletín' };
+const SECCIONES = { avisos: 'Avisos y alertas', banners: 'Portada con el volcán, buscador y «Ahora en Melipeuco»', campanas: 'Campañas (banners)', accesos: 'Accesos rápidos', tramites: 'Trámites en línea', noticias: 'Últimas noticias', eventos: 'Agenda, clima y emergencias', areas: 'Áreas municipales', turismo: 'Banda de turismo', encuesta: 'Encuesta activa', video: 'Último video y Concejo', boletin: 'Suscripción al boletín' };
 
 export default async function (vista) {
   const a = await api('GET', 'ajustes');
@@ -14,9 +14,9 @@ export default async function (vista) {
         <div class="fila"><label class="campo"><span>Nombre oficial</span><input name="nombre" value="${a.nombre}"></label><label class="campo"><span>Nombre corto</span><input name="nombreCorto" value="${a.nombreCorto}"></label><label class="campo"><span>Lema</span><input name="lema" value="${a.lema}"></label></div>
         <label class="campo"><span>Descripción (buscadores y redes sociales)</span><textarea name="descripcion" rows="2">${a.descripcion}</textarea></label>
         <h3>Colores institucionales</h3><div class="fila">
-          <label class="campo"><span>Principal</span><input type="color" name="c_primario" value="${a.colores?.primario || '#0b5a8c'}"></label>
-          <label class="campo"><span>Acento</span><input type="color" name="c_acento" value="${a.colores?.acento || '#ffaa02'}"></label>
-          <label class="campo"><span>Oscuro (cabecera y pie)</span><input type="color" name="c_oscuro" value="${a.colores?.oscuro || '#001035'}"></label></div>
+          <label class="campo"><span>Principal (azul noche)</span><input type="color" name="c_primario" value="${a.colores?.primario || '#14284A'}"></label>
+          <label class="campo"><span>Acento (botones destacados)</span><input type="color" name="c_acento" value="${a.colores?.acento || '#E3A33A'}"></label>
+          <label class="campo"><span>Fondo profundo (pie)</span><input type="color" name="c_oscuro" value="${a.colores?.oscuro || '#0C1A33'}"></label></div>
         <p class="chico muted">Mantenga buen contraste: el texto blanco debe leerse bien sobre el color principal y el oscuro.</p>
         <label class="campo"><span>Texto del pie (use {anio} para el año)</span><input name="pie" value="${a.pie?.texto || ''}"></label>
       </section>

@@ -1,7 +1,7 @@
 /* Service worker del sitio: páginas siempre frescas desde la red; si no hay conexión
    se muestra la última versión guardada (útil con mala señal en sectores rurales). */
-const CACHE = 'mlp-sitio-v1';
-const BASE = ['/', '/contacto/', '/tramites/', '/img/logo-claro.webp', '/img/favicon.png'];
+const CACHE = 'mlp-sitio-v2';
+const BASE = ['/', '/contacto/', '/tramites/', '/img/emblema-crema.svg', '/img/emblema-azul.svg', '/img/favicon.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(BASE)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k))))); self.clients.claim(); });
 self.addEventListener('fetch', (e) => {

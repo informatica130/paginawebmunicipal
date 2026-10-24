@@ -24,7 +24,7 @@ const VISTAS = {
 // ------------------------------------------------------------------ Ingreso
 function pantallaIngreso(mensaje = '') {
   app.innerHTML = String(h`<main class="ingreso"><form class="ingreso-caja" novalidate>
-    <img src="/img/logo-claro.webp" alt="">
+    <img src="/img/escudo-azul.svg" alt="">
     <h1>Panel del sitio web</h1><p class="sub">Municipalidad de Melipeuco</p>
     ${mensaje ? h`<div class="caja alerta" role="alert">${mensaje}</div>` : ''}
     <div data-paso="1">
@@ -67,7 +67,7 @@ function pantallaIngreso(mensaje = '') {
 
 function pantallaCambioClave() {
   app.innerHTML = String(h`<main class="ingreso"><form class="ingreso-caja">
-    <img src="/img/logo-claro.webp" alt=""><h1>Cree su contraseña</h1>
+    <img src="/img/escudo-azul.svg" alt=""><h1>Cree su contraseña</h1>
     <p class="sub">Por seguridad debe reemplazar la contraseña temporal.</p>
     <label class="campo"><span>Contraseña temporal</span><input type="password" name="actual" autocomplete="current-password" required></label>
     <label class="campo"><span>Nueva contraseña</span><input type="password" name="nueva" autocomplete="new-password" required minlength="12"><small class="ayuda">Mínimo 12 caracteres, con al menos tres de: minúsculas, mayúsculas, números y símbolos. Una frase larga es más segura y fácil de recordar.</small></label>
@@ -93,7 +93,7 @@ function estructura() {
   const tipo = (t, icono) => (tipos[t] ? enlace('contenidos/' + t, tipos[t].plural, icono) : '');
   app.innerHTML = String(h`<div class="app">
     <aside class="lateral" id="lateral">
-      <a class="marca" href="#/"><img src="/img/logo-oscuro.webp" alt=""><span><b>Sitio web municipal</b><small>Panel de administración</small></span></a>
+      <a class="marca" href="#/"><img src="/img/emblema-crema.svg" alt=""><span><b>Sitio web municipal</b><small>Panel de administración</small></span></a>
       <nav aria-label="Secciones del panel">
         ${enlace('', 'Escritorio', 'inicio')}
         <div class="grupo">Contenido</div>

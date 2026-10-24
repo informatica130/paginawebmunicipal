@@ -32,7 +32,7 @@ export const AJUSTES_BASE = {
     { nombre: 'Bomberos', telefono: '+56938708549' },
     { nombre: 'Ambulancia SAMU', telefono: '131' },
   ],
-  colores: { primario: '#0b5a8c', acento: '#ffaa02', oscuro: '#001035' },
+  colores: { primario: '#14284A', acento: '#E3A33A', oscuro: '#0C1A33' },
   codigos: { transparencia: 'MU172', sem: '70766500' },
   turismo: { titulo: 'Melipeuco, Capital del Trekking', texto: 'Volcanes, lagunas, araucarias y senderos para toda la familia.', url: 'https://melipeucocapitaldeltrekking.cl/', imagen: '/wp-content/uploads/2025/05/capital-del-trekking-05-1024x307.png' },
   video: { titulo: 'Último video', url: 'https://www.youtube.com/watch?v=K6y_Gbza-Cw' },
@@ -42,6 +42,7 @@ export const AJUSTES_BASE = {
       { id: 'avisos', activo: true },
       { id: 'banners', activo: true },
       { id: 'accesos', activo: true, titulo: 'Accesos rápidos' },
+      { id: 'campanas', activo: true, titulo: 'Campañas municipales' },
       { id: 'tramites', activo: true, titulo: 'Trámites en línea', texto: 'Reserve horas, inicie solicitudes y siga sus trámites sin hacer filas.' },
       { id: 'noticias', activo: true, titulo: 'Últimas noticias', cantidad: 9 },
       { id: 'eventos', activo: true, titulo: 'Agenda comunal', cantidad: 4 },
@@ -236,8 +237,8 @@ function paginasSeccion(areaId) {
     ] },
     { slug: 'logotipos-y-material', titulo: 'Logotipos y material gráfico', resumen: 'Escudo y logotipos oficiales de la Municipalidad de Melipeuco para uso en comunicaciones.', bloques: [
       B('texto', { html: '<p>Descargue el escudo oficial para usarlo en documentos, actividades y material de difusión patrocinado por la Municipalidad. Respete sus proporciones y colores, y no lo deforme ni lo combine con otros elementos.</p>' }),
-      B('galeria', { titulo: 'Escudo municipal', imagenes: [{ src: '/img/logo-claro.webp', alt: 'Escudo de Melipeuco, versión para fondos claros' }, { src: '/img/logo-oscuro.webp', alt: 'Escudo de Melipeuco, versión para fondos oscuros' }], estilo: 'grilla' }),
-      B('documentos', { titulo: 'Material descargable', coleccion: 'material-grafico', cantidad: 30, archivos: [{ titulo: 'Escudo (fondo claro, WEBP)', url: '/img/logo-claro.webp' }, { titulo: 'Escudo (fondo oscuro, WEBP)', url: '/img/logo-oscuro.webp' }] }),
+      B('galeria', { titulo: 'Escudo municipal', imagenes: [{ src: '/img/escudo-azul.svg', alt: 'Escudo de Melipeuco vectorizado, versión azul para fondos claros' }, { src: '/img/logo-claro.webp', alt: 'Escudo de Melipeuco a color' }], estilo: 'grilla' }),
+      B('documentos', { titulo: 'Material descargable', coleccion: 'material-grafico', cantidad: 30, archivos: [{ titulo: 'Escudo vectorial (azul, SVG)', url: '/img/escudo-azul.svg' }, { titulo: 'Escudo vectorial (crema, SVG)', url: '/img/escudo-crema.svg' }, { titulo: 'Escudo (fondo claro, WEBP)', url: '/img/logo-claro.webp' }, { titulo: 'Escudo (fondo oscuro, WEBP)', url: '/img/logo-oscuro.webp' }] }),
     ] },
     { slug: 'educacion', titulo: 'Educación', resumen: 'Departamento de Educación Municipal, establecimientos, becas y noticias de educación.', bloques: [
       B('texto', { html: '<p>El Departamento de Educación Municipal (DAEM) administra los establecimientos educacionales municipales de Melipeuco y vela por las condiciones óptimas para el proceso educativo de niñas, niños, jóvenes y adultos de la comuna.</p>' }),
@@ -354,6 +355,9 @@ export function fechaDesdeTitulo(t) {
 export function sembrarBase(db, repo) {
   const hecho = db.ajuste('semilla_base', null);
   if (!db.ajuste('sitio')) db.guardarAjuste('sitio', AJUSTES_BASE);
+  // Rediseño 2026: si nadie cambió los colores de la primera versión, se adoptan los nuevos.
+  const sitio = db.ajuste('sitio');
+  if (sitio?.colores && sitio.colores.primario === '#0b5a8c' && sitio.colores.acento === '#ffaa02' && sitio.colores.oscuro === '#001035') db.guardarAjuste('sitio', { ...sitio, colores: AJUSTES_BASE.colores });
   for (const [clave, m] of Object.entries(MENUS_BASE)) if (!db.get('SELECT 1 FROM menus WHERE clave = ?', clave)) repo.guardarMenu(clave, m.nombre, m.items);
   if (hecho) return false;
 

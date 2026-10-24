@@ -437,12 +437,12 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     if (b.mapa) o.mapa = { lat: Number(b.mapa.lat) || previo.mapa?.lat, lng: Number(b.mapa.lng) || previo.mapa?.lng, enlace: urlSegura(b.mapa.enlace) };
     if (b.redes) o.redes = Object.fromEntries(['facebook', 'instagram', 'youtube', 'x', 'tiktok'].map((k) => [k, urlSegura(b.redes[k], { permitirRelativa: false })]));
     if (Array.isArray(b.emergencias)) o.emergencias = b.emergencias.slice(0, 12).map((e) => ({ nombre: txt(e.nombre, 80), telefono: txt(e.telefono, 30) })).filter((e) => e.nombre && e.telefono);
-    if (b.colores) o.colores = { primario: color(b.colores.primario, '#0b5a8c'), acento: color(b.colores.acento, '#ffaa02'), oscuro: color(b.colores.oscuro, '#001035') };
+    if (b.colores) o.colores = { primario: color(b.colores.primario, '#14284A'), acento: color(b.colores.acento, '#E3A33A'), oscuro: color(b.colores.oscuro, '#0C1A33') };
     if (b.turismo) o.turismo = { titulo: txt(b.turismo.titulo), texto: txt(b.turismo.texto, 400), url: urlSegura(b.turismo.url), imagen: urlSegura(b.turismo.imagen) };
     if (b.video) o.video = { titulo: txt(b.video.titulo), url: urlSegura(b.video.url) };
     if (b.clima) o.clima = { activo: !!b.clima.activo, lugar: txt(b.clima.lugar, 60) };
     if (b.portada?.secciones) {
-      const conocidas = new Set(['avisos', 'banners', 'accesos', 'tramites', 'noticias', 'eventos', 'areas', 'turismo', 'encuesta', 'video', 'boletin']);
+      const conocidas = new Set(['avisos', 'banners', 'campanas', 'accesos', 'tramites', 'noticias', 'eventos', 'areas', 'turismo', 'encuesta', 'video', 'boletin']);
       o.portada = { secciones: b.portada.secciones.filter((s) => conocidas.has(s.id)).map((s) => ({ id: s.id, activo: !!s.activo, titulo: txt(s.titulo, 120), texto: txt(s.texto, 300), cantidad: Math.min(24, Math.max(1, Number(s.cantidad) || 0)) || undefined })) };
     }
     if (b.boletin) o.boletin = { activo: !!b.boletin.activo };
