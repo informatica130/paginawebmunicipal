@@ -77,7 +77,11 @@ export function crearClienteTramites({ base, apiKey = '', codigoOirs = 'SEC-OIRS
 
   // Envía un mensaje OIRS como solicitud a la plataforma. Devuelve { trackingCode } o null.
   async function enviarSolicitudOirs(m) {
-    if (!base || !apiKey) return null;
+    // La plataforma identifica a las personas por su RUN: sin RUN el mensaje queda sólo en el sitio.
+    if (!base || !apiKey || !m.rut) return null;
+    const partes = String(m.nombre || '').trim().split(/\s+/);
+    const apellidos = partes.length > 2 ? partes.slice(-2).join(' ') : partes.length === 2 ? partes[1] : '';
+    const nombres = partes.length > 2 ? partes.slice(0, -2).join(' ') : partes[0] || '';
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), 8000);
     try {
@@ -86,7 +90,7 @@ export function crearClienteTramites({ base, apiKey = '', codigoOirs = 'SEC-OIRS
         headers: { 'Content-Type': 'application/json', 'X-Api-Key': apiKey },
         body: JSON.stringify({
           procedureCode: codigoOirs, origen: 'sitio-web', externalId: m.codigo,
-          persona: { rut: m.rut || undefined, nombres: m.nombre, email: m.email || undefined, telefono: m.telefono || undefined },
+          persona: { rut: m.rut, nombres, apellidos, email: m.email || undefined, telefono: m.telefono || undefined },
           formData: { tipo: m.tipo, asunto: m.asunto, mensaje: m.mensaje, area: m.areaNombre || '' },
         }),
       });
