@@ -919,6 +919,12 @@ mark { background: color-mix(in srgb, var(--pinon) 45%, transparent); color: inh
   .cresta-pie { top: -27px; }
 }
 
+/* Pantallas verticales (celular, tablet): el dibujo se ajusta a la altura y se corre para dejar
+   el volcán completo a la derecha (su cumbre está al 62 % del ancho del dibujo). */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .hero-escena .paisaje { position: absolute; left: 50%; bottom: 0; height: 100%; width: auto; aspect-ratio: 16 / 9; max-width: none; transform: translateX(-56%); }
+}
+
 /* ---------------------------------------------------------------- Movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
