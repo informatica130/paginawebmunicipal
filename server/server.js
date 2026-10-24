@@ -38,7 +38,9 @@ export async function iniciar(opciones = {}) {
     if (!opciones.silencioso) console.log(`\nSuper Administrador: ${cfg.ADMIN_EMAIL}\n${cfg.ADMIN_PASSWORD ? 'Contraseña: la de ADMIN_PASSWORD' : `Contraseña temporal (cámbiela al ingresar): ${clave}`}\n`);
   }
 
-  let secreto = cfg.SECRETO || db.ajuste('secreto');
+  // En Vercel cada instancia tiene su propia base: el secreto debe ser común a todas
+  // (SITIO_SECRETO); si falta, se deriva de datos estables del proyecto.
+  let secreto = cfg.SECRETO || (cfg.VERCEL ? crypto.createHash('sha256').update(`${process.env.VERCEL_PROJECT_ID || ''}|${cfg.ADMIN_EMAIL}|${cfg.ADMIN_PASSWORD}`).digest('base64url') : null) || db.ajuste('secreto');
   if (!secreto) { secreto = crypto.randomBytes(32).toString('base64url'); db.guardarAjuste('secreto', secreto); }
 
   const tramites = crearClienteTramites({ base: cfg.TRAMITES_URL, apiKey: cfg.TRAMITES_API_KEY, codigoOirs: cfg.TRAMITES_OIRS_CODIGO, fetchImpl: opciones.fetchTramites });
@@ -126,7 +128,7 @@ export async function iniciar(opciones = {}) {
         throw new ErrorHttp(404, 'No encontrado');
       }
       if (ruta.startsWith('/api/admin/')) return await admin.manejar(req, res, url);
-      if (ruta === '/api/salud') return json(req, res, 200, { ok: true, version, hora: ahora(), tramites: await tramites.estado() });
+      if (ruta === '/api/salud') return json(req, res, 200, { ok: true, version, hora: ahora(), tramites: await tramites.estado(), efimero: cfg.VERCEL, claveAdminDefinida: !!cfg.ADMIN_PASSWORD });
       return await sitio.manejar(req, res, url);
     } catch (e) {
       const status = e.status || 500;
@@ -143,7 +145,7 @@ export async function iniciar(opciones = {}) {
   servidor.requestTimeout = 120000;
   servidor.keepAliveTimeout = 5000;
   const cerrar = () => { tareas.forEach(clearInterval); sitio.volcarVisitas(); servidor.close(); db.cerrar(); };
-  return { servidor, db, repo, cfg, cerrar, sitio, admin };
+  return { servidor, manejar, db, repo, cfg, cerrar, sitio, admin };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(RAIZ, 'server/server.js')) {

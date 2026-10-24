@@ -12,6 +12,7 @@ export default async function (vista) {
         ${puede('contenido.crear') ? h`<a class="btn primario" href="#/nuevo/noticia">${ico('mas', 16)} Nueva noticia</a><a class="btn" href="#/nuevo/aviso">${ico('escudo', 16)} Publicar un aviso</a><a class="btn" href="#/nuevo/evento">${ico('calendario', 16)} Nuevo evento</a>` : ''}
       </div>
     </div>
+    ${s.sitio.efimero ? h`<div class="caja alerta"><b>Modo demostración en Vercel.</b> El disco de Vercel es temporal: los cambios del panel, los mensajes y los archivos subidos se pierden cuando la instancia se reinicia. Para usar el panel en serio, instale el sitio en un servidor con disco persistente (ver docs/DESPLIEGUE.md).</div>` : ''}
     <div class="indicadores">
       ${d.mensajes ? h`<a class="indicador${d.mensajes.nuevos ? ' alerta' : ''}" href="#/mensajes?estado=nuevo"><b>${d.mensajes.nuevos}</b><span>mensajes nuevos (OIRS y contacto)</span></a>` : ''}
       ${d.mensajes?.vencidos ? h`<a class="indicador alerta" href="#/mensajes"><b>${d.mensajes.vencidos}</b><span>mensajes con más de 14 días sin cerrar</span></a>` : ''}

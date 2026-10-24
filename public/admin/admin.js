@@ -41,6 +41,9 @@ function pantallaIngreso(mensaje = '') {
   </form></main>`);
   const f = $('form', app);
   let paso = 1;
+  fetch('/api/salud').then((r) => r.json()).then((s) => {
+    if (s.efimero && !s.claveAdminDefinida) f.querySelector('h1').insertAdjacentHTML('afterend', '<div class="caja alerta">Este sitio corre en Vercel sin la variable <b>ADMIN_PASSWORD</b>. Defínala en Vercel (Settings → Environment Variables) junto con <b>ADMIN_EMAIL</b> y vuelva a desplegar para poder ingresar.</div>');
+  }).catch(() => {});
   $('input[name=email]', f).focus();
   f.addEventListener('submit', async (e) => {
     e.preventDefault();

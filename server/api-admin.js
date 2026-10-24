@@ -116,7 +116,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
   ruta('GET', 'sesion', '*', ({ u, sesion }) => ({
     usuario: usuarioPublico(u), permisos: permisosDe(u), csrf: sesion.sesion.csrf, version,
     esquema: { tipos: TIPOS, taxonomias: TAXONOMIAS, estados: ESTADOS, permisos: PERMISOS, roles: ROLES, rutas: RUTAS, iconos: ICONOS },
-    sitio: { nombre: db.ajuste('sitio')?.nombre, url: cfg.PUBLIC_URL, tramites: cfg.TRAMITES_URL || null, correo: !!mailer },
+    sitio: { nombre: db.ajuste('sitio')?.nombre, url: cfg.PUBLIC_URL, tramites: cfg.TRAMITES_URL || null, correo: !!mailer, efimero: !!cfg.VERCEL },
     areasPermitidas: areasPermitidas(u) ? [...areasPermitidas(u)] : null,
   }));
 

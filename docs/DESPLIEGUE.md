@@ -1,5 +1,20 @@
 # Despliegue
 
+## Vercel (demostración)
+
+El repositorio incluye `vercel.json` y la función `api/index.js`: Vercel sirve estilos, scripts e imágenes desde su CDN y todo lo demás lo responde el servidor del sitio como función. Basta con importar el repositorio en Vercel (sin cambiar *Build Command* ni *Output Directory*: los define `vercel.json`) y configurar en *Settings → Environment Variables*:
+
+| Variable | Valor |
+|---|---|
+| `ADMIN_EMAIL` | correo del Super Administrador |
+| `ADMIN_PASSWORD` | contraseña del Super Administrador (obligatoria en Vercel) |
+| `SITIO_SECRETO` | texto aleatorio largo (comparte las firmas de formularios entre instancias) |
+| `TRAMITES_URL` | dirección de la Plataforma de Trámites (opcional) |
+
+Use Node.js 22.x o superior (*Settings → General → Node.js Version*).
+
+**Limitación importante**: Vercel no tiene disco persistente. La base se crea en `/tmp` al iniciar cada instancia con el contenido importado, por lo que los cambios del panel, los mensajes OIRS y los archivos subidos **se pierden** cuando Vercel recicla la instancia, y con varias instancias simultáneas la sesión del panel puede cerrarse. Vercel sirve para mostrar el sitio; para operarlo use un servidor con disco persistente (abajo) o servicios como Railway, Render o Fly.io con un volumen montado en `DATA_DIR`.
+
 ## Requisitos
 
 - Linux con **Node.js 22.5 o superior** (usa `node:sqlite`, sin dependencias externas).

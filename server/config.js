@@ -15,14 +15,18 @@ export function cargarEnv(archivo = path.join(RAIZ, '.env')) {
   }
   const e = process.env;
   const PORT = Number(e.PORT || 8090);
-  const PUBLIC_URL = (e.PUBLIC_URL || `http://localhost:${PORT}/`).replace(/\/?$/, '/');
+  // En Vercel, si no se definió PUBLIC_URL se usa el dominio del proyecto.
+  const vercel = e.VERCEL_PROJECT_PRODUCTION_URL || e.VERCEL_URL;
+  const PUBLIC_URL = (e.PUBLIC_URL || (vercel ? `https://${vercel}/` : `http://localhost:${PORT}/`)).replace(/\/?$/, '/');
   const conBarra = (u) => (u ? String(u).trim().replace(/\/?$/, '/') : '');
   return {
     PORT,
     PUBLIC_URL,
     SEGURA: PUBLIC_URL.startsWith('https://'),
-    DATA_DIR: path.resolve(RAIZ, e.DATA_DIR || 'data'),
-    TRUST_PROXY: Math.max(0, Number(e.TRUST_PROXY || 0) || 0),
+    // Vercel sólo permite escribir en /tmp (efímero).
+    DATA_DIR: path.resolve(RAIZ, e.DATA_DIR || (e.VERCEL ? '/tmp/sitio-melipeuco' : 'data')),
+    VERCEL: !!e.VERCEL,
+    TRUST_PROXY: Math.max(0, Number(e.TRUST_PROXY || (e.VERCEL ? 1 : 0)) || 0),
     LOG_REQUESTS: e.LOG_REQUESTS === '1',
     ADMIN_EMAIL: e.ADMIN_EMAIL || 'informatica@munimelipeuco.cl',
     ADMIN_PASSWORD: e.ADMIN_PASSWORD || '',
