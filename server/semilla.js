@@ -43,7 +43,7 @@ export const AJUSTES_BASE = {
       { id: 'banners', activo: true },
       { id: 'accesos', activo: true, titulo: 'Accesos rápidos' },
       { id: 'tramites', activo: true, titulo: 'Trámites en línea', texto: 'Reserve horas, inicie solicitudes y siga sus trámites sin hacer filas.' },
-      { id: 'noticias', activo: true, titulo: 'Últimas noticias', cantidad: 8 },
+      { id: 'noticias', activo: true, titulo: 'Últimas noticias', cantidad: 9 },
       { id: 'eventos', activo: true, titulo: 'Agenda comunal', cantidad: 4 },
       { id: 'areas', activo: true, titulo: 'Áreas municipales' },
       { id: 'turismo', activo: true },
