@@ -1,0 +1,18 @@
+{
+  "name": "melipeuco-sitio-web",
+  "version": "1.0.0",
+  "description": "Sitio web oficial de la Ilustre Municipalidad de Melipeuco: portal de noticias, información municipal, trámites (integrado con la Plataforma Municipal de Trámites) y panel de administración.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "start": "node --no-warnings server/server.js",
+    "dev": "node --no-warnings --watch server/server.js",
+    "test": "node --no-warnings --test tests/*.test.mjs",
+    "importar": "node --no-warnings herramientas/importar-wordpress.js",
+    "semilla": "node --no-warnings herramientas/importar-wordpress.js --semilla",
+    "respaldo": "node --no-warnings herramientas/respaldo.js",
+    "usuario": "node --no-warnings herramientas/usuario.js"
+  },
+  "license": "UNLICENSED"
+}

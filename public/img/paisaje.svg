@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración del volcán Llaima con araucarias y laguna">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d3b6e"/>
+      <stop offset=".45" stop-color="#4f7fb3"/>
+      <stop offset=".8" stop-color="#f3c58d"/>
+      <stop offset="1" stop-color="#f7dcb2"/>
+    </linearGradient>
+    <linearGradient id="vol" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a6680"/>
+      <stop offset="1" stop-color="#2c3447"/>
+    </linearGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6f86a8"/>
+      <stop offset="1" stop-color="#4c6283"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f5a4c"/>
+      <stop offset="1" stop-color="#1c3b31"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fb3c9"/>
+      <stop offset="1" stop-color="#2a5a73"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff4d6"/>
+      <stop offset=".5" stop-color="#ffd98a" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#ffd98a" stop-opacity="0"/>
+    </radialGradient>
+    <symbol id="arau" viewBox="0 0 120 300">
+      <rect x="57" y="60" width="6" height="240" fill="#0f2a20"/>
+      <g fill="#0f2a20">
+        <path d="M60 60 C35 62 18 70 6 84 C26 76 44 74 60 76 Z"/>
+        <path d="M60 60 C85 62 102 70 114 84 C94 76 76 74 60 76 Z"/>
+        <path d="M60 40 C40 42 26 50 14 62 C32 56 46 54 60 56 Z"/>
+        <path d="M60 40 C80 42 94 50 106 62 C88 56 74 54 60 56 Z"/>
+        <path d="M60 22 C46 24 34 30 24 40 C38 36 50 35 60 37 Z"/>
+        <path d="M60 22 C74 24 86 30 96 40 C82 36 70 35 60 37 Z"/>
+        <ellipse cx="60" cy="18" rx="16" ry="8"/>
+        <path d="M60 82 C40 84 26 92 16 104 C32 98 46 96 60 98 Z"/>
+        <path d="M60 82 C80 84 94 92 104 104 C88 98 74 96 60 98 Z"/>
+      </g>
+    </symbol>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <circle cx="1220" cy="300" r="190" fill="url(#sun)"/>
+  <g fill="#ffffff" opacity=".55">
+    <ellipse cx="260" cy="130" rx="120" ry="18"/><ellipse cx="330" cy="118" rx="70" ry="16"/>
+    <ellipse cx="1340" cy="150" rx="110" ry="14"/><ellipse cx="1400" cy="140" rx="60" ry="12"/>
+  </g>
+  <path d="M0 470 L180 380 L320 430 L470 350 L600 420 L760 360 L900 430 L1060 370 L1220 420 L1400 350 L1600 420 L1600 700 L0 700 Z" fill="url(#far)" opacity=".85"/>
+  <path d="M470 530 L740 240 C760 222 780 218 800 224 C812 228 822 236 834 250 L1130 530 Z" fill="url(#vol)"/>
+  <path d="M700 282 L740 240 C760 222 780 218 800 224 C812 228 822 236 834 250 L874 296 C850 284 838 300 818 290 C800 280 790 300 770 292 C752 286 742 300 724 292 Z" fill="#f4f7fb"/>
+  <g fill="#e8eef6" opacity=".7"><ellipse cx="790" cy="196" rx="34" ry="12"/><ellipse cx="808" cy="170" rx="26" ry="10"/><ellipse cx="828" cy="146" rx="18" ry="8"/></g>
+  <path d="M0 520 C160 470 280 500 420 470 C560 440 700 500 860 480 C1020 460 1160 500 1300 470 C1420 446 1520 470 1600 460 L1600 700 L0 700 Z" fill="url(#mid)"/>
+  <path d="M0 560 C220 548 420 566 700 556 C980 546 1240 566 1600 552 L1600 640 L0 640 Z" fill="url(#lake)"/>
+  <g stroke="#ffffff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round">
+    <path d="M180 584 h90"/><path d="M420 600 h140"/><path d="M820 592 h110"/><path d="M1120 606 h150"/><path d="M1380 588 h80"/>
+  </g>
+  <path d="M0 620 C200 600 380 640 600 626 C840 612 1040 640 1260 624 C1420 612 1520 630 1600 620 L1600 700 L0 700 Z" fill="#14321f"/>
+  <use href="#arau" x="40" y="300" width="130" height="330"/>
+  <use href="#arau" x="150" y="350" width="100" height="270"/>
+  <use href="#arau" x="1330" y="290" width="140" height="350"/>
+  <use href="#arau" x="1460" y="340" width="110" height="290"/>
+  <use href="#arau" x="1250" y="390" width="80" height="220"/>
+  <use href="#arau" x="270" y="410" width="70" height="200"/>
+</svg>
