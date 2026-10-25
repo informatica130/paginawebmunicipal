@@ -322,3 +322,24 @@ test('panel: auditoría registra las acciones', async () => {
   const a = await (await api(s, 'GET', 'auditoria?q=contenido.crear')).json();
   assert.ok(a.total >= 1);
 });
+
+test('panel: en varias instancias sin base común (Vercel) la sesión no se pierde', async () => {
+  const opciones = (n) => ({ DATA_DIR: path.join(dir, 'instancia-' + n), archivoDb: path.join(dir, `instancia-${n}.db`), ADMIN_PASSWORD: CLAVE, ADMIN_EMAIL: 'admin@munimelipeuco.cl', PUBLIC_URL: 'http://localhost/', SECRETO: 'secreto-compartido-de-prueba', SESIONES_FIRMADAS: true, sinRespaldos: true, silencioso: true, fetchTramites, MEDIOS_RESPALDO_URL: '' });
+  const [a, b] = [await iniciar(opciones('a')), await iniciar(opciones('b'))];
+  try {
+    await Promise.all([a, b].map((x) => new Promise((ok) => x.servidor.listen(0, ok))));
+    const url = (x) => `http://127.0.0.1:${x.servidor.address().port}/api/admin/`;
+    const r = await fetch(url(a) + 'login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'admin@munimelipeuco.cl', clave: CLAVE }) });
+    assert.equal(r.status, 200);
+    const cookie = r.headers.get('set-cookie').split(';')[0];
+    const enB = await fetch(url(b) + 'sesion', { headers: { cookie } });
+    assert.equal(enB.status, 200);
+    const { csrf } = await enB.json();
+    // El token CSRF es el mismo en ambas instancias: se puede guardar desde la otra.
+    const guardar = await fetch(url(b) + 'ajustes', { method: 'PUT', headers: { cookie, 'X-CSRF': csrf, 'Content-Type': 'application/json' }, body: JSON.stringify({ lema: 'Para todas y todos' }) });
+    assert.equal(guardar.status, 200);
+    // Una firma alterada no sirve.
+    const [n, cuerpo] = cookie.split('=')[1].split('.');
+    assert.equal((await fetch(url(b) + 'sesion', { headers: { cookie: `mlp_admin=${n}.${cuerpo}.firmaFalsa` } })).status, 401);
+  } finally { a.cerrar(); b.cerrar(); }
+});

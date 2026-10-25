@@ -106,20 +106,51 @@ export const COOKIE = 'mlp_admin';
 const INACTIVIDAD_MIN = 120;
 const MAX_HORAS = 12;
 
-export function crearSesion(db, usuario, { ip, agente, paso = 'ok' }) {
-  const token = tokenAleatorio(32);
+// Sesiones firmadas (sólo donde cada instancia tiene su propia base, como Vercel): la cookie
+// lleva además los datos de la sesión firmados con HMAC-SHA256, y una instancia que no la
+// conoce la reconstruye en su base tras verificar la firma. Sin esto, cada petición que cae
+// en otra instancia cierra la sesión.
+const FIRMAS = new WeakMap(); // base → llave de firma
+export function usarSesionesFirmadas(db, secreto) {
+  if (secreto) FIRMAS.set(db, crypto.createHash('sha256').update('sesiones|' + secreto).digest()); else FIRMAS.delete(db);
+}
+const firmar = (llave, datos) => crypto.createHmac('sha256', llave).update(datos).digest('base64url');
+function tokenFirmado(llave, datos) {
+  const cuerpo = Buffer.from(JSON.stringify(datos)).toString('base64url');
+  return `${tokenAleatorio(16)}.${cuerpo}.${firmar(llave, cuerpo)}`;
+}
+function leerFirmado(llave, token) {
+  const [, cuerpo, f] = token.split('.');
+  if (!cuerpo || !f) return null;
+  const esperada = Buffer.from(firmar(llave, cuerpo)), dada = Buffer.from(f);
+  if (esperada.length !== dada.length || !crypto.timingSafeEqual(esperada, dada)) return null;
+  try { return JSON.parse(Buffer.from(cuerpo, 'base64url').toString('utf8')); } catch { return null; }
+}
+
+export function crearSesion(db, usuario, { ip, agente, paso = 'ok', csrf = tokenAleatorio(24), expira = new Date(Date.now() + MAX_HORAS * 3600e3).toISOString() }) {
+  const firma = FIRMAS.get(db);
+  const token = firma ? tokenFirmado(firma, { e: usuario.email, c: csrf, p: paso, x: expira }) : tokenAleatorio(32);
   const t = ahora();
-  const expira = new Date(Date.now() + MAX_HORAS * 3600e3).toISOString();
   db.run('INSERT INTO sesiones(id, usuario_id, csrf, paso, ip, agente, creado, ultimo_uso, expira) VALUES(?,?,?,?,?,?,?,?,?)',
-    sha256(token), usuario.id, tokenAleatorio(24), paso, ip || null, String(agente || '').slice(0, 300), t, t, expira);
+    sha256(token), usuario.id, csrf, paso, ip || null, String(agente || '').slice(0, 300), t, t, expira);
   // Máximo 5 sesiones simultáneas por persona: se cierran las más antiguas.
   db.run(`DELETE FROM sesiones WHERE usuario_id = ? AND id NOT IN (SELECT id FROM sesiones WHERE usuario_id = ? ORDER BY ultimo_uso DESC LIMIT 5)`, usuario.id, usuario.id);
   return token;
 }
 
 export function leerSesion(db, token) {
-  if (!token || token.length > 100) return null;
-  const s = db.get('SELECT * FROM sesiones WHERE id = ?', sha256(token));
+  const firma = FIRMAS.get(db);
+  if (!token || token.length > (firma ? 1000 : 100)) return null;
+  let s = db.get('SELECT * FROM sesiones WHERE id = ?', sha256(token));
+  if (!s && firma) {
+    // Sesión iniciada en otra instancia: se reconstruye si la firma es válida y no venció.
+    const d = leerFirmado(firma, token);
+    const u = d && Date.parse(d.x) > Date.now() && db.get('SELECT * FROM usuarios WHERE email = ?', d.e);
+    if (!u) return null;
+    const t = ahora();
+    db.run('INSERT OR IGNORE INTO sesiones(id, usuario_id, csrf, paso, ip, agente, creado, ultimo_uso, expira) VALUES(?,?,?,?,?,?,?,?,?)', sha256(token), u.id, String(d.c), d.p === 'ok' ? 'ok' : 'totp', null, '', t, t, d.x);
+    s = db.get('SELECT * FROM sesiones WHERE id = ?', sha256(token));
+  }
   if (!s) return null;
   const n = Date.now();
   if (Date.parse(s.expira) < n || Date.parse(s.ultimo_uso) + INACTIVIDAD_MIN * 60e3 < n) {

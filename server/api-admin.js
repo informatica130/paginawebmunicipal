@@ -96,14 +96,17 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return { paso };
   });
 
-  ruta('POST', 'login/totp', null, ({ body, req, sesion }) => {
+  ruta('POST', 'login/totp', null, ({ body, req, res, sesion }) => {
     if (!sesion || sesion.sesion.paso !== 'totp') throw new ErrorHttp(401, 'Ingrese primero su correo y contraseña.');
     if (limitador.exceso('totp:' + sesion.sesion.id, 6, 600)) { db.run('DELETE FROM sesiones WHERE id = ?', sesion.sesion.id); throw new ErrorHttp(429, 'Demasiados códigos incorrectos. Ingrese de nuevo.'); }
     const u = sesion.usuario;
     const paso = verificarTotp(u.totp_secreto, body.codigo, u.totp_ultimo);
     if (!paso) { auditar(u, 'ingreso.totp_fallido', u.email, '', req.ip); throw new ErrorHttp(401, 'El código no es válido. Revise la hora de su teléfono e inténtelo de nuevo.'); }
     db.run('UPDATE usuarios SET totp_ultimo = ?, ultimo_acceso = ? WHERE id = ?', paso, ahora(), u.id);
-    db.run("UPDATE sesiones SET paso = 'ok' WHERE id = ?", sesion.sesion.id);
+    // Sesión nueva ya validada (si viaja firmada, la cookie debe decir que pasó el segundo factor).
+    db.run('DELETE FROM sesiones WHERE id = ?', sesion.sesion.id);
+    const token = crearSesion(db, u, { ip: req.ip, agente: req.headers['user-agent'], paso: 'ok', csrf: sesion.sesion.csrf, expira: sesion.sesion.expira });
+    res.setHeader('Set-Cookie', cookieSesion(token, { segura: cfg.SEGURA }));
     auditar(u, 'ingreso', u.email, 'con segundo factor', req.ip);
     return { paso: 'ok' };
   });
