@@ -46,11 +46,11 @@ const GRUPOS = [
   ] },
   { id: 'portada', titulo: 'Portada', controles: [
     { ruta: 'portada.composicion', tipo: 'botones', etiqueta: 'Composición', opciones: OPCIONES.composicion },
-    { ruta: 'portada.imagen', tipo: 'imagen', etiqueta: 'Foto principal', ayuda: 'Vacío: la foto de la plaza y el volcán Llaima. Use una foto horizontal de al menos 1600 px de ancho.' },
+    { ruta: 'portada.imagen', tipo: 'imagen', etiqueta: 'Foto principal', ayuda: 'Vacío: las fotos de la Capital del Trekking (o la de la plaza y el volcán Llaima en las otras composiciones). Use una foto horizontal de al menos 1600 px de ancho.' },
     { ruta: 'portada.titulo', tipo: 'texto', etiqueta: 'Título' },
     { ruta: 'portada.bajada', tipo: 'textoLargo', etiqueta: 'Texto bajo el título', ayuda: 'Vacío: el lema seguido de una frase de bienvenida.' },
     { ruta: 'portada.credito', tipo: 'texto', etiqueta: 'Pie de foto' },
-    { ruta: 'portada.alto', tipo: 'botones', etiqueta: 'Altura', opciones: OPCIONES.alto },
+    { ruta: 'portada.alto', tipo: 'botones', etiqueta: 'Altura', opciones: OPCIONES.alto, si: (c) => c.portada.composicion !== 'trekking' },
     { ruta: 'portada.alineacion', tipo: 'botones', etiqueta: 'Alineación del texto', opciones: OPCIONES.alineacion, si: (c) => c.portada.composicion === 'foto' },
     { ruta: 'portada.velo', tipo: 'rango', etiqueta: 'Oscurecer la foto (legibilidad)', min: 0, max: 100, paso: 5, unidad: ' %', si: (c) => c.portada.composicion === 'foto' },
     { ruta: 'portada.franjaDatos', tipo: 'si', etiqueta: 'Franja de horario, teléfono, tiempo y emergencias' },
@@ -61,7 +61,7 @@ const GRUPOS = [
     { ruta: 'pie.emergencias', tipo: 'si', etiqueta: 'Franja de teléfonos de emergencia' },
     { ruta: 'pie.boletin', tipo: 'si', etiqueta: 'Formulario del boletín' },
     { ruta: 'pie.escudo', tipo: 'si', etiqueta: 'Escudo' },
-    { ruta: 'pie.marcaGrande', tipo: 'si', etiqueta: 'Nombre de la comuna en letra gigante' },
+    { ruta: 'pie.marcaGrande', tipo: 'si', etiqueta: 'Logo gigante «Melipeuco Capital del Trekking»' },
   ] },
   { id: 'animaciones', titulo: 'Animaciones', ayuda: 'Las personas que piden «reducir movimiento» en su equipo nunca ven animaciones.', controles: [
     { ruta: 'animaciones.activas', tipo: 'si', etiqueta: 'Animaciones activas' },
@@ -71,6 +71,7 @@ const GRUPOS = [
     { ruta: 'animaciones.aparicion', tipo: 'si', etiqueta: 'Contenido que aparece al bajar', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.cordillera', tipo: 'si', etiqueta: 'Cortina de cordillera con el color de cada sección al cambiar de página', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.barraCarga', tipo: 'si', etiqueta: 'Barra de carga al navegar', si: (c) => c.animaciones.activas },
   ] },
 ];

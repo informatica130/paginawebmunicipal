@@ -64,10 +64,10 @@ test('utilidades: slug, RUN y fechas de sesiones', () => {
 
 test('diseño: sólo acepta colores, opciones, números e imágenes válidos', () => {
   const d = normalizarDiseno({ colores: { primario: 'red;}</style><script>', acento: '#123abc' }, forma: { radio: 999, tarjetas: 'otra' }, tipografia: { cuerpo: 'comic' }, portada: { imagen: 'javascript:alert(1)', titulo: '<b>Hola</b>' }, cabecera: { logoUrl: '//malo.cl/x.png' }, avanzado: { css: 'a{}</style><script>' } }, { permitirCss: false, previo: { avanzado: { css: '.x{}' } } });
-  assert.equal(d.colores.primario, '#0B4F7C');
+  assert.equal(d.colores.primario, '#1F6FA8');
   assert.equal(d.colores.acento, '#123ABC');
   assert.equal(d.forma.radio, 24);
-  assert.equal(d.forma.tarjetas, 'linea');
+  assert.equal(d.forma.tarjetas, 'sombra');
   assert.equal(d.tipografia.cuerpo, 'public-sans');
   assert.equal(d.portada.imagen, '');
   assert.equal(d.portada.titulo, 'bHola/b');
@@ -75,6 +75,8 @@ test('diseño: sólo acepta colores, opciones, números e imágenes válidos', (
   assert.equal(d.avanzado.css, '.x{}');
   assert.doesNotMatch(variablesCss(aplicarEstilo(d, 'moderno')), /[<>]/);
   assert.equal(aplicarEstilo(d, 'moderno').cabecera.estilo, 'color');
+  assert.equal(aplicarEstilo(d, 'institucional').portada.composicion, 'dividida');
+  assert.equal(aplicarEstilo(d, 'institucional').colores.primario, '#0B4F7C');
 });
 
 test('repositorio: guardar, URLs, búsqueda, programación y bloques protegidos', () => {
@@ -144,6 +146,20 @@ test('portada y páginas públicas con cabeceras de seguridad', async () => {
   for (const ruta of ['/noticias/', '/tramites/', '/eventos/', '/areas/', '/contacto/', '/oirs/', '/transparencia/', '/concejo-municipal/', '/salud/', '/transito/', '/sitemap.xml', '/feed/', '/robots.txt', '/api/public/noticias']) {
     assert.equal((await pedir(ruta)).status, 200, ruta);
   }
+});
+
+test('portada «Melipeuco Capital del Trekking»: logo, nueve mundos y zonas por página', async () => {
+  const h = await (await pedir('/')).text();
+  assert.match(h, /class="tk-logo"[^>]*aria-label="Melipeuco Capital del Trekking"/);
+  assert.equal((h.match(/class="tk-letra"/g) || []).length, 9);
+  assert.match(h, /data-mundos/);
+  assert.match(h, /class="tk-cinta"/);
+  assert.match(h, /data-anim-cordillera="si"/);
+  assert.match(h, /data-zonas="\{&quot;rutas&quot;/);
+  const salud = await (await pedir('/salud/')).text();
+  assert.match(salud, /style="--z:#16A0A8;/);
+  assert.match(salud, /emblema-2\.svg/);
+  for (const f of ['/img/trekking/emblema-0.svg', '/img/trekking/portada-1-1920.webp', '/fuentes/bricolage-latin.woff2']) assert.equal((await pedir(f)).status, 200, f);
 });
 
 test('URLs antiguas de WordPress se conservan o redirigen', async () => {

@@ -146,6 +146,16 @@
   function entradaPortada() {
     var hero = $('.hero');
     if (!hero || !puede) return;
+    if (hero.hasAttribute('data-hero-trekking')) {
+      // El logo cae letra por letra con CSS; el resto aparece mientras tanto.
+      [['.tk-kicker', 80], ['.hero-lema', 900], ['.hero-buscar', 1050], ['.populares', 1200]].forEach(function (x) {
+        anim($(x[0], hero), [{ opacity: 0, transform: escalar('translateY(18px)') }, { opacity: 1, transform: 'none' }], { duration: 800, delay: x[1], easing: SALIDA });
+      });
+      $$('.franja-datos .dato').forEach(function (el, i) {
+        anim(el, [{ opacity: 0, transform: escalar('translateY(30px)') }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 1300 + i * 90, easing: SALIDA });
+      });
+      return;
+    }
     var foto = $('.hero-foto', hero);
     if (raiz.getAttribute('data-portada') === 'foto') {
       anim(foto, [{ transform: 'scale(1.12)', filter: 'saturate(.6) brightness(.8)' }, { transform: 'scale(1)', filter: 'none' }], { duration: 2200, easing: SALIDA });
@@ -184,11 +194,13 @@
     // Títulos de sección: el texto sube desde una máscara.
     { sel: '.seccion-cabecera h2, .bloque-cabecera h2, .ficha-seccion h2, .grupo-tramites h2', cuadros: [{ clipPath: 'inset(0 0 100% 0)', transform: 'translateY(60%)' }, { clipPath: 'inset(0 0 -20% 0)', transform: 'none' }], dur: 700, paso: 0, curva: SALIDA },
     // Bloques destacados: aparecen y suben.
+    { sel: '.tk-cifra, .tk-foto, .tk-trekking-cabeza > *', cuadros: [{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'none' }], dur: 800, paso: 70, curva: SALIDA },
+    { sel: '.tk-mundos-letras li', cuadros: [{ opacity: 0, transform: 'translateY(-60px) rotate(-10deg) scale(.7)' }, { opacity: 1, transform: 'none' }], dur: 900, paso: 60, curva: REBOTE },
     { sel: '.lateral-bloque, .caja, .campanas, .video, .calendario, .encuesta, .boletin, .banda-turismo .contenedor > *, .acordeon, .galeria-item, .lista-check li, .pasos li', cuadros: [{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'none' }], dur: 600, paso: 50, curva: SALIDA },
     // Escudo del pie: gira como una moneda.
     { sel: '.pie-escudo', cuadros: [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], dur: 800, paso: 0, curva: SALIDA },
     // Firma gigante del pie: las letras suben desde la base.
-    { sel: '.pie-marca-grande', cuadros: [{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }], dur: 1400, paso: 0, curva: SALIDA },
+    { sel: '.pie-trekking a', cuadros: [{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }], dur: 1400, paso: 0, curva: SALIDA },
   ];
 
   function aparicion() {
@@ -271,6 +283,185 @@
     addEventListener('pageshow', function () { barra.classList.remove('activa'); });
   }
 
+  // ================================================================ Capital del Trekking
+  // Barra de progreso de lectura (colores del logo) y parallax de la portada.
+  function progresoYParallax() {
+    var barra = $('.tk-progreso'), hero = $('[data-hero-trekking]');
+    var capas = hero && puede ? $$('[data-capa]', hero) : [], cont = hero && $('[data-capa-contenido]', hero), marco = 0;
+    function pintar() {
+      var y = scrollY, alto = d.documentElement.scrollHeight - innerHeight;
+      if (barra) barra.style.setProperty('--p', alto > 0 ? Math.min(1, y / alto).toFixed(4) : 0);
+      if (hero && puede && y < innerHeight * 1.2) {
+        capas.forEach(function (c) { c.style.transform = 'translate3d(0,' + (y * parseFloat(c.getAttribute('data-capa')) * F).toFixed(1) + 'px,0)'; });
+        if (cont) { cont.style.transform = 'translate3d(0,' + (y * .18).toFixed(1) + 'px,0)'; cont.style.opacity = Math.max(0, 1 - y / (innerHeight * .8)).toFixed(3); }
+      }
+    }
+    addEventListener('scroll', function () { cancelAnimationFrame(marco); marco = requestAnimationFrame(pintar); }, { passive: true });
+    pintar();
+  }
+
+  // Fotos de la portada: se funden cada 7 s con un zoom lento (se detiene al pasar el cursor o
+  // con el foco dentro, y no avanza sola con «reducir movimiento»).
+  function carruselPortada() {
+    var hero = $('[data-hero-trekking]');
+    if (!hero) return;
+    var fotos = $$('.tk-fotos img', hero), puntos = $$('.tk-puntos button', hero), i = 0, t = 0, quieto = false;
+    if (fotos.length < 2) return;
+    function ir(n) {
+      fotos[i].classList.remove('activa'); puntos[i] && (puntos[i].classList.remove('activa'), puntos[i].setAttribute('aria-pressed', 'false'));
+      i = (n + fotos.length) % fotos.length;
+      var f = fotos[i]; f.loading = 'eager'; void f.offsetWidth; f.classList.add('activa');
+      puntos[i] && (puntos[i].classList.add('activa'), puntos[i].setAttribute('aria-pressed', 'true'));
+      fotos[(i + 1) % fotos.length].loading = 'eager';
+    }
+    function iniciar() { clearInterval(t); if (!reducido && !quieto) t = setInterval(function () { if (!d.hidden) ir(i + 1); }, 7000); }
+    puntos.forEach(function (p, k) { p.addEventListener('click', function () { ir(k); iniciar(); }); });
+    hero.addEventListener('pointerenter', function () { quieto = true; clearInterval(t); });
+    hero.addEventListener('pointerleave', function () { quieto = false; iniciar(); });
+    hero.addEventListener('focusin', function () { quieto = true; clearInterval(t); });
+    hero.addEventListener('focusout', function () { quieto = false; iniciar(); });
+    iniciar();
+  }
+
+  // «Cada letra es una puerta»: al pasar o enfocar una letra el fondo toma su color.
+  function mundos() {
+    var sec = $('[data-mundos]');
+    if (!sec) return;
+    var letras = $$('.tk-mundos-letras a', sec), infos = $$('.tk-mundo-info', sec), gigantes = $$('.tk-mundos-gigante i', sec);
+    var actual = 0, t = 0, dentro = false, visible = false;
+    function elegir(k) {
+      if (k === actual) return;
+      actual = k;
+      var a = letras[k];
+      sec.style.setProperty('--fc', getComputedStyle(a).getPropertyValue('--c'));
+      sec.style.setProperty('--fz', getComputedStyle(a).getPropertyValue('--o'));
+      letras.forEach(function (l, j) { if (j === k) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current'); });
+      infos.forEach(function (el, j) { el.classList.toggle('activa', j === k); el.setAttribute('aria-hidden', j === k ? 'false' : 'true'); var e = $('a', el); if (e) e.tabIndex = j === k ? 0 : -1; });
+      gigantes.forEach(function (g, j) { g.classList.toggle('activa', j === k); });
+    }
+    letras.forEach(function (a, k) {
+      a.addEventListener('pointerenter', function () { elegir(k); });
+      a.addEventListener('focus', function () { elegir(k); });
+    });
+    sec.addEventListener('pointerenter', function () { dentro = true; });
+    sec.addEventListener('pointerleave', function () { dentro = false; });
+    sec.addEventListener('focusin', function () { dentro = true; });
+    sec.addEventListener('focusout', function () { dentro = false; });
+    if (reducido || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .35 }).observe(sec);
+    t = setInterval(function () { if (visible && !dentro && !d.hidden) elegir((actual + 1) % letras.length); }, 3600);
+  }
+
+  // Fila de lugares: flechas, arrastre con el mouse y barra de avance (sin secuestrar el scroll).
+  function filas() {
+    $$('[data-fila]').forEach(function (fila) {
+      var sec = fila.closest('section'), barra = sec && $('.tk-fila-barra i', sec), flechas = sec ? $$('[data-mover]', sec) : [];
+      function avance() {
+        var max = fila.scrollWidth - fila.clientWidth;
+        if (barra) barra.style.setProperty('--avance', max > 0 ? Math.max(.08, (fila.scrollLeft + fila.clientWidth) / fila.scrollWidth).toFixed(3) : 1);
+        flechas.forEach(function (b) { b.disabled = b.getAttribute('data-mover') === '-1' ? fila.scrollLeft < 4 : fila.scrollLeft > max - 4; });
+      }
+      flechas.forEach(function (b) { b.addEventListener('click', function () { fila.scrollBy({ left: Number(b.getAttribute('data-mover')) * fila.clientWidth * .8, behavior: reducido ? 'auto' : 'smooth' }); }); });
+      fila.addEventListener('scroll', avance, { passive: true });
+      addEventListener('resize', avance);
+      var x0 = 0, s0 = 0, arrastra = false, movio = false;
+      fila.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button !== 0) return; arrastra = true; movio = false; x0 = e.clientX; s0 = fila.scrollLeft; });
+      addEventListener('pointermove', function (e) { if (!arrastra) return; var dx = e.clientX - x0; if (Math.abs(dx) > 5) { movio = true; fila.classList.add('arrastrando'); } fila.scrollLeft = s0 - dx; });
+      addEventListener('pointerup', function () { if (!arrastra) return; arrastra = false; setTimeout(function () { fila.classList.remove('arrastrando'); }, 0); });
+      fila.addEventListener('click', function (e) { if (movio) { e.preventDefault(); movio = false; } }, true);
+      // Brillo que sigue al puntero sobre cada foto.
+      $$('.tk-foto', fila).forEach(function (a) { a.addEventListener('pointermove', function (e) { var r = a.getBoundingClientRect(); a.style.setProperty('--mx', (e.clientX - r.left) + 'px'); a.style.setProperty('--my', (e.clientY - r.top) + 'px'); }); });
+      avance();
+    });
+  }
+
+  // Contadores que suben al aparecer (3 volcanes, 250 km…).
+  function contadores() {
+    var els = $$('[data-contar]');
+    if (!els.length || !puede || !('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        obs.unobserve(e.target);
+        var el = e.target, fin = Number(el.getAttribute('data-contar')), suf = el.getAttribute('data-sufijo') || '', t0 = performance.now(), dur = 1600 / VEL;
+        (function paso(t) { var p = Math.min(1, (t - t0) / dur), v = Math.round(fin * (1 - Math.pow(1 - p, 3))); el.textContent = v + suf; if (p < 1) requestAnimationFrame(paso); })(t0);
+      });
+    }, { threshold: .5 });
+    els.forEach(function (el) { el.textContent = '0' + (el.getAttribute('data-sufijo') || ''); obs.observe(el); });
+  }
+
+  // Títulos de páginas interiores: cada palabra sube por separado.
+  function titulosPorPalabra() {
+    var h1 = $('.encabezado h1');
+    if (!h1 || !puede || h1.children.length) return;
+    var palabras = h1.textContent.trim().split(/\s+/);
+    h1.setAttribute('aria-label', h1.textContent.trim());
+    h1.innerHTML = '';
+    palabras.forEach(function (w, i) {
+      var caja = d.createElement('span'), dentro = d.createElement('span');
+      caja.className = 'palabra'; caja.setAttribute('aria-hidden', 'true'); dentro.textContent = w;
+      caja.appendChild(dentro); h1.appendChild(caja); h1.appendChild(d.createTextNode(' '));
+      anim(dentro, [{ transform: 'translateY(105%) rotate(6deg)' }, { transform: 'none' }], { duration: 1000, delay: 120 + i * 70, easing: SALIDA });
+    });
+    [['.encabezado .bajada', 500], ['.encabezado .migas', 0]].forEach(function (x) { anim($(x[0]), [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: x[1], easing: SALIDA }); });
+  }
+
+  // Cortina de cordillera: al ir a otra página del sitio suben capas con el color de la zona de
+  // destino; en la página nueva se abren hacia arriba. Los datos de las zonas vienen en la cortina.
+  function cortina() {
+    var capa = $('.tk-cortina');
+    if (!capa) return;
+    if (!puede || !activo('cordillera')) { capa.remove(); raiz.classList.remove('tk-entrando'); return; }
+    var capas = $$('.tk-cortina-capa', capa), info = $('.tk-cortina-info', capa), nombre = $('.tk-cortina-nombre', capa);
+    var datos = {}; try { datos = JSON.parse(capa.getAttribute('data-zonas') || '{}'); } catch (e) {}
+    var zonas = (datos.rutas || []).map(function (r) { return [new RegExp(r[0]), r[1]]; });
+    function zonaDe(ruta) { for (var i = 0; i < zonas.length; i++) if (zonas[i][0].test(ruta)) return zonas[i][1]; return 0; }
+    function preparar(k, texto) {
+      var p = (datos.paleta || [])[k] || ['#1F6FA8', '#0F3A5A'];
+      capas[1].style.setProperty('--c', p[0]); capas[2].style.setProperty('--c', p[1]);
+      $$('img', info).forEach(function (im) { im.hidden = Number(im.getAttribute('data-k')) !== k; });
+      nombre.textContent = texto || '';
+    }
+    var lejos = 'translate3d(0, calc(100% + 18vh), 0)', arriba = 'translate3d(0, calc(-100% - 18vh), 0)';
+    // Entrada: la página nueva aparece detrás de la cordillera que sube.
+    if (raiz.classList.contains('tk-entrando')) {
+      var previo = {}; try { previo = JSON.parse(sessionStorage.getItem('mlp-cortina') || '{}'); sessionStorage.removeItem('mlp-cortina'); } catch (e) {}
+      preparar(typeof previo.k === 'number' ? previo.k : zonaDe(location.pathname), previo.nombre);
+      info.style.opacity = 1;
+      var ultima;
+      capas.slice().reverse().forEach(function (c, i) { ultima = anim(c, [{ transform: 'none' }, { transform: arriba }], { duration: 760, delay: 140 + i * 90, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
+      anim(info, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-30px)' }], { duration: 320, delay: 60, easing: 'ease-in' });
+      var fin = function () { raiz.classList.remove('tk-entrando'); capas.forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); }); info.style.opacity = ''; info.getAnimations().forEach(function (a) { a.cancel(); }); };
+      if (ultima) ultima.finished.then(fin, fin); else fin();
+    }
+    var saliendo = false;
+    d.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (saliendo || !a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.closest('.barra-admin')) return;
+      var u = new URL(a.href, location.href);
+      if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search) || /^\/(admin|api|feed|medios|wp-content)\b/.test(u.pathname) || /\.\w{2,4}$/.test(u.pathname)) return;
+      e.preventDefault();
+      saliendo = true;
+      var k = zonaDe(u.pathname), texto = (($('b', a) || a).textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+      if (!texto || u.pathname === '/') texto = u.pathname === '/' ? 'Inicio' : '';
+      preparar(k, texto);
+      raiz.classList.add('tk-saliendo');
+      var ultima;
+      capas.forEach(function (c, i) { ultima = anim(c, [{ transform: lejos }, { transform: 'none' }], { duration: 560, delay: i * 80, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
+      anim(info, [{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 420, easing: SALIDA });
+      try { sessionStorage.setItem('mlp-cortina', JSON.stringify({ k: k, nombre: texto })); } catch (err) {}
+      var ir = function () { location.href = u.href; };
+      setTimeout(ir, 760 / VEL);
+    });
+    // Al volver con «Atrás» (página guardada en memoria) se quita la cortina.
+    addEventListener('pageshow', function (e) {
+      if (!e.persisted) return;
+      saliendo = false; raiz.classList.remove('tk-saliendo');
+      capas.concat([info]).forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); });
+    });
+  }
+
   // ================================================================ Inicio
   var hayIntro = intro();
   if (hayIntro) d.addEventListener('intro:salida', function () { setTimeout(entradaPortada, 250); }, { once: true });
@@ -278,4 +469,11 @@
   aparicion();
   inclinacion();
   barraCarga();
+  progresoYParallax();
+  carruselPortada();
+  mundos();
+  filas();
+  contadores();
+  titulosPorPalabra();
+  cortina();
 })();

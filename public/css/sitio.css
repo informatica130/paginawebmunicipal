@@ -1132,3 +1132,341 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); line-height: 1.15; }
   .seccion { padding: calc(48px * var(--esp, 1)) 0; }
 }
 :root[data-tarjetas="linea"] .ft-ico { width: auto; height: auto; background: transparent; }
+
+/* =====================================================================
+   Identidad «Melipeuco Capital del Trekking»
+   ---------------------------------------------------------------------
+   El logo de la comuna se desarma en sus nueve letras-símbolo y cada una
+   da el color y el emblema de un área del municipio (--z en <html>):
+   M montaña · E rostro · L cascada · I araucaria · P corazón · E persona
+   · U animales · C estrellas · O kultrún. Títulos en Bricolage Grotesque,
+   papel crema, noche, cordillera en capas y movimiento con rebote.
+   ===================================================================== */
+@font-face {
+  font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url('/fuentes/bricolage-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url('/fuentes/bricolage-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@property --fc { syntax: '<color>'; inherits: true; initial-value: #1F6FA8; }
+@property --fz { syntax: '<color>'; inherits: true; initial-value: #0F3A5A; }
+
+:root {
+  --montana: #1F6FA8; --rostro: #E2683C; --cascada: #16A0A8; --araucaria: #2F7D4A; --corazon: #D23B4A;
+  --persona: #E9A92B; --animales: #8A5A3B; --estrellas: #3E3E9A; --kultrun: #7A3E91;
+  --arcoiris: linear-gradient(90deg, var(--montana), var(--rostro), var(--cascada), var(--araucaria), var(--corazon), var(--persona), var(--animales), var(--estrellas), var(--kultrun));
+  --tk-noche: #121417; --tk-crema: #FFF8EC;
+  --tk-ease: cubic-bezier(.22, 1, .36, 1); --tk-rebote: cubic-bezier(.34, 1.56, .64, 1);
+  --tk-montes: clamp(70px, 10vw, 150px);
+  --sombra-1: 0 1px 2px rgb(23 25 27 / .06), 0 4px 14px -6px rgb(23 25 27 / .12);
+  --sombra-2: 0 2px 6px rgb(23 25 27 / .06), 0 18px 40px -18px rgb(23 25 27 / .35);
+  --sombra-3: 0 30px 80px -30px rgb(23 25 27 / .55);
+}
+/* Modo oscuro con la noche de la cordillera */
+:root[data-tema="oscuro"] { --fondo: #121417; --fondo-2: #1A1D21; --superficie: #1E2226; --azul-suave: #1E2A35; --borde: rgb(255 255 255 / .1); --borde-fuerte: rgb(255 255 255 / .22); --texto: #F2EEE7; --texto-2: #D5D0C7; --texto-3: #A7ADB3; --sombra-1: 0 1px 2px rgb(0 0 0 / .4), 0 4px 14px -6px rgb(0 0 0 / .5); --sombra-2: 0 2px 6px rgb(0 0 0 / .4), 0 18px 40px -18px rgb(0 0 0 / .7); }
+
+::selection { background: var(--z); color: #fff; }
+h1, h2 { text-wrap: balance; }
+.seccion-cabecera h2, .bloque-cabecera h2 { font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.04; letter-spacing: calc(var(--espaciado-titulo, -.02em) - .01em); }
+.seccion-cabecera h2 em, .tk-trekking h2 em { font-style: normal; color: var(--z); }
+.antetitulo { display: inline-flex; align-items: center; gap: .6em; margin-bottom: 12px; font: 700 .76rem/1.2 var(--fuente); letter-spacing: .2em; text-transform: uppercase; color: color-mix(in srgb, var(--c, var(--z)) 62%, var(--texto)); }
+.antetitulo .emblema { width: 24px; height: 26px; object-fit: contain; }
+.antetitulo::after { content: ''; width: 28px; height: 2px; border-radius: 2px; background: var(--c, var(--z)); }
+.seccion-cabecera > div > .antetitulo { display: flex; width: max-content; }
+.ver-todo { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 999px; border: 1.5px solid var(--borde-fuerte); color: var(--texto); text-decoration: none; transition: background-color .3s, color .3s, border-color .3s, transform .35s var(--tk-rebote); }
+.ver-todo::after { content: '→'; transition: transform .35s var(--tk-ease); }
+.ver-todo:hover { background: var(--z); border-color: var(--z); color: #fff; transform: translateY(-2px); }
+.ver-todo:hover::after { transform: translateX(3px); }
+
+/* Botones: el color sube desde abajo al pasar el cursor */
+.boton:not([disabled]) { position: relative; overflow: hidden; isolation: isolate; transition: transform .35s var(--tk-ease), box-shadow .35s var(--tk-ease), color .3s, background-color .2s, border-color .2s; }
+.boton:not([disabled])::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--b-hover, var(--tk-noche)); transform: translateY(101%); transition: transform .45s var(--tk-ease); }
+.boton:not([disabled]):hover { transform: translateY(-2px); box-shadow: var(--sombra-2); --b-fondo: var(--b-base, var(--azul)); --b-tinta: #fff; }
+.boton:not([disabled]):hover::before { transform: none; }
+.boton-acento { --b-base: var(--ambar); }
+.boton-acento:not([disabled]):hover { --b-fondo: var(--ambar); }
+.boton-exito { --b-base: var(--verde); }
+.boton-secundario { --b-base: transparent; --b-hover: var(--z); }
+.boton-secundario:not([disabled]):hover { --b-fondo: transparent; --b-borde: var(--z); }
+:root[data-tema="oscuro"] .boton { --b-hover: #F2EEE7; }
+:root[data-tema="oscuro"] .boton:not([disabled]):hover { --b-tinta: #17191B; }
+.boton .ico { transition: transform .35s var(--tk-ease); }
+.boton:hover .ico:last-child { transform: translateX(2px); }
+
+/* Barra de progreso de lectura con los colores del logo */
+.tk-progreso { position: fixed; inset: 0 0 auto; z-index: 950; height: 3px; background: var(--arcoiris); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); pointer-events: none; }
+
+/* ---------------------------------------------------------------- Cabecera (noche y vidrio) */
+.cabecera::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--arcoiris); transform: scaleX(.0001); transform-origin: 0 50%; transition: transform .8s var(--tk-ease); pointer-events: none; }
+.cabecera.compacta::after, .pagina-portada .cabecera::after { transform: none; }
+:root[data-cabecera="oscura"] .cabecera { background: color-mix(in srgb, var(--cab-fondo) 94%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); }
+:root[data-cabecera="oscura"] .barra-superior { background: color-mix(in srgb, var(--azul-profundo) 85%, #000); border-bottom: 1px solid rgb(255 255 255 / .06); }
+.marca-texto b { font-family: var(--fuente-titulo, var(--fuente)); letter-spacing: -.02em; }
+@media (min-width: 1025px) {
+  .nav-enlace::after, .nav-boton::after { bottom: 18px; height: 2px; border-radius: 2px; background: var(--persona) !important; transform: scaleX(0); transform-origin: right; transition: transform .45s var(--tk-ease); }
+  .cabecera.compacta .nav-enlace::after, .cabecera.compacta .nav-boton::after { bottom: 12px; }
+  .nav-enlace:hover::after, .nav-boton:hover::after, .nav-boton[aria-expanded="true"]::after, .nav-item.activo > .nav-enlace::after, .nav-item.activo > .nav-boton::after { transform: scaleX(1); transform-origin: left; }
+  .submenu { top: calc(100% - 8px); padding: 10px; border: 1px solid var(--borde); border-radius: 18px; box-shadow: 0 30px 70px -20px rgb(0 0 0 / .45); }
+  :root[data-cabecera="oscura"] .submenu { background: #16191C; color: #fff; border-color: rgb(255 255 255 / .08); }
+  :root[data-cabecera="oscura"] .submenu a { color: #fff; }
+  :root[data-cabecera="oscura"] .submenu a small { color: rgb(255 255 255 / .62); }
+  :root[data-cabecera="oscura"] .submenu a:hover, :root[data-cabecera="oscura"] .submenu a[aria-current] { background: rgb(255 255 255 / .07); }
+  :root[data-cabecera="oscura"] .submenu-todo { border-top-color: rgb(255 255 255 / .1); }
+  :root[data-cabecera="oscura"] .submenu-todo a { color: var(--persona); }
+}
+.submenu a.con-emblema { grid-template-columns: 34px minmax(0, 1fr); column-gap: 12px; align-items: center; }
+.submenu a.con-emblema .emblema { grid-row: span 2; width: 32px; height: 34px; object-fit: contain; transition: transform .6s var(--tk-rebote); }
+.submenu a.con-emblema:not(:has(small)) .emblema { grid-row: auto; }
+.submenu a.con-emblema:hover .emblema { transform: rotate(-10deg) scale(1.12); }
+
+/* ---------------------------------------------------------------- Portada «Capital del Trekking» */
+.hero.hero-trekking { position: relative; display: grid; place-items: center; min-height: clamp(640px, calc(100svh - 116px), 980px); overflow: hidden; isolation: isolate; color: #fff; background: #0B1520; text-align: center; }
+.tk-fotos { position: absolute; inset: -8% -2% -2%; z-index: -3; will-change: transform; }
+.tk-fotos img { position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.12); transition: opacity 1.8s ease; }
+.tk-fotos img.activa { opacity: 1; animation: tk-kenburns 10s ease-out forwards; }
+@keyframes tk-kenburns { from { transform: scale(1.16); } to { transform: scale(1.02) translate3d(-1%, -1.2%, 0); } }
+.tk-velo { position: absolute; inset: 0; z-index: -2; background: radial-gradient(120% 80% at 50% 35%, rgb(0 0 0 / .05) 0%, rgb(0 0 0 / .4) 75%), linear-gradient(180deg, rgb(0 0 0 / .5) 0%, rgb(0 0 0 / .1) 30%, rgb(0 0 0 / .28) 62%, rgb(0 0 0 / .72) 100%); }
+.tk-hero-contenido { position: relative; z-index: 2; display: grid; justify-items: center; padding-top: clamp(48px, 8vh, 96px); padding-bottom: calc(var(--tk-montes) + 90px); will-change: transform, opacity; }
+.hero.hero-trekking h1.tk-kicker { display: flex; align-items: center; gap: 14px; max-width: none; margin: 0 0 clamp(16px, 3vh, 28px); color: rgb(255 255 255 / .92); font: 700 clamp(.72rem, 1.1vw, .86rem)/1.3 var(--fuente); letter-spacing: .24em; text-transform: uppercase; text-shadow: 0 2px 14px rgb(0 0 0 / .5); }
+.tk-kicker-linea { width: clamp(20px, 4vw, 44px); height: 2px; border-radius: 2px; background: var(--arcoiris); }
+.tk-logo-caja { display: block; width: min(880px, 90vw); color: inherit; border-radius: 24px; }
+.tk-logo { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 14px 40px rgb(0 0 0 / .45)); }
+.tk-logo .tk-letra { animation: tk-letra-cae 1.1s var(--tk-rebote) both, tk-flota 6s ease-in-out infinite; animation-delay: calc(.25s + var(--i) * .09s), calc(2.8s + var(--i) * .32s); transition: scale .5s var(--tk-rebote), rotate .5s var(--tk-rebote); }
+.tk-logo .tk-simbolo { animation: tk-simbolo .9s var(--tk-rebote) both; animation-delay: calc(1.05s + var(--i) * .09s); transition: scale .6s var(--tk-rebote), rotate .6s var(--tk-rebote); }
+.tk-logo .tk-lema { animation: tk-lema 1s var(--tk-ease) 2s both; }
+.tk-logo .tk-letra:hover { scale: 1.07; rotate: -4deg; }
+.tk-logo .tk-letra:hover .tk-simbolo { scale: 1.16; rotate: 8deg; }
+.con-intro .tk-logo *, .tk-entrando .tk-logo * { animation-play-state: paused !important; }
+@keyframes tk-letra-cae { 0% { opacity: 0; transform: translateY(-160px) rotate(-14deg) scale(.6); } 60% { opacity: 1; transform: translateY(10px) rotate(3deg) scaleY(.9); } 80% { transform: translateY(-4px) scaleY(1.04); } 100% { opacity: 1; transform: none; } }
+@keyframes tk-simbolo { from { opacity: 0; transform: scale(.2) rotate(-30deg); } to { opacity: 1; transform: none; } }
+@keyframes tk-lema { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes tk-flota { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+.hero.hero-trekking .hero-lema { max-width: 58ch; margin: clamp(16px, 3vh, 26px) auto clamp(18px, 3vh, 28px); color: rgb(255 255 255 / .94); font-size: clamp(1.02rem, 1.45vw, 1.22rem); line-height: 1.55; text-shadow: 0 2px 18px rgb(0 0 0 / .55); }
+.hero-trekking .hero-buscar { width: min(680px, 100%); text-align: left; }
+.hero-trekking .hero-buscar label { color: #fff; text-align: center; font-family: var(--fuente-titulo, var(--fuente)); font-size: 1.15rem; text-shadow: 0 2px 12px rgb(0 0 0 / .5); }
+.hero-trekking .campo-buscar { padding: 7px 7px 7px 20px; border: 0; border-radius: 999px; background: rgb(255 255 255 / .97); color: #5C6166; box-shadow: 0 20px 50px -20px rgb(0 0 0 / .65); }
+.hero-trekking .campo-buscar input { color: #17191B; }
+.hero-trekking .campo-buscar:focus-within { box-shadow: 0 0 0 4px color-mix(in srgb, var(--persona) 70%, transparent), 0 20px 50px -20px rgb(0 0 0 / .65); }
+.hero-trekking .campo-buscar .boton { border-radius: 999px; }
+:root[data-tema="oscuro"] .hero-trekking .campo-buscar { background: rgb(30 34 38 / .96); color: #A7ADB3; }
+:root[data-tema="oscuro"] .hero-trekking .campo-buscar input { color: #F2EEE7; }
+.hero.hero-trekking .populares { justify-content: center; text-shadow: 0 1px 8px rgb(0 0 0 / .6); }
+.hero.hero-trekking .populares span { color: rgb(255 255 255 / .82); }
+.hero.hero-trekking .populares a { padding: 4px 12px; border-radius: 999px; background: rgb(255 255 255 / .14); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .25); color: #fff; text-decoration: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background-color .25s, color .25s; }
+.hero.hero-trekking .populares a:hover { background: #fff; color: #17191B; }
+.hero.hero-trekking .hero-credito { position: absolute; right: 20px; bottom: calc(var(--tk-montes) + 8px); z-index: 2; margin: 0; color: rgb(255 255 255 / .72); font-size: .75rem; text-shadow: 0 1px 3px rgb(0 0 0 / .7); }
+.tk-hero-montes { position: absolute; inset: auto 0 -1px; z-index: 1; pointer-events: none; }
+.tk-montes { display: block; width: 100%; height: var(--tk-montes); }
+.tk-monte { will-change: transform; }
+.tk-puntos { position: absolute; z-index: 3; right: clamp(14px, 3vw, 40px); top: 50%; translate: 0 -50%; display: grid; gap: 10px; }
+.tk-puntos button { width: 12px; height: 12px; padding: 0; border: 2px solid #fff; border-radius: 99px; background: transparent; cursor: pointer; transition: height .4s var(--tk-ease), background-color .3s; }
+.tk-puntos button.activa { height: 36px; background: #fff; }
+.tk-bajar { position: absolute; z-index: 3; left: 50%; bottom: calc(var(--tk-montes) * .45); translate: -50% 0; width: 28px; height: 46px; border: 2px solid rgb(255 255 255 / .85); border-radius: 99px; }
+.tk-bajar::after { content: ''; position: absolute; left: 50%; top: 8px; width: 4px; height: 9px; margin-left: -2px; border-radius: 4px; background: #fff; animation: tk-rueda 1.8s var(--tk-ease) infinite; }
+@keyframes tk-rueda { 0% { transform: translateY(0); opacity: 1; } 80% { transform: translateY(15px); opacity: 0; } 100% { opacity: 0; } }
+
+/* Franja de datos: tarjetas que flotan sobre la cordillera */
+.hero-trekking + .franja-datos { position: relative; z-index: 3; margin-top: calc(var(--tk-montes) * -.55); background: transparent; border: 0; }
+.hero-trekking + .franja-datos .contenedor { gap: 14px; }
+.hero-trekking + .franja-datos .dato, .hero-trekking + .franja-datos .dato:first-child { position: relative; padding: 18px 20px; border: 0; border-radius: 20px; background: var(--superficie); box-shadow: var(--sombra-2); overflow: hidden; transition: transform .5s var(--tk-ease), box-shadow .5s; }
+.hero-trekking + .franja-datos .dato::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: var(--dz, var(--montana)); }
+.hero-trekking + .franja-datos .dato:nth-child(2) { --dz: var(--cascada); } .hero-trekking + .franja-datos .dato:nth-child(3) { --dz: var(--persona); } .hero-trekking + .franja-datos .dato:nth-child(4) { --dz: var(--araucaria); } .hero-trekking + .franja-datos .dato:nth-child(5) { --dz: var(--corazon); }
+.hero-trekking + .franja-datos .dato > .ico, .hero-trekking + .franja-datos .dato > .clima-ico { color: var(--dz, var(--montana)); }
+.hero-trekking + .franja-datos a.dato:hover { transform: translateY(-4px); box-shadow: var(--sombra-3); background: var(--superficie); }
+
+/* Cinta que desfila */
+.tk-cinta { overflow: hidden; margin-top: calc(40px * var(--esp, 1)); padding: 22px 0; background: var(--tk-noche); color: #fff; }
+.tk-cinta-pista { display: flex; align-items: center; gap: 40px; width: max-content; animation: tk-desfile 42s linear infinite; font: 800 clamp(1.5rem, 3vw, 2.5rem)/1 var(--fuente-titulo, var(--fuente)); letter-spacing: -.02em; white-space: nowrap; }
+.tk-cinta-pista .emblema { width: 40px; height: 44px; object-fit: contain; }
+.tk-cinta:hover .tk-cinta-pista { animation-play-state: paused; }
+@keyframes tk-desfile { to { transform: translateX(-50%); } }
+
+/* Accesos rápidos: cada uno con el color de una letra; el color crece en círculo */
+.accesos a { position: relative; overflow: hidden; isolation: isolate; border-radius: 20px; transition: transform .5s var(--tk-ease), box-shadow .5s, color .35s, border-color .2s; }
+.accesos a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--c, var(--azul)); clip-path: circle(0 at 30px 50%); transition: clip-path .7s var(--tk-ease); }
+.accesos a:hover { color: #fff; transform: translateY(-4px); box-shadow: var(--sombra-3); }
+.accesos a:hover::before { clip-path: circle(150% at 30px 50%); }
+.accesos .acceso-ico { border-radius: 14px; background: color-mix(in srgb, var(--c, var(--azul)) 14%, var(--superficie)); color: color-mix(in srgb, var(--c, var(--azul)) 82%, #000); transition: transform .6s var(--tk-rebote), background-color .3s, color .3s; }
+:root[data-tema="oscuro"] .accesos .acceso-ico { color: color-mix(in srgb, var(--c) 60%, #fff); }
+.accesos a:hover .acceso-ico, :root[data-tarjetas] .accesos a:hover .acceso-ico { background: rgb(255 255 255 / .2); color: #fff; transform: rotate(-10deg) scale(1.1); }
+.accesos a:hover::after { color: #fff !important; }
+.inclinado { background-image: none !important; }
+
+/* Tarjetas de noticias: foto con zoom, esquinas redondas y elevación */
+.tn-img { border-radius: 20px; }
+.tn-img img { transition: transform 1.1s var(--tk-ease), opacity .2s; }
+.tarjeta-noticia:hover .tn-img img { opacity: 1; transform: scale(1.07); }
+.tarjeta-noticia .etiqueta { color: color-mix(in srgb, var(--rostro) 70%, var(--texto)); letter-spacing: .02em; }
+.tarjeta-noticia h3 { font-family: var(--fuente-titulo, var(--fuente)); letter-spacing: -.01em; }
+.tarjeta-noticia.grande h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.12; }
+.tarjeta-area, a.tarjeta, .tarjeta-accion, .lista-tramites, .horas-disponibles, .emergencias-portada { border-radius: 20px; }
+
+/* «Cada letra de Melipeuco es una puerta» */
+.tk-mundos { position: relative; margin: calc(64px * var(--esp, 1)) 0 0; padding: clamp(72px, 9vw, 120px) 0 clamp(56px, 7vw, 90px); overflow: hidden; isolation: isolate; color: #fff; background: var(--fz); transition: --fc .9s ease, --fz .9s ease; }
+.tk-mundos-fondo { position: absolute; inset: 0; z-index: -2; background: radial-gradient(120% 85% at 50% 38%, color-mix(in srgb, var(--fc) 72%, var(--fz)) 0%, var(--fz) 74%); }
+.tk-mundos-fondo::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgb(255 255 255 / .035) 0 2px, transparent 2px 22px); }
+.tk-mundos-cabeza { max-width: 760px; margin: 0 auto; text-align: center; }
+.tk-mundos .antetitulo { color: rgb(255 255 255 / .85); }
+.tk-mundos .antetitulo::after { background: var(--persona); }
+.tk-mundos h2 { margin: 0 0 12px; color: #fff; font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.04; }
+.tk-mundos h2 em { font-style: normal; background: var(--arcoiris) left bottom / 100% .12em no-repeat; padding-bottom: .04em; }
+.tk-mundos-cabeza p { margin: 0 auto; max-width: 56ch; color: rgb(255 255 255 / .8); }
+.tk-mundos-escena { position: relative; display: grid; place-items: center; min-height: clamp(280px, 34vw, 360px); margin-top: 18px; }
+.tk-mundos-gigante { position: absolute; inset: 0; z-index: -1; display: grid; place-items: center; pointer-events: none; }
+.tk-mundos-gigante i { grid-area: 1 / 1; width: min(380px, 66vw); aspect-ratio: 1; background: rgb(255 255 255 / .13); -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; opacity: 0; transform: scale(.55) rotate(-24deg); transition: opacity .6s ease, transform 1s var(--tk-rebote); }
+.tk-mundos-gigante i.activa { opacity: 1; transform: none; }
+.tk-mundos-info { display: grid; width: min(640px, 100%); text-align: center; }
+.tk-mundo-info { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(18px); transition: opacity .45s ease, transform .7s var(--tk-ease), visibility 0s .45s; }
+.tk-mundo-info.activa { opacity: 1; visibility: visible; transform: none; transition-delay: .1s, .1s, 0s; }
+.tk-mundo-paso { display: inline-block; margin-bottom: 14px; color: rgb(255 255 255 / .72); font: 700 .74rem/1 var(--fuente); letter-spacing: .22em; text-transform: uppercase; }
+.tk-mundo-info h3 { margin: 0 0 14px; color: #fff; font: 800 clamp(2.5rem, 6.2vw, 5.2rem)/.95 var(--fuente-titulo, var(--fuente)); letter-spacing: -.035em; text-shadow: 0 12px 40px rgb(0 0 0 / .25); }
+.tk-mundo-info p { max-width: 48ch; margin: 0 auto 22px; color: rgb(255 255 255 / .86); font-size: clamp(1rem, 1.3vw, 1.125rem); }
+.tk-mundo-info a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 999px; background: #fff; color: var(--fz); font-weight: 700; text-decoration: none; transition: transform .35s var(--tk-rebote), box-shadow .35s; }
+.tk-mundo-info a:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -14px rgb(0 0 0 / .5); }
+.tk-mundos-letras { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); align-items: end; gap: 8px; max-width: 1000px; margin: 34px auto 0; padding: 0; list-style: none; }
+.tk-mundos-letras a { display: grid; justify-items: center; gap: 10px; color: #fff; text-decoration: none; text-align: center; border-radius: 14px; }
+.tk-mundos-letras .emblema { width: auto; height: clamp(54px, 8.6vw, 104px); max-width: 100%; object-fit: contain; transition: transform .55s var(--tk-rebote), filter .4s, opacity .4s; filter: drop-shadow(0 8px 14px rgb(0 0 0 / .18)); }
+.tk-mundos-letras a:hover .emblema, .tk-mundos-letras a:focus-visible .emblema, .tk-mundos-letras a[aria-current] .emblema { transform: translateY(-12px) scale(1.1) rotate(-5deg); filter: drop-shadow(0 18px 24px rgb(0 0 0 / .3)); }
+.tk-mundos-letras b { display: block; font: 800 clamp(.74rem, 1.2vw, 1rem)/1.1 var(--fuente-titulo, var(--fuente)); }
+.tk-mundos-letras small { display: block; margin-top: 2px; color: rgb(255 255 255 / .62); font-size: .7rem; }
+.tk-mundos-letras a:not([aria-current]) b { opacity: .78; }
+@media (max-width: 760px) {
+  .tk-mundos-letras { grid-template-columns: repeat(3, 1fr); gap: 22px 12px; }
+  .tk-mundos-escena { min-height: 300px; }
+}
+
+/* «Melipeuco Capital del Trekking»: lugares y cifras */
+.tk-trekking { position: relative; margin-top: calc(var(--tk-montes) + 32px * var(--esp, 1)); padding: clamp(40px, 6vw, 80px) 0 clamp(64px, 8vw, 110px); background: var(--tk-noche); color: #E9E5DD; }
+.tk-trekking + .seccion, .tk-mundos + .seccion { padding-top: calc(72px * var(--esp, 1)); }
+.tk-trekking-montes { position: absolute; left: 0; right: 0; top: 1px; transform: translateY(-100%); pointer-events: none; }
+.tk-trekking-cabeza { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; margin-bottom: 34px; }
+.tk-trekking .antetitulo { color: var(--persona); }
+.tk-trekking h2 { margin: 0 0 10px; color: #fff; font-size: clamp(2rem, 4.4vw, 3.6rem); line-height: 1.03; }
+.tk-trekking h2 em { color: var(--persona); }
+.tk-trekking-cabeza p { max-width: 56ch; margin: 0; color: rgb(255 255 255 / .74); font-size: 1.0625rem; }
+.tk-fila-acciones { display: flex; align-items: center; gap: 10px; }
+.tk-flecha { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid rgb(255 255 255 / .2); background: transparent; color: #fff; cursor: pointer; transition: background-color .25s, color .25s, transform .35s var(--tk-rebote), opacity .25s; }
+.tk-flecha:hover:not(:disabled) { background: #fff; color: #17191B; transform: scale(1.08); }
+.tk-flecha:disabled { opacity: .3; cursor: default; }
+.tk-fila { display: flex; gap: 22px; overflow-x: auto; padding: 10px max(24px, (100vw - var(--ancho)) / 2 + 24px) 24px; scroll-snap-type: x mandatory; scroll-padding-inline: max(24px, (100vw - var(--ancho)) / 2 + 24px); scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }
+.tk-fila::-webkit-scrollbar { display: none; }
+.tk-fila.arrastrando { cursor: grabbing; scroll-snap-type: none; }
+.tk-fila.arrastrando a { pointer-events: none; }
+.tk-foto { --c: var(--z); position: relative; flex: 0 0 clamp(250px, 26vw, 340px); aspect-ratio: 3 / 4; overflow: hidden; isolation: isolate; border-radius: 26px; color: #fff; text-decoration: none; scroll-snap-align: start; box-shadow: 0 20px 50px -24px rgb(0 0 0 / .8); transition: transform .6s var(--tk-ease), box-shadow .6s; }
+.tk-foto img { position: absolute; inset: 0; z-index: -2; width: 100%; max-width: none; height: 100%; object-fit: cover; transition: transform 1.2s var(--tk-ease); }
+.tk-foto::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 35%, color-mix(in srgb, var(--c) 30%, rgb(0 0 0 / .88)) 100%); }
+.tk-foto::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), rgb(255 255 255 / .2), transparent 42%); opacity: 0; transition: opacity .4s; }
+.tk-foto:hover { transform: translateY(-6px); color: #fff; }
+.tk-foto:hover img { transform: scale(1.08); }
+.tk-foto:hover::before { opacity: 1; }
+.tk-foto-etiqueta { position: absolute; top: 16px; left: 16px; padding: 5px 12px; border-radius: 99px; background: var(--c); color: #fff; font-size: .74rem; font-weight: 700; letter-spacing: .02em; }
+.tk-foto-texto { position: absolute; inset: auto 0 0; padding: 24px; }
+.tk-foto-texto b { display: block; font: 800 clamp(1.3rem, 2vw, 1.65rem)/1.08 var(--fuente-titulo, var(--fuente)); letter-spacing: -.02em; }
+.tk-foto-texto > span { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 8px; font-size: .92rem; color: rgb(255 255 255 / .88); transition: grid-template-rows .6s var(--tk-ease), opacity .5s; }
+.tk-foto-texto > span > span { overflow: hidden; }
+.tk-foto:hover .tk-foto-texto > span, .tk-foto:focus-visible .tk-foto-texto > span { grid-template-rows: 1fr; opacity: 1; }
+@media (hover: none) { .tk-foto-texto > span { grid-template-rows: 1fr; opacity: 1; } }
+.tk-fila-barra { width: min(var(--ancho), 100% - 48px); height: 4px; margin: 14px auto 0; overflow: hidden; border-radius: 4px; background: rgb(255 255 255 / .12); }
+.tk-fila-barra i { display: block; height: 100%; background: var(--arcoiris); transform-origin: 0 50%; transform: scaleX(var(--avance, .15)); transition: transform .2s; }
+.tk-cifras { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: clamp(40px, 6vw, 72px); }
+.tk-cifra { padding: 24px; border-radius: 24px; background: rgb(255 255 255 / .05); border: 1px solid rgb(255 255 255 / .1); }
+.tk-cifra b { display: block; font: 800 clamp(2.4rem, 4.6vw, 3.6rem)/1 var(--fuente-titulo, var(--fuente)); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.tk-cifra:nth-child(1) b { color: var(--cascada); } .tk-cifra:nth-child(2) b { color: var(--persona); } .tk-cifra:nth-child(3) b { color: var(--rostro); } .tk-cifra:nth-child(4) b { color: #7FC79A; }
+.tk-cifra span { display: block; margin-top: 8px; color: rgb(255 255 255 / .78); font-weight: 600; font-size: .9375rem; }
+@media (max-width: 900px) {
+  .tk-trekking-cabeza { grid-template-columns: 1fr; }
+  .tk-cifras { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .tk-flecha, .tk-fila-barra { display: none; }
+  .tk-foto { flex-basis: 76vw; scroll-snap-align: center; }
+  .tk-fila { padding-inline: 16px; scroll-padding-inline: 16px; }
+}
+
+/* ---------------------------------------------------------------- Encabezado de páginas interiores */
+.encabezado, .encabezado:not(.con-imagen) { padding: clamp(44px, 6vw, 72px) 0 calc(56px + clamp(36px, 5vw, 64px)); overflow: hidden; isolation: isolate; background: var(--z-oscuro); color: #fff; border-bottom: 0; }
+.encabezado:not(.con-imagen)::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 120% at 88% 0%, color-mix(in srgb, var(--z) 70%, transparent), transparent 70%), repeating-linear-gradient(115deg, rgb(255 255 255 / .03) 0 2px, transparent 2px 22px); }
+.encabezado.con-imagen { padding-bottom: calc(56px + clamp(36px, 5vw, 64px)); background: var(--z-oscuro); }
+.encabezado.con-imagen::before { background: linear-gradient(0deg, color-mix(in srgb, var(--z-oscuro) 94%, transparent), color-mix(in srgb, var(--z-oscuro) 50%, transparent)); }
+.encabezado::after { content: ''; position: absolute; inset: auto 0 -1px; z-index: 3; height: 56px; background: var(--fondo); clip-path: polygon(0 100%, 0 62%, 6% 44%, 12% 58%, 19% 30%, 27% 56%, 34% 40%, 41% 64%, 49% 22%, 56% 52%, 63% 36%, 71% 60%, 79% 28%, 86% 54%, 93% 40%, 100% 58%, 100% 100%); }
+.encabezado h1 { color: #fff; max-width: 22ch; font-size: clamp(2.2rem, 5.4vw, 4.4rem); line-height: 1.02; letter-spacing: calc(var(--espaciado-titulo, -.02em) - .015em); text-shadow: 0 6px 40px rgb(0 0 0 / .2); }
+.encabezado h1 .palabra { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.encabezado h1 .palabra > span { display: inline-block; }
+.encabezado .bajada { color: rgb(255 255 255 / .86); max-width: 60ch; }
+.encabezado .migas ol, .encabezado .migas [aria-current] { color: rgb(255 255 255 / .7); }
+.encabezado .migas a { color: rgb(255 255 255 / .88); }
+.encabezado .migas li + li::before { color: rgb(255 255 255 / .4); }
+.encabezado .insignia { background: rgb(255 255 255 / .14); border-color: rgb(255 255 255 / .3); color: #fff; }
+.encabezado .contenedor { z-index: 2; }
+.encabezado-emblema { position: absolute; z-index: 2; right: max(24px, (100vw - var(--ancho)) / 2 + 24px); bottom: calc(56px + 18px); width: clamp(92px, 12vw, 168px); height: auto; filter: drop-shadow(0 20px 40px rgb(0 0 0 / .35)); animation: tk-emblema-entra 1.5s var(--tk-ease) .2s both, tk-emblema-flota 7s ease-in-out 1.7s infinite; }
+@keyframes tk-emblema-entra { from { opacity: 0; transform: perspective(600px) rotateY(-180deg) scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes tk-emblema-flota { 0%, 100% { translate: 0 0; rotate: -3deg; } 50% { translate: 0 -14px; rotate: 3deg; } }
+@media (max-width: 720px) {
+  .encabezado-emblema { top: 18px; bottom: auto; right: 16px; width: 58px; opacity: .92; }
+  .encabezado .contenedor { padding-right: 72px; }
+}
+
+/* ---------------------------------------------------------------- Pie con la cordillera y el logo */
+.pie { --pie-fondo: var(--azul-profundo); position: relative; margin-top: calc(var(--tk-montes) + 40px * var(--esp, 1)); background: var(--pie-fondo); border-top: 0 !important; }
+.banda-boletin + .pie, .seccion-areas + .pie { margin-top: var(--tk-montes); }
+:root[data-pie="color"] .pie { --pie-fondo: var(--azul); }
+:root[data-pie="claro"] .pie { --pie-fondo: var(--fondo-2); }
+.pie-montes { position: absolute; left: 0; right: 0; top: 1px; transform: translateY(-100%); pointer-events: none; }
+.pie-trekking { padding-top: 12px; padding-bottom: 26px; }
+.pie-trekking a { display: block; max-width: 980px; margin: 0 auto; border-radius: 20px; transition: transform .6s var(--tk-ease); }
+.pie-trekking a:hover { transform: translateY(-6px); }
+.pie-trekking img { display: block; width: 100%; height: auto; }
+.pie-trekking-oscuro { display: none !important; }
+:root[data-pie="claro"] .pie-trekking-claro { display: none !important; }
+:root[data-pie="claro"] .pie-trekking-oscuro { display: block !important; }
+:root[data-pie-marca="no"] .pie-trekking { display: none; }
+.pie .redes a { border-radius: 50%; transition: transform .35s var(--tk-rebote), background-color .3s, color .3s; }
+.pie .redes a:hover { transform: translateY(-4px) rotate(-6deg); background: var(--persona); color: #17191B; }
+.pie-legal { border-top-color: rgb(255 255 255 / .1); }
+
+/* Volver arriba: anillo de avance con el color de la zona */
+.arriba { width: 52px; height: 52px; border: 0; border-radius: 50%; isolation: isolate; background: conic-gradient(var(--z) calc(var(--progreso, 0) * 1turn), var(--borde) 0); box-shadow: var(--sombra-2); }
+.arriba::before { content: ''; position: absolute; inset: 3px; z-index: -1; border-radius: 50%; background: var(--superficie); }
+.arriba:hover { color: var(--z); }
+
+/* ---------------------------------------------------------------- Cortina de cordillera entre páginas */
+.tk-cortina { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; overflow: hidden; pointer-events: none; }
+.tk-cortina-capa { position: absolute; inset: 0; background: var(--c, var(--tk-noche)); color: var(--c, var(--tk-noche)); transform: translate3d(0, calc(100% + 18vh), 0); will-change: transform; }
+.tk-cortina-capa:nth-child(1) { --c: var(--tk-noche); } .tk-cortina-capa:nth-child(2) { --c: var(--z); } .tk-cortina-capa:nth-child(3) { --c: var(--z-oscuro); }
+.tk-cortina-capa svg { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: 16vh; fill: currentColor; }
+.tk-cortina-info { position: relative; z-index: 1; display: grid; justify-items: center; gap: 16px; opacity: 0; }
+.tk-cortina-info img { width: clamp(84px, 10vw, 124px); height: auto; filter: drop-shadow(0 18px 40px rgb(0 0 0 / .45)); }
+.tk-cortina-nombre { color: #fff; font: 800 clamp(1.4rem, 3.4vw, 2.4rem)/1 var(--fuente-titulo, var(--fuente)); letter-spacing: -.01em; }
+html.tk-entrando .tk-cortina, html.tk-saliendo .tk-cortina { pointer-events: auto; }
+html.tk-entrando .tk-cortina-capa { transform: none; }
+html.tk-entrando .tk-cortina { animation: tk-cortina-seguro 0s linear 3s forwards; }
+@keyframes tk-cortina-seguro { to { visibility: hidden; } }
+:root[data-anim-cordillera="si"] { view-transition-name: none; }
+:root[data-anim-cordillera="si"] .cabecera { view-transition-name: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-cortina { display: none; }
+  .tk-logo *, .tk-fotos img.activa, .tk-cinta-pista, .encabezado-emblema, .tk-bajar::after { animation: none !important; }
+  .tk-mundos { transition: none; }
+}
+:root[data-anim="no"] .tk-logo *, :root[data-anim="no"] .tk-fotos img.activa, :root[data-anim="no"] .tk-cinta-pista, :root[data-anim="no"] .encabezado-emblema { animation: none !important; }
+@media print {
+  .tk-cortina, .tk-progreso, .tk-cinta, .pie-montes, .tk-hero-montes, .encabezado-emblema, .tk-puntos, .tk-bajar { display: none !important; }
+  .encabezado { background: none; color: #000; } .encabezado h1 { color: #000; }
+}
+@media (max-width: 720px) {
+  .hero.hero-trekking { min-height: calc(100svh - 64px); }
+  .tk-logo-caja { width: 94vw; }
+  .tk-puntos { top: auto; bottom: calc(var(--tk-montes) + 10px); right: 50%; translate: 50% 0; display: flex; }
+  .tk-puntos button.activa { width: 30px; height: 12px; }
+  .tk-bajar, .hero.hero-trekking .hero-credito { display: none; }
+  .hero.hero-trekking .populares a { padding: 3px 10px; }
+  .hero-trekking + .franja-datos .contenedor { grid-template-columns: 1fr; gap: 10px; }
+  .accesos a::before { clip-path: circle(0 at 26px 26px); }
+  .accesos a:hover::before { clip-path: circle(150% at 26px 26px); }
+}
+.hero-trekking:has(+ .franja-datos) .tk-bajar { display: none; }
