@@ -256,6 +256,27 @@ test('panel: elegir qué trámites muestra la portada', async () => {
   await api(s, 'PUT', 'ajustes', { portada: { secciones: ajustes.portada.secciones } });
 });
 
+test('diseño y contenidos de la identidad se personalizan desde el panel', async () => {
+  const s = await admin();
+  const previo = await (await api(s, 'GET', 'ajustes')).json();
+  assert.equal(previo.trekkingActual.mundos.length, 9);
+  const r = await api(s, 'PUT', 'ajustes', {
+    diseno: { portada: { logoAnimacion: 'caida', tamanoLogo: 80, intervalo: 99 }, identidad: { zonas: false, cinta: 30 } },
+    portada: { secciones: previo.portada.secciones.map((x) => (x.id === 'cinta' ? { ...x, activo: true } : x)) },
+    trekking: { cinta: ['Volcanes <b>', 'Nieve'], mundos: [{ nombre: 'Viajar', texto: 'Turismo', url: 'javascript:alert(1)' }], cifras: [{ numero: '12', sufijo: ' km', texto: 'de ciclovías' }] },
+  });
+  assert.equal(r.status, 200);
+  const h = await (await pedir('/')).text();
+  assert.match(h, /data-logo-anim="caida"/);
+  assert.match(h, /data-id-zonas="no"/);
+  assert.match(h, /data-intervalo="20"/);
+  assert.match(h, /--tk-logo-escala:0\.8/);
+  assert.match(h, /<span>Volcanes &lt;b&gt;<\/span>/);
+  assert.match(h, /data-contar="12" data-sufijo=" km"/);
+  assert.doesNotMatch(h, /javascript:alert/);
+  await api(s, 'PUT', 'ajustes', { diseno: {}, portada: { secciones: previo.portada.secciones }, trekking: { cinta: [], mundos: [], lugares: [], cifras: [] } });
+});
+
 test('panel: ingreso, cookie segura y protección CSRF', async () => {
   const malo = await ingresar('admin@munimelipeuco.cl', 'incorrecta');
   assert.equal(malo.r.status, 401);

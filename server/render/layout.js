@@ -230,6 +230,7 @@ ${pie(ctx)}
 <button type="button" class="arriba" data-arriba aria-label="Volver arriba">${crudo(icono('flecha', { tam: 20, clase: 'arriba-ico' }))}</button>
 <script src="/js/sitio.js?v=${ctx.version}" defer></script>
 <script src="/js/movimiento.js?v=${ctx.version}" defer></script>
+${portada ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}
 </body>
 </html>`;
 }

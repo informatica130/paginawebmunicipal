@@ -5,13 +5,11 @@ import { documento, encabezado, disenoDe } from './layout.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
-import { completarSecciones } from '../../public/js/diseno.js';
-import { PALETA, MUNDOS, LUGARES, CINTA, SITIO_TREKKING, emblema, logoAnimado, montes } from './trekking.js';
+import { completarSecciones, fotosPortada } from '../../public/js/diseno.js';
+import { PALETA, SITIO_TREKKING, emblema, logoAnimado, montes, contenidoTrekking } from './trekking.js';
 
 // Antetítulo con el emblema (letra del logo) de la zona.
 const antetitulo = (k, texto) => crudo(`<span class="antetitulo" style="--c:${PALETA[k].color}">${emblema(k)}${esc(texto)}</span>`);
-// Fotos de la portada «Capital del Trekking» (en dos tamaños).
-const FOTOS_TREKKING = [1, 2, 3, 4, 5];
 
 // ------------------------------------------------------------------ Portada
 export async function portada(ctx) {
@@ -51,8 +49,8 @@ async function seccionPortada(ctx, sec) {
         // Portada «Melipeuco Capital del Trekking»: fotos que se funden con zoom lento, el logo de
         // las nueve letras que caen una a una, el buscador y la cordillera en capas (parallax).
         const turismo = s.turismo?.url || SITIO_TREKKING;
-        const fotos = dp.imagen ? [html`<img class="activa" src="${dp.imagen}" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">`]
-          : FOTOS_TREKKING.map((n, i) => html`<img${i === 0 ? crudo(' class="activa" fetchpriority="high"') : crudo(' loading="lazy"')} src="/img/trekking/portada-${n}-1920.webp" srcset="/img/trekking/portada-${n}-960.webp 960w, /img/trekking/portada-${n}-1920.webp 1920w" sizes="100vw" width="1920" height="1280" alt="" decoding="async"${i === 0 ? crudo(' data-diseno-img="portada.imagen"') : ''}>`);
+        const lista = fotosPortada(disenoDe(s));
+        const fotos = lista.map((f, i) => html`<img${i === 0 ? crudo(' class="activa" fetchpriority="high"') : crudo(' loading="lazy"')} src="${f.src}"${f.srcset ? html` srcset="${f.srcset}" sizes="100vw"` : ''} width="1920" height="1280" alt="" decoding="async" data-diseno-img="portada.foto-${i}">`);
         return html`<section class="hero hero-trekking" aria-labelledby="hero-titulo" data-hero-trekking>
           <div class="tk-fotos" data-capa="0.35">${fotos}</div>
           <div class="tk-velo" aria-hidden="true"></div>
@@ -62,7 +60,7 @@ async function seccionPortada(ctx, sec) {
             <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.`}</p>
             ${buscar}
           </div>
-          ${!dp.imagen && FOTOS_TREKKING.length > 1 ? html`<div class="tk-puntos" role="group" aria-label="Fotografías de la portada">${FOTOS_TREKKING.map((_, i) => html`<button type="button"${i === 0 ? crudo(' class="activa" aria-pressed="true"') : crudo(' aria-pressed="false"')} aria-label="Foto ${i + 1}"></button>`)}</div>` : ''}
+          ${lista.length > 1 ? html`<div class="tk-puntos" role="group" aria-label="Fotografías de la portada">${lista.map((_, i) => html`<button type="button"${i === 0 ? crudo(' class="activa" aria-pressed="true"') : crudo(' aria-pressed="false"')} aria-label="Foto ${i + 1}"></button>`)}</div>` : ''}
           <p class="hero-credito" data-diseno="portada.credito"${dp.credito ? '' : crudo(' hidden')}>${dp.credito}</p>
           <div class="tk-hero-montes">${crudo(montes('var(--fondo)'))}</div>
         </section>
@@ -85,8 +83,9 @@ async function seccionPortada(ctx, sec) {
     }
     case 'cinta':
       // Cinta que desfila con las palabras del territorio y las nueve letras del logo.
-      return html`<div class="tk-cinta" aria-hidden="true"><div class="tk-cinta-pista">${[0, 1].map(() => CINTA.map((t, i) => crudo(`<span>${t}</span>${emblema(i)}`)))}</div></div>`;
+      return html`<div class="tk-cinta" aria-hidden="true"><div class="tk-cinta-pista">${[0, 1].map(() => contenidoTrekking(s).cinta.map((t, i) => html`<span>${t}</span>${crudo(emblema(i % 9))}`))}</div></div>`;
     case 'mundos': {
+      const MUNDOS = contenidoTrekking(s).mundos;
       // «Cada letra de Melipeuco es una puerta»: las nueve letras del logo llevan a nueve áreas del municipio.
       return html`<section class="tk-mundos" aria-labelledby="mundos-titulo" data-mundos style="--fc:${PALETA[0].color};--fz:${PALETA[0].oscuro}">
         <div class="tk-mundos-fondo" aria-hidden="true"></div>
@@ -195,8 +194,8 @@ async function seccionPortada(ctx, sec) {
       // «Melipeuco Capital del Trekking»: fila deslizable de atractivos y cifras del territorio.
       const t = ctx.ajustes.turismo;
       if (!t?.url) return '';
-      const base = t.url.endsWith('/') ? t.url : t.url + '/';
-      const destino = (l) => base + l.url;
+      const { lugares, cifras } = contenidoTrekking(s);
+      const COLORES_CIFRA = ['var(--cascada)', 'var(--persona)', 'var(--rostro)', '#7FC79A'];
       return html`<section class="tk-trekking" aria-labelledby="trekking-titulo" style="--z:${PALETA[0].color}">
         <div class="tk-trekking-montes">${crudo(montes('var(--tk-noche)'))}</div>
         <div class="contenedor tk-trekking-cabeza">
@@ -212,19 +211,14 @@ async function seccionPortada(ctx, sec) {
           </div>
         </div>
         <div class="tk-fila" tabindex="0" aria-label="Lugares para visitar en Melipeuco" data-fila>
-          ${LUGARES.map((l) => html`<a class="tk-foto" ${attrsEnlace(destino(l))} style="--c:${PALETA[l.k].color}">
-            <img src="/img/trekking/lugar-${l.img}.webp" alt="" loading="lazy" decoding="async" width="720" height="960">
-            <span class="tk-foto-etiqueta">${l.tipo}</span>
-            <span class="tk-foto-texto"><b>${l.nombre}</b><span><span>${l.texto}</span></span></span>${avisoExterno(destino(l))}
+          ${lugares.map((l) => html`<a class="tk-foto" ${attrsEnlace(l.url)} style="--c:${PALETA[Math.min(8, Math.max(0, Number(l.letra) || 0))].color}">
+            ${l.imagen ? html`<img src="${l.imagen}" alt="" loading="lazy" decoding="async" width="720" height="960">` : ''}
+            ${l.tipo ? html`<span class="tk-foto-etiqueta">${l.tipo}</span>` : ''}
+            <span class="tk-foto-texto"><b>${l.nombre}</b>${l.texto ? html`<span><span>${l.texto}</span></span>` : ''}</span>${avisoExterno(l.url)}
           </a>`)}
         </div>
         <div class="tk-fila-barra" aria-hidden="true"><i></i></div>
-        <div class="contenedor tk-cifras">
-          <div class="tk-cifra"><b data-contar="3">3</b><span>volcanes: Llaima, Sollipulli y Sierra Nevada</span></div>
-          <div class="tk-cifra"><b data-contar="250" data-sufijo=" km">250 km</b><span>de senderos</span></div>
-          <div class="tk-cifra"><b data-contar="44">44</b><span>rutas de trekking para todos los niveles</span></div>
-          <div class="tk-cifra"><b data-contar="45" data-sufijo="%">45%</b><span>de la comuna son áreas silvestres protegidas</span></div>
-        </div>
+        ${cifras.length ? html`<div class="contenedor tk-cifras">${cifras.map((c, i) => html`<div class="tk-cifra" style="--cc:${COLORES_CIFRA[i % 4]}"><b data-contar="${c.numero}" data-sufijo="${c.sufijo || ''}">${c.numero}${c.sufijo || ''}</b><span>${c.texto}</span></div>`)}</div>` : ''}
       </section>`;
     }
     case 'encuesta': {

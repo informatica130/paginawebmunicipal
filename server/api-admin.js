@@ -13,6 +13,7 @@ import { ErrorValidacion } from './contenidos.js';
 import { ahora, parse } from './db.js';
 import { slugify, emailValido, urlSegura, textoPlano, recortar } from '../src/util.js';
 import { normalizar as normalizarDiseno } from '../public/js/diseno.js';
+import { contenidoTrekking } from './render/trekking.js';
 import { qrSvg } from '../src/qr.js';
 import { respaldar } from '../herramientas/respaldo.js';
 
@@ -421,7 +422,8 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return { clave: p.clave, nombre, items };
   });
 
-  ruta('GET', 'ajustes', 'contenido.ver', () => db.ajuste('sitio') || {});
+  // Incluye el contenido de la identidad ya completado con lo predeterminado, para editarlo en el panel.
+  ruta('GET', 'ajustes', 'contenido.ver', () => { const a = db.ajuste('sitio') || {}; return { ...a, trekkingActual: contenidoTrekking(a) }; });
   ruta('PUT', 'ajustes', 'ajustes.editar', ({ u, body, req }) => {
     const previo = db.ajuste('sitio') || {};
     const limpio = limpiarAjustes(body, previo, u);
@@ -447,6 +449,15 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     }
     if (b.colores && !b.diseno) o.colores = { primario: color(b.colores.primario, '#0B4F7C'), acento: color(b.colores.acento, '#F2A900'), oscuro: color(b.colores.oscuro, '#062B45') };
     if (b.turismo) o.turismo = { titulo: txt(b.turismo.titulo), texto: txt(b.turismo.texto, 400), url: urlSegura(b.turismo.url), imagen: urlSegura(b.turismo.imagen) };
+    if (b.trekking) {
+      const lista = (v, n, f) => (Array.isArray(v) ? v.slice(0, n).map(f).filter(Boolean) : []);
+      o.trekking = {
+        cinta: lista(b.trekking.cinta, 24, (x) => txt(x, 40) || null),
+        mundos: lista(b.trekking.mundos, 9, (m) => ({ nombre: txt(m?.nombre, 40), texto: txt(m?.texto, 200), url: urlSegura(m?.url) })),
+        lugares: lista(b.trekking.lugares, 24, (l) => (txt(l?.nombre, 80) ? { nombre: txt(l.nombre, 80), tipo: txt(l.tipo, 60), texto: txt(l.texto, 220), imagen: urlSegura(l.imagen), url: urlSegura(l.url), letra: Math.min(8, Math.max(0, Number(l.letra) || 0)) } : null)),
+        cifras: lista(b.trekking.cifras, 6, (c) => (txt(c?.texto, 120) ? { numero: Math.max(0, Math.min(1e7, Math.round(Number(c.numero) || 0))), sufijo: String(c.sufijo ?? '').replace(/[\u0000-\u001f]/g, '').slice(0, 8), texto: txt(c.texto, 120) } : null)),
+      };
+    }
     if (b.video) o.video = { titulo: txt(b.video.titulo), url: urlSegura(b.video.url) };
     if (b.clima) o.clima = { activo: !!b.clima.activo, lugar: txt(b.clima.lugar, 60) };
     if (b.portada?.secciones) {
