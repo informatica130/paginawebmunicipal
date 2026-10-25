@@ -448,7 +448,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     if (b.clima) o.clima = { activo: !!b.clima.activo, lugar: txt(b.clima.lugar, 60) };
     if (b.portada?.secciones) {
       const conocidas = new Set(['avisos', 'banners', 'cinta', 'mundos', 'campanas', 'accesos', 'tramites', 'noticias', 'eventos', 'areas', 'turismo', 'encuesta', 'video', 'boletin']);
-      o.portada = { secciones: b.portada.secciones.filter((s) => conocidas.has(s.id)).map((s) => ({ id: s.id, activo: !!s.activo, titulo: txt(s.titulo, 120), texto: txt(s.texto, 300), cantidad: Math.min(24, Math.max(1, Number(s.cantidad) || 0)) || undefined })) };
+      o.portada = { secciones: b.portada.secciones.filter((s) => conocidas.has(s.id)).map((s) => ({ id: s.id, activo: !!s.activo, titulo: txt(s.titulo, 120), texto: txt(s.texto, 300), cantidad: Math.min(24, Math.max(1, Number(s.cantidad) || 0)) || undefined, ids: Array.isArray(s.ids) ? [...new Set(s.ids.map(Number).filter((n) => Number.isInteger(n) && n > 0))].slice(0, 24) : undefined })) };
     }
     if (b.boletin) o.boletin = { activo: !!b.boletin.activo };
     if (b.mantenimiento) o.mantenimiento = { activo: !!b.mantenimiento.activo, mensaje: txt(b.mantenimiento.mensaje, 400) };

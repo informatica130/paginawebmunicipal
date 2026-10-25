@@ -1,4 +1,4 @@
-import { h, raw, $, $$, api, aviso, fallo, estado } from '../ui.js';
+import { h, raw, $, $$, api, aviso, fallo, estado, modal } from '../ui.js';
 import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
 import { completarSecciones } from '/js/diseno.js';
@@ -54,10 +54,39 @@ export default async function (vista) {
   for (const id of Object.keys(SECCIONES)) if (!secciones.some((s) => s.id === id)) secciones.push({ id, activo: false });
   const lista = $('[data-secciones]', vista);
   const pintar = () => {
-    lista.innerHTML = String(h`${secciones.map((s, i) => h`<li data-i="${i}"><input type="checkbox" data-k="activo"${s.activo ? raw(' checked') : ''} aria-label="Mostrar ${SECCIONES[s.id]}"><b>${SECCIONES[s.id] || s.id}</b><input data-k="titulo" value="${s.titulo || ''}" placeholder="Título (opcional)"><input type="number" data-k="cantidad" value="${s.cantidad || ''}" placeholder="Cant." min="1" max="24"><span class="acciones"><button type="button" class="btn chico fantasma" data-mov="-1">↑</button><button type="button" class="btn chico fantasma" data-mov="1">↓</button></span></li>`)}`);
+    lista.innerHTML = String(h`${secciones.map((s, i) => h`<li data-i="${i}"><input type="checkbox" data-k="activo"${s.activo ? raw(' checked') : ''} aria-label="Mostrar ${SECCIONES[s.id]}"><b>${SECCIONES[s.id] || s.id}</b><input data-k="titulo" value="${s.titulo || ''}" placeholder="Título (opcional)"><input type="number" data-k="cantidad" value="${s.cantidad || ''}" placeholder="Cant." min="1" max="24">${s.id === 'tramites' ? h`<button type="button" class="btn chico" data-elegir-tramites>Elegir trámites${s.ids?.length ? ` (${s.ids.length})` : ''}</button>` : ''}<span class="acciones"><button type="button" class="btn chico fantasma" data-mov="-1">↑</button><button type="button" class="btn chico fantasma" data-mov="1">↓</button></span></li>`)}`);
   };
   pintar();
   lista.addEventListener('input', (e) => { const i = e.target.closest('[data-i]').dataset.i; const k = e.target.dataset.k; secciones[i][k] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; });
+  // Trámites de la portada: se eligen y ordenan; sin elección se muestran los destacados (o los en línea).
+  lista.addEventListener('click', async (e) => {
+    if (!e.target.closest('[data-elegir-tramites]')) return;
+    const sec = secciones.find((x) => x.id === 'tramites');
+    let todos;
+    try { todos = (await api('GET', 'contenidos?tipo=tramite&estado=publicado&limite=300&orden=orden')).items; } catch (er) { return fallo(er); }
+    let elegidos = (sec.ids || []).filter((id) => todos.some((t) => t.id === id));
+    const cuerpo = document.createElement('div');
+    const dibujar = () => {
+      const orden = [...elegidos.map((id) => todos.find((t) => t.id === id)), ...todos.filter((t) => !elegidos.includes(t.id))];
+      cuerpo.innerHTML = String(h`<p class="chico muted">Marque los trámites que se verán en la portada y ordénelos con las flechas. Si no marca ninguno, se muestran los trámites «destacados en portada» o, si no hay, los primeros en línea.</p>
+        <input type="search" data-filtro placeholder="Buscar trámite…" style="width:100%;margin-bottom:10px">
+        <ul class="lista-elegir" style="list-style:none;padding:0;margin:0;max-height:55vh;overflow:auto">${orden.map((t) => { const n = elegidos.indexOf(t.id); return h`<li data-id="${t.id}" style="display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--borde, #ddd)"><label class="check" style="flex:1;margin:0"><input type="checkbox" data-marcar${n >= 0 ? raw(' checked') : ''}> ${n >= 0 ? h`<b>${n + 1}.</b> ` : ''}${t.titulo}</label>${n >= 0 ? h`<button type="button" class="btn chico fantasma" data-sube aria-label="Subir">↑</button><button type="button" class="btn chico fantasma" data-baja aria-label="Bajar">↓</button>` : ''}</li>`; })}</ul>`);
+    };
+    dibujar();
+    cuerpo.addEventListener('input', (ev) => { if (!ev.target.matches('[data-filtro]')) return; const q = ev.target.value.toLowerCase(); $$('li', cuerpo).forEach((li) => { li.hidden = !li.textContent.toLowerCase().includes(q); }); });
+    cuerpo.addEventListener('click', (ev) => {
+      const li = ev.target.closest('li[data-id]'); if (!li) return;
+      const id = Number(li.dataset.id), i = elegidos.indexOf(id);
+      if (ev.target.matches('[data-marcar]')) { if (i >= 0) elegidos.splice(i, 1); else elegidos.push(id); dibujar(); }
+      else if (ev.target.matches('[data-sube]') && i > 0) { [elegidos[i - 1], elegidos[i]] = [elegidos[i], elegidos[i - 1]]; dibujar(); }
+      else if (ev.target.matches('[data-baja]') && i < elegidos.length - 1) { [elegidos[i + 1], elegidos[i]] = [elegidos[i], elegidos[i + 1]]; dibujar(); }
+    });
+    const pie = document.createElement('div');
+    pie.innerHTML = '<button type="button" class="btn fantasma" data-limpiar>Quitar selección</button> <button type="button" class="btn primario" data-listo>Listo</button>';
+    const m = modal({ titulo: 'Trámites en la portada', cuerpo, pie, ancho: true });
+    $('[data-limpiar]', pie).addEventListener('click', () => { elegidos = []; dibujar(); });
+    $('[data-listo]', pie).addEventListener('click', () => { sec.ids = elegidos.slice(); m.cerrar(); pintar(); aviso('Selección lista. Guarde los ajustes para publicarla.'); });
+  });
   lista.addEventListener('click', (e) => { const b = e.target.closest('[data-mov]'); if (!b) return; const i = Number(b.closest('[data-i]').dataset.i); const j = i + Number(b.dataset.mov); if (j >= 0 && j < secciones.length) { [secciones[i], secciones[j]] = [secciones[j], secciones[i]]; pintar(); } });
   const imgTurismo = campo({ k: 'imagen', t: 'imagen', l: 'Logo o imagen' }, a.turismo?.imagen);
   $('[data-turismo-img]', vista).appendChild(imgTurismo.el);

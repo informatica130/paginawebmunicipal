@@ -90,6 +90,16 @@ function cabecera(ctx) {
         <nav class="nav" id="nav" aria-label="Menú principal">${menuPrincipal(ctx)}</nav>
         <div class="cabecera-acciones">
           <button type="button" class="boton-icono" data-abrir-buscador aria-label="Buscar en el sitio" aria-controls="buscador">${crudo(icono('buscar', { tam: 22 }))}</button>
+          <div class="acc-menu">
+            <button type="button" class="boton-icono" data-acc-abrir aria-expanded="false" aria-controls="acc-panel" aria-label="Opciones de lectura: tamaño del texto, contraste y modo oscuro">${crudo(icono('accesibilidad', { tam: 22 }))}</button>
+            <div class="acc-panel" id="acc-panel" role="group" aria-label="Opciones de lectura" hidden>
+              <p>Lectura</p>
+              <div class="acc-fila"><button type="button" data-texto="-1" aria-label="Achicar el texto">A−</button><button type="button" data-texto="1" aria-label="Agrandar el texto">A+</button></div>
+              <button type="button" class="acc-opcion" data-contraste aria-pressed="false">${crudo(icono('contraste', { tam: 18 }))} Alto contraste</button>
+              <button type="button" class="acc-opcion" data-tema aria-label="Cambiar a modo oscuro">${crudo(icono('luna', { tam: 18 }))} Modo oscuro</button>
+              <a class="acc-sos" href="/contacto/#emergencias">${crudo(icono('telefono', { tam: 16 }))} Teléfonos de emergencia</a>
+            </div>
+          </div>
           ${ctx.tramites.configurado ? html`<a class="boton boton-acento boton-tramites" href="/tramites/">${crudo(icono('licencia', { tam: 18 }))}<span>Trámites en línea</span></a>` : html`<a class="boton boton-acento boton-tramites" href="/tramites/">${crudo(icono('licencia', { tam: 18 }))}<span>Trámites</span></a>`}
           <button type="button" class="boton-icono boton-menu" data-menu aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">${crudo(icono('menu', { tam: 24 }))}</button>
         </div>

@@ -24,10 +24,10 @@ export const PREDETERMINADO = {
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#121417', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 17, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: false },
   forma: { radio: 16, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240 },
-  cabecera: { estilo: 'oscura', fija: true, barraSuperior: true, botonTramites: true, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
-  portada: { composicion: 'trekking', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: true },
+  cabecera: { estilo: 'oscura', fija: true, barraSuperior: false, botonTramites: false, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
+  portada: { composicion: 'trekking', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
-  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: true, barraCarga: true, cordillera: true },
+  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true },
   avanzado: { css: '' },
 };
 
@@ -41,7 +41,7 @@ const INSTITUCIONAL = {
 // Estilos prediseñados: cambian colores, tipografía, forma, cabecera y pie (no los textos ni las fotos).
 export const ESTILOS = {
   trekking: { nombre: 'Capital del Trekking', descripcion: 'Los nueve colores del logo de Melipeuco, papel crema, noche y la portada con el logo animado y la cordillera.', valores: { portada: { composicion: 'trekking' } } },
-  institucional: { nombre: 'Institucional', descripcion: 'Minimalista: blanco, tinta y azul municipal, sólo líneas finas.', valores: { ...INSTITUCIONAL, portada: { composicion: 'dividida' } } },
+  institucional: { nombre: 'Institucional', descripcion: 'Minimalista: blanco, tinta y azul municipal, sólo líneas finas.', valores: { ...INSTITUCIONAL, cabecera: { estilo: 'blanca', barraSuperior: true, botonTramites: true }, portada: { composicion: 'dividida', populares: true } } },
   bosque: { nombre: 'Bosque de araucarias', descripcion: 'Verde pehuén y tonos de madera.', valores: {
     colores: { ...INSTITUCIONAL.colores, primario: '#1F5A45', acento: '#D89A2B', oscuro: '#12352A', fondoAlterno: '#F2F5F1', exito: '#2F7D4F' },
     tipografia: { cuerpo: 'source-sans', titulos: 'source-sans', pesoTitulos: 700 },
@@ -120,20 +120,20 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1240, 1040, 1440),
     },
     cabecera: {
-      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, true), botonTramites: bool(ca.botonTramites, true),
+      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites),
       logo: opcion(ca.logo, OPCIONES.logo, 'emblema'), logoUrl: imagen(ca.logoUrl), tamanoLogo: numero(ca.tamanoLogo, 54, 36, 96),
       subtitulo: texto(ca.subtitulo, P.cabecera.subtitulo, 60), nombre: texto(ca.nombre, P.cabecera.nombre, 60),
     },
     portada: {
       composicion: opcion(po.composicion, OPCIONES.composicion, P.portada.composicion), imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
       alto: opcion(po.alto, OPCIONES.alto, P.portada.alto), alineacion: opcion(po.alineacion, OPCIONES.alineacion, 'izquierda'), velo: numero(po.velo, 80, 0, 100),
-      franjaDatos: bool(po.franjaDatos, true), populares: bool(po.populares, true),
+      franjaDatos: bool(po.franjaDatos, true), populares: bool(po.populares, P.portada.populares),
     },
     pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
       intro: opcion(an.intro, OPCIONES.intro, 'primera'), transiciones: bool(an.transiciones, true), aparicion: bool(an.aparicion, true),
-      inclinacion: bool(an.inclinacion, true), barraCarga: bool(an.barraCarga, true), cordillera: bool(an.cordillera, true),
+      inclinacion: bool(an.inclinacion, P.animaciones.inclinacion), barraCarga: bool(an.barraCarga, true), cordillera: bool(an.cordillera, true),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
     avanzado: { css: permitirCss ? String(e.avanzado?.css || '').replace(/<\/?style/gi, '').slice(0, 20000) : String(previo?.avanzado?.css || '') },
@@ -200,13 +200,13 @@ export function logoCabecera(cfg) {
 // ------------------------------------------------------------------ Secciones de la portada
 // Secciones que se agregaron después de la primera versión: si un sitio ya guardó su orden,
 // aparecen activas en el lugar que les corresponde (después de la sección indicada).
-export const SECCIONES_NUEVAS = [['cinta', 'banners'], ['campanas', 'accesos'], ['mundos', 'noticias']];
+export const SECCIONES_NUEVAS = [['campanas', 'banners', true], ['cinta', 'banners', false], ['mundos', 'noticias', false]];
 export function completarSecciones(lista) {
   const todas = (lista || []).map((x) => ({ ...x }));
-  for (const [id, despues] of SECCIONES_NUEVAS) {
+  for (const [id, despues, activo] of SECCIONES_NUEVAS) {
     if (todas.some((x) => x.id === id)) continue;
     const i = todas.findIndex((x) => x.id === despues);
-    todas.splice(i < 0 ? todas.length : i + 1, 0, { id, activo: true });
+    todas.splice(i < 0 ? todas.length : i + 1, 0, { id, activo });
   }
   return todas;
 }

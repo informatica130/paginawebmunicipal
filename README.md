@@ -28,6 +28,10 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - Tipografía de títulos Bricolage Grotesque (la del sitio de turismo), servida desde el propio sitio; el texto sigue en Public Sans.
 - Los recursos de marca están en `public/img/trekking/` y las piezas del logo en `server/render/logo-trekking.json` (las mismas del sitio de la Capital del Trekking). El estilo *Institucional* del panel vuelve al diseño anterior.
 
+- **Portada ordenada por prioridad**: héroe compacto → campañas municipales → trámites en línea → últimas noticias → accesos rápidos → agenda → Capital del Trekking → boletín. La cinta, «Cada letra es una puerta», áreas y video quedan disponibles (apagados) en *Ajustes → Portada*.
+- **Qué trámites se ven en la portada**: en *Ajustes → Portada → Trámites en línea → Elegir trámites* se marcan y ordenan. Sin elección se muestran los marcados «Destacar en portada» o, si no hay, los primeros en línea.
+- **Cabecera despejada**: menú de cinco entradas (Municipio, Trámites, Servicios, Noticias, Contacto; Agenda y Transparencia están dentro de Municipio) y las opciones de lectura (tamaño del texto, alto contraste, modo oscuro y emergencias) en un solo botón. La barra de transparencia y el botón «Trámites» se pueden volver a activar en *Diseño del sitio*.
+
 **Diseño (estilo Institucional)**
 - Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.

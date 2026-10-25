@@ -148,12 +148,10 @@ test('portada y páginas públicas con cabeceras de seguridad', async () => {
   }
 });
 
-test('portada «Melipeuco Capital del Trekking»: logo, nueve mundos y zonas por página', async () => {
+test('portada «Melipeuco Capital del Trekking»: logo y zonas por página', async () => {
   const h = await (await pedir('/')).text();
   assert.match(h, /class="tk-logo"[^>]*aria-label="Melipeuco Capital del Trekking"/);
   assert.equal((h.match(/class="tk-letra"/g) || []).length, 9);
-  assert.match(h, /data-mundos/);
-  assert.match(h, /class="tk-cinta"/);
   assert.match(h, /data-anim-cordillera="si"/);
   assert.match(h, /data-zonas="\{&quot;rutas&quot;/);
   const salud = await (await pedir('/salud/')).text();
@@ -226,8 +224,12 @@ async function ingresar(email = 'admin@munimelipeuco.cl', clave = CLAVE) {
 }
 const api = (sesion, metodo, ruta, cuerpo, extra = {}) => pedir('/api/admin/' + ruta, { method: metodo, headers: { cookie: sesion.cookie, 'X-CSRF': sesion.csrf, ...(cuerpo !== undefined ? { 'Content-Type': 'application/json' } : {}), ...extra }, body: cuerpo === undefined ? undefined : JSON.stringify(cuerpo) });
 
+// Sesión compartida por las pruebas del diseño y la portada (el ingreso tiene un límite de intentos por IP).
+let sesionAdmin;
+const admin = async () => (sesionAdmin ??= await ingresar());
+
 test('panel: el diseño guardado cambia el sitio publicado', async () => {
-  const s = await ingresar();
+  const s = await admin();
   const r = await api(s, 'PUT', 'ajustes', { diseno: { estilo: 'personalizado', colores: { primario: '#7A1F2B' }, cabecera: { estilo: 'oscura' }, portada: { titulo: 'Bienvenidos' }, animaciones: { activas: false } } });
   assert.equal(r.status, 200);
   const html = await (await pedir('/')).text();
@@ -236,6 +238,22 @@ test('panel: el diseño guardado cambia el sitio publicado', async () => {
   assert.match(html, /data-anim="no"/);
   assert.match(html, />Bienvenidos</);
   await api(s, 'PUT', 'ajustes', { diseno: {} });
+});
+
+test('panel: elegir qué trámites muestra la portada', async () => {
+  const s = await admin();
+  const lista = await (await api(s, 'GET', 'contenidos?tipo=tramite&estado=publicado&limite=300')).json();
+  const presencial = lista.items.find((t) => /Ley del Lobby/.test(t.titulo)) || lista.items.at(-1);
+  const ajustes = await (await api(s, 'GET', 'ajustes')).json();
+  const secciones = (ajustes.portada?.secciones || []).map((x) => (x.id === 'tramites' ? { ...x, ids: [presencial.id, 'x', -3] } : x));
+  assert.equal((await api(s, 'PUT', 'ajustes', { portada: { secciones } })).status, 200);
+  const guardado = await (await api(s, 'GET', 'ajustes')).json();
+  assert.deepEqual(guardado.portada.secciones.find((x) => x.id === 'tramites').ids, [presencial.id]);
+  const h = await (await pedir('/')).text();
+  const bloque = h.slice(h.indexOf('class="tramites-portada"'), h.indexOf('class="panel-tramites"'));
+  assert.equal((bloque.match(/class="fila-tramite"/g) || []).length, 1);
+  assert.ok(bloque.includes(presencial.titulo.split(' ')[0]));
+  await api(s, 'PUT', 'ajustes', { portada: { secciones: ajustes.portada.secciones } });
 });
 
 test('panel: ingreso, cookie segura y protección CSRF', async () => {

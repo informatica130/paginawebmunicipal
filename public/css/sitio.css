@@ -1470,3 +1470,125 @@ html.tk-entrando .tk-cortina { animation: tk-cortina-seguro 0s linear 3s forward
   .accesos a:hover::before { clip-path: circle(150% at 26px 26px); }
 }
 .hero-trekking:has(+ .franja-datos) .tk-bajar { display: none; }
+
+/* =====================================================================
+   Pulido: menos ruido, más jerarquía
+   Portada ordenada por prioridad (campañas, trámites, noticias), cabecera
+   despejada con las opciones de lectura en un panel, ritmo vertical más
+   amplio y movimientos más suaves y breves.
+   ===================================================================== */
+:root { --tk-montes: clamp(56px, 7vw, 110px); }
+.seccion { padding: calc(64px * var(--esp, 1)) 0; }
+.seccion + .seccion { padding-top: calc(24px * var(--esp, 1)); }
+.seccion-cabecera, .bloque-cabecera { align-items: end; margin-bottom: 24px; }
+.seccion-cabecera h2, .bloque-cabecera h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); }
+.seccion-cabecera p { max-width: 62ch; color: var(--texto-2); }
+.ver-todo { padding: 7px 16px; font-size: .9375rem; border-width: 1px; }
+
+/* Cabecera despejada */
+.cabecera-principal .contenedor { min-height: 72px; gap: 20px; }
+.nav-enlace, .nav-boton { min-height: 72px; padding: 0 14px; font-weight: 600; }
+.cabecera.compacta .cabecera-principal .contenedor, .cabecera.compacta .nav-enlace, .cabecera.compacta .nav-boton { min-height: 60px; }
+.marca-texto small { font-size: .75rem; letter-spacing: .02em; }
+.cabecera-acciones { gap: 2px; }
+.acc-menu { position: relative; }
+.acc-panel { position: absolute; right: 0; top: calc(100% + 10px); z-index: 90; display: grid; gap: 6px; width: 250px; padding: 14px; border: 1px solid var(--borde); border-radius: 18px; background: var(--superficie); color: var(--texto); box-shadow: 0 30px 60px -24px rgb(0 0 0 / .45); }
+.acc-panel[hidden] { display: none; }
+.acc-panel p { margin: 0 0 2px; color: var(--texto-3); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.acc-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.acc-panel button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px 12px; border: 1px solid var(--borde); border-radius: 12px; background: var(--fondo); color: var(--texto); font: inherit; font-weight: 650; cursor: pointer; transition: background-color .2s, border-color .2s; }
+.acc-panel .acc-opcion { justify-content: flex-start; }
+.acc-panel button:hover { border-color: var(--z); }
+.acc-panel button[aria-pressed="true"] { background: var(--texto); border-color: var(--texto); color: var(--fondo); }
+.acc-sos { display: flex; align-items: center; gap: 8px; margin-top: 4px; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--rojo) 10%, transparent); color: var(--peligro); font-weight: 700; font-size: .9375rem; text-decoration: none; }
+.acc-sos:hover { background: color-mix(in srgb, var(--rojo) 16%, transparent); }
+@media (prefers-reduced-motion: no-preference) { .acc-panel:not([hidden]) { animation: abrir-menu .2s cubic-bezier(.16, 1, .3, 1); transform-origin: top right; } }
+
+/* Portada: héroe más compacto, el contenido aparece antes */
+.hero.hero-trekking { min-height: clamp(560px, calc(86svh - 72px), 820px); }
+.tk-hero-contenido { padding-top: clamp(40px, 7vh, 80px); padding-bottom: calc(var(--tk-montes) + 72px); }
+.tk-logo-caja { width: min(760px, 88vw); }
+.hero.hero-trekking .hero-lema { max-width: 46ch; }
+.tk-logo .tk-letra { animation-duration: 1s, 8s; }
+@keyframes tk-flota { 0%, 100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+
+/* Franja de datos: una sola barra serena sobre la cordillera */
+.hero-trekking + .franja-datos { margin-top: calc(var(--tk-montes) * -.6); }
+.hero-trekking + .franja-datos .contenedor { gap: 0; padding: 0; overflow: hidden; border-radius: 20px; background: var(--superficie); box-shadow: var(--sombra-2); max-width: calc(var(--ancho) - 48px); }
+.hero-trekking + .franja-datos .dato, .hero-trekking + .franja-datos .dato:first-child { border-radius: 0; box-shadow: none; background: transparent; border-left: 1px solid var(--borde); padding: 16px 20px; }
+.hero-trekking + .franja-datos .dato:first-child { border-left: 0; }
+.hero-trekking + .franja-datos .dato::before { display: none; }
+.hero-trekking + .franja-datos a.dato:hover { transform: none; box-shadow: none; background: var(--fondo-2); }
+
+/* Campañas: protagonista, justo después del héroe */
+.seccion-campanas { padding-top: calc(56px * var(--esp, 1)); }
+.campanas { border-radius: 28px; box-shadow: var(--sombra-2); }
+.campanas .carrusel-item img { max-height: 520px; }
+.campanas .carrusel-ant, .campanas .carrusel-sig { opacity: 0; transition: opacity .25s, transform .3s var(--tk-ease); }
+.campanas:hover .carrusel-ant, .campanas:hover .carrusel-sig, .campanas :focus-visible { opacity: 1; }
+.campanas .carrusel-ant:hover, .campanas .carrusel-sig:hover { transform: translateY(-50%) scale(1.06); }
+@media (hover: none) { .campanas .carrusel-ant, .campanas .carrusel-sig { opacity: 1; } }
+
+/* Trámites: tarjetas claras en cuadrícula y acciones como accesos secundarios */
+.tramites-portada { grid-template-columns: 1fr; gap: 18px; }
+.tramites-portada .lista-tramites { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; border: 0; background: transparent; box-shadow: none; overflow: visible; }
+.tramites-portada .fila-tramite { position: relative; flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px 22px 18px; border: 1px solid var(--borde); border-radius: 20px; background: var(--superficie); transition: transform .45s var(--tk-ease), box-shadow .45s, border-color .2s; }
+.tramites-portada .fila-tramite:last-child { border-bottom: 1px solid var(--borde); }
+.tramites-portada .fila-tramite:hover { transform: translateY(-4px); border-color: transparent; background: var(--superficie); box-shadow: var(--sombra-3); }
+.tramites-portada .fila-tramite:hover .ft-texto b { text-decoration: none; }
+.tramites-portada .ft-ico { width: 44px; height: 44px; border-radius: 14px; background: color-mix(in srgb, var(--persona) 18%, var(--superficie)); color: color-mix(in srgb, var(--persona) 55%, #000); }
+:root[data-tema="oscuro"] .tramites-portada .ft-ico { color: var(--persona); }
+.tramites-portada .ft-texto { display: grid; gap: 4px; }
+.tramites-portada .ft-texto b { font-family: var(--fuente-titulo, var(--fuente)); font-size: 1.0625rem; line-height: 1.25; }
+.tramites-portada .ft-texto small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--texto-2); }
+.tramites-portada .fila-tramite .insignia { margin: auto 0 0; }
+.tramites-portada .fila-tramite::after { position: absolute; top: 22px; right: 20px; margin: 0; }
+.panel-tramites { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: stretch; }
+.panel-tramites .acciones-tramites { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); border: 0; background: transparent; box-shadow: none; gap: 10px; }
+.panel-tramites .tarjeta-accion { border: 1px solid var(--borde); border-radius: 16px; background: var(--superficie); }
+.panel-tramites .tarjeta-accion:last-child { border-bottom: 1px solid var(--borde); }
+.panel-tramites .tarjeta-accion:hover { border-color: var(--z); background: var(--superficie); }
+.panel-tramites:has(.horas-disponibles) { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+.horas-disponibles { border-left-width: 1px; border-top: 4px solid var(--verde); }
+@media (max-width: 1024px) { .tramites-portada .lista-tramites { grid-template-columns: 1fr 1fr; } .panel-tramites:has(.horas-disponibles) { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .tramites-portada .lista-tramites { grid-template-columns: 1fr; } .tramites-portada .fila-tramite .insignia { margin-left: 0; } }
+
+/* Noticias: más aire y una sola jerarquía */
+.noticias-portada { gap: clamp(24px, 3vw, 40px); }
+.noticias-portada .compacta .tarjeta-noticia { padding: 14px 0; }
+.noticias-portada .compacta .tn-img { border-radius: 14px; }
+.tarjeta-noticia time { color: var(--texto-3); font-size: .875rem; }
+
+/* Accesos rápidos: compactos, sin competir con lo principal */
+.accesos-seccion { padding-top: calc(48px * var(--esp, 1)); }
+.accesos { gap: 10px; }
+.accesos a { min-height: 64px; padding: 12px 40px 12px 14px; border-radius: 16px; font-size: .9688rem; }
+
+/* Pie más liviano */
+.pie-trekking a { max-width: 620px; }
+.pie-columnas { gap: 32px; }
+
+/* Movimiento más breve: la cortina es una sola pasada */
+.tk-cortina-info img { width: clamp(72px, 8vw, 104px); }
+:root[data-cabecera="color"] .acc-menu > .boton-icono, :root[data-cabecera="oscura"] .acc-menu > .boton-icono { color: #fff; }
+:root[data-cabecera="color"] .acc-menu > .boton-icono:hover, :root[data-cabecera="oscura"] .acc-menu > .boton-icono:hover { background: rgb(255 255 255 / .12); }
+@media (max-width: 1024px) {
+  /* El desenfoque de la cabecera encerraría el menú lateral (posición fija) */
+  :root[data-cabecera="oscura"] .cabecera { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--cab-fondo); }
+}
+@media (max-width: 720px) {
+  .hero.hero-trekking { min-height: 0; }
+  .tk-hero-contenido { padding-top: 40px; padding-bottom: calc(var(--tk-montes) + 64px); }
+  .hero-trekking + .franja-datos { margin-top: -28px; }
+  .hero-trekking + .franja-datos .contenedor { grid-template-columns: 1fr 1fr; max-width: calc(100% - 32px); }
+  .hero-trekking + .franja-datos .dato, .hero-trekking + .franja-datos .dato:first-child { padding: 12px 14px; font-size: .875rem; border-left: 0; border-top: 1px solid var(--borde); }
+  .hero-trekking + .franja-datos .dato:nth-child(-n+2) { border-top: 0; }
+  .hero-trekking + .franja-datos .dato:nth-child(even) { border-left: 1px solid var(--borde); }
+  .hero-trekking + .franja-datos .dato > .ico { display: none; }
+  .hero-trekking + .franja-datos .dato:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+  .tramites-portada .fila-tramite { flex-direction: row; align-items: center; flex-wrap: nowrap; gap: 14px; padding: 14px 40px 14px 14px; }
+  .tramites-portada .ft-texto small, .tramites-portada .fila-tramite .insignia { display: none; }
+  .tramites-portada .fila-tramite::after { top: 50%; right: 14px; margin-top: -9px; opacity: 1; transform: none; }
+  .seccion-cabecera { align-items: flex-start; }
+}
+:root .cabecera-acciones > .boton-menu[aria-expanded="true"] { color: var(--texto); background: var(--fondo-2); }
