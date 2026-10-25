@@ -59,13 +59,12 @@ async function seccionPortada(ctx, sec) {
           <div class="contenedor tk-hero-contenido" data-capa-contenido>
             <h1 id="hero-titulo" class="tk-kicker"><span class="tk-kicker-linea" aria-hidden="true"></span><span data-diseno="portada.titulo">${dp.titulo}</span><span class="tk-kicker-linea" aria-hidden="true"></span></h1>
             <a class="tk-logo-caja" ${attrsEnlace(turismo)} aria-label="Melipeuco Capital del Trekking: visite el sitio de turismo${/^https?:/.test(turismo) ? ' (se abre en otra pestaña)' : ''}">${crudo(logoAnimado())}</a>
-            <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. A los pies del volcán Llaima, en el corazón de la Araucanía Andina: trámites, servicios e información para vecinas, vecinos y visitantes.`}</p>
+            <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.`}</p>
             ${buscar}
           </div>
           ${!dp.imagen && FOTOS_TREKKING.length > 1 ? html`<div class="tk-puntos" role="group" aria-label="Fotografías de la portada">${FOTOS_TREKKING.map((_, i) => html`<button type="button"${i === 0 ? crudo(' class="activa" aria-pressed="true"') : crudo(' aria-pressed="false"')} aria-label="Foto ${i + 1}"></button>`)}</div>` : ''}
           <p class="hero-credito" data-diseno="portada.credito"${dp.credito ? '' : crudo(' hidden')}>${dp.credito}</p>
           <div class="tk-hero-montes">${crudo(montes('var(--fondo)'))}</div>
-          <a class="tk-bajar" href="#accesos" aria-label="Bajar al contenido"></a>
         </section>
         ${franja}`;
       }
@@ -114,7 +113,7 @@ async function seccionPortada(ctx, sec) {
       const slides = ctx.repo.vigentes('slide');
       if (!slides.length) return '';
       return html`<section class="seccion seccion-campanas" aria-labelledby="campanas-titulo"><div class="contenedor">
-        <div class="seccion-cabecera"><div>${antetitulo(4, 'Para la comunidad')}<h2 id="campanas-titulo">${sec.titulo || 'Campañas municipales'}</h2></div></div>
+        <div class="seccion-cabecera"><div><h2 id="campanas-titulo">${sec.titulo || 'Campañas municipales'}</h2></div></div>
         <div class="campanas" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Campañas municipales">
           <div class="carrusel-pista">${slides.map((sl, i) => {
             const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes: '(max-width: 1240px) 100vw, 1200px' })}</picture>`;
@@ -128,17 +127,22 @@ async function seccionPortada(ctx, sec) {
       const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items;
       if (!accesos.length) return '';
       return html`<section class="seccion accesos-seccion" id="accesos"><div class="contenedor">
-        <h2 class="sr">${sec.titulo || 'Accesos rápidos'}</h2>
+        <div class="seccion-cabecera"><h2>${sec.titulo || 'Accesos rápidos'}</h2></div>
         <ul class="accesos">${accesos.map((a, i) => html`<li><a ${attrsEnlace(a.datos.enlace, a.datos.nuevaVentana)} style="--color:${a.datos.color || 'var(--primario)'};--c:${PALETA[i % 9].color}"><span class="acceso-ico">${crudo(icono(a.datos.icono || 'estrella', { tam: 30 }))}</span><span>${a.titulo}</span>${avisoExterno(a.datos.enlace, a.datos.nuevaVentana)}</a></li>`)}</ul>
       </div></section>`;
     }
     case 'tramites': {
-      const fichas = ctx.repo.listar({ tipo: 'tramite', publico: true, orden: 'orden', limite: 100 }).items.filter((t) => t.datos.modalidad !== 'presencial').slice(0, 6);
+      // Los elegidos en el panel (en su orden); si no hay, los destacados y, si tampoco, los primeros en línea.
+      const todos = ctx.repo.listar({ tipo: 'tramite', publico: true, orden: 'orden', limite: 300 }).items;
+      const cant = sec.cantidad || 6;
+      const elegidos = (sec.ids || []).map((id) => todos.find((t) => t.id === id)).filter(Boolean);
+      const destacados = todos.filter((t) => t.destacado);
+      const fichas = elegidos.length ? elegidos : (destacados.length ? destacados : todos.filter((t) => t.datos.modalidad !== 'presencial')).slice(0, cant);
       const dest = await ctx.tramites.destacados();
       const proximas = dest?.proximas?.slice(0, 3) || [];
       const enl = ctx.tramites.enlaces;
       return html`<section class="seccion seccion-tramites"><div class="contenedor">
-        <div class="seccion-cabecera"><div>${antetitulo(5, 'Sin filas')}<h2>${sec.titulo || 'Trámites en línea'}</h2>${sec.texto ? html`<p>${sec.texto}</p>` : ''}</div><a class="ver-todo" href="/tramites/">Todos los trámites</a></div>
+        <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Trámites en línea'}</h2>${sec.texto ? html`<p>${sec.texto}</p>` : ''}</div><a class="ver-todo" href="/tramites/">Todos los trámites</a></div>
         <div class="tramites-portada">
           <div class="lista-tramites">${fichas.map((t) => filaTramite(ctx, t))}</div>
           <aside class="panel-tramites">
@@ -161,7 +165,7 @@ async function seccionPortada(ctx, sec) {
       const lado = resto.slice(0, 4);
       const mas = resto.slice(4);
       return html`<section class="seccion seccion-noticias"><div class="contenedor">
-        <div class="seccion-cabecera"><div>${antetitulo(1, 'Actualidad')}<h2>${sec.titulo || 'Últimas noticias'}</h2></div><a class="ver-todo" href="/noticias/">Todas las noticias</a></div>
+        <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Últimas noticias'}</h2></div><a class="ver-todo" href="/noticias/">Todas las noticias</a></div>
         <div class="noticias-portada">${tarjetaNoticia(ctx, destacada, { grande: true })}<div class="grilla-noticias compacta">${lado.map((c) => tarjetaNoticia(ctx, c))}</div></div>
         ${mas.length ? html`<div class="grilla-noticias noticias-mas">${mas.map((c) => tarjetaNoticia(ctx, c))}</div>` : ''}
       </div></section>`;
@@ -171,7 +175,7 @@ async function seccionPortada(ctx, sec) {
       const s2 = ctx.ajustes;
       return html`<section class="seccion seccion-agenda"><div class="contenedor agenda-portada">
         <div>
-          <div class="seccion-cabecera"><div>${antetitulo(8, 'Qué pasa en la comuna')}<h2>${sec.titulo || 'Agenda comunal'}</h2></div><a class="ver-todo" href="/eventos/">Ver agenda</a></div>
+          <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Agenda comunal'}</h2></div><a class="ver-todo" href="/eventos/">Ver agenda</a></div>
           ${lista.length ? html`<div class="lista-eventos">${lista.map((c) => tarjetaEvento(ctx, c))}</div>` : vacio('No hay actividades programadas en este momento. Revise la agenda o síganos en redes sociales.', 'calendario')}
         </div>
         <aside class="lateral-portada">
@@ -183,7 +187,7 @@ async function seccionPortada(ctx, sec) {
       const lista = ctx.repo.listar({ tipo: 'area', publico: true, orden: 'orden', limite: 300 }).items.filter((a) => ['direccion', 'alcaldia', 'juzgado', 'concejo'].includes(a.datos.tipoUnidad) || ['dep-salud', 'dep-educacion', 'dep-transito'].includes(a.datos.transitoDepartamento)).filter((a) => a.datos.enMenu !== false).slice(0, 16);
       if (!lista.length) return '';
       return html`<section class="seccion seccion-areas"><div class="contenedor">
-        <div class="seccion-cabecera"><div>${antetitulo(1, 'Municipio')}<h2>${sec.titulo || 'Áreas municipales'}</h2></div><a class="ver-todo" href="/areas/">Todas las áreas</a></div>
+        <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Áreas municipales'}</h2></div><a class="ver-todo" href="/areas/">Todas las áreas</a></div>
         ${tarjetasAreas(ctx, lista)}
       </div></section>`;
     }

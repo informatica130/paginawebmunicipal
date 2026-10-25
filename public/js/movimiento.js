@@ -429,7 +429,7 @@
       preparar(typeof previo.k === 'number' ? previo.k : zonaDe(location.pathname), previo.nombre);
       info.style.opacity = 1;
       var ultima;
-      capas.slice().reverse().forEach(function (c, i) { ultima = anim(c, [{ transform: 'none' }, { transform: arriba }], { duration: 760, delay: 140 + i * 90, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
+      capas.slice().reverse().forEach(function (c, i) { ultima = anim(c, [{ transform: 'none' }, { transform: arriba }], { duration: 640, delay: 80 + i * 70, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
       anim(info, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-30px)' }], { duration: 320, delay: 60, easing: 'ease-in' });
       var fin = function () { raiz.classList.remove('tk-entrando'); capas.forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); }); info.style.opacity = ''; info.getAnimations().forEach(function (a) { a.cancel(); }); };
       if (ultima) ultima.finished.then(fin, fin); else fin();
@@ -448,11 +448,11 @@
       preparar(k, texto);
       raiz.classList.add('tk-saliendo');
       var ultima;
-      capas.forEach(function (c, i) { ultima = anim(c, [{ transform: lejos }, { transform: 'none' }], { duration: 560, delay: i * 80, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
-      anim(info, [{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 420, easing: SALIDA });
+      capas.forEach(function (c, i) { ultima = anim(c, [{ transform: lejos }, { transform: 'none' }], { duration: 460, delay: i * 60, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
+      anim(info, [{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 300, delay: 280, easing: SALIDA });
       try { sessionStorage.setItem('mlp-cortina', JSON.stringify({ k: k, nombre: texto })); } catch (err) {}
       var ir = function () { location.href = u.href; };
-      setTimeout(ir, 760 / VEL);
+      setTimeout(ir, 600 / VEL);
     });
     // Al volver con «Atrás» (página guardada en memoria) se quita la cortina.
     addEventListener('pageshow', function (e) {

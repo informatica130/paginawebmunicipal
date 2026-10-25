@@ -95,26 +95,38 @@
       avisar('Tamaño del texto: ' + Math.round(escala * 100) + ' %');
     });
   });
-  var bc = $('[data-contraste]');
-  if (bc) {
-    bc.setAttribute('aria-pressed', raiz.dataset.contraste === 'alto' ? 'true' : 'false');
+  // Sólo los botones: <html> también lleva data-tema y data-contraste, y no debe responder a clics.
+  var bcs = $$('button[data-contraste]');
+  bcs.forEach(function (bc) { bc.setAttribute('aria-pressed', raiz.dataset.contraste === 'alto' ? 'true' : 'false'); });
+  bcs.forEach(function (bc) {
     bc.addEventListener('click', function () {
       var on = raiz.dataset.contraste !== 'alto';
       if (on) raiz.dataset.contraste = 'alto'; else delete raiz.dataset.contraste;
-      bc.setAttribute('aria-pressed', on ? 'true' : 'false');
+      bcs.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
       guardar('mlp-contraste', on ? '1' : null);
     });
-  }
-  var bt = $('[data-tema]');
-  if (bt) {
+  });
+  var bts = $$('button[data-tema]');
+  if (bts.length) {
     var oscuroSistema = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
     if (!raiz.dataset.tema && oscuroSistema) raiz.dataset.tema = 'oscuro';
-    var etiquetaTema = function () { bt.setAttribute('aria-label', raiz.dataset.tema === 'oscuro' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'); };
+    var etiquetaTema = function () { bts.forEach(function (bt) { bt.setAttribute('aria-label', raiz.dataset.tema === 'oscuro' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'); bt.setAttribute('aria-pressed', raiz.dataset.tema === 'oscuro' ? 'true' : 'false'); }); };
     etiquetaTema();
-    bt.addEventListener('click', function () {
-      var t = raiz.dataset.tema === 'oscuro' ? 'claro' : 'oscuro';
-      raiz.dataset.tema = t; guardar('mlp-tema', t); etiquetaTema();
+    bts.forEach(function (bt) {
+      bt.addEventListener('click', function () {
+        var t = raiz.dataset.tema === 'oscuro' ? 'claro' : 'oscuro';
+        raiz.dataset.tema = t; guardar('mlp-tema', t); etiquetaTema();
+      });
     });
+  }
+
+  // ---------------- Opciones de lectura (panel desplegable de la cabecera)
+  var accBtn = $('[data-acc-abrir]'), accPanel = $('#acc-panel');
+  if (accBtn && accPanel) {
+    var accCerrar = function (foco) { accPanel.hidden = true; accBtn.setAttribute('aria-expanded', 'false'); if (foco) accBtn.focus(); };
+    accBtn.addEventListener('click', function () { var abrir = accPanel.hidden; accPanel.hidden = !abrir; accBtn.setAttribute('aria-expanded', abrir ? 'true' : 'false'); });
+    d.addEventListener('click', function (e) { if (!accPanel.hidden && !e.target.closest('.acc-menu')) accCerrar(false); });
+    d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !accPanel.hidden) accCerrar(true); });
   }
 
   // ---------------- Avisos (se pueden ocultar durante la visita)
