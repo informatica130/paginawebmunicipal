@@ -4,7 +4,7 @@
 import { h, raw, $, $$, api, aviso, fallo, estado, confirmar, ico } from '../ui.js';
 import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
-import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera } from '/js/diseno.js';
+import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada } from '/js/diseno.js';
 
 // Controles agrupados. ruta = propiedad dentro del diseño.
 const GRUPOS = [
@@ -50,11 +50,35 @@ const GRUPOS = [
     { ruta: 'portada.titulo', tipo: 'texto', etiqueta: 'Título' },
     { ruta: 'portada.bajada', tipo: 'textoLargo', etiqueta: 'Texto bajo el título', ayuda: 'Vacío: el lema seguido de una frase de bienvenida.' },
     { ruta: 'portada.credito', tipo: 'texto', etiqueta: 'Pie de foto' },
-    { ruta: 'portada.alto', tipo: 'botones', etiqueta: 'Altura', opciones: OPCIONES.alto, si: (c) => c.portada.composicion !== 'trekking' },
+    { ruta: 'portada.alto', tipo: 'botones', etiqueta: 'Altura', opciones: OPCIONES.alto },
     { ruta: 'portada.alineacion', tipo: 'botones', etiqueta: 'Alineación del texto', opciones: OPCIONES.alineacion, si: (c) => c.portada.composicion === 'foto' },
-    { ruta: 'portada.velo', tipo: 'rango', etiqueta: 'Oscurecer la foto (legibilidad)', min: 0, max: 100, paso: 5, unidad: ' %', si: (c) => c.portada.composicion === 'foto' },
+    { ruta: 'portada.velo', tipo: 'rango', etiqueta: 'Oscurecer la foto (legibilidad)', min: 0, max: 100, paso: 5, unidad: ' %', si: (c) => c.portada.composicion !== 'dividida' },
+    { ruta: 'portada.logoAnimacion', tipo: 'lista', etiqueta: 'Animación del logo', opciones: OPCIONES.logoAnimacion, ayuda: 'Con «Logo vivo» el río fluye, el rostro parpadea, las gotas caen, la araucaria se mece, el corazón late, la persona camina, los animales se mueven, las estrellas titilan y el kultrún gira. Use «Animar el logo» para verla.', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.logoReposo', tipo: 'si', etiqueta: 'Letras con vida después de la entrada (movimiento continuo)', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.logoGestos', tipo: 'si', etiqueta: 'Cada letra salta y hace su gesto al pasar el cursor', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.tamanoLogo', tipo: 'rango', etiqueta: 'Tamaño del logo', min: 50, max: 120, paso: 5, unidad: ' %', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.kicker', tipo: 'si', etiqueta: 'Mostrar el título sobre el logo', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.buscador', tipo: 'si', etiqueta: 'Buscador «¿Qué necesita hacer?»', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.cordillera', tipo: 'si', etiqueta: 'Cordillera en capas al pie de la portada', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.puntos', tipo: 'si', etiqueta: 'Puntos para cambiar de foto', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.kenBurns', tipo: 'si', etiqueta: 'Zoom lento de las fotos', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.intervalo', tipo: 'rango', etiqueta: 'Cambio de foto cada', min: 3, max: 20, paso: 1, unidad: ' s', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.fotos.0', tipo: 'imagen', etiqueta: 'Foto 2 del carrusel', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.fotos.1', tipo: 'imagen', etiqueta: 'Foto 3 del carrusel', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.fotos.2', tipo: 'imagen', etiqueta: 'Foto 4 del carrusel', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.fotos.3', tipo: 'imagen', etiqueta: 'Foto 5 del carrusel', ayuda: 'Si no elige ninguna foto, se usan las cinco de la Capital del Trekking. Los cambios de fotos se ven al guardar.', si: (c) => c.portada.composicion === 'trekking' },
     { ruta: 'portada.franjaDatos', tipo: 'si', etiqueta: 'Franja de horario, teléfono, tiempo y emergencias' },
     { ruta: 'portada.populares', tipo: 'si', etiqueta: 'Enlaces «Lo más buscado»' },
+  ] },
+  { id: 'identidad', titulo: 'Identidad Capital del Trekking', ayuda: 'Los detalles de la marca en todo el sitio. Los textos de la cinta, los nueve mundos, los lugares y las cifras se editan en Ajustes del sitio → Portada.', controles: [
+    { ruta: 'identidad.zonas', tipo: 'si', etiqueta: 'Cada área con el color de su letra (encabezados, anillos, cortina)' },
+    { ruta: 'identidad.emblemaEncabezado', tipo: 'si', etiqueta: 'Emblema flotante en el encabezado de cada página' },
+    { ruta: 'identidad.titulosPalabra', tipo: 'si', etiqueta: 'Títulos de las páginas que suben palabra por palabra' },
+    { ruta: 'identidad.progreso', tipo: 'si', etiqueta: 'Barra de lectura arcoíris arriba de la pantalla' },
+    { ruta: 'identidad.lineaCabecera', tipo: 'si', etiqueta: 'Línea arcoíris bajo la cabecera' },
+    { ruta: 'identidad.cordilleras', tipo: 'si', etiqueta: 'Siluetas de cordillera entre secciones y en el pie' },
+    { ruta: 'identidad.accesosColor', tipo: 'si', etiqueta: 'Accesos rápidos con los nueve colores del logo' },
+    { ruta: 'identidad.cinta', tipo: 'rango', etiqueta: 'Velocidad de la cinta (una vuelta cada)', min: 15, max: 120, paso: 5, unidad: ' s' },
   ] },
   { id: 'pie', titulo: 'Pie de página', controles: [
     { ruta: 'pie.estilo', tipo: 'botones', etiqueta: 'Fondo del pie', opciones: OPCIONES.pieEstilo },
@@ -105,6 +129,7 @@ export default async function (vista) {
           <select data-pagina aria-label="Página de la vista previa">${Object.entries(PAGINAS).map(([u, t]) => h`<option value="${u}">${t}</option>`)}</select>
           <div class="segmentos" role="group" aria-label="Tamaño de pantalla">${Object.entries(DISPOSITIVOS).map(([k, [t]]) => h`<button type="button" data-dispositivo="${k}" aria-pressed="${k === dispositivo}">${t}</button>`)}</div>
           <button type="button" class="btn chico" data-intro title="Recarga la portada mostrando la pantalla de carga">Ver pantalla de carga</button>
+          <button type="button" class="btn chico" data-reproducir-logo title="Vuelve a reproducir la animación del logo en la vista previa">Animar el logo</button>
           <a class="btn chico fantasma" href="/" target="_blank" rel="noopener">${ico('ojo', 14)} Abrir el sitio</a>
         </div>
         <div class="diseno-marco" data-marco><iframe title="Vista previa del sitio" src="/?vista=diseno" data-iframe></iframe></div>
@@ -200,8 +225,8 @@ export default async function (vista) {
     const logo = logoCabecera(cfg);
     return {
       tipo: 'mlp-diseno', css: variablesCss(cfg), cssPropio: cfg.avanzado.css, atributos: atributos(cfg), fuentes: urlFuentes(cfg),
-      textos: { 'cabecera.subtitulo': cfg.cabecera.subtitulo, 'cabecera.nombre': cfg.cabecera.nombre, 'portada.titulo': cfg.portada.titulo, 'portada.bajada': cfg.portada.bajada || `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`, 'portada.credito': cfg.portada.credito },
-      imagenes: { 'portada.imagen': cfg.portada.imagen || '/img/plaza-melipeuco-1536.webp' },
+      textos: { 'cabecera.subtitulo': cfg.cabecera.subtitulo, 'cabecera.nombre': cfg.cabecera.nombre, 'portada.titulo': cfg.portada.titulo, 'portada.bajada': cfg.portada.bajada || (cfg.portada.composicion === 'trekking' ? `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.` : `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`), 'portada.credito': cfg.portada.credito },
+      imagenes: { 'portada.imagen': cfg.portada.imagen || '/img/plaza-melipeuco-1536.webp', ...Object.fromEntries([0, 1, 2, 3, 4, 5].map((i, _, fotos = fotosPortada(cfg)) => ['portada.foto-' + i, fotos[i % fotos.length].src])) },
       logo: { claro: logo.src, oscuro: logo.oscuro, conTexto: logo.conTexto },
     };
   };
@@ -231,6 +256,10 @@ export default async function (vista) {
   }
   const medidor = new ResizeObserver(ajustarMarco);
   medidor.observe(marco);
+  $('[data-reproducir-logo]', vista).addEventListener('click', () => {
+    if (pagina !== '/') { pagina = '/'; $('[data-pagina]', vista).value = '/'; cargar(); return; }
+    try { iframe.contentWindow?.postMessage({ ...mensaje(), reproducir: true }, location.origin); } catch { /* aún cargando */ }
+  });
   $('[data-intro]', vista).addEventListener('click', () => {
     if (!cfg.animaciones.activas || cfg.animaciones.intro === 'nunca') return aviso('La pantalla de carga está desactivada en «Animaciones».');
     pagina = '/'; $('[data-pagina]', vista).value = '/';

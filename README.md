@@ -32,6 +32,13 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - **Qué trámites se ven en la portada**: en *Ajustes → Portada → Trámites en línea → Elegir trámites* se marcan y ordenan. Sin elección se muestran los marcados «Destacar en portada» o, si no hay, los primeros en línea.
 - **Cabecera despejada**: menú de cinco entradas (Municipio, Trámites, Servicios, Noticias, Contacto; Agenda y Transparencia están dentro de Municipio) y las opciones de lectura (tamaño del texto, alto contraste, modo oscuro y emergencias) en un solo botón. La barra de transparencia y el botón «Trámites» se pueden volver a activar en *Diseño del sitio*.
 
+- **Logo vivo** (el mismo del sitio de turismo, sin librerías: `public/js/logo-vivo.js`): las letras caen y cada símbolo cobra vida según lo que representa: el río fluye, el rostro parpadea y sonríe, las gotas de la cascada caen, la araucaria se mece, el corazón late, la persona camina, el gallo picotea y el caballo asiente, las estrellas titilan y el kultrún gira con ondas de sonido. Al pasar el cursor cada letra salta y hace su gesto.
+- **Todo se personaliza en *Diseño del sitio*** con vista previa en vivo (botón «Animar el logo»):
+  - *Portada*: animación del logo (vivo, caída, aparecer o ninguna), movimiento continuo y gestos de las letras, tamaño del logo, título, buscador, cordillera, puntos, zoom lento, intervalo y hasta cinco fotos propias para el carrusel, altura y oscurecimiento de la foto.
+  - *Identidad Capital del Trekking*: color por área, emblema flotante, títulos palabra por palabra, barra arcoíris de lectura, línea arcoíris bajo la cabecera, cordilleras entre secciones, accesos con los nueve colores y velocidad de la cinta.
+  - Estilos prediseñados nuevos: *Glaciar y lagunas* y *Pehuén y terracota*.
+- **Contenidos de la identidad editables** en *Ajustes del sitio → Portada*: palabras de la cinta, los nueve mundos (nombre, texto y enlace de cada letra), los lugares de la Capital del Trekking (foto, etiqueta, texto, enlace y color) y las cifras con contador.
+
 **Diseño (estilo Institucional)**
 - Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.

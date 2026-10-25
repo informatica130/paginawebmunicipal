@@ -28,6 +28,9 @@ export default async function (vista) {
         <ul class="secciones-portada" style="list-style:none;padding:0" data-secciones></ul>
         <h3>Capital del Trekking (sección de turismo)</h3><div class="fila"><label class="campo"><span>Título</span><input name="t_titulo" value="${a.turismo?.titulo || ''}"></label><label class="campo"><span>Enlace</span><input name="t_url" value="${a.turismo?.url || ''}"></label></div>
         <label class="campo"><span>Texto</span><input name="t_texto" value="${a.turismo?.texto || ''}"></label><div data-turismo-img></div>
+        <h3>Identidad Capital del Trekking</h3>
+        <p class="chico muted">Textos de la cinta, de «Cada letra es una puerta», de los lugares y de las cifras de la sección de turismo. El aspecto (colores, animación del logo, cordilleras…) está en Diseño del sitio.</p>
+        <div data-trekking></div>
         <h3>Video destacado</h3><div class="fila"><label class="campo"><span>Título</span><input name="v_titulo" value="${a.video?.titulo || ''}"></label><label class="campo"><span>Enlace de YouTube</span><input name="v_url" value="${a.video?.url || ''}"></label></div>
         <h3>Clima</h3><label class="check"><input type="checkbox" name="clima"${a.clima?.activo ? raw(' checked') : ''}> Mostrar el pronóstico del tiempo (Open-Meteo, sin cookies)</label>
       </section>
@@ -90,6 +93,16 @@ export default async function (vista) {
   lista.addEventListener('click', (e) => { const b = e.target.closest('[data-mov]'); if (!b) return; const i = Number(b.closest('[data-i]').dataset.i); const j = i + Number(b.dataset.mov); if (j >= 0 && j < secciones.length) { [secciones[i], secciones[j]] = [secciones[j], secciones[i]]; pintar(); } });
   const imgTurismo = campo({ k: 'imagen', t: 'imagen', l: 'Logo o imagen' }, a.turismo?.imagen);
   $('[data-turismo-img]', vista).appendChild(imgTurismo.el);
+  // Identidad Capital del Trekking: cinta, nueve mundos (uno por letra), lugares y cifras.
+  const LETRAS = { 0: 'M · montaña (azul)', 1: 'E · rostro (terracota)', 2: 'L · cascada (turquesa)', 3: 'I · araucaria (verde)', 4: 'P · corazón (rojo)', 5: 'E · persona (amarillo)', 6: 'U · animales (café)', 7: 'C · estrellas (índigo)', 8: 'O · kultrún (violeta)' };
+  const tk = a.trekkingActual || {};
+  const tkCampos = {
+    cinta: campo({ k: 'cinta', t: 'lista', l: 'Palabras de la cinta', ayuda: 'Una por línea; entre cada una aparece una letra del logo.' }, tk.cinta),
+    mundos: campo({ k: 'mundos', t: 'repetidor', l: '«Cada letra es una puerta»: un área por letra, en orden (M, E, L, I, P, E, U, C, O)', sub: [{ k: 'nombre', t: 'texto', l: 'Nombre' }, { k: 'texto', t: 'texto', l: 'Descripción' }, { k: 'url', t: 'url', l: 'Enlace' }] }, tk.mundos),
+    lugares: campo({ k: 'lugares', t: 'repetidor', l: 'Lugares de la Capital del Trekking (fila deslizable)', sub: [{ k: 'nombre', t: 'texto', l: 'Nombre' }, { k: 'tipo', t: 'texto', l: 'Etiqueta' }, { k: 'texto', t: 'texto', l: 'Descripción' }, { k: 'imagen', t: 'imagen', l: 'Foto (vertical)' }, { k: 'url', t: 'url', l: 'Enlace' }, { k: 'letra', t: 'opcion', l: 'Color', opciones: LETRAS }] }, tk.lugares),
+    cifras: campo({ k: 'cifras', t: 'repetidor', l: 'Cifras con contador', sub: [{ k: 'numero', t: 'numero', l: 'Número' }, { k: 'sufijo', t: 'texto', l: 'Sufijo (km, %…)' }, { k: 'texto', t: 'texto', l: 'Texto' }] }, tk.cifras),
+  };
+  Object.values(tkCampos).forEach((c) => $('[data-trekking]', vista).appendChild(c.el));
   const emergencias = campo({ k: 'emergencias', t: 'repetidor', l: 'Teléfonos de emergencia', sub: [{ k: 'nombre', t: 'texto', l: 'Servicio' }, { k: 'telefono', t: 'telefono', l: 'Teléfono' }] }, a.emergencias);
   $('[data-emergencias]', vista).appendChild(emergencias.el);
 
@@ -100,6 +113,7 @@ export default async function (vista) {
     direccion: f.direccion.value, horario: f.horario.value, telefono: f.telefono.value, whatsapp: f.whatsapp.value, email: f.email.value, emailContacto: f.emailContacto.value,
     mapa: { lat: f.lat.value, lng: f.lng.value, enlace: f.mapaEnlace.value },
     redes: Object.fromEntries(['facebook', 'instagram', 'youtube', 'x', 'tiktok'].map((r) => [r, f['r_' + r].value])),
+    trekking: Object.fromEntries(Object.entries(tkCampos).map(([k, c]) => [k, c.valor()])),
     portada: { secciones }, turismo: { titulo: f.t_titulo.value, texto: f.t_texto.value, url: f.t_url.value, imagen: imgTurismo.valor() },
     video: { titulo: f.v_titulo.value, url: f.v_url.value }, clima: { activo: f.clima.checked, lugar: a.clima?.lugar || 'Melipeuco' },
     emergencias: emergencias.valor(), boletin: { activo: f.boletin.checked }, oirs: { plazoDias: f.oirsPlazo.value },

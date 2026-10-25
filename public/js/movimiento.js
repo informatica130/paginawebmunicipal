@@ -314,7 +314,7 @@
       puntos[i] && (puntos[i].classList.add('activa'), puntos[i].setAttribute('aria-pressed', 'true'));
       fotos[(i + 1) % fotos.length].loading = 'eager';
     }
-    function iniciar() { clearInterval(t); if (!reducido && !quieto) t = setInterval(function () { if (!d.hidden) ir(i + 1); }, 7000); }
+    function iniciar() { clearInterval(t); if (!reducido && !quieto) t = setInterval(function () { if (!d.hidden) ir(i + 1); }, (parseFloat(raiz.getAttribute('data-intervalo')) || 7) * 1000); }
     puntos.forEach(function (p, k) { p.addEventListener('click', function () { ir(k); iniciar(); }); });
     hero.addEventListener('pointerenter', function () { quieto = true; clearInterval(t); });
     hero.addEventListener('pointerleave', function () { quieto = false; iniciar(); });
@@ -393,7 +393,7 @@
   // Títulos de páginas interiores: cada palabra sube por separado.
   function titulosPorPalabra() {
     var h1 = $('.encabezado h1');
-    if (!h1 || !puede || h1.children.length) return;
+    if (!h1 || !puede || h1.children.length || raiz.getAttribute('data-id-titulos-palabra') === 'no') return;
     var palabras = h1.textContent.trim().split(/\s+/);
     h1.setAttribute('aria-label', h1.textContent.trim());
     h1.innerHTML = '';

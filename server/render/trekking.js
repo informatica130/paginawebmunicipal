@@ -51,15 +51,19 @@ export const estiloZona = (k) => { const p = PALETA[k]; return `--z:${p.color};-
 // Una letra como imagen (archivo SVG cacheado por el navegador).
 export const emblema = (k, clase = '', alt = '') => `<img class="emblema ${clase}" src="/img/trekking/emblema-${k}.svg" alt="${alt}" width="${Math.round(partes.letras[k].caja[2])}" height="${Math.round(partes.letras[k].caja[3])}" loading="lazy" decoding="async">`;
 
-// Logo completo en línea, letra por letra, para animarlo con CSS (caen, aparecen los símbolos y el lema).
+// Logo completo en línea, letra por letra y con cada símbolo separado en sus piezas, para que
+// public/js/logo-vivo.js lo anime («logo vivo») o el CSS lo haga caer letra por letra.
+const simbolos = JSON.parse(fs.readFileSync(new URL('./logo-simbolos.json', import.meta.url), 'utf8'));
 let cacheLogo = '';
 export function logoAnimado() {
   if (cacheLogo) return cacheLogo;
+  const f = (n) => Number(n).toFixed(1);
   const letras = partes.letras.map((l, i) => {
     const [x, y, w, h] = l.caja;
-    return `<g class="tk-letra" style="--i:${i};transform-origin:${(x + w / 2).toFixed(1)}px ${(y + h).toFixed(1)}px"><path fill="${PALETA[i].color}" d="${l.fondo}"/><path class="tk-simbolo" fill="#FFF8EC" d="${l.simbolo}" style="transform-origin:${(x + w / 2).toFixed(1)}px ${(y + h / 2).toFixed(1)}px"/></g>`;
+    const piezas = simbolos[i].map((p) => `<path class="tk-pieza" data-cx="${f(p.cx)}" data-cy="${f(p.cy)}" data-w="${f(p.w)}" data-h="${f(p.h)}" d="${p.d}"/>`).join('');
+    return `<g class="tk-letra" data-k="${i}" data-caja="${[x, y, w, h].map(f).join(' ')}" style="--i:${i};transform-origin:${f(x + w / 2)}px ${f(y + h)}px"><path class="tk-fondo" fill="${PALETA[i].color}" d="${l.fondo}"/><g class="tk-simbolo" fill="#FFF8EC" style="transform-origin:${f(x + w / 2)}px ${f(y + h / 2)}px">${piezas}</g></g>`;
   }).join('');
-  cacheLogo = `<svg class="tk-logo" viewBox="0 0 1036 265" role="img" aria-label="Melipeuco Capital del Trekking" xmlns="http://www.w3.org/2000/svg"><title>Melipeuco Capital del Trekking</title>${letras}<g class="tk-lema" fill="#FFFFFF">${partes.lema.map((d) => `<path d="${d}"/>`).join('')}</g></svg>`;
+  cacheLogo = `<svg class="tk-logo" viewBox="0 0 1036 265" role="img" aria-label="Melipeuco Capital del Trekking" xmlns="http://www.w3.org/2000/svg"><title>Melipeuco Capital del Trekking</title>${letras}<g class="tk-lema" fill="#FFFFFF">${partes.lema.map((d) => `<path class="tk-lema-letra" d="${d}"/>`).join('')}</g></svg>`;
   return cacheLogo;
 }
 
@@ -98,3 +102,25 @@ export const LUGARES = [
 ];
 
 export const CINTA = ['Volcanes', 'Glaciares', 'Araucarias', 'Lagunas', 'Cascadas', 'Termas', 'Estrellas', 'Kultrún', 'Senderos'];
+
+export const CIFRAS = [
+  { numero: 3, sufijo: '', texto: 'volcanes: Llaima, Sollipulli y Sierra Nevada' },
+  { numero: 250, sufijo: ' km', texto: 'de senderos' },
+  { numero: 44, sufijo: '', texto: 'rutas de trekking para todos los niveles' },
+  { numero: 45, sufijo: '%', texto: 'de la comuna son áreas silvestres protegidas' },
+];
+
+// Contenido de la identidad editable en Ajustes del sitio → Portada (lo que falta se completa
+// con lo predeterminado). Los lugares guardan su dirección completa y su imagen.
+export function contenidoTrekking(ajustes = {}) {
+  const t = ajustes.trekking || {};
+  const base = (ajustes.turismo?.url || SITIO_TREKKING).replace(/\/?$/, '/');
+  const lugares = LUGARES.map((l) => ({ nombre: l.nombre, tipo: l.tipo, texto: l.texto, imagen: `/img/trekking/lugar-${l.img}.webp`, url: base + l.url, letra: l.k }));
+  const lista = (v) => (Array.isArray(v) && v.length ? v : null);
+  return {
+    cinta: lista(t.cinta) || CINTA,
+    mundos: MUNDOS.map((m, k) => ({ ...m, ...Object.fromEntries(Object.entries(t.mundos?.[k] || {}).filter(([, v]) => v)) })),
+    lugares: lista(t.lugares) || lugares,
+    cifras: lista(t.cifras) || CIFRAS,
+  };
+}

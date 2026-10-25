@@ -333,6 +333,7 @@
       if (m.fuentes) { if (!f) { f = d.createElement('link'); f.rel = 'stylesheet'; f.id = 'diseno-fuentes'; d.head.appendChild(f); } if (f.getAttribute('href') !== m.fuentes) f.href = m.fuentes; }
       $$('[data-diseno]').forEach(function (el) { var v = (m.textos || {})[el.getAttribute('data-diseno')]; if (v != null) { el.textContent = v; el.hidden = !v; } });
       $$('[data-diseno-img]').forEach(function (img) { var v = (m.imagenes || {})[img.getAttribute('data-diseno-img')]; if (v && img.getAttribute('src') !== v) { img.removeAttribute('srcset'); img.src = v; } });
+      d.dispatchEvent(new CustomEvent('mlp:diseno', { detail: { reproducir: !!m.reproducir } }));
       if (m.logo) { $$('[data-diseno-logo]').forEach(function (img) { img.src = m.logo[img.getAttribute('data-diseno-logo')]; }); var mt = $('.marca-texto'); if (mt) mt.hidden = !m.logo.conTexto; }
     });
     window.parent.postMessage({ tipo: 'mlp-vista-lista' }, location.origin);
