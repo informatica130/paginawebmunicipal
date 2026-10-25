@@ -5,13 +5,18 @@ import { documento, encabezado, disenoDe } from './layout.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
+import { completarSecciones } from '../../public/js/diseno.js';
+import { PALETA, MUNDOS, LUGARES, CINTA, SITIO_TREKKING, emblema, logoAnimado, montes } from './trekking.js';
+
+// Antetítulo con el emblema (letra del logo) de la zona.
+const antetitulo = (k, texto) => crudo(`<span class="antetitulo" style="--c:${PALETA[k].color}">${emblema(k)}${esc(texto)}</span>`);
+// Fotos de la portada «Capital del Trekking» (en dos tamaños).
+const FOTOS_TREKKING = [1, 2, 3, 4, 5];
 
 // ------------------------------------------------------------------ Portada
 export async function portada(ctx) {
   const s = ctx.ajustes;
-  const todas = [...(s.portada?.secciones || [])];
-  if (!todas.some((x) => x.id === 'campanas')) todas.splice(Math.max(0, todas.findIndex((x) => x.id === 'accesos') + 1), 0, { id: 'campanas', activo: true });
-  const secciones = todas.filter((x) => x.activo);
+  const secciones = completarSecciones(s.portada?.secciones).filter((x) => x.activo);
   const partes = [];
   for (const sec of secciones) {
     const r = await seccionPortada(ctx, sec);
@@ -29,17 +34,47 @@ async function seccionPortada(ctx, sec) {
       const urgencia = (s.emergencias || [])[0];
       const foto = (w) => `/img/plaza-melipeuco-${w}.webp`;
       const dp = disenoDe(s).portada;
+      const franja = html`<div class="franja-datos"><div class="contenedor">
+        <div class="dato">${crudo(icono('reloj', { tam: 22 }))}<span><b>Horario de atención</b>${s.horario}</span></div>
+        <a class="dato" href="${telefonoHref(s.telefono)}">${crudo(icono('telefono', { tam: 22 }))}<span><b>Teléfono municipal</b>${s.telefono}</span></a>
+        ${proxima ? html`<a class="dato" href="${proxima.url}" target="_blank" rel="noopener">${crudo(icono('calendario', { tam: 22 }))}<span><b>Próxima hora disponible</b>${proxima.name}: ${fecha(proxima.date, { diaSemana: true })}${proxima.time ? `, ${proxima.time} hrs.` : ''}</span></a>` : ''}
+        ${s.clima?.activo ? html`<div class="dato" data-clima data-lat="${s.mapa?.lat || -38.85}" data-lng="${s.mapa?.lng || -71.69}">${crudo(icono('sol', { tam: 22 }))}<span><b>Tiempo en Melipeuco</b><span class="clima-cargando">Consultando…</span></span></div>` : ''}
+        ${urgencia ? html`<a class="dato dato-emergencia" href="/contacto/#emergencias">${crudo(icono('alerta', { tam: 22 }))}<span><b>Emergencias</b>${urgencia.nombre} ${telefonoTexto(urgencia.telefono)}</span></a>` : ''}
+      </div></div>`;
+      const buscar = html`<form class="hero-buscar" action="/buscar/" method="get" role="search">
+              <label for="q-portada">¿Qué necesita hacer?</label>
+              <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Ej.: licencia, patente, horario de buses" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
+              <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
+            </form>
+            <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>`;
+      if (dp.composicion === 'trekking') {
+        // Portada «Melipeuco Capital del Trekking»: fotos que se funden con zoom lento, el logo de
+        // las nueve letras que caen una a una, el buscador y la cordillera en capas (parallax).
+        const turismo = s.turismo?.url || SITIO_TREKKING;
+        const fotos = dp.imagen ? [html`<img class="activa" src="${dp.imagen}" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">`]
+          : FOTOS_TREKKING.map((n, i) => html`<img${i === 0 ? crudo(' class="activa" fetchpriority="high"') : crudo(' loading="lazy"')} src="/img/trekking/portada-${n}-1920.webp" srcset="/img/trekking/portada-${n}-960.webp 960w, /img/trekking/portada-${n}-1920.webp 1920w" sizes="100vw" width="1920" height="1280" alt="" decoding="async"${i === 0 ? crudo(' data-diseno-img="portada.imagen"') : ''}>`);
+        return html`<section class="hero hero-trekking" aria-labelledby="hero-titulo" data-hero-trekking>
+          <div class="tk-fotos" data-capa="0.35">${fotos}</div>
+          <div class="tk-velo" aria-hidden="true"></div>
+          <div class="contenedor tk-hero-contenido" data-capa-contenido>
+            <h1 id="hero-titulo" class="tk-kicker"><span class="tk-kicker-linea" aria-hidden="true"></span><span data-diseno="portada.titulo">${dp.titulo}</span><span class="tk-kicker-linea" aria-hidden="true"></span></h1>
+            <a class="tk-logo-caja" ${attrsEnlace(turismo)} aria-label="Melipeuco Capital del Trekking: visite el sitio de turismo${/^https?:/.test(turismo) ? ' (se abre en otra pestaña)' : ''}">${crudo(logoAnimado())}</a>
+            <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. A los pies del volcán Llaima, en el corazón de la Araucanía Andina: trámites, servicios e información para vecinas, vecinos y visitantes.`}</p>
+            ${buscar}
+          </div>
+          ${!dp.imagen && FOTOS_TREKKING.length > 1 ? html`<div class="tk-puntos" role="group" aria-label="Fotografías de la portada">${FOTOS_TREKKING.map((_, i) => html`<button type="button"${i === 0 ? crudo(' class="activa" aria-pressed="true"') : crudo(' aria-pressed="false"')} aria-label="Foto ${i + 1}"></button>`)}</div>` : ''}
+          <p class="hero-credito" data-diseno="portada.credito"${dp.credito ? '' : crudo(' hidden')}>${dp.credito}</p>
+          <div class="tk-hero-montes">${crudo(montes('var(--fondo)'))}</div>
+          <a class="tk-bajar" href="#accesos" aria-label="Bajar al contenido"></a>
+        </section>
+        ${franja}`;
+      }
       return html`<section class="hero" aria-labelledby="hero-titulo">
         <div class="contenedor hero-contenido">
           <div class="hero-texto">
             <h1 id="hero-titulo" data-diseno="portada.titulo">${dp.titulo}</h1>
             <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`}</p>
-            <form class="hero-buscar" action="/buscar/" method="get" role="search">
-              <label for="q-portada">¿Qué necesita hacer?</label>
-              <div class="campo-buscar">${crudo(icono('buscar', { tam: 22 }))}<input id="q-portada" name="q" type="search" placeholder="Ej.: licencia, patente, horario de buses" data-sugerencias aria-controls="sugerencias-portada" autocomplete="off"><button class="boton boton-acento" type="submit">Buscar</button></div>
-              <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
-            </form>
-            <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>
+            ${buscar}
           </div>
           <figure class="hero-figura">
             ${dp.imagen ? html`<img class="hero-foto" src="${dp.imagen}" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">` : html`<img class="hero-foto" src="${foto(1536)}" srcset="${foto(640)} 640w, ${foto(1024)} 1024w, ${foto(1536)} 1536w" sizes="(max-width: 900px) 100vw, 60vw" width="1536" height="800" alt="" fetchpriority="high" decoding="async" data-diseno-img="portada.imagen">`}
@@ -47,19 +82,39 @@ async function seccionPortada(ctx, sec) {
           </figure>
         </div>
       </section>
-      <div class="franja-datos"><div class="contenedor">
-        <div class="dato">${crudo(icono('reloj', { tam: 22 }))}<span><b>Horario de atención</b>${s.horario}</span></div>
-        <a class="dato" href="${telefonoHref(s.telefono)}">${crudo(icono('telefono', { tam: 22 }))}<span><b>Teléfono municipal</b>${s.telefono}</span></a>
-        ${proxima ? html`<a class="dato" href="${proxima.url}" target="_blank" rel="noopener">${crudo(icono('calendario', { tam: 22 }))}<span><b>Próxima hora disponible</b>${proxima.name}: ${fecha(proxima.date, { diaSemana: true })}${proxima.time ? `, ${proxima.time} hrs.` : ''}</span></a>` : ''}
-        ${s.clima?.activo ? html`<div class="dato" data-clima data-lat="${s.mapa?.lat || -38.85}" data-lng="${s.mapa?.lng || -71.69}">${crudo(icono('sol', { tam: 22 }))}<span><b>Tiempo en Melipeuco</b><span class="clima-cargando">Consultando…</span></span></div>` : ''}
-        ${urgencia ? html`<a class="dato dato-emergencia" href="/contacto/#emergencias">${crudo(icono('alerta', { tam: 22 }))}<span><b>Emergencias</b>${urgencia.nombre} ${telefonoTexto(urgencia.telefono)}</span></a>` : ''}
-      </div></div>`;
+      ${franja}`;
+    }
+    case 'cinta':
+      // Cinta que desfila con las palabras del territorio y las nueve letras del logo.
+      return html`<div class="tk-cinta" aria-hidden="true"><div class="tk-cinta-pista">${[0, 1].map(() => CINTA.map((t, i) => crudo(`<span>${t}</span>${emblema(i)}`)))}</div></div>`;
+    case 'mundos': {
+      // «Cada letra de Melipeuco es una puerta»: las nueve letras del logo llevan a nueve áreas del municipio.
+      return html`<section class="tk-mundos" aria-labelledby="mundos-titulo" data-mundos style="--fc:${PALETA[0].color};--fz:${PALETA[0].oscuro}">
+        <div class="tk-mundos-fondo" aria-hidden="true"></div>
+        <div class="contenedor">
+          <div class="tk-mundos-cabeza">
+            <span class="antetitulo">Nueve letras, nueve mundos</span>
+            <h2 id="mundos-titulo">${sec.titulo || crudo('Cada letra de <em class="tk-arcoiris">Melipeuco</em> es una puerta')}</h2>
+            <p>Montañas, rostros, cascadas, araucarias, corazón, personas, animales, estrellas y el kultrún: el logo de la comuna lleva a cada área del municipio.</p>
+          </div>
+          <div class="tk-mundos-escena">
+            <div class="tk-mundos-gigante" aria-hidden="true">${PALETA.map((_, k) => crudo(`<i data-k="${k}" style="--m:url(/img/trekking/emblema-${k}.svg)"${k ? '' : ' class="activa"'}></i>`))}</div>
+            <div class="tk-mundos-info">${MUNDOS.map((m, k) => html`<div class="tk-mundo-info${k ? '' : ' activa'}" data-k="${k}"${k ? crudo(' aria-hidden="true"') : ''}>
+              <span class="tk-mundo-paso">${String(k + 1).padStart(2, '0')} / 09 · ${PALETA[k].simbolo}</span>
+              <h3>${m.nombre}</h3>
+              <p>${m.texto}</p>
+              <a href="${m.url}"${k ? crudo(' tabindex="-1"') : ''}>Entrar ${crudo(icono('flecha', { tam: 18 }))}</a>
+            </div>`)}</div>
+          </div>
+          <ul class="tk-mundos-letras">${MUNDOS.map((m, k) => html`<li><a href="${m.url}" data-k="${k}" style="--c:${PALETA[k].color};--o:${PALETA[k].oscuro}"${k ? '' : crudo(' aria-current="true"')}>${crudo(emblema(k))}<span><b>${m.nombre}</b><small>${PALETA[k].simbolo}</small></span></a></li>`)}</ul>
+        </div>
+      </section>`;
     }
     case 'campanas': {
       const slides = ctx.repo.vigentes('slide');
       if (!slides.length) return '';
       return html`<section class="seccion seccion-campanas" aria-labelledby="campanas-titulo"><div class="contenedor">
-        <div class="seccion-cabecera"><h2 id="campanas-titulo">${sec.titulo || 'Campañas municipales'}</h2></div>
+        <div class="seccion-cabecera"><div>${antetitulo(4, 'Para la comunidad')}<h2 id="campanas-titulo">${sec.titulo || 'Campañas municipales'}</h2></div></div>
         <div class="campanas" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Campañas municipales">
           <div class="carrusel-pista">${slides.map((sl, i) => {
             const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes: '(max-width: 1240px) 100vw, 1200px' })}</picture>`;
@@ -72,9 +127,9 @@ async function seccionPortada(ctx, sec) {
     case 'accesos': {
       const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items;
       if (!accesos.length) return '';
-      return html`<section class="seccion accesos-seccion"><div class="contenedor">
+      return html`<section class="seccion accesos-seccion" id="accesos"><div class="contenedor">
         <h2 class="sr">${sec.titulo || 'Accesos rápidos'}</h2>
-        <ul class="accesos">${accesos.map((a) => html`<li><a ${attrsEnlace(a.datos.enlace, a.datos.nuevaVentana)} style="--color:${a.datos.color || 'var(--primario)'}"><span class="acceso-ico">${crudo(icono(a.datos.icono || 'estrella', { tam: 30 }))}</span><span>${a.titulo}</span>${avisoExterno(a.datos.enlace, a.datos.nuevaVentana)}</a></li>`)}</ul>
+        <ul class="accesos">${accesos.map((a, i) => html`<li><a ${attrsEnlace(a.datos.enlace, a.datos.nuevaVentana)} style="--color:${a.datos.color || 'var(--primario)'};--c:${PALETA[i % 9].color}"><span class="acceso-ico">${crudo(icono(a.datos.icono || 'estrella', { tam: 30 }))}</span><span>${a.titulo}</span>${avisoExterno(a.datos.enlace, a.datos.nuevaVentana)}</a></li>`)}</ul>
       </div></section>`;
     }
     case 'tramites': {
@@ -83,7 +138,7 @@ async function seccionPortada(ctx, sec) {
       const proximas = dest?.proximas?.slice(0, 3) || [];
       const enl = ctx.tramites.enlaces;
       return html`<section class="seccion seccion-tramites"><div class="contenedor">
-        <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Trámites en línea'}</h2>${sec.texto ? html`<p>${sec.texto}</p>` : ''}</div><a class="ver-todo" href="/tramites/">Todos los trámites</a></div>
+        <div class="seccion-cabecera"><div>${antetitulo(5, 'Sin filas')}<h2>${sec.titulo || 'Trámites en línea'}</h2>${sec.texto ? html`<p>${sec.texto}</p>` : ''}</div><a class="ver-todo" href="/tramites/">Todos los trámites</a></div>
         <div class="tramites-portada">
           <div class="lista-tramites">${fichas.map((t) => filaTramite(ctx, t))}</div>
           <aside class="panel-tramites">
@@ -106,7 +161,7 @@ async function seccionPortada(ctx, sec) {
       const lado = resto.slice(0, 4);
       const mas = resto.slice(4);
       return html`<section class="seccion seccion-noticias"><div class="contenedor">
-        <div class="seccion-cabecera"><h2>${sec.titulo || 'Últimas noticias'}</h2><a class="ver-todo" href="/noticias/">Todas las noticias</a></div>
+        <div class="seccion-cabecera"><div>${antetitulo(1, 'Actualidad')}<h2>${sec.titulo || 'Últimas noticias'}</h2></div><a class="ver-todo" href="/noticias/">Todas las noticias</a></div>
         <div class="noticias-portada">${tarjetaNoticia(ctx, destacada, { grande: true })}<div class="grilla-noticias compacta">${lado.map((c) => tarjetaNoticia(ctx, c))}</div></div>
         ${mas.length ? html`<div class="grilla-noticias noticias-mas">${mas.map((c) => tarjetaNoticia(ctx, c))}</div>` : ''}
       </div></section>`;
@@ -116,7 +171,7 @@ async function seccionPortada(ctx, sec) {
       const s2 = ctx.ajustes;
       return html`<section class="seccion seccion-agenda"><div class="contenedor agenda-portada">
         <div>
-          <div class="seccion-cabecera"><h2>${sec.titulo || 'Agenda comunal'}</h2><a class="ver-todo" href="/eventos/">Ver agenda</a></div>
+          <div class="seccion-cabecera"><div>${antetitulo(8, 'Qué pasa en la comuna')}<h2>${sec.titulo || 'Agenda comunal'}</h2></div><a class="ver-todo" href="/eventos/">Ver agenda</a></div>
           ${lista.length ? html`<div class="lista-eventos">${lista.map((c) => tarjetaEvento(ctx, c))}</div>` : vacio('No hay actividades programadas en este momento. Revise la agenda o síganos en redes sociales.', 'calendario')}
         </div>
         <aside class="lateral-portada">
@@ -128,18 +183,45 @@ async function seccionPortada(ctx, sec) {
       const lista = ctx.repo.listar({ tipo: 'area', publico: true, orden: 'orden', limite: 300 }).items.filter((a) => ['direccion', 'alcaldia', 'juzgado', 'concejo'].includes(a.datos.tipoUnidad) || ['dep-salud', 'dep-educacion', 'dep-transito'].includes(a.datos.transitoDepartamento)).filter((a) => a.datos.enMenu !== false).slice(0, 16);
       if (!lista.length) return '';
       return html`<section class="seccion seccion-areas"><div class="contenedor">
-        <div class="seccion-cabecera"><h2>${sec.titulo || 'Áreas municipales'}</h2><a class="ver-todo" href="/areas/">Todas las áreas</a></div>
+        <div class="seccion-cabecera"><div>${antetitulo(1, 'Municipio')}<h2>${sec.titulo || 'Áreas municipales'}</h2></div><a class="ver-todo" href="/areas/">Todas las áreas</a></div>
         ${tarjetasAreas(ctx, lista)}
       </div></section>`;
     }
     case 'turismo': {
+      // «Melipeuco Capital del Trekking»: fila deslizable de atractivos y cifras del territorio.
       const t = ctx.ajustes.turismo;
       if (!t?.url) return '';
-      return html`<section class="banda-turismo"><div class="contenedor">
-        ${t.imagen ? html`<img src="${t.imagen}" alt="${t.titulo}" loading="lazy" class="turismo-logo">` : html`<h2>${t.titulo}</h2>`}
-        <p>${t.texto}</p>
-        <a class="boton boton-acento" ${attrsEnlace(t.url)}>${crudo(icono('montana', { tam: 18 }))} Visite el sitio web${avisoExterno(t.url)}</a>
-      </div></section>`;
+      const base = t.url.endsWith('/') ? t.url : t.url + '/';
+      const destino = (l) => base + l.url;
+      return html`<section class="tk-trekking" aria-labelledby="trekking-titulo" style="--z:${PALETA[0].color}">
+        <div class="tk-trekking-montes">${crudo(montes('var(--tk-noche)'))}</div>
+        <div class="contenedor tk-trekking-cabeza">
+          <div>
+            ${antetitulo(0, t.titulo || 'Melipeuco, Capital del Trekking')}
+            <h2 id="trekking-titulo">${sec.titulo || crudo('44 rutas de trekking <em>entre volcanes, glaciares y araucarias</em>')}</h2>
+            <p>${t.texto}</p>
+          </div>
+          <div class="tk-fila-acciones">
+            <button class="tk-flecha" type="button" data-mover="-1" aria-label="Lugares anteriores">${crudo(icono('flechaIzq', { tam: 20 }))}</button>
+            <button class="tk-flecha" type="button" data-mover="1" aria-label="Más lugares">${crudo(icono('flecha', { tam: 20 }))}</button>
+            <a class="boton boton-acento" ${attrsEnlace(t.url)}>${crudo(icono('montana', { tam: 18 }))} Visite la Capital del Trekking${avisoExterno(t.url)}</a>
+          </div>
+        </div>
+        <div class="tk-fila" tabindex="0" aria-label="Lugares para visitar en Melipeuco" data-fila>
+          ${LUGARES.map((l) => html`<a class="tk-foto" ${attrsEnlace(destino(l))} style="--c:${PALETA[l.k].color}">
+            <img src="/img/trekking/lugar-${l.img}.webp" alt="" loading="lazy" decoding="async" width="720" height="960">
+            <span class="tk-foto-etiqueta">${l.tipo}</span>
+            <span class="tk-foto-texto"><b>${l.nombre}</b><span><span>${l.texto}</span></span></span>${avisoExterno(destino(l))}
+          </a>`)}
+        </div>
+        <div class="tk-fila-barra" aria-hidden="true"><i></i></div>
+        <div class="contenedor tk-cifras">
+          <div class="tk-cifra"><b data-contar="3">3</b><span>volcanes: Llaima, Sollipulli y Sierra Nevada</span></div>
+          <div class="tk-cifra"><b data-contar="250" data-sufijo=" km">250 km</b><span>de senderos</span></div>
+          <div class="tk-cifra"><b data-contar="44">44</b><span>rutas de trekking para todos los niveles</span></div>
+          <div class="tk-cifra"><b data-contar="45" data-sufijo="%">45%</b><span>de la comuna son áreas silvestres protegidas</span></div>
+        </div>
+      </section>`;
     }
     case 'encuesta': {
       const e = ctx.repo.vigentes('encuesta')[0];

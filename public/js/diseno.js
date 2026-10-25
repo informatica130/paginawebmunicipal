@@ -6,6 +6,7 @@
 
 export const FUENTES = {
   'public-sans': { nombre: 'Public Sans (institucional)', familia: "'Public Sans'", google: '' },
+  bricolage: { nombre: 'Bricolage Grotesque (Capital del Trekking)', familia: "'Bricolage Grotesque'", google: '' },
   atkinson: { nombre: 'Atkinson Hyperlegible (alta legibilidad)', familia: "'Atkinson Hyperlegible Next'", google: 'Atkinson+Hyperlegible+Next:wght@400;500;600;700;800' },
   inter: { nombre: 'Inter (moderna)', familia: "'Inter'", google: 'Inter:wght@400;500;600;700;800' },
   'source-sans': { nombre: 'Source Sans 3 (neutra)', familia: "'Source Sans 3'", google: 'Source+Sans+3:wght@400;500;600;700;800' },
@@ -16,39 +17,49 @@ export const FUENTES = {
   sistema: { nombre: 'La del sistema (la más rápida)', familia: 'system-ui', google: '' },
 };
 
+// El diseño predeterminado es el de «Melipeuco Capital del Trekking»: los colores de las nueve
+// letras del logo, papel crema, noche, títulos en Bricolage Grotesque y la portada con el logo animado.
 export const PREDETERMINADO = {
-  estilo: 'institucional',
-  colores: { primario: '#0B4F7C', acento: '#F2A900', oscuro: '#0D1B2A', fondo: '#FFFFFF', fondoAlterno: '#F4F5F7', texto: '#121A23', exito: '#1E7B4F', peligro: '#C62828' },
-  tipografia: { cuerpo: 'public-sans', titulos: 'public-sans', tamano: 17, pesoTitulos: 800, espaciadoTitulos: -2, menuMayusculas: false },
-  forma: { radio: 10, tarjetas: 'linea', botones: 'redondeados', densidad: 'normal', ancho: 1240 },
-  cabecera: { estilo: 'blanca', fija: true, barraSuperior: true, botonTramites: true, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
-  portada: { composicion: 'dividida', imagen: '', credito: 'Plaza de Melipeuco y volcán Llaima', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'medio', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: true },
+  estilo: 'trekking',
+  colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#121417', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
+  tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 17, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: false },
+  forma: { radio: 16, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240 },
+  cabecera: { estilo: 'oscura', fija: true, barraSuperior: true, botonTramites: true, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
+  portada: { composicion: 'trekking', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: true },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
-  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true },
+  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: true, barraCarga: true, cordillera: true },
   avanzado: { css: '' },
+};
+
+// Valores del diseño institucional anterior (blanco, azul y ámbar, sólo líneas).
+const INSTITUCIONAL = {
+  colores: { primario: '#0B4F7C', acento: '#F2A900', oscuro: '#0D1B2A', fondo: '#FFFFFF', fondoAlterno: '#F4F5F7', texto: '#121A23', exito: '#1E7B4F', peligro: '#C62828' },
+  tipografia: { cuerpo: 'public-sans', titulos: 'public-sans', pesoTitulos: 800, espaciadoTitulos: -2 },
+  forma: { radio: 10, tarjetas: 'linea', botones: 'redondeados' }, cabecera: { estilo: 'blanca' }, pie: { estilo: 'oscuro' },
 };
 
 // Estilos prediseñados: cambian colores, tipografía, forma, cabecera y pie (no los textos ni las fotos).
 export const ESTILOS = {
-  institucional: { nombre: 'Institucional', descripcion: 'Minimalista: blanco, tinta y azul municipal, sólo líneas finas.', valores: {} },
+  trekking: { nombre: 'Capital del Trekking', descripcion: 'Los nueve colores del logo de Melipeuco, papel crema, noche y la portada con el logo animado y la cordillera.', valores: { portada: { composicion: 'trekking' } } },
+  institucional: { nombre: 'Institucional', descripcion: 'Minimalista: blanco, tinta y azul municipal, sólo líneas finas.', valores: { ...INSTITUCIONAL, portada: { composicion: 'dividida' } } },
   bosque: { nombre: 'Bosque de araucarias', descripcion: 'Verde pehuén y tonos de madera.', valores: {
-    colores: { primario: '#1F5A45', acento: '#D89A2B', oscuro: '#12352A', fondoAlterno: '#F2F5F1', exito: '#2F7D4F' },
+    colores: { ...INSTITUCIONAL.colores, primario: '#1F5A45', acento: '#D89A2B', oscuro: '#12352A', fondoAlterno: '#F2F5F1', exito: '#2F7D4F' },
     tipografia: { cuerpo: 'source-sans', titulos: 'source-sans', pesoTitulos: 700 },
     forma: { radio: 10, tarjetas: 'sombra' }, cabecera: { estilo: 'blanca' }, pie: { estilo: 'oscuro' } } },
   moderno: { nombre: 'Moderno', descripcion: 'Botones redondos, sombras suaves y cabecera de color.', valores: {
-    colores: { primario: '#1D4ED8', acento: '#F59E0B', oscuro: '#0F172A', fondoAlterno: '#F1F5F9', texto: '#0F172A' },
+    colores: { ...INSTITUCIONAL.colores, primario: '#1D4ED8', acento: '#F59E0B', oscuro: '#0F172A', fondoAlterno: '#F1F5F9', texto: '#0F172A' },
     tipografia: { cuerpo: 'inter', titulos: 'inter', pesoTitulos: 800, espaciadoTitulos: -3 },
     forma: { radio: 14, tarjetas: 'sombra', botones: 'pildora' }, cabecera: { estilo: 'color' }, pie: { estilo: 'oscuro' } } },
   clasico: { nombre: 'Clásico', descripcion: 'Títulos con serifa, esquinas rectas, sobrio.', valores: {
-    colores: { primario: '#7A1F2B', acento: '#C9A227', oscuro: '#2A1A1D', fondoAlterno: '#F7F4EF', texto: '#211A1B' },
+    colores: { ...INSTITUCIONAL.colores, primario: '#7A1F2B', acento: '#C9A227', oscuro: '#2A1A1D', fondoAlterno: '#F7F4EF', texto: '#211A1B' },
     tipografia: { cuerpo: 'source-sans', titulos: 'merriweather', pesoTitulos: 700, espaciadoTitulos: 0 },
     forma: { radio: 2, tarjetas: 'borde', botones: 'rectos' }, cabecera: { estilo: 'blanca' }, pie: { estilo: 'oscuro' } } },
   claro: { nombre: 'Claro y amplio', descripcion: 'Mucho aire, pie claro, tarjetas planas.', valores: {
-    colores: { primario: '#0E7490', acento: '#F2A900', oscuro: '#0B3B4A', fondoAlterno: '#F0F7F9' },
+    colores: { ...INSTITUCIONAL.colores, primario: '#0E7490', acento: '#F2A900', oscuro: '#0B3B4A', fondoAlterno: '#F0F7F9' },
     tipografia: { cuerpo: 'nunito-sans', titulos: 'nunito-sans', pesoTitulos: 800 },
     forma: { radio: 12, tarjetas: 'plano', densidad: 'amplia' }, cabecera: { estilo: 'blanca' }, pie: { estilo: 'claro' } } },
   contraste: { nombre: 'Alto contraste', descripcion: 'Negro, blanco y amarillo; letra de alta legibilidad.', valores: {
-    colores: { primario: '#000000', acento: '#FFD000', oscuro: '#000000', fondo: '#FFFFFF', fondoAlterno: '#F2F2F2', texto: '#000000', exito: '#006B2E', peligro: '#B00000' },
+    colores: { ...INSTITUCIONAL.colores, primario: '#000000', acento: '#FFD000', oscuro: '#000000', fondo: '#FFFFFF', fondoAlterno: '#F2F2F2', texto: '#000000', exito: '#006B2E', peligro: '#B00000' },
     tipografia: { cuerpo: 'atkinson', titulos: 'atkinson', tamano: 19, pesoTitulos: 800, espaciadoTitulos: 0 },
     forma: { radio: 4, tarjetas: 'borde', botones: 'redondeados' }, cabecera: { estilo: 'blanca' }, pie: { estilo: 'oscuro' },
     animaciones: { intensidad: 'sutil' } } },
@@ -61,7 +72,7 @@ export const OPCIONES = {
   densidad: { compacta: 'Compacta', normal: 'Normal', amplia: 'Amplia' },
   cabeceraEstilo: { blanca: 'Blanca', color: 'Color principal', oscura: 'Oscura' },
   logo: { emblema: 'Emblema (sin texto) y nombre', escudo: 'Escudo completo', personalizado: 'Imagen propia' },
-  composicion: { dividida: 'Texto y foto lado a lado', foto: 'Foto de fondo completa' },
+  composicion: { trekking: 'Capital del Trekking (logo animado y cordillera)', dividida: 'Texto y foto lado a lado', foto: 'Foto de fondo completa' },
   alto: { bajo: 'Baja', medio: 'Media', alto: 'Alta', pantalla: 'Pantalla completa' },
   alineacion: { izquierda: 'A la izquierda', centro: 'Centrada' },
   pieEstilo: { oscuro: 'Oscuro', color: 'Color principal', claro: 'Claro' },
@@ -87,7 +98,8 @@ export function fusionar(base, cambios) {
 export function aplicarEstilo(cfg, id) {
   const e = ESTILOS[id];
   if (!e) return cfg;
-  const limpio = fusionar(PREDETERMINADO, {});
+  // Los estilos distintos del de la Capital del Trekking parten del diseño institucional.
+  const limpio = id === 'trekking' ? fusionar(PREDETERMINADO, {}) : fusionar(PREDETERMINADO, INSTITUCIONAL);
   const base = { colores: limpio.colores, tipografia: limpio.tipografia, forma: limpio.forma, cabecera: { estilo: limpio.cabecera.estilo }, pie: { estilo: limpio.pie.estilo }, animaciones: { intensidad: limpio.animaciones.intensidad } };
   return normalizar(fusionar(fusionar(cfg, base), { ...e.valores, estilo: id }));
 }
@@ -100,28 +112,28 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
     colores: Object.fromEntries(Object.keys(P.colores).map((k) => [k, color(c[k], P.colores[k])])),
     tipografia: {
       cuerpo: opcion(t.cuerpo, FUENTES, P.tipografia.cuerpo), titulos: opcion(t.titulos, FUENTES, P.tipografia.titulos),
-      tamano: numero(t.tamano, 17, 15, 21), pesoTitulos: numero(t.pesoTitulos, 800, 500, 900), espaciadoTitulos: numero(t.espaciadoTitulos, -2, -5, 5),
+      tamano: numero(t.tamano, 17, 15, 21), pesoTitulos: numero(t.pesoTitulos, 800, 500, 900), espaciadoTitulos: numero(t.espaciadoTitulos, P.tipografia.espaciadoTitulos, -5, 5),
       menuMayusculas: bool(t.menuMayusculas, false),
     },
     forma: {
-      radio: numero(f.radio, 10, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, 'linea'), botones: opcion(f.botones, OPCIONES.botones, 'redondeados'),
+      radio: numero(f.radio, P.forma.radio, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, P.forma.tarjetas), botones: opcion(f.botones, OPCIONES.botones, P.forma.botones),
       densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1240, 1040, 1440),
     },
     cabecera: {
-      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, 'blanca'), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, true), botonTramites: bool(ca.botonTramites, true),
+      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, true), botonTramites: bool(ca.botonTramites, true),
       logo: opcion(ca.logo, OPCIONES.logo, 'emblema'), logoUrl: imagen(ca.logoUrl), tamanoLogo: numero(ca.tamanoLogo, 54, 36, 96),
       subtitulo: texto(ca.subtitulo, P.cabecera.subtitulo, 60), nombre: texto(ca.nombre, P.cabecera.nombre, 60),
     },
     portada: {
-      composicion: opcion(po.composicion, OPCIONES.composicion, 'dividida'), imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
-      alto: opcion(po.alto, OPCIONES.alto, 'medio'), alineacion: opcion(po.alineacion, OPCIONES.alineacion, 'izquierda'), velo: numero(po.velo, 80, 0, 100),
+      composicion: opcion(po.composicion, OPCIONES.composicion, P.portada.composicion), imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
+      alto: opcion(po.alto, OPCIONES.alto, P.portada.alto), alineacion: opcion(po.alineacion, OPCIONES.alineacion, 'izquierda'), velo: numero(po.velo, 80, 0, 100),
       franjaDatos: bool(po.franjaDatos, true), populares: bool(po.populares, true),
     },
     pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
       intro: opcion(an.intro, OPCIONES.intro, 'primera'), transiciones: bool(an.transiciones, true), aparicion: bool(an.aparicion, true),
-      inclinacion: bool(an.inclinacion, false), barraCarga: bool(an.barraCarga, true),
+      inclinacion: bool(an.inclinacion, true), barraCarga: bool(an.barraCarga, true), cordillera: bool(an.cordillera, true),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
     avanzado: { css: permitirCss ? String(e.avanzado?.css || '').replace(/<\/?style/gi, '').slice(0, 20000) : String(previo?.avanzado?.css || '') },
@@ -137,13 +149,13 @@ function luminancia(hex) {
 const tintaSobre = (hex) => (luminancia(hex) > 0.4 ? '#141414' : '#FFFFFF');
 
 const ESCALA = { compacta: .72, normal: 1, amplia: 1.32 };
-const ALTO = { bajo: 'clamp(320px, 42vh, 420px)', medio: 'clamp(420px, 58vh, 560px)', alto: 'clamp(520px, 76vh, 760px)', pantalla: 'calc(100svh - 116px)' };
+const ALTO = { bajo: 'clamp(320px, 42vh, 420px)', medio: 'clamp(420px, 58vh, 560px)', alto: 'clamp(560px, 82vh, 860px)', pantalla: 'calc(100svh - 116px)' };
 const BOTON = { redondeados: null, pildora: '999px', rectos: '2px' };
 
 export function variablesCss(cfg) {
   const c = cfg.colores, t = cfg.tipografia, f = cfg.forma;
   const v = {
-    '--azul': c.primario, '--ambar': c.acento, '--azul-profundo': c.oscuro, '--fondo': c.fondo, '--superficie': c.fondo, '--fondo-2': c.fondoAlterno,
+    '--azul': c.primario, '--ambar': c.acento, '--azul-profundo': c.oscuro, '--fondo': c.fondo, '--superficie': `color-mix(in srgb, ${c.fondo} 35%, #FFFFFF)`, '--fondo-2': c.fondoAlterno,
     '--texto': c.texto, '--verde': c.exito, '--rojo': c.peligro, '--ambar-tinta': tintaSobre(c.acento), '--sobre-azul': tintaSobre(c.primario),
     '--fuente': `${FUENTES[t.cuerpo].familia}, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`,
     '--fuente-titulo': `${FUENTES[t.titulos].familia}, ${FUENTES[t.cuerpo].familia}, system-ui, sans-serif`,
@@ -168,6 +180,7 @@ export function atributos(cfg) {
     'data-anim': a.activas ? a.intensidad : 'no', 'data-intro': a.activas ? a.intro : 'nunca',
     'data-anim-transiciones': a.activas && a.transiciones ? 'si' : 'no', 'data-anim-aparicion': a.activas && a.aparicion ? 'si' : 'no',
     'data-anim-inclinacion': a.activas && a.inclinacion ? 'si' : 'no', 'data-anim-carga': a.activas && a.barraCarga ? 'si' : 'no',
+    'data-anim-cordillera': a.activas && a.cordillera ? 'si' : 'no',
   };
 }
 
@@ -182,4 +195,18 @@ export function logoCabecera(cfg) {
   if (ca.logo === 'personalizado' && ca.logoUrl) return { src: ca.logoUrl, oscuro: ca.logoUrl, conTexto: false };
   if (ca.logo === 'escudo') return { src: '/img/escudo-azul.svg', oscuro: '/img/escudo-crema.svg', conTexto: false };
   return { src: '/img/emblema-azul.svg', oscuro: '/img/emblema-crema.svg', conTexto: true };
+}
+
+// ------------------------------------------------------------------ Secciones de la portada
+// Secciones que se agregaron después de la primera versión: si un sitio ya guardó su orden,
+// aparecen activas en el lugar que les corresponde (después de la sección indicada).
+export const SECCIONES_NUEVAS = [['cinta', 'banners'], ['campanas', 'accesos'], ['mundos', 'noticias']];
+export function completarSecciones(lista) {
+  const todas = (lista || []).map((x) => ({ ...x }));
+  for (const [id, despues] of SECCIONES_NUEVAS) {
+    if (todas.some((x) => x.id === id)) continue;
+    const i = todas.findIndex((x) => x.id === despues);
+    todas.splice(i < 0 ? todas.length : i + 1, 0, { id, activo: true });
+  }
+  return todas;
 }

@@ -1,8 +1,9 @@
 import { h, raw, $, $$, api, aviso, fallo, estado } from '../ui.js';
 import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
+import { completarSecciones } from '/js/diseno.js';
 
-const SECCIONES = { avisos: 'Avisos y alertas', banners: 'Portada con el volcán, buscador y «Ahora en Melipeuco»', campanas: 'Campañas (banners)', accesos: 'Accesos rápidos', tramites: 'Trámites en línea', noticias: 'Últimas noticias', eventos: 'Agenda, clima y emergencias', areas: 'Áreas municipales', turismo: 'Banda de turismo', encuesta: 'Encuesta activa', video: 'Último video y Concejo', boletin: 'Suscripción al boletín' };
+const SECCIONES = { avisos: 'Avisos y alertas', banners: 'Portada con el logo de la Capital del Trekking, buscador y «Ahora en Melipeuco»', cinta: 'Cinta de palabras con las nueve letras', campanas: 'Campañas (banners)', mundos: '«Cada letra es una puerta»: nueve áreas del municipio', accesos: 'Accesos rápidos', tramites: 'Trámites en línea', noticias: 'Últimas noticias', eventos: 'Agenda, clima y emergencias', areas: 'Áreas municipales', turismo: 'Capital del Trekking: lugares y cifras', encuesta: 'Encuesta activa', video: 'Último video y Concejo', boletin: 'Suscripción al boletín' };
 
 export default async function (vista) {
   const a = await api('GET', 'ajustes');
@@ -25,7 +26,7 @@ export default async function (vista) {
       <section data-panel="portada" class="tarjeta" hidden>
         <p>Active, ordene y nombre las secciones de la portada.</p>
         <ul class="secciones-portada" style="list-style:none;padding:0" data-secciones></ul>
-        <h3>Banda de turismo</h3><div class="fila"><label class="campo"><span>Título</span><input name="t_titulo" value="${a.turismo?.titulo || ''}"></label><label class="campo"><span>Enlace</span><input name="t_url" value="${a.turismo?.url || ''}"></label></div>
+        <h3>Capital del Trekking (sección de turismo)</h3><div class="fila"><label class="campo"><span>Título</span><input name="t_titulo" value="${a.turismo?.titulo || ''}"></label><label class="campo"><span>Enlace</span><input name="t_url" value="${a.turismo?.url || ''}"></label></div>
         <label class="campo"><span>Texto</span><input name="t_texto" value="${a.turismo?.texto || ''}"></label><div data-turismo-img></div>
         <h3>Video destacado</h3><div class="fila"><label class="campo"><span>Título</span><input name="v_titulo" value="${a.video?.titulo || ''}"></label><label class="campo"><span>Enlace de YouTube</span><input name="v_url" value="${a.video?.url || ''}"></label></div>
         <h3>Clima</h3><label class="check"><input type="checkbox" name="clima"${a.clima?.activo ? raw(' checked') : ''}> Mostrar el pronóstico del tiempo (Open-Meteo, sin cookies)</label>
@@ -49,7 +50,7 @@ export default async function (vista) {
     $$('[data-panel]', vista).forEach((p) => { p.hidden = p.dataset.panel !== t.dataset.tab; });
   });
   // Secciones de portada
-  let secciones = (a.portada?.secciones || []).map((s) => ({ ...s }));
+  let secciones = completarSecciones(a.portada?.secciones);
   for (const id of Object.keys(SECCIONES)) if (!secciones.some((s) => s.id === id)) secciones.push({ id, activo: false });
   const lista = $('[data-secciones]', vista);
   const pintar = () => {

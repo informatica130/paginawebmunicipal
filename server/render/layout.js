@@ -5,13 +5,24 @@ import { html, crudo, esc, icono, attrsEnlace, avisoExterno, telefonoHref, telef
 import { textoPlano, recortar } from '../../src/util.js';
 import { plantillaIntro, SCRIPT_INTRO } from './intro.js';
 import { normalizar, variablesCss, atributos, urlFuentes, logoCabecera } from '../../public/js/diseno.js';
+import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCordillera } from './trekking.js';
 
 // Diseño personalizado desde el panel (Diseño del sitio), normalizado una vez por versión de ajustes.
+// Sin diseño guardado se usa el predeterminado (Capital del Trekking); los colores antiguos de
+// la semilla no cuentan como elección propia, los que se hayan cambiado sí.
 const cacheDiseno = new WeakMap();
+const COLORES_SEMILLA = '#0B4F7C#F2A900#062B45';
 export function disenoDe(s) {
-  if (!cacheDiseno.has(s)) cacheDiseno.set(s, normalizar(s.diseno || { colores: { ...(s.colores?.primario ? { primario: s.colores.primario, acento: s.colores.acento, oscuro: s.colores.oscuro } : {}) } }));
+  if (!cacheDiseno.has(s)) {
+    const c = s.colores || {};
+    const propios = c.primario && [c.primario, c.acento, c.oscuro].join('').toUpperCase() !== COLORES_SEMILLA;
+    cacheDiseno.set(s, normalizar(s.diseno || { colores: propios ? { primario: c.primario, acento: c.acento, oscuro: c.oscuro } : {} }));
+  }
   return cacheDiseno.get(s);
 }
+
+// Emblema (letra del logo) de los enlaces del menú que llevan a uno de los nueve mundos.
+const EMBLEMA_URL = new Map(MUNDOS.map((m, k) => [m.url, k]));
 
 const NIVELES = { info: 'info', alerta: 'alerta', emergencia: 'alerta', exito: 'check' };
 
@@ -37,7 +48,7 @@ function menuPrincipal(ctx) {
     ? html`<li class="nav-item tiene-sub${activo(i) ? ' activo' : ''}">
         <button type="button" class="nav-boton" aria-expanded="false" aria-controls="sub-${n}">${i.texto}${crudo(icono('abajo', { tam: 16 }))}</button>
         <div class="submenu" id="sub-${n}"><ul>
-          ${i.hijos.map((h) => html`<li><a ${attrsEnlace(h.url, h.nueva)}${h.url === actual ? crudo(' aria-current="page"') : ''}><b>${h.texto}</b>${h.descripcion ? html`<small>${h.descripcion}</small>` : ''}${avisoExterno(h.url, h.nueva)}</a></li>`)}
+          ${i.hijos.map((h) => html`<li><a ${attrsEnlace(h.url, h.nueva)}${h.url === actual ? crudo(' aria-current="page"') : ''}${EMBLEMA_URL.has(h.url) ? crudo(' class="con-emblema"') : ''}>${EMBLEMA_URL.has(h.url) ? crudo(emblema(EMBLEMA_URL.get(h.url))) : ''}<b>${h.texto}</b>${h.descripcion ? html`<small>${h.descripcion}</small>` : ''}${avisoExterno(h.url, h.nueva)}</a></li>`)}
           <li class="submenu-todo"><a href="${i.url}">Ver todo en ${i.texto} ${crudo(icono('flecha', { tam: 14 }))}</a></li>
         </ul></div>
       </li>`
@@ -105,7 +116,9 @@ function pie(ctx) {
   const anio = new Date().getFullYear();
   const redes = [['facebook', r.facebook, 'Facebook'], ['instagram', r.instagram, 'Instagram'], ['youtube', r.youtube, 'YouTube'], ['x', r.x, 'X (Twitter)']].filter((x) => x[1]);
   const lista = (clave) => ctx.repo.menu(clave).map((i) => html`<li><a ${attrsEnlace(i.url, i.nueva)}>${i.texto}${avisoExterno(i.url, i.nueva)}</a></li>`);
+  const turismo = s.turismo?.url || SITIO_TREKKING;
   return html`<footer class="pie" id="pie">
+    <div class="pie-montes" aria-hidden="true">${crudo(montes('var(--pie-fondo)', 'tk-montes'))}</div>
     <div class="pie-emergencias" id="emergencias-pie">
       <div class="contenedor">
         <strong>${crudo(icono('telefono', { tam: 18 }))} Teléfonos de emergencia</strong>
@@ -137,7 +150,7 @@ function pie(ctx) {
         <p class="pie-rss"><a href="/feed/">${crudo(icono('rss', { tam: 16 }))} Noticias por RSS</a></p>
       </section>
     </div>
-    <div class="contenedor pie-marca-grande" aria-hidden="true">${disenoDe(s).cabecera.nombre || s.nombreCorto}</div>
+    <div class="contenedor pie-trekking"><a ${attrsEnlace(turismo)}><img class="pie-trekking-claro" src="/img/trekking/logo-color-claro.svg" alt="Melipeuco Capital del Trekking" width="1036" height="265" loading="lazy"><img class="pie-trekking-oscuro" src="/img/trekking/logo-color.svg" alt="" width="1036" height="265" loading="lazy">${avisoExterno(turismo)}</a></div>
     <div class="pie-legal">
       <div class="contenedor">
         <p>${(s.pie?.texto || '© {anio} ' + s.nombre).replace('{anio}', anio)}</p>
@@ -155,7 +168,8 @@ export function documento(ctx, { titulo, descripcion = '', cuerpo, imagen = '', 
   const canon = base + (canonical || ctx.ruta);
   const img = imagen ? (imagen.startsWith('http') ? imagen : base + imagen) : base + '/img/icon-512.png';
   const dz = disenoDe(s), fuentes = urlFuentes(dz);
-  const attrs = Object.entries(atributos(dz)).map(([k, v]) => `${k}="${esc(v)}"`).join(' ');
+  const attrs = Object.entries({ ...atributos(dz), style: estiloZona(zonaDe(ctx.ruta)) }).map(([k, v]) => `${k}="${esc(v)}"`).join(' ');
+  const bricolage = [dz.tipografia.cuerpo, dz.tipografia.titulos].includes('bricolage');
   const ld = [{ '@context': 'https://schema.org', '@type': 'GovernmentOrganization', name: s.nombre, url: base + '/', logo: base + '/img/icon-512.png', telephone: s.telefono, email: s.email, address: { '@type': 'PostalAddress', streetAddress: 'Pedro Aguirre Cerda 14', addressLocality: 'Melipeuco', addressRegion: 'La Araucanía', addressCountry: 'CL' }, sameAs: Object.values(s.redes || {}).filter(Boolean) }];
   if (jsonLd) ld.push(...[jsonLd].flat());
   return '<!doctype html>\n' + html`<html lang="es-CL" ${crudo(attrs)}>
@@ -180,19 +194,22 @@ ${noindex ? crudo('<meta name="robots" content="noindex">') : ''}
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Noticias de ${s.nombreCorto}" href="/feed/">
 ${[dz.tipografia.cuerpo, dz.tipografia.titulos].includes('public-sans') ? crudo('<link rel="preload" href="/fuentes/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>') : ''}
+${bricolage ? crudo('<link rel="preload" href="/fuentes/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>') : ''}
 ${fuentes ? html`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="${fuentes}" id="diseno-fuentes">` : ''}
 <link rel="icon" type="image/svg+xml" href="/img/emblema-azul.svg">
 <link rel="stylesheet" href="/css/sitio.css?v=${ctx.version}">
 <style id="diseno-vars">${crudo(variablesCss(dz))}</style>
 ${dz.avanzado.css ? html`<style id="diseno-propio">${crudo(dz.avanzado.css)}</style>` : ''}
-<script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto'}catch(e){}})();</script>
+<script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto';if(sessionStorage.getItem('mlp-cortina')&&d.getAttribute('data-anim-cordillera')==='si'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('tk-entrando')}catch(e){}})();</script>
 <script type="application/ld+json" nonce="${ctx.nonce}">${crudo(JSON.stringify(ld).replace(/</g, '\\u003c'))}</script>
 ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
 </head>
 <body class="${clase}${portada ? ' es-portada' : ''}">
 ${portada ? html`${crudo(plantillaIntro())}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
+${dz.animaciones.activas && dz.animaciones.cordillera ? crudo(cortinaCordillera()) : ''}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="tk-progreso" aria-hidden="true"></div>
 ${ctx.usuario ? html`<div class="barra-admin"><div class="contenedor"><span>${crudo(icono('usuario', { tam: 16 }))} ${ctx.usuario.nombre}</span><a href="/admin/">Panel de administración</a>${editar ? html`<a href="/admin/#/editar/${editar}">${crudo(icono('herramienta', { tam: 16 }))} Editar esta página</a>` : ''}</div></div>` : ''}
 ${cabecera(ctx)}
 ${sinAvisos ? '' : avisos(ctx, { portada })}
@@ -208,9 +225,11 @@ ${pie(ctx)}
 }
 
 // Encabezado de página interior (título, bajada, migas).
+// Toma el color y el emblema de la zona de la página (una de las nueve letras del logo).
 export function encabezado({ titulo, bajada = '', migas = '', imagen = '', ctx, extra = '' }) {
   return html`<section class="encabezado${imagen ? ' con-imagen' : ''}">
     ${imagen ? html`<div class="encabezado-fondo">${ctx.img.imagen(imagen, { alt: '', sizes: '100vw', prioridad: true })}</div>` : ''}
+    ${crudo(emblema(zonaDe(ctx.ruta), 'encabezado-emblema'))}
     <div class="contenedor">
       ${migas}
       <h1>${titulo}</h1>

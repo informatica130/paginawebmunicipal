@@ -18,7 +18,17 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - 59 eventos de la agenda, 1.789 archivos de la biblioteca de medios, 50 transmisiones del Concejo convertidas en sesiones, y el directorio telefónico y de correos;
 - las páginas del menú que estaban vacías (Municipio, Salud, Educación, Udel, Social, Deporte, Turismo, Juzgado, PLADECO…) ahora tienen contenido: noticias de su área, trámites, contactos y documentos.
 
-**Diseño**
+**Identidad «Melipeuco Capital del Trekking»** (diseño predeterminado, estilo *Capital del Trekking* en el panel)
+- **Portada**: fotos de la Capital del Trekking que se funden con zoom lento, el logo de Melipeuco con sus nueve letras que caen una a una (luego aparecen los símbolos y el lema «Capital del Trekking», y las letras flotan y reaccionan al cursor), el buscador «¿Qué necesita hacer?» y la cordillera en capas con parallax. Los datos (horario, teléfono, tiempo, emergencias) flotan sobre la cordillera.
+- **Las nueve letras del logo son la identidad de cada área**, con su color y su emblema: M montaña (Turismo), E rostro (Municipio), L cascada (Salud), I araucaria (Medio ambiente), P corazón (Desarrollo social), E persona (Trámites), U animales (Desarrollo local), C estrellas (Educación) y O kultrún (Cultura y agenda). Cada página interior toma el color y el emblema de su zona en el encabezado, que termina en una silueta de cordillera, y su título sube palabra por palabra.
+- **«Cada letra de Melipeuco es una puerta»**: sección de la portada donde, al pasar o enfocar cada letra, el fondo toma su color y muestra el área del municipio.
+- **Sección «Capital del Trekking»**: fila deslizable (flechas, arrastre o dedo) de volcanes, lagunas y saltos que llevan al sitio de turismo, y contadores animados (3 volcanes, 250 km de senderos, 44 rutas, 45 % de áreas protegidas).
+- Cinta que desfila con las palabras del territorio, barra de progreso de lectura con los colores del logo, cabecera noche con línea arcoíris, accesos rápidos que se llenan de color en círculo, botones con relleno que sube, emblemas en el menú, tarjetas con zoom y brillo, botón «volver arriba» con anillo de avance y pie con la cordillera y el logo gigante.
+- **Cortina de cordillera** al cambiar de página: suben capas de montaña con el color y el emblema de la sección de destino (se desactiva en *Diseño del sitio → Animaciones*).
+- Tipografía de títulos Bricolage Grotesque (la del sitio de turismo), servida desde el propio sitio; el texto sigue en Public Sans.
+- Los recursos de marca están en `public/img/trekking/` y las piezas del logo en `server/render/logo-trekking.json` (las mismas del sitio de la Capital del Trekking). El estilo *Institucional* del panel vuelve al diseño anterior.
+
+**Diseño (estilo Institucional)**
 - Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.
 - Franja con horario de atención, teléfono, tiempo actual y emergencias; accesos rápidos en una cuadrícula con divisiones de un pixel; listas de trámites, agenda y documentos sin marcos.
