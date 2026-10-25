@@ -26,6 +26,8 @@ export function cargarEnv(archivo = path.join(RAIZ, '.env')) {
     // Vercel sólo permite escribir en /tmp (efímero).
     DATA_DIR: path.resolve(RAIZ, e.DATA_DIR || (e.VERCEL ? '/tmp/sitio-melipeuco' : 'data')),
     VERCEL: !!e.VERCEL,
+    // Sesiones del panel firmadas en la cookie (varias instancias sin base compartida).
+    SESIONES_FIRMADAS: e.SESIONES_FIRMADAS === '1' || e.SESIONES_FIRMADAS === true,
     TRUST_PROXY: Math.max(0, Number(e.TRUST_PROXY || (e.VERCEL ? 1 : 0)) || 0),
     LOG_REQUESTS: e.LOG_REQUESTS === '1',
     ADMIN_EMAIL: e.ADMIN_EMAIL || 'informatica@munimelipeuco.cl',

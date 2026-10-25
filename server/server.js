@@ -17,7 +17,7 @@ import { crearApiAdmin } from './api-admin.js';
 import { cargarSemillaWordpress, sembrarBase } from './semilla.js';
 import { permitirIframes } from './sanitizar.js';
 import { enviar, json, servirArchivo, cabecerasSeguridad, redirigir, ErrorHttp } from './http.js';
-import { hashClave, claveTemporal, leerCookies, leerSesion, COOKIE, Limitador } from './auth.js';
+import { hashClave, claveTemporal, leerCookies, leerSesion, COOKIE, Limitador, usarSesionesFirmadas } from './auth.js';
 import { respaldar } from '../herramientas/respaldo.js';
 
 export async function iniciar(opciones = {}) {
@@ -42,6 +42,8 @@ export async function iniciar(opciones = {}) {
   // (SITIO_SECRETO); si falta, se deriva de datos estables del proyecto.
   let secreto = cfg.SECRETO || (cfg.VERCEL ? crypto.createHash('sha256').update(`${process.env.VERCEL_PROJECT_ID || ''}|${cfg.ADMIN_EMAIL}|${cfg.ADMIN_PASSWORD}`).digest('base64url') : null) || db.ajuste('secreto');
   if (!secreto) { secreto = crypto.randomBytes(32).toString('base64url'); db.guardarAjuste('secreto', secreto); }
+  // Cada instancia de Vercel tiene su propia base: la sesión del panel viaja firmada en la cookie.
+  usarSesionesFirmadas(db, cfg.VERCEL || cfg.SESIONES_FIRMADAS ? secreto : null);
 
   const tramites = crearClienteTramites({ base: cfg.TRAMITES_URL, apiKey: cfg.TRAMITES_API_KEY, codigoOirs: cfg.TRAMITES_OIRS_CODIGO, fetchImpl: opciones.fetchTramites });
   permitirIframes([cfg.TRAMITES_URL]);
