@@ -24,7 +24,7 @@ const GRUPOS = [
   { id: 'tipografia', titulo: 'Tipografía', controles: [
     { ruta: 'tipografia.cuerpo', tipo: 'lista', etiqueta: 'Letra del texto', opciones: Object.fromEntries(Object.entries(FUENTES).map(([k, f]) => [k, f.nombre])) },
     { ruta: 'tipografia.titulos', tipo: 'lista', etiqueta: 'Letra de los títulos', opciones: Object.fromEntries(Object.entries(FUENTES).map(([k, f]) => [k, f.nombre])) },
-    { ruta: 'tipografia.tamano', tipo: 'rango', etiqueta: 'Tamaño del texto', min: 15, max: 21, paso: 1, unidad: ' px' },
+    { ruta: 'tipografia.tamano', tipo: 'rango', etiqueta: 'Tamaño del texto', min: 14, max: 21, paso: 1, unidad: ' px' },
     { ruta: 'tipografia.pesoTitulos', tipo: 'rango', etiqueta: 'Grosor de los títulos', min: 500, max: 900, paso: 100 },
     { ruta: 'tipografia.espaciadoTitulos', tipo: 'rango', etiqueta: 'Espaciado de los títulos', min: -5, max: 5, paso: 1 },
     { ruta: 'tipografia.menuMayusculas', tipo: 'si', etiqueta: 'Menú principal en mayúsculas' },
@@ -35,7 +35,8 @@ const GRUPOS = [
     { ruta: 'forma.botones', tipo: 'botones', etiqueta: 'Botones', opciones: OPCIONES.botones },
     { ruta: 'forma.sombras', tipo: 'botones', etiqueta: 'Sombras', opciones: OPCIONES.sombras },
     { ruta: 'forma.densidad', tipo: 'botones', etiqueta: 'Espacio entre secciones', opciones: OPCIONES.densidad },
-    { ruta: 'forma.ancho', tipo: 'rango', etiqueta: 'Ancho máximo del contenido', min: 1040, max: 1440, paso: 20, unidad: ' px' },
+    { ruta: 'forma.escala', tipo: 'rango', etiqueta: 'Tamaño general de la interfaz', min: 80, max: 115, paso: 5, unidad: ' %', ayuda: 'Achica o agranda todo el sitio a la vez (textos, botones, espacios y logo). Las personas pueden agrandar el texto con el botón de lectura.' },
+    { ruta: 'forma.ancho', tipo: 'rango', etiqueta: 'Ancho máximo del contenido', min: 960, max: 1440, paso: 20, unidad: ' px' },
   ] },
   { id: 'cabecera', titulo: 'Cabecera y logo', controles: [
     { ruta: 'cabecera.estilo', tipo: 'botones', etiqueta: 'Fondo de la cabecera', opciones: OPCIONES.cabeceraEstilo },

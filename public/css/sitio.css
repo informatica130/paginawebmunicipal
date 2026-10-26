@@ -1829,3 +1829,37 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="
 .hero.hero-vitrina .hero-credito { left: auto; right: 18px; bottom: 38px; text-align: right; }
 @media (max-width: 900px) { .hero.hero-vitrina .hero-credito { display: none; } }
 .accesos a, .emergencias-portada a, .lista-eventos a { text-decoration: none !important; }
+
+/* ---------------------------------------------------------------- Escala general y tamaños más contenidos */
+/* «Tamaño general de la interfaz» del panel: escala todo el sitio a la vez. */
+body { zoom: var(--interfaz, 1); }
+.cabecera-principal .contenedor { min-height: 66px; }
+@media (min-width: 1025px) { .nav-enlace, .nav-boton { min-height: 66px; font-size: .9688rem; } .nav-enlace::after, .nav-boton::after { bottom: 14px; } }
+.marca-emblema { width: min(var(--logo, 54px), 48px); }
+.marca-texto b { font-size: 1.25rem; }
+.boton, .boton:not([disabled]) { min-height: 44px; padding: 0 18px; font-size: .9688rem; }
+.seccion { padding: calc(60px * var(--esp, 1)) 0; }
+.seccion-cabecera h2, .bloque-cabecera h2 { font-size: clamp(1.45rem, 2.2vw, 1.95rem); }
+.hero-vitrina .tk-logo-caja { width: min(calc(480px * var(--tk-logo-escala, 1)), 100%); }
+.hv-rejilla { padding-top: clamp(24px, 4vw, 48px); padding-bottom: clamp(56px, 6vw, 88px); gap: clamp(28px, 4vw, 56px); }
+.hv-marco { max-height: min(540px, 64svh); }
+.hero.hero-vitrina .hero-lema { font-size: clamp(1rem, 1.2vw, 1.0938rem); margin: 12px 0 22px; }
+.encabezado h1 { font-size: clamp(2rem, 4.2vw, 3.25rem); }
+.encabezado, .encabezado:not(.con-imagen) { padding-top: clamp(36px, 5vw, 56px); padding-bottom: calc(56px + clamp(28px, 4vw, 48px)); }
+.tk-trekking h2 { font-size: clamp(1.8rem, 3.6vw, 2.9rem); }
+.tk-mundo-info h3 { font-size: clamp(2.2rem, 5vw, 4.2rem); }
+.tk-cifra b { font-size: clamp(2rem, 3.8vw, 3rem); }
+.tk-foto { flex-basis: clamp(230px, 22vw, 300px); }
+.tarjeta-noticia.grande h3 { font-size: clamp(1.35rem, 2vw, 1.75rem); }
+
+/* ---------------------------------------------------------------- Correcciones del examen */
+/* Textos largos sin espacios (direcciones web, códigos) ya no ensanchan la página en el celular. */
+main :is(p, li, dd, dt, td, th, h1, h2, h3, h4, blockquote, figcaption, .bajada, a) { overflow-wrap: anywhere; }
+/* Los hijos de las cuadrículas pueden achicarse (sin esto, un calendario o un directorio ancho desborda). */
+:is(.con-lateral, .tramites-catalogo, .agenda-portada, .noticias-portada, .tramites-portada, .video-portada, .columnas, .ficha) > * { min-width: 0; }
+@media (max-width: 720px) {
+  .calendario { overflow-x: auto; }
+  .calendario table { min-width: 0; width: 100%; table-layout: fixed; }
+  .calendario-cabecera { flex-wrap: wrap; gap: 8px; }
+  .directorio-fila { flex-wrap: wrap; }
+}

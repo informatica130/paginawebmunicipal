@@ -43,6 +43,9 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - **Portada «vitrina»** (predeterminada): insignia de la Municipalidad, logo vivo y buscador a un lado; al otro, el carrusel de fotos en un marco redondeado con un acceso flotante a la Capital del Trekking. Las fotos pueden ir a la derecha o a la izquierda. La portada de foto completa sigue disponible como «Capital del Trekking».
 - **Encabezado de las páginas interiores** a elección: claro con el tono del área (predeterminado), oscuro con el color del área o simple.
 
+- **Tamaño general de la interfaz** (*Diseño del sitio → Formas*): achica o agranda todo el sitio a la vez, de 80 % a 115 %.
+- **Vercel con memoria compartida**: con una base Redis gratuita (Upstash, se conecta desde Vercel → Storage) los cambios del panel se guardan de forma permanente y llegan a todas las instancias. Ver [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md#guardar-los-cambios-en-vercel-memoria-compartida-obligatorio-para-usar-el-panel).
+
 **Diseño (estilo Institucional)**
 - Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.

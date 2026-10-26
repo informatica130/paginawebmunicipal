@@ -2,6 +2,7 @@
 // mapa del sitio, calendario ICS, bloques aislados y API pública de datos abiertos.
 
 import crypto from 'node:crypto';
+import vm from 'node:vm';
 import * as V from './render/paginas.js';
 import { html, crudo, esc, icono } from './render/comun.js';
 import { crearImagenes } from './render/comun.js';
@@ -222,9 +223,12 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     if (!c || (!repo.visible(c) && !usuario)) throw new ErrorHttp(404, 'No encontrado');
     const b = (c.bloques || []).find((x) => x.id === bid && x.tipo === 'html_aislado');
     if (!b) throw new ErrorHttp(404, 'No encontrado');
-    const ajuste = `<base target="_top"><style>html,body{margin:0;overflow:hidden}</style>`;
+    // El marco aislado no tiene origen propio: sin este reemplazo, localStorage lanza un error y
+    // corta los scripts de las páginas heredadas.
+    const memoria = `<script>(function(){try{window.localStorage.length}catch(e){var m={},s={getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}},key:function(i){return Object.keys(m)[i]||null}};Object.defineProperty(s,'length',{get:function(){return Object.keys(m).length}});try{Object.defineProperty(window,'localStorage',{value:s,configurable:true});Object.defineProperty(window,'sessionStorage',{value:s,configurable:true})}catch(_){}}})();</script>`;
+    const ajuste = `<base target="_top"><style>html,body{margin:0;overflow:hidden}</style>${memoria}`;
     const resize = `<script>(function(){var u=0;function m(){var h=Math.max(document.documentElement.scrollHeight,document.body?document.body.scrollHeight:0);if(h!==u){u=h;parent.postMessage({tipo:'mlp-alto',bloque:${JSON.stringify(bid)},alto:h},'*')}}addEventListener('load',m);addEventListener('resize',m);if(window.ResizeObserver)new ResizeObserver(m).observe(document.documentElement);setInterval(m,1500);m()})();</script>`;
-    let h = String(b.html);
+    let h = repararScripts(String(b.html));
     if (/<html[\s>]/i.test(h)) {
       h = /<head[^>]*>/i.test(h) ? h.replace(/<head[^>]*>/i, (m) => m + ajuste) : h.replace(/<html[^>]*>/i, (m) => m + '<head>' + ajuste + '</head>');
       h = /<\/body>/i.test(h) ? h.replace(/<\/body>/i, resize + '</body>') : h + resize;
@@ -571,4 +575,28 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
   }
 
   return { manejar, invalidar, volcarVisitas, recibirMensaje, formulario, img };
+}
+
+// En el HTML heredado, un script puede escribir el texto «</script>» dentro de una cadena (por
+// ejemplo, para generar código): el navegador cree que el script termina ahí y falla. Se busca
+// el cierre real (el primero con el que el código es válido) y los anteriores se escapan.
+// Sólo para scripts clásicos en línea (sin src, sin tipo o de tipo JavaScript).
+export function repararScripts(html) {
+  const bajo = html.toLowerCase(), apertura = /<script\b([^>]*)>/gi;
+  let salida = '', i = 0, m;
+  while ((m = apertura.exec(html))) {
+    const inicio = m.index + m[0].length;
+    const primero = bajo.indexOf('</script', inicio);
+    if (primero < 0) break;
+    const clasico = !/\bsrc\s*=/i.test(m[1]) && (!/\btype\s*=/i.test(m[1]) || /type\s*=\s*["']?(text|application)\/javascript/i.test(m[1]));
+    let elegido = primero;
+    if (clasico) {
+      for (let fin = primero, n = 0; fin >= 0 && n < 20; fin = bajo.indexOf('</script', fin + 8), n++) {
+        try { new vm.Script(html.slice(inicio, fin)); elegido = fin; break; } catch { /* se prueba el siguiente cierre */ }
+      }
+    }
+    salida += html.slice(i, inicio) + html.slice(inicio, elegido).replace(/<\/script/gi, '<\\/script');
+    i = elegido; apertura.lastIndex = elegido + 8;
+  }
+  return salida + html.slice(i);
 }

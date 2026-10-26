@@ -2,9 +2,9 @@
 // rutas que no son archivos estáticos (ver vercel.json). La base se crea en /tmp al iniciar
 // la instancia, cargando el contenido importado del sitio anterior.
 //
-// Importante: en Vercel el disco es efímero y puede haber varias instancias, así que los
-// cambios hechos en el panel no son permanentes. Sirve para mostrar el sitio; para operar
-// el panel use un servidor con disco persistente (docs/DESPLIEGUE.md).
+// En Vercel el disco es efímero y puede haber varias instancias: los cambios del panel se
+// guardan en la memoria compartida (Redis de Upstash, server/persistencia.js) si está
+// conectada; sin ella no son permanentes (docs/DESPLIEGUE.md).
 
 import { iniciar } from '../server/server.js';
 

@@ -223,6 +223,7 @@ a.indicador:hover { border-color: var(--primario); }
 @keyframes entrar { from { transform: translateY(10px); opacity: 0; } }
 .caja { padding: 12px 14px; border-radius: 8px; border: 1px solid var(--borde); background: var(--superficie-2); margin-bottom: 12px; }
 .caja.alerta { border-color: color-mix(in srgb, var(--alerta) 45%, transparent); background: color-mix(in srgb, var(--alerta) 10%, var(--superficie)); }
+.caja.exito { border-color: color-mix(in srgb, var(--exito, #1e7b4f) 45%, transparent); background: color-mix(in srgb, var(--exito, #1e7b4f) 9%, var(--superficie)); }
 .caja.ok { border-color: color-mix(in srgb, var(--ok) 45%, transparent); background: color-mix(in srgb, var(--ok) 10%, var(--superficie)); }
 .caja.error { border-color: color-mix(in srgb, var(--peligro) 45%, transparent); background: color-mix(in srgb, var(--peligro) 10%, var(--superficie)); }
 .pestanas { display: flex; gap: 4px; border-bottom: 1px solid var(--borde); margin-bottom: 16px; flex-wrap: wrap; }
