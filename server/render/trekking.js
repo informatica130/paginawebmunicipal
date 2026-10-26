@@ -63,7 +63,7 @@ export function logoAnimado() {
     const piezas = simbolos[i].map((p) => `<path class="tk-pieza" data-cx="${f(p.cx)}" data-cy="${f(p.cy)}" data-w="${f(p.w)}" data-h="${f(p.h)}" d="${p.d}"/>`).join('');
     return `<g class="tk-letra" data-k="${i}" data-caja="${[x, y, w, h].map(f).join(' ')}" style="--i:${i};transform-origin:${f(x + w / 2)}px ${f(y + h)}px"><path class="tk-fondo" fill="${PALETA[i].color}" d="${l.fondo}"/><g class="tk-simbolo" fill="#FFF8EC" style="transform-origin:${f(x + w / 2)}px ${f(y + h / 2)}px">${piezas}</g></g>`;
   }).join('');
-  cacheLogo = `<svg class="tk-logo" viewBox="0 0 1036 265" role="img" aria-label="Melipeuco Capital del Trekking" xmlns="http://www.w3.org/2000/svg"><title>Melipeuco Capital del Trekking</title>${letras}<g class="tk-lema" fill="#FFFFFF">${partes.lema.map((d) => `<path class="tk-lema-letra" d="${d}"/>`).join('')}</g></svg>`;
+  cacheLogo = `<svg class="tk-logo" viewBox="0 0 1036 265" role="img" aria-label="Melipeuco Capital del Trekking" xmlns="http://www.w3.org/2000/svg"><title>Melipeuco Capital del Trekking</title>${letras}<g class="tk-lema" fill="currentColor">${partes.lema.map((d) => `<path class="tk-lema-letra" d="${d}"/>`).join('')}</g></svg>`;
   return cacheLogo;
 }
 

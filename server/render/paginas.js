@@ -45,6 +45,32 @@ async function seccionPortada(ctx, sec) {
               <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
             </form>
             <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>`;
+      if (dp.composicion === 'vitrina') {
+        // Portada «vitrina»: a un lado el nombre, el logo vivo y el buscador; al otro, las fotos de
+        // la Capital del Trekking en un marco redondeado, con un acceso flotante al sitio de turismo.
+        const turismo = s.turismo?.url || SITIO_TREKKING;
+        const lista = fotosPortada(disenoDe(s));
+        const fotos = lista.map((f, i) => html`<img${i === 0 ? crudo(' class="activa" fetchpriority="high"') : crudo(' loading="lazy"')} src="${f.src}"${f.srcset ? html` srcset="${f.srcset}" sizes="(max-width: 900px) 100vw, 50vw"` : ''} width="1920" height="1280" alt="" decoding="async" data-diseno-img="portada.foto-${i}">`);
+        return html`<section class="hero hero-vitrina" aria-labelledby="hero-titulo" data-hero-trekking>
+          <div class="contenedor hv-rejilla">
+            <div class="hv-texto">
+              <h1 id="hero-titulo" class="hv-insignia"><img src="/img/emblema-azul.svg" alt="" width="22" height="18" class="hv-insignia-claro"><img src="/img/emblema-crema.svg" alt="" width="22" height="18" class="hv-insignia-oscuro"><span data-diseno="portada.titulo">${dp.titulo}</span></h1>
+              <a class="tk-logo-caja hv-logo" ${attrsEnlace(turismo)} aria-label="Melipeuco Capital del Trekking: visite el sitio de turismo${/^https?:/.test(turismo) ? ' (se abre en otra pestaña)' : ''}">${crudo(logoAnimado())}</a>
+              <p class="hero-lema" data-diseno="portada.bajada">${dp.bajada || `${s.lema}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.`}</p>
+              ${buscar}
+            </div>
+            <div class="hv-visual">
+              <div class="hv-marco">
+                <div class="tk-fotos">${fotos}</div>
+                ${lista.length > 1 ? html`<div class="tk-puntos" role="group" aria-label="Fotografías de la portada">${lista.map((_, i) => html`<button type="button"${i === 0 ? crudo(' class="activa" aria-pressed="true"') : crudo(' aria-pressed="false"')} aria-label="Foto ${i + 1}"></button>`)}</div>` : ''}
+                <p class="hero-credito" data-diseno="portada.credito"${dp.credito ? '' : crudo(' hidden')}>${dp.credito}</p>
+              </div>
+              <a class="hv-flotante" ${attrsEnlace(turismo)}>${crudo(emblema(0))}<span><b>Capital del Trekking</b><small>Rutas, volcanes y lagunas</small></span>${crudo(icono('flecha', { tam: 18 }))}${avisoExterno(turismo)}</a>
+            </div>
+          </div>
+        </section>
+        ${franja}`;
+      }
       if (dp.composicion === 'trekking') {
         // Portada «Melipeuco Capital del Trekking»: fotos que se funden con zoom lento, el logo de
         // las nueve letras que caen una a una, el buscador y la cordillera en capas (parallax).

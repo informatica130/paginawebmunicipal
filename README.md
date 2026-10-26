@@ -39,6 +39,10 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
   - Estilos prediseñados nuevos: *Glaciar y lagunas* y *Pehuén y terracota*.
 - **Contenidos de la identidad editables** en *Ajustes del sitio → Portada*: palabras de la cinta, los nueve mundos (nombre, texto y enlace de cada letra), los lugares de la Capital del Trekking (foto, etiqueta, texto, enlace y color) y las cifras con contador.
 
+- **Interfaz v3**: un solo sistema de sombras en capas, radios y tiempos de animación para botones, enlaces, campos, tarjetas, listas y menús; cabecera blanca de vidrio; sin rayas decorativas. En *Diseño del sitio → Formas* se eligen las sombras (sin sombras, suaves o marcadas), los radios y los botones.
+- **Portada «vitrina»** (predeterminada): insignia de la Municipalidad, logo vivo y buscador a un lado; al otro, el carrusel de fotos en un marco redondeado con un acceso flotante a la Capital del Trekking. Las fotos pueden ir a la derecha o a la izquierda. La portada de foto completa sigue disponible como «Capital del Trekking».
+- **Encabezado de las páginas interiores** a elección: claro con el tono del área (predeterminado), oscuro con el color del área o simple.
+
 **Diseño (estilo Institucional)**
 - Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.

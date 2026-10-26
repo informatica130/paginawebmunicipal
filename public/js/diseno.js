@@ -23,16 +23,16 @@ export const PREDETERMINADO = {
   estilo: 'trekking',
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#121417', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 17, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: false },
-  forma: { radio: 16, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240 },
-  cabecera: { estilo: 'oscura', fija: true, barraSuperior: false, botonTramites: false, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
-  portada: { composicion: 'trekking', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
+  forma: { radio: 14, tarjetas: 'sombra', botones: 'redondeados', densidad: 'normal', ancho: 1240, sombras: 'suaves' },
+  cabecera: { estilo: 'blanca', fija: true, barraSuperior: false, botonTramites: false, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
+  portada: { composicion: 'vitrina', fotoLado: 'derecha', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
     // Portada «Capital del Trekking»
     logoAnimacion: 'vivo', logoReposo: true, logoGestos: true, tamanoLogo: 100, kicker: true, buscador: true, cordillera: true, puntos: true,
     fotos: ['', '', '', ''], intervalo: 7, kenBurns: true },
   // Identidad «Capital del Trekking» en todo el sitio
-  identidad: { zonas: true, emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: true, cordilleras: true, accesosColor: true, cinta: 42 },
+  identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
-  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true },
+  animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: false },
   avanzado: { css: '' },
 };
 
@@ -45,15 +45,15 @@ const INSTITUCIONAL = {
 
 // Estilos prediseñados: cambian colores, tipografía, forma, cabecera y pie (no los textos ni las fotos).
 export const ESTILOS = {
-  trekking: { nombre: 'Capital del Trekking', descripcion: 'Los nueve colores del logo de Melipeuco, papel crema, noche y la portada con el logo animado y la cordillera.', valores: { portada: { composicion: 'trekking' } } },
+  trekking: { nombre: 'Capital del Trekking', descripcion: 'Papel crema, los nueve colores del logo, sombras suaves y la portada vitrina con el logo vivo.', valores: { portada: { composicion: 'vitrina' } } },
   glaciar: { nombre: 'Glaciar y lagunas', descripcion: 'Turquesa de las lagunas andinas, fondo nevado y la portada del trekking.', valores: {
     colores: { primario: '#0E7C86', acento: '#E9A92B', oscuro: '#0A2A33', fondo: '#F3F8F9', fondoAlterno: '#E2EEF0', texto: '#0F2228', exito: '#2F7D4A', peligro: '#C62828' },
     tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', pesoTitulos: 800, espaciadoTitulos: -3 },
-    forma: { radio: 20, tarjetas: 'sombra', botones: 'pildora' }, cabecera: { estilo: 'oscura', barraSuperior: false, botonTramites: false }, pie: { estilo: 'oscuro' }, portada: { composicion: 'trekking' } } },
+    forma: { radio: 20, tarjetas: 'sombra', botones: 'pildora' }, cabecera: { estilo: 'blanca', barraSuperior: false, botonTramites: false }, pie: { estilo: 'oscuro' }, portada: { composicion: 'vitrina' } } },
   araucaria: { nombre: 'Pehuén y terracota', descripcion: 'Verde pehuén, terracota y papel crema, con la portada del trekking.', valores: {
     colores: { primario: '#2F7D4A', acento: '#E2683C', oscuro: '#132A1C', fondo: '#F5F2EA', fondoAlterno: '#E8E2D2', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
     tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', pesoTitulos: 800, espaciadoTitulos: -3 },
-    forma: { radio: 16, tarjetas: 'sombra', botones: 'pildora' }, cabecera: { estilo: 'oscura', barraSuperior: false, botonTramites: false }, pie: { estilo: 'oscuro' }, portada: { composicion: 'trekking' } } },
+    forma: { radio: 16, tarjetas: 'sombra', botones: 'pildora' }, cabecera: { estilo: 'blanca', barraSuperior: false, botonTramites: false }, pie: { estilo: 'oscuro' }, portada: { composicion: 'vitrina' } } },
   institucional: { nombre: 'Institucional', descripcion: 'Minimalista: blanco, tinta y azul municipal, sólo líneas finas.', valores: { ...INSTITUCIONAL, cabecera: { estilo: 'blanca', barraSuperior: true, botonTramites: true }, portada: { composicion: 'dividida', populares: true } } },
   bosque: { nombre: 'Bosque de araucarias', descripcion: 'Verde pehuén y tonos de madera.', valores: {
     colores: { ...INSTITUCIONAL.colores, primario: '#1F5A45', acento: '#D89A2B', oscuro: '#12352A', fondoAlterno: '#F2F5F1', exito: '#2F7D4F' },
@@ -85,9 +85,12 @@ export const OPCIONES = {
   densidad: { compacta: 'Compacta', normal: 'Normal', amplia: 'Amplia' },
   cabeceraEstilo: { blanca: 'Blanca', color: 'Color principal', oscura: 'Oscura' },
   logo: { emblema: 'Emblema (sin texto) y nombre', escudo: 'Escudo completo', personalizado: 'Imagen propia' },
-  composicion: { trekking: 'Capital del Trekking (logo animado y cordillera)', dividida: 'Texto y foto lado a lado', foto: 'Foto de fondo completa' },
+  composicion: { vitrina: 'Vitrina: logo y buscador junto a las fotos', trekking: 'Capital del Trekking: foto de fondo completa con el logo', dividida: 'Texto y foto lado a lado', foto: 'Foto de fondo completa' },
   alto: { bajo: 'Baja', medio: 'Media', alto: 'Alta', pantalla: 'Pantalla completa' },
   alineacion: { izquierda: 'A la izquierda', centro: 'Centrada' },
+  fotoLado: { derecha: 'Fotos a la derecha', izquierda: 'Fotos a la izquierda' },
+  sombras: { ninguna: 'Sin sombras (sólo bordes)', suaves: 'Suaves', marcadas: 'Marcadas' },
+  encabezado: { claro: 'Claro con el tono del área', oscuro: 'Oscuro con el color del área', simple: 'Simple (sin color)' },
   pieEstilo: { oscuro: 'Oscuro', color: 'Color principal', claro: 'Claro' },
   intensidad: { sutil: 'Sutil', normal: 'Normal', expresiva: 'Expresiva' },
   intro: { primera: 'Primera visita de cada sesión', siempre: 'Cada vez que se abre la portada', nunca: 'Nunca' },
@@ -131,7 +134,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
     },
     forma: {
       radio: numero(f.radio, P.forma.radio, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, P.forma.tarjetas), botones: opcion(f.botones, OPCIONES.botones, P.forma.botones),
-      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1240, 1040, 1440),
+      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1240, 1040, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras),
     },
     cabecera: {
       estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites),
@@ -142,11 +145,12 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       composicion: opcion(po.composicion, OPCIONES.composicion, P.portada.composicion), imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
       alto: opcion(po.alto, OPCIONES.alto, P.portada.alto), alineacion: opcion(po.alineacion, OPCIONES.alineacion, 'izquierda'), velo: numero(po.velo, 80, 0, 100),
       franjaDatos: bool(po.franjaDatos, true), populares: bool(po.populares, P.portada.populares),
+      fotoLado: opcion(po.fotoLado, OPCIONES.fotoLado, 'derecha'),
       logoAnimacion: opcion(po.logoAnimacion, OPCIONES.logoAnimacion, 'vivo'), logoReposo: bool(po.logoReposo, true), logoGestos: bool(po.logoGestos, true),
       tamanoLogo: numero(po.tamanoLogo, 100, 50, 120), kicker: bool(po.kicker, true), buscador: bool(po.buscador, true), cordillera: bool(po.cordillera, true), puntos: bool(po.puntos, true),
       fotos: [0, 1, 2, 3].map((i) => imagen(Array.isArray(po.fotos) ? po.fotos[i] : '')), intervalo: numero(po.intervalo, 7, 3, 20), kenBurns: bool(po.kenBurns, true),
     },
-    identidad: Object.fromEntries(Object.entries(P.identidad).map(([k, v]) => [k, k === 'cinta' ? numero(id.cinta, v, 15, 120) : bool(id[k], v)])),
+    identidad: Object.fromEntries(Object.entries(P.identidad).map(([k, v]) => [k, k === 'cinta' ? numero(id.cinta, v, 15, 120) : k === 'encabezado' ? opcion(id.encabezado, OPCIONES.encabezado, v) : bool(id[k], v)])),
     pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
@@ -203,7 +207,8 @@ export function atributos(cfg) {
     'data-logo-anim': a.activas ? cfg.portada.logoAnimacion : 'ninguna', 'data-logo-reposo': a.activas && cfg.portada.logoReposo ? 'si' : 'no', 'data-logo-gestos': a.activas && cfg.portada.logoGestos ? 'si' : 'no',
     'data-kicker': cfg.portada.kicker ? 'si' : 'no', 'data-hero-buscar': cfg.portada.buscador ? 'si' : 'no', 'data-hero-montes': cfg.portada.cordillera ? 'si' : 'no', 'data-hero-puntos': cfg.portada.puntos ? 'si' : 'no',
     'data-kenburns': a.activas && cfg.portada.kenBurns ? 'si' : 'no', 'data-intervalo': String(cfg.portada.intervalo),
-    ...Object.fromEntries(Object.entries(cfg.identidad).filter(([k]) => k !== 'cinta').map(([k, v]) => ['data-id-' + k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()), v ? 'si' : 'no'])),
+    'data-sombras': cfg.forma.sombras, 'data-hero-lado': cfg.portada.fotoLado, 'data-encabezado': cfg.identidad.encabezado,
+    ...Object.fromEntries(Object.entries(cfg.identidad).filter(([k]) => k !== 'cinta' && k !== 'encabezado').map(([k, v]) => ['data-id-' + k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()), v ? 'si' : 'no'])),
   };
 }
 

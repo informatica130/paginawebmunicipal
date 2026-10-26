@@ -6,6 +6,9 @@ import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
 import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada } from '/js/diseno.js';
 
+// Portadas que llevan el logo vivo y el carrusel de fotos.
+const conLogo = (c) => ['trekking', 'vitrina'].includes(c.portada.composicion);
+
 // Controles agrupados. ruta = propiedad dentro del diseño.
 const GRUPOS = [
   { id: 'colores', titulo: 'Colores', ayuda: 'El texto sobre los botones se ajusta solo para mantener buen contraste.', controles: [
@@ -30,6 +33,7 @@ const GRUPOS = [
     { ruta: 'forma.radio', tipo: 'rango', etiqueta: 'Redondeo de las esquinas', min: 0, max: 24, paso: 1, unidad: ' px' },
     { ruta: 'forma.tarjetas', tipo: 'botones', etiqueta: 'Tarjetas y listas', opciones: OPCIONES.tarjetas },
     { ruta: 'forma.botones', tipo: 'botones', etiqueta: 'Botones', opciones: OPCIONES.botones },
+    { ruta: 'forma.sombras', tipo: 'botones', etiqueta: 'Sombras', opciones: OPCIONES.sombras },
     { ruta: 'forma.densidad', tipo: 'botones', etiqueta: 'Espacio entre secciones', opciones: OPCIONES.densidad },
     { ruta: 'forma.ancho', tipo: 'rango', etiqueta: 'Ancho máximo del contenido', min: 1040, max: 1440, paso: 20, unidad: ' px' },
   ] },
@@ -53,25 +57,27 @@ const GRUPOS = [
     { ruta: 'portada.alto', tipo: 'botones', etiqueta: 'Altura', opciones: OPCIONES.alto },
     { ruta: 'portada.alineacion', tipo: 'botones', etiqueta: 'Alineación del texto', opciones: OPCIONES.alineacion, si: (c) => c.portada.composicion === 'foto' },
     { ruta: 'portada.velo', tipo: 'rango', etiqueta: 'Oscurecer la foto (legibilidad)', min: 0, max: 100, paso: 5, unidad: ' %', si: (c) => c.portada.composicion !== 'dividida' },
-    { ruta: 'portada.logoAnimacion', tipo: 'lista', etiqueta: 'Animación del logo', opciones: OPCIONES.logoAnimacion, ayuda: 'Con «Logo vivo» el río fluye, el rostro parpadea, las gotas caen, la araucaria se mece, el corazón late, la persona camina, los animales se mueven, las estrellas titilan y el kultrún gira. Use «Animar el logo» para verla.', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.logoReposo', tipo: 'si', etiqueta: 'Letras con vida después de la entrada (movimiento continuo)', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.logoGestos', tipo: 'si', etiqueta: 'Cada letra salta y hace su gesto al pasar el cursor', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.tamanoLogo', tipo: 'rango', etiqueta: 'Tamaño del logo', min: 50, max: 120, paso: 5, unidad: ' %', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.kicker', tipo: 'si', etiqueta: 'Mostrar el título sobre el logo', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.buscador', tipo: 'si', etiqueta: 'Buscador «¿Qué necesita hacer?»', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.logoAnimacion', tipo: 'lista', etiqueta: 'Animación del logo', opciones: OPCIONES.logoAnimacion, ayuda: 'Con «Logo vivo» el río fluye, el rostro parpadea, las gotas caen, la araucaria se mece, el corazón late, la persona camina, los animales se mueven, las estrellas titilan y el kultrún gira. Use «Animar el logo» para verla.', si: (c) => conLogo(c) },
+    { ruta: 'portada.logoReposo', tipo: 'si', etiqueta: 'Letras con vida después de la entrada (movimiento continuo)', si: (c) => conLogo(c) },
+    { ruta: 'portada.logoGestos', tipo: 'si', etiqueta: 'Cada letra salta y hace su gesto al pasar el cursor', si: (c) => conLogo(c) },
+    { ruta: 'portada.tamanoLogo', tipo: 'rango', etiqueta: 'Tamaño del logo', min: 50, max: 120, paso: 5, unidad: ' %', si: (c) => conLogo(c) },
+    { ruta: 'portada.kicker', tipo: 'si', etiqueta: 'Mostrar el título sobre el logo', si: (c) => conLogo(c) },
+    { ruta: 'portada.buscador', tipo: 'si', etiqueta: 'Buscador «¿Qué necesita hacer?»', si: (c) => conLogo(c) },
     { ruta: 'portada.cordillera', tipo: 'si', etiqueta: 'Cordillera en capas al pie de la portada', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.puntos', tipo: 'si', etiqueta: 'Puntos para cambiar de foto', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.kenBurns', tipo: 'si', etiqueta: 'Zoom lento de las fotos', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.intervalo', tipo: 'rango', etiqueta: 'Cambio de foto cada', min: 3, max: 20, paso: 1, unidad: ' s', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.fotos.0', tipo: 'imagen', etiqueta: 'Foto 2 del carrusel', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.fotos.1', tipo: 'imagen', etiqueta: 'Foto 3 del carrusel', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.fotos.2', tipo: 'imagen', etiqueta: 'Foto 4 del carrusel', si: (c) => c.portada.composicion === 'trekking' },
-    { ruta: 'portada.fotos.3', tipo: 'imagen', etiqueta: 'Foto 5 del carrusel', ayuda: 'Si no elige ninguna foto, se usan las cinco de la Capital del Trekking. Los cambios de fotos se ven al guardar.', si: (c) => c.portada.composicion === 'trekking' },
+    { ruta: 'portada.fotoLado', tipo: 'botones', etiqueta: 'Ubicación de las fotos', opciones: OPCIONES.fotoLado, si: (c) => c.portada.composicion === 'vitrina' },
+    { ruta: 'portada.puntos', tipo: 'si', etiqueta: 'Puntos para cambiar de foto', si: (c) => conLogo(c) },
+    { ruta: 'portada.kenBurns', tipo: 'si', etiqueta: 'Zoom lento de las fotos', si: (c) => conLogo(c) },
+    { ruta: 'portada.intervalo', tipo: 'rango', etiqueta: 'Cambio de foto cada', min: 3, max: 20, paso: 1, unidad: ' s', si: (c) => conLogo(c) },
+    { ruta: 'portada.fotos.0', tipo: 'imagen', etiqueta: 'Foto 2 del carrusel', si: (c) => conLogo(c) },
+    { ruta: 'portada.fotos.1', tipo: 'imagen', etiqueta: 'Foto 3 del carrusel', si: (c) => conLogo(c) },
+    { ruta: 'portada.fotos.2', tipo: 'imagen', etiqueta: 'Foto 4 del carrusel', si: (c) => conLogo(c) },
+    { ruta: 'portada.fotos.3', tipo: 'imagen', etiqueta: 'Foto 5 del carrusel', ayuda: 'Si no elige ninguna foto, se usan las cinco de la Capital del Trekking. Los cambios de fotos se ven al guardar.', si: (c) => conLogo(c) },
     { ruta: 'portada.franjaDatos', tipo: 'si', etiqueta: 'Franja de horario, teléfono, tiempo y emergencias' },
     { ruta: 'portada.populares', tipo: 'si', etiqueta: 'Enlaces «Lo más buscado»' },
   ] },
   { id: 'identidad', titulo: 'Identidad Capital del Trekking', ayuda: 'Los detalles de la marca en todo el sitio. Los textos de la cinta, los nueve mundos, los lugares y las cifras se editan en Ajustes del sitio → Portada.', controles: [
     { ruta: 'identidad.zonas', tipo: 'si', etiqueta: 'Cada área con el color de su letra (encabezados, anillos, cortina)' },
+    { ruta: 'identidad.encabezado', tipo: 'botones', etiqueta: 'Encabezado de las páginas interiores', opciones: OPCIONES.encabezado },
     { ruta: 'identidad.emblemaEncabezado', tipo: 'si', etiqueta: 'Emblema flotante en el encabezado de cada página' },
     { ruta: 'identidad.titulosPalabra', tipo: 'si', etiqueta: 'Títulos de las páginas que suben palabra por palabra' },
     { ruta: 'identidad.progreso', tipo: 'si', etiqueta: 'Barra de lectura arcoíris arriba de la pantalla' },
