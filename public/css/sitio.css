@@ -2132,3 +2132,103 @@ html.tk-saliendo :is(.tk-columnas, .tk-portal), html.tk-entrando :is(.tk-columna
   .pt-mosaico { margin-top: calc(-1 * (var(--pt-montes) * .3 + 44px)); }
 }
 @media (prefers-reduced-motion: reduce) { .pt-banda::after { animation: none !important; } .pt-tile-txt::after { display: none; } }
+
+/* =====================================================================
+   Portal · logo vivo de la Capital del Trekking, reparto y campañas
+   ===================================================================== */
+.pt-logo { display: block; width: min(420px, 100%); margin: 0 0 14px -4px; color: #fff; }
+.pt-logo .tk-logo { filter: drop-shadow(0 10px 26px rgb(0 0 0 / .35)); }
+:root[data-pt-logo="no"] .pt-logo { display: none; }
+:root[data-pt-reparto="banner"] .pt-rejilla { grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); }
+:root[data-pt-reparto="panel"] .pt-rejilla { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+
+/* Proporción y ajuste de la imagen de las campañas */
+:root[data-pt-banner="fijo"] .pt-visual .campanas .carrusel-item :is(picture, a) { display: block; aspect-ratio: var(--pt-banner-ar); overflow: hidden; }
+:root[data-pt-banner="fijo"] .pt-visual .campanas .carrusel-item img { width: 100%; height: 100%; max-height: none; aspect-ratio: var(--pt-banner-ar); object-fit: cover; }
+:root[data-pt-ajuste="completa"] .pt-visual .campanas .carrusel-item img { object-fit: contain; background: color-mix(in srgb, var(--pt-fin, var(--azul-profundo)) 70%, #000); }
+/* Al pasar el cursor por la campaña */
+.pt-visual .campanas { transition: transform .5s var(--mov), box-shadow .5s var(--mov); }
+.pt-visual .campanas .carrusel-item img { transition: transform 1.2s var(--mov), filter .6s; }
+:root[data-pt-efecto="zoom"] .pt-visual .campanas:hover .carrusel-item img { transform: scale(1.045); }
+:root[data-pt-efecto="elevar"] .pt-visual .campanas:hover { transform: translateY(calc(var(--elevacion) * -1.5)); box-shadow: 0 40px 70px -28px rgb(0 0 0 / .6); }
+.pt-visual .campanas .carrusel-ant { transform: translate(-14px, -50%); }
+.pt-visual .campanas .carrusel-sig { transform: translate(14px, -50%); }
+.pt-visual .campanas:hover :is(.carrusel-ant, .carrusel-sig) { transform: translate(0, -50%); }
+.pt-visual .campanas :is(.carrusel-ant, .carrusel-sig):hover { transform: translate(0, -50%) scale(1.08); }
+
+/* =====================================================================
+   Menús que se abren al pasar el cursor: un puente invisible evita que
+   el submenú se cierre al bajar el cursor, y entra con un leve desliz.
+   ===================================================================== */
+@media (min-width: 1025px) {
+  :root[data-menu-abrir="cursor"] .nav-item { position: relative; }
+  :root[data-menu-abrir="cursor"] .nav-boton[aria-expanded="true"] + .submenu::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 16px; }
+  .nav-boton[aria-expanded="true"] + .submenu { animation: menu-entra .28s var(--mov) both; }
+  .nav-boton[aria-expanded="true"] + .submenu li { animation: menu-item .32s var(--mov) both; }
+  .nav-boton[aria-expanded="true"] + .submenu li:nth-child(2) { animation-delay: .02s; } .nav-boton[aria-expanded="true"] + .submenu li:nth-child(3) { animation-delay: .04s; } .nav-boton[aria-expanded="true"] + .submenu li:nth-child(4) { animation-delay: .06s; } .nav-boton[aria-expanded="true"] + .submenu li:nth-child(n+5) { animation-delay: .08s; }
+  .nav-boton .ico { transition: transform .3s var(--mov); }
+  .nav-boton[aria-expanded="true"] .ico { transform: rotate(180deg); }
+}
+@keyframes menu-entra { from { opacity: 0; transform: translateY(-8px) scale(.985); } }
+@keyframes menu-item { from { opacity: 0; transform: translateY(6px); } }
+
+/* =====================================================================
+   Buscador predictivo
+   ===================================================================== */
+.con-fantasma { position: relative; }
+.sug-fantasma { position: absolute; z-index: 0; overflow: hidden; color: var(--texto-3); opacity: .55; white-space: pre; pointer-events: none; }
+.con-fantasma input { position: relative; z-index: 1; background: transparent; }
+.con-fantasma.buscando > .ico:first-child { animation: busca-pulso .8s ease-in-out infinite alternate; color: var(--azul); }
+@keyframes busca-pulso { to { transform: scale(1.15) rotate(-8deg); opacity: .6; } }
+.sugerencias { max-height: min(70vh, 560px); overflow-y: auto; padding: 6px; border-radius: var(--r-l); border-color: var(--linea-suave, var(--borde)); box-shadow: var(--sh-3); overscroll-behavior: contain; }
+.sugerencias a { align-items: center; justify-content: flex-start; gap: 12px; padding: 10px 12px; border: 0; border-radius: calc(var(--r-l) * .6); transition: background-color .15s; }
+.sugerencias a:hover, .sugerencias a[aria-selected="true"] { background: color-mix(in srgb, var(--azul) 9%, transparent); }
+.sugerencias a[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--azul); }
+.sug-ico { display: grid; flex-shrink: 0; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: color-mix(in srgb, var(--azul) 10%, transparent); color: var(--azul); }
+.sug-txt { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.sug-titulo { overflow: hidden; font-weight: 650; line-height: 1.3; text-overflow: ellipsis; }
+.sugerencias .sug-frag { overflow: hidden; color: var(--texto-3); font-size: .8125rem; line-height: 1.35; white-space: nowrap; text-overflow: ellipsis; }
+.sugerencias mark { padding: 0 1px; border-radius: 3px; background: color-mix(in srgb, var(--ambar) 38%, transparent); color: inherit; }
+.sug-ir { flex-shrink: 0; color: var(--texto-3); opacity: 0; transform: translateX(-4px); transition: opacity .15s, transform .2s var(--mov); }
+.sugerencias a:hover .sug-ir, .sugerencias a[aria-selected="true"] .sug-ir { opacity: 1; transform: none; }
+.sug-grupo { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 4px; color: var(--texto-3); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.sug-borrar { padding: 2px 6px; border: 0; border-radius: 6px; background: none; color: var(--enlace); font: inherit; font-size: .75rem; letter-spacing: 0; text-transform: none; cursor: pointer; }
+.sug-borrar:hover { background: color-mix(in srgb, var(--azul) 10%, transparent); }
+.sug-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 10px; }
+.sugerencias a.sug-chip { gap: 6px; padding: 6px 12px 6px 9px; border: 1px solid var(--linea-suave, var(--borde)); border-radius: 999px; font-size: .875rem; font-weight: 600; }
+.sug-chip .ico { width: 15px; height: 15px; color: var(--ambar); }
+.sugerencias a.sug-todo { justify-content: space-between; margin-top: 4px; border-top: 1px solid var(--linea-suave, var(--borde)); border-radius: 0 0 calc(var(--r-l) * .6) calc(var(--r-l) * .6); color: var(--enlace); font-weight: 700; }
+.sug-todo kbd { padding: 1px 6px; border: 1px solid var(--borde); border-radius: 5px; color: var(--texto-3); font: 600 .6875rem var(--fuente); }
+.sug-vacio { margin: 0; padding: 14px 12px 8px; color: var(--texto-2, var(--texto-3)); }
+@media (max-width: 720px) { .sugerencias .sug-frag { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; } .sug-todo kbd { display: none; } }
+
+/* =====================================================================
+   Transiciones: «Telón» y «Fluida»
+   ===================================================================== */
+.tk-telon { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; perspective: 1400px; visibility: hidden; }
+.tk-telon i { display: block; background: linear-gradient(90deg, var(--zo, #0F3A5A), var(--zc, #1F6FA8)); transform: translateX(-101%); transform-origin: 0 50%; }
+.tk-telon i:last-child { background: linear-gradient(270deg, var(--zo, #0F3A5A), var(--zc, #1F6FA8)); transform: translateX(101%); transform-origin: 100% 50%; box-shadow: inset 2px 0 0 color-mix(in srgb, var(--ambar) 80%, transparent); }
+:root[data-transicion-color="arcoiris"] .tk-telon i { background: linear-gradient(160deg, #1F6FA8, #16A0A8 30%, #2F7D4A 55%, #E9A92B 80%, #E2683C); }
+:root[data-transicion="telon"] .tk-cortina-capa, :root[data-transicion="telon"] .tk-columnas, :root[data-transicion="telon"] .tk-portal { display: none; }
+:root:not([data-transicion="telon"]) .tk-telon { display: none; }
+html.tk-saliendo .tk-telon, html.tk-entrando .tk-telon { visibility: visible; }
+html.tk-entrando[data-transicion="telon"] .tk-telon i { transform: none; }
+:root[data-transicion-nombre="no"] .tk-cortina-nombre { display: none; }
+/* Fluida (transición nativa entre páginas): la cabecera queda quieta y el contenido se desliza. */
+:root[data-transicion="vista"] .cabecera { view-transition-name: cabecera; }
+:root[data-transicion="vista"] main { view-transition-name: contenido; }
+::view-transition-old(contenido) { animation: vt-sale .28s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(contenido) { animation: vt-entra .52s cubic-bezier(.16, 1, .3, 1) .06s both; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .3s; }
+@keyframes vt-sale { to { opacity: 0; transform: translateX(-36px) scale(.99); filter: blur(4px); } }
+@keyframes vt-entra { from { opacity: 0; transform: translateX(48px); filter: blur(4px); } }
+/* El campo entero muestra el foco: el cuadro interno sobra. */
+.campo-buscar input:focus-visible { outline: none !important; }
+/* La luz de la franja se mueve dentro de su caja (sin salirse), así la franja puede dejar ver
+   las sugerencias del buscador por encima del mosaico. */
+.pt-banda::after { inset: 0; background-size: 140% 140%; }
+@keyframes pt-deriva { from { transform: none; background-position: 0% 0%; } to { transform: none; background-position: 100% 100%; } }
+.pt-banda:has(.sugerencias:not([hidden])) { z-index: 4; overflow: visible; }
+.pt-banda:has(.sugerencias:not([hidden]))::before { clip-path: inset(0); }
+.campo-buscar input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):focus { box-shadow: none !important; }
+@media (max-width: 720px) { .pt-logo { width: min(300px, 86%); margin-bottom: 10px; } }

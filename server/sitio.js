@@ -163,6 +163,9 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
   const BOTS = /bot|crawl|spider|slurp|facebookexternalhit|preview|monitor|curl|wget|python|headless/i;
   function contarVisita(ruta, req, status) {
     if (status !== 200 || req.method !== 'GET' || BOTS.test(req.headers['user-agent'] || '')) return;
+    // Las páginas que el navegador descarga por adelantado (al pasar el cursor) se cuentan sólo si
+    // de verdad se abren: la página avisa con /api/public/visita.
+    if (/prefetch|prerender/i.test(req.headers['sec-purpose'] || req.headers.purpose || '')) return;
     const clave = hoyLocal() + '|' + ruta.slice(0, 200);
     visitas.set(clave, (visitas.get(clave) || 0) + 1);
   }
@@ -267,15 +270,34 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
       case 'documentos': return enviarJson({ items: repo.listar({ tipo: 'documento', publico: true, orden: 'documento', limite, pagina }).items.map((d) => ({ ...resumen(d), archivo: d.datos.archivo ? base + d.datos.archivo : null, numero: d.datos.numero, fecha: d.datos.fechaDoc })) }, 300);
       case 'sitio': { const s = ajustes(); return enviarJson({ nombre: s.nombre, lema: s.lema, direccion: s.direccion, telefono: s.telefono, whatsapp: s.whatsapp, email: s.email, horario: s.horario, redes: s.redes, emergencias: s.emergencias, colores: s.colores, url: base + '/' }, 3600); }
       case 'menu': return enviarJson({ items: repo.menu(m[2] || 'principal') }, 600);
+      case 'visita': {
+        const r = String(query.get('r') || '');
+        if (/^\/(?!\/)[^\s]{0,200}$/.test(r) && !limitador.exceso('vis:' + req.ip, 60, 60)) contarVisita(r.split('?')[0], req, 200);
+        res.writeHead(204, { 'Cache-Control': 'no-store' }); return res.end();
+      }
       case 'buscar': {
         const q = String(query.get('q') || '').slice(0, 80);
         if (q.trim().length < 2) return enviarJson({ items: [] }, 30);
         if (limitador.exceso('sug:' + req.ip, 120, 60)) throw new ErrorHttp(429, 'Demasiadas consultas.');
-        const r = repo.buscar(q, { limite: 8 }).items.map((c) => ({ tipo: TIPOS[c.tipo]?.etiqueta || c.tipo, titulo: c.titulo, url: repo.urlDe(c) }));
+        const norm = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        const fragmento = (f) => String(f || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+        const deContenido = (c) => ({ tipo: TIPOS[c.tipo]?.etiqueta || c.tipo, clave: c.tipo, titulo: c.titulo, url: repo.urlDe(c), fragmento: fragmento(c.fragmento) });
+        let r = repo.buscar(q, { limite: 8 }).items.map(deContenido), aproximado = false;
+        // Sin resultados (falta de ortografía o palabra incompleta): se prueba con el comienzo de cada palabra.
+        if (!r.length) {
+          const corto = q.split(/\s+/).filter((t) => t.length > 3).map((t) => t.slice(0, Math.max(4, Math.ceil(t.length * .6)))).join(' ');
+          if (corto) { r = repo.buscar(corto, { limite: 6 }).items.map(deContenido); aproximado = r.length > 0; }
+        }
+        // Accesos directos del menú principal cuyo nombre coincide con lo escrito.
+        const nq = norm(q).trim(), palabras = nq.split(/\s+/);
+        const plano = (lista) => lista.flatMap((i) => [i, ...plano(i.hijos || [])]);
+        const atajos = plano(repo.menu('principal')).filter((i) => i.url && i.url !== '#' && palabras.every((p) => norm(i.texto + ' ' + (i.descripcion || '')).includes(p)))
+          .slice(0, 3).map((i) => ({ tipo: 'Acceso directo', clave: 'atajo', titulo: i.texto, url: i.url, externo: /^https?:/.test(i.url) && !i.url.startsWith(base) }));
         const cat = query.get('plataforma') !== '0' ? await tramites.catalogo() : null;
-        const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-        const en = cat ? cat.tramites.filter((t) => norm(t.nombre + ' ' + t.descripcion).includes(norm(q))).slice(0, 3).map((t) => ({ tipo: 'Trámite en línea', titulo: t.nombre, url: t.url, externo: true })) : [];
-        return enviarJson({ items: [...en, ...r].slice(0, 10) }, 60);
+        const en = cat ? cat.tramites.filter((t) => palabras.every((p) => norm(t.nombre + ' ' + t.descripcion).includes(p))).slice(0, 3).map((t) => ({ tipo: 'Trámite en línea', clave: 'en-linea', titulo: t.nombre, url: t.url, externo: true, fragmento: fragmento(t.descripcion) })) : [];
+        const vistos = new Set();
+        const items = [...atajos, ...en, ...r].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
+        return enviarJson({ items, aproximado }, 60);
       }
       default: throw new ErrorHttp(404, 'Recurso no encontrado');
     }

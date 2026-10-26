@@ -86,7 +86,7 @@ const CRESTAS = [
 const atributo = (v) => JSON.stringify(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 export function cortinaCordillera() {
   const datos = { rutas: ZONAS_URL.map(([r, k]) => [r.source, k]), paleta: PALETA.map((p) => [p.color, p.oscuro]) };
-  return `<div class="tk-cortina" aria-hidden="true" data-zonas="${atributo(datos)}">${CRESTAS.map((d) => `<div class="tk-cortina-capa"><svg viewBox="0 0 1440 140" preserveAspectRatio="none"><path d="${d}"/></svg></div>`).join('')}<div class="tk-columnas">${PALETA.map((p) => `<i style="--k:${p.color};--ko:${p.oscuro}"></i>`).join('')}</div><div class="tk-portal"></div><div class="tk-cortina-info">${PALETA.map((_, k) => `<img src="/img/trekking/emblema-${k}.svg" alt="" data-k="${k}" hidden>`).join('')}<span class="tk-cortina-nombre"></span></div></div>`;
+  return `<div class="tk-cortina" aria-hidden="true" data-zonas="${atributo(datos)}">${CRESTAS.map((d) => `<div class="tk-cortina-capa"><svg viewBox="0 0 1440 140" preserveAspectRatio="none"><path d="${d}"/></svg></div>`).join('')}<div class="tk-columnas">${PALETA.map((p) => `<i style="--k:${p.color};--ko:${p.oscuro}"></i>`).join('')}</div><div class="tk-portal"></div><div class="tk-telon"><i></i><i></i></div><div class="tk-cortina-info">${PALETA.map((_, k) => `<img src="/img/trekking/emblema-${k}.svg" alt="" data-k="${k}" hidden>`).join('')}<span class="tk-cortina-nombre"></span></div></div>`;
 }
 
 // Atractivos destacados del sitio de turismo (fotos optimizadas en /img/trekking/).

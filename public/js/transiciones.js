@@ -223,7 +223,7 @@
     var datos = {}; try { datos = JSON.parse(capa.getAttribute('data-zonas') || '{}'); } catch (e) {}
     var zonas = (datos.rutas || []).map(function (r) { return [new RegExp(r[0]), r[1]]; });
     var zonaDe = function (ruta) { for (var i = 0; i < zonas.length; i++) if (zonas[i][0].test(ruta)) return zonas[i][1]; return 0; };
-    var capas = $$('.tk-cortina-capa', capa), columnas = $$('.tk-columnas i', capa), portal = $('.tk-portal', capa);
+    var capas = $$('.tk-cortina-capa', capa), columnas = $$('.tk-columnas i', capa), portal = $('.tk-portal', capa), telon = $$('.tk-telon i', capa);
     var info = $('.tk-cortina-info', capa), nombre = $('.tk-cortina-nombre', capa);
 
     var centro = '50% 50%';
@@ -235,7 +235,7 @@
       $$('img', info).forEach(function (im) { im.hidden = Number(im.getAttribute('data-k')) !== k; });
       nombre.replaceChildren.apply(nombre, Array.prototype.map.call(texto || '', function (ch) { var s = d.createElement('span'); s.textContent = ch; return s; }));
     }
-    var cancelar = function () { capas.concat(columnas, [portal, info], $$('span, img', info)).forEach(function (el) { el && el.getAnimations().forEach(function (x) { x.cancel(); }); }); };
+    var cancelar = function () { capas.concat(columnas, telon, [portal, info], $$('span, img', info)).forEach(function (el) { el && el.getAnimations().forEach(function (x) { x.cancel(); }); }); };
     // Texto del destino: las letras aparecen en cascada.
     function nombreEntra(t0) { $$('span', nombre).forEach(function (s, i) { anim(s, [{ opacity: 0, transform: 'translateY(.6em) rotateX(-70deg)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: t0 + i * 18, easing: SALIDA }); }); }
 
@@ -248,10 +248,16 @@
       } else if (e === 'portal') {
         anim(portal, [{ clipPath: 'circle(0px at ' + centro + ')' }, { clipPath: 'circle(150vmax at ' + centro + ')' }], { duration: 560, easing: 'cubic-bezier(.7, 0, .3, 1)' });
         t = 300;
+      } else if (e === 'telon') {
+        // Dos paños se cierran desde los lados con un leve pliegue en 3D.
+        telon.forEach(function (p, i) { anim(p, [{ transform: 'translateX(' + (i ? 101 : -101) + '%) rotateY(' + (i ? -24 : 24) + 'deg)' }, { transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.76, 0, .24, 1)' }); });
+        t = 360;
       } else {
         capas.forEach(function (c, i) { anim(c, [{ transform: 'translate3d(0, calc(100% + 18vh), 0)' }, { transform: 'none' }], { duration: 460, delay: i * 60, easing: VUELO }); });
         t = 280;
       }
+      // La página actual retrocede un poco mientras se cubre (sensación de profundidad).
+      anim($('main'), [{ transform: 'none', filter: 'none' }, { transform: 'scale(.97) translateY(-12px)', filter: 'blur(3px) saturate(.8)' }], { duration: t + 200, easing: 'cubic-bezier(.4, 0, .2, 1)' });
       anim(info, [{ opacity: 0 }, { opacity: 1 }], { duration: 200, delay: t });
       anim(emblema, [{ opacity: 0, transform: 'perspective(600px) rotateY(-180deg) scale(.4)' }, { opacity: 1, transform: 'perspective(600px) rotateY(0) scale(1)' }], { duration: 560, delay: t, easing: REBOTE });
       nombreEntra(t + 120);
@@ -263,9 +269,13 @@
       anim(emblema, [{ opacity: 1, transform: 'perspective(600px) rotateY(0) scale(1)' }, { opacity: 0, transform: 'perspective(600px) rotateY(160deg) scale(.6)' }], { duration: 380, easing: 'ease-in' });
       anim(info, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 120 });
       if (e === 'columnas') columnas.forEach(function (c, i) { ultima = anim(c, [{ transform: 'none', transformOrigin: '100% 50%' }, { transform: 'rotateY(92deg)', transformOrigin: '100% 50%' }], { duration: 460, delay: 160 + i * 38, easing: 'cubic-bezier(.65, 0, .35, 1)' }); });
+      else if (e === 'telon') telon.forEach(function (p, i) { ultima = anim(p, [{ transform: 'none' }, { transform: 'translateX(' + (i ? 101 : -101) + '%) rotateY(' + (i ? -24 : 24) + 'deg)' }], { duration: 700, delay: 200, easing: 'cubic-bezier(.76, 0, .24, 1)' }); });
       else if (e === 'portal') ultima = anim(portal, [{ clipPath: 'circle(150vmax at 50% 50%)' }, { clipPath: 'circle(0px at 50% 50%)' }], { duration: 640, delay: 180, easing: 'cubic-bezier(.7, 0, .3, 1)' });
       else capas.slice().reverse().forEach(function (c, i) { ultima = anim(c, [{ transform: 'none' }, { transform: 'translate3d(0, calc(-100% - 18vh), 0)' }], { duration: 640, delay: 120 + i * 70, easing: VUELO }); });
-      var fin = function () { raiz.classList.remove('tk-entrando', 'tk-saliendo'); cancelar(); if (alTerminar) alTerminar(); };
+      // La página nueva llega desde un poco más abajo y más pequeña.
+      var main = $('main'), llegada = anim(main, [{ transform: 'scale(.975) translateY(24px)', opacity: .4 }, { transform: 'none', opacity: 1 }], { duration: 900, delay: 160, easing: SALIDA, fill: 'backwards' });
+      if (llegada) llegada.finished.then(function () { llegada.cancel(); }, function () {});
+      var fin = function () { raiz.classList.remove('tk-entrando', 'tk-saliendo'); cancelar(); main && main.getAnimations().forEach(function (x) { if (x !== llegada) x.cancel(); }); if (alTerminar) alTerminar(); };
       if (ultima) ultima.finished.then(fin, fin); else fin();
     }
 
@@ -282,7 +292,7 @@
       var a = e.target.closest('a[href]');
       if (saliendo || !a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.closest('.barra-admin')) return;
-      if (raiz.getAttribute('data-anim-cordillera') !== 'si') return;
+      if (raiz.getAttribute('data-anim-cordillera') !== 'si' || estilo() === 'vista') return;
       var u = new URL(a.href, location.href);
       if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search) || /^\/(admin|api|feed|medios|wp-content)\b/.test(u.pathname) || /\.\w{2,4}$/.test(u.pathname)) return;
       e.preventDefault();
@@ -295,11 +305,18 @@
       try { sessionStorage.setItem('mlp-cortina', JSON.stringify({ k: k, nombre: texto })); } catch (err) {}
       setTimeout(function () { location.href = u.href; }, t / VEL);
     });
-    addEventListener('pageshow', function (e) { if (!e.persisted) return; saliendo = false; raiz.classList.remove('tk-saliendo', 'tk-entrando'); cancelar(); });
+    addEventListener('pageshow', function (e) { if (!e.persisted) return; saliendo = false; raiz.classList.remove('tk-saliendo', 'tk-entrando'); cancelar(); var m = $('main'); m && m.getAnimations().forEach(function (x) { x.cancel(); }); });
 
     // Vista previa del panel: «Ver transición».
     d.addEventListener('mlp:diseno', function (e) {
       if (!e.detail || !e.detail.transicion) return;
+      if (estilo() === 'vista') {
+        // «Fluida» usa la transición nativa del navegador entre páginas; aquí se imita.
+        var main = $('main');
+        anim(main, [{ opacity: 1, transform: 'none', filter: 'none' }, { opacity: 0, transform: 'translateX(-40px) scale(.99)', filter: 'blur(4px)' }], { duration: 260, easing: 'ease-in' });
+        setTimeout(function () { anim(main, [{ opacity: 0, transform: 'translateX(60px)', filter: 'blur(4px)' }, { opacity: 1, transform: 'none', filter: 'none' }], { duration: 480, easing: SALIDA }); }, 300 / VEL);
+        return;
+      }
       cancelar(); raiz.classList.add('tk-saliendo');
       preparar(zonaDe(location.pathname), 'Melipeuco', 50, 50);
       setTimeout(function () { descubrir(); }, (cubrir() + 500) / VEL);
