@@ -24,12 +24,18 @@ export const PREDETERMINADO = {
   estilo: 'portal',
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#0F3A5A', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 16, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: true },
-  forma: { radio: 18, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240, sombras: 'suaves', escala: 100, maqueta: 'portal' },
+  forma: { radio: 18, radioGrande: 22, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240, sombras: 'suaves', escala: 100, maqueta: 'portal', elevacion: 4 },
   cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
   portada: { composicion: 'portal', fotoLado: 'derecha', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
     // Portada «Capital del Trekking»
     logoAnimacion: 'vivo', logoReposo: true, logoGestos: true, tamanoLogo: 100, kicker: true, buscador: true, cordillera: true, puntos: true,
     fotos: ['', '', '', ''], intervalo: 7, kenBurns: true },
+  // Portada «portal»: franja, mosaico, temas y buscador
+  portal: {
+    bandaPropia: false, bandaInicio: '#2A6A9C', bandaFin: '#0F3A5A', bandaTipo: 'radial', bandaAngulo: 160, patron: 'curvas', patronIntensidad: 50, brillo: true,
+    cordillera: true, cordilleraAlto: 100, mosaico: 6, mosaicoEstilo: 'solido', mosaicoColores: 'logo', mosaicoAlto: 150,
+    temas: true, temasTitulo: 'Quiero información de…', temasEstilo: 'vidrio', buscador: 'pildora',
+  },
   // Identidad «Capital del Trekking» en todo el sitio
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
@@ -108,6 +114,13 @@ export const OPCIONES = {
   introEstilo: { escudo3d: 'El escudo municipal se arma en 3D y vuela a la cabecera', logo3d: 'El logo se reconstruye en 3D, pieza por pieza', escudo: 'El escudo municipal se arma (clásica, plana)' },
   transicionEstilo: { columnas: 'Nueve columnas que giran en 3D (una por letra)', portal: 'Portal: el emblema del área se abre en círculo', cordillera: 'Cordillera: capas de montaña que suben' },
   transicionColor: { zona: 'Color del área de destino', arcoiris: 'Los nueve colores del logo' },
+  bandaTipo: { radial: 'Degradado circular', lineal: 'Degradado lineal', solido: 'Color sólido' },
+  patron: { curvas: 'Curvas de nivel', puntos: 'Puntos', diagonales: 'Líneas diagonales', ninguno: 'Sin patrón' },
+  mosaicoEstilo: { solido: 'Color sólido', degradado: 'Degradado', blanco: 'Tarjeta blanca con ícono de color' },
+  mosaicoColores: { logo: 'Colores del logo', tema: 'Color principal y acento' },
+  temasEstilo: { vidrio: 'Vidrio sobre la franja', solido: 'Botones blancos' },
+  buscador: { pildora: 'Píldora', redondeado: 'Esquinas suaves' },
+  curva: { suave: 'Suave', rebote: 'Con rebote', rapida: 'Rápida y precisa' },
   logoAnimacion: { vivo: 'Logo vivo: cada símbolo se anima', caida: 'Las letras caen una a una', aparecer: 'Aparece suavemente', ninguna: 'Sin animación de entrada' },
 };
 
@@ -137,7 +150,7 @@ export function aplicarEstilo(cfg, id) {
 
 export function normalizar(entrada, { permitirCss = true, previo = null } = {}) {
   const e = fusionar(PREDETERMINADO, esObjeto(entrada) ? entrada : {});
-  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad;
+  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal;
   return {
     estilo: opcion(e.estilo, { ...ESTILOS, personalizado: 1 }, 'personalizado'),
     colores: Object.fromEntries(Object.keys(P.colores).map((k) => [k, color(c[k], P.colores[k])])),
@@ -148,7 +161,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
     },
     forma: {
       radio: numero(f.radio, P.forma.radio, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, P.forma.tarjetas), botones: opcion(f.botones, OPCIONES.botones, P.forma.botones),
-      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, P.forma.ancho, 960, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras), escala: numero(f.escala, 100, 80, 115), maqueta: opcion(f.maqueta, OPCIONES.maqueta, P.forma.maqueta),
+      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, P.forma.ancho, 960, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras), escala: numero(f.escala, 100, 80, 115), radioGrande: numero(f.radioGrande, P.forma.radioGrande, 0, 48), elevacion: numero(f.elevacion, P.forma.elevacion, 0, 14), maqueta: opcion(f.maqueta, OPCIONES.maqueta, P.forma.maqueta),
     },
     cabecera: {
       estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), centrada: bool(ca.centrada, P.cabecera.centrada), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites),
@@ -164,12 +177,21 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       tamanoLogo: numero(po.tamanoLogo, 100, 50, 120), kicker: bool(po.kicker, true), buscador: bool(po.buscador, true), cordillera: bool(po.cordillera, true), puntos: bool(po.puntos, true),
       fotos: [0, 1, 2, 3].map((i) => imagen(Array.isArray(po.fotos) ? po.fotos[i] : '')), intervalo: numero(po.intervalo, 7, 3, 20), kenBurns: bool(po.kenBurns, true),
     },
+    portal: {
+      bandaPropia: bool(pt.bandaPropia, false), bandaInicio: color(pt.bandaInicio, PP.bandaInicio), bandaFin: color(pt.bandaFin, PP.bandaFin),
+      bandaTipo: opcion(pt.bandaTipo, OPCIONES.bandaTipo, PP.bandaTipo), bandaAngulo: numero(pt.bandaAngulo, PP.bandaAngulo, 0, 360),
+      patron: opcion(pt.patron, OPCIONES.patron, PP.patron), patronIntensidad: numero(pt.patronIntensidad, PP.patronIntensidad, 0, 100), brillo: bool(pt.brillo, PP.brillo),
+      cordillera: bool(pt.cordillera, PP.cordillera), cordilleraAlto: numero(pt.cordilleraAlto, PP.cordilleraAlto, 40, 200),
+      mosaico: numero(pt.mosaico, PP.mosaico, 0, 8), mosaicoEstilo: opcion(pt.mosaicoEstilo, OPCIONES.mosaicoEstilo, PP.mosaicoEstilo), mosaicoColores: opcion(pt.mosaicoColores, OPCIONES.mosaicoColores, PP.mosaicoColores), mosaicoAlto: numero(pt.mosaicoAlto, PP.mosaicoAlto, 100, 240),
+      temas: bool(pt.temas, PP.temas), temasTitulo: texto(pt.temasTitulo, PP.temasTitulo, 60), temasEstilo: opcion(pt.temasEstilo, OPCIONES.temasEstilo, PP.temasEstilo), buscador: opcion(pt.buscador, OPCIONES.buscador, PP.buscador),
+    },
     identidad: Object.fromEntries(Object.entries(P.identidad).map(([k, v]) => [k, k === 'cinta' ? numero(id.cinta, v, 15, 120) : k === 'encabezado' ? opcion(id.encabezado, OPCIONES.encabezado, v) : bool(id[k], v)])),
     pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
       intro: opcion(an.intro, OPCIONES.intro, 'primera'), transiciones: bool(an.transiciones, true), aparicion: bool(an.aparicion, true),
       inclinacion: bool(an.inclinacion, P.animaciones.inclinacion), barraCarga: bool(an.barraCarga, true), cordillera: bool(an.cordillera, P.animaciones.cordillera),
+      curva: opcion(an.curva, OPCIONES.curva, 'suave'),
       introEstilo: opcion(an.introEstilo, OPCIONES.introEstilo, P.animaciones.introEstilo), escudoVivo: bool(an.escudoVivo, true), profundidad: numero(an.profundidad, 70, 0, 100),
       transicionEstilo: opcion(an.transicionEstilo, OPCIONES.transicionEstilo, 'columnas'), transicionColor: opcion(an.transicionColor, OPCIONES.transicionColor, 'zona'),
     },
@@ -187,6 +209,7 @@ function luminancia(hex) {
 const tintaSobre = (hex) => (luminancia(hex) > 0.4 ? '#141414' : '#FFFFFF');
 
 const ESCALA = { compacta: .72, normal: 1, amplia: 1.32 };
+const CURVAS = { suave: 'cubic-bezier(.2, .8, .2, 1)', rebote: 'cubic-bezier(.34, 1.56, .64, 1)', rapida: 'cubic-bezier(.4, 0, .2, 1)' };
 const ALTO = { bajo: 'clamp(320px, 42vh, 420px)', medio: 'clamp(420px, 58vh, 560px)', alto: 'clamp(560px, 82vh, 860px)', pantalla: 'calc(100svh - 116px)' };
 const BOTON = { redondeados: null, pildora: '999px', rectos: '2px' };
 
@@ -202,7 +225,10 @@ export function variablesCss(cfg) {
     '--esp': ESCALA[f.densidad], '--ancho': `${f.ancho}px`,
     '--logo': `${cfg.cabecera.tamanoLogo}px`, '--hero-alto': ALTO[cfg.portada.alto], '--velo': cfg.portada.velo / 100,
     '--anim-vel': cfg.animaciones.velocidad,
-    '--interfaz': cfg.forma.escala / 100, '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
+    '--interfaz': cfg.forma.escala / 100, '--r-l': `${cfg.forma.radioGrande}px`, '--r-xl': `${Math.round(cfg.forma.radioGrande * 1.3)}px`, '--elevacion': `${cfg.forma.elevacion}px`,
+    '--mov': CURVAS[cfg.animaciones.curva], '--pt-angulo': `${cfg.portal.bandaAngulo}deg`, '--pt-patron': cfg.portal.patronIntensidad / 100,
+    '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`,
+    ...(cfg.portal.bandaPropia ? { '--pt-ini': cfg.portal.bandaInicio, '--pt-fin': cfg.portal.bandaFin } : {}), '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
   };
   return ':root{' + Object.entries(v).map(([k, x]) => `${k}:${x}`).join(';') + '}';
 }
@@ -224,6 +250,9 @@ export function atributos(cfg) {
     'data-logo-anim': a.activas ? cfg.portada.logoAnimacion : 'ninguna', 'data-logo-reposo': a.activas && cfg.portada.logoReposo ? 'si' : 'no', 'data-logo-gestos': a.activas && cfg.portada.logoGestos ? 'si' : 'no',
     'data-kicker': cfg.portada.kicker ? 'si' : 'no', 'data-hero-buscar': cfg.portada.buscador ? 'si' : 'no', 'data-hero-montes': cfg.portada.cordillera ? 'si' : 'no', 'data-hero-puntos': cfg.portada.puntos ? 'si' : 'no',
     'data-kenburns': a.activas && cfg.portada.kenBurns ? 'si' : 'no', 'data-intervalo': String(cfg.portada.intervalo),
+    'data-pt-banda': cfg.portal.bandaTipo, 'data-pt-patron': cfg.portal.patron, 'data-pt-brillo': a.activas && cfg.portal.brillo ? 'si' : 'no', 'data-pt-cordillera': cfg.portal.cordillera ? 'si' : 'no',
+    'data-pt-mosaico': String(cfg.portal.mosaico), 'data-pt-mosaico-estilo': cfg.portal.mosaicoEstilo, 'data-pt-mosaico-colores': cfg.portal.mosaicoColores,
+    'data-pt-temas': cfg.portal.temas ? 'si' : 'no', 'data-pt-temas-estilo': cfg.portal.temasEstilo, 'data-pt-buscador': cfg.portal.buscador, 'data-pt-propia': cfg.portal.bandaPropia ? 'si' : 'no',
     'data-sombras': cfg.forma.sombras, 'data-maqueta': cfg.forma.maqueta, 'data-cabecera-centrada': cfg.cabecera.centrada ? 'si' : 'no', 'data-hero-lado': cfg.portada.fotoLado, 'data-encabezado': cfg.identidad.encabezado,
     ...Object.fromEntries(Object.entries(cfg.identidad).filter(([k]) => k !== 'cinta' && k !== 'encabezado').map(([k, v]) => ['data-id-' + k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()), v ? 'si' : 'no'])),
   };

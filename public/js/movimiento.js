@@ -161,6 +161,28 @@
       });
       return;
     }
+    if (hero.classList.contains('hero-portal')) {
+      // Portada «portal»: la franja se enciende, la campaña sube, el panel llega por partes,
+      // los temas saltan uno a uno y el mosaico se levanta en cascada con un leve giro 3D.
+      // Al terminar se suelta cada animación para que el cursor pueda volver a moverlas.
+      var suelta = function (el, c, o) { var x = anim(el, c, o); if (x) x.finished.then(function () { x.cancel(); }, function () {}); };
+      suelta($('.pt-banda', hero), [{ opacity: .4, filter: 'saturate(.6)' }, { opacity: 1, filter: 'none' }], { duration: 900, easing: 'ease-out' });
+      suelta($('.pt-visual', hero), [{ opacity: 0, transform: escalar('translateY(36px) scale(.97)'), clipPath: 'inset(6% 4% 6% 4% round 40px)' }, { opacity: 1, transform: 'none', clipPath: 'inset(0 0 0 0 round 0px)' }], { duration: 1100, delay: 120, easing: SALIDA });
+      [['.pt-saludo', 260], ['.hero-buscar', 380], ['.pt-temas-titulo', 520]].forEach(function (x) {
+        suelta($(x[0], hero), [{ opacity: 0, transform: escalar('translateX(24px)') }, { opacity: 1, transform: 'none' }], { duration: 760, delay: x[1], easing: SALIDA });
+      });
+      $$('.pt-tema', hero).forEach(function (el, i) {
+        suelta(el, [{ opacity: 0, transform: escalar('translateY(10px) scale(.85)') }, { opacity: 1, transform: 'none' }], { duration: 620, delay: 600 + i * 55, easing: REBOTE });
+      });
+      suelta($('.pt-montes', hero), [{ transform: 'translateY(40%)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 1200, delay: 200, easing: SALIDA });
+      $$('.pt-mosaico > li', hero).forEach(function (el, i) {
+        suelta(el, [{ opacity: 0, transform: 'perspective(800px) ' + escalar('translateY(48px) rotateX(18deg)') }, { opacity: 1, transform: 'none' }], { duration: 900, delay: 520 + i * 70, easing: SALIDA });
+      });
+      $$('.franja-datos .dato').forEach(function (el, i) {
+        suelta(el, [{ opacity: 0, transform: escalar('translateY(14px)') }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 1000 + i * 80, easing: SALIDA });
+      });
+      return;
+    }
     var foto = $('.hero-foto', hero);
     if (raiz.getAttribute('data-portada') === 'foto') {
       anim(foto, [{ transform: 'scale(1.12)', filter: 'saturate(.6) brightness(.8)' }, { transform: 'scale(1)', filter: 'none' }], { duration: 2200, easing: SALIDA });
@@ -413,6 +435,8 @@
   var hayIntro = intro();
   if (hayIntro) d.addEventListener('intro:salida', function () { setTimeout(entradaPortada, 250); }, { once: true });
   else entradaPortada();
+  // Vista previa del panel: «Reproducir animaciones» vuelve a mostrar la entrada de la portada.
+  d.addEventListener('mlp:diseno', function (e) { if (e.detail && e.detail.reproducir) entradaPortada(); });
   aparicion();
   inclinacion();
   barraCarga();

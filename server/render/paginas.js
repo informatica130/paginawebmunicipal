@@ -64,7 +64,8 @@ async function seccionPortada(ctx, sec) {
         // Portada «portal»: franja azul con las campañas como protagonistas y, al lado, el buscador y
         // los temas más consultados; abajo, un mosaico de accesos grandes con los colores del logo.
         const slides = ctx.repo.vigentes('slide');
-        const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 6 }).items;
+        // Se dibujan hasta 8; cuántas se ven lo decide «Diseño del sitio» (así la vista previa cambia al instante).
+        const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 8 }).items;
         const temas = [...contenidoTrekking(s).mundos.map((m, k) => ({ nombre: m.nombre, url: m.url, k })), ...TEMAS_EXTRA.map(([nombre, url, ico]) => ({ nombre, url, ico }))];
         const lista = fotosPortada(disenoDe(s));
         const visual = slides.length ? carruselCampanas(ctx, slides, '(max-width: 900px) 100vw, 760px')
@@ -77,7 +78,7 @@ async function seccionPortada(ctx, sec) {
               <div class="pt-panel">
                 <p class="pt-saludo" data-diseno="portada.bajada">${dp.bajada || `${s.lema}: trámites, servicios e información de Melipeuco.`}</p>
                 ${buscar}
-                <h2 class="pt-temas-titulo">Quiero información de…</h2>
+                <h2 class="pt-temas-titulo" data-diseno="portal.temasTitulo">${disenoDe(s).portal.temasTitulo}</h2>
                 <ul class="pt-temas">${temas.map((t, i) => html`<li><a class="pt-tema" href="${t.url}" style="--i:${i}">${t.k !== undefined ? crudo(emblema(t.k)) : crudo(icono(t.ico || 'flecha', { tam: 16 }))}<span>${t.nombre}</span></a></li>`)}</ul>
               </div>
             </div>
@@ -186,8 +187,9 @@ async function seccionPortada(ctx, sec) {
       </div></section>`;
     }
     case 'accesos': {
-      // En la portada «portal» los seis primeros ya están en el mosaico de arriba.
-      const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items.slice(disenoDe(s).portada.composicion === 'portal' ? 6 : 0);
+      // En la portada «portal» los primeros ya están en el mosaico de arriba.
+      const dzA = disenoDe(s);
+      const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items.slice(dzA.portada.composicion === 'portal' ? dzA.portal.mosaico : 0);
       if (!accesos.length) return '';
       return html`<section class="seccion accesos-seccion" id="accesos"><div class="contenedor">
         <div class="seccion-cabecera"><h2>${sec.titulo || 'Accesos rápidos'}</h2></div>
