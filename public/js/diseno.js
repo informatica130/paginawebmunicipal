@@ -156,10 +156,21 @@ export function aplicarEstilo(cfg, id) {
   return normalizar(fusionar(fusionar(cfg, base), { ...e.valores, estilo: id }));
 }
 
+// Revisión del diseño. Los diseños guardados antes de «Portal colorido» (sin revisión y con otra
+// portada) pasan una sola vez al nuevo diseño; conservan textos, fotos, logo y CSS propio. Lo que
+// se guarde después (o una versión anterior que se restaure) lleva la revisión y no se toca.
+export const REVISION = 3;
+export function migrar(d) {
+  if (!esObjeto(d) || !Object.keys(d).length || Number(d.revision) >= REVISION) return d;
+  if (d.portada?.composicion === 'portal') return { ...d, revision: REVISION };
+  return aplicarEstilo(normalizar(d), 'portal');
+}
+
 export function normalizar(entrada, { permitirCss = true, previo = null } = {}) {
   const e = fusionar(PREDETERMINADO, esObjeto(entrada) ? entrada : {});
   const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador;
   return {
+    revision: REVISION,
     estilo: opcion(e.estilo, { ...ESTILOS, personalizado: 1 }, 'personalizado'),
     colores: Object.fromEntries(Object.keys(P.colores).map((k) => [k, color(c[k], P.colores[k])])),
     tipografia: {

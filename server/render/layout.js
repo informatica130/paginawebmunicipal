@@ -5,7 +5,7 @@ import { html, crudo, esc, icono, attrsEnlace, avisoExterno, telefonoHref, telef
 import { textoPlano, recortar } from '../../src/util.js';
 import { plantillaIntro, SCRIPT_INTRO } from './intro.js';
 import { escudoVivo } from './escudo.js';
-import { normalizar, variablesCss, atributos, urlFuentes, logoCabecera } from '../../public/js/diseno.js';
+import { normalizar, migrar, variablesCss, atributos, urlFuentes, logoCabecera } from '../../public/js/diseno.js';
 import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCordillera } from './trekking.js';
 
 // Diseño personalizado desde el panel (Diseño del sitio), normalizado una vez por versión de ajustes.
@@ -17,7 +17,7 @@ export function disenoDe(s) {
   if (!cacheDiseno.has(s)) {
     const c = s.colores || {};
     const propios = c.primario && !COLORES_SEMILLA.includes([c.primario, c.acento, c.oscuro].join('').toUpperCase());
-    cacheDiseno.set(s, normalizar(s.diseno || { colores: propios ? { primario: c.primario, acento: c.acento, oscuro: c.oscuro } : {} }));
+    cacheDiseno.set(s, normalizar(migrar(s.diseno) || { colores: propios ? { primario: c.primario, acento: c.acento, oscuro: c.oscuro } : {} }));
   }
   return cacheDiseno.get(s);
 }

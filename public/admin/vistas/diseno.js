@@ -4,7 +4,7 @@
 import { h, raw, $, $$, api, aviso, fallo, estado, confirmar, ico } from '../ui.js';
 import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
-import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada } from '/js/diseno.js';
+import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, migrar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada } from '/js/diseno.js';
 
 // Portadas que llevan el logo vivo y el carrusel de fotos.
 const conLogo = (c) => ['trekking', 'vitrina'].includes(c.portada.composicion) || (c.portada.composicion === 'portal' && c.portal.logoTrekking);
@@ -164,7 +164,7 @@ export default async function (vista) {
   const ajustes = await api('GET', 'ajustes');
   const superadmin = estado.sesion.usuario.rol === 'superadmin';
   const desdeColores = ajustes.colores?.primario ? { colores: { primario: ajustes.colores.primario, acento: ajustes.colores.acento, oscuro: ajustes.colores.oscuro } } : {};
-  let cfg = normalizar(ajustes.diseno || desdeColores);
+  let cfg = normalizar(migrar(ajustes.diseno) || desdeColores);
   let guardado = JSON.stringify(cfg);
   const historial = [];
   let pagina = '/', dispositivo = 'computador';
