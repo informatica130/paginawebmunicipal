@@ -216,7 +216,7 @@ ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
 </head>
 <body class="${clase}${portada ? ' es-portada' : ''}">
-${portada ? html`${crudo(plantillaIntro())}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
+${portada ? html`${crudo(plantillaIntro(dz.animaciones.introEstilo === 'logo3d' && ['vitrina', 'trekking'].includes(dz.portada.composicion) ? 'logo3d' : 'escudo'))}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
 ${dz.animaciones.activas && dz.animaciones.cordillera ? crudo(cortinaCordillera()) : ''}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="tk-progreso" aria-hidden="true"></div>
@@ -231,6 +231,7 @@ ${pie(ctx)}
 <script src="/js/sitio.js?v=${ctx.version}" defer></script>
 <script src="/js/movimiento.js?v=${ctx.version}" defer></script>
 ${portada ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}
+<script src="/js/transiciones.js?v=${ctx.version}" defer></script>
 </body>
 </html>`;
 }

@@ -836,7 +836,7 @@ mark { padding: 0 2px; border-radius: 2px; background: color-mix(in srgb, var(--
 
 /* Pantalla de carga de la portada */
 .con-intro { overflow: hidden; }
-.con-intro .marca-emblema { visibility: hidden; }
+.con-intro:not(.con-intro-logo) .marca-emblema { visibility: hidden; }
 .intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: var(--fondo); animation: intro-seguro .3s ease 4.4s forwards; }
 .intro-escudo { width: min(300px, 64vw); will-change: transform; }
 .intro-escudo svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1438,7 +1438,7 @@ h1, h2 { text-wrap: balance; }
 .tk-cortina-info img { width: clamp(84px, 10vw, 124px); height: auto; filter: drop-shadow(0 18px 40px rgb(0 0 0 / .45)); }
 .tk-cortina-nombre { color: #fff; font: 800 clamp(1.4rem, 3.4vw, 2.4rem)/1 var(--fuente-titulo, var(--fuente)); letter-spacing: -.01em; }
 html.tk-entrando .tk-cortina, html.tk-saliendo .tk-cortina { pointer-events: auto; }
-html.tk-entrando .tk-cortina-capa { transform: none; }
+html.tk-entrando[data-transicion="cordillera"] .tk-cortina-capa { transform: none; }
 html.tk-entrando .tk-cortina { animation: tk-cortina-seguro 0s linear 3s forwards; }
 @keyframes tk-cortina-seguro { to { visibility: hidden; } }
 :root[data-anim-cordillera="si"] { view-transition-name: none; }
@@ -1863,3 +1863,42 @@ main :is(p, li, dd, dt, td, th, h1, h2, h3, h4, blockquote, figcaption, .bajada,
   .calendario-cabecera { flex-wrap: wrap; gap: 8px; }
   .directorio-fila { flex-wrap: wrap; }
 }
+
+/* =====================================================================
+   Pantalla de carga «logo 3D» y transiciones entre páginas
+   (las anima public/js/transiciones.js)
+   ===================================================================== */
+.intro.intro-logo { background: transparent; animation: intro-seguro .3s ease 6.8s forwards; }
+.il-fondo { position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 45%, #1C2530 0%, #0D1116 70%), #0D1116; }
+.il-fondo::before { content: ''; position: absolute; inset: 0; opacity: .5; background-image: radial-gradient(1px 1px at 12% 22%, #fff, transparent), radial-gradient(1px 1px at 78% 14%, #fff, transparent), radial-gradient(1.5px 1.5px at 64% 68%, #fff, transparent), radial-gradient(1px 1px at 28% 80%, #fff, transparent), radial-gradient(1px 1px at 88% 52%, #fff, transparent), radial-gradient(1px 1px at 42% 36%, #fff, transparent); }
+.il-fondo::after { content: ''; position: absolute; inset: auto 0 0; height: 22vh; background: linear-gradient(transparent, rgb(31 111 168 / .18)); clip-path: polygon(0 100%, 0 70%, 8% 52%, 15% 66%, 24% 34%, 33% 60%, 41% 44%, 50% 18%, 58% 50%, 66% 38%, 75% 62%, 84% 30%, 92% 56%, 100% 44%, 100% 100%); }
+.il-escena { position: relative; z-index: 1; width: min(820px, 86vw); perspective: 1400px; perspective-origin: 50% 40%; }
+.il-logo { position: relative; width: 100%; aspect-ratio: 1036 / 265; transform-style: preserve-3d; will-change: transform; }
+.il-letra { position: absolute; transform-style: preserve-3d; will-change: transform, opacity; }
+.il-capa { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; backface-visibility: visible; }
+.il-base { filter: drop-shadow(0 18px 30px rgb(0 0 0 / .45)); }
+.il-pieza { will-change: transform, opacity; }
+.il-lema { fill: #fff; }
+.intro-logo .intro-barra { background: rgb(255 255 255 / .14); }
+.intro-logo .intro-barra span { animation: none; background: var(--arcoiris, #E9A92B); }
+.intro-logo .intro-saltar { color: rgb(255 255 255 / .55); }
+.con-intro-logo .hero .tk-logo-caja { visibility: hidden; }
+
+/* Transiciones: sólo se ve la del estilo elegido */
+.tk-columnas { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(9, 1fr); perspective: 1600px; pointer-events: none; }
+.tk-columnas i { display: block; height: 100%; margin-right: -1px; background: color-mix(in srgb, var(--zc, #1F6FA8) calc(100% - var(--n, 0) * 7%), var(--zo, #0F3A5A)); transform: rotateY(-92deg); transform-origin: 0 50%; backface-visibility: hidden; }
+.tk-columnas i:nth-child(1) { --n: 0; } .tk-columnas i:nth-child(2) { --n: 1; } .tk-columnas i:nth-child(3) { --n: 2; } .tk-columnas i:nth-child(4) { --n: 3; } .tk-columnas i:nth-child(5) { --n: 4; } .tk-columnas i:nth-child(6) { --n: 5; } .tk-columnas i:nth-child(7) { --n: 6; } .tk-columnas i:nth-child(8) { --n: 7; } .tk-columnas i:nth-child(9) { --n: 8; }
+:root[data-transicion-color="arcoiris"] .tk-columnas i { background: var(--k); }
+.tk-portal { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, var(--zc, #1F6FA8), var(--zo, #0F3A5A) 75%); clip-path: circle(0 at 50% 50%); }
+:root[data-transicion-color="arcoiris"] .tk-portal { background: conic-gradient(from 200deg at 50% 50%, #1F6FA8, #E2683C, #16A0A8, #2F7D4A, #D23B4A, #E9A92B, #8A5A3B, #3E3E9A, #7A3E91, #1F6FA8); }
+:root:not([data-transicion="cordillera"]) .tk-cortina-capa { display: none; }
+:root:not([data-transicion="columnas"]) .tk-columnas, :root[data-transicion="columnas"] .tk-portal, :root[data-transicion="cordillera"] .tk-portal { display: none; }
+html.tk-entrando[data-transicion="columnas"] .tk-columnas i { transform: none; }
+html.tk-entrando[data-transicion="portal"] .tk-portal { clip-path: circle(150vmax at 50% 50%); }
+.tk-cortina-info { perspective: 800px; }
+.tk-cortina-nombre { display: flex; perspective: 600px; }
+.tk-cortina-nombre > span { display: inline-block; white-space: pre; transform-origin: 50% 100%; }
+@media (prefers-reduced-motion: reduce) { .intro-logo { display: none; } }
+/* Las piezas de la transición sólo existen mientras se usa (en reposo no asoman bordes). */
+.tk-columnas, .tk-portal { visibility: hidden; }
+html.tk-saliendo :is(.tk-columnas, .tk-portal), html.tk-entrando :is(.tk-columnas, .tk-portal) { visibility: visible; }

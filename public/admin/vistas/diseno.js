@@ -98,11 +98,15 @@ const GRUPOS = [
     { ruta: 'animaciones.activas', tipo: 'si', etiqueta: 'Animaciones activas' },
     { ruta: 'animaciones.intensidad', tipo: 'botones', etiqueta: 'Intensidad', opciones: OPCIONES.intensidad, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.velocidad', tipo: 'rango', etiqueta: 'Velocidad', min: .5, max: 2, paso: .1, unidad: '×', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.intro', tipo: 'lista', etiqueta: 'Pantalla de carga con el escudo', opciones: OPCIONES.intro, si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.intro', tipo: 'lista', etiqueta: 'Pantalla de carga de la portada', opciones: OPCIONES.intro, si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.introEstilo', tipo: 'lista', etiqueta: 'Animación de la pantalla de carga', opciones: OPCIONES.introEstilo, ayuda: 'En 3D, las nueve letras llegan desde el espacio, cada símbolo se arma con sus piezas y el logo vuela a su lugar en la portada. Use «Ver pantalla de carga» (guarde antes).', si: (c) => c.animaciones.activas && c.animaciones.intro !== 'nunca' },
+    { ruta: 'animaciones.profundidad', tipo: 'rango', etiqueta: 'Profundidad del efecto 3D', min: 0, max: 100, paso: 10, unidad: ' %', si: (c) => c.animaciones.activas && c.animaciones.introEstilo === 'logo3d' },
     { ruta: 'animaciones.aparicion', tipo: 'si', etiqueta: 'Contenido que aparece al bajar', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.cordillera', tipo: 'si', etiqueta: 'Cortina de cordillera con el color de cada sección al cambiar de página', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.cordillera', tipo: 'si', etiqueta: 'Transición de identidad al cambiar de página', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.transicionEstilo', tipo: 'lista', etiqueta: 'Estilo de la transición', opciones: OPCIONES.transicionEstilo, ayuda: 'Use «Ver transición» en la vista previa.', si: (c) => c.animaciones.activas && c.animaciones.cordillera },
+    { ruta: 'animaciones.transicionColor', tipo: 'botones', etiqueta: 'Colores de la transición', opciones: OPCIONES.transicionColor, si: (c) => c.animaciones.activas && c.animaciones.cordillera && c.animaciones.transicionEstilo !== 'cordillera' },
     { ruta: 'animaciones.barraCarga', tipo: 'si', etiqueta: 'Barra de carga al navegar', si: (c) => c.animaciones.activas },
   ] },
 ];
@@ -136,6 +140,7 @@ export default async function (vista) {
           <select data-pagina aria-label="Página de la vista previa">${Object.entries(PAGINAS).map(([u, t]) => h`<option value="${u}">${t}</option>`)}</select>
           <div class="segmentos" role="group" aria-label="Tamaño de pantalla">${Object.entries(DISPOSITIVOS).map(([k, [t]]) => h`<button type="button" data-dispositivo="${k}" aria-pressed="${k === dispositivo}">${t}</button>`)}</div>
           <button type="button" class="btn chico" data-intro title="Recarga la portada mostrando la pantalla de carga">Ver pantalla de carga</button>
+          <button type="button" class="btn chico" data-ver-transicion title="Muestra la transición entre páginas en la vista previa">Ver transición</button>
           <button type="button" class="btn chico" data-reproducir-logo title="Vuelve a reproducir la animación del logo en la vista previa">Animar el logo</button>
           <a class="btn chico fantasma" href="/" target="_blank" rel="noopener">${ico('ojo', 14)} Abrir el sitio</a>
         </div>
@@ -263,6 +268,10 @@ export default async function (vista) {
   }
   const medidor = new ResizeObserver(ajustarMarco);
   medidor.observe(marco);
+  $('[data-ver-transicion]', vista).addEventListener('click', () => {
+    if (!cfg.animaciones.activas || !cfg.animaciones.cordillera) return aviso('Active «Transición de identidad al cambiar de página» en Animaciones.');
+    try { iframe.contentWindow?.postMessage({ ...mensaje(), transicion: true }, location.origin); } catch { /* aún cargando */ }
+  });
   $('[data-reproducir-logo]', vista).addEventListener('click', () => {
     if (pagina !== '/') { pagina = '/'; $('[data-pagina]', vista).value = '/'; cargar(); return; }
     try { iframe.contentWindow?.postMessage({ ...mensaje(), reproducir: true }, location.origin); } catch { /* aún cargando */ }

@@ -46,6 +46,9 @@ Nuevo sitio web oficial de la Municipalidad de Melipeuco («Para todas y todos»
 - **Tamaño general de la interfaz** (*Diseño del sitio → Formas*): achica o agranda todo el sitio a la vez, de 80 % a 115 %.
 - **Vercel con memoria compartida**: con una base Redis gratuita (Upstash, se conecta desde Vercel → Storage) los cambios del panel se guardan de forma permanente y llegan a todas las instancias. Ver [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md#guardar-los-cambios-en-vercel-memoria-compartida-obligatorio-para-usar-el-panel).
 
+- **Pantalla de carga «logo 3D»** (`public/js/transiciones.js`): el logo se reconstruye en el espacio. Las nueve letras llegan desde lejos girando en 3D, cada pieza de su símbolo cae desde delante y encaja, una ola de luz recorre las letras, se escribe «Capital del Trekking» y el logo vuela exactamente a su lugar en la portada. Se elige entre esta y la del escudo, y se ajusta la profundidad del 3D, en *Diseño del sitio → Animaciones*.
+- **Transición entre páginas renovada**, con tres estilos: *columnas* (nueve paneles que giran en 3D, uno por letra), *portal* (el color del área se abre en círculo desde el clic, con el emblema que gira) y *cordillera*; en el color del área de destino o con los nueve colores del logo. Botón «Ver transición» en la vista previa.
+
 **Diseño (estilo Institucional)**
 - Minimalista e institucional: blanco, tinta y el azul y ámbar de la marca municipal; menos cajas, líneas finas, más aire y una jerarquía tipográfica clara. Todo se puede cambiar desde *Diseño del sitio* en el panel.
 - Portada «texto y foto lado a lado»: título grande, el buscador «¿Qué necesita hacer?» como protagonista y una fotografía real de Melipeuco (la plaza, la iglesia y el volcán Llaima). También está la composición con la foto de fondo.

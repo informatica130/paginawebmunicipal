@@ -65,6 +65,7 @@
   function intro() {
     var capa = $('.intro');
     if (!capa) return false;
+    if (capa.classList.contains('intro-logo')) return true; // la anima public/js/transiciones.js
     if (!puede) { capa.remove(); raiz.classList.remove('con-intro'); return false; }
     capa.dataset.activa = '1';
     var escudo = $('.intro-escudo', capa), svg = $('svg', escudo), emblema = $('.intro-emblema', capa);
@@ -409,62 +410,6 @@
     [['.encabezado .bajada', 500], ['.encabezado .migas', 0]].forEach(function (x) { anim($(x[0]), [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 800, delay: x[1], easing: SALIDA }); });
   }
 
-  // Cortina de cordillera: al ir a otra página del sitio suben capas con el color de la zona de
-  // destino; en la página nueva se abren hacia arriba. Los datos de las zonas vienen en la cortina.
-  function cortina() {
-    var capa = $('.tk-cortina');
-    if (!capa) return;
-    if (!puede || !activo('cordillera')) { capa.remove(); raiz.classList.remove('tk-entrando'); return; }
-    var capas = $$('.tk-cortina-capa', capa), info = $('.tk-cortina-info', capa), nombre = $('.tk-cortina-nombre', capa);
-    var datos = {}; try { datos = JSON.parse(capa.getAttribute('data-zonas') || '{}'); } catch (e) {}
-    var zonas = (datos.rutas || []).map(function (r) { return [new RegExp(r[0]), r[1]]; });
-    function zonaDe(ruta) { for (var i = 0; i < zonas.length; i++) if (zonas[i][0].test(ruta)) return zonas[i][1]; return 0; }
-    function preparar(k, texto) {
-      var p = (datos.paleta || [])[k] || ['#1F6FA8', '#0F3A5A'];
-      capas[1].style.setProperty('--c', p[0]); capas[2].style.setProperty('--c', p[1]);
-      $$('img', info).forEach(function (im) { im.hidden = Number(im.getAttribute('data-k')) !== k; });
-      nombre.textContent = texto || '';
-    }
-    var lejos = 'translate3d(0, calc(100% + 18vh), 0)', arriba = 'translate3d(0, calc(-100% - 18vh), 0)';
-    // Entrada: la página nueva aparece detrás de la cordillera que sube.
-    if (raiz.classList.contains('tk-entrando')) {
-      var previo = {}; try { previo = JSON.parse(sessionStorage.getItem('mlp-cortina') || '{}'); sessionStorage.removeItem('mlp-cortina'); } catch (e) {}
-      preparar(typeof previo.k === 'number' ? previo.k : zonaDe(location.pathname), previo.nombre);
-      info.style.opacity = 1;
-      var ultima;
-      capas.slice().reverse().forEach(function (c, i) { ultima = anim(c, [{ transform: 'none' }, { transform: arriba }], { duration: 640, delay: 80 + i * 70, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
-      anim(info, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-30px)' }], { duration: 320, delay: 60, easing: 'ease-in' });
-      var fin = function () { raiz.classList.remove('tk-entrando'); capas.forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); }); info.style.opacity = ''; info.getAnimations().forEach(function (a) { a.cancel(); }); };
-      if (ultima) ultima.finished.then(fin, fin); else fin();
-    }
-    var saliendo = false;
-    d.addEventListener('click', function (e) {
-      var a = e.target.closest('a[href]');
-      if (saliendo || !a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.closest('.barra-admin')) return;
-      var u = new URL(a.href, location.href);
-      if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search) || /^\/(admin|api|feed|medios|wp-content)\b/.test(u.pathname) || /\.\w{2,4}$/.test(u.pathname)) return;
-      e.preventDefault();
-      saliendo = true;
-      var k = zonaDe(u.pathname), texto = (($('b', a) || a).textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40);
-      if (!texto || u.pathname === '/') texto = u.pathname === '/' ? 'Inicio' : '';
-      preparar(k, texto);
-      raiz.classList.add('tk-saliendo');
-      var ultima;
-      capas.forEach(function (c, i) { ultima = anim(c, [{ transform: lejos }, { transform: 'none' }], { duration: 460, delay: i * 60, easing: 'cubic-bezier(.7, 0, .2, 1)' }); });
-      anim(info, [{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 300, delay: 280, easing: SALIDA });
-      try { sessionStorage.setItem('mlp-cortina', JSON.stringify({ k: k, nombre: texto })); } catch (err) {}
-      var ir = function () { location.href = u.href; };
-      setTimeout(ir, 600 / VEL);
-    });
-    // Al volver con «Atrás» (página guardada en memoria) se quita la cortina.
-    addEventListener('pageshow', function (e) {
-      if (!e.persisted) return;
-      saliendo = false; raiz.classList.remove('tk-saliendo');
-      capas.concat([info]).forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); });
-    });
-  }
-
   // ================================================================ Inicio
   var hayIntro = intro();
   if (hayIntro) d.addEventListener('intro:salida', function () { setTimeout(entradaPortada, 250); }, { once: true });
@@ -478,5 +423,5 @@
   filas();
   contadores();
   titulosPorPalabra();
-  cortina();
+  // La transición entre páginas la hace public/js/transiciones.js (columnas, portal y cordillera).
 })();

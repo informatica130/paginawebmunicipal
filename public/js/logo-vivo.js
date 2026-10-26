@@ -175,7 +175,9 @@
       clearTimeout(temporizador);
       entrada.concat(reposo).forEach(function (an) { an.cancel(); });
       entrada = []; reposo = []; vivo = false;
-      var modo = attr('data-anim', 'normal') === 'no' ? 'ninguna' : attr('data-logo-anim', 'vivo');
+      // Si la pantalla de carga 3D acaba de dejar el logo en su lugar, no se repite la entrada.
+      var llego = raiz.classList.contains('tk-logo-llego'); raiz.classList.remove('tk-logo-llego');
+      var modo = llego || attr('data-anim', 'normal') === 'no' ? 'ninguna' : attr('data-logo-anim', 'vivo');
       var t = entrar(modo);
       temporizador = setTimeout(reposar, t / VEL);
     }
