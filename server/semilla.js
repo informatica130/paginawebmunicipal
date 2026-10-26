@@ -32,7 +32,7 @@ export const AJUSTES_BASE = {
     { nombre: 'Bomberos', telefono: '+56938708549' },
     { nombre: 'Ambulancia SAMU', telefono: '131' },
   ],
-  colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#121417' },
+  colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#0F3A5A' },
   codigos: { transparencia: 'MU172', sem: '70766500' },
   turismo: { titulo: 'Melipeuco, Capital del Trekking', texto: 'Volcanes, lagunas, araucarias y senderos para toda la familia.', url: 'https://melipeucocapitaldeltrekking.cl/', imagen: '/wp-content/uploads/2025/05/capital-del-trekking-05-1024x307.png' },
   video: { titulo: 'Último video', url: 'https://www.youtube.com/watch?v=K6y_Gbza-Cw' },

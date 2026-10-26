@@ -150,9 +150,10 @@ test('portada y páginas públicas con cabeceras de seguridad', async () => {
 
 test('portada «Melipeuco Capital del Trekking»: logo y zonas por página', async () => {
   const h = await (await pedir('/')).text();
-  assert.match(h, /class="tk-logo"[^>]*aria-label="Melipeuco Capital del Trekking"/);
-  assert.equal((h.match(/class="tk-letra"/g) || []).length, 9);
-  assert.match(h, /class="hero hero-vitrina"/);
+  assert.match(h, /class="hero hero-portal"/);
+  assert.match(h, /class="contenedor pt-mosaico"/);
+  assert.match(h, /Quiero información de/);
+  assert.match(h, /class="escudo-vivo marca-viva"/);
   assert.match(h, /data-sombras="suaves"/);
   const salud = await (await pedir('/salud/')).text();
   assert.match(salud, /style="--z:#16A0A8;/);

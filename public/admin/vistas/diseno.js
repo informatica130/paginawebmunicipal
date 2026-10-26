@@ -30,16 +30,20 @@ const GRUPOS = [
     { ruta: 'tipografia.menuMayusculas', tipo: 'si', etiqueta: 'Menú principal en mayúsculas' },
   ] },
   { id: 'forma', titulo: 'Formas y espacios', controles: [
-    { ruta: 'forma.radio', tipo: 'rango', etiqueta: 'Redondeo de las esquinas', min: 0, max: 24, paso: 1, unidad: ' px' },
+    { ruta: 'forma.radio', tipo: 'rango', etiqueta: 'Redondeo de botones y campos', min: 0, max: 24, paso: 1, unidad: ' px' },
+    { ruta: 'forma.radioGrande', tipo: 'rango', etiqueta: 'Redondeo de tarjetas, fotos y banners', min: 0, max: 48, paso: 2, unidad: ' px' },
+    { ruta: 'forma.elevacion', tipo: 'rango', etiqueta: 'Cuánto se elevan las tarjetas al pasar el cursor', min: 0, max: 14, paso: 1, unidad: ' px' },
     { ruta: 'forma.tarjetas', tipo: 'botones', etiqueta: 'Tarjetas y listas', opciones: OPCIONES.tarjetas },
     { ruta: 'forma.botones', tipo: 'botones', etiqueta: 'Botones', opciones: OPCIONES.botones },
     { ruta: 'forma.sombras', tipo: 'botones', etiqueta: 'Sombras', opciones: OPCIONES.sombras },
+    { ruta: 'forma.maqueta', tipo: 'botones', etiqueta: 'Estructura de las secciones', opciones: OPCIONES.maqueta },
     { ruta: 'forma.densidad', tipo: 'botones', etiqueta: 'Espacio entre secciones', opciones: OPCIONES.densidad },
     { ruta: 'forma.escala', tipo: 'rango', etiqueta: 'Tamaño general de la interfaz', min: 80, max: 115, paso: 5, unidad: ' %', ayuda: 'Achica o agranda todo el sitio a la vez (textos, botones, espacios y logo). Las personas pueden agrandar el texto con el botón de lectura.' },
     { ruta: 'forma.ancho', tipo: 'rango', etiqueta: 'Ancho máximo del contenido', min: 960, max: 1440, paso: 20, unidad: ' px' },
   ] },
   { id: 'cabecera', titulo: 'Cabecera y logo', controles: [
     { ruta: 'cabecera.estilo', tipo: 'botones', etiqueta: 'Fondo de la cabecera', opciones: OPCIONES.cabeceraEstilo },
+    { ruta: 'cabecera.centrada', tipo: 'si', etiqueta: 'Escudo y menú centrados' },
     { ruta: 'cabecera.logo', tipo: 'lista', etiqueta: 'Logo', opciones: OPCIONES.logo },
     { ruta: 'cabecera.logoUrl', tipo: 'imagen', etiqueta: 'Imagen del logo propio', si: (c) => c.cabecera.logo === 'personalizado' },
     { ruta: 'cabecera.tamanoLogo', tipo: 'rango', etiqueta: 'Tamaño del logo', min: 36, max: 96, paso: 2, unidad: ' px' },
@@ -76,6 +80,26 @@ const GRUPOS = [
     { ruta: 'portada.franjaDatos', tipo: 'si', etiqueta: 'Franja de horario, teléfono, tiempo y emergencias' },
     { ruta: 'portada.populares', tipo: 'si', etiqueta: 'Enlaces «Lo más buscado»' },
   ] },
+  { id: 'portal', titulo: 'Portada «portal»: franja, mosaico y temas', ayuda: 'Todo se ve al instante en la vista previa.', si: (c) => c.portada.composicion === 'portal', controles: [
+    { ruta: 'portal.bandaTipo', tipo: 'botones', etiqueta: 'Fondo de la franja azul', opciones: OPCIONES.bandaTipo },
+    { ruta: 'portal.bandaPropia', tipo: 'si', etiqueta: 'Elegir los colores de la franja (si no, usa los del tema)' },
+    { ruta: 'portal.bandaInicio', tipo: 'color', etiqueta: 'Color de inicio del degradado', si: (c) => c.portal.bandaPropia && c.portal.bandaTipo !== 'solido' },
+    { ruta: 'portal.bandaFin', tipo: 'color', etiqueta: 'Color final (también la cabecera oscura)', si: (c) => c.portal.bandaPropia },
+    { ruta: 'portal.bandaAngulo', tipo: 'rango', etiqueta: 'Ángulo del degradado', min: 0, max: 360, paso: 15, unidad: '°', si: (c) => c.portal.bandaTipo === 'lineal' },
+    { ruta: 'portal.patron', tipo: 'botones', etiqueta: 'Patrón de fondo', opciones: OPCIONES.patron },
+    { ruta: 'portal.patronIntensidad', tipo: 'rango', etiqueta: 'Intensidad del patrón', min: 0, max: 100, paso: 5, unidad: ' %', si: (c) => c.portal.patron !== 'ninguno' },
+    { ruta: 'portal.brillo', tipo: 'si', etiqueta: 'Luz que se mueve lentamente sobre la franja' },
+    { ruta: 'portal.cordillera', tipo: 'si', etiqueta: 'Silueta de cordillera al pie de la franja' },
+    { ruta: 'portal.cordilleraAlto', tipo: 'rango', etiqueta: 'Altura de la cordillera', min: 40, max: 200, paso: 10, unidad: ' px', si: (c) => c.portal.cordillera },
+    { ruta: 'portal.mosaico', tipo: 'rango', etiqueta: 'Tarjetas del mosaico (los primeros accesos rápidos)', min: 0, max: 8, paso: 1, unidad: '' },
+    { ruta: 'portal.mosaicoEstilo', tipo: 'botones', etiqueta: 'Estilo de las tarjetas', opciones: OPCIONES.mosaicoEstilo, si: (c) => c.portal.mosaico > 0 },
+    { ruta: 'portal.mosaicoColores', tipo: 'botones', etiqueta: 'Colores de las tarjetas', opciones: OPCIONES.mosaicoColores, si: (c) => c.portal.mosaico > 0 },
+    { ruta: 'portal.mosaicoAlto', tipo: 'rango', etiqueta: 'Alto de las tarjetas', min: 100, max: 240, paso: 10, unidad: ' px', si: (c) => c.portal.mosaico > 0 },
+    { ruta: 'portal.temas', tipo: 'si', etiqueta: 'Temas más consultados junto al buscador' },
+    { ruta: 'portal.temasTitulo', tipo: 'texto', etiqueta: 'Título de los temas', si: (c) => c.portal.temas },
+    { ruta: 'portal.temasEstilo', tipo: 'botones', etiqueta: 'Estilo de los temas', opciones: OPCIONES.temasEstilo, si: (c) => c.portal.temas },
+    { ruta: 'portal.buscador', tipo: 'botones', etiqueta: 'Forma del buscador', opciones: OPCIONES.buscador },
+  ] },
   { id: 'identidad', titulo: 'Identidad Capital del Trekking', ayuda: 'Los detalles de la marca en todo el sitio. Los textos de la cinta, los nueve mundos, los lugares y las cifras se editan en Ajustes del sitio → Portada.', controles: [
     { ruta: 'identidad.zonas', tipo: 'si', etiqueta: 'Cada área con el color de su letra (encabezados, anillos, cortina)' },
     { ruta: 'identidad.encabezado', tipo: 'botones', etiqueta: 'Encabezado de las páginas interiores', opciones: OPCIONES.encabezado },
@@ -97,6 +121,7 @@ const GRUPOS = [
   { id: 'animaciones', titulo: 'Animaciones', ayuda: 'Las personas que piden «reducir movimiento» en su equipo nunca ven animaciones.', controles: [
     { ruta: 'animaciones.activas', tipo: 'si', etiqueta: 'Animaciones activas' },
     { ruta: 'animaciones.intensidad', tipo: 'botones', etiqueta: 'Intensidad', opciones: OPCIONES.intensidad, si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.curva', tipo: 'botones', etiqueta: 'Carácter del movimiento', opciones: OPCIONES.curva, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.velocidad', tipo: 'rango', etiqueta: 'Velocidad', min: .5, max: 2, paso: .1, unidad: '×', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.intro', tipo: 'lista', etiqueta: 'Pantalla de carga de la portada', opciones: OPCIONES.intro, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.introEstilo', tipo: 'lista', etiqueta: 'Animación de la pantalla de carga', opciones: OPCIONES.introEstilo, ayuda: 'Escudo 3D: cada pieza del escudo (volcán, araucarias, kultrún, trutrucas, laureles, aves y cinta) llega a su manera y el escudo vuela a la cabecera. Logo 3D: las nueve letras se arman y el logo vuela a la portada. Use «Ver pantalla de carga» (guarde antes).', si: (c) => c.animaciones.activas && c.animaciones.intro !== 'nunca' },
@@ -203,7 +228,7 @@ export default async function (vista) {
   const pintarGrupos = () => {
     $$('details[data-grupo]', vista).forEach((d) => (d.open ? abiertos.add(d.dataset.grupo) : abiertos.delete(d.dataset.grupo)));
     const cont = $('[data-grupos]', vista);
-    cont.innerHTML = String(h`${GRUPOS.map((g) => h`<details class="tarjeta grupo-diseno" data-grupo="${g.id}"${abiertos.has(g.id) ? raw(' open') : ''}><summary>${g.titulo}</summary>
+    cont.innerHTML = String(h`${GRUPOS.filter((g) => !g.si || g.si(cfg)).map((g) => h`<details class="tarjeta grupo-diseno" data-grupo="${g.id}"${abiertos.has(g.id) ? raw(' open') : ''}><summary>${g.titulo}</summary>
       ${g.ayuda ? h`<p class="chico muted">${g.ayuda}</p>` : ''}
       <div class="${g.id === 'colores' ? 'rejilla-colores' : 'pila'}">${g.controles.filter((c) => !c.si || c.si(cfg)).map(control)}</div></details>`)}`);
     // Selectores de imagen (biblioteca de medios)
@@ -224,9 +249,10 @@ export default async function (vista) {
     const nuevo = copia(cfg);
     escribir(nuevo, ruta, valor);
     if (PERSONALIZA.test(ruta)) nuevo.estilo = 'personalizado';
-    const previoSi = GRUPOS.flatMap((g) => g.controles).filter((c) => c.si).map((c) => c.si(cfg)).join();
+    const condiciones = () => [...GRUPOS.filter((g) => g.si).map((g) => g.si(cfg)), ...GRUPOS.flatMap((g) => g.controles).filter((c) => c.si).map((c) => c.si(cfg))].join();
+    const previoSi = condiciones();
     cfg = normalizar(nuevo, { permitirCss: true });
-    const ahoraSi = GRUPOS.flatMap((g) => g.controles).filter((c) => c.si).map((c) => c.si(cfg)).join();
+    const ahoraSi = condiciones();
     if (repintar && previoSi !== ahoraSi) pintarGrupos();
     actualizar();
   }
@@ -261,7 +287,7 @@ export default async function (vista) {
     const logo = logoCabecera(cfg);
     return {
       tipo: 'mlp-diseno', css: variablesCss(cfg), cssPropio: cfg.avanzado.css, atributos: atributos(cfg), fuentes: urlFuentes(cfg),
-      textos: { 'cabecera.subtitulo': cfg.cabecera.subtitulo, 'cabecera.nombre': cfg.cabecera.nombre, 'portada.titulo': cfg.portada.titulo, 'portada.bajada': cfg.portada.bajada || (cfg.portada.composicion === 'trekking' ? `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.` : `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`), 'portada.credito': cfg.portada.credito },
+      textos: { 'cabecera.subtitulo': cfg.cabecera.subtitulo, 'cabecera.nombre': cfg.cabecera.nombre, 'portada.titulo': cfg.portada.titulo, 'portada.bajada': cfg.portada.bajada || (cfg.portada.composicion === 'portal' ? `${ajustes.lema || 'Para todas y todos'}: trámites, servicios e información de Melipeuco.` : cfg.portada.composicion === 'trekking' ? `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.` : `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`), 'portada.credito': cfg.portada.credito, 'portal.temasTitulo': cfg.portal.temasTitulo },
       imagenes: { 'portada.imagen': cfg.portada.imagen || '/img/plaza-melipeuco-1536.webp', ...((fotos) => Object.fromEntries([0, 1, 2, 3, 4, 5].map((i) => ['portada.foto-' + i, fotos[i % fotos.length].src])))(fotosPortada(cfg)) },
       logo: { claro: logo.src, oscuro: logo.oscuro, conTexto: logo.conTexto },
     };

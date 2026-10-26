@@ -23,6 +23,21 @@ export async function portada(ctx) {
   return documento(ctx, { titulo: s.nombre, portada: true, cuerpo: html`${partes}`, clase: 'pagina-portada' });
 }
 
+// Carrusel de campañas (banners), en su sección o como protagonista de la portada «portal».
+function carruselCampanas(ctx, slides, sizes = '(max-width: 1240px) 100vw, 1200px') {
+  return html`<div class="campanas" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Campañas municipales">
+          <div class="carrusel-pista">${slides.map((sl, i) => {
+            const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes, prioridad: i === 0 })}</picture>`;
+            return html`<div class="carrusel-item" aria-roledescription="diapositiva" aria-label="${i + 1} de ${slides.length}">${sl.datos.enlace ? html`<a ${attrsEnlace(sl.datos.enlace)}>${img}${avisoExterno(sl.datos.enlace)}</a>` : img}</div>`;
+          })}</div>
+          ${slides.length > 1 ? html`<button type="button" class="carrusel-ant" aria-label="Campaña anterior">${crudo(icono('flechaIzq'))}</button><button type="button" class="carrusel-sig" aria-label="Campaña siguiente">${crudo(icono('flecha'))}</button><button type="button" class="carrusel-pausa" aria-label="Pausar el carrusel">${crudo(icono('pausa', { tam: 16 }))}</button><div class="carrusel-puntos" role="tablist"></div>` : ''}
+        </div>`;
+}
+
+// Colores del mosaico de la portada «portal» (de las letras del logo, con buen contraste).
+const MOSAICO = [['#E9A92B', '#17191B'], ['#0F3A5A', '#FFFFFF'], ['#1F6FA8', '#FFFFFF'], ['#0E7C86', '#FFFFFF'], ['#2F7D4A', '#FFFFFF'], ['#C9552B', '#FFFFFF'], ['#7A3E91', '#FFFFFF'], ['#3E3E9A', '#FFFFFF']];
+const TEMAS_EXTRA = [['Transparencia', '/transparencia/', 'documento'], ['Concejo Municipal', '/concejo-municipal/', 'personas'], ['Horarios de buses', '/transportepublico/', 'bus'], ['OIRS', '/oirs/', 'chat'], ['Emergencias', '/contacto/#emergencias', 'telefono'], ['Juzgado', '/juzgado/', 'balanza']];
+
 async function seccionPortada(ctx, sec) {
   const s = ctx.ajustes;
   switch (sec.id) {
@@ -45,6 +60,34 @@ async function seccionPortada(ctx, sec) {
               <div class="sugerencias" id="sugerencias-portada" role="listbox" hidden></div>
             </form>
             <p class="populares"><span>Lo más buscado:</span> <a href="/tramites/?q=licencia">Licencia de conducir</a> <a href="/transportepublico/">Horario de buses</a> <a href="/tramites/pagar-permiso-de-circulacion/">Permiso de circulación</a> <a href="/tramites/obtener-patente-comercial/">Patente comercial</a> <a href="/contacto/">Teléfonos</a></p>`;
+      if (dp.composicion === 'portal') {
+        // Portada «portal»: franja azul con las campañas como protagonistas y, al lado, el buscador y
+        // los temas más consultados; abajo, un mosaico de accesos grandes con los colores del logo.
+        const slides = ctx.repo.vigentes('slide');
+        // Se dibujan hasta 8; cuántas se ven lo decide «Diseño del sitio» (así la vista previa cambia al instante).
+        const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 8 }).items;
+        const temas = [...contenidoTrekking(s).mundos.map((m, k) => ({ nombre: m.nombre, url: m.url, k })), ...TEMAS_EXTRA.map(([nombre, url, ico]) => ({ nombre, url, ico }))];
+        const lista = fotosPortada(disenoDe(s));
+        const visual = slides.length ? carruselCampanas(ctx, slides, '(max-width: 900px) 100vw, 760px')
+          : html`<div class="pt-fotos" data-hero-trekking><div class="tk-fotos">${lista.map((f, i) => html`<img${i === 0 ? crudo(' class="activa" fetchpriority="high"') : crudo(' loading="lazy"')} src="${f.src}" alt="" decoding="async">`)}</div></div>`;
+        return html`<section class="hero hero-portal" aria-labelledby="hero-titulo">
+          <h1 id="hero-titulo" class="sr" data-diseno="portada.titulo">${dp.titulo}</h1>
+          <div class="pt-banda">
+            <div class="contenedor pt-rejilla">
+              <div class="pt-visual">${visual}</div>
+              <div class="pt-panel">
+                <p class="pt-saludo" data-diseno="portada.bajada">${dp.bajada || `${s.lema}: trámites, servicios e información de Melipeuco.`}</p>
+                ${buscar}
+                <h2 class="pt-temas-titulo" data-diseno="portal.temasTitulo">${disenoDe(s).portal.temasTitulo}</h2>
+                <ul class="pt-temas">${temas.map((t, i) => html`<li><a class="pt-tema" href="${t.url}" style="--i:${i}">${t.k !== undefined ? crudo(emblema(t.k)) : crudo(icono(t.ico || 'flecha', { tam: 16 }))}<span>${t.nombre}</span></a></li>`)}</ul>
+              </div>
+            </div>
+            <div class="pt-montes" aria-hidden="true">${crudo(montes('var(--fondo)'))}</div>
+          </div>
+          ${accesos.length ? html`<ul class="contenedor pt-mosaico">${accesos.map((a, i) => html`<li style="--i:${i}"><a class="pt-tile" ${attrsEnlace(a.datos.enlace, a.datos.nuevaVentana)} style="--c:${MOSAICO[i % MOSAICO.length][0]};--t:${MOSAICO[i % MOSAICO.length][1]}"><span class="pt-tile-ico">${crudo(icono(a.datos.icono || 'estrella', { tam: 34 }))}</span><span class="pt-tile-txt">${a.titulo}</span>${avisoExterno(a.datos.enlace, a.datos.nuevaVentana)}</a></li>`)}</ul>` : ''}
+        </section>
+        ${franja}`;
+      }
       if (dp.composicion === 'vitrina') {
         // Portada «vitrina»: a un lado el nombre, el logo vivo y el buscador; al otro, las fotos de
         // la Capital del Trekking en un marco redondeado, con un acceso flotante al sitio de turismo.
@@ -136,20 +179,17 @@ async function seccionPortada(ctx, sec) {
     }
     case 'campanas': {
       const slides = ctx.repo.vigentes('slide');
-      if (!slides.length) return '';
+      // En la portada «portal» las campañas ya están arriba.
+      if (!slides.length || disenoDe(s).portada.composicion === 'portal') return '';
       return html`<section class="seccion seccion-campanas" aria-labelledby="campanas-titulo"><div class="contenedor">
         <div class="seccion-cabecera"><div><h2 id="campanas-titulo">${sec.titulo || 'Campañas municipales'}</h2></div></div>
-        <div class="campanas" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Campañas municipales">
-          <div class="carrusel-pista">${slides.map((sl, i) => {
-            const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes: '(max-width: 1240px) 100vw, 1200px' })}</picture>`;
-            return html`<div class="carrusel-item" aria-roledescription="diapositiva" aria-label="${i + 1} de ${slides.length}">${sl.datos.enlace ? html`<a ${attrsEnlace(sl.datos.enlace)}>${img}${avisoExterno(sl.datos.enlace)}</a>` : img}</div>`;
-          })}</div>
-          ${slides.length > 1 ? html`<button type="button" class="carrusel-ant" aria-label="Campaña anterior">${crudo(icono('flechaIzq'))}</button><button type="button" class="carrusel-sig" aria-label="Campaña siguiente">${crudo(icono('flecha'))}</button><button type="button" class="carrusel-pausa" aria-label="Pausar el carrusel">${crudo(icono('pausa', { tam: 16 }))}</button><div class="carrusel-puntos" role="tablist"></div>` : ''}
-        </div>
+        ${carruselCampanas(ctx, slides)}
       </div></section>`;
     }
     case 'accesos': {
-      const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items;
+      // En la portada «portal» los primeros ya están en el mosaico de arriba.
+      const dzA = disenoDe(s);
+      const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 24 }).items.slice(dzA.portada.composicion === 'portal' ? dzA.portal.mosaico : 0);
       if (!accesos.length) return '';
       return html`<section class="seccion accesos-seccion" id="accesos"><div class="contenedor">
         <div class="seccion-cabecera"><h2>${sec.titulo || 'Accesos rápidos'}</h2></div>
