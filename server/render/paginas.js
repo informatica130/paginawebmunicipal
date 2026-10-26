@@ -68,6 +68,7 @@ async function seccionPortada(ctx, sec) {
         const accesos = ctx.repo.listar({ tipo: 'acceso', publico: true, orden: 'orden', limite: 8 }).items;
         const temas = [...contenidoTrekking(s).mundos.map((m, k) => ({ nombre: m.nombre, url: m.url, k })), ...TEMAS_EXTRA.map(([nombre, url, ico]) => ({ nombre, url, ico }))];
         const lista = fotosPortada(disenoDe(s));
+        const turismo = s.turismo?.url || SITIO_TREKKING;
         const visual = slides.length ? carruselCampanas(ctx, slides, '(max-width: 900px) 100vw, 760px')
           : html`<div class="pt-fotos" data-hero-trekking><div class="tk-fotos">${lista.map((f, i) => html`<img${i === 0 ? crudo(' class="activa" fetchpriority="high"') : crudo(' loading="lazy"')} src="${f.src}" alt="" decoding="async">`)}</div></div>`;
         return html`<section class="hero hero-portal" aria-labelledby="hero-titulo">
@@ -76,6 +77,7 @@ async function seccionPortada(ctx, sec) {
             <div class="contenedor pt-rejilla">
               <div class="pt-visual">${visual}</div>
               <div class="pt-panel">
+                <a class="tk-logo-caja pt-logo" ${attrsEnlace(turismo)} aria-label="Melipeuco Capital del Trekking: visite el sitio de turismo${/^https?:/.test(turismo) ? ' (se abre en otra pestaña)' : ''}">${crudo(logoAnimado())}</a>
                 <p class="pt-saludo" data-diseno="portada.bajada">${dp.bajada || `${s.lema}: trámites, servicios e información de Melipeuco.`}</p>
                 ${buscar}
                 <h2 class="pt-temas-titulo" data-diseno="portal.temasTitulo">${disenoDe(s).portal.temasTitulo}</h2>

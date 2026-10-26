@@ -211,6 +211,7 @@ ${fuentes ? html`<link rel="preconnect" href="https://fonts.gstatic.com" crossor
 <link rel="icon" type="image/svg+xml" href="/img/emblema-azul.svg">
 <link rel="stylesheet" href="/css/sitio.css?v=${ctx.version}">
 <style id="diseno-vars">${crudo(variablesCss(dz))}</style>
+${dz.animaciones.activas && dz.animaciones.cordillera && dz.animaciones.transicionEstilo === 'vista' ? crudo('<style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>') : ''}
 ${dz.avanzado.css ? html`<style id="diseno-propio">${crudo(dz.avanzado.css)}</style>` : ''}
 <script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto';if(sessionStorage.getItem('mlp-cortina')&&d.getAttribute('data-anim-cordillera')==='si'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('tk-entrando')}catch(e){}})();</script>
 <script type="application/ld+json" nonce="${ctx.nonce}">${crudo(JSON.stringify(ld).replace(/</g, '\\u003c'))}</script>
@@ -218,7 +219,7 @@ ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
 </head>
 <body class="${clase}${portada ? ' es-portada' : ''}">
-${portada ? html`${crudo(plantillaIntro(dz.animaciones.introEstilo === 'logo3d' ? (['vitrina', 'trekking'].includes(dz.portada.composicion) ? 'logo3d' : 'escudo3d') : dz.animaciones.introEstilo))}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
+${portada ? html`${crudo(plantillaIntro(dz.animaciones.introEstilo === 'logo3d' ? (['vitrina', 'trekking'].includes(dz.portada.composicion) || (dz.portada.composicion === 'portal' && dz.portal.logoTrekking) ? 'logo3d' : 'escudo3d') : dz.animaciones.introEstilo))}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
 ${dz.animaciones.activas && dz.animaciones.cordillera ? crudo(cortinaCordillera()) : ''}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="tk-progreso" aria-hidden="true"></div>
@@ -235,9 +236,14 @@ ${pie(ctx)}
 ${portada ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}
 <script src="/js/transiciones.js?v=${ctx.version}" defer></script>
 <script src="/js/escudo-vivo.js?v=${ctx.version}" defer></script>
+${dz.animaciones.activas && dz.animaciones.precarga && !ctx.usuario ? html`<script type="speculationrules" nonce="${ctx.nonce}">${crudo(REGLAS_PRECARGA)}</script>` : ''}
 </body>
 </html>`;
 }
+
+// Las páginas del sitio se descargan por adelantado al pasar el cursor sobre un enlace (sólo el
+// HTML, sin ejecutarlas), así la página siguiente aparece casi al instante.
+const REGLAS_PRECARGA = JSON.stringify({ prefetch: [{ where: { and: [{ href_matches: '/*' }, { not: { href_matches: ['/admin/*', '/api/*', '/buscar/*', '/feed*', '/medios/*', '/wp-content/*', '/*.*', '/*\\?*'] } }, { not: { selector_matches: '[target=_blank], [download], [rel~=nofollow]' } }] }, eagerness: 'moderate' }] });
 
 // Encabezado de página interior (título, bajada, migas).
 // Toma el color y el emblema de la zona de la página (una de las nueve letras del logo).

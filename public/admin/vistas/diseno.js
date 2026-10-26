@@ -7,7 +7,7 @@ import { marcarCambios } from '../admin.js';
 import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada } from '/js/diseno.js';
 
 // Portadas que llevan el logo vivo y el carrusel de fotos.
-const conLogo = (c) => ['trekking', 'vitrina'].includes(c.portada.composicion);
+const conLogo = (c) => ['trekking', 'vitrina'].includes(c.portada.composicion) || (c.portada.composicion === 'portal' && c.portal.logoTrekking);
 
 // Controles agrupados. ruta = propiedad dentro del diseño.
 const GRUPOS = [
@@ -44,6 +44,7 @@ const GRUPOS = [
   { id: 'cabecera', titulo: 'Cabecera y logo', controles: [
     { ruta: 'cabecera.estilo', tipo: 'botones', etiqueta: 'Fondo de la cabecera', opciones: OPCIONES.cabeceraEstilo },
     { ruta: 'cabecera.centrada', tipo: 'si', etiqueta: 'Escudo y menú centrados' },
+    { ruta: 'cabecera.menuAbrir', tipo: 'botones', etiqueta: 'Abrir los menús (en computador)', opciones: OPCIONES.menuAbrir },
     { ruta: 'cabecera.logo', tipo: 'lista', etiqueta: 'Logo', opciones: OPCIONES.logo },
     { ruta: 'cabecera.logoUrl', tipo: 'imagen', etiqueta: 'Imagen del logo propio', si: (c) => c.cabecera.logo === 'personalizado' },
     { ruta: 'cabecera.tamanoLogo', tipo: 'rango', etiqueta: 'Tamaño del logo', min: 36, max: 96, paso: 2, unidad: ' px' },
@@ -99,6 +100,11 @@ const GRUPOS = [
     { ruta: 'portal.temasTitulo', tipo: 'texto', etiqueta: 'Título de los temas', si: (c) => c.portal.temas },
     { ruta: 'portal.temasEstilo', tipo: 'botones', etiqueta: 'Estilo de los temas', opciones: OPCIONES.temasEstilo, si: (c) => c.portal.temas },
     { ruta: 'portal.buscador', tipo: 'botones', etiqueta: 'Forma del buscador', opciones: OPCIONES.buscador },
+    { ruta: 'portal.logoTrekking', tipo: 'si', etiqueta: 'Logo animado «Capital del Trekking» sobre el buscador', ayuda: 'Es el logo vivo de las nueve letras; su animación se elige en «Portada → Animación del logo».' },
+    { ruta: 'portal.reparto', tipo: 'botones', etiqueta: 'Reparto entre campaña y buscador', opciones: OPCIONES.reparto },
+    { ruta: 'portal.bannerProporcion', tipo: 'lista', etiqueta: 'Proporción del banner de campañas', opciones: OPCIONES.bannerProporcion, ayuda: 'Para que todas las campañas midan lo mismo aunque las imágenes sean distintas.' },
+    { ruta: 'portal.bannerAjuste', tipo: 'botones', etiqueta: 'Cómo se acomoda la imagen', opciones: OPCIONES.bannerAjuste, si: (c) => c.portal.bannerProporcion !== 'auto' },
+    { ruta: 'portal.bannerEfecto', tipo: 'botones', etiqueta: 'Al pasar el cursor por el banner', opciones: OPCIONES.bannerEfecto },
   ] },
   { id: 'identidad', titulo: 'Identidad Capital del Trekking', ayuda: 'Los detalles de la marca en todo el sitio. Los textos de la cinta, los nueve mundos, los lugares y las cifras se editan en Ajustes del sitio → Portada.', controles: [
     { ruta: 'identidad.zonas', tipo: 'si', etiqueta: 'Cada área con el color de su letra (encabezados, anillos, cortina)' },
@@ -110,6 +116,14 @@ const GRUPOS = [
     { ruta: 'identidad.cordilleras', tipo: 'si', etiqueta: 'Siluetas de cordillera entre secciones y en el pie' },
     { ruta: 'identidad.accesosColor', tipo: 'si', etiqueta: 'Accesos rápidos con los nueve colores del logo' },
     { ruta: 'identidad.cinta', tipo: 'rango', etiqueta: 'Velocidad de la cinta (una vuelta cada)', min: 15, max: 120, paso: 5, unidad: ' s' },
+  ] },
+  { id: 'buscador', titulo: 'Buscador predictivo', ayuda: 'Pruébelo escribiendo en el buscador de la vista previa.', controles: [
+    { ruta: 'buscador.predictivo', tipo: 'si', etiqueta: 'Mostrar resultados mientras se escribe' },
+    { ruta: 'buscador.fragmentos', tipo: 'si', etiqueta: 'Mostrar un trozo del texto donde aparece la palabra', si: (c) => c.buscador.predictivo },
+    { ruta: 'buscador.recientes', tipo: 'si', etiqueta: 'Recordar las búsquedas recientes de cada persona (en su navegador)', si: (c) => c.buscador.predictivo },
+    { ruta: 'buscador.populares', tipo: 'si', etiqueta: 'Sugerir «lo más buscado» al entrar al buscador', si: (c) => c.buscador.predictivo },
+    { ruta: 'buscador.ejemplos', tipo: 'si', etiqueta: 'Ejemplos que se escriben solos en el buscador vacío' },
+    { ruta: 'buscador.ejemplosTexto', tipo: 'texto', etiqueta: 'Ejemplos y «lo más buscado» (separados por comas)', si: (c) => c.buscador.ejemplos || c.buscador.populares },
   ] },
   { id: 'pie', titulo: 'Pie de página', controles: [
     { ruta: 'pie.estilo', tipo: 'botones', etiqueta: 'Fondo del pie', opciones: OPCIONES.pieEstilo },
@@ -131,8 +145,10 @@ const GRUPOS = [
     { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.cordillera', tipo: 'si', etiqueta: 'Transición de identidad al cambiar de página', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.transicionEstilo', tipo: 'lista', etiqueta: 'Estilo de la transición', opciones: OPCIONES.transicionEstilo, ayuda: 'Use «Ver transición» en la vista previa.', si: (c) => c.animaciones.activas && c.animaciones.cordillera },
-    { ruta: 'animaciones.transicionColor', tipo: 'botones', etiqueta: 'Colores de la transición', opciones: OPCIONES.transicionColor, si: (c) => c.animaciones.activas && c.animaciones.cordillera && c.animaciones.transicionEstilo !== 'cordillera' },
+    { ruta: 'animaciones.transicionEstilo', tipo: 'lista', etiqueta: 'Estilo de la transición', opciones: OPCIONES.transicionEstilo, ayuda: 'Use «Ver transición» en la vista previa. «Fluida» usa la transición nativa del navegador (Chrome, Edge y Safari recientes); en los demás la página cambia al instante.', si: (c) => c.animaciones.activas && c.animaciones.cordillera },
+    { ruta: 'animaciones.transicionColor', tipo: 'botones', etiqueta: 'Colores de la transición', opciones: OPCIONES.transicionColor, si: (c) => c.animaciones.activas && c.animaciones.cordillera && !['cordillera', 'vista'].includes(c.animaciones.transicionEstilo) },
+    { ruta: 'animaciones.transicionNombre', tipo: 'si', etiqueta: 'Mostrar el emblema y el nombre de la página de destino', si: (c) => c.animaciones.activas && c.animaciones.cordillera && c.animaciones.transicionEstilo !== 'vista' },
+    { ruta: 'animaciones.precarga', tipo: 'si', etiqueta: 'Adelantar la descarga de la página al pasar el cursor por un enlace (navegación casi instantánea)', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.barraCarga', tipo: 'si', etiqueta: 'Barra de carga al navegar', si: (c) => c.animaciones.activas },
   ] },
 ];

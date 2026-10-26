@@ -18,13 +18,35 @@
     setTimeout(function () { a.remove(); }, 2200);
   }
 
+  // Si esta página llegó descargada por adelantado (al pasar el cursor), se cuenta la visita ahora.
+  try { var nav0 = performance.getEntriesByType('navigation')[0]; if (nav0 && /prefetch|prerender/.test(nav0.deliveryType || '')) fetch('/api/public/visita?r=' + encodeURIComponent(location.pathname), { keepalive: true }).catch(function () {}); } catch (e) {}
+
   // ---------------- Menú principal y submenús
   var nav = $('#nav'), botonMenu = $('[data-menu]'), velo = null;
   function cerrarSubmenus(excepto) { $$('.nav-boton[aria-expanded="true"]').forEach(function (b) { if (b !== excepto) b.setAttribute('aria-expanded', 'false'); }); }
   $$('.nav-boton').forEach(function (b) {
-    b.addEventListener('click', function (e) { e.stopPropagation(); var abierto = b.getAttribute('aria-expanded') === 'true'; cerrarSubmenus(b); b.setAttribute('aria-expanded', abierto ? 'false' : 'true'); });
+    b.addEventListener('click', function (e) { e.stopPropagation(); if (Date.now() - (b._porCursor || 0) < 700) return; var abierto = b.getAttribute('aria-expanded') === 'true'; cerrarSubmenus(b); b.setAttribute('aria-expanded', abierto ? 'false' : 'true'); });
   });
   d.addEventListener('click', function (e) { if (!e.target.closest('.nav-item')) cerrarSubmenus(); });
+  // En computador los submenús se abren al pasar el cursor (con una pequeña pausa para que no se
+  // abran por accidente al cruzar la barra). Opción «Cabecera → Abrir los menús».
+  var conCursor = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1025px)');
+  $$('.nav-item').forEach(function (item) {
+    var b = $('.nav-boton', item), espera = null;
+    if (!b) return;
+    var activo = function () { return conCursor && conCursor.matches && raiz.getAttribute('data-menu-abrir') !== 'clic'; };
+    item.addEventListener('pointerenter', function (e) {
+      if (e.pointerType !== 'mouse' || !activo()) return;
+      clearTimeout(espera);
+      var abierto = $('.nav-boton[aria-expanded="true"]');
+      espera = setTimeout(function () { cerrarSubmenus(b); if (b.getAttribute('aria-expanded') !== 'true') b._porCursor = Date.now(); b.setAttribute('aria-expanded', 'true'); }, abierto ? 0 : 90);
+    });
+    item.addEventListener('pointerleave', function (e) {
+      if (e.pointerType !== 'mouse' || !activo()) return;
+      clearTimeout(espera);
+      espera = setTimeout(function () { if (!item.contains(d.activeElement)) b.setAttribute('aria-expanded', 'false'); }, 260);
+    });
+  });
   function menuMovil(abrir) {
     if (!nav) return;
     nav.classList.toggle('abierto', abrir);
@@ -50,39 +72,141 @@
   $$('[data-abrir-buscador]').forEach(function (b) { b.addEventListener('click', function () { buscador.hidden = !buscador.hidden; if (!buscador.hidden) $('input', buscador).focus(); }); });
   $$('[data-cerrar-buscador]').forEach(function (b) { b.addEventListener('click', cerrarBuscador); });
 
+  // Buscador predictivo: resultados mientras se escribe (agrupados y con las palabras resaltadas),
+  // la palabra se completa en gris (Tab o → la acepta), búsquedas recientes y lo más buscado al
+  // entrar al campo, y ejemplos que se escriben solos en el campo vacío.
+  // Opciones en «Diseño del sitio → Buscador» (atributos data-busca-* de <html>).
+  var opBusca = function (k) { return raiz.getAttribute('data-busca-' + k) !== 'no'; };
+  var sinTilde = function (t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); };
+  var ICONOS_TIPO = { atajo: 'M5 12h14M13 6l6 6-6 6', 'en-linea': 'M4 5h16v11H4zM8 20h8', tramite: 'M7 3h7l5 5v13H7zM14 3v5h5', noticia: 'M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2', evento: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4', documento: 'M7 3h7l5 5v13H7zM10 13h6M10 17h6', reciente: 'M12 7v5l3 2M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5', popular: 'M13 3 4 14h7l-1 7 9-11h-7z' };
+  var icoTipo = function (k) { return '<svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (ICONOS_TIPO[k] || 'M4 4h16v16H4zM8 9h8M8 13h8M8 17h5') + '"/></svg>'; };
+  // Resalta (sin importar tildes ni mayúsculas) las palabras buscadas dentro de un texto.
+  function resaltar(texto, palabras) {
+    var t = String(texto || ''), n = sinTilde(t), marcas = [];
+    palabras.forEach(function (p) { if (p.length < 2) return; var k = n.indexOf(p); while (k >= 0) { marcas.push([k, k + p.length]); k = n.indexOf(p, k + p.length); } });
+    if (!marcas.length) return esc(t);
+    marcas.sort(function (a, b) { return a[0] - b[0]; });
+    var out = '', pos = 0;
+    marcas.forEach(function (m) { if (m[0] < pos) return; out += esc(t.slice(pos, m[0])) + '<mark>' + esc(t.slice(m[0], m[1])) + '</mark>'; pos = m[1]; });
+    return out + esc(t.slice(pos));
+  }
+  var recientes = function () { try { return JSON.parse(leer('mlp-busquedas') || '[]').slice(0, 5); } catch (e) { return []; } };
+  function recordar(q) {
+    q = String(q || '').trim(); if (q.length < 2 || !opBusca('recientes')) return;
+    var l = recientes().filter(function (x) { return sinTilde(x) !== sinTilde(q); }); l.unshift(q.slice(0, 80));
+    guardar('mlp-busquedas', JSON.stringify(l.slice(0, 5)));
+  }
+  var ejemplos = function () { return (raiz.getAttribute('data-busca-lista') || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean).slice(0, 8); };
+  var cacheBusca = {};
+
   $$('[data-sugerencias]').forEach(function (input) {
     var caja = d.getElementById(input.getAttribute('aria-controls'));
     if (!caja) return;
-    var t = null, ultimo = '', sel = -1;
-    function mostrar(items) {
-      sel = -1;
-      if (!items.length) { caja.hidden = true; return; }
-      caja.innerHTML = items.map(function (it, i) {
-        return '<a role="option" id="' + caja.id + '-' + i + '" href="' + esc(it.url) + '"' + (it.externo ? ' target="_blank" rel="noopener"' : '') + '><span>' + esc(it.titulo) + '</span><small>' + esc(it.tipo) + '</small></a>';
-      }).join('');
-      caja.hidden = false;
+    var form = input.form, marco = input.parentNode;
+    var t = null, pedido = 0, sel = -1, completar = '';
+    input.setAttribute('role', 'combobox'); input.setAttribute('aria-autocomplete', 'both'); input.setAttribute('aria-expanded', 'false');
+    // Texto fantasma con la palabra completada
+    var fantasma = d.createElement('span'); fantasma.className = 'sug-fantasma'; fantasma.setAttribute('aria-hidden', 'true');
+    marco.classList.add('con-fantasma'); marco.insertBefore(fantasma, input.nextSibling);
+    var lienzo = d.createElement('canvas').getContext('2d');
+    function ponerFantasma(texto) {
+      var v = input.value;
+      completar = texto && v && sinTilde(texto).indexOf(sinTilde(v)) === 0 && texto.length > v.length ? texto : '';
+      if (!completar || d.activeElement !== input) { fantasma.textContent = ''; return; }
+      var cs = getComputedStyle(input); lienzo.font = cs.font;
+      fantasma.style.font = cs.font;
+      fantasma.style.left = (input.offsetLeft + parseFloat(cs.paddingLeft) + lienzo.measureText(v).width - input.scrollLeft) + 'px';
+      fantasma.style.top = input.offsetTop + 'px'; fantasma.style.height = input.offsetHeight + 'px'; fantasma.style.lineHeight = input.offsetHeight + 'px';
+      fantasma.textContent = completar.slice(v.length);
     }
-    input.addEventListener('input', function () {
-      var q = input.value.trim();
+    function abrir(htmlCaja) { caja.innerHTML = htmlCaja; caja.hidden = false; input.setAttribute('aria-expanded', 'true'); sel = -1; }
+    function cerrar() { caja.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); fantasma.textContent = ''; }
+    var opcionHtml = function (i, url, titulo, extra, ico, externo, datos) {
+      return '<a role="option" id="' + caja.id + '-' + i + '" href="' + esc(url) + '"' + (externo ? ' target="_blank" rel="noopener"' : '') + (datos || '') + '><span class="sug-ico">' + icoTipo(ico) + '</span><span class="sug-txt"><span class="sug-titulo">' + titulo + '</span>' + (extra || '') + '</span><svg class="ico sug-ir" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="' + (externo ? 'M7 17 17 7M8 7h9v9' : 'M5 12h14M13 6l6 6-6 6') + '"/></svg></a>';
+    };
+    // Al entrar al campo vacío: recientes y lo más buscado.
+    function inicio() {
+      var r = opBusca('recientes') ? recientes() : [], p = opBusca('populares') ? ejemplos() : [], n = 0, h = '';
+      if (r.length) h += '<div class="sug-grupo"><span>Búsquedas recientes</span><button type="button" class="sug-borrar" data-borrar>Borrar</button></div>' + r.map(function (q) { return opcionHtml(n++, '/buscar/?q=' + encodeURIComponent(q), esc(q), '', 'reciente', false, ' data-q="' + esc(q) + '"'); }).join('');
+      if (p.length) h += '<div class="sug-grupo"><span>Lo más buscado</span></div><div class="sug-chips">' + p.map(function (q) { return '<a role="option" id="' + caja.id + '-' + (n++) + '" class="sug-chip" href="/buscar/?q=' + encodeURIComponent(q) + '" data-q="' + esc(q) + '">' + icoTipo('popular') + esc(q) + '</a>'; }).join('') + '</div>';
+      if (h) abrir(h); else cerrar();
+    }
+    function mostrar(q, j) {
+      var items = j.items || [], palabras = sinTilde(q).split(/\s+/).filter(Boolean), frag = opBusca('fragmentos');
+      if (!items.length) {
+        abrir('<p class="sug-vacio">Sin coincidencias para «' + esc(q) + '». Pruebe con otra palabra o revise la ortografía.</p>' + (ejemplos().length ? '<div class="sug-chips">' + ejemplos().slice(0, 4).map(function (x, i) { return '<a role="option" id="' + caja.id + '-' + i + '" class="sug-chip" href="/buscar/?q=' + encodeURIComponent(x) + '" data-q="' + esc(x) + '">' + icoTipo('popular') + esc(x) + '</a>'; }).join('') + '</div>' : ''));
+        ponerFantasma(''); return;
+      }
+      var h = j.aproximado ? '<div class="sug-grupo"><span>¿Quiso decir…?</span></div>' : '', grupo = null;
+      items.forEach(function (it, i) {
+        if (!j.aproximado && it.tipo !== grupo) { grupo = it.tipo; h += '<div class="sug-grupo"><span>' + esc(grupo) + '</span></div>'; }
+        var extra = frag && it.fragmento ? '<small class="sug-frag">' + esc(it.fragmento).replace(/\[\[/g, '<mark>').replace(/\]\]/g, '</mark>') + '</small>' : '';
+        h += opcionHtml(i, it.url, resaltar(it.titulo, palabras), extra, it.clave, it.externo);
+      });
+      h += '<a role="option" id="' + caja.id + '-todo" class="sug-todo" href="/buscar/?q=' + encodeURIComponent(q) + '">Ver todos los resultados de «' + esc(q) + '» <kbd>Enter</kbd></a>';
+      abrir(h);
+      var primero = items.filter(function (it) { return sinTilde(it.titulo).indexOf(sinTilde(input.value)) === 0; })[0];
+      ponerFantasma(primero ? primero.titulo : '');
+    }
+    function consultar() {
+      var q = input.value.replace(/\s+/g, ' ').trim();
       clearTimeout(t);
-      if (q.length < 2) { caja.hidden = true; return; }
+      if (!opBusca('predictivo')) return cerrar();
+      if (q.length < 2) { marco.classList.remove('buscando'); ponerFantasma(''); return inicio(); }
+      if (cacheBusca[sinTilde(q)]) return mostrar(q, cacheBusca[sinTilde(q)]);
+      var n = ++pedido;
       t = setTimeout(function () {
-        if (q === ultimo) return;
-        ultimo = q;
-        fetch('/api/public/buscar?q=' + encodeURIComponent(q)).then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (j) { if (input.value.trim() === q) mostrar(j.items || []); }).catch(function () {});
-      }, 220);
-    });
+        marco.classList.add('buscando');
+        fetch('/api/public/buscar?q=' + encodeURIComponent(q)).then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (j) {
+          cacheBusca[sinTilde(q)] = j;
+          if (n === pedido && d.activeElement === input) mostrar(q, j);
+        }).catch(function () {}).then(function () { if (n === pedido) marco.classList.remove('buscando'); });
+      }, 110);
+    }
+    input.addEventListener('input', consultar);
+    input.addEventListener('focus', function () { detenerEjemplos(); consultar(); });
+    input.addEventListener('blur', function () { setTimeout(function () { if (!caja.contains(d.activeElement)) { cerrar(); arrancarEjemplos(); } }, 150); });
     input.addEventListener('keydown', function (e) {
-      var op = $$('a', caja);
+      var op = $$('[role="option"]', caja);
+      if ((e.key === 'Tab' || (e.key === 'ArrowRight' && input.selectionStart === input.value.length)) && completar && !e.shiftKey) {
+        e.preventDefault(); input.value = completar; completar = ''; fantasma.textContent = ''; consultar(); return;
+      }
+      if (e.key === 'Escape') { if (!caja.hidden) { e.preventDefault(); cerrar(); } return; }
       if (caja.hidden || !op.length) return;
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + op.length) % op.length;
         op.forEach(function (o, i) { o.setAttribute('aria-selected', i === sel ? 'true' : 'false'); });
         input.setAttribute('aria-activedescendant', op[sel].id);
-      } else if (e.key === 'Enter' && sel >= 0) { e.preventDefault(); op[sel].click(); }
+        op[sel].scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter' && sel >= 0) { e.preventDefault(); recordar(op[sel].getAttribute('data-q') || input.value); op[sel].click(); }
     });
-    d.addEventListener('click', function (e) { if (e.target !== input && !caja.contains(e.target)) caja.hidden = true; });
+    caja.addEventListener('mousedown', function (e) { if (e.target.closest('[data-borrar]')) e.preventDefault(); });
+    caja.addEventListener('click', function (e) {
+      if (e.target.closest('[data-borrar]')) { guardar('mlp-busquedas', null); input.focus(); inicio(); return; }
+      var a = e.target.closest('a'); if (a) recordar(a.getAttribute('data-q') || input.value);
+    });
+    form && form.addEventListener('submit', function () { recordar(input.value); });
+    d.addEventListener('click', function (e) { if (e.target !== input && !caja.contains(e.target)) cerrar(); });
+
+    // Ejemplos que se escriben solos mientras el campo está vacío.
+    var original = input.getAttribute('placeholder') || '', reloj = null, vuelta = 0;
+    function detenerEjemplos() { clearTimeout(reloj); reloj = null; input.setAttribute('placeholder', original); }
+    function arrancarEjemplos() {
+      var lista = ejemplos();
+      if (reducido || !opBusca('ejemplos') || !lista.length || input.value || d.activeElement === input || reloj) return;
+      var palabra = lista[vuelta++ % lista.length], k = 0, borrando = false;
+      (function paso() {
+        if (input.value || d.activeElement === input) return detenerEjemplos();
+        input.setAttribute('placeholder', 'Ej.: ' + palabra.slice(0, k));
+        if (!borrando && k < palabra.length) { k++; reloj = setTimeout(paso, 55 + Math.random() * 45); }
+        else if (!borrando) { borrando = true; reloj = setTimeout(paso, 1900); }
+        else if (k > 0) { k--; reloj = setTimeout(paso, 22); }
+        else { palabra = lista[vuelta++ % lista.length]; borrando = false; reloj = setTimeout(paso, 350); }
+      })();
+    }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { if (e[0].isIntersecting) arrancarEjemplos(); else if (reloj) detenerEjemplos(); }).observe(input);
+    d.addEventListener('mlp:diseno', function () { detenerEjemplos(); arrancarEjemplos(); });
   });
 
   // ---------------- Accesibilidad: tamaño de texto, contraste y tema
