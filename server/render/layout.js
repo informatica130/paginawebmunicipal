@@ -12,11 +12,11 @@ import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCor
 // Sin diseño guardado se usa el predeterminado (Capital del Trekking); los colores antiguos de
 // la semilla no cuentan como elección propia, los que se hayan cambiado sí.
 const cacheDiseno = new WeakMap();
-const COLORES_SEMILLA = '#0B4F7C#F2A900#062B45';
+const COLORES_SEMILLA = ['#0B4F7C#F2A900#062B45', '#1F6FA8#E9A92B#121417', '#1F6FA8#E9A92B#0F3A5A'];
 export function disenoDe(s) {
   if (!cacheDiseno.has(s)) {
     const c = s.colores || {};
-    const propios = c.primario && [c.primario, c.acento, c.oscuro].join('').toUpperCase() !== COLORES_SEMILLA;
+    const propios = c.primario && !COLORES_SEMILLA.includes([c.primario, c.acento, c.oscuro].join('').toUpperCase());
     cacheDiseno.set(s, normalizar(s.diseno || { colores: propios ? { primario: c.primario, acento: c.acento, oscuro: c.oscuro } : {} }));
   }
   return cacheDiseno.get(s);
