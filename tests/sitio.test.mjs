@@ -12,7 +12,7 @@ import { Db } from '../server/db.js';
 import { crearRepositorio } from '../server/contenidos.js';
 import { fechaDesdeTitulo } from '../server/semilla.js';
 import { iniciar } from '../server/server.js';
-import { normalizar as normalizarDiseno, aplicarEstilo, variablesCss } from '../public/js/diseno.js';
+import { normalizar as normalizarDiseno, migrar as migrarDiseno, aplicarEstilo, variablesCss } from '../public/js/diseno.js';
 
 // ------------------------------------------------------------------ Unidades
 test('saneador: elimina scripts, eventos y URLs peligrosas', () => {
@@ -28,6 +28,16 @@ test('saneador: permite videos de YouTube y cierra etiquetas abiertas', () => {
   assert.match(sanitizarHtml('<a href="https://gob.cl" target="_blank">x</a>'), /rel="noopener noreferrer"/);
   assert.equal(sanitizarHtml('<a href="&#106;avascript:alert(1)">x</a>'), '<a>x</a>');
   assert.equal(sanitizarHtml('1 < 2 & 3 > 2'), '1 &lt; 2 &amp; 3 &gt; 2');
+});
+
+test('diseño: los guardados antes de «Portal colorido» pasan una vez al nuevo y conservan sus textos', () => {
+  const viejo = { estilo: 'trekking', portada: { composicion: 'vitrina', titulo: 'Hola' }, cabecera: { nombre: 'Melipeuco' } };
+  const m = normalizarDiseno(migrarDiseno(viejo));
+  assert.equal(m.portada.composicion, 'portal');
+  assert.equal(m.portada.titulo, 'Hola');
+  assert.equal(m.cabecera.nombre, 'Melipeuco');
+  // Lo guardado después (con revisión) se respeta tal cual.
+  assert.equal(migrarDiseno(normalizarDiseno(viejo)).portada.composicion, 'vitrina');
 });
 
 test('plantillas escapan lo interpolado', () => {
