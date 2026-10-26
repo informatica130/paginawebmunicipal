@@ -33,7 +33,7 @@ export const PREDETERMINADO = {
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
   animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true,
-    introEstilo: 'logo3d', profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona' },
+    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona' },
   avanzado: { css: '' },
 };
 
@@ -95,7 +95,7 @@ export const OPCIONES = {
   pieEstilo: { oscuro: 'Oscuro', color: 'Color principal', claro: 'Claro' },
   intensidad: { sutil: 'Sutil', normal: 'Normal', expresiva: 'Expresiva' },
   intro: { primera: 'Primera visita de cada sesión', siempre: 'Cada vez que se abre la portada', nunca: 'Nunca' },
-  introEstilo: { logo3d: 'El logo se reconstruye en 3D, pieza por pieza', escudo: 'El escudo municipal se arma' },
+  introEstilo: { escudo3d: 'El escudo municipal se arma en 3D y vuela a la cabecera', logo3d: 'El logo se reconstruye en 3D, pieza por pieza', escudo: 'El escudo municipal se arma (clásica, plana)' },
   transicionEstilo: { columnas: 'Nueve columnas que giran en 3D (una por letra)', portal: 'Portal: el emblema del área se abre en círculo', cordillera: 'Cordillera: capas de montaña que suben' },
   transicionColor: { zona: 'Color del área de destino', arcoiris: 'Los nueve colores del logo' },
   logoAnimacion: { vivo: 'Logo vivo: cada símbolo se anima', caida: 'Las letras caen una a una', aparecer: 'Aparece suavemente', ninguna: 'Sin animación de entrada' },
@@ -160,7 +160,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
       intro: opcion(an.intro, OPCIONES.intro, 'primera'), transiciones: bool(an.transiciones, true), aparicion: bool(an.aparicion, true),
       inclinacion: bool(an.inclinacion, P.animaciones.inclinacion), barraCarga: bool(an.barraCarga, true), cordillera: bool(an.cordillera, P.animaciones.cordillera),
-      introEstilo: opcion(an.introEstilo, OPCIONES.introEstilo, 'logo3d'), profundidad: numero(an.profundidad, 70, 0, 100),
+      introEstilo: opcion(an.introEstilo, OPCIONES.introEstilo, P.animaciones.introEstilo), escudoVivo: bool(an.escudoVivo, true), profundidad: numero(an.profundidad, 70, 0, 100),
       transicionEstilo: opcion(an.transicionEstilo, OPCIONES.transicionEstilo, 'columnas'), transicionColor: opcion(an.transicionColor, OPCIONES.transicionColor, 'zona'),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
@@ -200,7 +200,7 @@ export function variablesCss(cfg) {
 export function atributos(cfg) {
   const a = cfg.animaciones;
   return {
-    'data-cabecera': cfg.cabecera.estilo, 'data-cabecera-fija': cfg.cabecera.fija ? 'si' : 'no',
+    'data-cabecera': cfg.cabecera.estilo, 'data-logo-cabecera': cfg.cabecera.logo, 'data-escudo-vivo': cfg.animaciones.activas && cfg.animaciones.escudoVivo ? 'si' : 'no', 'data-cabecera-fija': cfg.cabecera.fija ? 'si' : 'no',
     'data-barra-superior': cfg.cabecera.barraSuperior ? 'si' : 'no', 'data-boton-tramites': cfg.cabecera.botonTramites ? 'si' : 'no',
     'data-menu-mayusculas': cfg.tipografia.menuMayusculas ? 'si' : 'no',
     'data-tarjetas': cfg.forma.tarjetas, 'data-botones': cfg.forma.botones, 'data-densidad': cfg.forma.densidad,

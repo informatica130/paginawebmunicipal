@@ -957,7 +957,7 @@ mark { padding: 0 2px; border-radius: 2px; background: color-mix(in srgb, var(--
 :root[data-pie="claro"] .pie address .ico { color: var(--azul); }
 :root[data-pie="claro"] .pie-legal { border-top-color: var(--borde); }
 :root[data-pie="claro"] .redes a { border-color: var(--borde-fuerte); color: var(--texto); }
-:root[data-pie="claro"] .pie-escudo { content: url('/img/escudo-azul.svg'); }
+:root[data-pie="claro"] .pie-escudo { color: #14284A; }
 :root[data-pie="claro"] .pie-boletin input { border-color: var(--borde-fuerte) !important; }
 :root[data-pie-emergencias="no"] .pie-emergencias, :root[data-pie-boletin="no"] .pie-boletin, :root[data-pie-escudo="no"] .pie-escudo { display: none; }
 
@@ -1868,7 +1868,7 @@ main :is(p, li, dd, dt, td, th, h1, h2, h3, h4, blockquote, figcaption, .bajada,
    Pantalla de carga «logo 3D» y transiciones entre páginas
    (las anima public/js/transiciones.js)
    ===================================================================== */
-.intro.intro-logo { background: transparent; animation: intro-seguro .3s ease 6.8s forwards; }
+.intro.intro-3d { background: transparent; animation: intro-seguro .3s ease 6.8s forwards; }
 .il-fondo { position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 45%, #1C2530 0%, #0D1116 70%), #0D1116; }
 .il-fondo::before { content: ''; position: absolute; inset: 0; opacity: .5; background-image: radial-gradient(1px 1px at 12% 22%, #fff, transparent), radial-gradient(1px 1px at 78% 14%, #fff, transparent), radial-gradient(1.5px 1.5px at 64% 68%, #fff, transparent), radial-gradient(1px 1px at 28% 80%, #fff, transparent), radial-gradient(1px 1px at 88% 52%, #fff, transparent), radial-gradient(1px 1px at 42% 36%, #fff, transparent); }
 .il-fondo::after { content: ''; position: absolute; inset: auto 0 0; height: 22vh; background: linear-gradient(transparent, rgb(31 111 168 / .18)); clip-path: polygon(0 100%, 0 70%, 8% 52%, 15% 66%, 24% 34%, 33% 60%, 41% 44%, 50% 18%, 58% 50%, 66% 38%, 75% 62%, 84% 30%, 92% 56%, 100% 44%, 100% 100%); }
@@ -1879,9 +1879,9 @@ main :is(p, li, dd, dt, td, th, h1, h2, h3, h4, blockquote, figcaption, .bajada,
 .il-base { filter: drop-shadow(0 18px 30px rgb(0 0 0 / .45)); }
 .il-pieza { will-change: transform, opacity; }
 .il-lema { fill: #fff; }
-.intro-logo .intro-barra { background: rgb(255 255 255 / .14); }
-.intro-logo .intro-barra span { animation: none; background: var(--arcoiris, #E9A92B); }
-.intro-logo .intro-saltar { color: rgb(255 255 255 / .55); }
+.intro-3d .intro-barra { background: rgb(255 255 255 / .14); }
+.intro-3d .intro-barra span { animation: none; background: var(--arcoiris, #E9A92B); }
+.intro-3d .intro-saltar { color: rgb(255 255 255 / .55); }
 .con-intro-logo .hero .tk-logo-caja { visibility: hidden; }
 
 /* Transiciones: sólo se ve la del estilo elegido */
@@ -1898,7 +1898,24 @@ html.tk-entrando[data-transicion="portal"] .tk-portal { clip-path: circle(150vma
 .tk-cortina-info { perspective: 800px; }
 .tk-cortina-nombre { display: flex; perspective: 600px; }
 .tk-cortina-nombre > span { display: inline-block; white-space: pre; transform-origin: 50% 100%; }
-@media (prefers-reduced-motion: reduce) { .intro-logo { display: none; } }
+@media (prefers-reduced-motion: reduce) { .intro-3d { display: none; } }
 /* Las piezas de la transición sólo existen mientras se usa (en reposo no asoman bordes). */
 .tk-columnas, .tk-portal { visibility: hidden; }
 html.tk-saliendo :is(.tk-columnas, .tk-portal), html.tk-entrando :is(.tk-columnas, .tk-portal) { visibility: visible; }
+
+/* ---------------------------------------------------------------- Escudo vivo (cabecera, pie y carga 3D) */
+.marca-viva { display: none; width: min(var(--logo, 54px), 48px); height: auto; overflow: visible; color: #14284A; }
+:root[data-logo-cabecera="emblema"] .marca-viva { display: block; }
+:root[data-logo-cabecera="emblema"] .marca img.marca-emblema { display: none !important; }
+:root[data-tema="oscuro"] .marca-viva, :root[data-cabecera="color"] .marca-viva, :root[data-cabecera="oscura"] .marca-viva { color: #F4EAD2; }
+.cabecera.compacta .marca-viva { width: calc(min(var(--logo, 54px), 48px) * .82); }
+.marca-viva, .marca-viva .ev-pz { transition: width .25s cubic-bezier(.16, 1, .3, 1); }
+.pie-escudo.escudo-vivo { display: block; width: 132px; height: auto; color: #F4EAD2; overflow: visible; cursor: pointer; }
+.ev-espera .ev-pz { opacity: 0; }
+.con-intro-escudo :is(.marca-viva, .marca-emblema) { visibility: hidden; }
+.con-intro:not(.con-intro-logo) .marca-viva { visibility: hidden; }
+.ie-escena { position: relative; z-index: 1; width: min(330px, 62vw); perspective: 1300px; perspective-origin: 50% 35%; }
+.ie-escudo { position: relative; width: 100%; aspect-ratio: 470 / 481; transform-style: preserve-3d; color: #F4EAD2; will-change: transform; }
+.ie-capa { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform, opacity; }
+.ie-capa svg { display: block; width: 100%; height: 100%; overflow: visible; fill: currentColor; filter: drop-shadow(0 14px 22px rgb(0 0 0 / .35)); }
+.ie-onda { position: absolute; width: 9%; aspect-ratio: 1; border: 2px solid #F4EAD2; border-radius: 50%; opacity: 0; pointer-events: none; }

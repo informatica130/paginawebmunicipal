@@ -423,11 +423,20 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return { clave: p.clave, nombre, items };
   });
 
+  ruta('GET', 'diseno/historial', 'ajustes.editar', () => (db.ajuste('diseno-historial') || []).map((v, i) => ({ i, fecha: v.fecha, usuario: v.usuario, estilo: v.estilo, diseno: v.diseno })));
+
   // Incluye el contenido de la identidad ya completado con lo predeterminado, para editarlo en el panel.
   ruta('GET', 'ajustes', 'contenido.ver', () => { const a = db.ajuste('sitio') || {}; return { ...a, trekkingActual: contenidoTrekking(a) }; });
   ruta('PUT', 'ajustes', 'ajustes.editar', ({ u, body, req }) => {
     const previo = db.ajuste('sitio') || {};
     const limpio = limpiarAjustes(body, previo, u);
+    // Historial del diseño: cada vez que cambia se guarda la versión anterior (las últimas 30),
+    // para poder volver a ella desde «Diseño del sitio».
+    if (body.diseno && JSON.stringify(limpio.diseno) !== JSON.stringify(previo.diseno)) {
+      const historial = db.ajuste('diseno-historial') || [];
+      historial.unshift({ fecha: ahora(), usuario: u.nombre, estilo: previo.diseno?.estilo || 'original', diseno: previo.diseno || null });
+      db.guardarAjuste('diseno-historial', historial.slice(0, 30));
+    }
     db.guardarAjuste('sitio', limpio);
     const cambiadas = Object.keys(limpio).filter((k) => JSON.stringify(limpio[k]) !== JSON.stringify(previo[k]));
     auditar(u, 'ajustes.editar', 'sitio', cambiadas.join(', '), req.ip);

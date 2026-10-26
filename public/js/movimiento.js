@@ -65,7 +65,7 @@
   function intro() {
     var capa = $('.intro');
     if (!capa) return false;
-    if (capa.classList.contains('intro-logo')) return true; // la anima public/js/transiciones.js
+    if (capa.classList.contains('intro-3d')) return true; // la anima public/js/transiciones.js
     if (!puede) { capa.remove(); raiz.classList.remove('con-intro'); return false; }
     capa.dataset.activa = '1';
     var escudo = $('.intro-escudo', capa), svg = $('svg', escudo), emblema = $('.intro-emblema', capa);
@@ -106,8 +106,9 @@
       terminado = true;
       d.dispatchEvent(new CustomEvent('intro:salida'));
       // El logo visible (claro u oscuro según la cabecera y el tema).
-      var logo = $$('.marca-emblema').filter(function (l) { return l.offsetWidth; })[0], r = logo && logo.getBoundingClientRect();
-      var conTexto = logo && /escudo-/.test(logo.getAttribute('src') || ''), propio = logo && !/(emblema|escudo)-/.test(logo.getAttribute('src') || '');
+      var logo = $$('.marca-viva, .marca-emblema').filter(function (l) { return l.getBoundingClientRect().width; })[0], r = logo && logo.getBoundingClientRect();
+      var vivo = logo && logo.classList.contains('marca-viva');
+      var conTexto = !vivo && logo && /escudo-/.test(logo.getAttribute('src') || ''), propio = !vivo && logo && !/(emblema|escudo)-/.test(logo.getAttribute('src') || '');
       if (propio) r = null;
       var e = svg.getBoundingClientRect();
       $$((conTexto ? '' : '.pz[data-pieza="municipalidad"], .pz[data-pieza="cinta"], .pz[data-pieza="chile"], ') + '.intro-barra, .intro-saltar', capa).forEach(function (el) {
@@ -125,7 +126,7 @@
     function quitar(a) {
       var fin = function () {
         capa.remove(); raiz.classList.remove('con-intro');
-        var logo = $$('.marca-emblema').filter(function (l) { return l.offsetWidth; })[0];
+        var logo = $$('.marca-viva, .marca-emblema').filter(function (l) { return l.getBoundingClientRect().width; })[0];
         anim(logo, [{ transform: 'scale(1.18)' }, { transform: 'scale(.94)' }, { transform: 'none' }], { duration: 420, easing: 'ease-out', fill: 'none' });
         d.dispatchEvent(new CustomEvent('intro:fin'));
       };
@@ -201,8 +202,6 @@
     { sel: '.tk-cifra, .tk-foto, .tk-trekking-cabeza > *', cuadros: [{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'none' }], dur: 800, paso: 70, curva: SALIDA },
     { sel: '.tk-mundos-letras li', cuadros: [{ opacity: 0, transform: 'translateY(-60px) rotate(-10deg) scale(.7)' }, { opacity: 1, transform: 'none' }], dur: 900, paso: 60, curva: REBOTE },
     { sel: '.lateral-bloque, .caja, .campanas, .video, .calendario, .encuesta, .boletin, .banda-turismo .contenedor > *, .acordeon, .galeria-item, .lista-check li, .pasos li', cuadros: [{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'none' }], dur: 600, paso: 50, curva: SALIDA },
-    // Escudo del pie: gira como una moneda.
-    { sel: '.pie-escudo', cuadros: [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], dur: 800, paso: 0, curva: SALIDA },
     // Firma gigante del pie: las letras suben desde la base.
     { sel: '.pie-trekking a', cuadros: [{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }], dur: 1400, paso: 0, curva: SALIDA },
   ];

@@ -121,7 +121,7 @@ export async function iniciar(opciones = {}) {
       if (ruta.length > 2000 || ruta.includes('\0')) throw new ErrorHttp(400, 'Solicitud inválida');
       // Archivos estáticos
       if (/^\/(css|js|img|fuentes)\//.test(ruta)) {
-        if (servirArchivo(req, res, PUB, ruta, { maxAge: url.search ? 31536000 : 3600, inmutable: !!url.search })) return;
+        if (servirArchivo(req, res, PUB, ruta, { maxAge: url.search ? 31536000 : 0, inmutable: !!url.search })) return;
         throw new ErrorHttp(404, 'No encontrado');
       }
       if (ruta === '/favicon.ico') return servirArchivo(req, res, PUB, '/img/favicon.png', { maxAge: 86400 }) || undefined;

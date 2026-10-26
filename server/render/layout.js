@@ -4,6 +4,7 @@
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, telefonoHref, telefonoTexto } from './comun.js';
 import { textoPlano, recortar } from '../../src/util.js';
 import { plantillaIntro, SCRIPT_INTRO } from './intro.js';
+import { escudoVivo } from './escudo.js';
 import { normalizar, variablesCss, atributos, urlFuentes, logoCabecera } from '../../public/js/diseno.js';
 import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCordillera } from './trekking.js';
 
@@ -83,6 +84,7 @@ function cabecera(ctx) {
     <div class="cabecera-principal">
       <div class="contenedor">
         <a class="marca" href="/" aria-label="${s.nombre}: ir al inicio">
+          ${crudo(escudoVivo({ clase: 'marca-viva', titulo: '' }).replace(' role="img" aria-label=""', ' aria-hidden="true"').replace('<title></title>', ''))}
           <img class="marca-emblema logo-claro" src="${logo.src}" alt="" data-diseno-logo="claro">
           <img class="marca-emblema logo-oscuro" src="${logo.oscuro}" alt="" data-diseno-logo="oscuro">
           <span class="marca-texto"${logo.conTexto ? '' : crudo(' hidden')}><small data-diseno="cabecera.subtitulo">${dz.cabecera.subtitulo}</small><b data-diseno="cabecera.nombre">${dz.cabecera.nombre}</b></span>
@@ -137,7 +139,7 @@ function pie(ctx) {
     </div>
     <div class="contenedor pie-columnas">
       <section class="pie-marca">
-        <img class="pie-escudo" src="/img/escudo-crema.svg" alt="Escudo de la Municipalidad de Melipeuco" width="150" height="142" loading="lazy">
+        ${crudo(escudoVivo({ completo: true, clase: 'pie-escudo' }))}
         <h2 class="sr">${s.nombre}</h2>
         <address>
           <p>${crudo(icono('ubicacion', { tam: 16 }))} <a ${attrsEnlace(s.mapa?.enlace || '#')}>${s.direccion}</a></p>
@@ -216,7 +218,7 @@ ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
 </head>
 <body class="${clase}${portada ? ' es-portada' : ''}">
-${portada ? html`${crudo(plantillaIntro(dz.animaciones.introEstilo === 'logo3d' && ['vitrina', 'trekking'].includes(dz.portada.composicion) ? 'logo3d' : 'escudo'))}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
+${portada ? html`${crudo(plantillaIntro(dz.animaciones.introEstilo === 'logo3d' ? (['vitrina', 'trekking'].includes(dz.portada.composicion) ? 'logo3d' : 'escudo3d') : dz.animaciones.introEstilo))}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
 ${dz.animaciones.activas && dz.animaciones.cordillera ? crudo(cortinaCordillera()) : ''}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="tk-progreso" aria-hidden="true"></div>
@@ -232,6 +234,7 @@ ${pie(ctx)}
 <script src="/js/movimiento.js?v=${ctx.version}" defer></script>
 ${portada ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}
 <script src="/js/transiciones.js?v=${ctx.version}" defer></script>
+<script src="/js/escudo-vivo.js?v=${ctx.version}" defer></script>
 </body>
 </html>`;
 }
