@@ -152,8 +152,8 @@ test('portada «Melipeuco Capital del Trekking»: logo y zonas por página', asy
   const h = await (await pedir('/')).text();
   assert.match(h, /class="tk-logo"[^>]*aria-label="Melipeuco Capital del Trekking"/);
   assert.equal((h.match(/class="tk-letra"/g) || []).length, 9);
-  assert.match(h, /data-anim-cordillera="si"/);
-  assert.match(h, /data-zonas="\{&quot;rutas&quot;/);
+  assert.match(h, /class="hero hero-vitrina"/);
+  assert.match(h, /data-sombras="suaves"/);
   const salud = await (await pedir('/salud/')).text();
   assert.match(salud, /style="--z:#16A0A8;/);
   assert.match(salud, /emblema-2\.svg/);

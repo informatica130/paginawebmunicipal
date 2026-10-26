@@ -148,7 +148,10 @@
     if (!hero || !puede) return;
     if (hero.hasAttribute('data-hero-trekking')) {
       // El logo cae letra por letra con CSS; el resto aparece mientras tanto.
-      [['.tk-kicker', 80], ['.hero-lema', 900], ['.hero-buscar', 1050], ['.populares', 1200]].forEach(function (x) {
+      // Portada «vitrina»: el marco de fotos se descubre y el acceso flotante llega desde abajo.
+      anim($('.hv-marco', hero), [{ clipPath: 'inset(8% 8% 8% 8% round 40px)', transform: 'scale(.96)' }, { clipPath: 'inset(0 0 0 0 round 0px)', transform: 'none' }], { duration: 1300, delay: 100, easing: SALIDA });
+      anim($('.hv-flotante', hero), [{ opacity: 0, transform: escalar('translateY(24px) scale(.96)') }, { opacity: 1, transform: 'none' }], { duration: 800, delay: 1100, easing: SALIDA });
+      [['.tk-kicker', 80], ['.hv-insignia', 60], ['.hero-lema', 900], ['.hero-buscar', 1050], ['.populares', 1200]].forEach(function (x) {
         anim($(x[0], hero), [{ opacity: 0, transform: escalar('translateY(18px)') }, { opacity: 1, transform: 'none' }], { duration: 800, delay: x[1], easing: SALIDA });
       });
       $$('.franja-datos .dato').forEach(function (el, i) {
