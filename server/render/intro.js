@@ -14,8 +14,18 @@ export const PIEZAS = [
   ['municipalidad', '50% 50%'], ['cinta', '50% 50%'], ['chile', '50% 50%'],
 ];
 
+// Variante «logo 3D»: la escena se llena en el navegador con las letras y piezas del logo de la
+// portada (public/js/transiciones.js), así no se repite el dibujo del logo en el HTML.
+const LOGO3D = `<template id="intro-plantilla"><div class="intro intro-logo" aria-hidden="true" data-limite="7000" data-clase="con-intro-logo">
+  <div class="il-fondo"></div>
+  <div class="il-escena"></div>
+  <div class="intro-barra"><span></span></div>
+  <p class="intro-saltar">Toque o presione una tecla para saltar</p>
+</div></template>`;
+
 let cache = '';
-export function plantillaIntro() {
+export function plantillaIntro(estilo = 'escudo') {
+  if (estilo === 'logo3d') return LOGO3D;
   if (cache) return cache;
   cache = `<template id="intro-plantilla"><div class="intro" aria-hidden="true">
   <div class="intro-escudo"><svg viewBox="20 -4 470 481" width="470" height="481">
@@ -30,4 +40,4 @@ export function plantillaIntro() {
 }
 
 // Script en línea (con nonce) que inserta la pantalla antes del primer pintado.
-export const SCRIPT_INTRO = `(function(){try{var d=document.documentElement,mm=window.matchMedia;var modo=d.getAttribute('data-intro')||'primera',forzar=/[?&]intro=1/.test(location.search);if(!forzar&&(/[?&]vista=diseno/.test(location.search)||modo==='nunca'||(modo==='primera'&&sessionStorage.getItem('mlp-intro'))||(mm&&mm('(prefers-reduced-motion: reduce)').matches)))return;sessionStorage.setItem('mlp-intro','1');if(!d.dataset.tema&&mm&&mm('(prefers-color-scheme: dark)').matches)d.dataset.tema='oscuro';var claro=d.dataset.tema==='oscuro'||/^(color|oscura)$/.test(d.getAttribute('data-cabecera')||'');var t=document.getElementById('intro-plantilla'),n=t.content.firstElementChild.cloneNode(true);if(claro)n.querySelectorAll('image').forEach(function(i){i.setAttribute('href',i.getAttribute('href').replace('-azul','-crema'))});document.body.prepend(n);d.classList.add('con-intro');setTimeout(function(){var i=document.querySelector('.intro');if(i&&!i.dataset.activa){i.remove();d.classList.remove('con-intro')}},4500)}catch(e){}})();`;
+export const SCRIPT_INTRO = `(function(){try{var d=document.documentElement,mm=window.matchMedia;var modo=d.getAttribute('data-intro')||'primera',forzar=/[?&]intro=1/.test(location.search);if(!forzar&&(/[?&]vista=diseno/.test(location.search)||modo==='nunca'||(modo==='primera'&&sessionStorage.getItem('mlp-intro'))||(mm&&mm('(prefers-reduced-motion: reduce)').matches)))return;sessionStorage.setItem('mlp-intro','1');if(!d.dataset.tema&&mm&&mm('(prefers-color-scheme: dark)').matches)d.dataset.tema='oscuro';var claro=d.dataset.tema==='oscuro'||/^(color|oscura)$/.test(d.getAttribute('data-cabecera')||'');var t=document.getElementById('intro-plantilla'),n=t.content.firstElementChild.cloneNode(true);if(claro)n.querySelectorAll('image').forEach(function(i){i.setAttribute('href',i.getAttribute('href').replace('-azul','-crema'))});document.body.prepend(n);d.classList.add('con-intro');if(n.getAttribute('data-clase'))d.classList.add(n.getAttribute('data-clase'));setTimeout(function(){var i=document.querySelector('.intro');if(i&&!i.dataset.activa){i.remove();d.classList.remove('con-intro','con-intro-logo')}},Number(n.getAttribute('data-limite'))||4500)}catch(e){}})();`;
