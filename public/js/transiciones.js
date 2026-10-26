@@ -125,6 +125,95 @@
     ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (t) { addEventListener(t, saltar, { once: true, passive: true }); });
   }
 
+  // ================================================================ Pantalla de carga «escudo 3D»
+  // Cada pieza del escudo municipal es una capa en el espacio y entra según lo que es: el volcán
+  // y el terreno se levantan como un telón, las araucarias crecen girando, el kultrún llega
+  // girando como una moneda desde delante, las trutrucas se cruzan desde lejos, sus bocinas
+  // llegan girando y suenan, los laureles con copihues se abren como puertas, las aves llegan
+  // volando y la cinta se despliega en 3D con el nombre. Luego vuela al logo de la cabecera.
+  var GESTOS_3D = {
+    paisaje: { c: ['rotateX(85deg) translateZ(-120px)', 'none'], t: 0, dur: 1050 },
+    'arbol-i': { c: ['rotateY(-100deg) scale(.25, 0)', 'rotateY(8deg) scale(1.04, 1.06)', 'none'], t: 300, dur: 1000 },
+    'arbol-d': { c: ['rotateY(100deg) scale(.25, 0)', 'rotateY(-8deg) scale(1.04, 1.06)', 'none'], t: 380, dur: 1000 },
+    kultrun: { c: ['rotateY(900deg) translateZ(380px) scale(.15)', 'rotateY(-12deg) translateZ(30px) scale(1.06)', 'none'], t: 120, dur: 1550, e: SALIDA },
+    'palo-i': { c: ['translate3d(-340px, -280px, -420px) rotateZ(-30deg)', 'none'], t: 450, dur: 900, e: SALIDA },
+    'palo-d': { c: ['translate3d(340px, -280px, -420px) rotateZ(30deg)', 'none'], t: 450, dur: 900, e: SALIDA },
+    'campana-i': { c: ['translate3d(-300px, 80px, 260px) rotateY(-120deg)', 'none'], t: 540, dur: 950, e: SALIDA },
+    'campana-d': { c: ['translate3d(300px, 80px, 260px) rotateY(120deg)', 'none'], t: 540, dur: 950, e: SALIDA },
+    'laurel-i': { c: ['rotateY(-110deg) scale(.4)', 'rotateY(10deg) scale(1.05)', 'none'], t: 720, dur: 1000 },
+    'laurel-d': { c: ['rotateY(110deg) scale(.4)', 'rotateY(-10deg) scale(1.05)', 'none'], t: 780, dur: 1000 },
+    aves: { c: ['translate3d(280px, -160px, 520px) rotateY(70deg) scale(.3)', 'translate3d(30px, -20px, 80px) rotateY(-10deg) scale(.95)', 'none'], t: 760, dur: 1150, e: 'ease-out' },
+    cinta: { c: ['rotateX(90deg) scaleX(.2)', 'rotateX(-12deg) scaleX(1.02)', 'none'], t: 1050, dur: 800 },
+    municipalidad: { c: ['rotateX(-90deg) translateZ(40px)', 'none'], t: 1200, dur: 700, e: SALIDA },
+    chile: { c: ['translateY(20px) rotateX(-90deg)', 'none'], t: 1300, dur: 650, e: SALIDA },
+  };
+  function introEscudo() {
+    var capa = $('.intro-escudo3d');
+    if (!capa) return;
+    var objetivo = $$('.marca-viva, .marca-emblema').filter(function (l) { return l.getBoundingClientRect().width; })[0];
+    var terminar = function () {
+      capa.remove(); raiz.classList.remove('con-intro', 'con-intro-escudo');
+      if (objetivo) anim(objetivo, [{ transform: 'scale(1.18)' }, { transform: 'scale(.94)' }, { transform: 'none' }], { duration: 480, easing: 'ease-out', fill: 'none' });
+      d.dispatchEvent(new CustomEvent('intro:fin'));
+    };
+    if (!puede) { d.dispatchEvent(new CustomEvent('intro:salida')); terminar(); return; }
+    capa.dataset.activa = '1';
+    var P = (parseFloat(raiz.getAttribute('data-intro-profundidad')) || 70) / 100;
+    var escudo = $('.ie-escudo', capa), fondo = $('.il-fondo', capa), capas = $$('.ie-capa', capa);
+    var animaciones = [], temporizadores = [], saliendo = false;
+    var a = function (el, c, o) { var x = anim(el, c, o); if (x) animaciones.push(x); return x; };
+    var prof = function (t) { return P === 1 ? t : t.replace(/(-?\d*\.?\d+)(px|deg)/g, function (_, n, u) { return (parseFloat(n) * P).toFixed(1) + u; }); };
+
+    a(escudo, [{ transform: prof('rotateX(30deg) rotateY(-35deg) translateZ(-200px)') }, { transform: 'none' }], { duration: 2400, easing: SALIDA });
+    capas.forEach(function (c) {
+      var g = GESTOS_3D[c.getAttribute('data-pieza')];
+      if (!g) return;
+      var cuadros = g.c.map(function (t, i) { return { transform: i === g.c.length - 1 ? t : prof(t), opacity: i === 0 ? 0 : 1 }; });
+      if (cuadros.length === 3) cuadros[1].offset = .68;
+      a(c, cuadros, { duration: g.dur, delay: g.t, easing: g.e || 'cubic-bezier(.22, .9, .3, 1)' });
+    });
+    // Las trutrucas suenan: ondas desde sus bocinas.
+    [[3.8, 67.8], [96.2, 67.8]].forEach(function (pos, i) {
+      [0, 1].forEach(function (k) {
+        var o = d.createElement('i'); o.className = 'ie-onda'; o.style.left = pos[0] + '%'; o.style.top = pos[1] + '%';
+        escudo.appendChild(o);
+        a(o, [{ transform: 'translate(-50%, -50%) scale(.4)', opacity: 0 }, { opacity: .6, offset: .2 }, { transform: 'translate(-50%, -50%) scale(2.8)', opacity: 0 }], { duration: 950, delay: 1350 + i * 140 + k * 260, easing: 'ease-out' });
+      });
+    });
+    // Ola de luz de arriba abajo cuando ya está armado.
+    capas.forEach(function (c, i) { a(c, [{ filter: 'brightness(1)' }, { filter: 'brightness(1.5)' }, { filter: 'brightness(1)' }], { duration: 520, delay: 1900 + i * 40, easing: 'ease-in-out', fill: 'none' }); });
+    a($('.intro-barra span', capa), [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 2600, easing: 'cubic-bezier(.6, 0, .25, 1)' });
+    temporizadores.push(setTimeout(salir, 2750 / VEL));
+
+    function salir() {
+      if (saliendo) return; saliendo = true;
+      d.dispatchEvent(new CustomEvent('intro:salida'));
+      animaciones.forEach(function (x) { x.finish(); });
+      $$('.intro-barra, .intro-saltar', capa).forEach(function (el) { anim(el, [{ opacity: 1 }, { opacity: 0 }], { duration: 200 }); });
+      var r = objetivo && objetivo.getBoundingClientRect(), c = escudo.getBoundingClientRect();
+      var vivo = objetivo && objetivo.classList.contains('marca-viva');
+      var completo = objetivo && !vivo && /escudo-/.test(objetivo.getAttribute('src') || '');
+      var propio = objetivo && !vivo && !completo && !/emblema-/.test(objetivo.getAttribute('src') || '');
+      anim(fondo, [{ opacity: 1 }, { opacity: 0 }], { duration: 650, delay: 180, easing: 'ease-in-out' });
+      var vuelo;
+      if (r && r.width && !propio && r.bottom > 0) {
+        if (!completo) capas.forEach(function (cp) { if (/^(municipalidad|cinta|chile)$/.test(cp.getAttribute('data-pieza'))) anim(cp, [{ opacity: 1 }, { opacity: 0 }], { duration: 260 }); });
+        var color = vivo ? getComputedStyle(objetivo).color : /crema/.test(objetivo.getAttribute('src') || '') ? '#F4EAD2' : '#14284A';
+        anim(escudo, [{ color: '#F4EAD2' }, { color: color }], { duration: 700, delay: 100 });
+        escudo.style.transformOrigin = '0 0';
+        var s = r.width / c.width, dx = r.left - c.left, dy = r.top - c.top;
+        vuelo = anim(escudo, [
+          { transform: 'translate(0, 0) scale(1)' },
+          { transform: 'translate(' + dx * .45 + 'px,' + (dy * .45 - 30) + 'px) scale(' + (1 + s) / 2.2 + ') rotateY(' + (14 * P).toFixed(1) + 'deg)', offset: .45 },
+          { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')' },
+        ], { duration: 860, easing: VUELO });
+      } else vuelo = anim(escudo, [{ opacity: 1 }, { opacity: 0, transform: 'scale(.9)' }], { duration: 450 });
+      if (vuelo) vuelo.finished.then(terminar, terminar); else terminar();
+    }
+    function saltar() { if (saliendo) return; temporizadores.forEach(clearTimeout); salir(); }
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (t) { addEventListener(t, saltar, { once: true, passive: true }); });
+  }
+
   // ================================================================ Transiciones entre páginas
   function transiciones() {
     var capa = $('.tk-cortina');
@@ -218,5 +307,6 @@
   }
 
   introLogo();
+  introEscudo();
   transiciones();
 })();

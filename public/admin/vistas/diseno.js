@@ -99,8 +99,9 @@ const GRUPOS = [
     { ruta: 'animaciones.intensidad', tipo: 'botones', etiqueta: 'Intensidad', opciones: OPCIONES.intensidad, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.velocidad', tipo: 'rango', etiqueta: 'Velocidad', min: .5, max: 2, paso: .1, unidad: '×', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.intro', tipo: 'lista', etiqueta: 'Pantalla de carga de la portada', opciones: OPCIONES.intro, si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.introEstilo', tipo: 'lista', etiqueta: 'Animación de la pantalla de carga', opciones: OPCIONES.introEstilo, ayuda: 'En 3D, las nueve letras llegan desde el espacio, cada símbolo se arma con sus piezas y el logo vuela a su lugar en la portada. Use «Ver pantalla de carga» (guarde antes).', si: (c) => c.animaciones.activas && c.animaciones.intro !== 'nunca' },
-    { ruta: 'animaciones.profundidad', tipo: 'rango', etiqueta: 'Profundidad del efecto 3D', min: 0, max: 100, paso: 10, unidad: ' %', si: (c) => c.animaciones.activas && c.animaciones.introEstilo === 'logo3d' },
+    { ruta: 'animaciones.introEstilo', tipo: 'lista', etiqueta: 'Animación de la pantalla de carga', opciones: OPCIONES.introEstilo, ayuda: 'Escudo 3D: cada pieza del escudo (volcán, araucarias, kultrún, trutrucas, laureles, aves y cinta) llega a su manera y el escudo vuela a la cabecera. Logo 3D: las nueve letras se arman y el logo vuela a la portada. Use «Ver pantalla de carga» (guarde antes).', si: (c) => c.animaciones.activas && c.animaciones.intro !== 'nunca' },
+    { ruta: 'animaciones.escudoVivo', tipo: 'si', etiqueta: 'Escudo municipal animado en la cabecera y el pie (se mueve al pasar el cursor)', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.profundidad', tipo: 'rango', etiqueta: 'Profundidad del efecto 3D', min: 0, max: 100, paso: 10, unidad: ' %', si: (c) => c.animaciones.activas && /3d$/.test(c.animaciones.introEstilo) },
     { ruta: 'animaciones.aparicion', tipo: 'si', etiqueta: 'Contenido que aparece al bajar', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
@@ -131,6 +132,7 @@ export default async function (vista) {
     <div class="acciones"><button class="btn" data-deshacer disabled>Deshacer</button><button class="btn" data-restablecer>Volver al diseño original</button><button class="btn primario" data-guardar>Guardar y publicar</button></div></div>
     <div class="diseno">
       <div class="diseno-controles">
+        <details class="tarjeta grupo-diseno" data-versiones><summary>Versiones anteriores</summary><p class="chico muted">Cada vez que guarda, la versión anterior queda aquí. «Ver» la carga en la vista previa; si le gusta, pulse «Guardar y publicar».</p><div data-lista-versiones><p class="chico muted">Cargando…</p></div></details>
         <section class="tarjeta"><h2>Estilos prediseñados</h2><p class="chico muted">Cambian colores, letras y formas de una vez; después puede ajustar cada detalle.</p><div class="estilos" data-estilos></div></section>
         <div data-grupos></div>
         ${superadmin ? h`<details class="tarjeta grupo-diseno"><summary>CSS propio (avanzado)</summary><p class="chico muted">Reglas CSS que se agregan al final de la hoja de estilos de todas las páginas. Sólo el Super Administrador las puede editar.</p><textarea class="mono" rows="10" data-css spellcheck="false" placeholder=".hero h1 { letter-spacing: 0; }"></textarea></details>` : ''}
@@ -149,6 +151,28 @@ export default async function (vista) {
       </div>
     </div>`);
 
+  // ---------------------------------------------------------------- Versiones anteriores
+  let versiones = [];
+  const pintarVersiones = async () => {
+    try { versiones = await api('GET', 'diseno/historial'); } catch { versiones = []; }
+    const fmt = (f) => new Date(f).toLocaleString('es-CL', { dateStyle: 'medium', timeStyle: 'short' });
+    $('[data-lista-versiones]', vista).innerHTML = String(h`<ul class="lista-simple">
+      <li><span><b>Diseño original del sitio</b><br><small class="muted">Capital del Trekking, tal como viene</small></span><button type="button" class="btn chico" data-version="original">Ver</button></li>
+      <li><span><b>Diseño institucional anterior</b><br><small class="muted">Blanco, azul y ámbar, sólo líneas</small></span><button type="button" class="btn chico" data-version="institucional">Ver</button></li>
+      ${versiones.map((v) => h`<li><span><b>${fmt(v.fecha)}</b><br><small class="muted">${v.usuario || ''} · estilo ${ESTILOS[v.estilo]?.nombre || v.estilo}</small></span><button type="button" class="btn chico" data-version="${v.i}">Ver</button></li>`)}
+    </ul>`);
+  };
+  $('[data-versiones]', vista).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-version]');
+    if (!b) return;
+    historial.push(JSON.stringify(cfg));
+    const v = b.dataset.version;
+    cfg = v === 'original' ? normalizar({ avanzado: cfg.avanzado }) : v === 'institucional' ? aplicarEstilo(normalizar({ avanzado: cfg.avanzado }), 'institucional') : normalizar(versiones.find((x) => String(x.i) === v)?.diseno || {}, { permitirCss: true });
+    pintarGrupos(); actualizar();
+    aviso('Versión cargada en la vista previa. Pulse «Guardar y publicar» para usarla, o «Deshacer» para volver.');
+  });
+  pintarVersiones();
+
   // ---------------------------------------------------------------- Estilos prediseñados
   const pintarEstilos = () => {
     $('[data-estilos]', vista).innerHTML = String(h`${Object.entries(ESTILOS).map(([id, e]) => {
@@ -165,8 +189,8 @@ export default async function (vista) {
     const ayuda = c.ayuda ? h`<small class="ayuda">${c.ayuda}</small>` : '';
     switch (c.tipo) {
       case 'color': return h`<label class="campo campo-color" for="${id}"><span>${c.etiqueta}</span><span class="color-doble"><input type="color" id="${id}" data-ruta="${c.ruta}" value="${v}"><input type="text" data-ruta="${c.ruta}" data-hex value="${v}" maxlength="7" aria-label="${c.etiqueta} en hexadecimal"></span>${ayuda}</label>`;
-      case 'lista': return h`<label class="campo" for="${id}"><span>${c.etiqueta}</span><select id="${id}" data-ruta="${c.ruta}">${Object.entries(c.opciones).map(([k, t]) => h`<option value="${k}"${k === v ? raw(' selected') : ''}>${t}</option>`)}</select>${ayuda}</label>`;
-      case 'botones': return h`<div class="campo"><span>${c.etiqueta}</span><div class="segmentos" role="radiogroup" aria-label="${c.etiqueta}">${Object.entries(c.opciones).map(([k, t]) => h`<button type="button" role="radio" data-ruta="${c.ruta}" data-valor="${k}" aria-checked="${k === v}">${t}</button>`)}</div>${ayuda}</div>`;
+      case 'lista': return h`<label class="campo" for="${id}"><span>${c.etiqueta}</span><select id="${id}" data-ruta="${c.ruta}">${Object.entries(c.opciones || {}).map(([k, t]) => h`<option value="${k}"${k === v ? raw(' selected') : ''}>${t}</option>`)}</select>${ayuda}</label>`;
+      case 'botones': return h`<div class="campo"><span>${c.etiqueta}</span><div class="segmentos" role="radiogroup" aria-label="${c.etiqueta}">${Object.entries(c.opciones || {}).map(([k, t]) => h`<button type="button" role="radio" data-ruta="${c.ruta}" data-valor="${k}" aria-checked="${k === v}">${t}</button>`)}</div>${ayuda}</div>`;
       case 'rango': return h`<label class="campo" for="${id}"><span>${c.etiqueta} <output data-salida="${c.ruta}">${v}${c.unidad || ''}</output></span><input type="range" id="${id}" data-ruta="${c.ruta}" min="${c.min}" max="${c.max}" step="${c.paso}" value="${v}">${ayuda}</label>`;
       case 'si': return h`<label class="interruptor"><input type="checkbox" data-ruta="${c.ruta}"${v ? raw(' checked') : ''}><span class="pista" aria-hidden="true"></span><span>${c.etiqueta}</span></label>`;
       case 'texto': return h`<label class="campo" for="${id}"><span>${c.etiqueta}</span><input id="${id}" data-ruta="${c.ruta}" value="${v}" maxlength="120">${ayuda}</label>`;
@@ -238,7 +262,7 @@ export default async function (vista) {
     return {
       tipo: 'mlp-diseno', css: variablesCss(cfg), cssPropio: cfg.avanzado.css, atributos: atributos(cfg), fuentes: urlFuentes(cfg),
       textos: { 'cabecera.subtitulo': cfg.cabecera.subtitulo, 'cabecera.nombre': cfg.cabecera.nombre, 'portada.titulo': cfg.portada.titulo, 'portada.bajada': cfg.portada.bajada || (cfg.portada.composicion === 'trekking' ? `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información de la comuna, a los pies del volcán Llaima.` : `${ajustes.lema || 'Para todas y todos'}. Trámites, servicios e información para las vecinas y vecinos de la comuna.`), 'portada.credito': cfg.portada.credito },
-      imagenes: { 'portada.imagen': cfg.portada.imagen || '/img/plaza-melipeuco-1536.webp', ...Object.fromEntries([0, 1, 2, 3, 4, 5].map((i, _, fotos = fotosPortada(cfg)) => ['portada.foto-' + i, fotos[i % fotos.length].src])) },
+      imagenes: { 'portada.imagen': cfg.portada.imagen || '/img/plaza-melipeuco-1536.webp', ...((fotos) => Object.fromEntries([0, 1, 2, 3, 4, 5].map((i) => ['portada.foto-' + i, fotos[i % fotos.length].src])))(fotosPortada(cfg)) },
       logo: { claro: logo.src, oscuro: logo.oscuro, conTexto: logo.conTexto },
     };
   };
@@ -288,7 +312,8 @@ export default async function (vista) {
     try {
       const r = await api('PUT', 'ajustes', { diseno: cfg });
       cfg = normalizar(r.diseno, { permitirCss: true }); guardado = JSON.stringify(cfg);
-      aviso('Diseño guardado y publicado.', 'ok');
+      aviso('Diseño guardado y publicado. La versión anterior quedó en «Versiones anteriores».', 'ok');
+      pintarVersiones();
     } catch (er) { fallo(er); }
   });
   $('[data-deshacer]', vista).addEventListener('click', () => {
