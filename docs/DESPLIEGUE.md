@@ -13,7 +13,23 @@ El repositorio incluye `vercel.json` y la función `api/index.js`: Vercel sirve 
 
 Use Node.js 22.x o superior (*Settings → General → Node.js Version*).
 
-**Limitación importante**: Vercel no tiene disco persistente. La base se crea en `/tmp` al iniciar cada instancia con el contenido importado, por lo que los cambios del panel, los mensajes OIRS y los archivos subidos **se pierden** cuando Vercel recicla la instancia, y con varias instancias simultáneas la sesión del panel puede cerrarse. Vercel sirve para mostrar el sitio; para operarlo use un servidor con disco persistente (abajo) o servicios como Railway, Render o Fly.io con un volumen montado en `DATA_DIR`.
+### Guardar los cambios en Vercel: memoria compartida (obligatorio para usar el panel)
+
+Vercel no tiene disco persistente y puede atender con varias instancias a la vez, cada una con su propia base en `/tmp`. Sin memoria compartida, lo que se guarda en el panel sólo existe en la instancia que atendió esa petición: otras visitas no lo ven y se pierde al reiniciar.
+
+Para que todo se guarde de forma permanente, conecte una base **Redis** gratuita de Upstash:
+
+1. En Vercel abra el proyecto → **Storage** → **Create Database** → **Upstash for Redis** (plan *Free*).
+2. Elija la región más cercana (por ejemplo, São Paulo) y pulse **Connect** para este proyecto. Vercel agrega solo las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN` (o `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN`).
+3. **Deployments → … → Redeploy**.
+
+El escritorio del panel muestra «Memoria compartida activa» cuando está funcionando (también `/api/salud` → `memoriaCompartida`).
+
+Qué se guarda: todas las escrituras de la base (contenidos, ajustes, diseño, menús, usuarios, mensajes OIRS, suscriptores, votos, auditoría) en un diario ordenado que cada instancia aplica al iniciar y antes de atender; aparte, los ajustes y menús completos (sobreviven aunque cambie la semilla del contenido) y los archivos subidos a la biblioteca de medios (hasta 8 MB cada uno). Las sesiones del panel viajan firmadas en la cookie y las visitas no se guardan.
+
+Si se cambia la semilla del contenido importado (`contenido/semilla/`, `server/semilla.js`), el diario de contenidos empieza de nuevo para no mezclar números de fila; los ajustes, el diseño y los menús se conservan.
+
+Aun así, para un uso intensivo del panel se recomienda un servidor con disco persistente (abajo) o Railway, Render o Fly.io con un volumen montado en `DATA_DIR`.
 
 ## Requisitos
 

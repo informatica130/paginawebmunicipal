@@ -19,6 +19,7 @@ import { permitirIframes } from './sanitizar.js';
 import { enviar, json, servirArchivo, cabecerasSeguridad, redirigir, ErrorHttp } from './http.js';
 import { hashClave, claveTemporal, leerCookies, leerSesion, COOKIE, Limitador, usarSesionesFirmadas } from './auth.js';
 import { respaldar } from '../herramientas/respaldo.js';
+import { crearPersistencia, configuracionRedis } from './persistencia.js';
 
 export async function iniciar(opciones = {}) {
   const cfg = { ...cargarEnv(), ...opciones };
@@ -75,8 +76,17 @@ export async function iniciar(opciones = {}) {
     db.run('INSERT INTO auditoria(en, usuario_id, usuario, accion, objeto, detalle, ip) VALUES(?,?,?,?,?,?,?)', ahora(), usuario?.id || null, usuario ? `${usuario.nombre} <${usuario.email}>` : '', accion, String(objeto).slice(0, 200), typeof detalle === 'string' ? detalle.slice(0, 2000) : JSON.stringify(detalle).slice(0, 2000), ip);
   };
 
-  const sitio = crearSitio({ db, repo, cfg, tramites, mailer, limitador, version, secreto, leerUsuario, auditar });
-  const admin = crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, auditar, invalidar: () => sitio.invalidar(), leerUsuario, version });
+  // Memoria compartida (Vercel): con Redis los cambios del panel llegan a todas las instancias y
+  // sobreviven a los reinicios. La huella de la semilla separa los diarios de contenidos distintos.
+  const redis = opciones.redis !== undefined ? opciones.redis : (cfg.VERCEL || cfg.PERSISTENCIA_REDIS ? configuracionRedis() : null);
+  let sitio = null;
+  const persistencia = redis ? crearPersistencia({
+    db, redis, fetchImpl: opciones.fetchRedis, alCambiar: () => sitio?.invalidar(),
+    huellaSemilla: ['server/semilla.js', 'server/db.js', 'src/tipos.js', 'herramientas/importar-wordpress.js', 'contenido/semilla/wordpress.json.gz'].reduce((h, f) => { try { return h.update(fs.readFileSync(path.join(RAIZ, f))); } catch { return h; } }, crypto.createHash('sha1')).digest('hex').slice(0, 12),
+  }) : null;
+  sitio = crearSitio({ db, repo, cfg, tramites, mailer, limitador, version, secreto, leerUsuario, auditar });
+  const admin = crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, auditar, invalidar: () => sitio.invalidar(), leerUsuario, version, persistencia });
+  if (persistencia) await persistencia.iniciar();
 
   // Tareas periódicas: publicar lo programado, limpiar sesiones vencidas y respaldo diario.
   const tareas = [];
@@ -116,13 +126,50 @@ export async function iniciar(opciones = {}) {
       }
       if (ruta === '/favicon.ico') return servirArchivo(req, res, PUB, '/img/favicon.png', { maxAge: 86400 }) || undefined;
       if (ruta === '/sw.js') return servirArchivo(req, res, PUB, '/js/sw.js', { maxAge: 0, cabeceras: { 'Service-Worker-Allowed': '/', 'Cache-Control': 'no-cache' } }) || undefined;
+      // Memoria compartida: trae los cambios de otras instancias y guarda los de esta petición
+      // antes de enviar la respuesta (en Vercel la función se congela al responder).
+      if (persistencia) {
+        await persistencia.sincronizar({ forzar: ruta.startsWith('/api/admin/') });
+        const fin = res.end.bind(res);
+        res.end = (...a) => { if (!persistencia.hayPendientes()) return fin(...a); persistencia.vaciar().finally(() => fin(...a)); return res; };
+      }
       // Medios subidos y heredados de WordPress
       if (ruta.startsWith('/medios/')) {
         if (servirArchivo(req, res, path.join(UPLOADS, 'sitio'), ruta.slice('/medios'.length), { inmutable: true })) return;
+        const relativa = decodeURIComponent(ruta.slice('/medios/'.length));
+        const guardado = persistencia && !relativa.includes('..') ? await persistencia.leerArchivo(relativa) : null;
+        if (guardado) {
+          const destino = path.join(UPLOADS, 'sitio', relativa);
+          fs.mkdirSync(path.dirname(destino), { recursive: true });
+          fs.writeFileSync(destino, guardado);
+          if (servirArchivo(req, res, path.join(UPLOADS, 'sitio'), '/' + relativa, { inmutable: true })) return;
+        }
         throw new ErrorHttp(404, 'Archivo no encontrado');
       }
+      // Imágenes de complementos de WordPress que ya no existen (las citan páginas heredadas):
+      // se responde una imagen transparente en vez de un error.
+      if (/^\/wp-content\/(plugins|themes)\/.+\.(png|gif|jpe?g|svg|webp)$/i.test(ruta)) {
+        res.writeHead(200, { 'Content-Type': 'image/gif', 'Cache-Control': 'public, max-age=2592000', 'X-Content-Type-Options': 'nosniff' });
+        return res.end(Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64'));
+      }
       if (ruta.startsWith('/wp-content/uploads/')) {
-        if (servirArchivo(req, res, path.join(UPLOADS, 'wp'), ruta.slice('/wp-content/uploads'.length), { maxAge: 30 * 86400 })) return;
+        // Archivos públicos: los marcos aislados de las páginas heredadas (origen opaco) también
+        // pueden leerlos (por ejemplo, los mapas KML de las rutas).
+        if (servirArchivo(req, res, path.join(UPLOADS, 'wp'), ruta.slice('/wp-content/uploads'.length), { maxAge: 30 * 86400, cabeceras: { 'Access-Control-Allow-Origin': '*' } })) return;
+        // Datos pequeños (mapas KML/GPX, JSON, CSV): se traen del sitio anterior y se guardan, para
+        // entregarlos con permiso de lectura (el sitio anterior no lo da y los mapas no cargaban).
+        if (respaldoMedios && /\.(kml|gpx|geojson|json|csv|txt)$/i.test(ruta) && !ruta.includes('..')) {
+          try {
+            const r = await fetch(respaldoMedios + ruta.slice(1), { signal: AbortSignal.timeout(8000) });
+            const buf = r.ok ? Buffer.from(await r.arrayBuffer()) : null;
+            if (buf && buf.length < 5 * 1024 * 1024) {
+              const destino = path.join(UPLOADS, 'wp', decodeURIComponent(ruta.slice('/wp-content/uploads/'.length)));
+              fs.mkdirSync(path.dirname(destino), { recursive: true });
+              fs.writeFileSync(destino, buf);
+              if (servirArchivo(req, res, path.join(UPLOADS, 'wp'), ruta.slice('/wp-content/uploads'.length), { maxAge: 30 * 86400, cabeceras: { 'Access-Control-Allow-Origin': '*' } })) return;
+            }
+          } catch { /* se redirige */ }
+        }
         if (respaldoMedios) return redirigir(res, respaldoMedios + ruta.slice(1), 302);
         throw new ErrorHttp(404, 'Archivo no encontrado');
       }
@@ -138,7 +185,7 @@ export async function iniciar(opciones = {}) {
         throw new ErrorHttp(404, 'No encontrado');
       }
       if (ruta.startsWith('/api/admin/')) return await admin.manejar(req, res, url);
-      if (ruta === '/api/salud') return json(req, res, 200, { ok: true, version, hora: ahora(), tramites: await tramites.estado(), efimero: cfg.VERCEL, claveAdminDefinida: !!cfg.ADMIN_PASSWORD });
+      if (ruta === '/api/salud') return json(req, res, 200, { ok: true, version, hora: ahora(), tramites: await tramites.estado(), efimero: cfg.VERCEL, claveAdminDefinida: !!cfg.ADMIN_PASSWORD, memoriaCompartida: persistencia ? { activa: !persistencia.estado.error, cambios: persistencia.estado.entradas, error: persistencia.estado.error || undefined } : false });
       return await sitio.manejar(req, res, url);
     } catch (e) {
       const status = e.status || 500;
@@ -155,7 +202,7 @@ export async function iniciar(opciones = {}) {
   servidor.requestTimeout = 120000;
   servidor.keepAliveTimeout = 5000;
   const cerrar = () => { tareas.forEach(clearInterval); sitio.volcarVisitas(); servidor.close(); db.cerrar(); };
-  return { servidor, manejar, db, repo, cfg, cerrar, sitio, admin };
+  return { servidor, manejar, db, repo, cfg, cerrar, sitio, admin, persistencia };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(RAIZ, 'server/server.js')) {

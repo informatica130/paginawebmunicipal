@@ -246,19 +246,28 @@ export class Db {
   }
   get(sql, ...p) { return this.st(sql).get(...p); }
   all(sql, ...p) { return this.st(sql).all(...p); }
-  run(sql, ...p) { return this.st(sql).run(...p); }
+  // Las escrituras se avisan a `alEscribir` (memoria compartida, ver server/persistencia.js);
+  // dentro de una transacción se avisan sólo si se confirma.
+  run(sql, ...p) {
+    const r = this.st(sql).run(...p);
+    if (this.alEscribir && !this.replicando) { if (this._prof) (this._lote ||= []).push([sql, p]); else this.alEscribir(sql, p); }
+    return r;
+  }
   exec(sql) { this.db.exec(sql); }
 
   // Transacción anidable (SAVEPOINT): si fn lanza, se deshace todo lo hecho en ella.
   tx(fn) {
     const nombre = 'sp' + (this._prof = (this._prof || 0) + 1);
+    const marca = this._lote?.length || 0;
     this.db.exec(`SAVEPOINT ${nombre}`);
     try {
       const r = fn();
       this.db.exec(`RELEASE ${nombre}`);
+      if (this._prof === 1 && this._lote?.length) { const lote = this._lote; this._lote = []; if (this.alEscribir && !this.replicando) lote.forEach(([s, p]) => this.alEscribir(s, p)); }
       return r;
     } catch (e) {
       this.db.exec(`ROLLBACK TO ${nombre}; RELEASE ${nombre}`);
+      if (this._lote) this._lote.length = marca;
       throw e;
     } finally {
       this._prof--;

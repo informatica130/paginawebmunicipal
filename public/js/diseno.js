@@ -22,8 +22,8 @@ export const FUENTES = {
 export const PREDETERMINADO = {
   estilo: 'trekking',
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#121417', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
-  tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 17, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: false },
-  forma: { radio: 14, tarjetas: 'sombra', botones: 'redondeados', densidad: 'normal', ancho: 1240, sombras: 'suaves' },
+  tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 16, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: false },
+  forma: { radio: 14, tarjetas: 'sombra', botones: 'redondeados', densidad: 'normal', ancho: 1200, sombras: 'suaves', escala: 100 },
   cabecera: { estilo: 'blanca', fija: true, barraSuperior: false, botonTramites: false, logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
   portada: { composicion: 'vitrina', fotoLado: 'derecha', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
     // Portada «Capital del Trekking»
@@ -129,12 +129,12 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
     colores: Object.fromEntries(Object.keys(P.colores).map((k) => [k, color(c[k], P.colores[k])])),
     tipografia: {
       cuerpo: opcion(t.cuerpo, FUENTES, P.tipografia.cuerpo), titulos: opcion(t.titulos, FUENTES, P.tipografia.titulos),
-      tamano: numero(t.tamano, 17, 15, 21), pesoTitulos: numero(t.pesoTitulos, 800, 500, 900), espaciadoTitulos: numero(t.espaciadoTitulos, P.tipografia.espaciadoTitulos, -5, 5),
+      tamano: numero(t.tamano, P.tipografia.tamano, 14, 21), pesoTitulos: numero(t.pesoTitulos, 800, 500, 900), espaciadoTitulos: numero(t.espaciadoTitulos, P.tipografia.espaciadoTitulos, -5, 5),
       menuMayusculas: bool(t.menuMayusculas, false),
     },
     forma: {
       radio: numero(f.radio, P.forma.radio, 0, 24), tarjetas: opcion(f.tarjetas, OPCIONES.tarjetas, P.forma.tarjetas), botones: opcion(f.botones, OPCIONES.botones, P.forma.botones),
-      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, 1240, 1040, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras),
+      densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, P.forma.ancho, 960, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras), escala: numero(f.escala, 100, 80, 115),
     },
     cabecera: {
       estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites),
@@ -186,7 +186,7 @@ export function variablesCss(cfg) {
     '--esp': ESCALA[f.densidad], '--ancho': `${f.ancho}px`,
     '--logo': `${cfg.cabecera.tamanoLogo}px`, '--hero-alto': ALTO[cfg.portada.alto], '--velo': cfg.portada.velo / 100,
     '--anim-vel': cfg.animaciones.velocidad,
-    '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
+    '--interfaz': cfg.forma.escala / 100, '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
   };
   return ':root{' + Object.entries(v).map(([k, x]) => `${k}:${x}`).join(';') + '}';
 }

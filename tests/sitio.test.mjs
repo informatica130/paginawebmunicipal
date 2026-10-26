@@ -364,3 +364,47 @@ test('panel: en varias instancias sin base común (Vercel) la sesión no se pier
     assert.equal((await fetch(url(b) + 'sesion', { headers: { cookie: `mlp_admin=${n}.${cuerpo}.firmaFalsa` } })).status, 401);
   } finally { a.cerrar(); b.cerrar(); }
 });
+
+test('Vercel: con memoria compartida (Redis) los cambios del panel llegan a todas las instancias y sobreviven al reinicio', async () => {
+  // Redis falso en memoria con la API REST de Upstash.
+  const listas = new Map(), hashes = new Map(), claves = new Map();
+  const fetchRedis = async (_url, op) => {
+    const [cmd, k, ...a] = JSON.parse(op.body);
+    let result = null;
+    if (cmd === 'LLEN') result = (listas.get(k) || []).length;
+    else if (cmd === 'RPUSH') { const l = listas.get(k) || []; l.push(...a); listas.set(k, l); result = l.length; }
+    else if (cmd === 'LRANGE') result = (listas.get(k) || []).slice(Number(a[0]), Number(a[1]) + 1);
+    else if (cmd === 'HSET') { const h = hashes.get(k) || new Map(); for (let i = 0; i < a.length; i += 2) h.set(a[i], a[i + 1]); hashes.set(k, h); result = a.length / 2; }
+    else if (cmd === 'HGETALL') result = [...(hashes.get(k) || new Map())].flat();
+    else if (cmd === 'SET') { claves.set(k, a[0]); result = 'OK'; }
+    else if (cmd === 'GET') result = claves.get(k) ?? null;
+    return new Response(JSON.stringify({ result }), { status: 200 });
+  };
+  const opciones = (n) => ({ DATA_DIR: path.join(dir, 'redis-' + n), archivoDb: path.join(dir, `redis-${n}.db`), ADMIN_PASSWORD: CLAVE, ADMIN_EMAIL: 'admin@munimelipeuco.cl', PUBLIC_URL: 'http://localhost/', SECRETO: 'secreto-compartido', SESIONES_FIRMADAS: true, sinRespaldos: true, silencioso: true, fetchTramites, MEDIOS_RESPALDO_URL: '', redis: { url: 'https://redis.prueba', token: 't' }, fetchRedis });
+  const apps = [await iniciar(opciones('a')), await iniciar(opciones('b'))];
+  try {
+    await Promise.all(apps.map((x) => new Promise((ok) => x.servidor.listen(0, ok))));
+    const url = (x) => `http://127.0.0.1:${x.servidor.address().port}`;
+    const r = await fetch(url(apps[0]) + '/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'admin@munimelipeuco.cl', clave: CLAVE }) });
+    const cookie = r.headers.get('set-cookie').split(';')[0];
+    const { csrf } = await (await fetch(url(apps[0]) + '/api/admin/sesion', { headers: { cookie } })).json();
+    const put = (cuerpo) => fetch(url(apps[0]) + '/api/admin/ajustes', { method: 'PUT', headers: { cookie, 'X-CSRF': csrf, 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo) });
+    assert.equal((await put({ diseno: { colores: { primario: '#7A1F2B' }, portada: { titulo: 'Hola desde Redis' } } })).status, 200);
+    const noticia = await fetch(url(apps[0]) + '/api/admin/contenidos', { method: 'POST', headers: { cookie, 'X-CSRF': csrf, 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'noticia', titulo: 'Noticia compartida entre instancias', cuerpo: '<p>Texto</p>', estado: 'publicado' }) });
+    assert.equal(noticia.status, 200);
+    // La otra instancia ve el diseño y la noticia nueva.
+    await new Promise((ok) => setTimeout(ok, 2600));
+    const enB = await (await fetch(url(apps[1]) + '/')).text();
+    assert.match(enB, /--azul:#7A1F2B/);
+    assert.match(enB, />Hola desde Redis</);
+    assert.match(await (await fetch(url(apps[1]) + '/noticias/')).text(), /Noticia compartida entre instancias/);
+    // Una instancia nueva (reinicio) arranca con todo aplicado.
+    apps.push(await iniciar(opciones('c')));
+    await new Promise((ok) => apps[2].servidor.listen(0, ok));
+    const enC = await (await fetch(url(apps[2]) + '/')).text();
+    assert.match(enC, /--azul:#7A1F2B/);
+    assert.match(await (await fetch(url(apps[2]) + '/noticias/')).text(), /Noticia compartida entre instancias/);
+    const salud = await (await fetch(url(apps[2]) + '/api/salud')).json();
+    assert.equal(salud.memoriaCompartida.activa, true);
+  } finally { apps.forEach((x) => x.cerrar()); }
+});

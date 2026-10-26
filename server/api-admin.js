@@ -33,7 +33,7 @@ const FIRMAS = [
 const EXT_OFFICE = { '.doc': 'application/msword', '.xls': 'application/vnd.ms-excel', '.ppt': 'application/vnd.ms-powerpoint' };
 const EXT_ZIP = { '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation', '.odt': 'application/vnd.oasis.opendocument.text', '.ods': 'application/vnd.oasis.opendocument.spreadsheet', '.zip': 'application/zip', '.kmz': 'application/vnd.google-earth.kmz' };
 
-export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, auditar, invalidar, version }) {
+export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, auditar, invalidar, version, persistencia = null }) {
   const rutas = [];
   const ruta = (metodo, patron, permiso, fn) => {
     const claves = [];
@@ -121,7 +121,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
   ruta('GET', 'sesion', '*', ({ u, sesion }) => ({
     usuario: usuarioPublico(u), permisos: permisosDe(u), csrf: sesion.sesion.csrf, version,
     esquema: { tipos: TIPOS, taxonomias: TAXONOMIAS, estados: ESTADOS, permisos: PERMISOS, roles: ROLES, rutas: RUTAS, iconos: ICONOS },
-    sitio: { nombre: db.ajuste('sitio')?.nombre, url: cfg.PUBLIC_URL, tramites: cfg.TRAMITES_URL || null, correo: !!mailer, efimero: !!cfg.VERCEL },
+    sitio: { nombre: db.ajuste('sitio')?.nombre, url: cfg.PUBLIC_URL, tramites: cfg.TRAMITES_URL || null, correo: !!mailer, efimero: !!cfg.VERCEL, memoria: persistencia ? { activa: !persistencia.estado.error, error: persistencia.estado.error || '' } : null },
     areasPermitidas: areasPermitidas(u) ? [...areasPermitidas(u)] : null,
   }));
 
@@ -357,6 +357,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     const destino = path.join(cfg.DATA_DIR, 'uploads', 'sitio', archivo);
     fs.mkdirSync(path.dirname(destino), { recursive: true });
     fs.writeFileSync(destino, buf);
+    if (persistencia && !(await persistencia.guardarArchivo(archivo, buf))) throw new ErrorHttp(413, 'El archivo es demasiado grande para la memoria compartida (máximo 8 MB).');
     const url = '/medios/' + archivo;
     const ancho = Number(req.headers['x-ancho']) || null;
     const alto = Number(req.headers['x-alto']) || null;
