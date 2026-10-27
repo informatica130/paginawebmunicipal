@@ -118,13 +118,57 @@
         ]
       },
       {
-        "id": "cuenta",
+        "id": "cuentas",
+        "tipo": "documentos",
+        "ancla": "Cuenta pública",
+        "titulo": "Cuentas públicas",
+        "intro": "Cada año el Alcalde da cuenta pública de la gestión municipal ante el Concejo y la comunidad.",
+        "items": [
+          {
+            "titulo": "Cuenta pública gestión 2025",
+            "tipo": "Cuenta pública",
+            "anio": "2025",
+            "doc": "ouOais0Kx_YW"
+          },
+          {
+            "titulo": "Cuenta pública gestión 2024",
+            "tipo": "Cuenta pública",
+            "anio": "2024",
+            "doc": "LAy6E_R-LEPN"
+          },
+          {
+            "titulo": "Revista cuenta pública 2023",
+            "tipo": "Revista",
+            "anio": "2023",
+            "doc": "7SUz5k6WhqVu"
+          },
+          {
+            "titulo": "Cuenta pública abril 2023",
+            "tipo": "Cuenta pública",
+            "anio": "2023",
+            "doc": "-ejerDsYWOnD"
+          },
+          {
+            "titulo": "Cuenta pública abril 2021",
+            "tipo": "Cuenta pública",
+            "anio": "2021",
+            "doc": "BaSRS_R1ux9l"
+          },
+          {
+            "titulo": "Cuenta pública 2020",
+            "tipo": "Cuenta pública",
+            "anio": "2020",
+            "doc": "UT9W2aeKnpA3"
+          }
+        ]
+      },
+      {
+        "id": "videos-cuenta",
         "tipo": "contenido",
         "fuente": "videos",
         "filtro": "cuenta-publica",
         "cantidad": 4,
-        "ancla": "Cuenta pública",
-        "titulo": "Cuenta pública y mensajes del Alcalde"
+        "titulo": "Cuenta pública en video"
       },
       {
         "id": "noticias",

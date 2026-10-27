@@ -1,0 +1,105 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "logotipos",
+    "nombre": "Logotipos y material",
+    "slug": "logotipos-y-material",
+    "unidad": "Identidad gráfica municipal",
+    "descripcion": "Escudo y logotipos oficiales de la Municipalidad de Melipeuco para descargar.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0F3A5A",
+      "oscuro": "#081F31",
+      "acento": "#E9A92B",
+      "patron": "puntos",
+      "icono": "camara",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Identidad de la Municipalidad",
+      "titulo": "Logotipos y material gráfico",
+      "bajada": "Escudo oficial y emblema de la Municipalidad de Melipeuco para documentos, actividades y material de difusión.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "informatica@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "uso",
+        "tipo": "texto",
+        "ancla": "Uso",
+        "titulo": "Cómo usarlos",
+        "html": "<p>Descargue el escudo oficial para usarlo en documentos, actividades y material de difusión patrocinado por la Municipalidad. Respete sus proporciones y colores, y no lo deforme ni lo combine con otros elementos.</p>"
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "Escudo municipal",
+        "imagenes": [
+          {
+            "src": "/img/escudo-azul.svg",
+            "alt": "Escudo de Melipeuco, versión azul para fondos claros"
+          },
+          {
+            "src": "/img/escudo-crema.svg",
+            "alt": "Escudo de Melipeuco, versión crema para fondos oscuros"
+          },
+          {
+            "src": "/img/logo-claro.webp",
+            "alt": "Escudo de Melipeuco a color"
+          }
+        ]
+      },
+      {
+        "id": "descargas",
+        "tipo": "documentos",
+        "ancla": "Descargas",
+        "titulo": "Descargas",
+        "items": [
+          {
+            "titulo": "Escudo vectorial azul",
+            "tipo": "SVG",
+            "url": "/img/escudo-azul.svg"
+          },
+          {
+            "titulo": "Escudo vectorial crema",
+            "tipo": "SVG",
+            "url": "/img/escudo-crema.svg"
+          },
+          {
+            "titulo": "Escudo para fondo claro",
+            "tipo": "WEBP",
+            "url": "/img/logo-claro.webp"
+          },
+          {
+            "titulo": "Escudo para fondo oscuro",
+            "tipo": "WEBP",
+            "url": "/img/logo-oscuro.webp"
+          },
+          {
+            "titulo": "Emblema (sin texto)",
+            "tipo": "SVG",
+            "url": "/img/emblema-azul.svg"
+          }
+        ]
+      }
+    ]
+  }
+}

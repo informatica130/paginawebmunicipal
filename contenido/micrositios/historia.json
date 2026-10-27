@@ -1,0 +1,79 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "historia",
+    "nombre": "Nuestra historia",
+    "slug": "historia",
+    "unidad": "Historia de Melipeuco",
+    "descripcion": "Historia de Melipeuco: primeros pobladores, creación de la comuna, la plaza y la vida comunitaria.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#8A5A3B",
+      "oscuro": "#432816",
+      "acento": "#E9A92B",
+      "patron": "montes",
+      "icono": "libro",
+      "portada": "dividida",
+      "imagen": "/img/plaza-melipeuco-1536.webp"
+    },
+    "portada": {
+      "antetitulo": "Una mirada al pasado",
+      "titulo": "Nuestra historia",
+      "bajada": "De las primeras familias que llegaron a los pies del volcán Llaima a la creación de la comuna en 1981: la historia de Melipeuco y de su gente.",
+      "botones": [],
+      "cifras": [
+        {
+          "valor": "5 jul 1980",
+          "etiqueta": "decreto que crea la comuna"
+        },
+        {
+          "valor": "1981",
+          "etiqueta": "inicia la Municipalidad, autónoma de Cunco"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "relato",
+        "tipo": "texto",
+        "ancla": "Relato",
+        "titulo": "Del libro «La tierra y el hombre»",
+        "html": "<p>\n\n<h2>Una mirada al pasado</h2><h5>Del libro </h5>\n\n<h3>LA TIERRA Y EL HOMBRE</h3><h5>Se presume que los primeros hombres que poblaron la zona de Melipeuco procedían de Maquehue, Chol-Chol, Imperial, y que sus primeras actividades correspondieron a la labranza de la tierra, la ganadería, y algún tiempo más tarde la elaboración de durmientes para el ferrocarril nacional.</h5>\n\n<h5>Tiempos muy dificiles aquellos. Fue necesario soportar el aislamiento, las bajas temperaturas, la falta de medios para fortalecer la salud y, naturalmente, muy escasas las posibilidades de alguna acción educativa.<br>\nSin caminos, rodeadas las precarias viviendas de tupidos bosques, gran parte del escenario era el barro y la nieve.<br>\nSeñalan cronistas que como las dificultades para llegar a sepultar los muertos hasta el cementerio de Cunco era muchas, numerosos cuerpos fueron enterrados en cualquier parte.</h5>\n\n<h5>Se afirma como probable que los bosques, los ríos, algunos valles y el propio volcán Llaima hayan sido atractivos naturales para que llegaran al sector las primeras familias que sirvieron de base a la comunidad de hoy.<br>\nEl primitivo dinamismo era consecuencia de la actividad generada por Aquellos que arribaron primero: José Calfullán, Julia de la Barra, Leonidas Gilibrand, Santiago Poblete, Miguel Angel Padilla, José Alfaro, Salvador Gonzalez, Miguel Córdova, Isidoro Yánez y José Alcoholado.</h5>\n\n<h3>LA CREACION DE LA COMUNA</h3><h5>Correspondió al Gobierno Militar, en el año 1981, proceder a la creación de la comuna, determinando su autonomía de Cunco, al que había estado ligado desde su nacimiento La Junta Militar correspondiente dio a conocer el decreto respectivo el 5 de julio de 1980. ordenando:</h5></p>\n<p>Artículo 1-Establecerse correspondientes Municipalidades que tendrán a su cargo la administración local de las comunas que a continuación se indican: IX Región de la Araucanía, Provincia de Cautín, comuna de Melipeuco, Curarrehue, Teodoro Schmidt.</p>\n<p>Artículo 2- Las Municipalidades que se crean por este texto, entrarán en funcionamiento dentro del plazo máximo de noventa días (90) contados desde la publicación en el Diario Oficial, en la fecha de asunción del respectivo cargo de Alcalde.\n\n<h5>La zona era una jurisdicción laboriosa, es verdad, pero sin destino pese al esfuerzo de sus habitantes, que dependían de la comuna de Cunco.</h5></p>\n<p>El suceso estimuló a las familias para prestar el máximo apoyo y colaboración al alcalde, del mismo modo, facilitar el trabajo de la autoridad, los funcionarios asesores y cooperar en todas aquellas situaciones nuevas que surgieron con la creación de la comuna.\n\n<h5>Comenzaron a activarse las labores en todos los frentes, se instalaron nuevos despachos públicos y privados, llegaron nuevos funcionarios, una dinámica accionó todos los rincones de tal manera que se comenzó a trabajar, como una fragua, intensa y ardientemente.</h5></p>\n<p>Melipeuco comprendió que había sido premiado, pero que ello imponía el costo de merecerlo, cuidarlo y hasta mejorarlo,como ha estado ocurriendo en los últimos 14 años.\n\n<h2>LA PLAZA</h2><h5>Comenzaron a activarse las labores en todos los frentes, se instalaron nuevos despachos públicos y privados, llegaron nuevos funcionarios, una dinámica accionó todos los rincones de tal manera que se comenzó a trabajar, como una fragua, intensa y ardientemente.</h5></p>\n<p>Melipeuco comprendió que había sido premiado, pero que ello imponía el costo de merecerlo, cuidarlo y hasta mejorarlo,como ha estado ocurriendo en los últimos 14 años.</p>\n<p>En el corazón y principal vértice del poblado se diseñó la Plaza en lo que por muchos años fue simplemente un potrero en donde circulaban los animales y las aves, más tarde sirvió de escenario para las primeras pichangas de fútbol, y hasta sirvió de recipiente de las basuras y desechos que se lanzaban a las calles.\n\n<h5>Hasta que por allá por 1981, cuando asume como alcalde el vecino Carlos Mohor, provoca un movimiento orientado a dar forma concreta a la plaza. Con entusiasmo y buena voluntad, con resolución y sin desmayos, preparadas las herramientas adecuadas, en una actitud colectiva ejemplar alcalde y vecinos se dieron a la obra concluyéndola en breve tiempo.</h5></p>\n<p>Para perpetuar el nombre de Melipeuco arrastraron al medio de lo que iba a pesar a ser el gran paseo, una piedra gigantesca, de duro granítico y en la cima instalaron las figuras de cuatro peucos en bronce brillante, sobre cuyos perfiles golpean\n\n<h3>ACTITUD COMUNITARIA</h3><h5>Al estudiar a la familia local que es la base de la sociedad de Melipeuco se desprende que ella es generosa, que sabe vivir en comunidad. Ha heredado del pasado la necesidad de unirse, de estrechar filas para hacer un solo frente a la adversidad.</h5>\n\n<h5>Es una actitud hermosa porque la vida tiene sentido cuando se ayuda al otro, cuando se actúa a favor del próximo, que es el prójimo Entonces comprenden que la vida es algo más que un palpitar del corazón. Esta sociedad local está conformada por sus numerosas Juntas de Vecinos, Comités de Adelanto y Desarrollo Rural, Comité de Pequeños Agricultores, agrupaciones de Talleres Artesanales, para el Agua Potable, Electrificación, Clubes Deportivos, de Huasos, de Rayuela, además de los Folcloristas, Teatro y Arte.</h5></p>\n<p>Una estadistica señala que aproximadamente tres miles entes ocupan un lugar en estas manifestaciones sociales y desarrollan con agrado sus roles.\n\n<h5>Como siempre ocurre, algunos se quedan al margen de estas actividades permaneciendo indiferentes y entregando a los otros todo el peso de remar mirando hacia delante.<br>\nQuienes están en estas brigadas de trabajo experimentan con frecuencia la satisfacción de lograr lo que han pretendido, de alcanzar las soluciones requeridas, por lo que el éxito los invita a comenzar otra tarea y con la fecundidad del tesón y la constancia alcanzar el triunfo, una y otra vez.</h5>\n\n<h5>En esos casos el triunfo significa viviendas, agua potable, capacitación en diferentes materias. Significa un buen rodeo con muchos puntos buenos, y cuando del deporte popular se refiere, significa un torneo inmejorable.</h5></p>\n<p>En otras ocasiones va a significar el arreglo de un camino, la apertura de una calle, la inauguración de una escuela o una posta rural.</p>\n<p>Es que la unidad entrega frutos, la unión hace la fuerza.\n\n<h5>Es también, en otras ocasiones, una bonita velada artística ofrecida a la población, puede ser una peña folclórica, como ha ocurrido, pero cuando las familias se unen sus miembros son felices y son felices los que viven a su lado.</h5></p>\n<p>Melipeuco aun tiene que luchar por muchas conquistas. Las autoridades oficiaran a los organismos respectivos, pero siempre es el esfuerzo de los propios hijos lo que lleva a la victoria definitiva y a la alegría sin limite.<br>\nLas organizaciones sociales deben pretender siempre estar en alto, vencer sus dificultades se aprecia aquí, se está cumpliendo.\n\n<h5>Este sentido de cooperativismo constituye una faceta destacada de nuestro hombre campesino. Fue a través de este desprendimiento que se construyeron los primeros puentes donde el vecino no solamente realizaba el trabajo físico, sino que talaba los árboles, preparaba las basas, aserraba los tablones y así poder armar los viaductos que reclamaban los adelantos y progresos que llegaban con el transcurrir del tiempo. Si en algún instante mediaron las primeras solicitudes a las autoridades reclamando beneficios de esa hora, en otro instante los vecinos acordaban ejecutar ellos mismos los trabajos y no perder el tiempo en papeles, logrando así la normalidad en la vida rural.<br>\nMuchos de esos puentes habilitados hace 30 o más años siguen prolongando su vida útil. Es que los materiales empleados eran los mejores y la obra era o fue responsabilidad de los mejores.<br>\nTomarse de la mano fue una característica del hombre de esta tierra. Esta filosofia permitió vencer los inconvenientes materiales en esos primeros días cuando florecía un pueblo llamado a labrar, con el esfuerzo de los suyos, cada vez un nuevo amanecer más próspero.</h5>\n\n<h5>Cuando se narra la historia de la humanidad se destaca que el hombre desde sus primeros días se unió para defenderse de los animales salvajes, de los cataclismos, de los incendios y, en ocasiones. para protegerse de otros hombres.</h5></p>\n<p>En Melipeuco los vecinos se unieron para ser protagonistas de su propio bienestar\n\n<h3>BONDADES TURÍSTICAS</h3><h5>Esta comuna, sentada en el umbral de dura cordillera, enmarcada por la sobria majestad de su volcán, sus bosques, sus zigzagueantes ríos ,heredó del Hacedor muchas bondades turísticas, que hacen temblar de envidia a muchas congéneres.</h5></p>\n<p>En el lugar que geográficamente ocupa debe soportar un frió, nevoso y largo invierno. Pero el estío es cálido, es fraterno, despierta a la gente con los primeros tentáculos del sol y les golpea el rostro con su viento puelche, que de cuando en cuando cruza el pueblo, sus aldeas y sus praderas.</p>\n<p>La cordillera en su descenso al valle fue creando lo cerros Cheñe ,Nevados de Sollipulli, Loncotraro, Viscachas, al mismo tiempo accediendo a la velocidad de los ríos Carén, Tracura Alpehue ,Allipén, y entre otros el Truf Truf en una zona asombrosa y visitada por miles de forasteros todos los años.\n\n<h5>Para los dueños de casa como para los visitantes en general, uno de los elementos naturales más grandiosos con que nace y, seguramente, con el que vivirá siempre, es el volcán Llaima, considerado uno de los macizos andinos más voluminosos del cinturón de Los Andes. Tiene dos cráter, existe en ellos una permanente actividad fumarolita.</h5></p>\n<p>En su historia se anotan numerosas erupciones, las principales corresponden a los años 1927 y 57, manteniéndose fresca en la memoria la que despertó a la región en 1994.<h5>Familias antiguas que tuvieron domicilio rural en aldeas cercanas dijeron antes de morir que cada vez que el Llaima entraba en actividad los mapuches y pehuenches huían refugiándose lejos para retornar cuando todo volvía a la calma.</h5></p>\n<p>En la bitácora de este volcán se sabe de varios nombres con que fue identificado periódicamente: Llaymas, Yaima, Chayll, Chanel.\n\n<blockquote>El fragmento anterior fue tomado del texto original de \"Tierra de Alma Blanca\" de Julio Contreras Asenjo. (Temuco, Julio 2002)</blockquote>\n\n</p>"
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "cultura",
+            "texto": "Cultura",
+            "url": "/cultura/"
+          },
+          {
+            "icono": "montana",
+            "texto": "Turismo",
+            "url": "/turismo/"
+          }
+        ]
+      }
+    ]
+  }
+}

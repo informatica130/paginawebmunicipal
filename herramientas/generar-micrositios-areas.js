@@ -38,10 +38,13 @@ const mod = (id, tipo, o) => ({ id, tipo, ...o });
 
 // Dirección de cada unidad: las que tienen micrositio propio usan ése.
 const PROPIOS = { 'dep-educacion': 'educacion', 'dep-salud': 'salud', 'dep-dideco': 'social', 'dep-del': 'udel', 'dep-deportes': 'deporte', 'dep-turismo': 'turismo', 'dep-cultura': 'cultura', 'dep-transito': 'transito', 'dep-dom': 'obras', 'dep-jpl': 'juzgado', 'dep-medioambiente': 'medioambiente', 'dep-alcaldia': 'alcaldia', 'dep-concejo': 'concejo-municipal' };
-const SLUGS = { 'dep-oirs': 'oficina-oirs', 'dep-transparencia': 'oficina-de-transparencia', 'dep-partes': 'oficina-de-partes', 'dep-sec-cosoc': 'secretaria-cosoc', 'dep-cosoc': 'cosoc', 'dep-admin': 'administracion-municipal', 'dep-secmun': 'secretaria-municipal', 'dep-secplan': 'secplan', 'dep-daf': 'administracion-y-finanzas', 'dep-control': 'direccion-de-control', 'dep-dsi': 'servicios-incorporados', 'dep-informatica': 'transformacion-digital', 'dep-programas': 'programas-sociales', 'dep-rentas': 'patentes-municipales', 'dep-emergencia': 'emergencias', 'dep-cta': 'comite-tecnico', 'dep-rrhh': 'recursos-humanos', 'dep-dideco-social': 'desarrollo-social', 'dep-dideco-comunitario': 'desarrollo-comunitario', 'dep-uamis': 'uamis', 'dep-mujer': 'oficina-de-la-mujer', 'dep-comunicaciones': 'comunicaciones', 'dep-fomento': 'fomento-productivo', 'dep-hidricos': 'recursos-hidricos', 'dep-inventario': 'inventarios-y-bodega', 'dep-auditoria': 'auditorias', 'dep-juridico': 'asesoria-juridica', 'dep-vehiculos': 'vehiculos-municipales', 'dep-coord-programas': 'coordinacion-de-programas', 'dep-rendiciones': 'rendiciones-de-programas' };
+const SLUGS = { 'dep-oirs': 'oficina-oirs', 'dep-transparencia': 'oficina-de-transparencia', 'dep-partes': 'oficina-de-partes', 'dep-sec-cosoc': 'secretaria-cosoc', 'dep-cosoc': 'cosoc', 'dep-admin': 'administracion-municipal', 'dep-secmun': 'secretaria-municipal', 'dep-secplan': 'secplan', 'dep-daf': 'administracion-y-finanzas', 'dep-control': 'direccion-de-control', 'dep-dsi': 'servicios-incorporados', 'dep-informatica': 'transformaciondigital', 'dep-programas': 'programas-sociales', 'dep-rentas': 'patentes-municipales', 'dep-emergencia': 'emergencias', 'dep-cta': 'comite-tecnico', 'dep-rrhh': 'recursos-humanos', 'dep-dideco-social': 'desarrollo-social', 'dep-dideco-comunitario': 'desarrollo-comunitario', 'dep-uamis': 'uamis', 'dep-mujer': 'oficina-de-la-mujer', 'dep-comunicaciones': 'comunicaciones', 'dep-fomento': 'fomento-productivo', 'dep-hidricos': 'recursos-hidricos', 'dep-inventario': 'inventarios-y-bodega', 'dep-auditoria': 'auditorias', 'dep-juridico': 'asesoria-juridica', 'dep-vehiculos': 'vehiculos-municipales', 'dep-coord-programas': 'coordinacion-de-programas', 'dep-rendiciones': 'rendiciones-de-programas' };
 const slugify = (t) => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 function slugDe(id) { const u = unidad(id); return !u ? '' : PROPIOS[id] || SLUGS[id] || slugify(u.name.replace(/^Oficina de (la |los )?/, '').replace(/^Departamento de /, '').replace(/^Dirección de /, '')); }
 
+const ICONOS = { star: 'estrella', building: 'escudo', people: 'personas', scale: 'balanza', stamp: 'documento', inbox: 'correo', help: 'chat', eye: 'buscar', note: 'documento', heart: 'corazon', home: 'casa', cash: 'billete', user2: 'usuario', award: 'deporte', sparkles: 'estrella', chart: 'grafico', map: 'mapa', book: 'libro', layers: 'carpeta', tool: 'herramienta', archive: 'carpeta', alert: 'alerta', leaf: 'hoja', truck: 'camion', car: 'auto', id: 'licencia', doc: 'documento', list: 'documento', shield: 'escudo', search: 'buscar', cpu: 'wifi' };
+const TIPO = { direccion: 'Dirección', departamento: 'Departamento', oficina: 'Oficina', concejo: 'Órgano colegiado', alcaldia: 'Alcaldía', juzgado: 'Juzgado', seccion: 'Sección', unidad: 'Unidad', programa: 'Programa' };
+const contenido = (id, fuente, o = {}) => mod(id, 'contenido', { fuente, filtro: '', cantidad: 6, ...o });
 function sitio(a) {
   const img = a.imagen || fotos(a.categorias, 1)[0]?.src || '';
   const galeria = a.galeria === false ? [] : fotos(a.categorias, 6);
@@ -269,8 +272,94 @@ const AREAS = [
 ];
 
 
+// ================================================================ Páginas del menú «Municipio» y «Servicios»
+const paginaSemilla = (slug) => semilla.contenidos.find((c) => c.slug === slug && c.tipo === 'pagina');
+const DIRECCIONES = ORG.filter((u) => u.parentId === 'dep-muni');
+const enRama = (u, d) => { let p = unidad(u.parentId); while (p && p.id !== d.id) p = unidad(p.parentId); return !!p; };
+const MENU = [
+  sitio({ slug: 'municipio', id: 'municipio', nombre: 'Municipio', unidad: 'Ilustre Municipalidad de Melipeuco', color: '#1F6FA8', oscuro: '#0F3A5A', patron: 'curvas', icono: 'escudo', categorias: ['alcaldia'], galeria: false, imagen: '/img/plaza-melipeuco-1536.webp',
+    titulo: 'Conozca su Municipalidad', antetitulo: 'Ilustre Municipalidad de Melipeuco', bajada: 'Autoridades, áreas municipales, organigrama, planificación comunal, historia y transparencia: todo lo que hace la Municipalidad por Melipeuco.',
+    descripcion: 'La Municipalidad de Melipeuco: autoridades, áreas, organigrama, PLADECO, historia, transparencia y noticias.', telefono: '+56 2 3384 8813', email: 'oficinadepartes@munimelipeuco.cl',
+    botones: [{ texto: 'Direcciones municipales', url: '#m-areas' }, { texto: 'Transparencia', url: '/transparencia/' }],
+    cifras: [{ valor: '1981', etiqueta: 'año en que inicia la Municipalidad de Melipeuco' }, { valor: `${ORG.length - 1} unidades`, etiqueta: 'entre direcciones, departamentos y oficinas' }],
+    modulos: [
+      mod('presentacion', 'texto', { ancla: 'La Municipalidad', titulo: 'La Municipalidad de Melipeuco', html: '<p>La Ilustre Municipalidad de Melipeuco es una corporación autónoma de derecho público, con personalidad jurídica y patrimonio propio, cuya finalidad es satisfacer las necesidades de la comunidad local y asegurar su participación en el progreso económico, social y cultural de la comuna (Ley 18.695, Orgánica Constitucional de Municipalidades).</p>', destacado: 'La constituyen el Alcalde, su máxima autoridad, y el Concejo Municipal.' }),
+      mod('conozca', 'tarjetas', { ancla: 'Conozca', titulo: 'Conozca su municipio', columnas: '3', items: [
+        { icono: 'estrella', titulo: 'Alcaldía', texto: 'El Alcalde, sus audiencias, gabinete y cuentas públicas.', url: '/alcaldia/' },
+        { icono: 'balanza', titulo: 'Concejo Municipal', texto: 'Integrantes, sesiones, actas y transmisiones en vivo.', url: '/concejo-municipal/' },
+        { icono: 'grafico', titulo: 'Organigrama', texto: 'Todas las unidades municipales y sus sitios.', url: '/organigrama/' },
+        { icono: 'mapa', titulo: 'PLADECO', texto: 'Plan de Desarrollo Comunal: la hoja de ruta de la comuna.', url: '/pladeco/' },
+        { icono: 'libro', titulo: 'Nuestra historia', texto: 'Los orígenes de Melipeuco y su municipalidad.', url: '/historia/' },
+        { icono: 'documento', titulo: 'Transparencia', texto: 'Transparencia activa, documentos y solicitudes de información.', url: '/transparencia/' },
+        { icono: 'wifi', titulo: 'Transformación digital', texto: 'Convenios y trámites en línea.', url: '/transformaciondigital/' },
+        { icono: 'camara', titulo: 'Logotipos y material', texto: 'Escudo y material gráfico oficial.', url: '/logotipos-y-material/' },
+        { icono: 'calendario', titulo: 'Agenda comunal', texto: 'Actividades, fiestas y talleres.', url: '/eventos/' },
+      ] }),
+      mod('areas', 'tarjetas', { ancla: 'Direcciones', titulo: 'Direcciones municipales', intro: 'Cada dirección tiene su sitio, con sus oficinas, trámites y contacto.', columnas: '3', items: DIRECCIONES.map((u) => ({ icono: ICONOS[u.icon] || 'escudo', etiqueta: TIPO[u.type] || '', titulo: u.name, texto: (u.funciones || [])[0] || '', url: '/' + slugDe(u.id) + '/' })) }),
+      contenido('autoridades', 'autoridades', { ancla: 'Autoridades', titulo: 'Autoridades', filtro: 'alcalde concejal' }),
+    ] }),
+
+  sitio({ slug: 'organigrama', id: 'organigrama', nombre: 'Organigrama', unidad: 'Estructura orgánica municipal', color: '#3E3E9A', oscuro: '#1D1D4F', patron: 'cuadricula', icono: 'grafico', categorias: [], galeria: false,
+    titulo: 'Organigrama municipal', antetitulo: 'Reglamento de Organización Interna N° 12', bajada: 'La estructura de la Municipalidad de Melipeuco: cada dirección, departamento y oficina, con el enlace a su propio sitio.',
+    descripcion: 'Organigrama de la Municipalidad de Melipeuco según el Reglamento de Organización Interna N° 12 (2025), con enlaces a cada unidad.',
+    cifras: [{ valor: String(DIRECCIONES.length), etiqueta: 'direcciones y órganos superiores' }, { valor: String(ORG.length - 1), etiqueta: 'unidades en total' }, { valor: '2025', etiqueta: 'Reglamento N° 12, de 29 de abril' }],
+    botones: [{ texto: 'Descargar el organigrama (PDF)', url: '/wp-content/uploads/2025/10/organigrama-2024.pdf' }],
+    modulos: [
+      mod('norma', 'texto', { ancla: 'Reglamento', titulo: 'Cómo se organiza la Municipalidad', html: '<p>La estructura orgánica de la Municipalidad de Melipeuco está definida en el <strong>Reglamento de Organización Interna N° 12</strong>, de 29 de abril de 2025, modificación aprobada por el Concejo Municipal en la sesión ordinaria N° 07 de 4 de febrero de 2025. Cada unidad tiene su norma de creación y sus funciones.</p>' }),
+      ...DIRECCIONES.map((d) => mod('rama-' + d.id.slice(4), 'tarjetas', { ancla: d.short && d.short.length < 22 ? d.short : '', titulo: d.name, intro: (d.funciones || [])[0] || '', columnas: '3', items: [d, ...ORG.filter((u) => enRama(u, d))].map((u) => ({ icono: ICONOS[u.icon] || 'escudo', etiqueta: u.id === d.id ? 'Sitio de la dirección' : TIPO[u.type] || '', titulo: u.name, texto: u.id === d.id ? '' : (u.funciones || [])[0] || '', url: '/' + slugDe(u.id) + '/' })) })),
+      mod('pdf', 'documentos', { titulo: 'Documentos', items: [{ titulo: 'Organigrama municipal (PDF)', tipo: 'Organigrama', url: '/wp-content/uploads/2025/10/organigrama-2024.pdf' }, { titulo: 'Organigrama 2024', tipo: 'Organigrama', anio: '2024', doc: 'OQuJ5_8mLLn0' }, { titulo: 'Organigrama oficial 2023', tipo: 'Organigrama', anio: '2023', doc: '4_qEaCOm6X9S' }] }),
+    ] }),
+
+  sitio({ slug: 'pladeco', id: 'pladeco', nombre: 'PLADECO', unidad: 'Plan de Desarrollo Comunal · SECPLAN', color: '#16A0A8', oscuro: '#0A5155', patron: 'curvas', icono: 'mapa', categorias: [], galeria: false, imagen: '/wp-content/uploads/2025/08/Pladeco-banner-2024.png',
+    titulo: 'Plan de Desarrollo Comunal', antetitulo: 'PLADECO Melipeuco 2022 – 2026', bajada: 'La guía que orienta cómo queremos que crezca la comuna: visión compartida, diagnóstico y los proyectos y metas para mejorar la calidad de vida de vecinas y vecinos.',
+    descripcion: 'PLADECO de Melipeuco 2022-2026: visión, diagnóstico, áreas prioritarias y documentos del Plan de Desarrollo Comunal.', email: 'secplan@munimelipeuco.cl',
+    botones: [{ texto: 'Documentos del PLADECO', url: '#m-documentos' }],
+    modulos: [
+      mod('que-es', 'texto', { ancla: 'Qué es', titulo: '¿Qué es el PLADECO?', html: '<p>El Plan de Desarrollo Comunal es el instrumento rector del desarrollo de la comuna: contempla las acciones para satisfacer las necesidades de la comunidad y promover su avance social, económico y cultural (art. 7 de la Ley 18.695). Lo elabora la Secretaría Comunal de Planificación (SECPLAN) con participación de la comunidad.</p><p>En el PLADECO 2022–2026 encontrará la visión de futuro que compartimos como comunidad, un diagnóstico de la realidad local en lo social, cultural, económico y medioambiental, y los proyectos y metas de cada área.</p>' }),
+      mod('prioridades', 'tarjetas', { ancla: 'Áreas prioritarias', titulo: 'Áreas prioritarias', columnas: '4', items: [['salud', 'Salud', '/salud/'], ['escuela', 'Educación', '/educacion/'], ['casa', 'Vivienda', '/vivienda/'], ['cultura', 'Cultura e identidad', '/cultura/'], ['montana', 'Turismo', '/turismo/'], ['hoja', 'Medio ambiente', '/medioambiente/'], ['herramienta', 'Infraestructura', '/obras/'], ['trabajo', 'Desarrollo económico', '/udel/']].map(([icono, titulo, url]) => ({ icono, titulo, texto: '', url })) }),
+      mod('documentos', 'documentos', { ancla: 'Documentos', titulo: 'Documentos del PLADECO', items: [
+        { titulo: 'PLADECO Melipeuco 2022 – 2026', tipo: 'Plan', anio: '2022', doc: 'HN6OgkTwyfI5' }, { titulo: 'Decreto PLADECO 2021 – 2024', tipo: 'Decreto', anio: '2021', doc: '0qtiYeVXTOGp' },
+        { titulo: 'PLADECO Melipeuco 2012 – 2016', tipo: 'Plan', anio: '2016', doc: 'FREV-iOL_3_u' }, { titulo: 'PLADECO 2006 – 2011', tipo: 'Plan', anio: '2011', doc: 'HNj-5Wxggbm0' },
+      ] }),
+    ], relacionadas: [{ icono: 'grafico', texto: 'SECPLAN', descripcion: 'Secretaría Comunal de Planificación', url: '/secplan/' }, { icono: 'escudo', texto: 'Municipio', url: '/municipio/' }] }),
+
+  sitio({ slug: 'historia', id: 'historia', nombre: 'Nuestra historia', unidad: 'Historia de Melipeuco', color: '#8A5A3B', oscuro: '#432816', patron: 'montes', icono: 'libro', categorias: [], galeria: false, imagen: '/img/plaza-melipeuco-1536.webp',
+    titulo: 'Nuestra historia', antetitulo: 'Una mirada al pasado', bajada: 'De las primeras familias que llegaron a los pies del volcán Llaima a la creación de la comuna en 1981: la historia de Melipeuco y de su gente.',
+    descripcion: 'Historia de Melipeuco: primeros pobladores, creación de la comuna, la plaza y la vida comunitaria.',
+    cifras: [{ valor: '5 jul 1980', etiqueta: 'decreto que crea la comuna' }, { valor: '1981', etiqueta: 'inicia la Municipalidad, autónoma de Cunco' }],
+    modulos: [mod('relato', 'texto', { ancla: 'Relato', titulo: 'Del libro «La tierra y el hombre»', html: paginaSemilla('historia')?.cuerpo || '' })],
+    relacionadas: [{ icono: 'cultura', texto: 'Cultura', url: '/cultura/' }, { icono: 'montana', texto: 'Turismo', url: '/turismo/' }] }),
+
+  sitio({ slug: 'logotipos-y-material', id: 'logotipos', nombre: 'Logotipos y material', unidad: 'Identidad gráfica municipal', color: '#0F3A5A', oscuro: '#081F31', patron: 'puntos', icono: 'camara', categorias: [], galeria: false,
+    titulo: 'Logotipos y material gráfico', antetitulo: 'Identidad de la Municipalidad', bajada: 'Escudo oficial y emblema de la Municipalidad de Melipeuco para documentos, actividades y material de difusión.',
+    descripcion: 'Escudo y logotipos oficiales de la Municipalidad de Melipeuco para descargar.', email: 'informatica@munimelipeuco.cl',
+    modulos: [
+      mod('uso', 'texto', { ancla: 'Uso', titulo: 'Cómo usarlos', html: '<p>Descargue el escudo oficial para usarlo en documentos, actividades y material de difusión patrocinado por la Municipalidad. Respete sus proporciones y colores, y no lo deforme ni lo combine con otros elementos.</p>' }),
+      mod('galeria', 'galeria', { titulo: 'Escudo municipal', imagenes: [{ src: '/img/escudo-azul.svg', alt: 'Escudo de Melipeuco, versión azul para fondos claros' }, { src: '/img/escudo-crema.svg', alt: 'Escudo de Melipeuco, versión crema para fondos oscuros' }, { src: '/img/logo-claro.webp', alt: 'Escudo de Melipeuco a color' }] }),
+      mod('descargas', 'documentos', { ancla: 'Descargas', titulo: 'Descargas', items: [
+        { titulo: 'Escudo vectorial azul', tipo: 'SVG', url: '/img/escudo-azul.svg' }, { titulo: 'Escudo vectorial crema', tipo: 'SVG', url: '/img/escudo-crema.svg' },
+        { titulo: 'Escudo para fondo claro', tipo: 'WEBP', url: '/img/logo-claro.webp' }, { titulo: 'Escudo para fondo oscuro', tipo: 'WEBP', url: '/img/logo-oscuro.webp' },
+        { titulo: 'Emblema (sin texto)', tipo: 'SVG', url: '/img/emblema-azul.svg' },
+      ] }),
+    ] }),
+
+  sitio({ slug: 'transporte-publico', id: 'transporte-publico', nombre: 'Transporte público', unidad: 'Buses y conexiones de Melipeuco', color: '#1F6FA8', oscuro: '#0F3A5A', patron: 'diagonales', icono: 'bus', categorias: [], galeria: false, alias: ['buses', 'horario-de-buses'],
+    titulo: 'Buses desde y hacia Melipeuco', antetitulo: 'Transporte público', bajada: 'Horarios de buses a Cunco y Temuco, destinos rurales, tarifas, terminales y conexiones a Santiago.',
+    descripcion: 'Transporte público en Melipeuco: horario de buses, tarifas, terminales y conexión a Santiago.', telefono: '+56 2 3384 8829', email: 'transito@munimelipeuco.cl',
+    botones: [{ texto: 'Ver el horario de buses', url: '/transportepublico/' }, { texto: 'Tarifas', url: '#m-tarifas' }],
+    cifras: [{ valor: '$3.400', etiqueta: 'Melipeuco ↔ Temuco (persona mayor $1.700)' }, { valor: '$1.200', etiqueta: 'Melipeuco ↔ Cunco' }],
+    modulos: [
+      mod('horario', 'llamado', { titulo: 'Horario de buses en vivo', texto: 'Elija desde dónde viaja y hacia dónde va, y vea la próxima salida, el cronograma del día y los destinos rurales.', icono: 'bus', boton: 'Abrir el horario', url: '/transportepublico/' }),
+      mod('tarifas', 'tabla', { ancla: 'Tarifas', titulo: 'Tarifas referenciales', columnas: ['Tramo', 'General', 'Persona mayor'], filas: 'Melipeuco ↔ Temuco | $3.400 | $1.700\nMelipeuco ↔ Cunco | $1.200 | —', nota: 'Los horarios y las tarifas son referenciales y pueden variar por el clima o la ruta.' }),
+      mod('santiago', 'tabla', { ancla: 'Santiago', titulo: 'Conexión a Santiago (desde Cunco)', columnas: ['Recorrido', 'Empresa', 'Salidas'], filas: 'Cunco → Santiago | Nar Bus | 20:40 · 20:55 · 21:20\nCunco → Santiago | Transantin | 21:15\nSantiago → Cunco | Nar Bus | 22:00 · 22:15 · 22:45\nSantiago → Cunco | Transantin | 22:25' }),
+      mod('terminales', 'directorio', { ancla: 'Terminales', titulo: 'Terminales y contactos', items: [
+        { nombre: 'Terminal de Temuco', sigla: '', texto: '', url: '', telefono: '+56 45 223 7599', email: '' }, { nombre: 'Terminal de Melipeuco', sigla: '', texto: '', url: '', telefono: '+56 45 258 1108', email: '' }, { nombre: 'Buses Cerrillos', sigla: '', texto: '', url: '', telefono: '+56 9 8456 0126', email: '' },
+      ] }),
+      mod('temuco', 'texto', { titulo: 'Pago en Temuco', html: '<p>En las micros urbanas de Temuco se paga con CuentaRUT o con tarjeta bancaria al subir (BiPay).</p>' }),
+    ], relacionadas: [{ icono: 'auto', texto: 'Tránsito', url: '/transito/' }, { icono: 'montana', texto: 'Turismo', url: '/turismo/' }] }),
+];
+
 // ================================================================ Gobierno comunal y programas
-const contenido = (id, fuente, o = {}) => mod(id, 'contenido', { fuente, filtro: '', cantidad: 6, ...o });
 const EXTRA = [
   sitio({ slug: 'alcaldia', organigrama: 'dep-alcaldia', alias: ['alcaldia-y-concejo-municipal'], nombre: 'Alcaldía', unidad: 'Alcaldía de Melipeuco', color: '#B07A12', oscuro: '#4A3304', acento: '#1F6FA8', patron: 'curvas', icono: 'estrella', categorias: ['alcaldia'],
     titulo: 'Alcaldía de Melipeuco', antetitulo: 'Alcalde Alejandro Cuminao Barros', bajada: 'Dirección y administración superior de la Municipalidad: audiencias, gabinete, comunicaciones y la cuenta pública del Alcalde.',
@@ -284,7 +373,12 @@ const EXTRA = [
       mod('audiencias', 'texto', { ancla: 'Audiencias', titulo: '¿Cómo solicitar una audiencia?', html: '<p>Puede solicitar audiencia en línea a través del registro de la <strong>Ley del Lobby</strong> o acercarse presencialmente a la Municipalidad, en Pedro Aguirre Cerda N° 14, primer piso. La atención es por orden de llegada los <strong>lunes, miércoles y viernes de 08:30 a 13:00 hrs.</strong></p>', botones: [{ texto: 'Solicitar audiencia (Ley del Lobby)', url: 'https://www.leylobby.gob.cl/instituciones/MU172' }, { texto: 'Concejo Municipal', url: '/concejo-municipal/' }] }),
       mod('facultades', 'texto', { ancla: 'Facultades', titulo: '¿Qué hace el Alcalde?', html: '<p>El Alcalde es la máxima autoridad de la Municipalidad: dirige la administración municipal y es su representante legal. Es elegido por votación popular por un período de cuatro años. Entre sus atribuciones (Ley 18.695, Orgánica Constitucional de Municipalidades):</p>' + lista(['Representar judicial y extrajudicialmente a la Municipalidad.', 'Proponer al Concejo la organización interna de la Municipalidad.', 'Nombrar y remover a los funcionarios de su dependencia.', 'Velar por la probidad administrativa y aplicar medidas disciplinarias.', 'Administrar los recursos financieros de la Municipalidad.', 'Administrar los bienes municipales y nacionales de uso público de la comuna.']) }),
       mod('oficinas', 'tarjetas', { ancla: 'Equipo', titulo: 'Oficinas de la Alcaldía', columnas: '2', items: oficinas('dep-alcaldia', { 'dep-gabinete': 'estrella', 'dep-comunicaciones': 'megafono' }).map((t) => ({ ...t, url: '/' + slugDe(hijas('dep-alcaldia').find((u) => t.texto === u.funciones[0])?.id) + '/' })) }),
-      contenido('cuenta', 'videos', { ancla: 'Cuenta pública', titulo: 'Cuenta pública y mensajes del Alcalde', filtro: 'cuenta-publica', cantidad: 4 }),
+      mod('cuentas', 'documentos', { ancla: 'Cuenta pública', titulo: 'Cuentas públicas', intro: 'Cada año el Alcalde da cuenta pública de la gestión municipal ante el Concejo y la comunidad.', items: [
+        { titulo: 'Cuenta pública gestión 2025', tipo: 'Cuenta pública', anio: '2025', doc: 'ouOais0Kx_YW' }, { titulo: 'Cuenta pública gestión 2024', tipo: 'Cuenta pública', anio: '2024', doc: 'LAy6E_R-LEPN' },
+        { titulo: 'Revista cuenta pública 2023', tipo: 'Revista', anio: '2023', doc: '7SUz5k6WhqVu' }, { titulo: 'Cuenta pública abril 2023', tipo: 'Cuenta pública', anio: '2023', doc: '-ejerDsYWOnD' },
+        { titulo: 'Cuenta pública abril 2021', tipo: 'Cuenta pública', anio: '2021', doc: 'BaSRS_R1ux9l' }, { titulo: 'Cuenta pública 2020', tipo: 'Cuenta pública', anio: '2020', doc: 'UT9W2aeKnpA3' },
+      ] }),
+      contenido('videos-cuenta', 'videos', { titulo: 'Cuenta pública en video', filtro: 'cuenta-publica', cantidad: 4 }),
     ] }),
 
   sitio({ slug: 'concejo-municipal', organigrama: 'dep-concejo', alias: ['concejosmunicipales'], nombre: 'Concejo Municipal', unidad: 'Concejo Municipal de Melipeuco', color: '#5B3A8C', oscuro: '#26163F', acento: '#E9A92B', patron: 'hexagonos', icono: 'balanza', categorias: [], galeria: false,
@@ -409,6 +503,7 @@ const EXTRA = [
     modulos: [
       mod('programa', 'texto', { ancla: 'El programa', titulo: 'El programa', html: '<p>La Red Local de Apoyos y Cuidados fortalece la atención de las personas en situación de dependencia funcional y de quienes las cuidan, garantizando acceso oportuno y articulado a prestaciones de salud, rehabilitación, apoyo social y acompañamiento comunitario. El Centro de Cuidados atiende en el teléfono +56 2 3384 8820.</p>' }),
     ], relacionadas: [{ icono: 'personas', texto: 'Adulto Mayor e Inclusión (UAMIS)', url: '/uamis/' }, { icono: 'salud', texto: 'Salud', url: '/salud/' }] }),
+  ...MENU,
 ];
 
 // ================================================================ Todas las demás unidades del organigrama
@@ -432,12 +527,19 @@ const DIRECTORIO = { 'dep-emergencia': (x) => x.grupo === 'emergencia' || /Emerg
 // Color, patrón e ícono según la dirección a la que pertenece cada unidad.
 const RAMAS = { 'dep-alcaldia': ['#B07A12', '#4A3304', 'curvas'], 'dep-concejo': ['#5B3A8C', '#26163F', 'hexagonos'], 'dep-cosoc': ['#5B3A8C', '#26163F', 'hexagonos'], 'dep-admin': ['#1F6FA8', '#0F3A5A', 'curvas'], 'dep-secmun': ['#3E3E9A', '#1D1D4F', 'puntos'], 'dep-dideco': ['#D23B4A', '#6E1520', 'ondas'], 'dep-del': ['#8A5A3B', '#432816', 'montes'], 'dep-dom': ['#C9552B', '#5B2210', 'triangulos'], 'dep-transito': ['#D4901A', '#5E3F05', 'cuadricula'], 'dep-daf': ['#0E7C86', '#0A2A33', 'cuadricula'], 'dep-control': ['#4A5A6A', '#1E2A35', 'diagonales'], 'dep-secplan': ['#16A0A8', '#0A5155', 'curvas'], 'dep-dsi': ['#2E6F9E', '#123552', 'cruces'], 'dep-jpl': ['#3E3E9A', '#1D1D4F', 'cuadricula'] };
 const rama = (id) => { let u = unidad(id); while (u && !RAMAS[u.id]) u = unidad(u.parentId); return RAMAS[u?.id] || ['#1F6FA8', '#0F3A5A', 'curvas']; };
-const ICONOS = { star: 'estrella', building: 'escudo', people: 'personas', scale: 'balanza', stamp: 'documento', inbox: 'correo', help: 'chat', eye: 'buscar', note: 'documento', heart: 'corazon', home: 'casa', cash: 'billete', user2: 'usuario', award: 'deporte', sparkles: 'estrella', chart: 'grafico', map: 'mapa', book: 'libro', layers: 'carpeta', tool: 'herramienta', archive: 'carpeta', alert: 'alerta', leaf: 'hoja', truck: 'camion', car: 'auto', id: 'licencia', doc: 'documento', list: 'documento', shield: 'escudo', search: 'buscar', cpu: 'wifi' };
-const TIPO = { direccion: 'Dirección', departamento: 'Departamento', oficina: 'Oficina', concejo: 'Órgano colegiado', alcaldia: 'Alcaldía', juzgado: 'Juzgado', seccion: 'Sección', unidad: 'Unidad', programa: 'Programa' };
+const ALIAS = { 'dep-informatica': ['transformacion-digital', 'informatica'], 'dep-uamis': ['adulto-mayor'], 'dep-emergencia': ['emergencia', 'proteccion-civil'] };
 // Textos extra para unidades que atienden mucho público.
 const EXTRAS = {
   'dep-emergencia': [mod('numeros', 'llamado', { titulo: 'Teléfonos de emergencia', texto: 'Urgencias CESFAM Melipeuco 45 255 7691 · Bomberos 132 · Carabineros 133 · SAMU 131. Oficina municipal de Emergencia: +56 2 3384 8812.', icono: 'alerta', boton: 'Llamar a Bomberos (132)', url: 'tel:132', boton2: 'Llamar a Carabineros (133)', url2: 'tel:133' })],
-  'dep-informatica': [mod('ley', 'texto', { ancla: 'Transformación digital', titulo: 'Ley de Transformación Digital del Estado', html: '<p>La <strong>Ley N° 21.180</strong> establece un marco para modernizar el Estado incorporando tecnologías digitales en los procesos administrativos, para mejorar la eficiencia, la transparencia y la calidad de los servicios a la ciudadanía.</p>' + lista(['Modernización de los trámites municipales.', 'Digitalización de los procesos internos.', 'Más transparencia y acceso a la información.']), botones: [{ texto: 'Convenios de transformación digital', url: '/transformaciondigital/' }, { texto: 'Trámites en línea', url: '/tramites/' }] })],
+  'dep-informatica': [mod('convenios', 'pestanas', { ancla: 'Convenios', titulo: 'Convenios de transformación digital', intro: 'Alianzas para modernizar la gestión municipal y acercar los servicios a vecinas y vecinos.', items: [
+      { titulo: 'Municipalidad de Padre Las Casas', icono: 'wifi', html: '<p><strong>Objetivo:</strong> un marco de colaboración para el desarrollo de ambas municipalidades, enfocado en la implementación de la Ley de Transformación Digital del Estado mediante plataformas tecnológicas.</p><p>Padre Las Casas entrega capacitación, asistencia técnica y el uso de sus plataformas; Melipeuco las usa según las políticas de seguridad y privacidad, comparte las mejoras que desarrolle y no las distribuye ni modifica sin autorización. El convenio tiene vigencia indefinida.</p>' },
+      { titulo: 'Gobierno Regional: DocDigital', icono: 'documento', html: '<p><strong>Objetivo:</strong> firmar electrónicamente los convenios mediante la plataforma <strong>DocDigital</strong>, con la correcta gestión de usuarios, perfiles y subrogantes.</p><p>El Gobierno Regional de La Araucanía capacita y monitorea el uso de la plataforma; la Municipalidad mantiene actualizados sus usuarios y subrogantes. Incluye autenticación con ClaveÚnica y FirmaGob.</p>' },
+    ] }),
+    mod('beneficios', 'tarjetas', { titulo: 'Beneficios de la transformación digital', columnas: '3', items: [
+      { icono: 'reloj', titulo: 'Eficiencia', texto: 'Menos tiempo en los procesos administrativos.' }, { icono: 'llave', titulo: 'Seguridad de datos', texto: 'Información protegida en plataformas seguras.' }, { icono: 'billete', titulo: 'Ahorro', texto: 'Menos costos en papel y trámites presenciales.' },
+      { icono: 'usuario', titulo: 'Mejor servicio', texto: 'Trámites más rápidos y sencillos para los vecinos.' }, { icono: 'buscar', titulo: 'Transparencia', texto: 'Más acceso a la información pública municipal.' }, { icono: 'escuela', titulo: 'Capacitación', texto: 'Funcionarios formados en herramientas digitales.' },
+    ] }),
+    mod('ley', 'texto', { ancla: 'Transformación digital', titulo: 'Ley de Transformación Digital del Estado', html: '<p>La <strong>Ley N° 21.180</strong> establece un marco para modernizar el Estado incorporando tecnologías digitales en los procesos administrativos, para mejorar la eficiencia, la transparencia y la calidad de los servicios a la ciudadanía.</p>' + lista(['Modernización de los trámites municipales.', 'Digitalización de los procesos internos.', 'Más transparencia y acceso a la información.']), botones: [{ texto: 'Trámites en línea', url: '/tramites/' }, { texto: 'Ver el estado de mi trámite', url: '/tramites/seguimiento/' }] })],
   'dep-partes': [mod('ingreso', 'texto', { ancla: 'Ingreso de documentos', titulo: 'Ingreso de documentos y solicitudes', html: '<p>En la Oficina de Partes, en el mesón principal del primer piso, se ingresan las cartas, solicitudes y documentos dirigidos a la Municipalidad. También se reciben aquí las solicitudes varias y de maquinaria municipal.</p>', botones: [{ texto: 'Solicitudes varias', url: '/solicitudesvarias/' }, { texto: 'Solicitud de maquinaria', url: '/solicitud-de-maquinaria/' }] })],
   'dep-oirs': [mod('oirs', 'llamado', { titulo: 'Reclamos, consultas y sugerencias', texto: 'Ingrese su solicitud en línea y reciba un código de seguimiento.', icono: 'chat', boton: 'Ir a la OIRS', url: '/oirs/' })],
   'dep-transparencia': [mod('transparencia', 'enlaces', { ancla: 'Transparencia', titulo: 'Transparencia municipal', items: [{ icono: 'documento', texto: 'Transparencia Activa', descripcion: 'Información que la Ley 20.285 obliga a publicar', url: '/transparencia/activa/' }, { icono: 'carpeta', texto: 'Documentos de Transparencia', url: '/transparencia/documentos/' }, { icono: 'buscar', texto: 'Solicitar información', descripcion: 'Transparencia pasiva', url: '/transparencia/' }] })],
@@ -463,7 +565,7 @@ const GENERICOS = ORG.filter((u) => u.id !== 'dep-muni' && !PROPIOS[u.id]).map((
   ];
   const dir = DIRECTORIO[u.id] ? directorio(DIRECTORIO[u.id]) : [];
   return sitio({
-    slug: slugDe(u.id), id: slugDe(u.id), organigrama: u.id, nombre: u.short && u.short.length < u.name.length && u.short.length > 3 ? u.short : u.name, unidad: u.name, color, oscuro, patron, icono: ICONOS[u.icon] || 'escudo',
+    slug: slugDe(u.id), id: slugDe(u.id), organigrama: u.id, alias: ALIAS[u.id] || [], nombre: u.short && u.short.length < u.name.length && u.short.length > 3 ? u.short : u.name, unidad: u.name, color, oscuro, patron, icono: ICONOS[u.icon] || 'escudo',
     categorias: NOTICIAS[u.id] || [], galeria: false, imagen: '',
     titulo: u.name, antetitulo: nombrePadre || 'Municipalidad de Melipeuco', bajada: (u.funciones || [])[0] || '',
     descripcion: `${u.name} de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.`,
