@@ -2235,29 +2235,20 @@ html.tk-entrando[data-transicion="telon"] .tk-telon i { transform: none; }
 
 /* =====================================================================
    Cabecera: el escudo municipal se alterna con el logo animado de la
-   Capital del Trekking (Diseño → Cabecera → Alternar logos).
+   Capital del Trekking (Diseño → Cabecera → Alternar logos). El
+   movimiento lo hace public/js/escudo-vivo.js; aquí sólo los estados.
    ===================================================================== */
-.marca { position: relative; perspective: 800px; }
-.marca > :not(.marca-tk) { transition: opacity .5s var(--mov), transform .75s var(--mov), filter .5s; transform-origin: 50% 50%; }
-.marca-tk { position: absolute; top: 50%; left: 0; z-index: 1; display: block; width: clamp(180px, 16vw, 236px); translate: 0 -50%; color: var(--texto); opacity: 0; pointer-events: none; transform-origin: 50% 50%; transition: opacity .5s var(--mov), transform .75s var(--mov), filter .5s; }
-.marca-tk .tk-logo { width: 100%; filter: drop-shadow(0 6px 14px rgb(0 0 0 / .18)); }
+.marca { position: relative; perspective: 900px; }
+.marca-muni { display: flex; flex-direction: inherit; align-items: center; gap: inherit; text-align: inherit; transform-origin: 50% 50%; will-change: transform, opacity; }
+.marca-tk { position: absolute; top: 50%; left: 0; z-index: 1; display: block; width: var(--tk-ancho, 220px); translate: 0 -50%; color: var(--texto); visibility: hidden; pointer-events: none; transform-origin: 50% 50%; }
+.marca-tk .tk-logo { width: 100%; filter: drop-shadow(0 6px 14px rgb(0 0 0 / .2)); }
+.marca-tk .tk-letra { cursor: default; }
 :root:is([data-cabecera="oscura"], [data-cabecera="color"], [data-tema="oscuro"]) .marca-tk { color: #FFF8EC; }
-:root[data-cabecera-centrada="si"] .marca-tk { left: 50%; width: clamp(220px, 20vw, 300px); translate: -50% -50%; }
+:root[data-cabecera-centrada="si"] .marca-tk { left: 50%; translate: -50% -50%; }
+.marca.tk-visible .marca-tk { visibility: visible; }
+.marca.muni-oculta .marca-muni { visibility: hidden; }
 :root:not([data-alternar-logo="si"]) .marca-tk { display: none; }
-/* Giro en 3D (predeterminado) */
-.marca-tk { transform: rotateX(-90deg); }
-.marca.cara-tk > :not(.marca-tk) { opacity: 0; transform: rotateX(90deg); }
-.marca.cara-tk .marca-tk { opacity: 1; transform: none; }
-/* Fundido */
-:root[data-alternar-efecto="fundido"] .marca-tk { transform: scale(.94); filter: blur(6px); }
-:root[data-alternar-efecto="fundido"] .marca.cara-tk > :not(.marca-tk) { transform: scale(1.04); filter: blur(6px); }
-:root[data-alternar-efecto="fundido"] .marca.cara-tk .marca-tk { transform: none; filter: none; }
-/* Desliza hacia arriba */
-:root[data-alternar-efecto="deslizar"] .marca-tk { transform: translateY(70%); }
-:root[data-alternar-efecto="deslizar"] .marca.cara-tk > :not(.marca-tk) { transform: translateY(-70%); }
-:root[data-alternar-efecto="deslizar"] .marca.cara-tk .marca-tk { transform: none; }
-:root[data-alternar-efecto="deslizar"] .marca { overflow: clip; overflow-clip-margin: 14px; }
-@media (max-width: 1024px) { :root[data-cabecera-centrada="si"] .marca-tk, .marca-tk { left: 0; width: 170px; translate: 0 -50%; } }
+@media (max-width: 1024px) { :root[data-cabecera-centrada="si"] .marca-tk { left: 0; translate: 0 -50%; } }
 @media (prefers-reduced-motion: reduce) { .marca-tk { display: none !important; } }
 
 /* =====================================================================
@@ -2436,8 +2427,8 @@ html.tk-entrando[data-transicion="persiana"] .tk-columnas i { transform: none; }
 html.tk-entrando[data-transicion="diagonal"] .tk-portal { clip-path: none; }
 :root[data-transicion="diagonal"][data-transicion-color="arcoiris"] .tk-portal { background: linear-gradient(135deg, #1F6FA8, #16A0A8, #2F7D4A, #E9A92B, #E2683C, #D23B4A, #7A3E91); }
 /* En la cabecera compacta (al bajar) se queda el escudo: no hay espacio para el logo ancho. */
-.cabecera.compacta .marca-tk { opacity: 0 !important; visibility: hidden; }
-.cabecera.compacta .marca.cara-tk > :not(.marca-tk) { opacity: 1; transform: none; filter: none; }
+.cabecera.compacta .marca-tk { opacity: 0 !important; visibility: hidden !important; }
+.cabecera.compacta .marca.muni-oculta .marca-muni { visibility: visible; }
 
 /* =====================================================================
    Extensiones: bloques en zonas y ventanas emergentes
@@ -2523,3 +2514,39 @@ body.con-emergente { overflow: hidden; }
 .ct-pasos li::before { content: counter(paso); position: absolute; top: 16px; left: 16px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--azul); color: #fff; font-weight: 800; }
 .ct-pasos span { color: var(--texto-2); font-size: .9375rem; }
 .ct-compacta { grid-template-columns: 1fr; }
+
+/* Nombre de destino en las transiciones: letras de colores como el logo */
+:root:not([data-transicion-letras="simple"]) .tk-cortina-nombre { gap: .06em; font-size: clamp(1.6rem, 4.2vw, 3rem); letter-spacing: 0; }
+:root:not([data-transicion-letras="simple"]) .tk-cortina-nombre > .tk-ch { display: inline-grid; place-items: center; min-width: .92em; padding: .14em .16em .18em; border-radius: 44% 52% 40% 48% / 50% 42% 54% 46%; background: var(--c); color: #FFF8EC; line-height: 1; text-shadow: 0 2px 0 rgb(0 0 0 / .12); box-shadow: inset 0 -.12em 0 rgb(0 0 0 / .14), 0 .25em .5em -.2em rgb(0 0 0 / .45); transform-origin: 50% 100%; }
+:root:not([data-transicion-letras="simple"]) .tk-cortina-nombre > .tk-espacio { width: .36em; }
+.tk-cortina-nombre { flex-wrap: wrap; justify-content: center; max-width: min(92vw, 980px); }
+
+/* =====================================================================
+   Pulido general de la interfaz
+   ===================================================================== */
+/* Imágenes que aparecen al cargar y caja que brilla mientras tanto */
+img.por-cargar { opacity: 0; transition: opacity .7s var(--mov), transform 1.2s var(--mov); }
+img.por-cargar.cargada { opacity: 1; }
+:is(.tn-img, .galeria-item, .tk-foto, .ct-materia):has(img.por-cargar:not(.cargada)) { background: linear-gradient(100deg, var(--fondo-2) 30%, color-mix(in srgb, var(--fondo-2) 60%, #fff) 50%, var(--fondo-2) 70%) 0 0 / 220% 100%; animation: brillo-carga 1.4s linear infinite; }
+@keyframes brillo-carga { to { background-position: -220% 0; } }
+/* Botones principales: un destello cruza al pasar el cursor */
+:is(.boton-primario, .boton-acento) { position: relative; overflow: hidden; isolation: isolate; }
+:is(.boton-primario, .boton-acento)::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / .32) 50%, transparent 70%); transform: translateX(-120%); }
+:is(.boton-primario, .boton-acento):hover::after { transform: translateX(120%); transition: transform .8s var(--mov); }
+.boton:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+/* Anillo de foco suave y visible en todo el sitio */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 3px solid color-mix(in srgb, var(--ambar) 85%, transparent); outline-offset: 3px; border-radius: 6px; transition: outline-offset .15s var(--mov); }
+/* Barra de desplazamiento con los colores del sitio */
+html { scrollbar-color: color-mix(in srgb, var(--azul) 45%, transparent) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 10px; background: color-mix(in srgb, var(--azul) 45%, transparent) padding-box; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--azul); }
+/* Enlaces dentro de los textos: subrayado que crece */
+.prosa a:not(.boton) { text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-thickness .2s, text-underline-offset .2s, color .2s; }
+.prosa a:not(.boton):hover { text-decoration-thickness: 2px; text-underline-offset: 5px; }
+/* Tablas de los textos más legibles */
+.prosa table { overflow: hidden; border-radius: var(--r-m, 12px); box-shadow: 0 0 0 1px var(--linea-suave, var(--borde)); }
+.prosa table tr:nth-child(even) td { background: color-mix(in srgb, var(--fondo-2) 55%, transparent); }
+/* Volver arriba: aparece con un rebote */
+.arriba { transition: opacity .3s, transform .45s var(--tk-rebote, cubic-bezier(.34, 1.56, .64, 1)); }
+@media (prefers-reduced-motion: reduce) { img.por-cargar { transition: none; } :is(.boton-primario, .boton-acento)::after { display: none; } }

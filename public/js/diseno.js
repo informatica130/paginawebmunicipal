@@ -25,7 +25,7 @@ export const PREDETERMINADO = {
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#0F3A5A', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 16, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: true },
   forma: { radio: 18, radioGrande: 22, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240, sombras: 'suaves', escala: 100, maqueta: 'portal', elevacion: 4 },
-  cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, menuAbrir: 'cursor', alternarLogo: true, alternarCada: 7, alternarEfecto: 'giro', logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
+  cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, menuAbrir: 'cursor', alternarLogo: true, alternarCada: 7, alternarTk: 6, alternarEfecto: 'giro', alternarEntrada: 'caida', logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
   portada: { composicion: 'portal', fotoLado: 'derecha', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
     // Portada «Capital del Trekking»
     logoAnimacion: 'vivo', logoReposo: true, logoGestos: true, tamanoLogo: 100, kicker: true, buscador: true, cordillera: true, puntos: true,
@@ -49,7 +49,7 @@ export const PREDETERMINADO = {
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
   animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true,
-    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true },
+    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, transicionLetras: 'logo', precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true },
   avanzado: { css: '' },
 };
 
@@ -123,7 +123,9 @@ export const OPCIONES = {
   introEstilo: { escudo3d: 'El escudo municipal se arma en 3D y vuela a la cabecera', logo3d: 'El logo se reconstruye en 3D, pieza por pieza', escudo: 'El escudo municipal se arma (clásica, plana)' },
   transicionEstilo: { columnas: 'Nueve columnas que giran en 3D (una por letra)', portal: 'Portal: el emblema del área se abre en círculo', cordillera: 'Cordillera: capas de montaña que suben', telon: 'Telón: dos paños se cierran con el escudo al centro', persiana: 'Persiana: nueve franjas horizontales que giran', diagonal: 'Barrido diagonal con los colores del área', vista: 'Fluida: la cabecera queda quieta y el contenido se desliza (la más rápida)' },
   menuAbrir: { cursor: 'Al pasar el cursor', clic: 'Al hacer clic' },
-  alternarEfecto: { giro: 'Giro en 3D', fundido: 'Fundido suave', deslizar: 'Desliza hacia arriba' },
+  alternarEfecto: { giro: 'Giro en 3D', volteo: 'Volteo lateral', fundido: 'Fundido suave', deslizar: 'Desliza hacia arriba', barrido: 'Barrido', zoom: 'Acercamiento' },
+  alternarEntrada: { caida: 'Las letras caen y rebotan', salto: 'Saltan desde abajo', ola: 'Crecen en ola', vivo: 'Logo vivo completo', aparecer: 'Aparece de una vez' },
+  transicionLetras: { logo: 'Letras de colores como el logo', simple: 'Letras simples' },
   transicionCampana: { deslizar: 'Deslizar', fundido: 'Fundido', zoom: 'Fundido con acercamiento', profundidad: 'Profundidad 3D' },
   flechas: { cursor: 'Al pasar el cursor', siempre: 'Siempre', nunca: 'Nunca' },
   puntos: { pildora: 'Píldoras', puntos: 'Puntos', barra: 'Barras de progreso', ninguno: 'Ocultos' },
@@ -207,7 +209,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, P.forma.ancho, 960, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras), escala: numero(f.escala, 100, 80, 115), radioGrande: numero(f.radioGrande, P.forma.radioGrande, 0, 48), elevacion: numero(f.elevacion, P.forma.elevacion, 0, 14), maqueta: opcion(f.maqueta, OPCIONES.maqueta, P.forma.maqueta),
     },
     cabecera: {
-      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), centrada: bool(ca.centrada, P.cabecera.centrada), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites), menuAbrir: opcion(ca.menuAbrir, OPCIONES.menuAbrir, 'cursor'), alternarLogo: bool(ca.alternarLogo, true), alternarCada: numero(ca.alternarCada, 7, 3, 30), alternarEfecto: opcion(ca.alternarEfecto, OPCIONES.alternarEfecto, 'giro'),
+      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), centrada: bool(ca.centrada, P.cabecera.centrada), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites), menuAbrir: opcion(ca.menuAbrir, OPCIONES.menuAbrir, 'cursor'), alternarLogo: bool(ca.alternarLogo, true), alternarCada: numero(ca.alternarCada, 7, 3, 30), alternarTk: numero(ca.alternarTk, 6, 3, 30), alternarEfecto: opcion(ca.alternarEfecto, OPCIONES.alternarEfecto, 'giro'), alternarEntrada: opcion(ca.alternarEntrada, OPCIONES.alternarEntrada, 'caida'),
       logo: opcion(ca.logo, OPCIONES.logo, 'emblema'), logoUrl: imagen(ca.logoUrl), tamanoLogo: numero(ca.tamanoLogo, 54, 36, 96),
       subtitulo: texto(ca.subtitulo, P.cabecera.subtitulo, 60), nombre: texto(ca.nombre, P.cabecera.nombre, 60),
     },
@@ -257,7 +259,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       curva: opcion(an.curva, OPCIONES.curva, 'suave'),
       introEstilo: opcion(an.introEstilo, OPCIONES.introEstilo, P.animaciones.introEstilo), escudoVivo: bool(an.escudoVivo, true), profundidad: numero(an.profundidad, 70, 0, 100),
       transicionEstilo: opcion(an.transicionEstilo, OPCIONES.transicionEstilo, 'columnas'), transicionColor: opcion(an.transicionColor, OPCIONES.transicionColor, 'zona'),
-      transicionNombre: bool(an.transicionNombre, true), precarga: bool(an.precarga, true),
+      transicionNombre: bool(an.transicionNombre, true), transicionLetras: opcion(an.transicionLetras, OPCIONES.transicionLetras, 'logo'), precarga: bool(an.precarga, true),
       aparicionEstilo: opcion(an.aparicionEstilo, OPCIONES.aparicionEstilo, 'mixto'), cursorLuz: bool(an.cursorLuz, true), ondaClic: bool(an.ondaClic, true), desplazamientoSuave: bool(an.desplazamientoSuave, true),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
@@ -319,7 +321,7 @@ export function atributos(cfg) {
     'data-pt-mosaico': String(cfg.portal.mosaico), 'data-pt-mosaico-estilo': cfg.portal.mosaicoEstilo, 'data-pt-mosaico-colores': cfg.portal.mosaicoColores,
     'data-pt-temas': cfg.portal.temas ? 'si' : 'no', 'data-pt-temas-estilo': cfg.portal.temasEstilo, 'data-pt-buscador': cfg.portal.buscador, 'data-pt-propia': cfg.portal.bandaPropia ? 'si' : 'no',
     'data-pt-logo': cfg.portal.logoTrekking ? 'si' : 'no', 'data-pt-reparto': cfg.portal.reparto, 'data-pt-banner': cfg.portal.bannerProporcion === 'auto' ? 'auto' : 'fijo', 'data-pt-ajuste': cfg.portal.bannerAjuste, 'data-pt-efecto': cfg.portal.bannerEfecto,
-    'data-alternar-logo': a.activas && cfg.cabecera.alternarLogo ? 'si' : 'no', 'data-alternar-efecto': cfg.cabecera.alternarEfecto, 'data-alternar-cada': String(cfg.cabecera.alternarCada),
+    'data-alternar-logo': a.activas && cfg.cabecera.alternarLogo ? 'si' : 'no', 'data-alternar-efecto': cfg.cabecera.alternarEfecto, 'data-alternar-cada': String(cfg.cabecera.alternarCada), 'data-alternar-tk': String(cfg.cabecera.alternarTk), 'data-alternar-entrada': cfg.cabecera.alternarEntrada, 'data-transicion-letras': a.transicionLetras,
     'data-camp-auto': cfg.campanas.autoplay ? String(cfg.campanas.intervalo) : '0', 'data-camp-trans': cfg.campanas.transicion, 'data-camp-flechas': cfg.campanas.flechas, 'data-camp-puntos': cfg.campanas.puntos, 'data-camp-pausa': cfg.campanas.pausa ? 'si' : 'no', 'data-camp-marco': cfg.campanas.marco, 'data-camp-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : 'fijo',
     'data-noticias': cfg.noticias.disposicion, 'data-tn-estilo': cfg.noticias.estilo, 'data-tn-resumen': cfg.noticias.resumen, 'data-tn-fecha': cfg.noticias.fecha ? 'si' : 'no', 'data-tn-categoria': cfg.noticias.categoria ? 'si' : 'no', 'data-tn-efecto': cfg.noticias.efecto, 'data-tn-etiqueta': cfg.noticias.etiqueta,
     'data-el-accesos': cfg.elementos.accesos, 'data-el-tramites': cfg.elementos.tramites, 'data-el-ver-todo': cfg.elementos.verTodo, 'data-el-categorias': cfg.elementos.categorias, 'data-el-iconos': cfg.elementos.iconos, 'data-el-separadores': cfg.elementos.separadores,

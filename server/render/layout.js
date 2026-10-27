@@ -84,10 +84,12 @@ function cabecera(ctx) {
     <div class="cabecera-principal">
       <div class="contenedor">
         <a class="marca" href="/" aria-label="${s.nombre}: ir al inicio">
+          <span class="marca-muni">
           ${crudo(escudoVivo({ clase: 'marca-viva', titulo: '' }).replace(' role="img" aria-label=""', ' aria-hidden="true"').replace('<title></title>', ''))}
           <img class="marca-emblema logo-claro" src="${logo.src}" alt="" data-diseno-logo="claro">
           <img class="marca-emblema logo-oscuro" src="${logo.oscuro}" alt="" data-diseno-logo="oscuro">
           <span class="marca-texto"${logo.conTexto ? '' : crudo(' hidden')}><small data-diseno="cabecera.subtitulo">${dz.cabecera.subtitulo}</small><b data-diseno="cabecera.nombre">${dz.cabecera.nombre}</b></span>
+          </span>
           ${dz.animaciones.activas ? crudo(`<span class="marca-tk" aria-hidden="true">${logoAnimado().replace(' role="img" aria-label="Melipeuco Capital del Trekking"', '').replace(/<title>[^<]*<\/title>/, '')}</span>`) : ''}
         </a>
         <nav class="nav" id="nav" aria-label="Menú principal">${menuPrincipal(ctx)}</nav>

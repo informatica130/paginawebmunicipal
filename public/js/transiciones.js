@@ -233,11 +233,38 @@
       capas[1] && capas[1].style.setProperty('--c', p[0]); capas[2] && capas[2].style.setProperty('--c', p[1]);
       centro = (x == null ? 50 : x).toFixed(1) + '% ' + (y == null ? 50 : y).toFixed(1) + '%';
       $$('img', info).forEach(function (im) { im.hidden = Number(im.getAttribute('data-k')) !== k; });
-      nombre.replaceChildren.apply(nombre, Array.prototype.map.call(texto || '', function (ch) { var s = d.createElement('span'); s.textContent = ch; return s; }));
+      // Con «Letras de colores como el logo» cada letra es una pieza redondeada con uno de los nueve
+      // colores de la Capital del Trekking, como las letras del logo.
+      // (sin el color del fondo, para que ninguna letra se pierda).
+      var paleta = (datos.paleta || []).map(function (x) { return x[0]; }).filter(function (_, i) { return i !== k; }), n = 0;
+      nombre.replaceChildren.apply(nombre, Array.prototype.map.call(texto || '', function (ch) {
+        var s = d.createElement('span'); s.textContent = ch;
+        if (/\s/.test(ch)) s.className = 'tk-espacio';
+        else { s.className = 'tk-ch'; s.style.setProperty('--c', paleta.length ? paleta[(k + n) % paleta.length] : '#E9A92B'); s.setAttribute('data-r', String((n * 37) % 9 - 4)); n++; }
+        return s;
+      }));
     }
     var cancelar = function () { capas.concat(columnas, telon, [portal, info], $$('span, img', info)).forEach(function (el) { el && el.getAnimations().forEach(function (x) { x.cancel(); }); }); };
     // Texto del destino: las letras aparecen en cascada.
-    function nombreEntra(t0) { $$('span', nombre).forEach(function (s, i) { anim(s, [{ opacity: 0, transform: 'translateY(.6em) rotateX(-70deg)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: t0 + i * 18, easing: SALIDA }); }); }
+    var conLogo = function () { return raiz.getAttribute('data-transicion-letras') !== 'simple'; };
+    function nombreEntra(t0) {
+      $$('span', nombre).forEach(function (s, i) {
+        if (conLogo()) anim(s, [
+          { opacity: 0, transform: 'translateY(-1.6em) rotate(' + (i % 2 ? 16 : -16) + 'deg) scale(.4)' },
+          { opacity: 1, transform: 'translateY(.12em) rotate(0) scale(1.1, .82)', offset: .5 },
+          { transform: 'translateY(-.08em) scale(.97, 1.05)', offset: .74 },
+          { transform: 'rotate(' + (s.getAttribute('data-r') || 0) + 'deg)' },
+        ], { duration: 720, delay: t0 + i * 38, easing: 'cubic-bezier(.3, .9, .4, 1)' });
+        else anim(s, [{ opacity: 0, transform: 'translateY(.6em) rotateX(-70deg)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: t0 + i * 18, easing: SALIDA });
+      });
+    }
+    // Al descubrir la página, las letras saltan y se van una a una.
+    function nombreSale() {
+      if (!conLogo()) return 0;
+      var l = $$('span', nombre);
+      l.forEach(function (s, i) { anim(s, [{ transform: 'rotate(' + (s.getAttribute('data-r') || 0) + 'deg)', opacity: 1 }, { transform: 'translateY(.1em) scale(1.08, .9)', offset: .25 }, { transform: 'translateY(-1.4em) rotate(' + (i % 2 ? 20 : -20) + 'deg) scale(.5)', opacity: 0 }], { duration: 420, delay: i * 22, easing: 'cubic-bezier(.5, 0, .75, 0)' }); });
+      return 180 + l.length * 22;
+    }
 
     // Tapar la pantalla (antes de ir a otra página). Devuelve los milisegundos que tarda.
     function cubrir() {
@@ -273,7 +300,8 @@
     function descubrir(alTerminar) {
       var e = estilo(), emblema = $('img:not([hidden])', info), ultima;
       anim(emblema, [{ opacity: 1, transform: 'perspective(600px) rotateY(0) scale(1)' }, { opacity: 0, transform: 'perspective(600px) rotateY(160deg) scale(.6)' }], { duration: 380, easing: 'ease-in' });
-      anim(info, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 120 });
+      var tLetras = nombreSale();
+      anim(info, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: Math.max(120, tLetras) });
       if (e === 'columnas') columnas.forEach(function (c, i) { ultima = anim(c, [{ transform: 'none', transformOrigin: '100% 50%' }, { transform: 'rotateY(92deg)', transformOrigin: '100% 50%' }], { duration: 460, delay: 160 + i * 38, easing: 'cubic-bezier(.65, 0, .35, 1)' }); });
       else if (e === 'persiana') columnas.forEach(function (c, i) { ultima = anim(c, [{ transform: 'none', transformOrigin: '50% 100%' }, { transform: 'rotateX(-92deg)', transformOrigin: '50% 100%' }], { duration: 460, delay: 160 + i * 36, easing: 'cubic-bezier(.65, 0, .35, 1)' }); });
       else if (e === 'diagonal') ultima = anim(portal, [{ clipPath: 'polygon(-100% 100%, 100% -100%, 100% 100%, 100% 100%)' }, { clipPath: 'polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%)' }], { duration: 680, delay: 180, easing: 'cubic-bezier(.76, 0, .24, 1)' });

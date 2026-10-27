@@ -67,6 +67,16 @@
     // ------------------------------------------------------------ Entrada
     function entrar(modo) {
       if (modo === 'ninguna' || reducido) return 0;
+      if (modo === 'ola' || modo === 'salto') {
+        letras.forEach(function (g, i) {
+          var c = modo === 'ola'
+            ? [{ opacity: 0, transform: 'scale(0) rotate(-25deg)' }, { opacity: 1, transform: 'scale(1.18) rotate(6deg)', offset: .6 }, { transform: 'scale(.95)', offset: .8 }, { transform: 'none' }]
+            : [{ opacity: 0, transform: 'translateY(120px) scale(.6)' }, { opacity: 1, transform: 'translateY(-18px) scale(1.04, .96)', offset: .55 }, { transform: 'translateY(4px) scale(.98, 1.03)', offset: .78 }, { transform: 'none' }];
+          a(g, c, { duration: 820, delay: 60 + i * 70, easing: 'cubic-bezier(.3, .9, .4, 1)' });
+        });
+        lema.forEach(function (l, k) { a(l, [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: 700 + k * 18, easing: SALIDA }); });
+        return 1500;
+      }
       if (modo === 'aparecer') {
         a(svg, [{ opacity: 0, transform: 'translateY(16px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 1100, easing: SALIDA });
         return 900;
@@ -171,18 +181,31 @@
     }).observe(svg);
 
     var temporizador = 0;
-    function reproducir() {
+    function reproducir(e) {
+      var pedido = e && e.detail && e.detail.modo;
       clearTimeout(temporizador);
       entrada.concat(reposo).forEach(function (an) { an.cancel(); });
       entrada = []; reposo = []; vivo = false;
       // Si la pantalla de carga 3D acaba de dejar el logo en su lugar, no se repite la entrada.
       var llego = raiz.classList.contains('tk-logo-llego'); raiz.classList.remove('tk-logo-llego');
-      var modo = llego || attr('data-anim', 'normal') === 'no' ? 'ninguna' : attr('data-logo-anim', 'vivo');
+      var modo = llego || attr('data-anim', 'normal') === 'no' ? 'ninguna' : pedido || attr('data-logo-anim', 'vivo');
       var t = entrar(modo);
       temporizador = setTimeout(reposar, t / VEL);
     }
     // La cabecera pide repetir la animación cada vez que muestra este logo.
     svg.addEventListener('tk:reproducir', reproducir);
+    // …y que sus letras se vayan antes de volver al escudo: saltan una a una y desaparecen.
+    svg.addEventListener('tk:salir', function (e) {
+      clearTimeout(temporizador);
+      entrada.concat(reposo).forEach(function (an) { an.cancel(); });
+      entrada = []; reposo = []; vivo = false;
+      if (reducido) { if (e.detail) e.detail.duracion = 0; return; }
+      letras.forEach(function (g, i) {
+        a(g, [{ transform: 'none', opacity: 1 }, { transform: 'translateY(8px) scale(1.08, .9)', offset: .25 }, { transform: 'translateY(-90px) rotate(' + (i % 2 ? 18 : -18) + 'deg) scale(.5)', opacity: 0 }], { duration: 560, delay: i * 45, easing: 'cubic-bezier(.5, 0, .75, 0)', fill: 'forwards' });
+      });
+      lema.forEach(function (l) { a(l, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }); });
+      if (e.detail) e.detail.duracion = 560 + letras.length * 45;
+    });
     return { reproducir: reproducir, enCabecera: !!svg.closest('.marca-tk') };
   }
 
