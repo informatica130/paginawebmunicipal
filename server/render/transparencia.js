@@ -6,6 +6,7 @@
 // «sueldos» lleva a «Personal y remuneraciones»). Todo se puede editar en Extensiones → Transparencia.
 
 import { html, crudo, icono, esc } from './comun.js';
+import { inventario, resumenArchivo } from './archivo.js';
 
 export const PORTAL = 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU172';
 export const SOLICITUD = 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrg=608';
@@ -59,6 +60,20 @@ export function configuracion(ext = {}) {
 const externo = (u) => /^https?:/.test(u);
 const attrs = (u) => crudo(`href="${esc(u)}"${externo(u) ? ' target="_blank" rel="noopener"' : ''}`);
 
+// Carpeta del archivo de Drive que corresponde a cada materia (por su nombre).
+const CARPETAS = [[/diario oficial/, /diario oficial/], [/potestades/, /potestades/], [/marco normativo/, /^\d*\W*marco normativo/], [/estructura organica|funciones de cada unidad/, /estructura organica/],
+  [/remuneraciones/, /^remuneraciones$/], [/compras/, /adquisiciones/], [/actos y resoluciones/, /actos y resoluciones/], [/subsidios/, /subsidios/], [/participacion ciudadana/, /participacion ciudadana/],
+  [/presupuesto/, /presupuesto/], [/auditorias/, /auditorias/], [/otras entidades/, /otras entidades/], [/transferencias/, /junta de vecinos y organizaciones/]];
+const sinTildes = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+function carpetaDe(m) {
+  const inv = inventario();
+  if (!inv?.raiz) return null;
+  const t = sinTildes(m.titulo), regla = CARPETAS.find(([r]) => r.test(t));
+  if (!regla) return null;
+  const c = inv.raiz.hijas.find((h) => regla[1].test(sinTildes(h.nombre).replace(/^\d+\W+/, '')) || regla[1].test(sinTildes(h.nombre)));
+  return c && c.total ? c : null;
+}
+
 export function centroTransparencia(ext) {
   const c = configuracion(ext);
   if (!c.activo) return '';
@@ -68,11 +83,12 @@ export function centroTransparencia(ext) {
       <a class="boton boton-primario" ${attrs(PORTAL)}>${crudo(icono('documento', { tam: 18 }))} Ver todo en el Portal de Transparencia</a>
     </div>
     <div class="ct-filtro"><label for="ct-buscar" class="sr">Buscar una materia</label>${crudo(icono('buscar', { tam: 18 }))}<input id="ct-buscar" type="search" placeholder="¿Qué busca? Ej.: sueldos, licitaciones, presupuesto…" data-filtrar=".ct-materias > li" autocomplete="off"></div>
-    <ul class="ct-materias">${c.categorias.map((m, i) => html`<li data-filtrable="${(m.claves || '') + ' ' + m.titulo + ' ' + m.texto}"><a class="ct-materia" ${attrs(m.url || PORTAL)} style="--i:${i}">
+    <ul class="ct-materias">${c.categorias.map((m, i) => html`<li data-filtrable="${(m.claves || '') + ' ' + m.titulo + ' ' + m.texto}">${carpetaDe(m) ? html`<a class="ct-docs" href="/transparencia/archivo/${carpetaDe(m).id}/">${crudo(icono('carpeta', { tam: 14 }))} ${carpetaDe(m).total} documentos en el archivo</a>` : ''}<a class="ct-materia" ${attrs(m.url || PORTAL)} style="--i:${i}">
       <span class="ct-ico">${crudo(icono(m.icono || 'documento', { tam: 22 }))}</span>
       <span class="ct-txt"><b>${m.titulo}</b><small>${m.texto}</small></span>
       <span class="ct-ir" aria-hidden="true">${crudo(icono(externo(m.url || PORTAL) ? 'enlace' : 'flecha', { tam: 16 }))}</span>${externo(m.url || PORTAL) ? html`<span class="sr"> (abre en otra pestaña)</span>` : ''}
     </a></li>`)}</ul>
+    ${resumenArchivo()}
     <h2 class="ct-sub">Sus derechos</h2>
     <ul class="ct-derechos">${DERECHOS.map((d) => html`<li><span class="ct-ico">${crudo(icono(d.icono, { tam: 22 }))}</span><div><h3>${d.titulo}</h3><p>${d.texto}</p><a class="ver-todo" ${attrs(d.url)}>${d.boton}</a></div></li>`)}</ul>
     <h2 class="ct-sub">Cómo pedir información</h2>

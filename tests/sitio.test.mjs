@@ -281,6 +281,18 @@ test('extensiones: ventana emergente, bloques en zonas, HTML aislado, código pr
   await api(s, 'PUT', 'extensiones', { emergentes: [], zonas: [], fuentes: [], codigo: { cabeza: '', cuerpo: '', dominios: '' } });
 });
 
+test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
+  const { leerCarpeta } = await import('../herramientas/transparencia-drive.js');
+  const { nombreBonito } = await import('../server/render/archivo.js');
+  const html = '<div class="flip-entries"><div class="flip-entry" id="entry-ABC123" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/drive/folders/ABC123?resourcekey=0-xyz" target="_blank"><div class="flip-entry-title">05.- ADQUISICIONES</div></a></div><div class="flip-entry-last-modified"><div>8/19/16</div></div></div>'
+    + '<div class="flip-entry" id="entry-F1" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/file/d/F1/view?usp=drive_web&amp;resourcekey=0-k" target="_blank"><div class="flip-entry-list-icon"><img src="https://drive-thirdparty.googleusercontent.com/16/type/application/pdf" alt=""/></div><div class="flip-entry-title">Decreto 123 &amp; anexo.pdf</div></a></div><div class="flip-entry-last-modified"><div>5/9/18</div></div></div></div>';
+  const it = leerCarpeta(html);
+  assert.equal(it.length, 2);
+  assert.deepEqual([it[0].tipo, it[0].clave, it[0].fecha], ['carpeta', '0-xyz', '2016-08-19']);
+  assert.deepEqual([it[1].tipo, it[1].nombre, it[1].url], ['PDF', 'Decreto 123 & anexo.pdf', 'https://drive.google.com/file/d/F1/view?resourcekey=0-k']);
+  assert.deepEqual(nombreBonito('17.- INFORMES SUBDERE'), { numero: '17', nombre: 'Informes SUBDERE' });
+});
+
 test('extensiones: plantillas de fuentes de datos', async () => {
   const { plantilla, urlFuenteValida } = await import('../server/extensiones.js');
   assert.equal(plantilla('{{#items}}<li>{{@indice}} {{n}}</li>{{/items}}{{^vacio}}-{{/vacio}}', { items: [{ n: '<b>' }, { n: 'x' }] }), '<li>1 &lt;b&gt;</li><li>2 x</li>-');

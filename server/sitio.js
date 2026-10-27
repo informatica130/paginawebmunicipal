@@ -14,6 +14,7 @@ import { ahora } from './db.js';
 import { sha256, tokenAleatorio } from './auth.js';
 import { crearExtensiones } from './extensiones.js';
 import { buscarTransparencia } from './render/transparencia.js';
+import { paginaArchivo, buscarArchivo, inventario, nombreBonito } from './render/archivo.js';
 
 export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version, secreto, leerUsuario, auditar }) {
   const img = crearImagenes(db);
@@ -212,7 +213,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
 
   function sitemap() {
     const base = cfg.PUBLIC_URL.replace(/\/$/, '');
-    const urls = ['/', '/noticias/', '/tramites/', '/eventos/', '/documentos/', '/areas/', '/contacto/', '/oirs/', '/transparencia/', '/concejo/sesiones/', '/mapa-del-sitio/'].map((u) => ({ u, m: null }));
+    const urls = ['/', '/noticias/', '/tramites/', '/eventos/', '/documentos/', '/areas/', '/contacto/', '/oirs/', '/transparencia/', '/transparencia/archivo/', '/concejo/sesiones/', '/mapa-del-sitio/'].map((u) => ({ u, m: null }));
     for (const f of db.all("SELECT id, tipo, slug, padre_id, publicado_en, creado, modificado, datos FROM contenidos WHERE estado = 'publicado' AND tipo NOT IN ('slide','acceso','aviso','contacto') AND json_extract(seo, '$.noindex') IS NOT 1")) {
       urls.push({ u: repo.urlDe({ ...f, datos: JSON.parse(f.datos) }), m: f.modificado });
     }
@@ -310,9 +311,10 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         const cat = query.get('plataforma') !== '0' ? await tramites.catalogo() : null;
         const en = cat ? cat.tramites.filter((t) => palabras.every((p) => norm(t.nombre + ' ' + t.descripcion).includes(p))).slice(0, 3).map((t) => ({ tipo: 'Trámite en línea', clave: 'en-linea', titulo: t.nombre, url: t.url, externo: true, fragmento: fragmento(t.descripcion) })) : [];
         const transp = buscarTransparencia(ext.leer(), palabras, norm);
+        const docs = buscarArchivo(inventario(), q, { limite: 3 }).map((a) => ({ tipo: 'Archivo de Transparencia', clave: 'documento', titulo: a.nombre.replace(/\.(pdf|docx?|xlsx?|pptx?|csv)$/i, '').replace(/_/g, ' '), url: a.url, externo: true, fragmento: a.fecha ? 'Publicado el ' + a.fecha.split('-').reverse().join('-') : '' }));
         const vistos = new Set();
-        const items = [...atajos, ...en, ...transp, ...r].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
-        return enviarJson({ items, aproximado }, 60);
+        const items = [...atajos, ...en, ...transp, ...r, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
+        return enviarJson({ items, aproximado: aproximado && !atajos.length && !en.length && !transp.length && !docs.length }, 60);
       }
       default: throw new ErrorHttp(404, 'Recurso no encontrado');
     }
@@ -523,6 +525,10 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
       return responder(V.busqueda(ctx, { q: term, tipo, pagina: p, resultados, tramitesEnLinea: enLinea }), { cachear: false });
     }
     if (seg[0] === 'transparencia' && !seg[1]) return responder(V.transparencia(ctx));
+    if (seg[0] === 'transparencia' && seg[1] === 'archivo' && seg.length <= 3) {
+      const r = paginaArchivo(ctx, { id: seg[2] || '', q: String(q.get('q') || '').slice(0, 120), pagina: Number(q.get('p')) || 1 });
+      return r ? responder(r, { cachear: !q.get('q') }) : noEncontrado(req, res, ctx, ruta);
+    }
     if (seg[0] === 'mapa-del-sitio') return responder(V.mapaDelSitio(ctx));
     if (seg[0] === 'accesibilidad' && !repo.paginaPorRuta(['accesibilidad'])) return responder(V.accesibilidad(ctx));
 
