@@ -291,6 +291,13 @@ test('micrositios: Medio Ambiente predeterminado, edición desde el panel y borr
   assert.match(h, /Comité Ambiental Comunal/);
   assert.match(h, /data-ms-pestanas/);
   assert.match(await (await pedir('/sitemap.xml')).text(), /\/medioambiente\//);
+  // Un micrositio por área, generado con la información del sitio (organigrama, contactos, noticias).
+  for (const [ruta, texto] of [['/salud/', /Salud cerca de cada familia/], ['/social/', /Acompañamos a cada familia/], ['/transito/', /Licencias de conducir/], ['/juzgado/', /Qué materias conoce/], ['/educacion/', /Educación pública/], ['/udel/', /Emprender y producir/], ['/deporte/', /Melipeuco en movimiento/], ['/turismo/', /Capital del Trekking/], ['/cultura/', /Cultura viva/], ['/obras/', /Construimos la comuna/]]) {
+    const x = await pedir(ruta);
+    assert.equal(x.status, 200, ruta);
+    assert.match(await x.text(), texto, ruta);
+  }
+  assert.match(await (await pedir('/transito/')).text(), /class="fila-tramite"/); // trámites del área desde las fichas del sitio
   const s = await admin();
   const rg = await api(s, 'GET', 'micrositios');
   const actual = await rg.json();
@@ -304,7 +311,12 @@ test('micrositios: Medio Ambiente predeterminado, edición desde el panel y borr
   assert.notEqual(g.sitios[2].slug, 'admin');
   assert.equal((await pedir('/deportes-melipeuco/')).status, 404); // borrador: sólo con sesión
   assert.equal((await pedir('/deportes-melipeuco/', { headers: { cookie: s.cookie } })).status, 200);
-  await api(s, 'PUT', 'micrositios', { sitios: [actual.sitios[0]] });
+  // Una plantilla predeterminada eliminada no vuelve a aparecer; las demás siguen.
+  const sinJuzgado = actual.sitios.filter((x) => x.id !== 'juzgado');
+  const e = await (await api(s, 'PUT', 'micrositios', { sitios: sinJuzgado, eliminados: ['juzgado'] })).json();
+  assert.ok(!e.sitios.some((x) => x.id === 'juzgado'));
+  assert.equal((await (await api(s, 'GET', 'micrositios')).json()).sitios.length, sinJuzgado.length);
+  await api(s, 'PUT', 'micrositios', { sitios: actual.sitios, eliminados: [] });
 });
 
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {

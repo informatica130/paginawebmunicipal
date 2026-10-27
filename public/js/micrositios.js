@@ -57,6 +57,9 @@ export const MODULOS = {
     { k: 'boton2', t: 'texto', l: 'Segundo botón (opcional)' }, { k: 'url2', t: 'url', l: 'Enlace del segundo botón' }] },
   enlaces: { n: 'Enlaces de interés', d: 'Plataformas y sitios relacionados.', icono: 'enlace', campos: [titulo, intro,
     { k: 'items', t: 'repetidor', l: 'Enlaces', sub: [{ k: 'icono', t: 'icono', l: 'Ícono' }, { k: 'texto', t: 'texto', l: 'Nombre' }, { k: 'descripcion', t: 'texto', l: 'Descripción' }, { k: 'url', t: 'url', l: 'Enlace' }] }] },
+  tramites: { n: 'Trámites del área', d: 'Las fichas de trámites del sitio y los trámites en línea de la Plataforma de la unidad.', icono: 'licencia', campos: [titulo, intro,
+    { k: 'dependencia', t: 'texto', l: 'Código de la unidad en el organigrama (ej.: dep-transito; incluye sus oficinas)' }, { k: 'etiqueta', t: 'texto', l: 'O trámites con esta etiqueta (slug)' }, { k: 'cantidad', t: 'numero', l: 'Cantidad máxima', def: 12 },
+    { k: 'vacio', t: 'texto', l: 'Texto si no hay trámites', def: 'Consulte los trámites de esta unidad en la Oficina de Partes.' }] },
   video: { n: 'Video', d: 'Un video de YouTube o Vimeo.', icono: 'video', campos: [titulo, intro, { k: 'url', t: 'url', l: 'Enlace del video' }] },
 };
 

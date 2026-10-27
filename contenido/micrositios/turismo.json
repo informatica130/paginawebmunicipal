@@ -1,0 +1,187 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "turismo",
+    "nombre": "Turismo",
+    "slug": "turismo",
+    "unidad": "Oficina de Turismo",
+    "descripcion": "Turismo en Melipeuco, Capital del Trekking: volcán Llaima, Parque Nacional Conguillío, laguna Icalma, Geoparque Kütralkura, fiestas y cultura mapuche pehuenche.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "montes",
+      "icono": "montana",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/09/546844383_1222823759883028_770852907037026663_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Oficina de Turismo · Capital del Trekking",
+      "titulo": "Melipeuco, Capital del Trekking",
+      "bajada": "A los pies del volcán Llaima: puerta de entrada al Parque Nacional Conguillío, la laguna Icalma y la Reserva de la Biósfera Araucarias, en el Geoparque Kütralkura.",
+      "botones": [
+        {
+          "texto": "Melipeuco Capital del Trekking",
+          "url": "https://melipeucocapitaldeltrekking.cl/"
+        },
+        {
+          "texto": "Descubre Melipeuco",
+          "url": "/descubremelipeuco/"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "Volcán Llaima",
+          "etiqueta": "y Parque Nacional Conguillío"
+        },
+        {
+          "valor": "Geoparque",
+          "etiqueta": "Kütralkura, Geoparque Mundial UNESCO"
+        },
+        {
+          "valor": "Parador",
+          "etiqueta": "turístico: +56 9 3944 8069"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 9 3944 8069",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Sitio Melipeuco Capital del Trekking",
+          "url": "https://melipeucocapitaldeltrekking.cl/"
+        },
+        {
+          "texto": "Descubre Melipeuco",
+          "url": "/descubremelipeuco/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "destinos",
+        "tipo": "pestanas",
+        "ancla": "Qué hacer",
+        "titulo": "Qué hacer en Melipeuco",
+        "items": [
+          {
+            "titulo": "Trekking y volcanes",
+            "icono": "montana",
+            "html": "<p>Senderos entre araucarias milenarias, coladas de lava y miradores al volcán Llaima. Melipeuco es la <strong>Capital del Trekking</strong>.</p>",
+            "enlace": "https://melipeucocapitaldeltrekking.cl/"
+          },
+          {
+            "titulo": "Parque Nacional Conguillío",
+            "icono": "arbol",
+            "html": "<p>Lagos, bosques de araucarias y el volcán Llaima, con acceso desde Melipeuco. Revise las condiciones y horarios en CONAF antes de su visita.</p>",
+            "enlace": "https://www.conaf.cl/"
+          },
+          {
+            "titulo": "Lagunas y ríos",
+            "icono": "agua",
+            "html": "<p>La laguna Icalma, el río Truful-Truful y el río Allipén, con saltos, playas de río y paisajes volcánicos.</p>",
+            "enlace": "/descubremelipeuco/"
+          },
+          {
+            "titulo": "Cultura y fiestas",
+            "icono": "cultura",
+            "html": "<p>La Fiesta del Baqueano, el Festival de la Mosqueta Cordillerana, el Festival de la Montaña y la cultura mapuche pehuenche.</p>",
+            "enlace": "/cultura/"
+          }
+        ]
+      },
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "La oficina",
+        "titulo": "La Oficina de Turismo",
+        "html": "<p>La Oficina de Turismo, parte de la UDEL, elabora planes y proyectos de promoción del turismo, se vincula con SERNATUR y con el sector privado y difunde el potencial turístico de la comuna. Melipeuco participa además en la red de Geoparques Mundiales de la UNESCO.</p>"
+      },
+      {
+        "id": "enlaces",
+        "tipo": "enlaces",
+        "titulo": "Para planificar su viaje",
+        "items": [
+          {
+            "icono": "montana",
+            "texto": "Melipeuco Capital del Trekking",
+            "descripcion": "Rutas, alojamiento y servicios turísticos",
+            "url": "https://melipeucocapitaldeltrekking.cl/"
+          },
+          {
+            "icono": "mapa",
+            "texto": "Descubre Melipeuco",
+            "descripcion": "Lugares para visitar en la comuna",
+            "url": "/descubremelipeuco/"
+          },
+          {
+            "icono": "bus",
+            "texto": "Horario de buses",
+            "descripcion": "Transporte público hacia y desde Melipeuco",
+            "url": "/transportepublico/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Prestadores de servicios",
+            "descripcion": "Listado de prestadores de servicios turísticos",
+            "url": "/listado-de-prestadores-de-servicio-melipeuco/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones de la oficina",
+        "html": "<ul><li>Políticas, planes y proyectos de promoción del turismo.</li><li>Vínculo con SERNATUR y el sector privado turístico.</li><li>Difusión y estudios del potencial turístico comunal.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 32.</small></p>"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de turismo",
+        "categoria": "turismo",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2025/09/546844383_1222823759883028_770852907037026663_n.jpg",
+            "alt": "Melipeuco avanza en cooperación internacional con delegación de Wenzhou, China"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546094051_1221339086698162_8333927953608467209_n-1.jpg",
+            "alt": "Melipeuco presente en la inauguración de la GeoFeria “Saberes y Sabores” y firma de acuerdo internacional con Geoparques de China"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/539385992_1212679647564106_8244520340932218055_n.jpg",
+            "alt": "Melipeuco recibe delegación nacional y evaluadora internacional en proceso de postulación a sello SIPAM"
+          },
+          {
+            "src": "/wp-content/uploads/2025/08/540103841_1211016917730379_6310920184475437115_n.jpg",
+            "alt": "Melipeuco presente en el lanzamiento oficial de la 11° Conferencia de Geoparques Mundiales de UNESCO"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/491572136_1106417191523686_4351850966715330222_n.jpg",
+            "alt": "Primer Taller de Lengua de Señas en Melipeuco: Avanzando hacia un Turismo Inclusivo"
+          },
+          {
+            "src": "/wp-content/uploads/2022/10/IMG_20221018_104739_782.webp",
+            "alt": "Melipeuco inició el 13° Festival de las Aves"
+          }
+        ]
+      }
+    ]
+  }
+}

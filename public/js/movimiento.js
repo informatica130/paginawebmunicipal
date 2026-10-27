@@ -326,7 +326,7 @@
     var barra = $('.tk-progreso'), hero = $('[data-hero-trekking]');
     var capas = hero && puede ? $$('[data-capa]', hero) : [], cont = hero && $('[data-capa-contenido]', hero), marco = 0;
     function pintar() {
-      var y = scrollY, alto = d.documentElement.scrollHeight - innerHeight;
+      var y = scrollY, alto = window.mlpAltoPagina ? window.mlpAltoPagina() : d.documentElement.scrollHeight - innerHeight;
       if (barra) barra.style.setProperty('--p', alto > 0 ? Math.min(1, y / alto).toFixed(4) : 0);
       if (hero && puede && y < innerHeight * 1.2) {
         capas.forEach(function (c) { c.style.transform = 'translate3d(0,' + (y * parseFloat(c.getAttribute('data-capa')) * F).toFixed(1) + 'px,0)'; });

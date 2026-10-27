@@ -1,0 +1,163 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "cultura",
+    "nombre": "Cultura",
+    "slug": "cultura",
+    "unidad": "Oficina de Cultura",
+    "descripcion": "Oficina de Cultura de Melipeuco: Fiesta del Baqueano, Biblioteca Pública Municipal, talleres, conciertos, efemérides y patrimonio.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#7A3E91",
+      "oscuro": "#3A1748",
+      "acento": "#E9A92B",
+      "patron": "hexagonos",
+      "icono": "cultura",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/10/559134223_1241107418054662_3333759552941252892_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Oficina de Cultura",
+      "titulo": "Cultura viva de la cordillera",
+      "bajada": "Fiestas costumbristas, música, libros, talleres y la cultura mapuche pehuenche: la vida cultural de Melipeuco y su Biblioteca Municipal.",
+      "botones": [
+        {
+          "texto": "Agenda cultural",
+          "url": "/eventos/"
+        },
+        {
+          "texto": "Fiesta del Baqueano",
+          "url": "/fiestadelbaqueano/"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "La oficina",
+        "titulo": "La Oficina de Cultura",
+        "html": "<p>La Oficina de Cultura, parte de la UDEL, protege los bienes y monumentos de interés comunal, fomenta museos, bibliotecas y centros culturales —y administra la Biblioteca Pública Municipal—, y organiza concursos, talleres, exposiciones, conciertos y efemérides.</p>",
+        "destacado": "La cultura de Melipeuco nace del encuentro entre la cordillera, el pueblo mapuche pehuenche y sus familias colonas."
+      },
+      {
+        "id": "temas",
+        "tipo": "tarjetas",
+        "ancla": "Actividades",
+        "titulo": "Fiestas, talleres y patrimonio",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "estrella",
+            "etiqueta": "Tradición",
+            "titulo": "Fiesta del Baqueano",
+            "texto": "La gran fiesta costumbrista de la comuna, con desfile y feria.",
+            "url": "/fiestadelbaqueano/"
+          },
+          {
+            "icono": "libro",
+            "etiqueta": "Lectura",
+            "titulo": "Biblioteca Pública Municipal",
+            "texto": "Préstamo de libros, lanzamientos y actividades, renovada en 2025."
+          },
+          {
+            "icono": "cultura",
+            "etiqueta": "Música",
+            "titulo": "Conciertos y peñas",
+            "texto": "Conciertos, peñas folclóricas y presentaciones de ballet folclórico."
+          },
+          {
+            "icono": "mano",
+            "etiqueta": "Oficios",
+            "titulo": "Talleres",
+            "texto": "Cestería con fibras vegetales, textilería y artesanía en madera."
+          },
+          {
+            "icono": "calendario",
+            "etiqueta": "Efemérides",
+            "titulo": "Fiestas Patrias y aniversario",
+            "texto": "Desfiles, juegos populares y el aniversario de la comuna."
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Patrimonio",
+            "titulo": "Patrimonio local",
+            "texto": "Protección de los bienes y monumentos de interés comunal."
+          }
+        ]
+      },
+      {
+        "id": "agenda",
+        "tipo": "calendario",
+        "ancla": "Agenda",
+        "titulo": "Agenda cultural",
+        "items": [],
+        "categoria": "cultura",
+        "vacio": "Revise la agenda completa del sitio para ver las próximas actividades."
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones de la oficina",
+        "html": "<ul><li>Protección de bienes y monumentos nacionales de incidencia comunal.</li><li>Fomentar museos, bibliotecas y centros culturales; administrar la biblioteca municipal.</li><li>Concursos, talleres, exposiciones, conciertos y efemérides.</li><li>Programas de mejoramiento en educación pública no traspasada.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 33.</small></p>"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de cultura",
+        "categoria": "cultural",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2025/10/559134223_1241107418054662_3333759552941252892_n.jpg",
+            "alt": "Finalizó con éxito el Curso de Cestería con Fibras Vegetales en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/555734190_1237072781791459_4875826499484717820_n.jpg",
+            "alt": "Concierto “Chile Sonoro: Paisaje en diez cuerdas” cautivó a la comunidad en Melipeuco."
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/548193392_1226704902828247_3911115010298696987_n.jpg",
+            "alt": "Melipeuco celebró la Peña Folclórica Inclusiva en el marco de las Fiestas Patrias 2025"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/547773060_1225756462923091_4555596886110055657_n.jpg",
+            "alt": "Melipeuco conmemora las Fiestas Patrias con desfile en honor a las Glorias del Ejército"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546844383_1222823759883028_770852907037026663_n.jpg",
+            "alt": "Melipeuco avanza en cooperación internacional con delegación de Wenzhou, China"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546094051_1221339086698162_8333927953608467209_n-1.jpg",
+            "alt": "Melipeuco presente en la inauguración de la GeoFeria “Saberes y Sabores” y firma de acuerdo internacional con Geoparques de China"
+          }
+        ]
+      }
+    ]
+  }
+}

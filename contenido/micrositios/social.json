@@ -1,0 +1,240 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "social",
+    "nombre": "Desarrollo Social",
+    "slug": "social",
+    "unidad": "Dirección de Desarrollo Comunitario (DIDECO)",
+    "descripcion": "DIDECO Melipeuco: programas sociales, Registro Social de Hogares, subsidios, vivienda, adulto mayor, mujer, juventud y organizaciones comunitarias.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "corazon",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/764679798_1495446299287438_5415972341440461162_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Dirección de Desarrollo Comunitario (DIDECO)",
+      "titulo": "Acompañamos a cada familia",
+      "bajada": "Registro Social de Hogares, ayudas sociales, subsidios y pensiones, vivienda, personas mayores, mujeres, juventud y organizaciones comunitarias.",
+      "botones": [
+        {
+          "texto": "Ver las oficinas",
+          "url": "#m-oficinas"
+        },
+        {
+          "texto": "Trámites en línea",
+          "url": "#m-tramites"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "9 oficinas",
+          "etiqueta": "y programas para la comunidad"
+        },
+        {
+          "valor": "FONDEVE",
+          "etiqueta": "fondo concursable para juntas de vecinos"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8811",
+      "email": "dideco@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "DIDECO",
+        "titulo": "La Dirección de Desarrollo Comunitario",
+        "html": "<p>DIDECO asesora a la comunidad y a sus organizaciones, realiza diagnósticos socioeconómicos, administra los programas sociales de cobertura nacional y entrega asistencia social, incluida la ayuda en emergencias según el reglamento de ayudas sociales.</p><p>Si necesita orientación sobre beneficios, el Registro Social de Hogares o una ayuda social, acérquese a DIDECO en el municipio.</p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y programas",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "mano",
+            "etiqueta": "Oficina",
+            "titulo": "Asistencia Social",
+            "texto": "Diagnósticos de problemas sociales y sectores afectados.",
+            "url": ""
+          },
+          {
+            "icono": "casa",
+            "etiqueta": "Oficina",
+            "titulo": "Vivienda",
+            "texto": "Asesorar a postulantes a viviendas sociales y subsidios habitacionales, en coordinación con el SERVIU.",
+            "url": ""
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Subsidios y Pensiones",
+            "texto": "Administrar pensiones y subsidios de la red social con atención expedita.",
+            "url": ""
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Oficina",
+            "titulo": "Adulto Mayor e Inclusión Social (UAMIS)",
+            "texto": "Planes y programas de desarrollo social del adulto mayor y de inclusión de personas con discapacidad o dependencia.",
+            "url": ""
+          },
+          {
+            "icono": "deporte",
+            "etiqueta": "Oficina",
+            "titulo": "Deportes y Recreación",
+            "texto": "Organizar y ejecutar programas deportivos y recreativos.",
+            "url": "/deporte/"
+          },
+          {
+            "icono": "usuario",
+            "etiqueta": "Oficina",
+            "titulo": "Mujer y Equidad de Género",
+            "texto": "Mejorar la calidad de vida de las mujeres, su empoderamiento y autonomía.",
+            "url": ""
+          },
+          {
+            "icono": "estrella",
+            "etiqueta": "Oficina",
+            "titulo": "Juventud",
+            "texto": "Integración, información y participación de jóvenes y adolescentes.",
+            "url": ""
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Oficina",
+            "titulo": "Organizaciones Comunitarias",
+            "texto": "Promover la organización, consolidación y participación de las organizaciones comunitarias.",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "id": "temas",
+        "tipo": "pestanas",
+        "ancla": "Beneficios",
+        "titulo": "Beneficios y apoyos",
+        "items": [
+          {
+            "titulo": "Registro Social de Hogares",
+            "icono": "documento",
+            "html": "<p>El Registro Social de Hogares es la puerta de entrada a la mayoría de los beneficios del Estado. En DIDECO puede ingresar, actualizar o rectificar su información.</p>",
+            "puntos": [
+              "Lleve su cédula de identidad.",
+              "Mantenga actualizados los integrantes y el domicilio de su hogar."
+            ],
+            "enlace": "https://www.registrosocial.gob.cl/"
+          },
+          {
+            "titulo": "Vivienda",
+            "icono": "casa",
+            "html": "<p>La Oficina de Vivienda asesora a quienes postulan a subsidios habitacionales, en coordinación con el SERVIU: orienta la creación de comités, arma los expedientes y apoya los proyectos técnicos.</p>",
+            "puntos": [
+              "Subsidio de construcción en sitio propio.",
+              "Mejoramiento y ampliación de viviendas.",
+              "Viviendas de emergencia."
+            ]
+          },
+          {
+            "titulo": "Personas mayores e inclusión",
+            "icono": "personas",
+            "html": "<p>La UAMIS impulsa planes y programas para las personas mayores y para la inclusión de personas con discapacidad o dependencia, y asesora a sus organizaciones en proyectos y personalidad jurídica.</p>",
+            "puntos": [
+              "Operativos de salud y talleres.",
+              "Proyecto de la Casa del Adulto Mayor.",
+              "Entrega de leña en invierno para personas de 60 años o más (inscripción en UAMIS)."
+            ]
+          },
+          {
+            "titulo": "Mujeres y juventud",
+            "icono": "usuario",
+            "html": "<p>La Oficina de la Mujer y Equidad de Género promueve la autonomía y el liderazgo de las mujeres y articula la red local contra la violencia. La Oficina de la Juventud apoya a jóvenes y a sus organizaciones con información, capacitación y fondos concursables.</p>"
+          },
+          {
+            "titulo": "Organizaciones comunitarias",
+            "icono": "escudo",
+            "html": "<p>La Oficina de Organizaciones Comunitarias asesora a juntas de vecinos y otras organizaciones (Ley 19.418), tramita su personalidad jurídica y las apoya en sus postulaciones al Fondo de Desarrollo Vecinal (FONDEVE).</p>",
+            "enlace": "/fondeve2026/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones de DIDECO",
+        "html": "<ul><li>Asesorar al Alcalde y al Concejo en la promoción del desarrollo comunitario.</li><li>Asesoría técnica a organizaciones comunitarias, su desarrollo, legalización y participación.</li><li>Acciones en salud pública, medio ambiente, educación y cultura, capacitación laboral, deporte, empleo, fomento productivo y turismo.</li><li>Asistencia social, incluida la paliativa en emergencias según el reglamento de ayudas sociales.</li><li>Diagnósticos socioeconómicos y registros actualizados; administrar programas sociales de cobertura nacional.</li><li>Mantener bodega para atender estados de necesidad manifiesta y registro de atenciones y prestaciones.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 17 y 18.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y postulaciones",
+        "dependencia": "dep-dideco",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": "Para trámites de esta unidad, consulte en la Oficina de Partes o llame al teléfono de contacto."
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de desarrollo social",
+        "categoria": "social",
+        "palabras": "registro social, subsidio, vivienda, adulto mayor",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2026/08/764679798_1495446299287438_5415972341440461162_n.jpg",
+            "alt": "Familias de Melipeuco culminan Programa de Apoyo a la Seguridad Alimentaria"
+          },
+          {
+            "src": "/wp-content/uploads/2026/08/762008531_1491796869652381_1040071149585674857_n.jpg",
+            "alt": "Municipalidad entrega leña a familias de Melipeuco durante el invierno"
+          },
+          {
+            "src": "/wp-content/uploads/2025/10/557783389_1242254967939907_4460040340840564802_n.jpg",
+            "alt": "Operativo audiológico benefició a personas mayores en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/10/557630480_1240517784780292_1003214793876337401_n.jpg",
+            "alt": "9 Casas de Emergencia serán construidas en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/554538555_1234320305400040_4583113183754331573_n.jpg",
+            "alt": "Presentación del Programa Arquitectónico “Casa del Adulto Mayor” en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/554324724_1233468855485185_8170011766349853718_n.jpg",
+            "alt": "Pasacalle con batucada en conmemoración del Día de la Prevención del Suicidio"
+          }
+        ]
+      }
+    ]
+  }
+}

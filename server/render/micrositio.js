@@ -5,6 +5,8 @@
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, video, migas, telefonoHref, vacio } from './comun.js';
 import { documento } from './layout.js';
 import { inventario, urlDoc } from './archivo.js';
+import { filaTramite, filaTramiteEnLinea } from './bloques.js';
+import { ORGANIGRAMA_MELIPEUCO } from '../../src/organigrama-melipeuco.js';
 import { patronUrl, tamanoPatron } from '../../public/js/diseno.js';
 import { fecha, hoyLocal, textoPlano, recortar } from '../../src/util.js';
 
@@ -16,8 +18,32 @@ const ancla = (m) => 'm-' + m.id;
 const normal = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const repoVisible = (ctx, c) => (ctx.repo.visible ? ctx.repo.visible(c) : c.estado === 'publicado');
 
-function modulo(ctx, s, m) {
+// La unidad y todas sus oficinas (según el organigrama).
+function descendientes(id) {
+  const r = new Set([id]);
+  for (let n = 0; n < 6; n++) for (const u of ORGANIGRAMA_MELIPEUCO) if (r.has(u.parentId)) r.add(u.id);
+  return r;
+}
+
+async function modulo(ctx, s, m) {
   switch (m.tipo) {
+    case 'tramites': {
+      const deps = m.dependencia ? descendientes(m.dependencia) : new Set();
+      const areas = deps.size ? ctx.db.all("SELECT id FROM contenidos WHERE tipo = 'area' AND json_extract(datos, '$.transitoDepartamento') IN (" + [...deps].map(() => '?').join(',') + ')', ...deps).map((x) => x.id) : [];
+      const etiqueta = m.etiqueta ? ctx.db.get("SELECT id FROM taxonomias WHERE tipo = 'etiqueta' AND slug = ?", m.etiqueta)?.id : null;
+      const vistos = new Set(), locales = [];
+      for (const q of [...areas.map((area) => ({ area })), ...(etiqueta ? [{ taxonomia: etiqueta }] : [])]) {
+        for (const t of ctx.repo.listar({ tipo: 'tramite', publico: true, orden: 'orden', limite: 50, ...q }).items) if (!vistos.has(t.id)) { vistos.add(t.id); locales.push(t); }
+      }
+      let enLinea = [];
+      if (deps.size) {
+        const cat = await ctx.tramites.catalogo().catch(() => null);
+        if (cat) { const vinc = new Set(locales.map((t) => t.datos.transitoTramite).filter(Boolean)); enLinea = cat.tramites.filter((t) => deps.has(t.departamentoId) && !vinc.has(t.id)); }
+      }
+      const n = m.cantidad || 12;
+      const todos = [...locales.slice(0, n).map((t) => filaTramite(ctx, t)), ...enLinea.slice(0, Math.max(0, n - locales.length)).map((t) => filaTramiteEnLinea(t))];
+      return html`${cab(m, html`<a class="ver-todo" href="/tramites/">Todos los trámites</a>`)}${todos.length ? html`<div class="lista-tramites ms-tramites">${todos}</div>` : html`<div class="ms-vacio">${crudo(icono('licencia', { tam: 28 }))}<p>${m.vacio}</p></div>`}`;
+    }
     case 'texto': {
       const img = m.imagen ? html`<figure class="ms-texto-img">${ctx.img.imagen(m.imagen, { alt: '', sizes: '(max-width: 900px) 100vw, 520px' })}</figure>` : '';
       return html`<div class="ms-texto${m.imagen ? ' con-img lado-' + m.lado : ''}"><div>${cab(m)}<div class="prosa">${crudo(m.html)}</div>
@@ -134,13 +160,14 @@ function estiloTema(t) {
     p ? `--ms-patron:${patronUrl(p, { color: '#FFFFFF', opacidad: .1 })}` : '', p ? `--ms-patron-claro:${patronUrl(p, { color: t.color, opacidad: .09 })}` : '', p ? `--ms-patron-tam:${tamanoPatron(p, 140)}` : ''].filter(Boolean).join(';');
 }
 
-export function paginaMicrositio(ctx, s) {
+export async function paginaMicrositio(ctx, s) {
   const t = s.tema, po = s.portada, k = s.contacto;
   const modulos = s.modulos.filter((m) => m.visible !== false);
   // Los fondos «automáticos» se alternan para separar las secciones; un llamado siempre va oscuro.
   let alterno = false;
-  const partes = modulos.map((m) => {
-    const r = modulo(ctx, s, m);
+  const hechos = await Promise.all(modulos.map((m) => modulo(ctx, s, m).catch((e) => { console.error('Micrositio', s.slug, m.tipo, e.message); return ''; })));
+  const partes = modulos.map((m, i) => {
+    const r = hechos[i];
     if (!r || !String(r).trim()) return null;
     const fondo = m.tipo === 'llamado' ? 'llamado' : m.fondo === 'auto' ? ((alterno = !alterno) ? 'claro' : 'suave') : m.fondo;
     return { m, fondo, r };

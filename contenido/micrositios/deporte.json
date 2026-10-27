@@ -1,0 +1,156 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "deporte",
+    "nombre": "Deporte",
+    "slug": "deporte",
+    "unidad": "Oficina de Deportes y Recreación",
+    "descripcion": "Oficina de Deportes y Recreación de Melipeuco: talleres, escuelas deportivas, campeonatos y eventos como la Media Maratón Entre Ríos y Volcanes.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#E2683C",
+      "oscuro": "#7A2E12",
+      "acento": "#E9A92B",
+      "patron": "diagonales",
+      "icono": "deporte",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/09/548544314_1228446715987399_4683971695375670981_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Oficina de Deportes y Recreación",
+      "titulo": "Melipeuco en movimiento",
+      "bajada": "Talleres, escuelas deportivas, campeonatos y actividades recreativas para todas las edades, en el estadio, el gimnasio y la naturaleza.",
+      "botones": [
+        {
+          "texto": "Media Maratón Entre Ríos y Volcanes",
+          "url": "/entreriosyvolcanes/"
+        },
+        {
+          "texto": "Actividades",
+          "url": "#m-actividades"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8811",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "La oficina",
+        "titulo": "Deporte y recreación para todos",
+        "html": "<p>La Oficina de Deportes y Recreación, parte de DIDECO, organiza y ejecuta programas deportivos y recreativos, fomenta la participación de clubes, organizaciones y sectores de la comuna y se coordina con instituciones públicas y privadas para traer más deporte a Melipeuco.</p>"
+      },
+      {
+        "id": "actividades",
+        "tipo": "tarjetas",
+        "ancla": "Actividades",
+        "titulo": "Escuelas, talleres y eventos",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "deporte",
+            "etiqueta": "Fútbol",
+            "titulo": "Campeonatos y torneos",
+            "texto": "Campeonato comunal y torneos de fútbol masculino y femenino."
+          },
+          {
+            "icono": "montana",
+            "etiqueta": "Aire libre",
+            "titulo": "Trail y montaña",
+            "texto": "Media Maratón «Entre Ríos y Volcanes», raid y deportes en la Capital del Trekking.",
+            "url": "/entreriosyvolcanes/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Escuelas",
+            "titulo": "Escuelas deportivas",
+            "texto": "Atletismo, artes marciales, muro de escalada y talleres para personas mayores."
+          },
+          {
+            "icono": "estrella",
+            "etiqueta": "Eventos",
+            "titulo": "Grandes eventos",
+            "texto": "Velada internacional de boxeo, cicletada familiar y juegos populares de Fiestas Patrias."
+          },
+          {
+            "icono": "escuela",
+            "etiqueta": "Escolar",
+            "titulo": "Deporte escolar",
+            "texto": "Corrida escolar comunal en el Día de la Actividad Física, con el DAEM."
+          }
+        ]
+      },
+      {
+        "id": "agenda",
+        "tipo": "calendario",
+        "ancla": "Calendario",
+        "titulo": "Próximas actividades",
+        "items": [],
+        "categoria": "deporte",
+        "vacio": "Pronto publicaremos las próximas competencias, inscripciones y talleres."
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones de la oficina",
+        "html": "<ul><li>Organizar y ejecutar programas deportivos y recreativos.</li><li>Fomentar la participación de organizaciones y sectores; coordinar con instituciones públicas y privadas.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 26.</small></p>"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de deporte",
+        "categoria": "deporte",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2025/09/548544314_1228446715987399_4683971695375670981_n.jpg",
+            "alt": "Melipeuco celebró las Fiestas Patrias con la Cicletada Familiar 2025"
+          },
+          {
+            "src": "/wp-content/uploads/2025/08/533483928_1202964771868927_451472611017433474_n.jpg",
+            "alt": "Melipeuco hizo historia con la Primera Velada Internacional de Boxeo"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/490032754_1101789851986420_2342055121719895216_n.jpg",
+            "alt": "Gran Corrida Escolar Comunal reunió a estudiantes de toda Melipeuco en el Día de la Actividad Física"
+          },
+          {
+            "src": "/wp-content/uploads/2022/10/IMG_20221011_212231_088.jpg",
+            "alt": "Torneo de fútbol masculino"
+          },
+          {
+            "src": "/wp-content/uploads/2022/10/FB_IMG_1665440879261.jpg",
+            "alt": "Campeonato comunal de Melipeuco 2022"
+          },
+          {
+            "src": "/wp-content/uploads/2022/10/310701445_6261487423868245_2804190549388974372_n.jpg",
+            "alt": "Segundo Raid En Duro Melipeuco 2022"
+          }
+        ]
+      }
+    ]
+  }
+}
