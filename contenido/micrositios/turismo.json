@@ -6,6 +6,8 @@
     "slug": "turismo",
     "unidad": "Oficina de Turismo",
     "descripcion": "Turismo en Melipeuco, Capital del Trekking: volcán Llaima, Parque Nacional Conguillío, laguna Icalma, Geoparque Kütralkura, fiestas y cultura mapuche pehuenche.",
+    "organigrama": "dep-turismo",
+    "alias": [],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

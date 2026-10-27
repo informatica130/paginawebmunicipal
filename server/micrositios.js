@@ -55,6 +55,8 @@ export function normalizarModulo(m, i = 0) {
 export function normalizarSitio(x, i = 0) {
   const g = objeto(GENERAL, x);
   g.slug = slugOk(g.slug || g.nombre);
+  g.alias = g.alias.map(slugOk).filter((x) => x && x !== g.slug && !RESERVADAS.has(x)).slice(0, 10);
+  g.organigrama = /^dep-[a-z0-9-]{2,40}$/.test(g.organigrama) ? g.organigrama : '';
   if (!g.slug || RESERVADAS.has(g.slug)) g.slug = 'unidad-' + (i + 1);
   return {
     id: idOk(x?.id, i), ...g,
@@ -104,6 +106,8 @@ export function crearMicrositios({ db }) {
   return {
     leer,
     porSlug: (slug) => leer().sitios.find((s) => s.slug === slug) || null,
+    porAlias: (slug) => leer().sitios.find((s) => s.alias.includes(slug) && s.slug !== slug) || null,
+    porUnidad: (dep) => (dep ? leer().sitios.find((s) => s.organigrama === dep && s.publicado) || null : null),
     publicados: () => leer().sitios.filter((s) => s.publicado),
   };
 }

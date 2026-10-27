@@ -1,0 +1,88 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "comite-tecnico",
+    "nombre": "Comité Técnico",
+    "slug": "comite-tecnico",
+    "unidad": "Comité Técnico Administrativo",
+    "descripcion": "Comité Técnico Administrativo de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-cta",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "personas",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Administración Municipal",
+      "titulo": "Comité Técnico Administrativo",
+      "bajada": "Instancia asesora del Alcalde, presidida por el Administrador Municipal e integrada por los directivos.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>El <strong>Comité Técnico Administrativo</strong> es parte de la Municipalidad de Melipeuco y depende de la Administración Municipal. Sus funciones son:</p><ul><li>Instancia asesora del Alcalde, presidida por el Administrador Municipal e integrada por los directivos.</li><li>Difundir y analizar políticas, planes, programas y proyectos de desarrollo comunal.</li><li>Proponer estrategias operativas y mejoras de procedimientos administrativos internos.</li><li>Evaluar el cumplimiento de políticas, planes e instrucciones de la autoridad.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 11.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-cta",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Unidad de la que depende",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "balanza",
+            "texto": "Oficina de Asesoría Jurídica Municipal",
+            "descripcion": "Oficina",
+            "url": "/asesoria-juridica/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

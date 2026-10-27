@@ -1,0 +1,132 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "programas-sociales",
+    "nombre": "Programas Sociales",
+    "slug": "programas-sociales",
+    "unidad": "Departamento de Programas Sociales",
+    "descripcion": "Departamento de Programas Sociales de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-programas",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "carpeta",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/764679798_1495446299287438_5415972341440461162_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Dirección de Desarrollo Comunitario",
+      "titulo": "Departamento de Programas Sociales",
+      "bajada": "Implementar, coordinar y rendir los programas sociales de Gobierno en convenio (niñez, adolescencia, mujeres, adultos mayores, dependencia y otros).",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8811",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>El <strong>Departamento de Programas Sociales</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Desarrollo Comunitario. Sus funciones son:</p><ul><li>Implementar, coordinar y rendir los programas sociales de Gobierno en convenio (niñez, adolescencia, mujeres, adultos mayores, dependencia y otros).</li><li>Contraparte de los programas; fiscalizar rendiciones y cumplimiento de metas.</li><li>Registro actualizado de los programas en convenio y sus usuarios.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 34.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "carpeta",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Coordinación de Programas Sociales",
+            "texto": "Coordinar los programas sociales que administra el Municipio.",
+            "url": "/coordinacion-de-programas/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Rendiciones de Programas Sociales",
+            "texto": "Revisión periódica de la ejecución de los programas en convenio.",
+            "url": "/rendiciones-de-programas/"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-programas",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Dirección de Desarrollo Comunitario",
+            "descripcion": "Unidad de la que depende",
+            "url": "/social/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Departamento de Desarrollo Social",
+            "descripcion": "Departamento",
+            "url": "/desarrollo-social/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Departamento de Desarrollo Comunitario",
+            "descripcion": "Departamento",
+            "url": "/desarrollo-comunitario/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Departamento de Desarrollo Económico Local",
+            "descripcion": "Departamento",
+            "url": "/udel/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de programas sociales",
+        "categoria": "dideco",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

@@ -6,6 +6,10 @@
     "slug": "obras",
     "unidad": "Dirección de Obras Municipales (DOM)",
     "descripcion": "Dirección de Obras Municipales de Melipeuco: permisos de edificación, certificados, inspección, vialidad, alumbrado, cementerios, emergencias y solicitud de maquinaria.",
+    "organigrama": "dep-dom",
+    "alias": [
+      "dom"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {
@@ -67,49 +71,49 @@
             "etiqueta": "Oficina",
             "titulo": "Edificación y Urbanización",
             "texto": "Revisar y aprobar proyectos de subdivisión, fusión, loteo, urbanización y construcción.",
-            "url": ""
+            "url": "/edificacion-y-urbanizacion/"
           },
           {
             "icono": "buscar",
             "etiqueta": "Oficina",
             "titulo": "Inspección de Obras",
             "texto": "Fiscalizar obras de edificación, ampliación, remodelación y demolición.",
-            "url": ""
+            "url": "/inspeccion-de-obras/"
           },
           {
             "icono": "carpeta",
             "etiqueta": "Oficina",
             "titulo": "Catastros y Archivos",
             "texto": "Catastro actualizado de obras de urbanización y edificación.",
-            "url": ""
+            "url": "/catastros-y-archivos/"
           },
           {
             "icono": "alerta",
             "etiqueta": "Oficina",
             "titulo": "Emergencia y Protección Civil",
             "texto": "Prevención, mitigación, atención, control y recuperación ante emergencias y catástrofes.",
-            "url": ""
+            "url": "/emergencias/"
           },
           {
             "icono": "escudo",
             "etiqueta": "Oficina",
             "titulo": "Cementerios",
             "texto": "Dirección administrativa y gestión de los cementerios municipales (Ley 18.096).",
-            "url": ""
+            "url": "/cementerios/"
           },
           {
             "icono": "basura",
             "etiqueta": "Oficina",
             "titulo": "Aseo y Ornato",
             "texto": "Aseo de vías públicas, parques, jardines y bienes nacionales de uso público.",
-            "url": ""
+            "url": "/aseo-y-ornato/"
           },
           {
             "icono": "camion",
             "etiqueta": "Oficina",
             "titulo": "Vehículos",
             "texto": "Coordinación y mantención de los vehículos municipales y sus contratos de reparación.",
-            "url": ""
+            "url": "/vehiculos-municipales/"
           },
           {
             "icono": "hoja",

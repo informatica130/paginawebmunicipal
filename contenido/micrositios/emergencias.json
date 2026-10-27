@@ -1,0 +1,163 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "emergencias",
+    "nombre": "Emergencias",
+    "slug": "emergencias",
+    "unidad": "Oficina de Emergencia y Protección Civil",
+    "descripcion": "Oficina de Emergencia y Protección Civil de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-emergencia",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#C9552B",
+      "oscuro": "#5B2210",
+      "acento": "#E9A92B",
+      "patron": "triangulos",
+      "icono": "alerta",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Obras Municipales",
+      "titulo": "Oficina de Emergencia y Protección Civil",
+      "bajada": "Prevención, mitigación, atención, control y recuperación ante emergencias y catástrofes.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8812",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "numeros",
+        "tipo": "llamado",
+        "titulo": "Teléfonos de emergencia",
+        "texto": "Urgencias CESFAM Melipeuco 45 255 7691 · Bomberos 132 · Carabineros 133 · SAMU 131. Oficina municipal de Emergencia: +56 2 3384 8812.",
+        "icono": "alerta",
+        "boton": "Llamar a Bomberos (132)",
+        "url": "tel:132",
+        "boton2": "Llamar a Carabineros (133)",
+        "url2": "tel:133"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Emergencia y Protección Civil</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Obras Municipales. Sus funciones son:</p><ul><li>Prevención, mitigación, atención, control y recuperación ante emergencias y catástrofes.</li><li>Planificar y coordinar el Comité de Emergencia Comunal y el COE; comités vecinales de protección civil.</li><li>Base de datos de emergencias y mapa de riesgos y vulnerabilidad de la comuna.</li><li>Centro de comunicaciones comunal y equipos de radiocomunicación.</li><li>Coordinar a Salud, Bomberos, Carabineros, PDI, CONAF, empresas de servicios y otros.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 42.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Oficina de Emergencia y Seguridad Publica (Oficina)",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8812",
+            "email": ""
+          },
+          {
+            "nombre": "Urgencias CESFAM Melipeuco",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 45 255 7691",
+            "email": ""
+          },
+          {
+            "nombre": "Bomberos",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 93 870 8549",
+            "email": ""
+          },
+          {
+            "nombre": "Carabineros",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 45 246 6915",
+            "email": ""
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-emergencia",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "herramienta",
+            "texto": "Dirección de Obras Municipales",
+            "descripcion": "Unidad de la que depende",
+            "url": "/obras/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Edificación y Urbanización",
+            "descripcion": "Oficina",
+            "url": "/edificacion-y-urbanizacion/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección de Obras",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-de-obras/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Oficina de Catastros y Archivos",
+            "descripcion": "Oficina",
+            "url": "/catastros-y-archivos/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Cementerios",
+            "descripcion": "Oficina",
+            "url": "/cementerios/"
+          },
+          {
+            "icono": "hoja",
+            "texto": "Oficina de Aseo y Ornato",
+            "descripcion": "Oficina",
+            "url": "/aseo-y-ornato/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

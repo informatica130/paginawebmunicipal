@@ -298,6 +298,15 @@ test('micrositios: Medio Ambiente predeterminado, edición desde el panel y borr
     assert.match(await x.text(), texto, ruta);
   }
   assert.match(await (await pedir('/transito/')).text(), /class="fila-tramite"/); // trámites del área desde las fichas del sitio
+  // Gobierno comunal, programas y una por cada unidad del organigrama.
+  const alcaldia = await (await pedir('/alcaldia/')).text();
+  assert.match(alcaldia, /¿Cómo solicitar una audiencia\?/);
+  assert.match(alcaldia, /class="autoridades"/);
+  assert.equal((await pedir('/alcaldia-y-concejo-municipal/')).headers.get('location'), '/alcaldia/');
+  assert.match(await (await pedir('/concejo-municipal/')).text(), /Integrantes del Concejo/);
+  for (const ruta of ['/boxveterinario/', '/comite-de-bienestar/', '/oficina-de-la-ninez/', '/omil/', '/pdti/', '/programa-vinculos/', '/tesoreria-municipal/', '/oficina-de-partes/', '/emergencias/', '/uamis/', '/secplan/', '/cosoc/']) assert.equal((await pedir(ruta)).status, 200, ruta);
+  assert.match(await (await pedir('/tesoreria-municipal/')).text(), /depende de la Dirección de Administración y Finanzas/);
+  assert.match(await (await pedir('/areas/salud/')).text(), /Visite el sitio de Salud/);
   const s = await admin();
   const rg = await api(s, 'GET', 'micrositios');
   const actual = await rg.json();

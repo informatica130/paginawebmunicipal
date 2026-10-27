@@ -1,0 +1,105 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "licencias-de-conducir",
+    "nombre": "Licencias",
+    "slug": "licencias-de-conducir",
+    "unidad": "Oficina de Licencias de Conducir",
+    "descripcion": "Oficina de Licencias de Conducir de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-transito-lic",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D4901A",
+      "oscuro": "#5E3F05",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "licencia",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Tránsito y Transporte Público",
+      "titulo": "Oficina de Licencias de Conducir",
+      "bajada": "Otorgar, renovar, restringir o denegar licencias de conducir.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8829",
+      "email": "transito@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "reserva",
+        "tipo": "llamado",
+        "titulo": "Reserve su hora sin filas",
+        "texto": "Agende en línea su hora para licencias de conducir.",
+        "icono": "calendario",
+        "boton": "Reservar hora",
+        "url": "/reservadehora/",
+        "boton2": "Guía de la primera licencia",
+        "url2": "/licenciadeconducir/"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Licencias de Conducir</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Tránsito y Transporte Público. Sus funciones son:</p><ul><li>Otorgar, renovar, restringir o denegar licencias de conducir.</li><li>Solicitar el certificado de antecedentes del conductor al Registro Civil.</li><li>Efectuar los exámenes para el otorgamiento o renovación.</li><li>Registro de licencias otorgadas y denegadas e informe al Registro Nacional de Conductores.</li><li>Giro de derechos municipales y estadísticas para organismos del Estado.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 49.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-transito-lic",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "auto",
+            "texto": "Departamento de Tránsito y Transporte Público",
+            "descripcion": "Unidad de la que depende",
+            "url": "/transito/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Oficina de Permisos de Circulación",
+            "descripcion": "Oficina",
+            "url": "/permisos-de-circulacion/"
+          },
+          {
+            "icono": "mapa",
+            "texto": "Oficina de Señalización Vial",
+            "descripcion": "Oficina",
+            "url": "/senalizacion-vial/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "oficina-de-transparencia",
+    "nombre": "Transparencia",
+    "slug": "oficina-de-transparencia",
+    "unidad": "Oficina Municipal de Transparencia",
+    "descripcion": "Oficina Municipal de Transparencia de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-transparencia",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#3E3E9A",
+      "oscuro": "#1D1D4F",
+      "acento": "#E9A92B",
+      "patron": "puntos",
+      "icono": "buscar",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Secretaría Municipal",
+      "titulo": "Oficina Municipal de Transparencia",
+      "bajada": "Cumplir la Ley 20.285 manteniendo permanentemente actualizados los antecedentes del art. 7 (transparencia activa).",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "transparencia",
+        "tipo": "enlaces",
+        "ancla": "Transparencia",
+        "titulo": "Transparencia municipal",
+        "items": [
+          {
+            "icono": "documento",
+            "texto": "Transparencia Activa",
+            "descripcion": "Información que la Ley 20.285 obliga a publicar",
+            "url": "/transparencia/activa/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Documentos de Transparencia",
+            "url": "/transparencia/documentos/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Solicitar información",
+            "descripcion": "Transparencia pasiva",
+            "url": "/transparencia/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina Municipal de Transparencia</strong> es parte de la Municipalidad de Melipeuco y depende de la Secretaría Municipal. Sus funciones son:</p><ul><li>Cumplir la Ley 20.285 manteniendo permanentemente actualizados los antecedentes del art. 7 (transparencia activa).</li><li>Velar por la entrega de información en los plazos legales y hacer seguimiento de las solicitudes de acceso.</li><li>Archivar física o digitalmente todas las solicitudes ingresadas.</li><li>Coordinarse con el Concejo; elaborar manuales y procedimientos de transparencia; capacitar a los funcionarios.</li><li>Informar al Alcalde sobre la gestión interna de transparencia.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 15.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-transparencia",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Unidad de la que depende",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "correo",
+            "texto": "Oficina de Partes y Archivo",
+            "descripcion": "Oficina",
+            "url": "/oficina-de-partes/"
+          },
+          {
+            "icono": "chat",
+            "texto": "Oficina de Informaciones, Reclamos y Sugerencias (OIRS)",
+            "descripcion": "Oficina",
+            "url": "/oficina-oirs/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría del Consejo Comunal de Organizaciones de la Sociedad Civil",
+            "descripcion": "Oficina",
+            "url": "/secretaria-cosoc/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

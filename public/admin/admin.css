@@ -401,3 +401,5 @@ a.indicador:hover { border-color: var(--primario); }
 .diseno-nav button b { font-size: .8rem; }
 .diseno-nav button .ico { margin-top: 0; }
 @media (max-width: 1300px) { .diseno-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ms-filtros { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.ms-filtros .buscar-opcion { flex: 1 1 280px; }

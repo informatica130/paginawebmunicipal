@@ -1,0 +1,165 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "box-veterinario",
+    "nombre": "Box Veterinario",
+    "slug": "boxveterinario",
+    "unidad": "Box Veterinario Municipal · Tenencia responsable",
+    "descripcion": "Box Veterinario Municipal de Melipeuco: atención clínica, vacunación antirrábica, esterilización, requisitos, horario y contacto.",
+    "organigrama": "dep-medioambiente",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#2F7D4A",
+      "oscuro": "#123524",
+      "acento": "#E9A92B",
+      "patron": "puntos",
+      "icono": "perro",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/09/556059812_1238507841647953_245624008465520436_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Tenencia responsable de mascotas",
+      "titulo": "Box Veterinario Municipal",
+      "bajada": "Atención básica y preventiva para las mascotas de la comunidad —consulta, vacunación y esterilización—, priorizando a familias en situación de vulnerabilidad.",
+      "botones": [
+        {
+          "texto": "Requisitos para la atención",
+          "url": "#m-requisitos"
+        },
+        {
+          "texto": "Llamar",
+          "url": "tel:+56233848815"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "L a V",
+          "etiqueta": "de 09:00 a 17:00 hrs."
+        },
+        {
+          "valor": "Gratuitas",
+          "etiqueta": "campañas periódicas de vacunación y esterilización"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8815",
+      "email": "",
+      "direccion": "Box Veterinario Municipal, Melipeuco",
+      "horario": "Lunes a viernes de 09:00 a 17:00 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "servicios",
+        "tipo": "tarjetas",
+        "ancla": "Servicios",
+        "titulo": "Nuestros servicios",
+        "intro": "Atención básica y preventiva subsidiada por la Municipalidad de Melipeuco.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "salud",
+            "etiqueta": "Clínica",
+            "titulo": "Atención clínica",
+            "texto": "Exámenes físicos completos, diagnóstico y tratamiento básico, asesoría en nutrición y cuidados, y chequeos preventivos."
+          },
+          {
+            "icono": "check",
+            "etiqueta": "Prevención",
+            "titulo": "Vacunación",
+            "texto": "Vacunación antirrábica obligatoria y esquema básico según el calendario oficial, con campañas periódicas gratuitas."
+          },
+          {
+            "icono": "corazon",
+            "etiqueta": "Control",
+            "titulo": "Esterilización",
+            "texto": "Control poblacional y prevención de enfermedades, con seguimiento postquirúrgico y campañas periódicas."
+          }
+        ]
+      },
+      {
+        "id": "requisitos",
+        "tipo": "pasos",
+        "ancla": "Requisitos",
+        "titulo": "Requisitos para la atención",
+        "intro": "Para acceder a los servicios veterinarios subsidiados por la Municipalidad, presente:",
+        "items": [
+          {
+            "icono": "licencia",
+            "titulo": "Cédula de identidad",
+            "texto": "Vigente, de la persona dueña de la mascota."
+          },
+          {
+            "icono": "casa",
+            "titulo": "Comprobante de residencia",
+            "texto": "Que acredite domicilio en la comuna de Melipeuco."
+          },
+          {
+            "icono": "documento",
+            "titulo": "Registro Social de Hogares",
+            "texto": "Actualizado, para acceder a los beneficios."
+          }
+        ]
+      },
+      {
+        "id": "operativos",
+        "tipo": "llamado",
+        "titulo": "Operativos en los sectores",
+        "texto": "El programa de Tenencia Responsable de Mascotas organiza operativos gratuitos de vacunación en distintos sectores de la comuna. Siga las noticias para conocer las próximas fechas.",
+        "icono": "perro",
+        "boton": "Ver noticias",
+        "url": "#m-noticias",
+        "boton2": "Medio Ambiente",
+        "url2": "/medioambiente/"
+      },
+      {
+        "id": "preguntas",
+        "tipo": "faq",
+        "titulo": "Preguntas frecuentes",
+        "items": [
+          {
+            "pregunta": "¿Quiénes pueden atenderse?",
+            "respuesta": "Las mascotas de familias con domicilio en Melipeuco, priorizando a familias en situación de vulnerabilidad según el Registro Social de Hogares."
+          },
+          {
+            "pregunta": "¿La vacuna antirrábica es obligatoria?",
+            "respuesta": "Sí. Se aplica según el calendario oficial y en campañas periódicas gratuitas."
+          },
+          {
+            "pregunta": "¿Dónde me informo de las campañas de esterilización?",
+            "respuesta": "En las noticias de esta página y en las redes sociales de la Municipalidad."
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Fichas de atención",
+        "dependencia": "dep-medioambiente",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de box veterinario",
+        "categoria": "box-veterinario",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

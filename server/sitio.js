@@ -149,7 +149,7 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
     return {
       db, repo, cfg, tramites, img, ruta, req, usuario, version, categoriasDe,
       nonce: crypto.randomBytes(16).toString('base64'),
-      ajustes: ajustes(), formulario, encuesta, campoAntispam, ext,
+      ajustes: ajustes(), formulario, encuesta, campoAntispam, ext, micro,
     };
   }
 
@@ -345,7 +345,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         const transp = [...buscarTransparencia(ext.leer(), palabras, norm), ...buscarActiva(palabras)].slice(0, 4);
         const docs = buscarArchivo(inventario(), q, { limite: 3 }).map((a) => ({ tipo: 'Documento de Transparencia', clave: 'documento', titulo: a.n, url: urlDoc(a), fragmento: [a.c, a.ar, a.f ? 'publicado el ' + a.f.split('-').reverse().join('-') : ''].filter(Boolean).join(' · ') }));
         const vids = buscarVideos(q, 3).map((v) => ({ tipo: 'Video', clave: 'video', titulo: v.t, url: urlVideo(v), fragmento: [indiceVideos()?.cats.get(v.c)?.nombre, (v.fe || v.f || '').slice(0, 10).split('-').reverse().join('-')].filter(Boolean).join(' · ') }));
-        const sitiosU = micro.publicados().filter((x) => palabras.every((p) => norm(textoMicrositio(x)).includes(p))).slice(0, 2).map((x) => ({ tipo: 'Sitio de la unidad', clave: 'micrositio', titulo: x.nombre, url: `/${x.slug}/`, fragmento: fragmento(x.descripcion || x.portada.bajada) }));
+        const sitiosU = micro.publicados().map((x) => [x, norm(x.nombre + ' ' + x.unidad)]).sort((a, b) => palabras.filter((p) => b[1].includes(p)).length - palabras.filter((p) => a[1].includes(p)).length).map(([x]) => x).filter((x) => palabras.every((p) => norm(textoMicrositio(x)).includes(p))).slice(0, 2).map((x) => ({ tipo: 'Sitio de la unidad', clave: 'micrositio', titulo: x.nombre, url: `/${x.slug}/`, fragmento: fragmento(x.descripcion || x.portada.bajada) }));
         const vistos = new Set();
         const items = [...atajos, ...sitiosU, ...en, ...transp, ...r, ...vids, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
         return enviarJson({ items, aproximado: aproximado && !atajos.length && !en.length && !transp.length && !docs.length && !vids.length }, 60);
@@ -589,6 +589,9 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     if (seg.length === 1) {
       const ms = micro.porSlug(seg[0]);
       if (ms && (ms.publicado || usuario)) return responder(await paginaMicrositio(ctx, ms), { cachear: ms.publicado });
+      // Direcciones antiguas o alternativas de un micrositio (si no son una página con contenido propio)
+      const alias = micro.porAlias(seg[0]);
+      if (alias && (alias.publicado || usuario)) return redirigir(res, `/${alias.slug}/`, 301);
     }
 
     // Páginas por jerarquía de slugs

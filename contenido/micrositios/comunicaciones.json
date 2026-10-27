@@ -1,0 +1,97 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "comunicaciones",
+    "nombre": "Comunicaciones",
+    "slug": "comunicaciones",
+    "unidad": "Oficina de Comunicaciones, Relaciones Públicas y Protocolo",
+    "descripcion": "Oficina de Comunicaciones, Relaciones Públicas y Protocolo de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-comunicaciones",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#B07A12",
+      "oscuro": "#4A3304",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "escudo",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/762008531_1491796869652381_1040071149585674857_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Alcaldía",
+      "titulo": "Oficina de Comunicaciones, Relaciones Públicas y Protocolo",
+      "bajada": "Crear y mantener canales de información entre el Municipio y la comunidad.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8821",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Comunicaciones, Relaciones Públicas y Protocolo</strong> es parte de la Municipalidad de Melipeuco y depende de la Alcaldía. Sus funciones son:</p><ul><li>Crear y mantener canales de información entre el Municipio y la comunidad.</li><li>Relación con medios de prensa; comunicados, cuñas radiales y registro fotográfico y audiovisual.</li><li>Mantener actualizada la página web municipal, sus diarios digitales y la agenda municipal.</li><li>Formatos tipo de comunicación municipal y correcto uso de logos y frases institucionales.</li><li>Transmitir las sesiones del Concejo y publicar sus grabaciones dentro de 72 horas, disponibles por al menos tres años (Ley 21.534).</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 5.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-comunicaciones",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Unidad de la que depende",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "estrella",
+            "texto": "Oficina de Gabinete",
+            "descripcion": "Oficina",
+            "url": "/gabinete/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de comunicaciones",
+        "categoria": "alcaldia",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

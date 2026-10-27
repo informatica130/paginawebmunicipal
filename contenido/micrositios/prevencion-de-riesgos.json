@@ -1,0 +1,82 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "prevencion-de-riesgos",
+    "nombre": "Prevención de Riesgos",
+    "slug": "prevencion-de-riesgos",
+    "unidad": "Oficina de Prevención de Riesgos",
+    "descripcion": "Oficina de Prevención de Riesgos de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-prevencion",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "escudo",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Recursos Humanos",
+      "titulo": "Oficina de Prevención de Riesgos",
+      "bajada": "Evaluar y controlar riesgos de accidentes y enfermedades profesionales.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Prevención de Riesgos</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Recursos Humanos. Sus funciones son:</p><ul><li>Evaluar y controlar riesgos de accidentes y enfermedades profesionales.</li><li>Educación preventiva y capacitación; estadísticas.</li><li>Asesorar a los comités paritarios.</li><li>Protocolos para el bienestar físico y emocional; investigaciones de puestos de trabajo ante denuncias de acoso laboral.</li><li>Encuesta anual de satisfacción de trabajadores.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 58.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-prevencion",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Departamento de Recursos Humanos",
+            "descripcion": "Unidad de la que depende",
+            "url": "/recursos-humanos/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

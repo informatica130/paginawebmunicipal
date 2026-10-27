@@ -1,0 +1,128 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "oficina-de-la-mujer",
+    "nombre": "Mujer y Equidad",
+    "slug": "oficina-de-la-mujer",
+    "unidad": "Oficina de la Mujer y Equidad de Género",
+    "descripcion": "Oficina de la Mujer y Equidad de Género de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-mujer",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "corazon",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Desarrollo Social",
+      "titulo": "Oficina de la Mujer y Equidad de Género",
+      "bajada": "Mejorar la calidad de vida de las mujeres, su empoderamiento y autonomía.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8816",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de la Mujer y Equidad de Género</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Desarrollo Social. Sus funciones son:</p><ul><li>Mejorar la calidad de vida de las mujeres, su empoderamiento y autonomía.</li><li>Informar sobre derechos y servicios; capacitación; liderazgo y asociatividad.</li><li>Redes de apoyo local, incluida la red de no violencia contra la mujer.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 27.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Oficina de la Mujer",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8816",
+            "email": ""
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-mujer",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "corazon",
+            "texto": "Departamento de Desarrollo Social",
+            "descripcion": "Unidad de la que depende",
+            "url": "/desarrollo-social/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Oficina de Asistencia Social",
+            "descripcion": "Oficina",
+            "url": "/asistencia-social/"
+          },
+          {
+            "icono": "casa",
+            "texto": "Oficina de Vivienda",
+            "descripcion": "Oficina",
+            "url": "/vivienda/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Subsidios y Pensiones",
+            "descripcion": "Oficina",
+            "url": "/subsidios-y-pensiones/"
+          },
+          {
+            "icono": "usuario",
+            "texto": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
+            "descripcion": "Oficina",
+            "url": "/uamis/"
+          },
+          {
+            "icono": "deporte",
+            "texto": "Oficina de Deportes y Recreación",
+            "descripcion": "Oficina",
+            "url": "/deporte/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "oficina-oirs",
+    "nombre": "OIRS",
+    "slug": "oficina-oirs",
+    "unidad": "Oficina de Informaciones, Reclamos y Sugerencias (OIRS)",
+    "descripcion": "Oficina de Informaciones, Reclamos y Sugerencias (OIRS) de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-oirs",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#3E3E9A",
+      "oscuro": "#1D1D4F",
+      "acento": "#E9A92B",
+      "patron": "puntos",
+      "icono": "chat",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Secretaría Municipal",
+      "titulo": "Oficina de Informaciones, Reclamos y Sugerencias (OIRS)",
+      "bajada": "Informar sobre la organización, competencias, requisitos, plazos y procedimientos de las prestaciones municipales.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8813",
+      "email": "oficinadepartes@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "oirs",
+        "tipo": "llamado",
+        "titulo": "Reclamos, consultas y sugerencias",
+        "texto": "Ingrese su solicitud en línea y reciba un código de seguimiento.",
+        "icono": "chat",
+        "boton": "Ir a la OIRS",
+        "url": "/oirs/"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Informaciones, Reclamos y Sugerencias (OIRS)</strong> es parte de la Municipalidad de Melipeuco y depende de la Secretaría Municipal. Sus funciones son:</p><ul><li>Informar sobre la organización, competencias, requisitos, plazos y procedimientos de las prestaciones municipales.</li><li>Recibir sugerencias y reclamos (libro foliado) y remitirlos mensualmente a la Administración Municipal.</li><li>Realizar encuestas de satisfacción sobre las prestaciones y la calidad de la atención.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 14.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-oirs",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Unidad de la que depende",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "correo",
+            "texto": "Oficina de Partes y Archivo",
+            "descripcion": "Oficina",
+            "url": "/oficina-de-partes/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina Municipal de Transparencia",
+            "descripcion": "Oficina",
+            "url": "/oficina-de-transparencia/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría del Consejo Comunal de Organizaciones de la Sociedad Civil",
+            "descripcion": "Oficina",
+            "url": "/secretaria-cosoc/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

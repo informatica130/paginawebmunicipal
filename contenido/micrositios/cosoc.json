@@ -1,0 +1,114 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "cosoc",
+    "nombre": "COSOC",
+    "slug": "cosoc",
+    "unidad": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+    "descripcion": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC) de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-cosoc",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#5B3A8C",
+      "oscuro": "#26163F",
+      "acento": "#E9A92B",
+      "patron": "hexagonos",
+      "icono": "personas",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Municipalidad de Melipeuco",
+      "titulo": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+      "bajada": "Órgano asesor para asegurar la participación de la comunidad en el progreso económico, social y cultural de la comuna.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "sesiones",
+        "tipo": "contenido",
+        "fuente": "sesiones",
+        "filtro": "",
+        "cantidad": 4,
+        "titulo": "Sesiones del Concejo"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>El <strong>Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)</strong> es parte de la Municipalidad de Melipeuco. Sus funciones son:</p><ul><li>Órgano asesor para asegurar la participación de la comunidad en el progreso económico, social y cultural de la comuna.</li><li>Lo preside el Alcalde y actúa como secretaria la Secretaría Municipal.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 2.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-cosoc",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Alcaldía",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Concejo Municipal",
+            "descripcion": "Órgano colegiado",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Dirección",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Dirección",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Dirección de Desarrollo Comunitario",
+            "descripcion": "Dirección",
+            "url": "/social/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

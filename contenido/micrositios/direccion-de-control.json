@@ -1,0 +1,122 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "direccion-de-control",
+    "nombre": "Control",
+    "slug": "direccion-de-control",
+    "unidad": "Dirección de Control",
+    "descripcion": "Dirección de Control de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-control",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#4A5A6A",
+      "oscuro": "#1E2A35",
+      "acento": "#E9A92B",
+      "patron": "diagonales",
+      "icono": "buscar",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Municipalidad de Melipeuco",
+      "titulo": "Dirección de Control",
+      "bajada": "Auditoría operativa interna para fiscalizar la legalidad y eficiencia de la actuación municipal.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "controlinterno@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Dirección de Control</strong> es parte de la Municipalidad de Melipeuco. Sus funciones son:</p><ul><li>Auditoría operativa interna para fiscalizar la legalidad y eficiencia de la actuación municipal.</li><li>Controlar la ejecución financiera y presupuestaria; informe trimestral al Concejo.</li><li>Representar al Alcalde los actos que estime ilegales, con acceso a toda la documentación pertinente.</li><li>Colaborar con el Concejo en su función fiscalizadora y responder por escrito a los concejales.</li><li>Atender a la Contraloría General, de la que depende técnicamente.</li><li>Revisar rendiciones de cuenta, inventarios e imputaciones contables.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 62.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Auditorías y Revisión",
+            "texto": "Auditoría operativa interna bajo la supervisión del Director de Control.",
+            "url": "/auditorias/"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-control",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Alcaldía",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Concejo Municipal",
+            "descripcion": "Órgano colegiado",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "descripcion": "Órgano colegiado",
+            "url": "/cosoc/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Dirección",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Dirección",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

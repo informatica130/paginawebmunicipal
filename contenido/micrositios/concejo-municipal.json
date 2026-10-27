@@ -1,0 +1,107 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "concejo-municipal",
+    "nombre": "Concejo Municipal",
+    "slug": "concejo-municipal",
+    "unidad": "Concejo Municipal de Melipeuco",
+    "descripcion": "Concejo Municipal de Melipeuco: integrantes, sesiones, actas, transmisiones en vivo y COSOC.",
+    "organigrama": "dep-concejo",
+    "alias": [
+      "concejosmunicipales"
+    ],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#5B3A8C",
+      "oscuro": "#26163F",
+      "acento": "#E9A92B",
+      "patron": "hexagonos",
+      "icono": "balanza",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Órgano normativo, resolutivo y fiscalizador",
+      "titulo": "Concejo Municipal",
+      "bajada": "Concejalas y concejales, sesiones ordinarias y extraordinarias, actas y transmisiones en vivo del Concejo Municipal de Melipeuco.",
+      "botones": [
+        {
+          "texto": "Ver las sesiones",
+          "url": "#m-sesiones"
+        },
+        {
+          "texto": "Transmisiones en vivo",
+          "url": "https://www.youtube.com/channel/UCxQ299eYJmshjxa8a00FJRQ"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "Secretaría Municipal",
+      "cargo": "Ministra de fe del Concejo",
+      "telefono": "",
+      "email": "secretariamunicipal@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Transmisiones en YouTube",
+          "url": "https://www.youtube.com/channel/UCxQ299eYJmshjxa8a00FJRQ"
+        },
+        {
+          "texto": "Todas las sesiones",
+          "url": "/concejo/sesiones/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "que-es",
+        "tipo": "texto",
+        "ancla": "El Concejo",
+        "titulo": "¿Qué es el Concejo Municipal?",
+        "html": "<p>El Concejo Municipal es el órgano colegiado de carácter normativo, resolutivo y fiscalizador, encargado de hacer efectiva la participación de la comunidad local y de ejercer las atribuciones que le señala la Ley 18.695. Las sesiones son públicas y se transmiten en vivo por el canal de YouTube de la Municipalidad.</p><ul><li>Elegir al alcalde en caso de vacancia.</li><li>Pronunciarse sobre las materias que enumera el artículo 65 de la ley (presupuesto, plan de desarrollo comunal, ordenanzas, entre otras).</li><li>Fiscalizar el cumplimiento de los planes y programas de inversión municipales y la ejecución del presupuesto.</li></ul>"
+      },
+      {
+        "id": "integrantes",
+        "tipo": "contenido",
+        "fuente": "autoridades",
+        "filtro": "alcalde concejal",
+        "cantidad": 6,
+        "ancla": "Integrantes",
+        "titulo": "Integrantes del Concejo",
+        "intro": "El Concejo lo preside el Alcalde. Las concejalas y concejales se agregan en el panel, en «Alcaldía y Concejo», y aparecen aquí automáticamente."
+      },
+      {
+        "id": "sesiones",
+        "tipo": "contenido",
+        "fuente": "sesiones",
+        "filtro": "",
+        "cantidad": 12,
+        "ancla": "Sesiones",
+        "titulo": "Sesiones, tablas y actas"
+      },
+      {
+        "id": "videos",
+        "tipo": "contenido",
+        "fuente": "videos",
+        "filtro": "concejo-municipal",
+        "cantidad": 4,
+        "ancla": "Transmisiones",
+        "titulo": "Sesiones transmitidas"
+      },
+      {
+        "id": "cosoc",
+        "tipo": "llamado",
+        "titulo": "Consejo Comunal de Organizaciones de la Sociedad Civil",
+        "texto": "El COSOC asegura la participación de las organizaciones de la comuna en el progreso económico, social y cultural de Melipeuco.",
+        "icono": "personas",
+        "boton": "Conocer el COSOC",
+        "url": "/cosoc/",
+        "boton2": "Todas las sesiones",
+        "url2": "/concejo/sesiones/"
+      }
+    ]
+  }
+}

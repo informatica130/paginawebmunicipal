@@ -1,0 +1,195 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "administracion-y-finanzas",
+    "nombre": "Administración y Finanzas",
+    "slug": "administracion-y-finanzas",
+    "unidad": "Dirección de Administración y Finanzas",
+    "descripcion": "Dirección de Administración y Finanzas de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-daf",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "billete",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Municipalidad de Melipeuco",
+      "titulo": "Dirección de Administración y Finanzas",
+      "bajada": "Asesorar al Alcalde en la administración del personal y financiera de los bienes municipales.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8823",
+      "email": "daf@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Dirección de Administración y Finanzas</strong> es parte de la Municipalidad de Melipeuco. Sus funciones son:</p><ul><li>Asesorar al Alcalde en la administración del personal y financiera de los bienes municipales.</li><li>Estudiar, calcular, proponer y regular la percepción de ingresos municipales.</li><li>Colaborar con SECPLAN en el presupuesto municipal.</li><li>Visar los decretos que irroguen gastos o generen recursos.</li><li>Llevar la contabilidad municipal según la normativa de la Contraloría.</li><li>Efectuar los pagos, manejar la cuenta corriente y rendir cuenta a la Contraloría; recaudar ingresos.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 52.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "grafico",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Contabilidad y Presupuesto",
+            "texto": "Contabilidad patrimonial y presupuestaria; balance anual.",
+            "url": "/contabilidad-y-presupuesto/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Tesorería Municipal",
+            "texto": "Recaudar tributos e ingresos municipales; custodiar fondos, especies valoradas y garantías.",
+            "url": "/tesoreria-municipal/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Patentes Municipales",
+            "texto": "Tramitar otorgamiento, traslado, transferencia y caducidad de patentes comerciales, industriales, de alcoholes y profesionales.",
+            "url": "/patentes-municipales/"
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Inspección Municipal",
+            "texto": "Planificar la fiscalización externa en materias normativas y tributarias.",
+            "url": "/inspeccion-municipal/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Recursos Humanos",
+            "texto": "Proponer políticas de administración de personal y aplicar la carrera funcionaria.",
+            "url": "/recursos-humanos/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Remuneraciones",
+            "texto": "Calcular, registrar y pagar las remuneraciones y planillas de cotizaciones.",
+            "url": "/remuneraciones/"
+          },
+          {
+            "icono": "documento",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Adquisiciones",
+            "texto": "Recibir solicitudes de compra, cotizar y emitir órdenes de compra.",
+            "url": "/adquisiciones/"
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Activo Fijo, Inventarios y Bodega",
+            "texto": "Registros e inventarios valorados de bienes municipales por dependencia.",
+            "url": "/inventarios-y-bodega/"
+          }
+        ]
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Finanzas y Recursos Humanos",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8823",
+            "email": ""
+          },
+          {
+            "nombre": "Director de Finanzas",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "daf@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-daf",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Alcaldía",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Concejo Municipal",
+            "descripcion": "Órgano colegiado",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "descripcion": "Órgano colegiado",
+            "url": "/cosoc/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Dirección",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Dirección",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

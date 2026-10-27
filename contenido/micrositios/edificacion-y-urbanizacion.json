@@ -1,0 +1,121 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "edificacion-y-urbanizacion",
+    "nombre": "Edificación",
+    "slug": "edificacion-y-urbanizacion",
+    "unidad": "Oficina de Edificación y Urbanización",
+    "descripcion": "Oficina de Edificación y Urbanización de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-edificacion",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#C9552B",
+      "oscuro": "#5B2210",
+      "acento": "#E9A92B",
+      "patron": "triangulos",
+      "icono": "escudo",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/09/554538555_1234320305400040_4583113183754331573_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Dirección de Obras Municipales",
+      "titulo": "Oficina de Edificación y Urbanización",
+      "bajada": "Revisar y aprobar proyectos de subdivisión, fusión, loteo, urbanización y construcción.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8825",
+      "email": "obras@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Edificación y Urbanización</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Obras Municipales. Sus funciones son:</p><ul><li>Revisar y aprobar proyectos de subdivisión, fusión, loteo, urbanización y construcción.</li><li>Girar los derechos municipales de permisos y servicios de la DOM.</li><li>Otorgar permisos y certificados para la ejecución y recepción de obras; recibir obras y autorizar su uso.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 39.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-edificacion",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "herramienta",
+            "texto": "Dirección de Obras Municipales",
+            "descripcion": "Unidad de la que depende",
+            "url": "/obras/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección de Obras",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-de-obras/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Oficina de Catastros y Archivos",
+            "descripcion": "Oficina",
+            "url": "/catastros-y-archivos/"
+          },
+          {
+            "icono": "alerta",
+            "texto": "Oficina de Emergencia y Protección Civil",
+            "descripcion": "Oficina",
+            "url": "/emergencias/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Cementerios",
+            "descripcion": "Oficina",
+            "url": "/cementerios/"
+          },
+          {
+            "icono": "hoja",
+            "texto": "Oficina de Aseo y Ornato",
+            "descripcion": "Oficina",
+            "url": "/aseo-y-ornato/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de edificación",
+        "categoria": "obras",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

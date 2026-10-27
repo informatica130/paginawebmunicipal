@@ -1,0 +1,104 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "asesoria-juridica",
+    "nombre": "Jurídico",
+    "slug": "asesoria-juridica",
+    "unidad": "Oficina de Asesoría Jurídica Municipal",
+    "descripcion": "Oficina de Asesoría Jurídica Municipal de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-juridico",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "balanza",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Administración Municipal",
+      "titulo": "Oficina de Asesoría Jurídica Municipal",
+      "bajada": "Participar en juicios en que la Municipalidad sea parte o tenga interés.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "asesorjuridico@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Asesoría Jurídica Municipal</strong> es parte de la Municipalidad de Melipeuco y depende de la Administración Municipal. Sus funciones son:</p><ul><li>Participar en juicios en que la Municipalidad sea parte o tenga interés.</li><li>Prestar apoyo legal al Alcalde y al Concejo y orientación jurídica a la comunidad cuando proceda.</li><li>Informar en derecho los asuntos legales de las direcciones, con archivo actualizado y considerando la jurisprudencia de la Contraloría.</li><li>Apoyar la redacción de ordenanzas, reglamentos, instructivos, convenios y contratos.</li><li>Cobranza judicial de impuestos, derechos y otros ingresos municipales.</li><li>Atender requerimientos de la Contraloría y efectuar investigaciones y sumarios administrativos cuando lo ordene el Alcalde.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 10.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Asesor Jurídico de Asuntos Municipales",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "asesorjuridico@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-juridico",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Unidad de la que depende",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Comité Técnico Administrativo",
+            "descripcion": "Órgano colegiado",
+            "url": "/comite-tecnico/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

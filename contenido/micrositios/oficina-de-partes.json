@@ -1,0 +1,141 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "oficina-de-partes",
+    "nombre": "Oficina de Partes",
+    "slug": "oficina-de-partes",
+    "unidad": "Oficina de Partes y Archivo",
+    "descripcion": "Oficina de Partes y Archivo de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-partes",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#3E3E9A",
+      "oscuro": "#1D1D4F",
+      "acento": "#E9A92B",
+      "patron": "puntos",
+      "icono": "correo",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Secretaría Municipal",
+      "titulo": "Oficina de Partes y Archivo",
+      "bajada": "Flujo, control, archivo y conservación de toda la documentación que ingresa y egresa de la Municipalidad.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8813",
+      "email": "oficinadepartes@munimelipeuco.cl",
+      "direccion": "Mesón principal, primer piso",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "ingreso",
+        "tipo": "texto",
+        "ancla": "Ingreso de documentos",
+        "titulo": "Ingreso de documentos y solicitudes",
+        "html": "<p>En la Oficina de Partes, en el mesón principal del primer piso, se ingresan las cartas, solicitudes y documentos dirigidos a la Municipalidad. También se reciben aquí las solicitudes varias y de maquinaria municipal.</p>",
+        "botones": [
+          {
+            "texto": "Solicitudes varias",
+            "url": "/solicitudesvarias/"
+          },
+          {
+            "texto": "Solicitud de maquinaria",
+            "url": "/solicitud-de-maquinaria/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Partes y Archivo</strong> es parte de la Municipalidad de Melipeuco y depende de la Secretaría Municipal. Sus funciones son:</p><ul><li>Flujo, control, archivo y conservación de toda la documentación que ingresa y egresa de la Municipalidad.</li><li>Registros numerados correlativos de decretos, reglamentos, ordenanzas, oficios y resoluciones.</li><li>Ingreso, clasificación y distribución de la correspondencia oficial.</li><li>Archivo central de la documentación oficial.</li><li>Control de plazos de tramitación conforme a la Ley 19.880 e informar al público el estado de sus presentaciones.</li><li>Recibir presentaciones y reclamos según la Ordenanza de Participación Ciudadana.</li><li>Distribuir copias de decretos, reglamentos, ordenanzas y circulares.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 13.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Recepcion",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8813",
+            "email": ""
+          },
+          {
+            "nombre": "Encargada de Oficina de Partes",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "oficinadepartes@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-partes",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Unidad de la que depende",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "chat",
+            "texto": "Oficina de Informaciones, Reclamos y Sugerencias (OIRS)",
+            "descripcion": "Oficina",
+            "url": "/oficina-oirs/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina Municipal de Transparencia",
+            "descripcion": "Oficina",
+            "url": "/oficina-de-transparencia/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría del Consejo Comunal de Organizaciones de la Sociedad Civil",
+            "descripcion": "Oficina",
+            "url": "/secretaria-cosoc/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

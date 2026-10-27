@@ -1,0 +1,82 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "auditorias",
+    "nombre": "Auditorías",
+    "slug": "auditorias",
+    "unidad": "Oficina de Auditorías y Revisión",
+    "descripcion": "Oficina de Auditorías y Revisión de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-auditoria",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#4A5A6A",
+      "oscuro": "#1E2A35",
+      "acento": "#E9A92B",
+      "patron": "diagonales",
+      "icono": "buscar",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Control",
+      "titulo": "Oficina de Auditorías y Revisión",
+      "bajada": "Auditoría operativa interna bajo la supervisión del Director de Control.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Auditorías y Revisión</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Control. Sus funciones son:</p><ul><li>Auditoría operativa interna bajo la supervisión del Director de Control.</li><li>Antecedentes para el control financiero y presupuestario.</li><li>Constatar imputaciones contables y comprobar inventarios físicos.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 63.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-auditoria",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "buscar",
+            "texto": "Dirección de Control",
+            "descripcion": "Unidad de la que depende",
+            "url": "/direccion-de-control/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

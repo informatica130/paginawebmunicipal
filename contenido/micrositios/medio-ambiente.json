@@ -8,19 +8,42 @@
     "descripcion": "Gestión ambiental de la Municipalidad de Melipeuco: reciclaje, compostaje, retiro de residuos, educación ambiental, normativa, datos y participación ciudadana. Municipio Sustentable.",
     "publicado": true,
     "actualizado": "2026-10-27",
-    "tema": { "color": "#2F7D4A", "oscuro": "#0F3B26", "acento": "#E9A92B", "patron": "hojas", "icono": "hoja", "portada": "dividida", "imagen": "/wp-content/uploads/2025/05/REFORESTACION-PARQUE-ECOLOGICO.jpg" },
+    "tema": {
+      "color": "#2F7D4A",
+      "oscuro": "#0F3B26",
+      "acento": "#E9A92B",
+      "patron": "hojas",
+      "icono": "hoja",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/05/REFORESTACION-PARQUE-ECOLOGICO.jpg"
+    },
     "portada": {
       "antetitulo": "Municipio Sustentable · Unidad de Medio Ambiente",
       "titulo": "Melipeuco, comuna sustentable",
       "bajada": "Cuidamos los bosques, el agua y el aire de la comuna a los pies del volcán Llaima: reciclaje, compostaje, retiro de residuos, educación ambiental y participación de la comunidad.",
       "botones": [
-        { "texto": "Inscribirme al retiro de orgánicos", "url": "https://forms.gle/FJc8URXvUcNUnsMs8" },
-        { "texto": "Horario de recolección", "url": "#m-horario" }
+        {
+          "texto": "Inscribirme al retiro de orgánicos",
+          "url": "https://forms.gle/FJc8URXvUcNUnsMs8"
+        },
+        {
+          "texto": "Horario de recolección",
+          "url": "#m-horario"
+        }
       ],
       "cifras": [
-        { "valor": "$90 millones", "etiqueta": "de ahorro anual con el programa «Basura Cero»" },
-        { "valor": "−70 %", "etiqueta": "en el gasto de traslado de residuos (2024)" },
-        { "valor": "2 por semana", "etiqueta": "retiros de residuos orgánicos en el radio urbano" }
+        {
+          "valor": "$90 millones",
+          "etiqueta": "de ahorro anual con el programa «Basura Cero»"
+        },
+        {
+          "valor": "−70 %",
+          "etiqueta": "en el gasto de traslado de residuos (2024)"
+        },
+        {
+          "valor": "2 por semana",
+          "etiqueta": "retiros de residuos orgánicos en el radio urbano"
+        }
       ]
     },
     "contacto": {
@@ -30,149 +53,559 @@
       "email": "oficinadepartes@munimelipeuco.cl",
       "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
       "horario": "Lunes a viernes, 08:30 a 13:30 hrs",
-      "redes": [ { "texto": "Reclamos, consultas y denuncias (OIRS)", "url": "/oirs/" } ]
+      "redes": [
+        {
+          "texto": "Reclamos, consultas y denuncias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
     },
     "modulos": [
-      { "id": "unidad", "tipo": "texto", "ancla": "La unidad", "titulo": "Una gestión ambiental cercana",
+      {
+        "id": "unidad",
+        "tipo": "texto",
+        "ancla": "La unidad",
+        "titulo": "Una gestión ambiental cercana",
         "html": "<p>La <strong>Unidad de Medio Ambiente, Aseo y Ornato</strong> vela por el aseo de las vías públicas, parques, plazas y jardines; por el servicio de extracción de residuos; por la construcción y conservación de las áreas verdes, y colabora en la fiscalización de las normas de protección del medio ambiente dentro de la comuna (Ley 18.695, Orgánica Constitucional de Municipalidades).</p><p>Con el programa <strong>«Basura Cero»</strong> la comuna dejó de enviar gran parte de sus residuos fuera de Melipeuco: una compostera municipal transforma los residuos orgánicos y un sistema de recolección diferenciada, con vehículos eléctricos, retira los orgánicos casa por casa.</p>",
-        "imagen": "/wp-content/uploads/2025/05/INFRAESTRUCTURA.jpg", "lado": "derecha",
+        "imagen": "/wp-content/uploads/2025/05/INFRAESTRUCTURA.jpg",
+        "lado": "derecha",
         "destacado": "No queremos botar la basura: queremos transformarla en oportunidades para la comuna.",
-        "botones": [ { "texto": "Ver las cifras", "url": "#m-datos" } ] },
-
-      { "id": "temas", "tipo": "pestanas", "ancla": "Qué hacemos", "titulo": "Cómo cuidamos Melipeuco", "intro": "Cuatro líneas de trabajo en las que cada vecina y vecino puede sumarse desde su casa, su negocio o su campo.",
+        "botones": [
+          {
+            "texto": "Ver las cifras",
+            "url": "#m-datos"
+          }
+        ]
+      },
+      {
+        "id": "temas",
+        "tipo": "pestanas",
+        "ancla": "Qué hacemos",
+        "titulo": "Cómo cuidamos Melipeuco",
+        "intro": "Cuatro líneas de trabajo en las que cada vecina y vecino puede sumarse desde su casa, su negocio o su campo.",
         "items": [
-          { "titulo": "Compostaje", "icono": "hoja", "html": "<p>Los restos de cocina y del jardín no son basura: se convierten en abono. La compostera municipal procesa los residuos orgánicos del radio urbano, que se retiran <strong>los martes y viernes desde las 9:00</strong> para quienes se inscriben.</p><p>También realizamos capacitaciones de compostaje y lombricompostaje para producir humus en casa.</p>",
-            "puntos": ["Sí: restos de frutas y verduras, cáscaras de huevo, borra de café y bolsitas de té, hojas secas y pasto.", "No: carnes, huesos, lácteos, aceites ni fecas de mascotas.", "Mezcle material húmedo (cocina) con seco (hojas, cartón sin tinta) y mantenga la mezcla aireada."],
-            "enlace": "https://forms.gle/FJc8URXvUcNUnsMs8" },
-          { "titulo": "Residuos domiciliarios", "icono": "camion", "html": "<p>El camión recolector recorre la comuna según un calendario por sector. Saque sus residuos <strong>el día que corresponde a su sector</strong>, en bolsas bien cerradas, para evitar que los animales las rompan.</p><p>Periódicamente hacemos operativos de retiro de chatarra en el radio urbano para prevenir focos de insalubridad y vectores.</p>",
-            "puntos": ["Revise el horario de su sector más abajo.", "Separe los orgánicos: así se reduce lo que viaja fuera de la comuna.", "En los operativos de chatarra se retira sólo material ferroso y metales livianos; no se retiran televisores, refrigeradores, colchones ni muebles."],
-            "enlace": "#m-horario" },
-          { "titulo": "Reciclaje", "icono": "basura", "html": "<p>Aplicar la regla de las <strong>3R —Reducir, Reutilizar y Reciclar—</strong> mantiene la comuna limpia y sana. Separe papel, cartón, plásticos y vidrio, y lleve los residuos especiales (electrónicos, pilas) a los puntos limpios.</p><p>La comuna cuenta con su punto limpio y con el <strong>Punto Verde de Santa María de Llaima</strong>. La Ley REP (N° 20.920) obliga a quienes producen o importan ciertos productos a hacerse cargo de ellos cuando se convierten en residuos.</p>",
-            "puntos": ["Enjuague y seque envases antes de reciclarlos.", "Aplaste botellas y cajas para que ocupen menos espacio.", "Valore y apoye el trabajo de las recicladoras y recicladores de base."],
-            "enlace": "#m-mapa" },
-          { "titulo": "Cambio climático", "icono": "sol", "html": "<p>El déficit hídrico, los incendios forestales y los inviernos más extremos ya se sienten en el territorio. Por eso impulsamos la <strong>cosecha de aguas lluvias</strong> y el riego por goteo en huertas, las energías renovables —como la planta fotovoltaica de la Escuela Municipal Volcán Llaima— y la reforestación, como la del Parque Ecológico El Balneario.</p>",
-            "puntos": ["Use leña seca: calienta más y genera menos humo.", "No haga quemas en temporada de riesgo y avise de inmediato cualquier foco de incendio.", "Cuide el agua: riegue temprano o al atardecer y repare las filtraciones."],
-            "enlace": "#m-normativa" }
-        ] },
-
-      { "id": "datos", "tipo": "cifras", "ancla": "Datos", "titulo": "Datos ambientales de la comuna", "intro": "Resultados del programa «Basura Cero». Estos datos se actualizan al menos una vez al año.",
+          {
+            "titulo": "Compostaje",
+            "icono": "hoja",
+            "html": "<p>Los restos de cocina y del jardín no son basura: se convierten en abono. La compostera municipal procesa los residuos orgánicos del radio urbano, que se retiran <strong>los martes y viernes desde las 9:00</strong> para quienes se inscriben.</p><p>También realizamos capacitaciones de compostaje y lombricompostaje para producir humus en casa.</p>",
+            "puntos": [
+              "Sí: restos de frutas y verduras, cáscaras de huevo, borra de café y bolsitas de té, hojas secas y pasto.",
+              "No: carnes, huesos, lácteos, aceites ni fecas de mascotas.",
+              "Mezcle material húmedo (cocina) con seco (hojas, cartón sin tinta) y mantenga la mezcla aireada."
+            ],
+            "enlace": "https://forms.gle/FJc8URXvUcNUnsMs8"
+          },
+          {
+            "titulo": "Residuos domiciliarios",
+            "icono": "camion",
+            "html": "<p>El camión recolector recorre la comuna según un calendario por sector. Saque sus residuos <strong>el día que corresponde a su sector</strong>, en bolsas bien cerradas, para evitar que los animales las rompan.</p><p>Periódicamente hacemos operativos de retiro de chatarra en el radio urbano para prevenir focos de insalubridad y vectores.</p>",
+            "puntos": [
+              "Revise el horario de su sector más abajo.",
+              "Separe los orgánicos: así se reduce lo que viaja fuera de la comuna.",
+              "En los operativos de chatarra se retira sólo material ferroso y metales livianos; no se retiran televisores, refrigeradores, colchones ni muebles."
+            ],
+            "enlace": "#m-horario"
+          },
+          {
+            "titulo": "Reciclaje",
+            "icono": "basura",
+            "html": "<p>Aplicar la regla de las <strong>3R —Reducir, Reutilizar y Reciclar—</strong> mantiene la comuna limpia y sana. Separe papel, cartón, plásticos y vidrio, y lleve los residuos especiales (electrónicos, pilas) a los puntos limpios.</p><p>La comuna cuenta con su punto limpio y con el <strong>Punto Verde de Santa María de Llaima</strong>. La Ley REP (N° 20.920) obliga a quienes producen o importan ciertos productos a hacerse cargo de ellos cuando se convierten en residuos.</p>",
+            "puntos": [
+              "Enjuague y seque envases antes de reciclarlos.",
+              "Aplaste botellas y cajas para que ocupen menos espacio.",
+              "Valore y apoye el trabajo de las recicladoras y recicladores de base."
+            ],
+            "enlace": "#m-mapa"
+          },
+          {
+            "titulo": "Cambio climático",
+            "icono": "sol",
+            "html": "<p>El déficit hídrico, los incendios forestales y los inviernos más extremos ya se sienten en el territorio. Por eso impulsamos la <strong>cosecha de aguas lluvias</strong> y el riego por goteo en huertas, las energías renovables —como la planta fotovoltaica de la Escuela Municipal Volcán Llaima— y la reforestación, como la del Parque Ecológico El Balneario.</p>",
+            "puntos": [
+              "Use leña seca: calienta más y genera menos humo.",
+              "No haga quemas en temporada de riesgo y avise de inmediato cualquier foco de incendio.",
+              "Cuide el agua: riegue temprano o al atardecer y repare las filtraciones."
+            ],
+            "enlace": "#m-normativa"
+          }
+        ]
+      },
+      {
+        "id": "datos",
+        "tipo": "cifras",
+        "ancla": "Datos",
+        "titulo": "Datos ambientales de la comuna",
+        "intro": "Resultados del programa «Basura Cero». Estos datos se actualizan al menos una vez al año.",
         "items": [
-          { "valor": "$242", "unidad": "millones", "etiqueta": "gasto anual en traslado de residuos antes del programa", "icono": "camion" },
-          { "valor": "$72", "unidad": "millones", "etiqueta": "gasto en traslado de residuos en 2024", "nota": "2024", "icono": "grafico" },
-          { "valor": "$170", "unidad": "millones", "etiqueta": "de ahorro directo al año en traslado", "icono": "billete" },
-          { "valor": "+$90", "unidad": "millones", "etiqueta": "de ahorro consolidado al año, considerando combustible y logística", "icono": "hoja" }
+          {
+            "valor": "$242",
+            "unidad": "millones",
+            "etiqueta": "gasto anual en traslado de residuos antes del programa",
+            "icono": "camion"
+          },
+          {
+            "valor": "$72",
+            "unidad": "millones",
+            "etiqueta": "gasto en traslado de residuos en 2024",
+            "nota": "2024",
+            "icono": "grafico"
+          },
+          {
+            "valor": "$170",
+            "unidad": "millones",
+            "etiqueta": "de ahorro directo al año en traslado",
+            "icono": "billete"
+          },
+          {
+            "valor": "+$90",
+            "unidad": "millones",
+            "etiqueta": "de ahorro consolidado al año, considerando combustible y logística",
+            "icono": "hoja"
+          }
         ],
-        "fuente": "Unidad de Medio Ambiente de la Municipalidad de Melipeuco (marzo de 2025)." },
-
-      { "id": "horario", "tipo": "tabla", "ancla": "Horarios", "titulo": "Horario de recolección de residuos", "intro": "Busque su sector y saque sus residuos el día que corresponde.",
-        "columnas": ["Día", "Sector", "Recorrido"],
+        "fuente": "Unidad de Medio Ambiente de la Municipalidad de Melipeuco (marzo de 2025)."
+      },
+      {
+        "id": "horario",
+        "tipo": "tabla",
+        "ancla": "Horarios",
+        "titulo": "Horario de recolección de residuos",
+        "intro": "Busque su sector y saque sus residuos el día que corresponde.",
+        "columnas": [
+          "Día",
+          "Sector",
+          "Recorrido"
+        ],
         "filas": "Lunes | Rural | Tracura, Alpehue, Casa Blanca, Cumcumllaque, Caren Bajo, Flor del Valle, Salto Truful y Truful\nMartes | Urbano | Radio urbano de Melipeuco · retiro de orgánicos para inscritos desde las 9:00\nMiércoles | Rural | Huallerupe, Retiro, Santa María de Llaima (Molulco, Cherquén), carretera camino a Cunco y Los Mallines\nJueves | Rural | Parque Nacional Conguillío, Baita, Escorial, El Membrillo y Santa Julia\nViernes | Urbano | Radio urbano de Melipeuco · retiro de orgánicos para inscritos desde las 9:00",
-        "nota": "Los horarios pueden cambiar por feriados o emergencias: revise los avisos del sitio y de las redes municipales." },
-
-      { "id": "separar", "tipo": "pasos", "titulo": "Separar en casa, paso a paso", "intro": "Con cuatro hábitos, la mitad de la basura de un hogar deja de ser basura.",
+        "nota": "Los horarios pueden cambiar por feriados o emergencias: revise los avisos del sitio y de las redes municipales."
+      },
+      {
+        "id": "separar",
+        "tipo": "pasos",
+        "titulo": "Separar en casa, paso a paso",
+        "intro": "Con cuatro hábitos, la mitad de la basura de un hogar deja de ser basura.",
         "items": [
-          { "icono": "hoja", "titulo": "Separe los orgánicos", "texto": "Use un recipiente con tapa para los restos de cocina y entréguelos al retiro de orgánicos o a su compostera." },
-          { "icono": "agua", "titulo": "Limpie los reciclables", "texto": "Enjuague y seque envases de plástico, vidrio y latas; doble el cartón." },
-          { "icono": "ubicacion", "titulo": "Llévelos al punto limpio", "texto": "Deposite cada material en su contenedor. Pilas y electrónicos van separados." },
-          { "icono": "calendario", "titulo": "Saque el resto el día de su sector", "texto": "Bolsas bien cerradas y sólo el día del recorrido, para que no las rompan los animales." }
-        ] },
-
-      { "id": "inscripcion", "tipo": "llamado", "titulo": "Súmese al retiro de residuos orgánicos", "texto": "Vecinas y vecinos del radio urbano: el camión pasa los martes y viernes desde las 9:00. Inscríbase y ayude a reducir la basura que sale de la comuna.", "icono": "camion",
-        "boton": "Inscribirme", "url": "https://forms.gle/FJc8URXvUcNUnsMs8", "boton2": "Ver el horario", "url2": "#m-horario" },
-
-      { "id": "normativa", "tipo": "documentos", "ancla": "Normativa", "titulo": "Política, ordenanzas y regulaciones", "intro": "La política ambiental municipal, las ordenanzas comunales vigentes y las leyes que rigen la gestión ambiental local.",
+          {
+            "icono": "hoja",
+            "titulo": "Separe los orgánicos",
+            "texto": "Use un recipiente con tapa para los restos de cocina y entréguelos al retiro de orgánicos o a su compostera."
+          },
+          {
+            "icono": "agua",
+            "titulo": "Limpie los reciclables",
+            "texto": "Enjuague y seque envases de plástico, vidrio y latas; doble el cartón."
+          },
+          {
+            "icono": "ubicacion",
+            "titulo": "Llévelos al punto limpio",
+            "texto": "Deposite cada material en su contenedor. Pilas y electrónicos van separados."
+          },
+          {
+            "icono": "calendario",
+            "titulo": "Saque el resto el día de su sector",
+            "texto": "Bolsas bien cerradas y sólo el día del recorrido, para que no las rompan los animales."
+          }
+        ]
+      },
+      {
+        "id": "inscripcion",
+        "tipo": "llamado",
+        "titulo": "Súmese al retiro de residuos orgánicos",
+        "texto": "Vecinas y vecinos del radio urbano: el camión pasa los martes y viernes desde las 9:00. Inscríbase y ayude a reducir la basura que sale de la comuna.",
+        "icono": "camion",
+        "boton": "Inscribirme",
+        "url": "https://forms.gle/FJc8URXvUcNUnsMs8",
+        "boton2": "Ver el horario",
+        "url2": "#m-horario"
+      },
+      {
+        "id": "normativa",
+        "tipo": "documentos",
+        "ancla": "Normativa",
+        "titulo": "Política, ordenanzas y regulaciones",
+        "intro": "La política ambiental municipal, las ordenanzas comunales vigentes y las leyes que rigen la gestión ambiental local.",
         "items": [
-          { "titulo": "Política Ambiental Municipal", "descripcion": "Se publicará una vez informada al Concejo Municipal.", "tipo": "Política" },
-          { "titulo": "Ordenanza Ambiental Comunal", "descripcion": "En elaboración.", "tipo": "Ordenanza" },
-          { "titulo": "Ordenanza de Aseo y Ornato", "descripcion": "Decreto N° 2639, del 3 de agosto de 2016.", "tipo": "Ordenanza", "anio": "2016", "doc": "uxRaJo_xxs5_" },
-          { "titulo": "Ordenanza de Ruidos Molestos", "descripcion": "Ordenanza N° 2638, del 3 de agosto de 2016.", "tipo": "Ordenanza", "anio": "2016", "doc": "wxQNzG1yCEFg" },
-          { "titulo": "Ordenanza de transporte de basuras, desechos, escombros y residuos", "descripcion": "Decreto N° 4206, del 1 de diciembre de 2016.", "tipo": "Ordenanza", "anio": "2016", "doc": "1YdkiXE8gCD6" },
-          { "titulo": "Plan de emergencia por incendios forestales", "descripcion": "Plan específico de emergencia por variable de riesgo.", "tipo": "Plan", "anio": "2025", "doc": "YGBKUyi2osrc" },
-          { "titulo": "Ley N° 20.920: gestión de residuos, responsabilidad extendida del productor y fomento al reciclaje (Ley REP)", "tipo": "Ley", "anio": "2016", "url": "https://www.bcn.cl/leychile/navegar?idNorma=1090894" },
-          { "titulo": "Ley N° 19.300: bases generales del medio ambiente", "tipo": "Ley", "anio": "1994", "url": "https://www.bcn.cl/leychile/navegar?idNorma=30667" }
-        ] },
-
-      { "id": "cac", "tipo": "documentos", "ancla": "Participación", "titulo": "Comité Ambiental Comunal (CAC)", "intro": "El CAC reúne a vecinas, vecinos, organizaciones y la Municipalidad para acompañar la gestión ambiental de la comuna. Aquí se publican sus actas y los reportes de cada reunión.",
-        "items": [], "vacio": "Las actas y reportes de las reuniones del CAC se publicarán aquí después de cada sesión." },
-
-      { "id": "agenda", "tipo": "calendario", "ancla": "Actividades", "titulo": "Calendario ambiental", "intro": "Talleres educativos, operativos de retiro, ferias y actividades comunitarias.",
-        "items": [], "categoria": "medio-ambiente", "vacio": "Pronto publicaremos las próximas actividades, talleres y operativos." },
-
-      { "id": "educacion", "tipo": "tarjetas", "ancla": "Educación", "titulo": "Material educativo", "intro": "Guías breves para practicar en casa, en la escuela y en el campo.", "columnas": "4",
+          {
+            "titulo": "Política Ambiental Municipal",
+            "descripcion": "Se publicará una vez informada al Concejo Municipal.",
+            "tipo": "Política"
+          },
+          {
+            "titulo": "Ordenanza Ambiental Comunal",
+            "descripcion": "En elaboración.",
+            "tipo": "Ordenanza"
+          },
+          {
+            "titulo": "Ordenanza de Aseo y Ornato",
+            "descripcion": "Decreto N° 2639, del 3 de agosto de 2016.",
+            "tipo": "Ordenanza",
+            "anio": "2016",
+            "doc": "uxRaJo_xxs5_"
+          },
+          {
+            "titulo": "Ordenanza de Ruidos Molestos",
+            "descripcion": "Ordenanza N° 2638, del 3 de agosto de 2016.",
+            "tipo": "Ordenanza",
+            "anio": "2016",
+            "doc": "wxQNzG1yCEFg"
+          },
+          {
+            "titulo": "Ordenanza de transporte de basuras, desechos, escombros y residuos",
+            "descripcion": "Decreto N° 4206, del 1 de diciembre de 2016.",
+            "tipo": "Ordenanza",
+            "anio": "2016",
+            "doc": "1YdkiXE8gCD6"
+          },
+          {
+            "titulo": "Plan de emergencia por incendios forestales",
+            "descripcion": "Plan específico de emergencia por variable de riesgo.",
+            "tipo": "Plan",
+            "anio": "2025",
+            "doc": "YGBKUyi2osrc"
+          },
+          {
+            "titulo": "Ley N° 20.920: gestión de residuos, responsabilidad extendida del productor y fomento al reciclaje (Ley REP)",
+            "tipo": "Ley",
+            "anio": "2016",
+            "url": "https://www.bcn.cl/leychile/navegar?idNorma=1090894"
+          },
+          {
+            "titulo": "Ley N° 19.300: bases generales del medio ambiente",
+            "tipo": "Ley",
+            "anio": "1994",
+            "url": "https://www.bcn.cl/leychile/navegar?idNorma=30667"
+          }
+        ]
+      },
+      {
+        "id": "cac",
+        "tipo": "documentos",
+        "ancla": "Participación",
+        "titulo": "Comité Ambiental Comunal (CAC)",
+        "intro": "El CAC reúne a vecinas, vecinos, organizaciones y la Municipalidad para acompañar la gestión ambiental de la comuna. Aquí se publican sus actas y los reportes de cada reunión.",
+        "items": [],
+        "vacio": "Las actas y reportes de las reuniones del CAC se publicarán aquí después de cada sesión."
+      },
+      {
+        "id": "agenda",
+        "tipo": "calendario",
+        "ancla": "Actividades",
+        "titulo": "Calendario ambiental",
+        "intro": "Talleres educativos, operativos de retiro, ferias y actividades comunitarias.",
+        "items": [],
+        "categoria": "medio-ambiente",
+        "vacio": "Pronto publicaremos las próximas actividades, talleres y operativos."
+      },
+      {
+        "id": "educacion",
+        "tipo": "tarjetas",
+        "ancla": "Educación",
+        "titulo": "Material educativo",
+        "intro": "Guías breves para practicar en casa, en la escuela y en el campo.",
+        "columnas": "4",
         "items": [
-          { "icono": "hoja", "etiqueta": "Guía", "titulo": "Compostaje casero", "texto": "Qué se composta, cómo armar la compostera y cuándo usar el abono." },
-          { "icono": "basura", "etiqueta": "Guía", "titulo": "Separación de residuos", "texto": "Los materiales que se reciclan en la comuna y cómo entregarlos." },
-          { "icono": "agua", "etiqueta": "Guía", "titulo": "Agua y huerta", "texto": "Cosecha de aguas lluvias y riego por goteo para enfrentar la sequía." },
-          { "icono": "fuego", "etiqueta": "Guía", "titulo": "Prevención de incendios", "texto": "Cuidados en temporada de riesgo y cómo avisar un foco a tiempo." }
-        ] },
-
-      { "id": "folletos", "tipo": "documentos", "titulo": "Folletos y recursos para descargar", "items": [], "vacio": "Los folletos y guías en PDF se publicarán aquí." },
-
-      { "id": "mapa", "tipo": "mapa", "ancla": "Mapas", "titulo": "Mapa de puntos de reciclaje", "intro": "Los puntos de reciclaje de la comuna; puede filtrar por tipo de material.",
-        "url": "https://www.google.com/maps/d/embed?mid=1DI8VVRVsYQDWykByUP6vMA7FNe_HBK1V&ehbc=2E312F", "alto": 480, "leyenda": [] },
-
-      { "id": "riesgos", "tipo": "mapa", "titulo": "Mapa de riesgos ambientales y climáticos", "intro": "Zonas de riesgo volcánico, de incendio forestal, inundación y remoción en masa de la comuna.",
-        "url": "", "vacio": "El mapa de riesgos ambientales y climáticos de la comuna está en preparación." },
-
-      { "id": "territorio", "tipo": "texto", "titulo": "Recursos naturales y servicios ecosistémicos",
+          {
+            "icono": "hoja",
+            "etiqueta": "Guía",
+            "titulo": "Compostaje casero",
+            "texto": "Qué se composta, cómo armar la compostera y cuándo usar el abono."
+          },
+          {
+            "icono": "basura",
+            "etiqueta": "Guía",
+            "titulo": "Separación de residuos",
+            "texto": "Los materiales que se reciclan en la comuna y cómo entregarlos."
+          },
+          {
+            "icono": "agua",
+            "etiqueta": "Guía",
+            "titulo": "Agua y huerta",
+            "texto": "Cosecha de aguas lluvias y riego por goteo para enfrentar la sequía."
+          },
+          {
+            "icono": "fuego",
+            "etiqueta": "Guía",
+            "titulo": "Prevención de incendios",
+            "texto": "Cuidados en temporada de riesgo y cómo avisar un foco a tiempo."
+          }
+        ]
+      },
+      {
+        "id": "folletos",
+        "tipo": "documentos",
+        "titulo": "Folletos y recursos para descargar",
+        "items": [],
+        "vacio": "Los folletos y guías en PDF se publicarán aquí."
+      },
+      {
+        "id": "mapa",
+        "tipo": "mapa",
+        "ancla": "Mapas",
+        "titulo": "Mapa de puntos de reciclaje",
+        "intro": "Los puntos de reciclaje de la comuna; puede filtrar por tipo de material.",
+        "url": "https://www.google.com/maps/d/embed?mid=1DI8VVRVsYQDWykByUP6vMA7FNe_HBK1V&ehbc=2E312F",
+        "alto": 480,
+        "leyenda": []
+      },
+      {
+        "id": "riesgos",
+        "tipo": "mapa",
+        "titulo": "Mapa de riesgos ambientales y climáticos",
+        "intro": "Zonas de riesgo volcánico, de incendio forestal, inundación y remoción en masa de la comuna.",
+        "url": "",
+        "vacio": "El mapa de riesgos ambientales y climáticos de la comuna está en preparación."
+      },
+      {
+        "id": "territorio",
+        "tipo": "texto",
+        "titulo": "Recursos naturales y servicios ecosistémicos",
         "html": "<p>Melipeuco es puerta de entrada al <strong>Parque Nacional Conguillío</strong> y forma parte del territorio del <strong>Geoparque Kütralkura</strong>. Sus bosques de araucarias, ríos como el Truful-Truful y el Allipén, sus lagunas y suelos volcánicos entregan agua, alimento, leña, turismo y paisaje a la comunidad.</p><p>Aquí se informará sobre el uso y la conservación de estos recursos y sobre las <strong>zonas declaradas contaminadas</strong> mediante decreto, por tipo de contaminante y localización, cuando corresponda.</p>",
-        "imagen": "/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-19-at-3.35.18-PM.jpeg", "lado": "izquierda" },
-
-      { "id": "presupuesto", "tipo": "enlaces", "titulo": "Presupuesto y gastos ambientales", "intro": "El presupuesto asignado a los programas ambientales y cómo se usan los fondos se publica en Transparencia.",
+        "imagen": "/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-19-at-3.35.18-PM.jpeg",
+        "lado": "izquierda"
+      },
+      {
+        "id": "presupuesto",
+        "tipo": "enlaces",
+        "titulo": "Presupuesto y gastos ambientales",
+        "intro": "El presupuesto asignado a los programas ambientales y cómo se usan los fondos se publica en Transparencia.",
         "items": [
-          { "icono": "grafico", "texto": "Información presupuestaria", "descripcion": "Presupuesto municipal y su ejecución", "url": "/transparencia/activa/informacion-presupuestaria/" },
-          { "icono": "documento", "texto": "Documentos de presupuesto", "descripcion": "Informes trimestrales y balances", "url": "/transparencia/documentos/?materia=presupuesto" },
-          { "icono": "billete", "texto": "Compras y contrataciones", "descripcion": "Contratos de aseo, recolección y áreas verdes", "url": "/transparencia/activa/adquisiciones-y-contrataciones/" }
-        ] },
-
-      { "id": "scams", "tipo": "texto", "ancla": "Municipio Sustentable", "titulo": "Municipio Sustentable (SCAM)",
+          {
+            "icono": "grafico",
+            "texto": "Información presupuestaria",
+            "descripcion": "Presupuesto municipal y su ejecución",
+            "url": "/transparencia/activa/informacion-presupuestaria/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Documentos de presupuesto",
+            "descripcion": "Informes trimestrales y balances",
+            "url": "/transparencia/documentos/?materia=presupuesto"
+          },
+          {
+            "icono": "billete",
+            "texto": "Compras y contrataciones",
+            "descripcion": "Contratos de aseo, recolección y áreas verdes",
+            "url": "/transparencia/activa/adquisiciones-y-contrataciones/"
+          }
+        ]
+      },
+      {
+        "id": "scams",
+        "tipo": "texto",
+        "ancla": "Municipio Sustentable",
+        "titulo": "Municipio Sustentable (SCAM)",
         "html": "<p>Melipeuco participa del <strong>Sistema de Certificación Ambiental Municipal</strong> de la Subsecretaría del Medio Ambiente, que acompaña a los municipios para integrar la gestión ambiental en su trabajo diario: participación ciudadana, educación, gestión de residuos, eficiencia hídrica y energética, y transparencia de la información ambiental.</p>",
-        "imagen": "/wp-content/uploads/2025/05/scam-intermedio.png", "lado": "derecha",
-        "botones": [ { "texto": "Plataforma SCAM del Ministerio", "url": "https://scam.mma.gob.cl/" } ] },
-
-      { "id": "ruta", "tipo": "hitos", "titulo": "Hoja de ruta de la plataforma ambiental", "intro": "Etapas para tener toda la información ambiental de la comuna disponible en este sitio.",
+        "imagen": "/wp-content/uploads/2025/05/scam-intermedio.png",
+        "lado": "derecha",
+        "botones": [
+          {
+            "texto": "Plataforma SCAM del Ministerio",
+            "url": "https://scam.mma.gob.cl/"
+          }
+        ]
+      },
+      {
+        "id": "ruta",
+        "tipo": "hitos",
+        "titulo": "Hoja de ruta de la plataforma ambiental",
+        "intro": "Etapas para tener toda la información ambiental de la comuna disponible en este sitio.",
         "items": [
-          { "periodo": "Julio 2026", "titulo": "Hito inicial", "texto": "Comienza el plazo de desarrollo de la plataforma.", "estado": "hecho" },
-          { "periodo": "Agosto – septiembre 2026", "titulo": "Estructura y enlaces", "texto": "Diseño de una sección web amigable y enlace con la plataforma SCAM.", "estado": "hecho" },
-          { "periodo": "Octubre – noviembre 2026", "titulo": "Carga institucional y legal", "texto": "Política ambiental, ordenanzas y regulaciones vigentes.", "estado": "curso" },
-          { "periodo": "Diciembre 2026 – enero 2027", "titulo": "Gobernanza y educación", "texto": "Actas del CAC, calendario de actividades y material educativo.", "estado": "pendiente" },
-          { "periodo": "Febrero – marzo 2027", "titulo": "Diagnósticos y mapas", "texto": "Datos y estadísticas ambientales, y mapa de riesgos.", "estado": "pendiente" },
-          { "periodo": "Abril 2027", "titulo": "Ecosistema público", "texto": "Directorio de instituciones, presupuesto y recursos.", "estado": "pendiente" },
-          { "periodo": "Junio 2027", "titulo": "Puesta en marcha", "texto": "Revisión final de la plataforma.", "estado": "pendiente" }
-        ] },
-
-      { "id": "entidades", "tipo": "directorio", "ancla": "Instituciones", "titulo": "Instituciones con competencia ambiental", "intro": "Organismos públicos a los que puede recurrir según el tema.",
+          {
+            "periodo": "Julio 2026",
+            "titulo": "Hito inicial",
+            "texto": "Comienza el plazo de desarrollo de la plataforma.",
+            "estado": "hecho"
+          },
+          {
+            "periodo": "Agosto – septiembre 2026",
+            "titulo": "Estructura y enlaces",
+            "texto": "Diseño de una sección web amigable y enlace con la plataforma SCAM.",
+            "estado": "hecho"
+          },
+          {
+            "periodo": "Octubre – noviembre 2026",
+            "titulo": "Carga institucional y legal",
+            "texto": "Política ambiental, ordenanzas y regulaciones vigentes.",
+            "estado": "curso"
+          },
+          {
+            "periodo": "Diciembre 2026 – enero 2027",
+            "titulo": "Gobernanza y educación",
+            "texto": "Actas del CAC, calendario de actividades y material educativo.",
+            "estado": "pendiente"
+          },
+          {
+            "periodo": "Febrero – marzo 2027",
+            "titulo": "Diagnósticos y mapas",
+            "texto": "Datos y estadísticas ambientales, y mapa de riesgos.",
+            "estado": "pendiente"
+          },
+          {
+            "periodo": "Abril 2027",
+            "titulo": "Ecosistema público",
+            "texto": "Directorio de instituciones, presupuesto y recursos.",
+            "estado": "pendiente"
+          },
+          {
+            "periodo": "Junio 2027",
+            "titulo": "Puesta en marcha",
+            "texto": "Revisión final de la plataforma.",
+            "estado": "pendiente"
+          }
+        ]
+      },
+      {
+        "id": "entidades",
+        "tipo": "directorio",
+        "ancla": "Instituciones",
+        "titulo": "Instituciones con competencia ambiental",
+        "intro": "Organismos públicos a los que puede recurrir según el tema.",
         "items": [
-          { "nombre": "Ministerio del Medio Ambiente", "sigla": "MMA", "texto": "Diseña y aplica las políticas, planes y normas ambientales del país, y coordina la certificación ambiental municipal.", "url": "https://mma.gob.cl/" },
-          { "nombre": "Superintendencia del Medio Ambiente", "sigla": "SMA", "texto": "Fiscaliza el cumplimiento de las normas y permisos ambientales y recibe denuncias ciudadanas.", "url": "https://portal.sma.gob.cl/" },
-          { "nombre": "Servicio de Evaluación Ambiental", "sigla": "SEA", "texto": "Administra la evaluación ambiental de los proyectos y la participación ciudadana en ella.", "url": "https://www.sea.gob.cl/" },
-          { "nombre": "Corporación Nacional Forestal", "sigla": "CONAF", "texto": "Administra las áreas silvestres protegidas, como el Parque Nacional Conguillío, y combate los incendios forestales.", "url": "https://www.conaf.cl/" },
-          { "nombre": "Servicio Agrícola y Ganadero", "sigla": "SAG", "texto": "Protege la salud animal y vegetal, los suelos y la fauna silvestre.", "url": "https://www.sag.gob.cl/" },
-          { "nombre": "Dirección General de Aguas", "sigla": "DGA", "texto": "Administra los derechos de agua y vigila el uso de las aguas superficiales y subterráneas.", "url": "https://dga.mop.gob.cl/" },
-          { "nombre": "Servicio Nacional de Geología y Minería", "sigla": "SERNAGEOMIN", "texto": "Vigila la actividad de los volcanes, entre ellos el Llaima.", "url": "https://www.sernageomin.cl/" },
-          { "nombre": "Servicio Nacional de Prevención y Respuesta ante Desastres", "sigla": "SENAPRED", "texto": "Coordina la prevención y la respuesta ante emergencias y desastres.", "url": "https://senapred.cl/" }
-        ] },
-
-      { "id": "preguntas", "tipo": "faq", "titulo": "Preguntas frecuentes",
+          {
+            "nombre": "Ministerio del Medio Ambiente",
+            "sigla": "MMA",
+            "texto": "Diseña y aplica las políticas, planes y normas ambientales del país, y coordina la certificación ambiental municipal.",
+            "url": "https://mma.gob.cl/"
+          },
+          {
+            "nombre": "Superintendencia del Medio Ambiente",
+            "sigla": "SMA",
+            "texto": "Fiscaliza el cumplimiento de las normas y permisos ambientales y recibe denuncias ciudadanas.",
+            "url": "https://portal.sma.gob.cl/"
+          },
+          {
+            "nombre": "Servicio de Evaluación Ambiental",
+            "sigla": "SEA",
+            "texto": "Administra la evaluación ambiental de los proyectos y la participación ciudadana en ella.",
+            "url": "https://www.sea.gob.cl/"
+          },
+          {
+            "nombre": "Corporación Nacional Forestal",
+            "sigla": "CONAF",
+            "texto": "Administra las áreas silvestres protegidas, como el Parque Nacional Conguillío, y combate los incendios forestales.",
+            "url": "https://www.conaf.cl/"
+          },
+          {
+            "nombre": "Servicio Agrícola y Ganadero",
+            "sigla": "SAG",
+            "texto": "Protege la salud animal y vegetal, los suelos y la fauna silvestre.",
+            "url": "https://www.sag.gob.cl/"
+          },
+          {
+            "nombre": "Dirección General de Aguas",
+            "sigla": "DGA",
+            "texto": "Administra los derechos de agua y vigila el uso de las aguas superficiales y subterráneas.",
+            "url": "https://dga.mop.gob.cl/"
+          },
+          {
+            "nombre": "Servicio Nacional de Geología y Minería",
+            "sigla": "SERNAGEOMIN",
+            "texto": "Vigila la actividad de los volcanes, entre ellos el Llaima.",
+            "url": "https://www.sernageomin.cl/"
+          },
+          {
+            "nombre": "Servicio Nacional de Prevención y Respuesta ante Desastres",
+            "sigla": "SENAPRED",
+            "texto": "Coordina la prevención y la respuesta ante emergencias y desastres.",
+            "url": "https://senapred.cl/"
+          }
+        ]
+      },
+      {
+        "id": "preguntas",
+        "tipo": "faq",
+        "titulo": "Preguntas frecuentes",
         "items": [
-          { "pregunta": "¿Cómo me inscribo al retiro de residuos orgánicos?", "respuesta": "Complete el formulario de inscripción (botón «Inscribirme» de esta página). El retiro es para el radio urbano, los martes y viernes desde las 9:00." },
-          { "pregunta": "¿Dónde dejo pilas, aparatos electrónicos y otros residuos especiales?", "respuesta": "En los puntos limpios de la comuna. Revise el mapa de puntos de reciclaje para encontrar el más cercano." },
-          { "pregunta": "¿Qué se retira en los operativos de chatarra?", "respuesta": "Sólo chatarra: material ferroso, latas y otros metales livianos reciclables. No se retiran televisores, refrigeradores, colchones, muebles ni otros residuos voluminosos." },
-          { "pregunta": "¿Cómo aviso de un microbasural, una quema o un problema ambiental?", "respuesta": "Llame a la Unidad de Medio Ambiente al +56 45 2581001 o ingrese su reclamo o denuncia en la OIRS del sitio. Ante un incendio, llame de inmediato a Bomberos (132) o a CONAF (130)." },
-          { "pregunta": "¿Cambian los horarios de recolección en feriados?", "respuesta": "Pueden cambiar. Los avisos se publican en este sitio y en las redes sociales de la Municipalidad." }
-        ] },
-
-      { "id": "noticias", "tipo": "noticias", "ancla": "Noticias", "titulo": "Noticias ambientales", "categoria": "medio-ambiente", "palabras": "reciclaje, compostaje, medio ambiente, residuos, basura cero", "cantidad": 6 },
-
-      { "id": "galeria", "tipo": "galeria", "titulo": "En terreno",
+          {
+            "pregunta": "¿Cómo me inscribo al retiro de residuos orgánicos?",
+            "respuesta": "Complete el formulario de inscripción (botón «Inscribirme» de esta página). El retiro es para el radio urbano, los martes y viernes desde las 9:00."
+          },
+          {
+            "pregunta": "¿Dónde dejo pilas, aparatos electrónicos y otros residuos especiales?",
+            "respuesta": "En los puntos limpios de la comuna. Revise el mapa de puntos de reciclaje para encontrar el más cercano."
+          },
+          {
+            "pregunta": "¿Qué se retira en los operativos de chatarra?",
+            "respuesta": "Sólo chatarra: material ferroso, latas y otros metales livianos reciclables. No se retiran televisores, refrigeradores, colchones, muebles ni otros residuos voluminosos."
+          },
+          {
+            "pregunta": "¿Cómo aviso de un microbasural, una quema o un problema ambiental?",
+            "respuesta": "Llame a la Unidad de Medio Ambiente al +56 45 2581001 o ingrese su reclamo o denuncia en la OIRS del sitio. Ante un incendio, llame de inmediato a Bomberos (132) o a CONAF (130)."
+          },
+          {
+            "pregunta": "¿Cambian los horarios de recolección en feriados?",
+            "respuesta": "Pueden cambiar. Los avisos se publican en este sitio y en las redes sociales de la Municipalidad."
+          }
+        ]
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "perro",
+            "texto": "Box Veterinario Municipal",
+            "descripcion": "Atención, vacunación y esterilización de mascotas",
+            "url": "/boxveterinario/"
+          },
+          {
+            "icono": "basura",
+            "texto": "Aseo y Ornato",
+            "descripcion": "Aseo de vías públicas, áreas verdes y residuos",
+            "url": "/aseo-y-ornato/"
+          },
+          {
+            "icono": "herramienta",
+            "texto": "Dirección de Obras",
+            "url": "/obras/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias ambientales",
+        "categoria": "medio-ambiente",
+        "palabras": "reciclaje, compostaje, medio ambiente, residuos, basura cero",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
         "imagenes": [
-          { "src": "/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-19-at-3.35.18-PM.jpeg", "alt": "Inauguración del Punto Verde de Santa María de Llaima" },
-          { "src": "/wp-content/uploads/2025/05/INFRAESTRUCTURA.jpg", "alt": "Nueva infraestructura del punto limpio de la comuna" },
-          { "src": "/wp-content/uploads/2025/05/REFORESTACION-PARQUE-ECOLOGICO.jpg", "alt": "Reforestación del Parque Ecológico El Balneario" },
-          { "src": "/wp-content/uploads/2025/05/Visita-del-Gobernador.jpg", "alt": "Visita del Gobernador Regional" },
-          { "src": "/wp-content/uploads/2025/04/489315040_1099980032167402_3487611126978987606_n-1.jpg", "alt": "«El Árbol que Habla»: arte y conciencia ambiental" },
-          { "src": "/wp-content/uploads/2025/07/512690112_1162941742537897_8668463532428423624_n.jpg", "alt": "Campaña «Súmate al cuidado del medio ambiente»" }
-        ] }
+          {
+            "src": "/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-19-at-3.35.18-PM.jpeg",
+            "alt": "Inauguración del Punto Verde de Santa María de Llaima"
+          },
+          {
+            "src": "/wp-content/uploads/2025/05/INFRAESTRUCTURA.jpg",
+            "alt": "Nueva infraestructura del punto limpio de la comuna"
+          },
+          {
+            "src": "/wp-content/uploads/2025/05/REFORESTACION-PARQUE-ECOLOGICO.jpg",
+            "alt": "Reforestación del Parque Ecológico El Balneario"
+          },
+          {
+            "src": "/wp-content/uploads/2025/05/Visita-del-Gobernador.jpg",
+            "alt": "Visita del Gobernador Regional"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/489315040_1099980032167402_3487611126978987606_n-1.jpg",
+            "alt": "«El Árbol que Habla»: arte y conciencia ambiental"
+          },
+          {
+            "src": "/wp-content/uploads/2025/07/512690112_1162941742537897_8668463532428423624_n.jpg",
+            "alt": "Campaña «Súmate al cuidado del medio ambiente»"
+          }
+        ]
+      }
+    ],
+    "organigrama": "dep-medioambiente",
+    "alias": [
+      "medio-ambiente"
     ]
   }
 }

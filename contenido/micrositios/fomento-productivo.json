@@ -1,0 +1,109 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "fomento-productivo",
+    "nombre": "Fomento Productivo",
+    "slug": "fomento-productivo",
+    "unidad": "Oficina de Promoción del Fomento Productivo Local",
+    "descripcion": "Oficina de Promoción del Fomento Productivo Local de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-fomento",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#8A5A3B",
+      "oscuro": "#432816",
+      "acento": "#E9A92B",
+      "patron": "montes",
+      "icono": "grafico",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/762629823_1492560429576025_520058368672760345_n-1.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Desarrollo Económico Local",
+      "titulo": "Oficina de Promoción del Fomento Productivo Local",
+      "bajada": "Promover fuentes productivas y capacidades locales.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8818",
+      "email": "udel@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Promoción del Fomento Productivo Local</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Desarrollo Económico Local. Sus funciones son:</p><ul><li>Promover fuentes productivas y capacidades locales.</li><li>Promover la regularización de emprendimientos locales.</li><li>Gestionar ferias de emprendimiento dentro y fuera de la comuna.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 30.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-fomento",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "grafico",
+            "texto": "Departamento de Desarrollo Económico Local",
+            "descripcion": "Unidad de la que depende",
+            "url": "/udel/"
+          },
+          {
+            "icono": "mapa",
+            "texto": "Oficina de Recursos Hídricos y Saneamiento de Títulos",
+            "descripcion": "Oficina",
+            "url": "/recursos-hidricos/"
+          },
+          {
+            "icono": "mapa",
+            "texto": "Oficina de Turismo",
+            "descripcion": "Oficina",
+            "url": "/turismo/"
+          },
+          {
+            "icono": "libro",
+            "texto": "Oficina de Cultura",
+            "descripcion": "Oficina",
+            "url": "/cultura/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de fomento productivo",
+        "categoria": "udel",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

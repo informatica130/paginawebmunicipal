@@ -690,6 +690,7 @@ export async function fichaArea(ctx, a) {
     cuerpo: html`${encabezado({ titulo: a.titulo, bajada: d.nombreCorto && d.nombreCorto !== a.titulo ? d.nombreCorto : '', migas: migas([{ texto: 'Áreas municipales', url: '/areas/' }, ...(padre ? [{ texto: padre.datos.nombreCorto || padre.titulo, url: ctx.repo.urlDe(padre) }] : []), { texto: d.nombreCorto || a.titulo }]), ctx })}
       <div class="contenedor con-lateral">
         <div>
+          ${(() => { const ms = ctx.micro?.porUnidad(d.transitoDepartamento); return ms ? html`<a class="ms-aviso-sitio" href="/${ms.slug}/" style="--c:${ms.tema.color}">${crudo(icono(ms.tema.icono || 'estrella', { tam: 26 }))}<span><b>Visite el sitio de ${ms.nombre}</b><small>Servicios, trámites, documentos, noticias y contacto de la unidad</small></span>${crudo(icono('flecha', { tam: 20 }))}</a>` : ''; })()}
           ${a.cuerpo ? html`<div class="prosa">${crudo(a.cuerpo)}</div>` : ''}
           ${d.funciones?.length ? html`<section class="ficha-seccion"><h2>${crudo(icono('lista', { tam: 22 }))} Funciones</h2><ul class="lista-check">${d.funciones.map((f) => html`<li>${f}</li>`)}</ul>${d.norma ? html`<p class="meta">${d.norma}</p>` : ''}</section>` : ''}
           ${await renderBloques(ctx, a.bloques, { contenido: a })}

@@ -1,0 +1,115 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "transformacion-digital",
+    "nombre": "Informática y TD",
+    "slug": "transformacion-digital",
+    "unidad": "Oficina de Desarrollo Informático y Transformación Digital Municipal",
+    "descripcion": "Oficina de Desarrollo Informático y Transformación Digital Municipal de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-informatica",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#16A0A8",
+      "oscuro": "#0A5155",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "wifi",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Secretaría Comunal de Planificación",
+      "titulo": "Oficina de Desarrollo Informático y Transformación Digital Municipal",
+      "bajada": "Administrar los sistemas de información, redes y equipos computacionales.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "informatica@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "ley",
+        "tipo": "texto",
+        "ancla": "Transformación digital",
+        "titulo": "Ley de Transformación Digital del Estado",
+        "html": "<p>La <strong>Ley N° 21.180</strong> establece un marco para modernizar el Estado incorporando tecnologías digitales en los procesos administrativos, para mejorar la eficiencia, la transparencia y la calidad de los servicios a la ciudadanía.</p><ul><li>Modernización de los trámites municipales.</li><li>Digitalización de los procesos internos.</li><li>Más transparencia y acceso a la información.</li></ul>",
+        "botones": [
+          {
+            "texto": "Convenios de transformación digital",
+            "url": "/transformaciondigital/"
+          },
+          {
+            "texto": "Trámites en línea",
+            "url": "/tramites/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Desarrollo Informático y Transformación Digital Municipal</strong> es parte de la Municipalidad de Melipeuco y depende de la Secretaría Comunal de Planificación. Sus funciones son:</p><ul><li>Administrar los sistemas de información, redes y equipos computacionales.</li><li>Liderar la Transformación Digital en el marco de la Ley 21.180 y apoyar su implementación.</li><li>Estrategias, reglamentos y manuales de digitalización de procesos.</li><li>Soporte y capacitación a usuarios internos; contraparte técnica de servicios informáticos contratados.</li><li>Integridad de la información y planes de contingencia.</li><li>Estadísticas y bases de datos integradas para la toma de decisiones.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 66.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Informática y Transformación Digital",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "informatica@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-informatica",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "mapa",
+            "texto": "Secretaría Comunal de Planificación",
+            "descripcion": "Unidad de la que depende",
+            "url": "/secplan/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}
