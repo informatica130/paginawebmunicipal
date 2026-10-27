@@ -618,7 +618,76 @@
       d.dispatchEvent(new CustomEvent('mlp:diseno', { detail: { reproducir: !!m.reproducir, transicion: !!m.transicion } }));
       if (m.logo) { $$('[data-diseno-logo]').forEach(function (img) { img.src = m.logo[img.getAttribute('data-diseno-logo')]; }); var mt = $('.marca-texto'); if (mt) mt.hidden = !m.logo.conTexto; }
     });
+    // «Tocar para editar» del panel de diseño: resalta la parte bajo el cursor y, al hacer clic,
+    // avisa al panel qué opciones le corresponden (la zona más interior gana).
+    var insp = null, marcaInsp = null;
+    var zonaInsp = function (t) {
+      var mejor = null;
+      (insp.zonas || []).forEach(function (z) { var el = t.closest && t.closest(z[0]); if (el && (!mejor || mejor.el.contains(el))) mejor = { el: el, grupo: z[1] }; });
+      if (mejor && mejor.grupo === 'secciones') mejor.sec = mejor.el.getAttribute('data-sec');
+      return mejor;
+    };
+    var moverInsp = function (e) {
+      var z = zonaInsp(e.target);
+      if (!z) { marcaInsp.hidden = true; return; }
+      var r = z.el.getBoundingClientRect();
+      marcaInsp.hidden = false;
+      marcaInsp.style.cssText = 'top:' + (r.top + scrollY) + 'px;left:' + (r.left + scrollX) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+      marcaInsp.firstChild.textContent = '✎ ' + ((insp.nombres || {})[z.sec ? 'sec:' + z.sec : z.grupo] || z.grupo);
+    };
+    var clicInsp = function (e) {
+      var z = zonaInsp(e.target);
+      if (!z) return;
+      e.preventDefault(); e.stopPropagation();
+      window.parent.postMessage({ tipo: 'mlp-elegido', grupo: z.grupo, sec: z.sec || '' }, location.origin);
+    };
+    window.addEventListener('message', function (e) {
+      if (e.origin !== location.origin || e.source !== window.parent || !e.data || e.data.tipo !== 'mlp-inspeccionar') return;
+      insp = e.data.activo ? e.data : null;
+      raiz.classList.toggle('inspeccionando', !!insp);
+      if (insp && !marcaInsp) { marcaInsp = d.createElement('div'); marcaInsp.className = 'marca-inspector'; marcaInsp.hidden = true; marcaInsp.appendChild(d.createElement('span')); d.body.appendChild(marcaInsp); }
+      d[insp ? 'addEventListener' : 'removeEventListener']('mouseover', moverInsp, true);
+      d[insp ? 'addEventListener' : 'removeEventListener']('click', clicInsp, true);
+      if (!insp && marcaInsp) marcaInsp.hidden = true;
+    });
     window.parent.postMessage({ tipo: 'mlp-vista-lista' }, location.origin);
+  }
+
+  // ---------------- Micrositios: pestañas (con teclado) y barra de secciones que sigue la lectura
+  $$('[data-ms-pestanas]').forEach(function (caja) {
+    var tabs = [].slice.call(caja.querySelectorAll('[role="tab"]'));
+    var elegir = function (t, foco) {
+      tabs.forEach(function (x) { var si = x === t; x.setAttribute('aria-selected', String(si)); x.tabIndex = si ? 0 : -1; d.getElementById(x.getAttribute('aria-controls')).hidden = !si; });
+      if (foco) t.focus();
+      t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { elegir(t); });
+      t.addEventListener('keydown', function (e) {
+        var n = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (n === undefined) return;
+        e.preventDefault(); elegir(tabs[(n + tabs.length) % tabs.length], true);
+      });
+    });
+  });
+  var msNav = $('[data-ms-nav]');
+  if (msNav) {
+    // La barra queda justo bajo la cabecera fija (que se compacta al bajar).
+    var cabMs = $('.cabecera'), altoCab = function () { if (cabMs && raiz.getAttribute('data-cabecera-fija') === 'si') raiz.style.setProperty('--alto-cabecera', Math.round(cabMs.getBoundingClientRect().height) + 'px'); else raiz.style.setProperty('--alto-cabecera', '0px'); };
+    altoCab(); addEventListener('resize', altoCab); addEventListener('scroll', function () { requestAnimationFrame(altoCab); }, { passive: true });
+  }
+  if (msNav && 'IntersectionObserver' in window) {
+    var enlaces = [].slice.call(msNav.querySelectorAll('a'));
+    var vistos = new Map();
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { vistos.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0); });
+      var mejor = null, max = 0;
+      enlaces.forEach(function (a) { var r = vistos.get(a.hash.slice(1)) || 0; if (r > max) { max = r; mejor = a; } });
+      if (!mejor) return;
+      enlaces.forEach(function (a) { a.setAttribute('aria-current', String(a === mejor)); });
+      mejor.scrollIntoView({ block: 'nearest', inline: 'center' });
+    }, { rootMargin: '-120px 0px -45% 0px', threshold: [0, .1, .3, .6] });
+    enlaces.forEach(function (a) { var s = d.getElementById(a.hash.slice(1)); if (s) io.observe(s); });
   }
 
   // ---------------- Aplicación instalable y lectura sin conexión

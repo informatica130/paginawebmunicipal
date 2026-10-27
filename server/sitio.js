@@ -13,6 +13,8 @@ import { TIPOS, RUTAS } from '../src/tipos.js';
 import { ahora } from './db.js';
 import { sha256, tokenAleatorio } from './auth.js';
 import { crearExtensiones } from './extensiones.js';
+import { crearMicrositios } from './micrositios.js';
+import { paginaMicrositio, textoMicrositio } from './render/micrositio.js';
 import { buscarTransparencia } from './render/transparencia.js';
 import { paginaArchivo, buscarArchivo, inventario, urlDoc } from './render/archivo.js';
 import { paginaActiva, buscarActiva } from './render/portal.js';
@@ -27,6 +29,7 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
 
   const ajustes = () => ({ ...(db.ajuste('sitio') || {}) });
   const ext = crearExtensiones({ db });
+  const micro = crearMicrositios({ db });
   // Dominios externos que el código propio necesita (se suman a la política de seguridad).
   const seguridad = (req, nonce) => req.seguridad(nonce, false, ext.dominios());
   const categoriasDe = (id) => repo.taxonomiasDe(id).filter((t) => t.tipo === 'categoria');
@@ -220,7 +223,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     for (const f of db.all("SELECT id, tipo, slug, padre_id, publicado_en, creado, modificado, datos FROM contenidos WHERE estado = 'publicado' AND tipo NOT IN ('slide','acceso','aviso','contacto') AND json_extract(seo, '$.noindex') IS NOT 1")) {
       urls.push({ u: repo.urlDe({ ...f, datos: JSON.parse(f.datos) }), m: f.modificado });
     }
-    urls.push({ u: '/videos/', m: null }, ...urlsVideos());
+    urls.push({ u: '/videos/', m: null }, ...urlsVideos(), ...micro.publicados().map((x) => ({ u: `/${x.slug}/`, m: x.actualizado || null })));
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((x) => `<url><loc>${esc(base + x.u)}</loc>${x.m ? `<lastmod>${x.m.slice(0, 10)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>`;
   }
 
@@ -342,8 +345,9 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         const transp = [...buscarTransparencia(ext.leer(), palabras, norm), ...buscarActiva(palabras)].slice(0, 4);
         const docs = buscarArchivo(inventario(), q, { limite: 3 }).map((a) => ({ tipo: 'Documento de Transparencia', clave: 'documento', titulo: a.n, url: urlDoc(a), fragmento: [a.c, a.ar, a.f ? 'publicado el ' + a.f.split('-').reverse().join('-') : ''].filter(Boolean).join(' · ') }));
         const vids = buscarVideos(q, 3).map((v) => ({ tipo: 'Video', clave: 'video', titulo: v.t, url: urlVideo(v), fragmento: [indiceVideos()?.cats.get(v.c)?.nombre, (v.fe || v.f || '').slice(0, 10).split('-').reverse().join('-')].filter(Boolean).join(' · ') }));
+        const sitiosU = micro.publicados().filter((x) => palabras.every((p) => norm(textoMicrositio(x)).includes(p))).slice(0, 2).map((x) => ({ tipo: 'Sitio de la unidad', clave: 'micrositio', titulo: x.nombre, url: `/${x.slug}/`, fragmento: fragmento(x.descripcion || x.portada.bajada) }));
         const vistos = new Set();
-        const items = [...atajos, ...en, ...transp, ...r, ...vids, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
+        const items = [...atajos, ...sitiosU, ...en, ...transp, ...r, ...vids, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
         return enviarJson({ items, aproximado: aproximado && !atajos.length && !en.length && !transp.length && !docs.length && !vids.length }, 60);
       }
       default: throw new ErrorHttp(404, 'Recurso no encontrado');
@@ -580,6 +584,12 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     }
     if (seg[0] === 'mapa-del-sitio') return responder(V.mapaDelSitio(ctx));
     if (seg[0] === 'accesibilidad' && !repo.paginaPorRuta(['accesibilidad'])) return responder(V.accesibilidad(ctx));
+
+    // Micrositios de las unidades (tienen prioridad sobre una página con la misma dirección)
+    if (seg.length === 1) {
+      const ms = micro.porSlug(seg[0]);
+      if (ms && (ms.publicado || usuario)) return responder(paginaMicrositio(ctx, ms), { cachear: ms.publicado });
+    }
 
     // Páginas por jerarquía de slugs
     const c = repo.paginaPorRuta(seg);

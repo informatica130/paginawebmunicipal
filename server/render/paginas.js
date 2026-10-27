@@ -21,7 +21,8 @@ export async function portada(ctx) {
   const partes = [];
   for (const sec of secciones) {
     const r = await seccionPortada(ctx, sec);
-    if (r) partes.push(r);
+    // Cada sección lleva su nombre para el estilo propio de «Diseño → Secciones de la portada».
+    if (r) partes.push(crudo(String(r).replace(/^\s*<(section|div|aside)\b/, `<$1 data-sec="${sec.id}"`)));
     // Bloques propios colocados después de esta sección (Extensiones → Bloques en zonas).
     const extra = zona(ctx, 'portada:' + sec.id);
     if (String(extra)) partes.push(extra);

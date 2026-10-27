@@ -25,7 +25,7 @@ export const PREDETERMINADO = {
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#0F3A5A', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 16, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: true },
   forma: { radio: 18, radioGrande: 22, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240, sombras: 'suaves', escala: 100, maqueta: 'portal', elevacion: 4 },
-  cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, menuAbrir: 'cursor', alternarLogo: true, alternarCada: 7, alternarTk: 6, alternarEfecto: 'giro', alternarEntrada: 'caida', logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
+  cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, menuAbrir: 'cursor', alternarLogo: true, alternarCada: 7, alternarTk: 6, alternarEfecto: 'giro', alternarEntrada: 'caida', logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco', colorPropio: false, color: '#0F3A5A' },
   portada: { composicion: 'portal', fotoLado: 'derecha', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
     // Portada «Capital del Trekking»
     logoAnimacion: 'vivo', logoReposo: true, logoGestos: true, tamanoLogo: 100, kicker: true, buscador: true, cordillera: true, puntos: true,
@@ -45,12 +45,16 @@ export const PREDETERMINADO = {
   videos: { destacado: true, destacadoTema: 'oscuro', tarjeta: 'clasica', tam: 'normal', proporcion: '16/9', previa: true, vistas: true, fecha: true, categoria: true, duracion: true, marcas: true,
     filas: { concejo: true, ultimo: true, vistos: true, shorts: true, archivo: true, listas: true, anios: true, canales: true }, carril: true, portadaCantidad: 4 },
   // Elementos repetidos en todo el sitio
-  elementos: { accesos: 'tarjetas', tramites: 'tarjetas', verTodo: 'pildora', categorias: 'pildora', iconos: 'suaves', separadores: 'ninguno' },
+  elementos: { accesos: 'tarjetas', tramites: 'tarjetas', verTodo: 'pildora', categorias: 'pildora', iconos: 'suaves', separadores: 'ninguno', titulos: 'simple', titulosAlinear: 'auto' },
+  // Fondo de todas las páginas: patrón, degradado y tinte de las tarjetas
+  fondos: { patron: 'ninguno', color: 'primario', intensidad: 7, escala: 100, degradado: 'ninguno', tinte: 35 },
+  // Estilo propio de cada sección de la portada (fondo, patrón, espacio y títulos)
+  secciones: {},
   // Buscador predictivo (portada, cabecera y página de resultados)
   buscador: { predictivo: true, ejemplos: true, ejemplosTexto: 'licencia de conducir, patente comercial, horario de buses, permiso de circulación, certificado de residencia', recientes: true, populares: true, fragmentos: true },
   // Identidad «Capital del Trekking» en todo el sitio
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
-  pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
+  pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true, colorPropio: false, color: '#0F3A5A' },
   animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true,
     introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, transicionLetras: 'logo', precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true, controlVisitante: true },
   avanzado: { css: '' },
@@ -162,8 +166,46 @@ export const OPCIONES = {
   temasEstilo: { vidrio: 'Vidrio sobre la franja', solido: 'Botones blancos' },
   buscador: { pildora: 'Píldora', redondeado: 'Esquinas suaves' },
   curva: { suave: 'Suave', rebote: 'Con rebote', rapida: 'Rápida y precisa' },
+  titulosSeccion: { simple: 'Simples', linea: 'Con una línea de color debajo', barra: 'Con una barra de color al lado', antetitulo: 'Con una rayita de color encima', resaltado: 'Resaltados como con plumón' },
+  titulosAlinear: { auto: 'Como el diseño', izquierda: 'A la izquierda', centro: 'Centrados' },
+  patronFondo: { ninguno: 'Sin patrón', curvas: 'Curvas de nivel', puntos: 'Puntos', diagonales: 'Líneas diagonales', cuadricula: 'Cuadrícula', ondas: 'Ondas', hojas: 'Hojas', araucarias: 'Araucarias', montes: 'Cordillera', triangulos: 'Triángulos', hexagonos: 'Panal', cruces: 'Cruces' },
+  colorPatron: { primario: 'Color principal', acento: 'Acento', oscuro: 'Profundo', texto: 'Color del texto' },
+  degradadoFondo: { ninguno: 'Sin degradado', aurora: 'Aurora: luces suaves de color arriba', cielo: 'Cielo: del color principal al fondo', esquinas: 'Esquinas de color', calido: 'Cálido: acento arriba' },
+  fondoSeccion: { auto: 'Como el diseño', ninguno: 'Transparente', alterno: 'Fondo de bandas', superficie: 'Blanco (tarjeta)', suave: 'Tinte del color principal', acentoSuave: 'Tinte del acento', primario: 'Color principal', oscuro: 'Profundo', color: 'Un color a elección', degradado: 'Degradado de dos colores' },
+  formaSeccion: { completa: 'A todo el ancho', tarjeta: 'Recuadro redondeado' },
+  espacioSeccion: { auto: 'Como el diseño', compacto: 'Compacto', normal: 'Normal', amplio: 'Amplio' },
   logoAnimacion: { vivo: 'Logo vivo: cada símbolo se anima', caida: 'Las letras caen una a una', aparecer: 'Aparece suavemente', ninguna: 'Sin animación de entrada' },
 };
+
+// Secciones de la portada que se pueden personalizar una por una.
+export const SECCIONES_PORTADA = { banners: 'Portada principal', avisos: 'Avisos y alertas', cinta: 'Cinta de palabras', campanas: 'Campañas', mundos: 'Nueve mundos', accesos: 'Accesos rápidos', tramites: 'Trámites', noticias: 'Noticias', videoteca: 'Videos', eventos: 'Agenda', areas: 'Áreas', turismo: 'Turismo', video: 'Video', encuesta: 'Encuesta', boletin: 'Boletín' };
+const SECCION_DEF = { color1: '#2F7D4A', color2: '#0F3A5A' };
+
+// ------------------------------------------------------------------ Patrones
+// Mosaicos SVG que se repiten (fondo de páginas, secciones y micrositios). Se dibujan en negro y
+// se usan como máscara (toman el color que se elija y se adaptan al modo oscuro) o con un color
+// fijo en una imagen de fondo.
+const PATRONES = {
+  curvas: [120, 120, '<g fill="none" stroke="#000" stroke-width="1.3"><path d="M-10 64c20-30 52-38 74-22s48 18 66-6"/><path d="M-10 84c26-26 56-30 80-14s42 14 60-8"/><path d="M-10 104c28-18 58-20 82-8s40 10 58-6"/><path d="M-10 40c18-30 48-40 72-26s50 18 68-8"/><path d="M-10 18c18-22 44-30 68-20s50 14 72-6"/></g>'],
+  puntos: [22, 22, '<circle cx="11" cy="11" r="1.7" fill="#000"/>'],
+  diagonales: [18, 18, '<path d="M-4 4 4-4M0 18 18 0M14 22l8-8" stroke="#000" stroke-width="1.2"/>'],
+  cuadricula: [32, 32, '<path d="M32 0H0v32" fill="none" stroke="#000" stroke-width="1"/>'],
+  ondas: [80, 28, '<path d="M0 14c10-9 30-9 40 0s30 9 40 0" fill="none" stroke="#000" stroke-width="1.4"/>'],
+  hojas: [72, 72, '<g fill="none" stroke="#000" stroke-width="1.3" stroke-linecap="round"><path d="M10 26c8-14 24-16 30-14-2 8-12 22-30 14zM12 24 32 15"/><path d="M44 64c4-14 18-20 25-19 0 8-8 22-25 19zM46 62l17-13"/></g>'],
+  araucarias: [64, 84, '<g fill="none" stroke="#000" stroke-width="1.3" stroke-linecap="round"><path d="M32 76V18M32 20c-8 0-14 3-17 8M32 20c8 0 14 3 17 8M32 32c-10 0-18 4-21 10M32 32c10 0 18 4 21 10M32 45c-12 0-21 5-24 11M32 45c12 0 21 5 24 11"/></g>'],
+  montes: [96, 40, '<path d="M0 36 16 18l9 9 16-21 18 22 11-11 26 19" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>'],
+  triangulos: [40, 36, '<path d="M20 4 36 32H4zM0 36 0 36" fill="none" stroke="#000" stroke-width="1.1"/>'],
+  hexagonos: [42, 72, '<path d="M21 0 42 12v24L21 48 0 36V12zM21 48v24" fill="none" stroke="#000" stroke-width="1.1"/>'],
+  cruces: [30, 30, '<path d="M15 10v10M10 15h10" stroke="#000" stroke-width="1.4" stroke-linecap="round"/>'],
+};
+// Imagen del patrón como url(): con color fijo (fondo de secciones) o en negro (máscara).
+export function patronUrl(id, { color = '#000', opacidad = 1 } = {}) {
+  const p = PATRONES[id];
+  if (!p) return '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${p[0]}" height="${p[1]}"><g opacity="${opacidad}">${p[2].replace(/#000/g, color)}</g></svg>`;
+  return `url("data:image/svg+xml,${svg.replace(/"/g, "'").replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E')}")`;
+}
+export const tamanoPatron = (id, escala = 100) => (PATRONES[id] ? `${Math.round(PATRONES[id][0] * escala / 100)}px ${Math.round(PATRONES[id][1] * escala / 100)}px` : 'auto');
 
 // ------------------------------------------------------------------ Normalización
 const esObjeto = (v) => v && typeof v === 'object' && !Array.isArray(v);
@@ -201,7 +243,7 @@ export function migrar(d) {
 
 export function normalizar(entrada, { permitirCss = true, previo = null } = {}) {
   const e = fusionar(PREDETERMINADO, esObjeto(entrada) ? entrada : {});
-  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, vi = e.videos, cp = e.campanas, no = e.noticias, el = e.elementos;
+  const P = PREDETERMINADO, fo = e.fondos, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, vi = e.videos, cp = e.campanas, no = e.noticias, el = e.elementos;
   return {
     revision: REVISION,
     estilo: opcion(e.estilo, { ...ESTILOS, personalizado: 1 }, 'personalizado'),
@@ -219,6 +261,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), centrada: bool(ca.centrada, P.cabecera.centrada), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites), menuAbrir: opcion(ca.menuAbrir, OPCIONES.menuAbrir, 'cursor'), alternarLogo: bool(ca.alternarLogo, true), alternarCada: numero(ca.alternarCada, 7, 3, 30), alternarTk: numero(ca.alternarTk, 6, 3, 30), alternarEfecto: opcion(ca.alternarEfecto, OPCIONES.alternarEfecto, 'giro'), alternarEntrada: opcion(ca.alternarEntrada, OPCIONES.alternarEntrada, 'caida'),
       logo: opcion(ca.logo, OPCIONES.logo, 'emblema'), logoUrl: imagen(ca.logoUrl), tamanoLogo: numero(ca.tamanoLogo, 54, 36, 96),
       subtitulo: texto(ca.subtitulo, P.cabecera.subtitulo, 60), nombre: texto(ca.nombre, P.cabecera.nombre, 60),
+      colorPropio: bool(ca.colorPropio, false), color: color(ca.color, P.cabecera.color),
     },
     portada: {
       composicion: opcion(po.composicion, OPCIONES.composicion, P.portada.composicion), imagen: imagen(po.imagen), credito: texto(po.credito, P.portada.credito, 120), titulo: texto(po.titulo, P.portada.titulo, 90), bajada: texto(po.bajada, '', 240),
@@ -252,7 +295,17 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
     elementos: {
       accesos: opcion(el.accesos, OPCIONES.estiloAccesos, 'tarjetas'), tramites: opcion(el.tramites, OPCIONES.estiloTramites, 'tarjetas'), verTodo: opcion(el.verTodo, OPCIONES.verTodo, 'pildora'),
       categorias: opcion(el.categorias, OPCIONES.estiloCategorias, 'pildora'), iconos: opcion(el.iconos, OPCIONES.estiloIconos, 'suaves'), separadores: opcion(el.separadores, OPCIONES.separadores, 'ninguno'),
+      titulos: opcion(el.titulos, OPCIONES.titulosSeccion, 'simple'), titulosAlinear: opcion(el.titulosAlinear, OPCIONES.titulosAlinear, 'auto'),
     },
+    fondos: {
+      patron: opcion(fo.patron, OPCIONES.patronFondo, 'ninguno'), color: opcion(fo.color, OPCIONES.colorPatron, 'primario'), intensidad: numero(fo.intensidad, 7, 1, 40),
+      escala: numero(fo.escala, 100, 50, 250), degradado: opcion(fo.degradado, OPCIONES.degradadoFondo, 'ninguno'), tinte: numero(fo.tinte, 35, 0, 100),
+    },
+    secciones: Object.fromEntries(Object.keys(SECCIONES_PORTADA).map((k) => { const x = esObjeto(e.secciones?.[k]) ? e.secciones[k] : {}; return [k, {
+      fondo: opcion(x.fondo, OPCIONES.fondoSeccion, 'auto'), forma: opcion(x.forma, OPCIONES.formaSeccion, 'completa'), color1: color(x.color1, SECCION_DEF.color1), color2: color(x.color2, SECCION_DEF.color2),
+      angulo: numero(x.angulo, 135, 0, 360), patron: opcion(x.patron, OPCIONES.patronFondo, 'ninguno'), intensidad: numero(x.intensidad, 10, 2, 50),
+      espacio: opcion(x.espacio, OPCIONES.espacioSeccion, 'auto'), titulos: opcion(x.titulos, OPCIONES.titulosAlinear, 'auto'),
+    }]; })),
     videos: {
       destacado: bool(vi.destacado, true), destacadoTema: opcion(vi.destacadoTema, OPCIONES.temaDestacado, 'oscuro'), tarjeta: opcion(vi.tarjeta, OPCIONES.tarjetaVideo, 'clasica'), tam: opcion(vi.tam, OPCIONES.tamVideo, 'normal'),
       proporcion: opcion(vi.proporcion, OPCIONES.proporcionVideo, '16/9'), previa: bool(vi.previa, true), vistas: bool(vi.vistas, true), fecha: bool(vi.fecha, true), categoria: bool(vi.categoria, true), duracion: bool(vi.duracion, true), marcas: bool(vi.marcas, true),
@@ -263,7 +316,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       recientes: bool(bu.recientes, true), populares: bool(bu.populares, true), fragmentos: bool(bu.fragmentos, true),
     },
     identidad: Object.fromEntries(Object.entries(P.identidad).map(([k, v]) => [k, k === 'cinta' ? numero(id.cinta, v, 15, 120) : k === 'encabezado' ? opcion(id.encabezado, OPCIONES.encabezado, v) : bool(id[k], v)])),
-    pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true) },
+    pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true), colorPropio: bool(pi.colorPropio, false), color: color(pi.color, P.pie.color) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
       intro: opcion(an.intro, OPCIONES.intro, 'primera'), transiciones: bool(an.transiciones, true), aparicion: bool(an.aparicion, true),
@@ -295,7 +348,7 @@ const BOTON = { redondeados: null, pildora: '999px', rectos: '2px' };
 export function variablesCss(cfg) {
   const c = cfg.colores, t = cfg.tipografia, f = cfg.forma;
   const v = {
-    '--azul': c.primario, '--ambar': c.acento, '--azul-profundo': c.oscuro, '--fondo': c.fondo, '--superficie': `color-mix(in srgb, ${c.fondo} 35%, #FFFFFF)`, '--fondo-2': c.fondoAlterno,
+    '--azul': c.primario, '--ambar': c.acento, '--azul-profundo': c.oscuro, '--fondo': c.fondo, '--superficie': `color-mix(in srgb, ${c.fondo} ${cfg.fondos.tinte}%, #FFFFFF)`, '--fondo-2': c.fondoAlterno,
     '--texto': c.texto, '--verde': c.exito, '--rojo': c.peligro, '--ambar-tinta': tintaSobre(c.acento), '--sobre-azul': tintaSobre(c.primario),
     '--fuente': `${FUENTES[t.cuerpo].familia}, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`,
     '--fuente-titulo': `${FUENTES[t.titulos].familia}, ${FUENTES[t.cuerpo].familia}, system-ui, sans-serif`,
@@ -309,7 +362,47 @@ export function variablesCss(cfg) {
     '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`, '--pt-banner-ar': cfg.portal.bannerProporcion === 'auto' ? 'auto' : cfg.portal.bannerProporcion.replace('/', ' / '), '--camp-ar-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : cfg.campanas.proporcionMovil.replace('/', ' / '), '--camp-dur': `${cfg.campanas.intervalo}s`, '--tn-ar': cfg.noticias.proporcion.replace('/', ' / '), '--tn-cols': cfg.noticias.columnas, '--vd-ar': cfg.videos.proporcion.replace('/', ' / '), '--vd-min': { compacta: '200px', normal: '250px', amplia: '330px' }[cfg.videos.tam], '--alternar': `${cfg.cabecera.alternarCada}s`,
     ...(cfg.portal.bandaPropia ? { '--pt-ini': cfg.portal.bandaInicio, '--pt-fin': cfg.portal.bandaFin } : {}), '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
   };
-  return ':root{' + Object.entries(v).map(([k, x]) => `${k}:${x}`).join(';') + '}';
+  const fo = cfg.fondos;
+  if (fo.patron !== 'ninguno') Object.assign(v, { '--fp-img': patronUrl(fo.patron), '--fp-tam': tamanoPatron(fo.patron, fo.escala), '--fp-color': COLOR_PATRON[fo.color], '--fp-op': fo.intensidad / 100 });
+  if (fo.degradado !== 'ninguno') v['--fondo-deg'] = DEGRADADOS[fo.degradado];
+  if (cfg.cabecera.colorPropio) v['--cab-propio'] = cfg.cabecera.color;
+  if (cfg.pie.colorPropio) v['--pie-propio'] = cfg.pie.color;
+  return ':root{' + Object.entries(v).map(([k, x]) => `${k}:${x}`).join(';') + '}' + cssSecciones(cfg);
+}
+
+const COLOR_PATRON = { primario: 'var(--azul)', acento: 'var(--ambar)', oscuro: 'var(--azul-profundo)', texto: 'var(--texto)' };
+const DEGRADADOS = {
+  aurora: 'radial-gradient(60% 420px at 12% 0, color-mix(in srgb, var(--azul) 16%, transparent), transparent), radial-gradient(50% 380px at 88% 0, color-mix(in srgb, var(--ambar) 18%, transparent), transparent)',
+  cielo: 'linear-gradient(180deg, color-mix(in srgb, var(--azul) 14%, var(--fondo)) 0, var(--fondo) 900px)',
+  esquinas: 'radial-gradient(500px 500px at 0 0, color-mix(in srgb, var(--azul) 14%, transparent), transparent), radial-gradient(520px 520px at 100% 100%, color-mix(in srgb, var(--ambar) 16%, transparent), transparent)',
+  calido: 'linear-gradient(180deg, color-mix(in srgb, var(--ambar) 16%, var(--fondo)) 0, var(--fondo) 760px)',
+};
+const ESPACIOS = { compacto: 28, normal: 56, amplio: 96 };
+
+// Reglas de cada sección de la portada con estilo propio.
+export function cssSecciones(cfg) {
+  let css = '';
+  for (const [id, x] of Object.entries(cfg.secciones || {})) {
+    const sel = `.pagina-portada [data-sec="${id}"]`, caja = x.forma === 'tarjeta' ? `${sel}>.contenedor` : sel;
+    const c = cfg.colores, reglas = [];
+    const base = { ninguno: 'transparent', alterno: 'var(--fondo-2)', superficie: 'var(--superficie)', suave: 'color-mix(in srgb,var(--azul) 9%,var(--fondo))', acentoSuave: 'color-mix(in srgb,var(--ambar) 14%,var(--fondo))', primario: 'var(--azul)', oscuro: 'var(--azul-profundo)', color: x.color1, degradado: `linear-gradient(${x.angulo}deg,${x.color1},${x.color2})` }[x.fondo];
+    // ¿El fondo es oscuro? (para poner los títulos en blanco y el patrón claro)
+    const hex = { primario: c.primario, oscuro: c.oscuro, color: x.color1, degradado: x.color1 }[x.fondo];
+    const oscuro = hex ? luminancia(hex) < 0.35 : false;
+    const capas = [];
+    if (x.patron !== 'ninguno') capas.push(`${patronUrl(x.patron, { color: oscuro ? '#FFFFFF' : c.primario, opacidad: x.intensidad / 100 })} 0 0/${tamanoPatron(x.patron)}`);
+    if (base) capas.push(base);
+    if (capas.length) reglas.push(`${caja}{background:${capas.join(',')}}`);
+    if (x.forma === 'tarjeta' && base) reglas.push(`${caja}{border-radius:var(--r-xl);padding:clamp(22px,4vw,48px)}`);
+    if (base && x.forma !== 'tarjeta') reglas.push(`${sel}{padding-top:calc(${ESPACIOS[x.espacio] || 56}px * var(--esp,1))}`);
+    if (x.espacio !== 'auto') reglas.push(`${sel}{padding-block:calc(${ESPACIOS[x.espacio]}px * var(--esp,1))}`);
+    // Sobre un fondo oscuro la sección entera pasa a tinta clara (como el modo oscuro).
+    if (oscuro) reglas.push(`${caja}{--texto:#F4F1EA;--texto-2:rgb(255 255 255/.82);--texto-3:rgb(255 255 255/.66);--superficie:rgb(255 255 255/.08);--fondo-2:rgb(255 255 255/.06);--borde:rgb(255 255 255/.16);--borde-fuerte:rgb(255 255 255/.28);--enlace:#fff;color:var(--texto)}${sel} :is(.seccion-cabecera,.seccion-cabecera h2,.seccion-cabecera p,.seccion-cabecera .ver-todo){color:#fff}${sel} .seccion-cabecera .ver-todo{border-color:rgb(255 255 255/.5)}`);
+    if (x.titulos === 'centro') reglas.push(`${sel} .seccion-cabecera{flex-direction:column;align-items:center;text-align:center}`);
+    if (x.titulos === 'izquierda') reglas.push(`${sel} .seccion-cabecera{align-items:flex-start;text-align:left}`);
+    css += reglas.join('');
+  }
+  return css;
 }
 
 export function atributos(cfg) {
@@ -343,6 +436,7 @@ export function atributos(cfg) {
     'data-aparicion-estilo': a.aparicionEstilo, 'data-cursor-luz': a.activas && a.cursorLuz ? 'si' : 'no', 'data-onda-clic': a.activas && a.ondaClic ? 'si' : 'no', 'data-desplazamiento': a.desplazamientoSuave ? 'suave' : 'normal',
     'data-menu-abrir': cfg.cabecera.menuAbrir, 'data-transicion-nombre': cfg.animaciones.transicionNombre ? 'si' : 'no', 'data-precarga': cfg.animaciones.precarga ? 'si' : 'no',
     'data-busca-predictivo': cfg.buscador.predictivo ? 'si' : 'no', 'data-busca-ejemplos': cfg.buscador.ejemplos ? 'si' : 'no', 'data-busca-recientes': cfg.buscador.recientes ? 'si' : 'no', 'data-busca-populares': cfg.buscador.populares ? 'si' : 'no', 'data-busca-fragmentos': cfg.buscador.fragmentos ? 'si' : 'no', 'data-busca-lista': cfg.buscador.ejemplosTexto,
+    'data-fondo-patron': cfg.fondos.patron, 'data-fondo-deg': cfg.fondos.degradado, 'data-titulos': cfg.elementos.titulos, 'data-titulos-alinear': cfg.elementos.titulosAlinear, 'data-cab-propio': cfg.cabecera.colorPropio ? 'si' : 'no', 'data-pie-propio': cfg.pie.colorPropio ? 'si' : 'no',
     'data-sombras': cfg.forma.sombras, 'data-maqueta': cfg.forma.maqueta, 'data-cabecera-centrada': cfg.cabecera.centrada ? 'si' : 'no', 'data-hero-lado': cfg.portada.fotoLado, 'data-encabezado': cfg.identidad.encabezado,
     ...Object.fromEntries(Object.entries(cfg.identidad).filter(([k]) => k !== 'cinta' && k !== 'encabezado').map(([k, v]) => ['data-id-' + k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()), v ? 'si' : 'no'])),
   };
