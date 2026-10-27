@@ -21,6 +21,14 @@
   // Si esta página llegó descargada por adelantado (al pasar el cursor), se cuenta la visita ahora.
   try { var nav0 = performance.getEntriesByType('navigation')[0]; if (nav0 && /prefetch|prerender/.test(nav0.deliveryType || '')) fetch('/api/public/visita?r=' + encodeURIComponent(location.pathname), { keepalive: true }).catch(function () {}); } catch (e) {}
 
+  // Las imágenes diferidas aparecen con un fundido suave (mientras cargan, su caja brilla).
+  $$('img[loading="lazy"]').forEach(function (img) {
+    if (img.complete && img.naturalWidth) return;
+    img.classList.add('por-cargar');
+    var listo = function () { img.classList.add('cargada'); };
+    img.addEventListener('load', listo, { once: true }); img.addEventListener('error', listo, { once: true });
+  });
+
   // ---------------- Menú principal y submenús
   var nav = $('#nav'), botonMenu = $('[data-menu]'), velo = null;
   function cerrarSubmenus(excepto) { $$('.nav-boton[aria-expanded="true"]').forEach(function (b) { if (b !== excepto) b.setAttribute('aria-expanded', 'false'); }); }

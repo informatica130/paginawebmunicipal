@@ -74,33 +74,81 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { lista.forEach(function (x) { if (e[0].isIntersecting) x.play(); else x.pause(); }); }).observe(svg);
   });
 
-  // Alternancia del logo de la cabecera: el escudo municipal cede su lugar al logo animado de la
-  // Capital del Trekking y luego vuelve, una y otra vez. Opción «Cabecera → Alternar con el logo
-  // de la Capital del Trekking» (cada cuántos segundos y con qué efecto). Se detiene al pasar el
-  // cursor, con la pestaña oculta o fuera de pantalla.
+  // Alternancia del logo de la cabecera: el escudo municipal sale, entra el logo de la Capital
+  // del Trekking (sus letras caen, saltan u ondulan según «Entrada de las letras»), se queda unos
+  // segundos, sus letras se van una a una y vuelve el escudo armándose pieza por pieza.
+  // Efectos del cambio (data-alternar-efecto): giro, volteo, fundido, deslizar, barrido, zoom.
+  // Se detiene con el cursor encima, con la pestaña oculta, fuera de pantalla y en la cabecera
+  // compacta.
+  var EFECTOS = {
+    giro: { sale: [{ transform: 'none', opacity: 1 }, { transform: 'rotateX(90deg)', opacity: 0 }], entra: [{ transform: 'rotateX(-90deg)', opacity: 0 }, { transform: 'none', opacity: 1 }] },
+    volteo: { sale: [{ transform: 'none', opacity: 1 }, { transform: 'rotateY(-90deg)', opacity: 0 }], entra: [{ transform: 'rotateY(90deg)', opacity: 0 }, { transform: 'none', opacity: 1 }] },
+    fundido: { sale: [{ opacity: 1, filter: 'blur(0)', transform: 'none' }, { opacity: 0, filter: 'blur(8px)', transform: 'scale(1.06)' }], entra: [{ opacity: 0, filter: 'blur(8px)', transform: 'scale(.94)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }] },
+    deslizar: { sale: [{ transform: 'none', opacity: 1 }, { transform: 'translateY(-55%)', opacity: 0 }], entra: [{ transform: 'translateY(55%)', opacity: 0 }, { transform: 'none', opacity: 1 }] },
+    barrido: { sale: [{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 0 100%)' }], entra: [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }] },
+    zoom: { sale: [{ transform: 'none', opacity: 1, filter: 'blur(0)' }, { transform: 'scale(.4)', opacity: 0, filter: 'blur(4px)' }], entra: [{ transform: 'scale(1.5)', opacity: 0, filter: 'blur(6px)' }, { transform: 'none', opacity: 1, filter: 'blur(0)' }] },
+  };
+  var CAE = 'cubic-bezier(.7, 0, .84, 0)';
   $$('.marca').forEach(function (marca) {
-    var tk = marca.querySelector('.marca-tk');
-    if (!tk) return;
-    var svgTk = tk.querySelector('svg'), escudo = marca.querySelector('.marca-viva'), reloj = null, encima = false, visible = true;
-    var cada = function () { return (Number(raiz.getAttribute('data-alternar-cada')) || 7) * 1000; };
+    var tk = marca.querySelector('.marca-tk'), muni = marca.querySelector('.marca-muni');
+    if (!tk || !muni) return;
+    var svgTk = tk.querySelector('svg'), escudo = marca.querySelector('.marca-viva'), reloj = null, encima = false, visible = true, ocupada = false, enTk = false;
+    var num = function (k, d) { return Number(raiz.getAttribute(k)) || d; };
     var activa = function () { return raiz.getAttribute('data-alternar-logo') === 'si'; };
-    function mostrar(tkVisible) {
-      marca.classList.toggle('cara-tk', tkVisible);
-      if (tkVisible && svgTk) setTimeout(function () { svgTk.dispatchEvent(new Event('tk:reproducir')); }, 260);
-      else if (!tkVisible && escudo && activo()) setTimeout(function () { gesto(escudo); }, 300);
+    var efecto = function () { return EFECTOS[raiz.getAttribute('data-alternar-efecto')] || EFECTOS.giro; };
+    var cab = marca.closest('.cabecera');
+    var compacta = function () { return cab && cab.classList.contains('compacta'); };
+    // El logo del trekking toma un ancho acorde a la cabecera.
+    function medir() {
+      var r = muni.getBoundingClientRect();
+      if (!r.height) return;
+      var centrada = raiz.getAttribute('data-cabecera-centrada') === 'si' && innerWidth > 1024;
+      var ancho = centrada ? Math.min(330, Math.max(210, r.height * 3.2)) : Math.min(innerWidth > 640 ? 250 : 175, Math.max(150, r.width * 1.1));
+      marca.style.setProperty('--tk-ancho', Math.round(ancho) + 'px');
+    }
+    function anim(el, cuadros, o) { o.duration /= VEL; if (o.delay) o.delay /= VEL; return el.animate(cuadros, o); }
+    function mostrarTk() {
+      ocupada = true; medir();
+      var ef = efecto();
+      var sale = anim(muni, ef.sale, { duration: 420, easing: CAE, fill: 'forwards' });
+      setTimeout(function () {
+        // Primero se prepara la entrada de las letras (quedan ocultas) y recién entonces se ve.
+        if (svgTk) svgTk.dispatchEvent(new CustomEvent('tk:reproducir', { detail: { modo: raiz.getAttribute('data-alternar-entrada') || 'caida', cabecera: true } }));
+        marca.classList.add('tk-visible');
+        anim(tk, ef.entra, { duration: 620, easing: SALIDA });
+      }, 300 / VEL);
+      sale.finished.then(function () { marca.classList.add('muni-oculta'); sale.cancel(); ocupada = false; }, function () { ocupada = false; });
+    }
+    function mostrarMuni() {
+      ocupada = true;
+      var ef = efecto();
+      var t = 0;
+      if (svgTk) { var ev = new CustomEvent('tk:salir', { detail: {} }); svgTk.dispatchEvent(ev); t = ev.detail.duracion || 0; }
+      setTimeout(function () {
+        var sale = anim(tk, ef.sale, { duration: 380, easing: CAE, fill: 'forwards' });
+        setTimeout(function () {
+          marca.classList.remove('muni-oculta');
+          anim(muni, ef.entra, { duration: 620, easing: SALIDA });
+          if (escudo && activo()) armar(escudo, true);
+        }, 260 / VEL);
+        sale.finished.then(function () { marca.classList.remove('tk-visible'); sale.cancel(); ocupada = false; }, function () { ocupada = false; });
+      }, Math.max(0, t - 250) / VEL);
     }
     function programar() {
       clearTimeout(reloj);
-      if (!activa()) { marca.classList.remove('cara-tk'); return; }
-      // El logo del trekking se queda un poco menos que el escudo.
-      var t = marca.classList.contains('cara-tk') ? cada() * .8 : cada();
-      reloj = setTimeout(function () { if (!encima && visible && !d.hidden) mostrar(!marca.classList.contains('cara-tk')); programar(); }, t);
+      if (!activa()) { marca.classList.remove('tk-visible', 'muni-oculta'); enTk = false; return; }
+      var t = enTk ? num('data-alternar-tk', 6) * 1000 : num('data-alternar-cada', 7) * 1000;
+      reloj = setTimeout(function () {
+        if (!encima && visible && !d.hidden && !ocupada && !compacta()) { enTk = !enTk; if (enTk) mostrarTk(); else mostrarMuni(); }
+        programar();
+      }, t);
     }
     marca.addEventListener('pointerenter', function () { encima = true; });
     marca.addEventListener('pointerleave', function () { encima = false; });
+    addEventListener('resize', medir, { passive: true });
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(marca);
     if (raiz.classList.contains('con-intro')) d.addEventListener('intro:fin', programar, { once: true }); else programar();
-    d.addEventListener('mlp:diseno', programar);
+    d.addEventListener('mlp:diseno', function () { medir(); programar(); });
   });
 
   // Pie: se arma al aparecer en pantalla.
