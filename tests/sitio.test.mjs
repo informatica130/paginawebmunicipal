@@ -239,6 +239,56 @@ const api = (sesion, metodo, ruta, cuerpo, extra = {}) => pedir('/api/admin/' + 
 let sesionAdmin;
 const admin = async () => (sesionAdmin ??= await ingresar());
 
+test('extensiones: ventana emergente, bloques en zonas, HTML aislado, código propio y transparencia', async () => {
+  const s = await admin();
+  const r = await api(s, 'PUT', 'extensiones', {
+    emergentes: [{ id: 'aviso-prueba', titulo: 'Vacunación invernal', texto: '<p>Hola<script>alert(1)</script></p>', estilo: 'modal', disparo: 'tiempo', segundos: 2, paginas: 'portada', boton: { texto: 'Ver más', url: '/tramites/' } }],
+    zonas: [
+      { id: 'franja-arriba', zona: 'antes-cabecera', tipo: 'html', html: '<p onclick="x()">Franja de prueba</p>', paginas: 'todas' },
+      { id: 'tras-noticias', zona: 'portada:noticias', tipo: 'aviso', nivel: 'alerta', titulo: 'Corte de agua', html: '<p>Mañana</p>', paginas: 'todas' },
+      { id: 'widget', zona: 'final-contenido', tipo: 'aislado', html: '<script>document.write("ok")</script>', paginas: 'rutas', rutas: '/contacto/' },
+      { id: 'vencido', zona: 'antes-pie', tipo: 'html', html: '<p>No debe verse</p>', hasta: '2020-01-01' },
+    ],
+    fuentes: [{ id: 'interna', nombre: 'Interna', url: 'https://localhost/x' }, { id: 'ip', nombre: 'IP', url: 'https://10.0.0.1/x' }],
+    codigo: { cabeza: '<script>window.prueba=1</script>', dominios: 'https://www.googletagmanager.com\njavascript:alert(1)' },
+  });
+  assert.equal(r.status, 200);
+  const guardado = await r.json();
+  assert.equal(guardado.fuentes.length, 0, 'no se aceptan direcciones internas');
+  assert.doesNotMatch(guardado.emergentes[0].texto, /script/);
+  const portada = await pedir('/');
+  const html = await portada.text();
+  assert.match(html, /data-emergente="aviso-prueba"/);
+  assert.match(html, /Vacunación invernal/);
+  assert.match(html, /Franja de prueba/);
+  assert.doesNotMatch(html, /onclick/);
+  assert.match(html, /Corte de agua/);
+  assert.doesNotMatch(html, /No debe verse/);
+  assert.match(html, /<script nonce="[^"]+">window\.prueba=1/);
+  assert.match(portada.headers.get('content-security-policy'), /https:\/\/www\.googletagmanager\.com/);
+  const contacto = await (await pedir('/contacto/')).text();
+  assert.match(contacto, /src="\/embed\/zona\/widget"/);
+  assert.doesNotMatch(contacto, /data-emergente="aviso-prueba"/);
+  const marco = await pedir('/embed/zona/widget');
+  assert.equal(marco.status, 200);
+  assert.match(marco.headers.get('content-security-policy'), /sandbox/);
+  // Centro de Transparencia y buscador
+  const t = await (await pedir('/transparencia/')).text();
+  assert.match(t, /Personal y remuneraciones/);
+  assert.match(t, /org=MU172/);
+  const sug = await (await pedir('/api/public/buscar?q=sueldos')).json();
+  assert.ok(sug.items.some((i) => i.titulo === 'Personal y remuneraciones'));
+  await api(s, 'PUT', 'extensiones', { emergentes: [], zonas: [], fuentes: [], codigo: { cabeza: '', cuerpo: '', dominios: '' } });
+});
+
+test('extensiones: plantillas de fuentes de datos', async () => {
+  const { plantilla, urlFuenteValida } = await import('../server/extensiones.js');
+  assert.equal(plantilla('{{#items}}<li>{{@indice}} {{n}}</li>{{/items}}{{^vacio}}-{{/vacio}}', { items: [{ n: '<b>' }, { n: 'x' }] }), '<li>1 &lt;b&gt;</li><li>2 x</li>-');
+  assert.equal(urlFuenteValida('http://api.ejemplo.cl'), '');
+  assert.equal(urlFuenteValida('https://intranet.local/x'), '');
+  assert.ok(urlFuenteValida('https://api.open-meteo.com/v1/forecast'));
+});
+
 test('panel: el diseño guardado cambia el sitio publicado', async () => {
   const s = await admin();
   const r = await api(s, 'PUT', 'ajustes', { diseno: { estilo: 'personalizado', colores: { primario: '#7A1F2B' }, cabecera: { estilo: 'oscura' }, portada: { titulo: 'Bienvenidos' }, animaciones: { activas: false } } });

@@ -1,7 +1,8 @@
 // Plantillas de las vistas públicas.
 
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, paginacion, migas, compartir, video, telefonoHref, telefonoTexto, vacio } from './comun.js';
-import { documento, encabezado, disenoDe } from './layout.js';
+import { documento, encabezado, disenoDe, zona } from './layout.js';
+import { centroTransparencia, buscarTransparencia } from './transparencia.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
@@ -19,6 +20,9 @@ export async function portada(ctx) {
   for (const sec of secciones) {
     const r = await seccionPortada(ctx, sec);
     if (r) partes.push(r);
+    // Bloques propios colocados después de esta sección (Extensiones → Bloques en zonas).
+    const extra = zona(ctx, 'portada:' + sec.id);
+    if (String(extra)) partes.push(extra);
   }
   return documento(ctx, { titulo: s.nombre, portada: true, cuerpo: html`${partes}`, clase: 'pagina-portada' });
 }
@@ -792,6 +796,7 @@ export function busqueda(ctx, { q, tipo = '', pagina = 1, resultados, tramitesEn
           <div class="chips">${[['', 'Todo'], ['tramite', 'Trámites'], ['noticia', 'Noticias'], ['pagina', 'Páginas'], ['evento', 'Eventos'], ['documento', 'Documentos'], ['area', 'Áreas']].map(([k, v]) => html`<a href="/buscar/?q=${encodeURIComponent(q)}${k ? '&tipo=' + k : ''}" class="chip"${tipo === k ? crudo(' aria-current="true"') : ''}>${v}</a>`)}</div>
         </form>
         ${q ? html`<p class="resultado-conteo" role="status">${resultados.total + tramitesEnLinea.length} resultados para «${q}»</p>` : ''}
+        ${(() => { const norm = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); const p = norm(q).split(/\s+/).filter((x) => x.length > 2); const t = p.length && ctx.ext ? buscarTransparencia(ctx.ext.leer(), p, norm) : []; return t.length ? html`<section class="ficha-seccion"><h2>Transparencia</h2><ul class="ct-materias ct-compacta">${t.map((m) => html`<li><a class="ct-materia" href="${m.url}"${m.externo ? crudo(' target="_blank" rel="noopener"') : ''}><span class="ct-ico">${crudo(icono('documento', { tam: 20 }))}</span><span class="ct-txt"><b>${m.titulo}</b><small>${m.fragmento}</small></span></a></li>`)}</ul></section>` : ''; })()}
         ${tramitesEnLinea.length ? html`<section class="ficha-seccion"><h2>Trámites en línea</h2><div class="lista-tramites">${tramitesEnLinea.map((t) => filaTramiteEnLinea(t))}</div></section>` : ''}
         ${resultados.items.length ? html`<ol class="resultados">${resultados.items.map((r) => html`<li><span class="etiqueta">${etiquetas[r.tipo] || r.tipo}</span><h2><a href="${ctx.repo.urlDe(r)}">${r.titulo}</a></h2><p>${resaltar(r.fragmento)}</p>${r.tipo === 'noticia' ? html`<p class="meta">${fecha(r.publicado_en, { largo: true })}</p>` : ''}</li>`)}</ol>` : q && !tramitesEnLinea.length ? vacio('No encontramos resultados. Pruebe con otras palabras, revise el catálogo de trámites o escríbanos a la OIRS.', 'buscar') : ''}
         ${paginacion('/buscar/', pagina, paginas, `?q=${encodeURIComponent(q)}${tipo ? '&tipo=' + tipo : ''}`)}
@@ -811,6 +816,7 @@ export function transparencia(ctx) {
           <a class="tarjeta" href="/listado-de-prestadores-de-servicio-melipeuco/"><span class="tarjeta-ico">${crudo(icono('personas', { tam: 26 }))}</span><h3>Prestadores de servicios</h3><p>Listado de prestadores de servicio de Melipeuco.</p></a>
           <a class="tarjeta" href="/oirs/"><span class="tarjeta-ico">${crudo(icono('chat', { tam: 26 }))}</span><h3>OIRS</h3><p>Consultas, reclamos y sugerencias.</p></a>
         </div>
+        ${centroTransparencia(ctx.ext ? ctx.ext.leer() : {})}
       </div>`,
   });
 }
