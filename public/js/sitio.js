@@ -421,10 +421,8 @@
     });
   })();
 
-  // Carpeta de Drive «en vivo» (Archivo de Transparencia): se carga sólo al abrirla.
-  $$('details.ar-vivo').forEach(function (dt) {
-    dt.addEventListener('toggle', function () { var f = $('iframe[data-src]', dt); if (dt.open && f && !f.src) f.src = f.getAttribute('data-src'); });
-  });
+  // Filtros que se aplican al elegir una opción (lista de documentos de Transparencia).
+  $$('select[data-auto-enviar]').forEach(function (sel) { sel.addEventListener('change', function () { if (sel.form) sel.form.submit(); }); });
 
   // ---------------- Bloques aislados: altura automática
   window.addEventListener('message', function (e) {

@@ -282,15 +282,19 @@ test('extensiones: ventana emergente, bloques en zonas, HTML aislado, código pr
 });
 
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
-  const { leerCarpeta } = await import('../herramientas/transparencia-drive.js');
-  const { nombreBonito } = await import('../server/render/archivo.js');
+  const { leerCarpeta, clasificar, nombreVisible, idPublico } = await import('../herramientas/transparencia-drive.js');
   const html = '<div class="flip-entries"><div class="flip-entry" id="entry-ABC123" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/drive/folders/ABC123?resourcekey=0-xyz" target="_blank"><div class="flip-entry-title">05.- ADQUISICIONES</div></a></div><div class="flip-entry-last-modified"><div>8/19/16</div></div></div>'
     + '<div class="flip-entry" id="entry-F1" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/file/d/F1/view?usp=drive_web&amp;resourcekey=0-k" target="_blank"><div class="flip-entry-list-icon"><img src="https://drive-thirdparty.googleusercontent.com/16/type/application/pdf" alt=""/></div><div class="flip-entry-title">Decreto 123 &amp; anexo.pdf</div></a></div><div class="flip-entry-last-modified"><div>5/9/18</div></div></div></div>';
   const it = leerCarpeta(html);
   assert.equal(it.length, 2);
   assert.deepEqual([it[0].tipo, it[0].clave, it[0].fecha], ['carpeta', '0-xyz', '2016-08-19']);
-  assert.deepEqual([it[1].tipo, it[1].nombre, it[1].url], ['PDF', 'Decreto 123 & anexo.pdf', 'https://drive.google.com/file/d/F1/view?resourcekey=0-k']);
-  assert.deepEqual(nombreBonito('17.- INFORMES SUBDERE'), { numero: '17', nombre: 'Informes SUBDERE' });
+  assert.deepEqual([it[1].tipo, it[1].nombre, it[1].clave], ['PDF', 'Decreto 123 & anexo.pdf', '0-k']);
+  // Clasificación propia del sitio (las carpetas sólo sirven para clasificar y no se guardan).
+  const c = clasificar({ nombre: 'BALANCE COMPROBACION SALUD SEPTIEMBRE 2026.pdf', fecha: '2026-10-19' }, ['11.- PRESUPUESTO ASIGNADO Y SU EJECUCION', 'Balance de comprobación']);
+  assert.deepEqual(c, { m: 'presupuesto', a: 2026, me: 9, ar: 'Salud', c: 'Balance' });
+  assert.equal(nombreVisible('Plantilla_Otras_Compras (2).pdf'), 'Plantilla Otras Compras');
+  assert.notEqual(idPublico('F1'), 'F1');
+  assert.equal(idPublico('F1').length, 12);
 });
 
 test('extensiones: plantillas de fuentes de datos', async () => {
