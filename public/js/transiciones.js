@@ -15,7 +15,8 @@
   var d = document, raiz = d.documentElement, NS = 'http://www.w3.org/2000/svg';
   var $ = function (s, c) { return (c || d).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
-  var reducido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // También cuenta la elección de la persona en «Opciones de lectura → Movimiento».
+  var reducido = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.documentElement.getAttribute('data-movimiento') === 'nada';
   var puede = 'animate' in Element.prototype && !reducido && raiz.getAttribute('data-anim') !== 'no';
   var VEL = parseFloat(getComputedStyle(raiz).getPropertyValue('--anim-vel')) || 1;
   var SALIDA = 'cubic-bezier(.16, 1, .3, 1)', VUELO = 'cubic-bezier(.7, 0, .2, 1)', REBOTE = 'cubic-bezier(.34, 1.4, .64, 1)';

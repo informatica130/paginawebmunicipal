@@ -8,7 +8,8 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
   var guardar = function (k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} };
   var leer = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
-  var reducido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // También cuenta la elección de la persona en «Opciones de lectura → Movimiento».
+  var reducido = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.documentElement.getAttribute('data-movimiento') === 'nada';
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
 
   function avisar(texto) {
@@ -252,6 +253,25 @@
     });
   }
 
+  // Movimiento elegido por la persona: completo, suave (sin transiciones entre páginas ni pantalla
+  // de carga) o sin animaciones. Se recuerda en este navegador y se aplica al recargar la página.
+  var bms = $$('button[data-movimiento]');
+  if (bms.length) {
+    var actualMv = leer('mlp-movimiento') || 'completo';
+    var marcarMv = function (v) { bms.forEach(function (b) { b.setAttribute('aria-checked', b.getAttribute('data-movimiento') === v ? 'true' : 'false'); }); };
+    marcarMv(actualMv);
+    bms.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-movimiento');
+        if (v === actualMv) return;
+        guardar('mlp-movimiento', v === 'completo' ? null : v);
+        marcarMv(v);
+        avisar(v === 'completo' ? 'Animaciones activadas' : v === 'suave' ? 'Movimiento suave: sin transiciones entre páginas' : 'Animaciones desactivadas');
+        setTimeout(function () { location.reload(); }, 700);
+      });
+    });
+  }
+
   // ---------------- Opciones de lectura (panel desplegable de la cabecera)
   var accBtn = $('[data-acc-abrir]'), accPanel = $('#acc-panel');
   if (accBtn && accPanel) {
@@ -428,6 +448,35 @@
     alta.onload = function () { if (alta.naturalWidth > 200) img.src = alta.src; };
     alta.src = 'https://i.ytimg.com/vi/' + img.getAttribute('data-mini') + '/' + img.getAttribute('data-calidad') + '.jpg';
   });
+
+  // Videoteca: flechas de las filas, vista previa animada (los tres cuadros que YouTube publica de
+  // cada video) y vista en cuadrícula o lista (se recuerda en este navegador).
+  $$('[data-carril]').forEach(function (c) {
+    var pista = $('.vd-pista', c), ant = $('[data-carril-ant]', c), sig = $('[data-carril-sig]', c);
+    if (!pista) return;
+    var revisar = function () { ant.disabled = pista.scrollLeft < 8; sig.disabled = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 8; c.classList.toggle('sin-desborde', pista.scrollWidth <= pista.clientWidth + 8); };
+    var mover = function (dir) { pista.scrollBy({ left: dir * pista.clientWidth * .85, behavior: reducido ? 'auto' : 'smooth' }); };
+    ant.addEventListener('click', function () { mover(-1); }); sig.addEventListener('click', function () { mover(1); });
+    pista.addEventListener('scroll', revisar, { passive: true }); addEventListener('resize', revisar, { passive: true }); revisar();
+  });
+  if (!reducido && window.matchMedia && matchMedia('(hover: hover)').matches) {
+    d.addEventListener('pointerover', function (e) {
+      var t = e.target.closest && e.target.closest('[data-previa]');
+      if (!t || t._previa || raiz.getAttribute('data-vd-previa') !== 'si') return;
+      var img = $('.vd-mini img', t); if (!img) return;
+      var id = t.getAttribute('data-previa'), original = img.src, n = 0;
+      t._previa = setInterval(function () { n = n % 3 + 1; img.src = 'https://i.ytimg.com/vi/' + id + '/mq' + n + '.jpg'; }, 700);
+      t.classList.add('en-previa');
+      t.addEventListener('pointerleave', function fin() { clearInterval(t._previa); t._previa = null; img.src = original; t.classList.remove('en-previa'); t.removeEventListener('pointerleave', fin); });
+    });
+  }
+  var bvs = $$('button[data-vd-vista]'), vt = $('.videoteca');
+  if (bvs.length && vt) {
+    var vista = leer('mlp-vd-vista') || 'grilla';
+    var pintarVista = function () { vt.setAttribute('data-vista', vista); bvs.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-vd-vista') === vista ? 'true' : 'false'); }); };
+    bvs.forEach(function (b) { b.addEventListener('click', function () { vista = b.getAttribute('data-vd-vista'); guardar('mlp-vd-vista', vista === 'grilla' ? null : vista); pintarVista(); }); });
+    pintarVista();
+  }
 
   // Filtros que se aplican al elegir una opción (lista de documentos de Transparencia).
   $$('select[data-auto-enviar]').forEach(function (sel) { sel.addEventListener('change', function () { if (sel.form) sel.form.submit(); }); });

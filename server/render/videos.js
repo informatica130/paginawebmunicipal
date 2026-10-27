@@ -116,16 +116,17 @@ export const urlVideo = (v) => `${BASE}${v.id}/`;
 
 export function tarjetaVideo(ix, v, { grande = false } = {}) {
   const c = ix.cats.get(v.c);
-  return html`<a class="vd-tarjeta${grande ? ' vd-grande' : ''}${v.fm === 'v' ? ' vd-vertical' : ''}" href="${urlVideo(v)}" style="--c:${c?.color || 'var(--azul)'}">
+  return html`<a class="vd-tarjeta${grande ? ' vd-grande' : ''}${v.fm === 'v' ? ' vd-vertical' : ''}" href="${urlVideo(v)}" style="--c:${c?.color || 'var(--azul)'}" data-previa="${v.id}">
     <span class="vd-mini"><img src="${mini(v.id, grande ? 'hqdefault' : 'mqdefault')}" alt="" loading="lazy" decoding="async" data-mini="${v.id}">
       <span class="vd-play" aria-hidden="true">${crudo(icono('play', { tam: grande ? 30 : 22 }))}</span>
-      ${v.s ? html`<span class="vd-dur">${duracion(v.s)}</span>` : ''}
+      ${v.s ? html`<span class="vd-dur">${duracion(v.s)}</span>` : ''}<span class="vd-progreso" aria-hidden="true"></span>
       ${v.tp === 'transmision_en_vivo' ? html`<span class="vd-marca vd-vivo">Transmisión</span>` : v.tp === 'short' ? html`<span class="vd-marca">Short</span>` : v.e === 'archivo-historico-canal3' ? html`<span class="vd-marca vd-archivo">Archivo Canal 3</span>` : v.nuevo ? html`<span class="vd-marca vd-nuevo">Nuevo</span>` : ''}
     </span>
-    <span class="vd-info"><span class="vd-cat">${c?.nombre || 'Video'}</span><b>${v.t}</b><small>${fechaDe(v)}${v.v ? html` · ${miles(v.v)} ${v.v === 1 ? 'vista' : 'vistas'}` : ''}</small></span>
+    <span class="vd-info"><span class="vd-cat">${c?.nombre || 'Video'}</span><b>${v.t}</b><small><span class="vd-fecha">${fechaDe(v)}</span>${v.v ? html`<span class="vd-vistas">${miles(v.v)} ${v.v === 1 ? 'vista' : 'vistas'}</span>` : ''}</small></span>
   </a>`;
 }
-const fila = (ix, titulo, lista, enlace = '', extra = '') => (lista.length ? html`<section class="vd-fila"><div class="vd-fila-cab"><h2>${titulo}</h2>${extra}${enlace ? html`<a class="ver-todo" href="${enlace}">Ver todos</a>` : ''}</div><div class="vd-carril">${lista.map((v) => tarjetaVideo(ix, v))}</div></section>` : '');
+// Fila con nombre (data-vd-fila) para que «Diseño → Videoteca» la muestre u oculte al instante.
+const fila = (ix, clave, titulo, lista, enlace = '') => (lista.length ? html`<section class="vd-fila" data-vd-fila="${clave}"><div class="vd-fila-cab"><h2>${titulo}</h2>${enlace ? html`<a class="ver-todo" href="${enlace}">Ver todos</a>` : ''}</div><div class="vd-carril" data-carril><button type="button" class="vd-flecha vd-ant" data-carril-ant aria-label="Anteriores">${crudo(icono('flechaIzq', { tam: 18 }))}</button><div class="vd-pista">${lista.map((v) => tarjetaVideo(ix, v))}</div><button type="button" class="vd-flecha vd-sig" data-carril-sig aria-label="Siguientes">${crudo(icono('flecha', { tam: 18 }))}</button></div></section>` : '');
 
 function formulario(ix, f) {
   const op = (lista, v) => lista.map(([k, t]) => html`<option value="${k}"${String(k) === String(v) ? crudo(' selected') : ''}>${t}</option>`);
@@ -155,7 +156,8 @@ export function paginaVideos(ctx, filtros = {}, pagina = 1) {
     const r = filtrarVideos(ix, f);
     const paginas = Math.max(1, Math.ceil(r.length / POR_PAGINA)), p = Math.min(Math.max(1, pagina), paginas);
     const qs = (n) => '?' + Object.entries({ ...f, orden: f.orden === 'recientes' ? '' : f.orden, p: n > 1 ? n : '' }).filter(([, v]) => v).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
-    cuerpo = html`<p class="resultado-conteo" role="status">${miles(r.length)} ${r.length === 1 ? 'video' : 'videos'}${f.q ? html` para «${f.q}»` : ''}.</p>
+    cuerpo = html`<div class="vd-barra-resultados"><p class="resultado-conteo" role="status">${miles(r.length)} ${r.length === 1 ? 'video' : 'videos'}${f.q ? html` para «${f.q}»` : ''}.</p>
+      <div class="segmentos-vista" role="group" aria-label="Ver como"><button type="button" data-vd-vista="grilla" aria-pressed="true">${crudo(icono('grafico', { tam: 16 }))} Cuadrícula</button><button type="button" data-vd-vista="lista" aria-pressed="false">${crudo(icono('menu', { tam: 16 }))} Lista</button></div></div>
       ${r.length ? html`<div class="vd-grilla">${r.slice((p - 1) * POR_PAGINA, p * POR_PAGINA).map((v) => tarjetaVideo(ix, v))}</div>
         ${paginas > 1 ? html`<nav class="paginacion" aria-label="Paginación">${p > 1 ? html`<a href="${BASE}${qs(p - 1)}" rel="prev">Anterior</a>` : ''}<span aria-current="page">Página ${p} de ${paginas}</span>${p < paginas ? html`<a href="${BASE}${qs(p + 1)}" rel="next">Siguiente</a>` : ''}</nav>` : ''}`
       : vacio('No encontramos videos con esos filtros. Pruebe con otra palabra o quite algún filtro.', 'buscar')}`;
@@ -163,20 +165,20 @@ export function paginaVideos(ctx, filtros = {}, pagina = 1) {
     const [primero, ...resto] = ix.videos.filter((v) => v.tp !== 'short');
     const cats = [...ix.cats.values()].filter((c) => c.total).sort((a, b) => b.total - a.total);
     cuerpo = html`
-      <section class="vd-destacado">
+      <section class="vd-destacado" data-vd-fila="destacado">
         <div class="vd-destacado-video">${reproductor(primero)}</div>
         <div class="vd-destacado-info"><span class="vd-cat" style="--c:${ix.cats.get(primero.c)?.color}">${ix.cats.get(primero.c)?.nombre}</span><h2><a href="${urlVideo(primero)}">${primero.t}</a></h2><p class="meta">${fechaDe(primero)}${primero.s ? ` · ${duracion(primero.s)}` : ''}</p>
           <ul class="vd-siguientes">${resto.slice(0, 4).map((v) => html`<li><a href="${urlVideo(v)}"><img src="${mini(v.id, 'default')}" alt="" loading="lazy"><span><b>${v.t}</b><small>${fechaDe(v)}</small></span></a></li>`)}</ul></div>
       </section>
       <nav class="vd-categorias" aria-label="Categorías de videos">${cats.map((c) => html`<a class="vd-chip" href="${BASE}?categoria=${c.id}" style="--c:${c.color}">${c.nombre}<small>${c.total}</small></a>`)}</nav>
-      ${fila(ix, 'Sesiones del Concejo Municipal', ix.videos.filter((v) => v.c === 'concejo-municipal').slice(0, 10), `${BASE}?categoria=concejo-municipal`)}
-      ${fila(ix, 'Lo último', resto.filter((v) => v.c !== 'concejo-municipal').slice(0, 10), `${BASE}?orden=recientes&tipo=video`)}
-      ${fila(ix, 'Los más vistos', filtrarVideos(ix, { orden: 'vistos' }, 10), `${BASE}?orden=vistos`)}
-      ${fila(ix, 'Shorts', ix.videos.filter((v) => v.tp === 'short').slice(0, 10), `${BASE}?tipo=short`)}
-      ${fila(ix, 'Archivo histórico Canal 3 / Canal 12 Melivisión (2010–2017)', filtrarVideos(ix, { canal: 'archivo-historico-canal3', orden: 'vistos' }, 10), `${BASE}?canal=archivo-historico-canal3`)}
-      <section class="vd-fila"><div class="vd-fila-cab"><h2>Listas de reproducción</h2></div><div class="vd-listas">${ix.listas.size ? [...ix.listas.values()].filter((l) => l.videos.length > 1).sort((a, b) => b.videos.length - a.videos.length).map((l) => html`<a class="vd-lista" href="${BASE}lista/${l.id}/"><span class="vd-mini"><img src="${mini(l.mini)}" alt="" loading="lazy"><span class="vd-lista-n">${l.videos.length} videos</span></span><b>${l.t}</b></a>`) : ''}</div></section>
-      <section class="vd-fila"><div class="vd-fila-cab"><h2>Por año</h2></div><div class="chips ar-anios">${ix.anios.map((a) => html`<a class="chip" href="${BASE}?anio=${a}">${a} <small>${ix.porAnio[a]}</small></a>`)}</div></section>
-      <section class="vd-canales">${ix.canales.filter((c) => c.handle !== '@municipalidaddemelipeuco8051').map((c) => html`<a class="vd-canal" href="${c.url}" target="_blank" rel="noopener">${c.avatar ? html`<img src="${c.avatar.replace(/=s\d+-/, '=s96-')}" alt="" loading="lazy">` : ''}<span><b>${c.nombre}</b><small>${c.historico && c.historico !== c.nombre ? c.historico + ' · ' : ''}${miles(c.suscriptores)} suscriptores</small></span><span class="boton boton-secundario">Ver en YouTube</span></a>`)}</section>`;
+      ${fila(ix, 'concejo', 'Sesiones del Concejo Municipal', ix.videos.filter((v) => v.c === 'concejo-municipal').slice(0, 12), `${BASE}?categoria=concejo-municipal`)}
+      ${fila(ix, 'ultimo', 'Lo último', resto.filter((v) => v.c !== 'concejo-municipal').slice(0, 12), `${BASE}?orden=recientes&tipo=video`)}
+      ${fila(ix, 'vistos', 'Los más vistos', filtrarVideos(ix, { orden: 'vistos' }, 12), `${BASE}?orden=vistos`)}
+      ${fila(ix, 'shorts', 'Shorts', ix.videos.filter((v) => v.tp === 'short').slice(0, 12), `${BASE}?tipo=short`)}
+      ${fila(ix, 'archivo', 'Archivo histórico Canal 3 / Canal 12 Melivisión (2010–2017)', filtrarVideos(ix, { canal: 'archivo-historico-canal3', orden: 'vistos' }, 12), `${BASE}?canal=archivo-historico-canal3`)}
+      <section class="vd-fila" data-vd-fila="listas"><div class="vd-fila-cab"><h2>Listas de reproducción</h2></div><div class="vd-listas">${ix.listas.size ? [...ix.listas.values()].filter((l) => l.videos.length > 1).sort((a, b) => b.videos.length - a.videos.length).map((l) => html`<a class="vd-lista" href="${BASE}lista/${l.id}/"><span class="vd-mini"><img src="${mini(l.mini)}" alt="" loading="lazy"><span class="vd-lista-n">${l.videos.length} videos</span></span><b>${l.t}</b></a>`) : ''}</div></section>
+      <section class="vd-fila" data-vd-fila="anios"><div class="vd-fila-cab"><h2>Por año</h2></div><div class="chips ar-anios">${ix.anios.map((a) => html`<a class="chip" href="${BASE}?anio=${a}">${a} <small>${ix.porAnio[a]}</small></a>`)}</div></section>
+      <section class="vd-canales" data-vd-fila="canales">${ix.canales.filter((c) => c.handle !== '@municipalidaddemelipeuco8051').map((c) => html`<a class="vd-canal" href="${c.url}" target="_blank" rel="noopener">${c.avatar ? html`<img src="${c.avatar.replace(/=s\d+-/, '=s96-')}" alt="" loading="lazy">` : ''}<span><b>${c.nombre}</b><small>${c.historico && c.historico !== c.nombre ? c.historico + ' · ' : ''}${miles(c.suscriptores)} suscriptores</small></span><span class="boton boton-secundario">Ver en YouTube</span></a>`)}</section>`;
   }
   return documento(ctx, {
     titulo: `${titulo} — Videos`, descripcion: cat ? cat.descripcion : 'Videos de la Municipalidad de Melipeuco: sesiones del Concejo, aniversarios, fiestas, obras, turismo y el archivo histórico de Canal 3.', canonical: cat ? `${BASE}?categoria=${cat.id}` : BASE,
@@ -244,12 +246,12 @@ export function paginaLista(ctx, id) {
 }
 
 // Bloques para otras páginas.
-export function seccionVideosPortada(titulo = 'Videos de Melipeuco') {
+export function seccionVideosPortada(titulo = 'Videos de Melipeuco', cantidad = 4) {
   const ix = indice();
   if (!ix) return '';
   // El más reciente y, a su lado, lo último de otras categorías (para que no sean sólo sesiones).
   const largos = ix.videos.filter((v) => v.tp !== 'short');
-  const ult = [largos[0], ...largos.slice(1).filter((v) => v.c !== largos[0]?.c).slice(0, 3)].filter(Boolean);
+  const ult = [largos[0], ...largos.slice(1).filter((v) => v.c !== largos[0]?.c).slice(0, Math.max(2, cantidad - 1))].filter(Boolean);
   const cats = [...ix.cats.values()].filter((c) => c.total).sort((a, b) => b.total - a.total).slice(0, 8);
   return html`<section class="seccion seccion-videoteca"><div class="contenedor">
     <div class="seccion-cabecera"><div><h2>${titulo}</h2><p>Sesiones del Concejo, fiestas, obras y el archivo histórico de Canal 3.</p></div><a class="ver-todo" href="${BASE}">Todos los videos</a></div>

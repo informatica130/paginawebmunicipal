@@ -11,7 +11,7 @@
   var d = document, raiz = d.documentElement;
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
   if (!('animate' in Element.prototype)) return;
-  if ((window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || raiz.getAttribute('data-anim') === 'no') return;
+  if ((window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || raiz.getAttribute('data-anim') === 'no' || raiz.getAttribute('data-movimiento') === 'nada') return;
   var activo = function () { return raiz.getAttribute('data-escudo-vivo') !== 'no'; };
   var VEL = parseFloat(getComputedStyle(raiz).getPropertyValue('--anim-vel')) || 1;
   var SALIDA = 'cubic-bezier(.16, 1, .3, 1)', REBOTE = 'cubic-bezier(.34, 1.5, .64, 1)', SENO = 'cubic-bezier(.45, 0, .55, 1)';

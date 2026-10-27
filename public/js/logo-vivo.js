@@ -13,7 +13,8 @@
   var d = document, raiz = d.documentElement, NS = 'http://www.w3.org/2000/svg';
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
   if (!('animate' in Element.prototype)) return;
-  var reducido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // También cuenta la elección de la persona en «Opciones de lectura → Movimiento».
+  var reducido = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.documentElement.getAttribute('data-movimiento') === 'nada';
   var VEL = parseFloat(getComputedStyle(raiz).getPropertyValue('--anim-vel')) || 1;
   var attr = function (k, def) { return raiz.getAttribute(k) || def; };
 
