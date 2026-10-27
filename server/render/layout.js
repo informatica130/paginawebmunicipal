@@ -102,6 +102,12 @@ function cabecera(ctx) {
               <div class="acc-fila"><button type="button" data-texto="-1" aria-label="Achicar el texto">A−</button><button type="button" data-texto="1" aria-label="Agrandar el texto">A+</button></div>
               <button type="button" class="acc-opcion" data-contraste aria-pressed="false">${crudo(icono('contraste', { tam: 18 }))} Alto contraste</button>
               <button type="button" class="acc-opcion" data-tema aria-label="Cambiar a modo oscuro">${crudo(icono('luna', { tam: 18 }))} Modo oscuro</button>
+              ${dz.animaciones.activas && dz.animaciones.controlVisitante ? html`<p>Movimiento</p>
+              <div class="acc-movimiento" role="radiogroup" aria-label="Animaciones y transiciones">
+                <button type="button" role="radio" data-movimiento="completo" aria-checked="true" title="Todas las animaciones y transiciones">Completo</button>
+                <button type="button" role="radio" data-movimiento="suave" aria-checked="false" title="Sin transiciones entre páginas ni pantalla de carga">Suave</button>
+                <button type="button" role="radio" data-movimiento="nada" aria-checked="false" title="Sin animaciones">Sin animaciones</button>
+              </div>` : ''}
               <a class="acc-sos" href="/contacto/#emergencias">${crudo(icono('telefono', { tam: 16 }))} Teléfonos de emergencia</a>
             </div>
           </div>
@@ -217,7 +223,7 @@ ${fuentes ? html`<link rel="preconnect" href="https://fonts.gstatic.com" crossor
 <style id="diseno-vars">${crudo(variablesCss(dz))}</style>
 ${dz.animaciones.activas && dz.animaciones.cordillera && dz.animaciones.transicionEstilo === 'vista' ? crudo('<style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>') : ''}
 ${dz.avanzado.css ? html`<style id="diseno-propio">${crudo(dz.avanzado.css)}</style>` : ''}
-<script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto';if(sessionStorage.getItem('mlp-cortina')&&d.getAttribute('data-anim-cordillera')==='si'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('tk-entrando')}catch(e){}})();</script>
+<script nonce="${ctx.nonce}">(function(){try{var d=document.documentElement,t=localStorage.getItem('mlp-tema'),f=localStorage.getItem('mlp-texto'),k=localStorage.getItem('mlp-contraste');if(t)d.dataset.tema=t;if(f)d.style.setProperty('--escala',f);if(k==='1')d.dataset.contraste='alto';var mv=localStorage.getItem('mlp-movimiento');if(mv==='suave'||mv==='nada'){d.dataset.movimiento=mv;d.setAttribute('data-anim-cordillera','no');d.setAttribute('data-intro','nunca');d.setAttribute('data-alternar-logo','no');d.setAttribute('data-pt-brillo','no');d.setAttribute('data-cursor-luz','no');d.setAttribute('data-kenburns','no');if(mv==='nada'){d.setAttribute('data-anim','no');d.setAttribute('data-logo-anim','ninguna');d.setAttribute('data-anim-aparicion','no');d.setAttribute('data-escudo-vivo','no');d.setAttribute('data-desplazamiento','normal')}}if(!mv||mv==='completo')if(sessionStorage.getItem('mlp-cortina')&&d.getAttribute('data-anim-cordillera')==='si'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('tk-entrando')}catch(e){}})();</script>
 <script type="application/ld+json" nonce="${ctx.nonce}">${crudo(JSON.stringify(ld).replace(/</g, '\\u003c'))}</script>
 ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}

@@ -10,7 +10,8 @@
   var d = document, raiz = d.documentElement;
   var $ = function (s, c) { return (c || d).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
-  var reducido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // También cuenta la elección de la persona en «Opciones de lectura → Movimiento».
+  var reducido = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || document.documentElement.getAttribute('data-movimiento') === 'nada';
   var puede = typeof Element !== 'undefined' && 'animate' in Element.prototype && !reducido;
 
   // Preferencias del panel «Diseño del sitio» (atributos de <html>).

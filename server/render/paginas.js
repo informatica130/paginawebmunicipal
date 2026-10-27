@@ -299,7 +299,7 @@ async function seccionPortada(ctx, sec) {
       const e = ctx.repo.vigentes('encuesta')[0];
       return e ? html`<section class="seccion"><div class="contenedor angosto">${ctx.encuesta(e)}</div></section>` : '';
     }
-    case 'videoteca': return seccionVideosPortada(sec.titulo || 'Videos de Melipeuco');
+    case 'videoteca': return seccionVideosPortada(sec.titulo || 'Videos de Melipeuco', disenoDe(s).videos.portadaCantidad);
     case 'video': {
       const v = ctx.ajustes.video;
       if (!v?.url) return '';

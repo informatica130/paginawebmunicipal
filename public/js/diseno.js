@@ -41,6 +41,9 @@ export const PREDETERMINADO = {
   campanas: { autoplay: true, intervalo: 7, transicion: 'deslizar', flechas: 'cursor', puntos: 'pildora', pausa: true, marco: 'sombra', proporcionMovil: 'auto' },
   // Noticias (portada y listados)
   noticias: { disposicion: 'destacada', columnas: 4, proporcion: '16/10', estilo: 'limpia', resumen: 'destacada', fecha: true, categoria: true, efecto: 'zoom', etiqueta: 'texto' },
+  // Videoteca (/videos/ y videos en la portada, noticias y Concejo)
+  videos: { destacado: true, destacadoTema: 'oscuro', tarjeta: 'clasica', tam: 'normal', proporcion: '16/9', previa: true, vistas: true, fecha: true, categoria: true, duracion: true, marcas: true,
+    filas: { concejo: true, ultimo: true, vistos: true, shorts: true, archivo: true, listas: true, anios: true, canales: true }, carril: true, portadaCantidad: 4 },
   // Elementos repetidos en todo el sitio
   elementos: { accesos: 'tarjetas', tramites: 'tarjetas', verTodo: 'pildora', categorias: 'pildora', iconos: 'suaves', separadores: 'ninguno' },
   // Buscador predictivo (portada, cabecera y página de resultados)
@@ -49,7 +52,7 @@ export const PREDETERMINADO = {
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
   animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true,
-    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, transicionLetras: 'logo', precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true },
+    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, transicionLetras: 'logo', precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true, controlVisitante: true },
   avanzado: { css: '' },
 };
 
@@ -142,6 +145,10 @@ export const OPCIONES = {
   estiloCategorias: { pildora: 'Píldoras', subrayado: 'Pestañas subrayadas' },
   estiloIconos: { suaves: 'Fondo suave', solidos: 'Fondo de color', lineas: 'Sólo el trazo' },
   separadores: { ninguno: 'Sin separadores', ondas: 'Ondas entre secciones', montes: 'Cordillera entre secciones' },
+  tarjetaVideo: { clasica: 'Imagen y texto abajo', superpuesta: 'Texto sobre la imagen', lista: 'En lista (imagen al lado)' },
+  tamVideo: { compacta: 'Pequeñas', normal: 'Medianas', amplia: 'Grandes' },
+  proporcionVideo: { '16/9': 'Panorámica 16:9', '4/3': 'Clásica 4:3', '1/1': 'Cuadrada' },
+  temaDestacado: { oscuro: 'Fondo oscuro', claro: 'Fondo claro', color: 'Color principal' },
   aparicionEstilo: { mixto: 'Cada elemento a su manera', subir: 'Suben', fundido: 'Aparecen', zoom: 'Crecen', giro3d: 'Giran en 3D', lateral: 'Llegan desde el lado', desenfoque: 'Se enfocan' },
   reparto: { equilibrado: 'Equilibrado', banner: 'Campaña más grande', panel: 'Buscador más ancho' },
   bannerProporcion: { auto: 'La de la imagen', '16/9': 'Panorámica 16:9', '21/9': 'Cine 21:9', '3/1': 'Franja 3:1', '4/3': 'Clásica 4:3', '1/1': 'Cuadrada 1:1' },
@@ -194,7 +201,7 @@ export function migrar(d) {
 
 export function normalizar(entrada, { permitirCss = true, previo = null } = {}) {
   const e = fusionar(PREDETERMINADO, esObjeto(entrada) ? entrada : {});
-  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, cp = e.campanas, no = e.noticias, el = e.elementos;
+  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, vi = e.videos, cp = e.campanas, no = e.noticias, el = e.elementos;
   return {
     revision: REVISION,
     estilo: opcion(e.estilo, { ...ESTILOS, personalizado: 1 }, 'personalizado'),
@@ -246,6 +253,11 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       accesos: opcion(el.accesos, OPCIONES.estiloAccesos, 'tarjetas'), tramites: opcion(el.tramites, OPCIONES.estiloTramites, 'tarjetas'), verTodo: opcion(el.verTodo, OPCIONES.verTodo, 'pildora'),
       categorias: opcion(el.categorias, OPCIONES.estiloCategorias, 'pildora'), iconos: opcion(el.iconos, OPCIONES.estiloIconos, 'suaves'), separadores: opcion(el.separadores, OPCIONES.separadores, 'ninguno'),
     },
+    videos: {
+      destacado: bool(vi.destacado, true), destacadoTema: opcion(vi.destacadoTema, OPCIONES.temaDestacado, 'oscuro'), tarjeta: opcion(vi.tarjeta, OPCIONES.tarjetaVideo, 'clasica'), tam: opcion(vi.tam, OPCIONES.tamVideo, 'normal'),
+      proporcion: opcion(vi.proporcion, OPCIONES.proporcionVideo, '16/9'), previa: bool(vi.previa, true), vistas: bool(vi.vistas, true), fecha: bool(vi.fecha, true), categoria: bool(vi.categoria, true), duracion: bool(vi.duracion, true), marcas: bool(vi.marcas, true),
+      filas: Object.fromEntries(Object.keys(P.videos.filas).map((k) => [k, bool(vi.filas?.[k], true)])), carril: bool(vi.carril, true), portadaCantidad: numero(vi.portadaCantidad, 4, 3, 8),
+    },
     buscador: {
       predictivo: bool(bu.predictivo, true), ejemplos: bool(bu.ejemplos, true), ejemplosTexto: texto(bu.ejemplosTexto, P.buscador.ejemplosTexto, 300),
       recientes: bool(bu.recientes, true), populares: bool(bu.populares, true), fragmentos: bool(bu.fragmentos, true),
@@ -260,7 +272,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       introEstilo: opcion(an.introEstilo, OPCIONES.introEstilo, P.animaciones.introEstilo), escudoVivo: bool(an.escudoVivo, true), profundidad: numero(an.profundidad, 70, 0, 100),
       transicionEstilo: opcion(an.transicionEstilo, OPCIONES.transicionEstilo, 'columnas'), transicionColor: opcion(an.transicionColor, OPCIONES.transicionColor, 'zona'),
       transicionNombre: bool(an.transicionNombre, true), transicionLetras: opcion(an.transicionLetras, OPCIONES.transicionLetras, 'logo'), precarga: bool(an.precarga, true),
-      aparicionEstilo: opcion(an.aparicionEstilo, OPCIONES.aparicionEstilo, 'mixto'), cursorLuz: bool(an.cursorLuz, true), ondaClic: bool(an.ondaClic, true), desplazamientoSuave: bool(an.desplazamientoSuave, true),
+      aparicionEstilo: opcion(an.aparicionEstilo, OPCIONES.aparicionEstilo, 'mixto'), controlVisitante: bool(an.controlVisitante, true), cursorLuz: bool(an.cursorLuz, true), ondaClic: bool(an.ondaClic, true), desplazamientoSuave: bool(an.desplazamientoSuave, true),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
     avanzado: { css: permitirCss ? String(e.avanzado?.css || '').replace(/<\/?style/gi, '').slice(0, 20000) : String(previo?.avanzado?.css || '') },
@@ -294,7 +306,7 @@ export function variablesCss(cfg) {
     '--anim-vel': cfg.animaciones.velocidad,
     '--interfaz': cfg.forma.escala / 100, '--r-l': `${cfg.forma.radioGrande}px`, '--r-xl': `${Math.round(cfg.forma.radioGrande * 1.3)}px`, '--elevacion': `${cfg.forma.elevacion}px`,
     '--mov': CURVAS[cfg.animaciones.curva], '--pt-angulo': `${cfg.portal.bandaAngulo}deg`, '--pt-patron': cfg.portal.patronIntensidad / 100,
-    '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`, '--pt-banner-ar': cfg.portal.bannerProporcion === 'auto' ? 'auto' : cfg.portal.bannerProporcion.replace('/', ' / '), '--camp-ar-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : cfg.campanas.proporcionMovil.replace('/', ' / '), '--camp-dur': `${cfg.campanas.intervalo}s`, '--tn-ar': cfg.noticias.proporcion.replace('/', ' / '), '--tn-cols': cfg.noticias.columnas, '--alternar': `${cfg.cabecera.alternarCada}s`,
+    '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`, '--pt-banner-ar': cfg.portal.bannerProporcion === 'auto' ? 'auto' : cfg.portal.bannerProporcion.replace('/', ' / '), '--camp-ar-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : cfg.campanas.proporcionMovil.replace('/', ' / '), '--camp-dur': `${cfg.campanas.intervalo}s`, '--tn-ar': cfg.noticias.proporcion.replace('/', ' / '), '--tn-cols': cfg.noticias.columnas, '--vd-ar': cfg.videos.proporcion.replace('/', ' / '), '--vd-min': { compacta: '200px', normal: '250px', amplia: '330px' }[cfg.videos.tam], '--alternar': `${cfg.cabecera.alternarCada}s`,
     ...(cfg.portal.bandaPropia ? { '--pt-ini': cfg.portal.bandaInicio, '--pt-fin': cfg.portal.bandaFin } : {}), '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
   };
   return ':root{' + Object.entries(v).map(([k, x]) => `${k}:${x}`).join(';') + '}';
@@ -323,6 +335,9 @@ export function atributos(cfg) {
     'data-pt-logo': cfg.portal.logoTrekking ? 'si' : 'no', 'data-pt-reparto': cfg.portal.reparto, 'data-pt-banner': cfg.portal.bannerProporcion === 'auto' ? 'auto' : 'fijo', 'data-pt-ajuste': cfg.portal.bannerAjuste, 'data-pt-efecto': cfg.portal.bannerEfecto,
     'data-alternar-logo': a.activas && cfg.cabecera.alternarLogo ? 'si' : 'no', 'data-alternar-efecto': cfg.cabecera.alternarEfecto, 'data-alternar-cada': String(cfg.cabecera.alternarCada), 'data-alternar-tk': String(cfg.cabecera.alternarTk), 'data-alternar-entrada': cfg.cabecera.alternarEntrada, 'data-transicion-letras': a.transicionLetras,
     'data-camp-auto': cfg.campanas.autoplay ? String(cfg.campanas.intervalo) : '0', 'data-camp-trans': cfg.campanas.transicion, 'data-camp-flechas': cfg.campanas.flechas, 'data-camp-puntos': cfg.campanas.puntos, 'data-camp-pausa': cfg.campanas.pausa ? 'si' : 'no', 'data-camp-marco': cfg.campanas.marco, 'data-camp-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : 'fijo',
+    'data-vd-tarjeta': cfg.videos.tarjeta, 'data-vd-destacado': cfg.videos.destacado ? cfg.videos.destacadoTema : 'no', 'data-vd-previa': a.activas && cfg.videos.previa ? 'si' : 'no', 'data-vd-carril': cfg.videos.carril ? 'si' : 'no',
+    'data-vd-vistas': cfg.videos.vistas ? 'si' : 'no', 'data-vd-fecha': cfg.videos.fecha ? 'si' : 'no', 'data-vd-cat': cfg.videos.categoria ? 'si' : 'no', 'data-vd-dur': cfg.videos.duracion ? 'si' : 'no', 'data-vd-marcas': cfg.videos.marcas ? 'si' : 'no',
+    ...Object.fromEntries(Object.entries(cfg.videos.filas).map(([k, v]) => ['data-vd-f-' + k, v ? 'si' : 'no'])),
     'data-noticias': cfg.noticias.disposicion, 'data-tn-estilo': cfg.noticias.estilo, 'data-tn-resumen': cfg.noticias.resumen, 'data-tn-fecha': cfg.noticias.fecha ? 'si' : 'no', 'data-tn-categoria': cfg.noticias.categoria ? 'si' : 'no', 'data-tn-efecto': cfg.noticias.efecto, 'data-tn-etiqueta': cfg.noticias.etiqueta,
     'data-el-accesos': cfg.elementos.accesos, 'data-el-tramites': cfg.elementos.tramites, 'data-el-ver-todo': cfg.elementos.verTodo, 'data-el-categorias': cfg.elementos.categorias, 'data-el-iconos': cfg.elementos.iconos, 'data-el-separadores': cfg.elementos.separadores,
     'data-aparicion-estilo': a.aparicionEstilo, 'data-cursor-luz': a.activas && a.cursorLuz ? 'si' : 'no', 'data-onda-clic': a.activas && a.ondaClic ? 'si' : 'no', 'data-desplazamiento': a.desplazamientoSuave ? 'suave' : 'normal',

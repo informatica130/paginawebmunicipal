@@ -143,6 +143,29 @@ const GRUPOS = [
     { ruta: 'noticias.etiqueta', tipo: 'botones', etiqueta: 'Estilo de la categoría', opciones: OPCIONES.etiquetaNoticia, si: (c) => c.noticias.categoria },
     { ruta: 'noticias.efecto', tipo: 'botones', etiqueta: 'Al pasar el cursor', opciones: OPCIONES.efectoNoticia },
   ] },
+  { id: 'videos', titulo: 'Videoteca', ayuda: 'La sección /videos/ y los videos de la portada, Noticias y el Concejo. Elija «Videos» en la página de la vista previa para verla.', controles: [
+    { ruta: 'videos.tarjeta', tipo: 'botones', etiqueta: 'Forma de cada video', opciones: OPCIONES.tarjetaVideo },
+    { ruta: 'videos.tam', tipo: 'botones', etiqueta: 'Tamaño de las tarjetas', opciones: OPCIONES.tamVideo },
+    { ruta: 'videos.proporcion', tipo: 'botones', etiqueta: 'Forma de las miniaturas', opciones: OPCIONES.proporcionVideo },
+    { ruta: 'videos.carril', tipo: 'si', etiqueta: 'Filas que se deslizan de lado (si no, en cuadrícula)' },
+    { ruta: 'videos.previa', tipo: 'si', etiqueta: 'Vista previa animada al pasar el cursor por una miniatura', si: (c) => c.animaciones.activas },
+    { ruta: 'videos.duracion', tipo: 'si', etiqueta: 'Mostrar la duración' },
+    { ruta: 'videos.categoria', tipo: 'si', etiqueta: 'Mostrar la categoría' },
+    { ruta: 'videos.fecha', tipo: 'si', etiqueta: 'Mostrar la fecha' },
+    { ruta: 'videos.vistas', tipo: 'si', etiqueta: 'Mostrar las visualizaciones' },
+    { ruta: 'videos.marcas', tipo: 'si', etiqueta: 'Etiquetas «Nuevo», «Short», «Transmisión» y «Archivo Canal 3»' },
+    { ruta: 'videos.destacado', tipo: 'si', etiqueta: 'Video destacado grande arriba' },
+    { ruta: 'videos.destacadoTema', tipo: 'botones', etiqueta: 'Fondo del destacado', opciones: OPCIONES.temaDestacado, si: (c) => c.videos.destacado },
+    { ruta: 'videos.filas.concejo', tipo: 'si', etiqueta: 'Fila «Sesiones del Concejo Municipal»' },
+    { ruta: 'videos.filas.ultimo', tipo: 'si', etiqueta: 'Fila «Lo último»' },
+    { ruta: 'videos.filas.vistos', tipo: 'si', etiqueta: 'Fila «Los más vistos»' },
+    { ruta: 'videos.filas.shorts', tipo: 'si', etiqueta: 'Fila «Shorts»' },
+    { ruta: 'videos.filas.archivo', tipo: 'si', etiqueta: 'Fila «Archivo histórico Canal 3»' },
+    { ruta: 'videos.filas.listas', tipo: 'si', etiqueta: 'Listas de reproducción' },
+    { ruta: 'videos.filas.anios', tipo: 'si', etiqueta: 'Videos por año' },
+    { ruta: 'videos.filas.canales', tipo: 'si', etiqueta: 'Canales de YouTube' },
+    { ruta: 'videos.portadaCantidad', tipo: 'rango', etiqueta: 'Videos en la portada (se aplica al guardar)', min: 3, max: 8, paso: 1, unidad: '' },
+  ] },
   { id: 'elementos', titulo: 'Elementos del sitio', ayuda: 'Accesos, trámites, botones, categorías, íconos y separadores en todas las páginas.', controles: [
     { ruta: 'elementos.accesos', tipo: 'botones', etiqueta: 'Accesos rápidos', opciones: OPCIONES.estiloAccesos },
     { ruta: 'elementos.tramites', tipo: 'botones', etiqueta: 'Trámites de la portada', opciones: OPCIONES.estiloTramites },
@@ -179,6 +202,7 @@ const GRUPOS = [
     { ruta: 'animaciones.aparicionEstilo', tipo: 'lista', etiqueta: 'Cómo aparece el contenido', opciones: OPCIONES.aparicionEstilo, si: (c) => c.animaciones.activas && c.animaciones.aparicion },
     { ruta: 'animaciones.cursorLuz', tipo: 'si', etiqueta: 'Luz suave que sigue al cursor sobre las tarjetas', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.ondaClic', tipo: 'si', etiqueta: 'Onda al hacer clic en botones y tarjetas', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.controlVisitante', tipo: 'si', etiqueta: 'Permitir que cada persona elija «Completo», «Suave» o «Sin animaciones» en Opciones de lectura', ayuda: 'Para quienes las transiciones resultan molestas. Se recuerda en su navegador.', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.desplazamientoSuave', tipo: 'si', etiqueta: 'Desplazamiento suave al usar enlaces dentro de la página' },
     { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
@@ -197,11 +221,11 @@ const PESTANAS = [
   ['todo', 'Todo', null],
   ['apariencia', 'Apariencia', ['colores', 'tipografia', 'forma', 'elementos']],
   ['portada', 'Cabecera y portada', ['cabecera', 'portada', 'portal', 'campanas', 'identidad']],
-  ['contenido', 'Contenido', ['noticias', 'buscador', 'pie']],
+  ['contenido', 'Contenido', ['noticias', 'videos', 'buscador', 'pie']],
   ['movimiento', 'Movimiento', ['animaciones']],
 ];
 
-const PAGINAS = { '/': 'Portada', '/noticias/': 'Noticias', '/tramites/': 'Trámites', '/contacto/': 'Contacto', '/areas/': 'Áreas' };
+const PAGINAS = { '/': 'Portada', '/noticias/': 'Noticias', '/videos/': 'Videos', '/tramites/': 'Trámites', '/contacto/': 'Contacto', '/areas/': 'Áreas' };
 const DISPOSITIVOS = { computador: ['Computador', 1366], tablet: ['Tablet', 820], celular: ['Celular', 390] };
 
 const leer = (o, ruta) => ruta.split('.').reduce((a, k) => a?.[k], o);
@@ -327,7 +351,7 @@ export default async function (vista) {
   // ---------------------------------------------------------------- Cambios
   const PERSONALIZA = /^(colores|tipografia|forma|cabecera\.estilo)/;
   // Parte de la página que muestra cada grupo de opciones (la vista previa se desplaza hasta ella).
-  const ZONAS = { noticias: '.seccion-noticias', campanas: '.campanas', 'cabecera.': '.cabecera', 'elementos.accesos': '.accesos-seccion, .pt-mosaico', 'elementos.tramites': '.seccion-tramites', 'elementos.verTodo': '.seccion-tramites', 'elementos.separadores': '.seccion-tramites', buscador: '.hero-buscar, .cabecera', 'portal.mosaico': '.pt-mosaico', pie: '.pie' };
+  const ZONAS = { videos: '.videoteca, .seccion-videoteca', noticias: '.seccion-noticias', campanas: '.campanas', 'cabecera.': '.cabecera', 'elementos.accesos': '.accesos-seccion, .pt-mosaico', 'elementos.tramites': '.seccion-tramites', 'elementos.verTodo': '.seccion-tramites', 'elementos.separadores': '.seccion-tramites', buscador: '.hero-buscar, .cabecera', 'portal.mosaico': '.pt-mosaico', pie: '.pie' };
   let ultimaZona = '';
   function irA(ruta) {
     const k = Object.keys(ZONAS).find((z) => ruta.startsWith(z));
