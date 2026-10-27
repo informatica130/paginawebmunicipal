@@ -6,6 +6,8 @@
     "slug": "educacion",
     "unidad": "Departamento de Educación Municipal (DAEM)",
     "descripcion": "Departamento de Educación Municipal de Melipeuco: establecimientos, becas, programas extraescolares y noticias de educación.",
+    "organigrama": "dep-educacion",
+    "alias": [],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

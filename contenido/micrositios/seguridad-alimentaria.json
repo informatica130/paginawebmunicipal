@@ -1,0 +1,88 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "seguridad-alimentaria",
+    "nombre": "Seguridad Alimentaria",
+    "slug": "seguridad-alimentaria",
+    "unidad": "Programa de Apoyo a la Seguridad Alimentaria",
+    "descripcion": "Programa de Apoyo a la Seguridad Alimentaria en Melipeuco: invernaderos, gallineros y sistemas de agua para el autoconsumo familiar.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#2F7D4A",
+      "oscuro": "#123524",
+      "acento": "#E9A92B",
+      "patron": "hojas",
+      "icono": "hoja",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/764679798_1495446299287438_5415972341440461162_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Programa de Apoyo a la Seguridad Alimentaria",
+      "titulo": "Producir para el autoconsumo",
+      "bajada": "En convenio con el Ministerio de Desarrollo Social y Familia y el apoyo técnico del FOSIS, el programa fortalece la autonomía y la seguridad alimentaria de las familias.",
+      "botones": [],
+      "cifras": [
+        {
+          "valor": "13 familias",
+          "etiqueta": "acompañadas durante nueve meses"
+        },
+        {
+          "valor": "$19,3 millones",
+          "etiqueta": "de inversión ministerial y municipal"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8811",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "programa",
+        "tipo": "texto",
+        "ancla": "El programa",
+        "titulo": "Cómo funciona",
+        "html": "<p>Durante nueve meses, el programa acompañó a 13 familias de la comuna con un proceso de apoyo productivo y social, impulsando proyectos orientados al autoconsumo: <strong>invernaderos, gallineros, cierres perimetrales y sistemas de acumulación y conducción de agua</strong>.</p><p>La ejecución contempló una inversión ministerial de $13.250.000 y un aporte municipal de $6.041.600.</p>"
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "corazon",
+            "texto": "Programas Sociales",
+            "url": "/programas-sociales/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Desarrollo Social (DIDECO)",
+            "url": "/social/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de seguridad alimentaria",
+        "categoria": "programa-de-apoyo-a-la-seguridad-alimentaria",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

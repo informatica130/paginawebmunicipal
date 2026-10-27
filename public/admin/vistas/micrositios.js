@@ -47,16 +47,25 @@ export default async function (vista) {
   };
 
   // ---------------------------------------------------------------- Lista
+  let filtroLista = '', estadoLista = 'todos';
+  const sinTilde = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   function pintarLista() {
     actual = null; lectores = [];
     $('[data-volver]', vista).hidden = true; $('[data-ver]', vista).hidden = true;
+    const q = sinTilde(filtroLista.trim());
+    const visibles = sitios.map((s, i) => [s, i]).filter(([s]) => (!q || sinTilde(`${s.nombre} ${s.unidad} ${s.slug}`).includes(q)) && (estadoLista === 'todos' || (estadoLista === 'publicados') === !!s.publicado));
     cuerpo.innerHTML = String(h`<p class="muted">Cada micrositio queda en <code>sitio/dirección/</code> y tiene prioridad sobre una página con la misma dirección. Los que están en borrador sólo los ve quien tiene sesión en el panel.</p>
-      <div class="ms-lista">${sitios.length ? sitios.map((s, i) => h`<article class="tarjeta ms-ficha" style="--c:${s.tema.color};--o:${s.tema.oscuro}">
+      <div class="tarjeta ms-filtros"><label class="buscar-opcion"><span class="sr">Buscar un micrositio</span>${ico('buscar', 16)}<input type="search" data-filtro-lista placeholder="Buscar por nombre, unidad o dirección…" value="${filtroLista}" autocomplete="off"></label>
+        <div class="segmentos" role="group" aria-label="Estado">${[['todos', `Todos (${sitios.length})`], ['publicados', `Publicados (${sitios.filter((s) => s.publicado).length})`], ['borradores', `Borradores (${sitios.filter((s) => !s.publicado).length})`]].map(([k, t]) => h`<button type="button" data-estado-lista="${k}" aria-pressed="${k === estadoLista}">${t}</button>`)}</div></div>
+      <div class="ms-lista">${visibles.length ? visibles.map(([s, i]) => h`<article class="tarjeta ms-ficha" style="--c:${s.tema.color};--o:${s.tema.oscuro}">
         <div class="ms-ficha-portada" style="background-image:${patronUrl(s.tema.patron, { color: '#FFFFFF', opacidad: .18 }) || 'none'}"><span class="insignia ${s.publicado ? 'activo' : ''}">${s.publicado ? 'Publicado' : 'Borrador'}</span><b>${s.nombre}</b><small>/${s.slug}/</small></div>
         <p class="chico muted">${s.unidad || 'Sin unidad asignada'} · ${s.modulos.length} módulos${s.actualizado ? ` · actualizado ${s.actualizado.split('-').reverse().join('-')}` : ''}</p>
         <div class="fila-acciones"><button class="btn chico primario" data-editar="${i}">Editar</button><a class="btn chico" href="/${s.slug}/" target="_blank" rel="noopener">${ico('ojo', 14)} Ver</a><button class="btn chico" data-duplicar="${i}">Duplicar</button><button class="btn chico peligro" data-eliminar="${i}">Eliminar</button></div>
-      </article>`) : h`<p class="tarjeta muted">Todavía no hay micrositios. Cree el primero con «Nuevo micrositio».</p>`}</div>`);
+      </article>`) : h`<p class="tarjeta muted">${sitios.length ? 'No hay micrositios que coincidan.' : 'Todavía no hay micrositios. Cree el primero con «Nuevo micrositio».'}</p>`}</div>`);
+    const f = $('[data-filtro-lista]', cuerpo);
+    if (q) { f.focus(); f.setSelectionRange(f.value.length, f.value.length); }
   }
+  vista.addEventListener('input', (e) => { if (e.target.matches('[data-filtro-lista]')) { filtroLista = e.target.value; pintarLista(); } });
 
   // ---------------------------------------------------------------- Editor
   function pintarEditor() {
@@ -98,6 +107,7 @@ export default async function (vista) {
     const ds = b.dataset;
     if (ds.editar !== undefined) { actual = Number(ds.editar); pestana = 'general'; abiertos.clear(); pintarEditor(); window.scrollTo(0, 0); return; }
     if ('volver' in ds) { recoger(); pintarLista(); return; }
+    if (ds.estadoLista) { estadoLista = ds.estadoLista; pintarLista(); return; }
     if (ds.pestana) { recoger(); pestana = ds.pestana; pintarEditor(); return; }
     if (ds.duplicar !== undefined) { const c = copia(sitios[Number(ds.duplicar)]); c.id = nuevoId(); c.nombre += ' (copia)'; c.slug += '-copia'; c.publicado = false; sitios.push(c); pintarLista(); return; }
     if (ds.eliminar !== undefined) {

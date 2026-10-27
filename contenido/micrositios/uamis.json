@@ -1,0 +1,161 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "uamis",
+    "nombre": "Adulto Mayor e Inclusión",
+    "slug": "uamis",
+    "unidad": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
+    "descripcion": "Oficina de Adulto Mayor e Inclusión Social (UAMIS) de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-uamis",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "usuario",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/04/490471372_1102144185284320_1839836890776529811_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Desarrollo Social",
+      "titulo": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
+      "bajada": "Planes y programas de desarrollo social del adulto mayor y de inclusión de personas con discapacidad o dependencia.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8814",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, oficina 2, primer piso",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "ayudas",
+        "tipo": "texto",
+        "titulo": "Ayudas técnicas SENADIS",
+        "html": "<p>La UAMIS orienta y apoya a las personas con discapacidad que postulan a las <strong>ayudas técnicas de SENADIS</strong>. Para postular se requiere estar inscrito en el Registro Nacional de Discapacidad y en el Registro Social de Hogares.</p>",
+        "botones": [
+          {
+            "texto": "SENADIS",
+            "url": "https://www.senadis.gob.cl/"
+          },
+          {
+            "texto": "Programa Vínculos",
+            "url": "/programa-vinculos/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Adulto Mayor e Inclusión Social (UAMIS)</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Desarrollo Social. Sus funciones son:</p><ul><li>Planes y programas de desarrollo social del adulto mayor y de inclusión de personas con discapacidad o dependencia.</li><li>Catastro de organizaciones de adultos mayores y de personas con discapacidad y sus socios.</li><li>Asesorar en personalidad jurídica, proyectos y su ejecución; supervisar proyectos adjudicados.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 25.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Centro de cuidados",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8820",
+            "email": ""
+          },
+          {
+            "nombre": "Eleam",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8810",
+            "email": ""
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-uamis",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "corazon",
+            "texto": "Departamento de Desarrollo Social",
+            "descripcion": "Unidad de la que depende",
+            "url": "/desarrollo-social/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Oficina de Asistencia Social",
+            "descripcion": "Oficina",
+            "url": "/asistencia-social/"
+          },
+          {
+            "icono": "casa",
+            "texto": "Oficina de Vivienda",
+            "descripcion": "Oficina",
+            "url": "/vivienda/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Subsidios y Pensiones",
+            "descripcion": "Oficina",
+            "url": "/subsidios-y-pensiones/"
+          },
+          {
+            "icono": "deporte",
+            "texto": "Oficina de Deportes y Recreación",
+            "descripcion": "Oficina",
+            "url": "/deporte/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Oficina de la Mujer y Equidad de Género",
+            "descripcion": "Oficina",
+            "url": "/oficina-de-la-mujer/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de adulto mayor e inclusión",
+        "categoria": "uamis",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "servicios-incorporados",
+    "nombre": "Servicios Incorporados",
+    "slug": "servicios-incorporados",
+    "unidad": "Dirección de Servicios Incorporados a la Gestión Municipal",
+    "descripcion": "Dirección de Servicios Incorporados a la Gestión Municipal de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-dsi",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#2E6F9E",
+      "oscuro": "#123552",
+      "acento": "#E9A92B",
+      "patron": "cruces",
+      "icono": "carpeta",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Municipalidad de Melipeuco",
+      "titulo": "Dirección de Servicios Incorporados a la Gestión Municipal",
+      "bajada": "Asesorar al Alcalde y al Concejo en salud y educación municipal.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Dirección de Servicios Incorporados a la Gestión Municipal</strong> es parte de la Municipalidad de Melipeuco. Sus funciones son:</p><ul><li>Asesorar al Alcalde y al Concejo en salud y educación municipal.</li><li>Administrar los recursos humanos, materiales y financieros de los servicios traspasados.</li><li>Controlar la transferencia de recursos del Servicio de Salud y del Ministerio de Educación y su rendición.</li><li>Registro de convenios vigentes.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 67.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "corazon",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Salud Municipal",
+            "texto": "Asegurar la atención de los establecimientos de salud municipal.",
+            "url": "/salud/"
+          },
+          {
+            "icono": "libro",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Educación Municipal",
+            "texto": "Condiciones óptimas para el proceso educativo en los establecimientos municipales.",
+            "url": "/educacion/"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-dsi",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Alcaldía",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Concejo Municipal",
+            "descripcion": "Órgano colegiado",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "descripcion": "Órgano colegiado",
+            "url": "/cosoc/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Dirección",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Dirección",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

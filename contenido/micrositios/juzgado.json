@@ -6,6 +6,10 @@
     "slug": "juzgado",
     "unidad": "Juzgado de Policía Local de Melipeuco",
     "descripcion": "Juzgado de Policía Local de Melipeuco: materias, escritos y solicitudes, horario y contacto.",
+    "organigrama": "dep-jpl",
+    "alias": [
+      "juzgado-2"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

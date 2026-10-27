@@ -1,0 +1,147 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "patentes-municipales",
+    "nombre": "Patentes",
+    "slug": "patentes-municipales",
+    "unidad": "Oficina de Patentes Municipales",
+    "descripcion": "Oficina de Patentes Municipales de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-rentas",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "billete",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Administración y Finanzas",
+      "titulo": "Oficina de Patentes Municipales",
+      "bajada": "Tramitar otorgamiento, traslado, transferencia y caducidad de patentes comerciales, industriales, de alcoholes y profesionales.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8827",
+      "email": "rentasypatentes@munimelipeuco.cl",
+      "direccion": "Oficina 23, segundo piso",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "pago",
+        "tipo": "llamado",
+        "titulo": "Pague su patente en línea",
+        "texto": "La patente se paga por semestre: enero y julio. Contribuyentes con morosidad deben acudir a Tesorería Municipal.",
+        "icono": "billete",
+        "boton": "Pagar en línea",
+        "url": "https://www.sem2.gob.cl/tramites/patentes-municipales/70766500/buscar",
+        "boton2": "Obtener una patente",
+        "url2": "/patentecomercial/"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Patentes Municipales</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Administración y Finanzas. Sus funciones son:</p><ul><li>Tramitar otorgamiento, traslado, transferencia y caducidad de patentes comerciales, industriales, de alcoholes y profesionales.</li><li>Registro de patentes y de propaganda comercial.</li><li>Análisis de las declaraciones de capital propio.</li><li>Permisos y concesiones sobre bienes nacionales de uso público para actividades lucrativas.</li><li>Apoyo en permisos de circulación: registro comunal, traslados y giro del impuesto.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 55.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Rentas y patentes",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8827",
+            "email": ""
+          },
+          {
+            "nombre": "Oficina de Rentas y Patentes",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "rentasypatentes@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-rentas",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "billete",
+            "texto": "Dirección de Administración y Finanzas",
+            "descripcion": "Unidad de la que depende",
+            "url": "/administracion-y-finanzas/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Oficina de Contabilidad y Presupuesto",
+            "descripcion": "Oficina",
+            "url": "/contabilidad-y-presupuesto/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Tesorería Municipal",
+            "descripcion": "Oficina",
+            "url": "/tesoreria-municipal/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección Municipal",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Departamento de Recursos Humanos",
+            "descripcion": "Departamento",
+            "url": "/recursos-humanos/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Remuneraciones",
+            "descripcion": "Oficina",
+            "url": "/remuneraciones/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

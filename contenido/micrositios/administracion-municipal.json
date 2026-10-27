@@ -1,0 +1,145 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "administracion-municipal",
+    "nombre": "Administración Municipal",
+    "slug": "administracion-municipal",
+    "unidad": "Administración Municipal",
+    "descripcion": "Administración Municipal de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-admin",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "escudo",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Municipalidad de Melipeuco",
+      "titulo": "Administración Municipal",
+      "bajada": "Coordinar y gestionar permanentemente todas las unidades municipales según las instrucciones del Alcalde.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Administración Municipal</strong> es parte de la Municipalidad de Melipeuco. Sus funciones son:</p><ul><li>Coordinar y gestionar permanentemente todas las unidades municipales según las instrucciones del Alcalde.</li><li>Colaborar en la elaboración y seguimiento del Plan Anual de Acción Municipal.</li><li>Ejercer las atribuciones que le delegue expresamente el Alcalde.</li><li>Presidir el Comité Técnico Administrativo.</li><li>Analizar y actualizar reglamentos, manuales de organización, procedimientos y descripciones de cargos.</li><li>Coordinar y controlar la fiscalización en materias de tránsito, obras y patentes.</li><li>Coordinar programas de igualdad de oportunidades entre hombres y mujeres.</li><li>Elaborar el presupuesto municipal con Finanzas y SECPLAN; informar a la SUBDERE.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 8 y 9.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "balanza",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Asesoría Jurídica Municipal",
+            "texto": "Participar en juicios en que la Municipalidad sea parte o tenga interés.",
+            "url": "/asesoria-juridica/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Órgano colegiado",
+            "titulo": "Comité Técnico Administrativo",
+            "texto": "Instancia asesora del Alcalde, presidida por el Administrador Municipal e integrada por los directivos.",
+            "url": "/comite-tecnico/"
+          }
+        ]
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Administradora Municipal",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "administracion@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-admin",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Alcaldía",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Concejo Municipal",
+            "descripcion": "Órgano colegiado",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "descripcion": "Órgano colegiado",
+            "url": "/cosoc/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Dirección",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Dirección de Desarrollo Comunitario",
+            "descripcion": "Dirección",
+            "url": "/social/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

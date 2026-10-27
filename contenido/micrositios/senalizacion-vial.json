@@ -1,0 +1,94 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "senalizacion-vial",
+    "nombre": "Señalización vial",
+    "slug": "senalizacion-vial",
+    "unidad": "Oficina de Señalización Vial",
+    "descripcion": "Oficina de Señalización Vial de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-transito-senal",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D4901A",
+      "oscuro": "#5E3F05",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "mapa",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Tránsito y Transporte Público",
+      "titulo": "Oficina de Señalización Vial",
+      "bajada": "Mantener señalizadas las vías públicas urbanas.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8829",
+      "email": "transito@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Señalización Vial</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Tránsito y Transporte Público. Sus funciones son:</p><ul><li>Mantener señalizadas las vías públicas urbanas.</li><li>Cumplir normas e instrucciones del Ministerio de Transportes.</li><li>Proponer el sentido de circulación y evacuar informes técnicos de tránsito.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 51.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-transito-senal",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "auto",
+            "texto": "Departamento de Tránsito y Transporte Público",
+            "descripcion": "Unidad de la que depende",
+            "url": "/transito/"
+          },
+          {
+            "icono": "licencia",
+            "texto": "Oficina de Licencias de Conducir",
+            "descripcion": "Oficina",
+            "url": "/licencias-de-conducir/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Oficina de Permisos de Circulación",
+            "descripcion": "Oficina",
+            "url": "/permisos-de-circulacion/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

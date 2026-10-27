@@ -1,0 +1,104 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "omil",
+    "nombre": "OMIL",
+    "slug": "omil",
+    "unidad": "Oficina Municipal de Información Laboral (OMIL)",
+    "descripcion": "OMIL Melipeuco: intermediación laboral, Bolsa Nacional de Empleo, ofertas de trabajo y capacitación.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "trabajo",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/07/32d4f40b-fd9e-4d11-b08d-c1ad31472dfb.jpg"
+    },
+    "portada": {
+      "antetitulo": "Oficina Municipal de Información Laboral",
+      "titulo": "Encuentre trabajo en Melipeuco",
+      "bajada": "Orientación laboral, inscripción en la Bolsa Nacional de Empleo y conexión con ofertas de trabajo y capacitación para vecinas y vecinos de la comuna.",
+      "botones": [
+        {
+          "texto": "Bolsa Nacional de Empleo",
+          "url": "https://www.bne.cl/"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8818",
+      "email": "udel@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "servicios",
+        "tipo": "tarjetas",
+        "ancla": "Servicios",
+        "titulo": "Cómo le ayudamos",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "usuario",
+            "titulo": "Orientación laboral",
+            "texto": "Le ayudamos a preparar su currículum y a buscar empleo."
+          },
+          {
+            "icono": "trabajo",
+            "titulo": "Ofertas de trabajo",
+            "texto": "Inscripción en la Bolsa Nacional de Empleo y difusión de ofertas.",
+            "url": "https://www.bne.cl/"
+          },
+          {
+            "icono": "escuela",
+            "titulo": "Capacitación",
+            "texto": "Información sobre cursos y programas de capacitación."
+          }
+        ]
+      },
+      {
+        "id": "jovenes",
+        "tipo": "texto",
+        "titulo": "Cerca de las y los jóvenes",
+        "html": "<p>La OMIL también sale del municipio para acercar el mundo laboral a adolescentes y jóvenes, por ejemplo en las ferias informativas del Liceo Los Andes junto a la Oficina Local de la Niñez.</p>"
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "trabajo",
+            "texto": "Desarrollo Local (UDEL)",
+            "descripcion": "Fomento productivo y emprendimiento",
+            "url": "/udel/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de omil",
+        "categoria": "omil",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "secplan",
+    "nombre": "SECPLAN",
+    "slug": "secplan",
+    "unidad": "Secretaría Comunal de Planificación",
+    "descripcion": "Secretaría Comunal de Planificación de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-secplan",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#16A0A8",
+      "oscuro": "#0A5155",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "mapa",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Municipalidad de Melipeuco",
+      "titulo": "Secretaría Comunal de Planificación",
+      "bajada": "Secretaría técnica permanente del Alcalde y del Concejo en políticas, planes, programas y proyectos.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "secplan@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "pladeco",
+        "tipo": "enlaces",
+        "ancla": "PLADECO",
+        "titulo": "Planificación comunal",
+        "items": [
+          {
+            "icono": "mapa",
+            "texto": "PLADECO",
+            "descripcion": "Plan de Desarrollo Comunal",
+            "url": "/pladeco/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Secretaría Comunal de Planificación</strong> es parte de la Municipalidad de Melipeuco. Sus funciones son:</p><ul><li>Secretaría técnica permanente del Alcalde y del Concejo en políticas, planes, programas y proyectos.</li><li>Elaborar y actualizar el Plan de Desarrollo Comunal (PLADECO) y asesorar en el presupuesto.</li><li>Estudios y evaluación del desarrollo comunal; Plan Municipal de Inversiones.</li><li>Información de proyectos de inversión para su aprobación y seguimiento.</li><li>Coordinar solicitudes de subvención; nexo con la planificación regional.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 64 y 65.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "wifi",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Desarrollo Informático y Transformación Digital Municipal",
+            "texto": "Administrar los sistemas de información, redes y equipos computacionales.",
+            "url": "/transformacion-digital/"
+          }
+        ]
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Director del Departamento de Planificación",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "directorsecplan@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Profesionales del Departamento de Planificación",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "secplan@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-secplan",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Alcaldía",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Concejo Municipal",
+            "descripcion": "Órgano colegiado",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "descripcion": "Órgano colegiado",
+            "url": "/cosoc/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Administración Municipal",
+            "descripcion": "Dirección",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "documento",
+            "texto": "Secretaría Municipal",
+            "descripcion": "Dirección",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

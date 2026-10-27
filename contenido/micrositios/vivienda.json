@@ -1,0 +1,145 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "vivienda",
+    "nombre": "Vivienda",
+    "slug": "vivienda",
+    "unidad": "Oficina de Vivienda",
+    "descripcion": "Oficina de Vivienda de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-vivienda",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "casa",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/10/557630480_1240517784780292_1003214793876337401_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Desarrollo Social",
+      "titulo": "Oficina de Vivienda",
+      "bajada": "Asesorar a postulantes a viviendas sociales y subsidios habitacionales, en coordinación con el SERVIU.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8814",
+      "email": "vivienda@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Vivienda</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Desarrollo Social. Sus funciones son:</p><ul><li>Asesorar a postulantes a viviendas sociales y subsidios habitacionales, en coordinación con el SERVIU.</li><li>Orientar la creación de comités y organizar la demanda.</li><li>Formar expedientes administrativos, técnicos y sociales para postulaciones.</li><li>Diseñar proyectos técnicos y apoyar la inspección de obras en terreno.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 23.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Oficina de Vivienda",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 2 3384 8814",
+            "email": ""
+          },
+          {
+            "nombre": "Oficina de Vivienda",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "vivienda@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-vivienda",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "corazon",
+            "texto": "Departamento de Desarrollo Social",
+            "descripcion": "Unidad de la que depende",
+            "url": "/desarrollo-social/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Oficina de Asistencia Social",
+            "descripcion": "Oficina",
+            "url": "/asistencia-social/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Subsidios y Pensiones",
+            "descripcion": "Oficina",
+            "url": "/subsidios-y-pensiones/"
+          },
+          {
+            "icono": "usuario",
+            "texto": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
+            "descripcion": "Oficina",
+            "url": "/uamis/"
+          },
+          {
+            "icono": "deporte",
+            "texto": "Oficina de Deportes y Recreación",
+            "descripcion": "Oficina",
+            "url": "/deporte/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Oficina de la Mujer y Equidad de Género",
+            "descripcion": "Oficina",
+            "url": "/oficina-de-la-mujer/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de vivienda",
+        "categoria": "vivienda",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

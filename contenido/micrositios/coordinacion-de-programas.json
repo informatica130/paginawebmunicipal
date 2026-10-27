@@ -1,0 +1,88 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "coordinacion-de-programas",
+    "nombre": "Coordinación de Programas",
+    "slug": "coordinacion-de-programas",
+    "unidad": "Oficina de Coordinación de Programas Sociales",
+    "descripcion": "Oficina de Coordinación de Programas Sociales de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-coord-programas",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "carpeta",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Programas Sociales",
+      "titulo": "Oficina de Coordinación de Programas Sociales",
+      "bajada": "Coordinar los programas sociales que administra el Municipio.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Coordinación de Programas Sociales</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Programas Sociales. Sus funciones son:</p><ul><li>Coordinar los programas sociales que administra el Municipio.</li><li>Registro administrativo y de usuarios de cada programa; agenda de atención.</li><li>Oferta de servicios y cobertura actualizada.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 35.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-coord-programas",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "carpeta",
+            "texto": "Departamento de Programas Sociales",
+            "descripcion": "Unidad de la que depende",
+            "url": "/programas-sociales/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Rendiciones de Programas Sociales",
+            "descripcion": "Oficina",
+            "url": "/rendiciones-de-programas/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

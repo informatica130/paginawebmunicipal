@@ -60,6 +60,10 @@ export const MODULOS = {
   tramites: { n: 'Trámites del área', d: 'Las fichas de trámites del sitio y los trámites en línea de la Plataforma de la unidad.', icono: 'licencia', campos: [titulo, intro,
     { k: 'dependencia', t: 'texto', l: 'Código de la unidad en el organigrama (ej.: dep-transito; incluye sus oficinas)' }, { k: 'etiqueta', t: 'texto', l: 'O trámites con esta etiqueta (slug)' }, { k: 'cantidad', t: 'numero', l: 'Cantidad máxima', def: 12 },
     { k: 'vacio', t: 'texto', l: 'Texto si no hay trámites', def: 'Consulte los trámites de esta unidad en la Oficina de Partes.' }] },
+  contenido: { n: 'Contenido del sitio', d: 'Autoridades, sesiones del Concejo, agenda, directorio telefónico, lugares, formularios o videos, siempre al día.', icono: 'carpeta', campos: [titulo, intro,
+    { k: 'fuente', t: 'opcion', l: 'Qué mostrar', opciones: { autoridades: 'Autoridades', sesiones: 'Sesiones del Concejo', eventos: 'Próximos eventos de la agenda', directorio: 'Directorio telefónico', lugares: 'Lugares turísticos', formulario: 'Formulario', videos: 'Videos de la videoteca' }, def: 'eventos' },
+    { k: 'filtro', t: 'texto', l: 'Filtro (autoridades: alcalde o concejal · directorio: municipal, salud, educacion, emergencia · lugares: tipo · formulario: contacto, oirs o suscripcion · videos: categoría)' },
+    { k: 'cantidad', t: 'numero', l: 'Cantidad', def: 6 }] },
   video: { n: 'Video', d: 'Un video de YouTube o Vimeo.', icono: 'video', campos: [titulo, intro, { k: 'url', t: 'url', l: 'Enlace del video' }] },
 };
 
@@ -76,6 +80,8 @@ export const GENERAL = [
   { k: 'slug', t: 'texto', l: 'Dirección (ej.: medioambiente → sitio/medioambiente/)', req: true },
   { k: 'unidad', t: 'texto', l: 'Unidad o departamento responsable' },
   { k: 'descripcion', t: 'parrafo', l: 'Descripción para buscadores y redes sociales' },
+  { k: 'organigrama', t: 'texto', l: 'Código de la unidad en el organigrama (ej.: dep-salud), para enlazar su ficha de Áreas municipales' },
+  { k: 'alias', t: 'lista', l: 'Otras direcciones que llevan a este micrositio (una por línea, sin barras)' },
   { k: 'publicado', t: 'si', l: 'Publicado (si no, sólo lo ve quien tiene sesión en el panel)', def: false },
   { k: 'actualizado', t: 'fecha', l: 'Fecha de la última actualización de la información' },
 ];

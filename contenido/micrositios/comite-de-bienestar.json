@@ -1,0 +1,112 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "comite-bienestar",
+    "nombre": "Comité de Bienestar",
+    "slug": "comite-de-bienestar",
+    "unidad": "Comité de Bienestar del personal municipal",
+    "descripcion": "Comité de Bienestar de la Municipalidad de Melipeuco: beneficios y descuentos para el personal municipal en el comercio local.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "cruces",
+      "icono": "corazon",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Para funcionarias y funcionarios municipales",
+      "titulo": "Comité de Bienestar",
+      "bajada": "Programa de beneficios exclusivos para el personal municipal de Melipeuco: descuentos en establecimientos de la comuna que conectan a nuestros equipos con el comercio local.",
+      "botones": [
+        {
+          "texto": "Acceso para socios",
+          "url": "/comitebienestar/"
+        },
+        {
+          "texto": "Cómo usar los beneficios",
+          "url": "#m-pasos"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8813",
+      "email": "contacto@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Acceso de socias y socios",
+          "url": "/comitebienestar/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "beneficios",
+        "tipo": "tarjetas",
+        "ancla": "Beneficios",
+        "titulo": "Beneficios en el comercio local",
+        "intro": "Descuentos especiales en establecimientos de confianza de Melipeuco.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "estrella",
+            "titulo": "Restaurantes",
+            "texto": "Descuentos en locales de comida de la comuna."
+          },
+          {
+            "icono": "casa",
+            "titulo": "Supermercados",
+            "texto": "Beneficios en compras del hogar."
+          },
+          {
+            "icono": "salud",
+            "titulo": "Salud",
+            "texto": "Descuentos en servicios de salud y bienestar."
+          }
+        ]
+      },
+      {
+        "id": "pasos",
+        "tipo": "pasos",
+        "ancla": "Cómo usar",
+        "titulo": "¿Cómo utilizar los beneficios?",
+        "items": [
+          {
+            "icono": "buscar",
+            "titulo": "Encuentre un beneficio",
+            "texto": "Revise la lista de establecimientos en el acceso para socios y elija el beneficio."
+          },
+          {
+            "icono": "ubicacion",
+            "titulo": "Visite el establecimiento",
+            "texto": "Muestre su credencial digital (o una captura) al personal del local."
+          },
+          {
+            "icono": "check",
+            "titulo": "Disfrute su descuento",
+            "texto": "El descuento se aplica de inmediato en su compra o servicio."
+          }
+        ]
+      },
+      {
+        "id": "acceso",
+        "tipo": "llamado",
+        "titulo": "Acceso exclusivo para socias y socios",
+        "texto": "La credencial es personal e intransferible y está disponible sólo para el personal municipal activo.",
+        "icono": "llave",
+        "boton": "Ingresar",
+        "url": "/comitebienestar/"
+      }
+    ]
+  }
+}

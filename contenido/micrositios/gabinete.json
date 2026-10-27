@@ -1,0 +1,97 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "gabinete",
+    "nombre": "Gabinete",
+    "slug": "gabinete",
+    "unidad": "Oficina de Gabinete",
+    "descripcion": "Oficina de Gabinete de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-gabinete",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#B07A12",
+      "oscuro": "#4A3304",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "estrella",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/762008531_1491796869652381_1040071149585674857_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Alcaldía",
+      "titulo": "Oficina de Gabinete",
+      "bajada": "Mantener informada a la comunidad de las actividades del Municipio.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8821",
+      "email": "alcaldia@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Gabinete</strong> es parte de la Municipalidad de Melipeuco y depende de la Alcaldía. Sus funciones son:</p><ul><li>Mantener informada a la comunidad de las actividades del Municipio.</li><li>Colaborar en situaciones que requieren pronunciamiento o decisión directa del Alcalde.</li><li>Programar y coordinar las actividades administrativas y protocolares del Alcalde.</li><li>Supervisar la atención de público, la programación de audiencias y el apoyo directo al Alcalde.</li><li>Coordinar ceremonias y actividades donde participe la autoridad comunal y cuidar el protocolo.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 4.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-gabinete",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "estrella",
+            "texto": "Alcaldía",
+            "descripcion": "Unidad de la que depende",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Comunicaciones, Relaciones Públicas y Protocolo",
+            "descripcion": "Oficina",
+            "url": "/comunicaciones/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de gabinete",
+        "categoria": "alcaldia",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

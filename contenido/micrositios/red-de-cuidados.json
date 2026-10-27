@@ -1,0 +1,70 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "red-cuidados",
+    "nombre": "Red Local de Apoyos y Cuidados",
+    "slug": "red-de-cuidados",
+    "unidad": "Programa Red Local de Apoyos y Cuidados",
+    "descripcion": "Red Local de Apoyos y Cuidados de Melipeuco: apoyo a personas con dependencia y a sus cuidadores.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#16A0A8",
+      "oscuro": "#0A5155",
+      "acento": "#E9A92B",
+      "patron": "cruces",
+      "icono": "mano",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Red Local de Apoyos y Cuidados",
+      "titulo": "Cuidar a quien cuida",
+      "bajada": "Atención articulada para personas en situación de dependencia funcional y sus cuidadoras y cuidadores: salud, rehabilitación, apoyo social y acompañamiento comunitario.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8820",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "programa",
+        "tipo": "texto",
+        "ancla": "El programa",
+        "titulo": "El programa",
+        "html": "<p>La Red Local de Apoyos y Cuidados fortalece la atención de las personas en situación de dependencia funcional y de quienes las cuidan, garantizando acceso oportuno y articulado a prestaciones de salud, rehabilitación, apoyo social y acompañamiento comunitario. El Centro de Cuidados atiende en el teléfono +56 2 3384 8820.</p>"
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Adulto Mayor e Inclusión (UAMIS)",
+            "url": "/uamis/"
+          },
+          {
+            "icono": "salud",
+            "texto": "Salud",
+            "url": "/salud/"
+          }
+        ]
+      }
+    ]
+  }
+}

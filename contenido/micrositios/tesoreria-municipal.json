@@ -1,0 +1,112 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "tesoreria-municipal",
+    "nombre": "Tesorería",
+    "slug": "tesoreria-municipal",
+    "unidad": "Oficina de Tesorería Municipal",
+    "descripcion": "Oficina de Tesorería Municipal de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-tesoreria",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "billete",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Administración y Finanzas",
+      "titulo": "Oficina de Tesorería Municipal",
+      "bajada": "Recaudar tributos e ingresos municipales; custodiar fondos, especies valoradas y garantías.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Tesorería Municipal, oficina 15, piso 2",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Tesorería Municipal</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Administración y Finanzas. Sus funciones son:</p><ul><li>Recaudar tributos e ingresos municipales; custodiar fondos, especies valoradas y garantías.</li><li>Pagar las obligaciones municipales y depositar lo recaudado.</li><li>Rendición mensual de caja con conciliaciones bancarias.</li><li>Establecer cajas recaudadoras; actuar como martillero en remates municipales.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 54.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-tesoreria",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "billete",
+            "texto": "Dirección de Administración y Finanzas",
+            "descripcion": "Unidad de la que depende",
+            "url": "/administracion-y-finanzas/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Oficina de Contabilidad y Presupuesto",
+            "descripcion": "Oficina",
+            "url": "/contabilidad-y-presupuesto/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Patentes Municipales",
+            "descripcion": "Oficina",
+            "url": "/patentes-municipales/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección Municipal",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Departamento de Recursos Humanos",
+            "descripcion": "Departamento",
+            "url": "/recursos-humanos/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Remuneraciones",
+            "descripcion": "Oficina",
+            "url": "/remuneraciones/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

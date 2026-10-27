@@ -1,0 +1,171 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "alcaldia",
+    "nombre": "Alcaldía",
+    "slug": "alcaldia",
+    "unidad": "Alcaldía de Melipeuco",
+    "descripcion": "Alcaldía de Melipeuco: el Alcalde, cómo solicitar una audiencia, gabinete, comunicaciones, cuenta pública y noticias.",
+    "organigrama": "dep-alcaldia",
+    "alias": [
+      "alcaldia-y-concejo-municipal"
+    ],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#B07A12",
+      "oscuro": "#4A3304",
+      "acento": "#1F6FA8",
+      "patron": "curvas",
+      "icono": "estrella",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/762008531_1491796869652381_1040071149585674857_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Alcalde Alejandro Cuminao Barros",
+      "titulo": "Alcaldía de Melipeuco",
+      "bajada": "Dirección y administración superior de la Municipalidad: audiencias, gabinete, comunicaciones y la cuenta pública del Alcalde.",
+      "botones": [
+        {
+          "texto": "Solicitar audiencia",
+          "url": "#m-audiencias"
+        },
+        {
+          "texto": "Cuenta pública",
+          "url": "#m-cuenta"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "2024 – 2028",
+          "etiqueta": "período del Alcalde"
+        },
+        {
+          "valor": "Lun · Mié · Vie",
+          "etiqueta": "audiencias de 08:30 a 13:00 hrs."
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "Alejandro Cuminao Barros",
+      "cargo": "Alcalde de Melipeuco",
+      "telefono": "+56 2 3384 8821",
+      "email": "alcaldia@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, primer piso",
+      "horario": "Audiencias: lunes, miércoles y viernes de 08:30 a 13:00 hrs., por orden de llegada.",
+      "redes": [
+        {
+          "texto": "Solicitar audiencia (Ley del Lobby)",
+          "url": "https://www.leylobby.gob.cl/instituciones/MU172"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "alcalde",
+        "tipo": "contenido",
+        "fuente": "autoridades",
+        "filtro": "alcalde",
+        "cantidad": 6,
+        "ancla": "El Alcalde",
+        "titulo": "El Alcalde"
+      },
+      {
+        "id": "audiencias",
+        "tipo": "texto",
+        "ancla": "Audiencias",
+        "titulo": "¿Cómo solicitar una audiencia?",
+        "html": "<p>Puede solicitar audiencia en línea a través del registro de la <strong>Ley del Lobby</strong> o acercarse presencialmente a la Municipalidad, en Pedro Aguirre Cerda N° 14, primer piso. La atención es por orden de llegada los <strong>lunes, miércoles y viernes de 08:30 a 13:00 hrs.</strong></p>",
+        "botones": [
+          {
+            "texto": "Solicitar audiencia (Ley del Lobby)",
+            "url": "https://www.leylobby.gob.cl/instituciones/MU172"
+          },
+          {
+            "texto": "Concejo Municipal",
+            "url": "/concejo-municipal/"
+          }
+        ]
+      },
+      {
+        "id": "facultades",
+        "tipo": "texto",
+        "ancla": "Facultades",
+        "titulo": "¿Qué hace el Alcalde?",
+        "html": "<p>El Alcalde es la máxima autoridad de la Municipalidad: dirige la administración municipal y es su representante legal. Es elegido por votación popular por un período de cuatro años. Entre sus atribuciones (Ley 18.695, Orgánica Constitucional de Municipalidades):</p><ul><li>Representar judicial y extrajudicialmente a la Municipalidad.</li><li>Proponer al Concejo la organización interna de la Municipalidad.</li><li>Nombrar y remover a los funcionarios de su dependencia.</li><li>Velar por la probidad administrativa y aplicar medidas disciplinarias.</li><li>Administrar los recursos financieros de la Municipalidad.</li><li>Administrar los bienes municipales y nacionales de uso público de la comuna.</li></ul>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Equipo",
+        "titulo": "Oficinas de la Alcaldía",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "estrella",
+            "etiqueta": "Oficina",
+            "titulo": "Gabinete",
+            "texto": "Mantener informada a la comunidad de las actividades del Municipio.",
+            "url": "/gabinete/"
+          },
+          {
+            "icono": "megafono",
+            "etiqueta": "Oficina",
+            "titulo": "Comunicaciones, Relaciones Públicas y Protocolo",
+            "texto": "Crear y mantener canales de información entre el Municipio y la comunidad.",
+            "url": "/comunicaciones/"
+          }
+        ]
+      },
+      {
+        "id": "cuenta",
+        "tipo": "contenido",
+        "fuente": "videos",
+        "filtro": "cuenta-publica",
+        "cantidad": 4,
+        "ancla": "Cuenta pública",
+        "titulo": "Cuenta pública y mensajes del Alcalde"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de alcaldía",
+        "categoria": "alcaldia",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2026/08/762008531_1491796869652381_1040071149585674857_n.jpg",
+            "alt": "Municipalidad entrega leña a familias de Melipeuco durante el invierno"
+          },
+          {
+            "src": "/wp-content/uploads/2026/04/682413390_1408258501339552_7998859466610166064_n.jpg",
+            "alt": "Melipeuco presenta su Cuenta Pública 2025"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/553414400_1234954352003302_6154028353391023225_n.jpg",
+            "alt": "CORE aprueba inversión para el desarrollo de Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/547773060_1225756462923091_4555596886110055657_n.jpg",
+            "alt": "Melipeuco conmemora las Fiestas Patrias con desfile en honor a las Glorias del Ejército"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546844383_1222823759883028_770852907037026663_n.jpg",
+            "alt": "Melipeuco avanza en cooperación internacional con delegación de Wenzhou, China"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546094051_1221339086698162_8333927953608467209_n-1.jpg",
+            "alt": "Melipeuco presente en la inauguración de la GeoFeria “Saberes y Sabores” y firma de acuerdo internacional con Geoparques de China"
+          }
+        ]
+      }
+    ]
+  }
+}

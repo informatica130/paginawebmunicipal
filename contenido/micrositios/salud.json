@@ -6,6 +6,8 @@
     "slug": "salud",
     "unidad": "Departamento de Salud Municipal · CESFAM Melipeuco",
     "descripcion": "Salud municipal de Melipeuco: CESFAM, postas rurales, urgencias, teléfonos y noticias de salud.",
+    "organigrama": "dep-salud",
+    "alias": [],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

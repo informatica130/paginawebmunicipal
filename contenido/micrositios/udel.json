@@ -6,6 +6,10 @@
     "slug": "udel",
     "unidad": "Departamento de Desarrollo Económico Local (UDEL)",
     "descripcion": "UDEL Melipeuco: fomento productivo, PDTI, PRODESAL, recursos hídricos, saneamiento de títulos, ferias, turismo y cultura.",
+    "organigrama": "dep-del",
+    "alias": [
+      "desarrollolocal"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {
@@ -109,14 +113,14 @@
             "etiqueta": "Oficina",
             "titulo": "Promoción del Fomento Productivo Local",
             "texto": "Promover fuentes productivas y capacidades locales.",
-            "url": ""
+            "url": "/fomento-productivo/"
           },
           {
             "icono": "agua",
             "etiqueta": "Oficina",
             "titulo": "Recursos Hídricos y Saneamiento de Títulos",
             "texto": "Asesoría en acceso y manejo del agua; información sobre la Ley 21.435 (Reforma al Código de Aguas).",
-            "url": ""
+            "url": "/recursos-hidricos/"
           },
           {
             "icono": "montana",

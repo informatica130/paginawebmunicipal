@@ -1,0 +1,100 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "organizaciones-comunitarias",
+    "nombre": "Organizaciones Comunitarias",
+    "slug": "organizaciones-comunitarias",
+    "unidad": "Oficina de Organizaciones Comunitarias",
+    "descripcion": "Oficina de Organizaciones Comunitarias de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-organizaciones",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "personas",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/764679798_1495446299287438_5415972341440461162_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Desarrollo Comunitario",
+      "titulo": "Oficina de Organizaciones Comunitarias",
+      "bajada": "Promover la organización, consolidación y participación de las organizaciones comunitarias.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8811",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "fondeve",
+        "tipo": "llamado",
+        "titulo": "Fondo de Desarrollo Vecinal (FONDEVE)",
+        "texto": "Fondos concursables para proyectos de juntas de vecinos y organizaciones comunitarias.",
+        "icono": "personas",
+        "boton": "FONDEVE 2026",
+        "url": "/fondeve2026/"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Organizaciones Comunitarias</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Desarrollo Comunitario. Sus funciones son:</p><ul><li>Promover la organización, consolidación y participación de las organizaciones comunitarias.</li><li>Orientar y capacitar a la comunidad organizada; asesorar el cumplimiento de la Ley 19.418.</li><li>Registro interno de organizaciones comunales.</li><li>Formular proyectos y asesorar postulaciones al Fondo de Desarrollo Vecinal.</li><li>Tramitar personalidad jurídica e incentivar la legalización de organizaciones.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 22.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-organizaciones",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Departamento de Desarrollo Comunitario",
+            "descripcion": "Unidad de la que depende",
+            "url": "/desarrollo-comunitario/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de organizaciones comunitarias",
+        "categoria": "dideco",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "cementerios",
+    "nombre": "Cementerios",
+    "slug": "cementerios",
+    "unidad": "Oficina de Cementerios",
+    "descripcion": "Oficina de Cementerios de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-cementerios",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#C9552B",
+      "oscuro": "#5B2210",
+      "acento": "#E9A92B",
+      "patron": "triangulos",
+      "icono": "escudo",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Obras Municipales",
+      "titulo": "Oficina de Cementerios",
+      "bajada": "Dirección administrativa y gestión de los cementerios municipales (Ley 18.096).",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8825",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Cementerios</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Obras Municipales. Sus funciones son:</p><ul><li>Dirección administrativa y gestión de los cementerios municipales (Ley 18.096).</li><li>Cumplir el Código Sanitario y el Reglamento General de Cementerios (D.S. 357/1970).</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 43.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-cementerios",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "herramienta",
+            "texto": "Dirección de Obras Municipales",
+            "descripcion": "Unidad de la que depende",
+            "url": "/obras/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Edificación y Urbanización",
+            "descripcion": "Oficina",
+            "url": "/edificacion-y-urbanizacion/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección de Obras",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-de-obras/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Oficina de Catastros y Archivos",
+            "descripcion": "Oficina",
+            "url": "/catastros-y-archivos/"
+          },
+          {
+            "icono": "alerta",
+            "texto": "Oficina de Emergencia y Protección Civil",
+            "descripcion": "Oficina",
+            "url": "/emergencias/"
+          },
+          {
+            "icono": "hoja",
+            "texto": "Oficina de Aseo y Ornato",
+            "descripcion": "Oficina",
+            "url": "/aseo-y-ornato/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

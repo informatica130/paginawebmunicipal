@@ -6,6 +6,8 @@
     "slug": "transito",
     "unidad": "Departamento de Tránsito y Transporte Público",
     "descripcion": "Departamento de Tránsito de Melipeuco: licencias de conducir, reserva de horas, permisos de circulación, señalización y transporte público.",
+    "organigrama": "dep-transito",
+    "alias": [],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {
@@ -118,21 +120,21 @@
             "etiqueta": "Oficina",
             "titulo": "Licencias de Conducir",
             "texto": "Otorgar, renovar, restringir o denegar licencias de conducir.",
-            "url": ""
+            "url": "/licencias-de-conducir/"
           },
           {
             "icono": "auto",
             "etiqueta": "Oficina",
             "titulo": "Permisos de Circulación",
             "texto": "Otorgar y renovar permisos de circulación y sus duplicados.",
-            "url": ""
+            "url": "/permisos-de-circulacion/"
           },
           {
             "icono": "alerta",
             "etiqueta": "Oficina",
             "titulo": "Señalización Vial",
             "texto": "Mantener señalizadas las vías públicas urbanas.",
-            "url": ""
+            "url": "/senalizacion-vial/"
           }
         ]
       },

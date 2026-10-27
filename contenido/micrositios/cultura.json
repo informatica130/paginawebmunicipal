@@ -6,6 +6,8 @@
     "slug": "cultura",
     "unidad": "Oficina de Cultura",
     "descripcion": "Oficina de Cultura de Melipeuco: Fiesta del Baqueano, Biblioteca Pública Municipal, talleres, conciertos, efemérides y patrimonio.",
+    "organigrama": "dep-cultura",
+    "alias": [],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

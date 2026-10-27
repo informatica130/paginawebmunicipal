@@ -1,0 +1,136 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "contabilidad-y-presupuesto",
+    "nombre": "Contabilidad y Presupuesto",
+    "slug": "contabilidad-y-presupuesto",
+    "unidad": "Oficina de Contabilidad y Presupuesto",
+    "descripcion": "Oficina de Contabilidad y Presupuesto de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-contabilidad",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "grafico",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Administración y Finanzas",
+      "titulo": "Oficina de Contabilidad y Presupuesto",
+      "bajada": "Contabilidad patrimonial y presupuestaria; balance anual.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "contabilidad@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Contabilidad y Presupuesto</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Administración y Finanzas. Sus funciones son:</p><ul><li>Contabilidad patrimonial y presupuestaria; balance anual.</li><li>Valor actualizado de activos y pasivos; revalorizaciones y depreciaciones.</li><li>Control de ingresos y egresos; registro de obligaciones financieras con terceros.</li><li>Refrendar e imputar presupuestariamente los egresos e ingresos.</li><li>Formar y custodiar los expedientes de rendiciones de cuenta para la Contraloría.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 53.</small></p>"
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Área de Contabilidad y Presupuesto",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "contabilidad@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Área de Contabilidad y Presupuesto CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "finanzasdsm@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-contabilidad",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "billete",
+            "texto": "Dirección de Administración y Finanzas",
+            "descripcion": "Unidad de la que depende",
+            "url": "/administracion-y-finanzas/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Tesorería Municipal",
+            "descripcion": "Oficina",
+            "url": "/tesoreria-municipal/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Patentes Municipales",
+            "descripcion": "Oficina",
+            "url": "/patentes-municipales/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección Municipal",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-municipal/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Departamento de Recursos Humanos",
+            "descripcion": "Departamento",
+            "url": "/recursos-humanos/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Remuneraciones",
+            "descripcion": "Oficina",
+            "url": "/remuneraciones/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

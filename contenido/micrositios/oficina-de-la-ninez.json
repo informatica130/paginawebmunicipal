@@ -1,0 +1,109 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "oln",
+    "nombre": "Oficina Local de la Niñez",
+    "slug": "oficina-de-la-ninez",
+    "unidad": "Oficina Local de la Niñez (OLN)",
+    "descripcion": "Oficina Local de la Niñez de Melipeuco: protección y promoción de derechos de niñas, niños y adolescentes (Ley 21.430), gestión de casos y actividades.",
+    "organigrama": "",
+    "alias": [
+      "oln"
+    ],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#E2683C",
+      "oscuro": "#7A2E12",
+      "acento": "#16A0A8",
+      "patron": "ondas",
+      "icono": "personas",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/04/675277575_1402423731923029_8140724490700605616_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Oficina Local de la Niñez (OLN)",
+      "titulo": "Niñas, niños y adolescentes primero",
+      "bajada": "Promoción y protección de los derechos de niñas, niños y adolescentes de Melipeuco, en el marco de la Ley N° 21.430 de garantías de la niñez.",
+      "botones": [
+        {
+          "texto": "Llamar a la OLN",
+          "url": "tel:+56233848817"
+        },
+        {
+          "texto": "Qué hacemos",
+          "url": "#m-que-hacemos"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8817",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas y reclamos (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "que-hacemos",
+        "tipo": "texto",
+        "ancla": "Qué hacemos",
+        "titulo": "Una oficina para la niñez",
+        "html": "<p>La Oficina Local de la Niñez (OLN) acompaña de forma integral a niñas, niños y adolescentes y a sus familias, en el marco de la <strong>Ley N° 21.430</strong> sobre garantías y protección integral de los derechos de la niñez y adolescencia. Su equipo, con gestoras y gestores de casos y territoriales, articula la red local —escuelas, salud, programas sociales— para responder a tiempo.</p>",
+        "destacado": "Elige el buen trato: respeto, empatía y sana convivencia en cada familia y cada escuela."
+      },
+      {
+        "id": "lineas",
+        "tipo": "tarjetas",
+        "ancla": "Líneas de trabajo",
+        "titulo": "Líneas de trabajo",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "corazon",
+            "titulo": "Protección de derechos",
+            "texto": "Gestión de casos y atención integral de niñas, niños y adolescentes."
+          },
+          {
+            "icono": "escuela",
+            "titulo": "Trabajo con escuelas",
+            "texto": "Ferias informativas y espacios seguros junto a los establecimientos de la comuna."
+          },
+          {
+            "icono": "estrella",
+            "titulo": "Promoción del buen trato",
+            "texto": "Actividades comunitarias como el Festival «Elige el Buen Trato»."
+          }
+        ]
+      },
+      {
+        "id": "ayuda",
+        "tipo": "llamado",
+        "titulo": "¿Un niño, niña o adolescente necesita ayuda?",
+        "texto": "Comuníquese con la Oficina Local de la Niñez. Ante una emergencia, llame a Carabineros (133).",
+        "icono": "telefono",
+        "boton": "Llamar a la OLN",
+        "url": "tel:+56233848817",
+        "boton2": "Llamar al 133",
+        "url2": "tel:133"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de oficina local de la niñez",
+        "categoria": "oln",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

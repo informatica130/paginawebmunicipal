@@ -1,0 +1,116 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "desarrollo-comunitario",
+    "nombre": "Desarrollo Comunitario",
+    "slug": "desarrollo-comunitario",
+    "unidad": "Departamento de Desarrollo Comunitario",
+    "descripcion": "Departamento de Desarrollo Comunitario de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-dideco-comunitario",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "personas",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Desarrollo Comunitario",
+      "titulo": "Departamento de Desarrollo Comunitario",
+      "bajada": "",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>El <strong>Departamento de Desarrollo Comunitario</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Desarrollo Comunitario. Sus funciones son:</p><ul></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 21.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "personas",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Organizaciones Comunitarias",
+            "texto": "Promover la organización, consolidación y participación de las organizaciones comunitarias.",
+            "url": "/organizaciones-comunitarias/"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-dideco-comunitario",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Dirección de Desarrollo Comunitario",
+            "descripcion": "Unidad de la que depende",
+            "url": "/social/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Departamento de Desarrollo Social",
+            "descripcion": "Departamento",
+            "url": "/desarrollo-social/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Departamento de Desarrollo Económico Local",
+            "descripcion": "Departamento",
+            "url": "/udel/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Departamento de Programas Sociales",
+            "descripcion": "Departamento",
+            "url": "/programas-sociales/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

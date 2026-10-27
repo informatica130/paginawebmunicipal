@@ -1,0 +1,105 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "permisos-de-circulacion",
+    "nombre": "Permisos de circulación",
+    "slug": "permisos-de-circulacion",
+    "unidad": "Oficina de Permisos de Circulación",
+    "descripcion": "Oficina de Permisos de Circulación de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-transito-pc",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D4901A",
+      "oscuro": "#5E3F05",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "documento",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Tránsito y Transporte Público",
+      "titulo": "Oficina de Permisos de Circulación",
+      "bajada": "Otorgar y renovar permisos de circulación y sus duplicados.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "permisosdecirculacion@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "pago",
+        "tipo": "llamado",
+        "titulo": "Pague su permiso de circulación",
+        "texto": "Primera o segunda cuota, en línea en el sistema SEM.",
+        "icono": "auto",
+        "boton": "Pagar en línea",
+        "url": "https://www.sem2.gob.cl/tramites/permisos-de-circulacion/70766500/buscar",
+        "boton2": "Segunda cuota",
+        "url2": "https://www.sem2.gob.cl/tramites/permisos-de-circulacion-2c/70766500/buscar"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Permisos de Circulación</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Tránsito y Transporte Público. Sus funciones son:</p><ul><li>Otorgar y renovar permisos de circulación y sus duplicados.</li><li>Registro comunal de permisos de circulación; informar o rechazar traslados.</li><li>Giro de derechos y estadísticas para organismos del Estado.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 50.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-transito-pc",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "auto",
+            "texto": "Departamento de Tránsito y Transporte Público",
+            "descripcion": "Unidad de la que depende",
+            "url": "/transito/"
+          },
+          {
+            "icono": "licencia",
+            "texto": "Oficina de Licencias de Conducir",
+            "descripcion": "Oficina",
+            "url": "/licencias-de-conducir/"
+          },
+          {
+            "icono": "mapa",
+            "texto": "Oficina de Señalización Vial",
+            "descripcion": "Oficina",
+            "url": "/senalizacion-vial/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -5,7 +5,8 @@
 import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, video, migas, telefonoHref, vacio } from './comun.js';
 import { documento } from './layout.js';
 import { inventario, urlDoc } from './archivo.js';
-import { filaTramite, filaTramiteEnLinea } from './bloques.js';
+import { filaTramite, filaTramiteEnLinea, renderBloques, tarjetaAutoridad } from './bloques.js';
+import { franjaVideos } from './videos.js';
 import { ORGANIGRAMA_MELIPEUCO } from '../../src/organigrama-melipeuco.js';
 import { patronUrl, tamanoPatron } from '../../public/js/diseno.js';
 import { fecha, hoyLocal, textoPlano, recortar } from '../../src/util.js';
@@ -27,6 +28,17 @@ function descendientes(id) {
 
 async function modulo(ctx, s, m) {
   switch (m.tipo) {
+    case 'contenido': {
+      const f = m.filtro.trim(), n = m.cantidad || 6;
+      if (m.fuente === 'autoridades') {
+        const lista = ctx.repo.listar({ tipo: 'autoridad', publico: true, orden: 'orden', limite: 50 }).items.filter((a) => !f || f.split(/[,\s]+/).includes(a.datos.cargo));
+        return lista.length ? html`${cab(m)}<div class="autoridades">${lista.map((a) => tarjetaAutoridad(ctx, a))}</div>` : '';
+      }
+      if (m.fuente === 'videos') { const v = franjaVideos(m.titulo || 'Videos', { categoria: f, cantidad: n, enlace: f ? `/videos/?categoria=${encodeURIComponent(f)}` : '/videos/' }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
+      const b = { id: 'c' + m.id, tipo: m.fuente, titulo: '', cantidad: n, grupo: f, tipoLugar: f, formulario: f || 'contacto' };
+      const r = (await renderBloques(ctx, [b])).map(String).join('');
+      return r.trim() ? html`${cab(m)}${crudo(r)}` : '';
+    }
     case 'tramites': {
       const deps = m.dependencia ? descendientes(m.dependencia) : new Set();
       const areas = deps.size ? ctx.db.all("SELECT id FROM contenidos WHERE tipo = 'area' AND json_extract(datos, '$.transitoDepartamento') IN (" + [...deps].map(() => '?').join(',') + ')', ...deps).map((x) => x.id) : [];
@@ -42,6 +54,7 @@ async function modulo(ctx, s, m) {
       }
       const n = m.cantidad || 12;
       const todos = [...locales.slice(0, n).map((t) => filaTramite(ctx, t)), ...enLinea.slice(0, Math.max(0, n - locales.length)).map((t) => filaTramiteEnLinea(t))];
+      if (!todos.length && !m.vacio) return '';
       return html`${cab(m, html`<a class="ver-todo" href="/tramites/">Todos los trámites</a>`)}${todos.length ? html`<div class="lista-tramites ms-tramites">${todos}</div>` : html`<div class="ms-vacio">${crudo(icono('licencia', { tam: 28 }))}<p>${m.vacio}</p></div>`}`;
     }
     case 'texto': {
@@ -146,7 +159,7 @@ async function modulo(ctx, s, m) {
         <div class="botonera">${m.url ? html`<a class="boton boton-acento" ${attrsEnlace(m.url)}>${m.boton || 'Participar'}${avisoExterno(m.url)}</a>` : ''}${m.url2 ? html`<a class="boton ms-boton-claro" ${attrsEnlace(m.url2)}>${m.boton2 || 'Más información'}${avisoExterno(m.url2)}</a>` : ''}</div></div>`;
     case 'enlaces':
       if (!m.items.length) return '';
-      return html`${cab(m)}<div class="ms-enlaces">${m.items.filter((x) => x.url).map((x) => html`<a class="ms-enlace" ${attrsEnlace(x.url)}>${crudo(icono(x.icono || 'enlace', { tam: 24 }))}<span><b>${x.texto}</b>${x.descripcion ? html`<small>${x.descripcion}</small>` : ''}</span>${crudo(icono('externo', { tam: 16 }))}${avisoExterno(x.url)}</a>`)}</div>`;
+      return html`${cab(m)}<div class="ms-enlaces">${m.items.filter((x) => x.url).map((x) => html`<a class="ms-enlace" ${attrsEnlace(x.url)}>${crudo(icono(x.icono || 'enlace', { tam: 24 }))}<span><b>${x.texto}</b>${x.descripcion ? html`<small>${x.descripcion}</small>` : ''}</span>${crudo(icono(/^https?:/.test(x.url) ? 'externo' : 'flecha', { tam: 16 }))}${avisoExterno(x.url)}</a>`)}</div>`;
     case 'video':
       return m.url ? html`${cab(m)}<div class="ms-video">${video(m.url, m.titulo || 'Video')}</div>` : '';
     default: return '';
@@ -209,7 +222,14 @@ export async function paginaMicrositio(ctx, s) {
 }
 
 // Para el buscador del sitio: el micrositio y sus módulos con título.
+const cacheTexto = new WeakMap();
 export function textoMicrositio(s) {
+  if (cacheTexto.has(s)) return cacheTexto.get(s);
+  const t = textoDe(s);
+  cacheTexto.set(s, t);
+  return t;
+}
+function textoDe(s) {
   const partes = [s.nombre, s.unidad, s.descripcion, s.portada.titulo, s.portada.bajada];
   for (const m of s.modulos) partes.push(m.titulo, m.intro, textoPlano(m.html || ''), ...(m.items || []).map((x) => [x.titulo, x.texto, x.nombre, x.pregunta, x.etiqueta].filter(Boolean).join(' ')));
   return recortar(partes.filter(Boolean).join(' '), 20000);

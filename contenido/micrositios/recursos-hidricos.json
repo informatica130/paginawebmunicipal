@@ -1,0 +1,100 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "recursos-hidricos",
+    "nombre": "Recursos Hídricos y Títulos",
+    "slug": "recursos-hidricos",
+    "unidad": "Oficina de Recursos Hídricos y Saneamiento de Títulos",
+    "descripcion": "Oficina de Recursos Hídricos y Saneamiento de Títulos de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-hidricos",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#8A5A3B",
+      "oscuro": "#432816",
+      "acento": "#E9A92B",
+      "patron": "montes",
+      "icono": "mapa",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Departamento de Desarrollo Económico Local",
+      "titulo": "Oficina de Recursos Hídricos y Saneamiento de Títulos",
+      "bajada": "Asesoría en acceso y manejo del agua; información sobre la Ley 21.435 (Reforma al Código de Aguas).",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8818",
+      "email": "udel@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Recursos Hídricos y Saneamiento de Títulos</strong> es parte de la Municipalidad de Melipeuco y depende del Departamento de Desarrollo Económico Local. Sus funciones son:</p><ul><li>Asesoría en acceso y manejo del agua; información sobre la Ley 21.435 (Reforma al Código de Aguas).</li><li>Apoyo en proyectos de riego y saneamiento de títulos de dominio.</li><li>Línea base, plan anual de trabajo y difusión; registro actualizado de datos comunales.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 31.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-hidricos",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "grafico",
+            "texto": "Departamento de Desarrollo Económico Local",
+            "descripcion": "Unidad de la que depende",
+            "url": "/udel/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Oficina de Promoción del Fomento Productivo Local",
+            "descripcion": "Oficina",
+            "url": "/fomento-productivo/"
+          },
+          {
+            "icono": "mapa",
+            "texto": "Oficina de Turismo",
+            "descripcion": "Oficina",
+            "url": "/turismo/"
+          },
+          {
+            "icono": "libro",
+            "texto": "Oficina de Cultura",
+            "descripcion": "Oficina",
+            "url": "/cultura/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,6 +6,10 @@
     "slug": "social",
     "unidad": "Dirección de Desarrollo Comunitario (DIDECO)",
     "descripcion": "DIDECO Melipeuco: programas sociales, Registro Social de Hogares, subsidios, vivienda, adulto mayor, mujer, juventud y organizaciones comunitarias.",
+    "organigrama": "dep-dideco",
+    "alias": [
+      "dideco"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

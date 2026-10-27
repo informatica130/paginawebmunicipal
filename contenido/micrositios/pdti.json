@@ -1,0 +1,135 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "pdti",
+    "nombre": "PDTI",
+    "slug": "pdti",
+    "unidad": "Programa de Desarrollo Territorial Indígena (PDTI)",
+    "descripcion": "PDTI Municipal de Melipeuco: Programa de Desarrollo Territorial Indígena en convenio con INDAP, talleres, asesoría técnica y emprendimiento.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#6B4E2E",
+      "oscuro": "#33230F",
+      "acento": "#E9A92B",
+      "patron": "araucarias",
+      "icono": "hoja",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/762629823_1492560429576025_520058368672760345_n-1.jpg"
+    },
+    "portada": {
+      "antetitulo": "PDTI Municipal · Convenio INDAP",
+      "titulo": "Desarrollo Territorial Indígena",
+      "bajada": "Asesoría técnica, capacitación e incentivos para familias mapuche pehuenche de la comuna, con rescate de saberes y recursos del territorio.",
+      "botones": [
+        {
+          "texto": "INDAP",
+          "url": "https://www.indap.gob.cl/"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8818",
+      "email": "udel@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "programa",
+        "tipo": "texto",
+        "ancla": "El programa",
+        "titulo": "El programa",
+        "html": "<p>El PDTI Municipal, financiado a través del Convenio INDAP, acompaña a familias y comunidades indígenas de Melipeuco con asesoría técnica, capacitaciones e incentivos para fortalecer sus sistemas productivos y emprendimientos, poniendo en valor la identidad, la cultura y la riqueza natural del territorio.</p>"
+      },
+      {
+        "id": "lineas",
+        "tipo": "tarjetas",
+        "ancla": "Talleres",
+        "titulo": "Talleres y apoyos",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "arbol",
+            "titulo": "Bosque nativo",
+            "texto": "Talleres como «Rescatando los aromas del bosque»: inciensos, aceites esenciales e hidrolatos."
+          },
+          {
+            "icono": "agua",
+            "titulo": "Agua y huerta",
+            "texto": "Cosecha de aguas lluvias y riego por goteo para la huerta."
+          },
+          {
+            "icono": "mano",
+            "titulo": "Saberes y oficios",
+            "texto": "Cestería, artesanía y conservación de alimentos."
+          }
+        ]
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "trabajo",
+            "texto": "Desarrollo Local (UDEL)",
+            "descripcion": "Programas de fomento productivo",
+            "url": "/udel/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de pdti",
+        "categoria": "pdti",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2026/08/762629823_1492560429576025_520058368672760345_n-1.jpg",
+            "alt": "PDTI Municipal impulsa taller para rescatar los aromas del bosque nativo"
+          },
+          {
+            "src": "/wp-content/uploads/2025/10/559134223_1241107418054662_3333759552941252892_n.jpg",
+            "alt": "Finalizó con éxito el Curso de Cestería con Fibras Vegetales en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/10/557677209_1239632234868847_7443942944587705679_n.jpg",
+            "alt": "Melipeuco avanza en el Proyecto de Agua Potable Rural Flor del Valle"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/553414400_1234954352003302_6154028353391023225_n.jpg",
+            "alt": "CORE aprueba inversión para el desarrollo de Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546844383_1222823759883028_770852907037026663_n.jpg",
+            "alt": "Melipeuco avanza en cooperación internacional con delegación de Wenzhou, China"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546094051_1221339086698162_8333927953608467209_n-1.jpg",
+            "alt": "Melipeuco presente en la inauguración de la GeoFeria “Saberes y Sabores” y firma de acuerdo internacional con Geoparques de China"
+          }
+        ]
+      }
+    ]
+  }
+}

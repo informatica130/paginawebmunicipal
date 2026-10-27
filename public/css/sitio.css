@@ -3039,3 +3039,9 @@ a.ms-tarjeta:hover { transform: translateY(calc(var(--elevacion, 4px) * -1)); bo
 /* El destello de los botones queda dentro del botón (una regla general dejaba el desborde visible
    y el destello se veía como una raya al lado del botón sobre fondos oscuros). */
 :is(.boton-primario, .boton-acento):not([disabled]) { overflow: hidden; isolation: isolate; }
+.ms-aviso-sitio { display: flex; align-items: center; gap: 14px; margin: 0 0 24px; padding: 16px 20px; border-radius: var(--r-l); background: var(--c); color: #fff; text-decoration: none; box-shadow: var(--sh-2); transition: transform .25s var(--mov); }
+.ms-aviso-sitio:hover { transform: translateY(-2px); color: #fff; }
+.ms-aviso-sitio span { display: grid; flex: 1; }
+.ms-aviso-sitio small { opacity: .85; }
+.ms-intro-suelta { max-width: 760px; color: var(--texto-2); }
+.ms-mod-contenido .seccion-videoteca, .ms-mod-contenido .seccion { padding: 0; background: none; }

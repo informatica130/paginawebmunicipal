@@ -1,0 +1,167 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "desarrollo-social",
+    "nombre": "Desarrollo Social",
+    "slug": "desarrollo-social",
+    "unidad": "Departamento de Desarrollo Social",
+    "descripcion": "Departamento de Desarrollo Social de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-dideco-social",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "corazon",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/10/557783389_1242254967939907_4460040340840564802_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Dirección de Desarrollo Comunitario",
+      "titulo": "Departamento de Desarrollo Social",
+      "bajada": "Mejorar la situación de pobreza y vulnerabilidad en la comuna.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8811",
+      "email": "dideco@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>El <strong>Departamento de Desarrollo Social</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Desarrollo Comunitario. Sus funciones son:</p><ul><li>Mejorar la situación de pobreza y vulnerabilidad en la comuna.</li><li>Diagnósticos socioeconómicos y registro actualizado.</li><li>Administrar proyectos de cobertura nacional para personas vulnerables.</li><li>Orientar sobre beneficios sociales, su difusión y postulación.</li><li>Atender casos sociales, emergencias y necesidad manifiesta; administrar las bodegas del departamento.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 19.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "corazon",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Asistencia Social",
+            "texto": "Diagnósticos de problemas sociales y sectores afectados.",
+            "url": "/asistencia-social/"
+          },
+          {
+            "icono": "casa",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Vivienda",
+            "texto": "Asesorar a postulantes a viviendas sociales y subsidios habitacionales, en coordinación con el SERVIU.",
+            "url": "/vivienda/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Subsidios y Pensiones",
+            "texto": "Administrar pensiones y subsidios de la red social con atención expedita.",
+            "url": "/subsidios-y-pensiones/"
+          },
+          {
+            "icono": "usuario",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
+            "texto": "Planes y programas de desarrollo social del adulto mayor y de inclusión de personas con discapacidad o dependencia.",
+            "url": "/uamis/"
+          },
+          {
+            "icono": "deporte",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Deportes y Recreación",
+            "texto": "Organizar y ejecutar programas deportivos y recreativos.",
+            "url": "/deporte/"
+          },
+          {
+            "icono": "corazon",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de la Mujer y Equidad de Género",
+            "texto": "Mejorar la calidad de vida de las mujeres, su empoderamiento y autonomía.",
+            "url": "/oficina-de-la-mujer/"
+          },
+          {
+            "icono": "estrella",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de la Juventud",
+            "texto": "Integración, información y participación de jóvenes y adolescentes.",
+            "url": "/juventud/"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-dideco-social",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Dirección de Desarrollo Comunitario",
+            "descripcion": "Unidad de la que depende",
+            "url": "/social/"
+          },
+          {
+            "icono": "personas",
+            "texto": "Departamento de Desarrollo Comunitario",
+            "descripcion": "Departamento",
+            "url": "/desarrollo-comunitario/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Departamento de Desarrollo Económico Local",
+            "descripcion": "Departamento",
+            "url": "/udel/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Departamento de Programas Sociales",
+            "descripcion": "Departamento",
+            "url": "/programas-sociales/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de desarrollo social",
+        "categoria": "social",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

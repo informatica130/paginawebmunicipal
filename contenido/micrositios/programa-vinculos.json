@@ -1,0 +1,89 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "vinculos",
+    "nombre": "Programa Vínculos",
+    "slug": "programa-vinculos",
+    "unidad": "Programa Vínculos · Personas mayores",
+    "descripcion": "Programa Vínculos en Melipeuco: acompañamiento a personas mayores durante dos años.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D23B4A",
+      "oscuro": "#6E1520",
+      "acento": "#E9A92B",
+      "patron": "ondas",
+      "icono": "personas",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/04/492419179_1112829230882482_1127010130097148008_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Programa Vínculos",
+      "titulo": "Acompañamiento a personas mayores",
+      "bajada": "Atención personalizada y cercana durante dos años para que las personas mayores accedan a servicios, prestaciones y redes de apoyo, con una vejez activa y digna.",
+      "botones": [],
+      "cifras": [
+        {
+          "valor": "97",
+          "etiqueta": "personas mayores acompañadas (2025)"
+        },
+        {
+          "valor": "2 años",
+          "etiqueta": "de acompañamiento personalizado"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8800",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "programa",
+        "tipo": "texto",
+        "ancla": "El programa",
+        "titulo": "El programa",
+        "html": "<p>El Programa Vínculos entrega acompañamiento personalizado a personas mayores, promoviendo la confianza, el respeto, la unidad y la ayuda mutua. Fortalece su autonomía y les garantiza acceso a servicios, prestaciones sociales y redes de apoyo locales e institucionales.</p><p>En 2025 se sumaron 57 nuevas personas mayores a las 40 que ya participaban, con un total de 97 en la comuna.</p>"
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "personas",
+            "texto": "Adulto Mayor e Inclusión (UAMIS)",
+            "descripcion": "Programas para personas mayores",
+            "url": "/uamis/"
+          },
+          {
+            "icono": "corazon",
+            "texto": "Desarrollo Social (DIDECO)",
+            "url": "/social/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de programa vínculos",
+        "categoria": "programa-vinculos",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "aseo-y-ornato",
+    "nombre": "Aseo y Ornato",
+    "slug": "aseo-y-ornato",
+    "unidad": "Oficina de Aseo y Ornato",
+    "descripcion": "Oficina de Aseo y Ornato de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-aseo",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#C9552B",
+      "oscuro": "#5B2210",
+      "acento": "#E9A92B",
+      "patron": "triangulos",
+      "icono": "hoja",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/07/512690112_1162941742537897_8668463532428423624_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Dirección de Obras Municipales",
+      "titulo": "Oficina de Aseo y Ornato",
+      "bajada": "Aseo de vías públicas, parques, jardines y bienes nacionales de uso público.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8824",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>La <strong>Oficina de Aseo y Ornato</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Obras Municipales. Sus funciones son:</p><ul><li>Aseo de vías públicas, parques, jardines y bienes nacionales de uso público.</li><li>Extracción y disposición final de residuos, o control del servicio concesionado.</li><li>Áreas verdes y ornato; catastro de plazas y arbolado.</li><li>Retiro de escombros, vehículos, especies y animales abandonados.</li><li>Denunciar infracciones de aseo al Juzgado de Policía Local.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 44 y 45.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-aseo",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "herramienta",
+            "texto": "Dirección de Obras Municipales",
+            "descripcion": "Unidad de la que depende",
+            "url": "/obras/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Edificación y Urbanización",
+            "descripcion": "Oficina",
+            "url": "/edificacion-y-urbanizacion/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección de Obras",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-de-obras/"
+          },
+          {
+            "icono": "carpeta",
+            "texto": "Oficina de Catastros y Archivos",
+            "descripcion": "Oficina",
+            "url": "/catastros-y-archivos/"
+          },
+          {
+            "icono": "alerta",
+            "texto": "Oficina de Emergencia y Protección Civil",
+            "descripcion": "Oficina",
+            "url": "/emergencias/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Oficina de Cementerios",
+            "descripcion": "Oficina",
+            "url": "/cementerios/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de aseo y ornato",
+        "categoria": "medio-ambiente",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

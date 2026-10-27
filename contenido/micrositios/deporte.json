@@ -6,6 +6,10 @@
     "slug": "deporte",
     "unidad": "Oficina de Deportes y Recreación",
     "descripcion": "Oficina de Deportes y Recreación de Melipeuco: talleres, escuelas deportivas, campeonatos y eventos como la Media Maratón Entre Ríos y Volcanes.",
+    "organigrama": "dep-deportes",
+    "alias": [
+      "deporte-2"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

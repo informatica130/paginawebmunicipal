@@ -1,0 +1,152 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "recursos-humanos",
+    "nombre": "Recursos Humanos",
+    "slug": "recursos-humanos",
+    "unidad": "Departamento de Recursos Humanos",
+    "descripcion": "Departamento de Recursos Humanos de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
+    "organigrama": "dep-rrhh",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#0E7C86",
+      "oscuro": "#0A2A33",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "personas",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Dirección de Administración y Finanzas",
+      "titulo": "Departamento de Recursos Humanos",
+      "bajada": "Proponer políticas de administración de personal y aplicar la carrera funcionaria.",
+      "botones": [],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "personal@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Qué hacemos",
+        "html": "<p>El <strong>Departamento de Recursos Humanos</strong> es parte de la Municipalidad de Melipeuco y depende de la Dirección de Administración y Finanzas. Sus funciones son:</p><ul><li>Proponer políticas de administración de personal y aplicar la carrera funcionaria.</li><li>Registros del personal: nombramientos, calificaciones, escalafones, medidas disciplinarias, permisos y feriados.</li><li>Tramitar nombramientos, renuncias, permisos y feriados; resoluciones finales de sumarios.</li><li>Planes de capacitación y evaluación del desempeño.</li><li>Higiene y ambiente de trabajo; programas de prevención de riesgos.</li><li>Sistemas de control de asistencia y horario del personal municipal.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 57.</small></p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas y unidades",
+        "columnas": "2",
+        "items": [
+          {
+            "icono": "escudo",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Prevención de Riesgos",
+            "texto": "Evaluar y controlar riesgos de accidentes y enfermedades profesionales.",
+            "url": "/prevencion-de-riesgos/"
+          }
+        ]
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Contacto",
+        "titulo": "Teléfonos y correos",
+        "items": [
+          {
+            "nombre": "Encargado de Personal Municipal",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "personal@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Encargado de Personal CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "personal.dsm@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-rrhh",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": ""
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "billete",
+            "texto": "Dirección de Administración y Finanzas",
+            "descripcion": "Unidad de la que depende",
+            "url": "/administracion-y-finanzas/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Oficina de Contabilidad y Presupuesto",
+            "descripcion": "Oficina",
+            "url": "/contabilidad-y-presupuesto/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Tesorería Municipal",
+            "descripcion": "Oficina",
+            "url": "/tesoreria-municipal/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Patentes Municipales",
+            "descripcion": "Oficina",
+            "url": "/patentes-municipales/"
+          },
+          {
+            "icono": "buscar",
+            "texto": "Oficina de Inspección Municipal",
+            "descripcion": "Oficina",
+            "url": "/inspeccion-municipal/"
+          },
+          {
+            "icono": "billete",
+            "texto": "Oficina de Remuneraciones",
+            "descripcion": "Oficina",
+            "url": "/remuneraciones/"
+          },
+          {
+            "icono": "grafico",
+            "texto": "Organigrama municipal",
+            "descripcion": "Toda la estructura de la Municipalidad",
+            "url": "/organigrama/"
+          }
+        ]
+      }
+    ]
+  }
+}
