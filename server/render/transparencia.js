@@ -7,6 +7,7 @@
 
 import { html, crudo, icono, esc } from './comun.js';
 import { totalMateria, resumenArchivo } from './archivo.js';
+import { resumenActiva, seccionPorNombre, avisoFecha, portal, BASE as BASE_ACTIVA } from './portal.js';
 
 export const PORTAL = 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU172';
 export const SOLICITUD = 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrg=608';
@@ -71,6 +72,17 @@ function materiaDe(m) {
   return n ? { id, total: n } : null;
 }
 
+// Sección de Transparencia Activa (copia del Portal en el sitio) para cada materia de la ley.
+const SECCION_DE = [[/diario oficial/, /diario oficial/], [/potestades|marco normativo/, /potestades/], [/estructura organica|funciones de cada unidad/, /estructura organica/],
+  [/remuneraciones/, /personal y remuneraciones/], [/compras/, /adquisiciones/], [/transferencias/, /transferencias/], [/actos y resoluciones/, /actos y resoluciones/],
+  [/subsidios/, /subsidios/], [/participacion ciudadana/, /participacion ciudadana/], [/presupuesto/, /presupuestaria/], [/auditorias/, /auditorias/], [/otras entidades/, /otras entidades/]];
+function enlaceActiva(m) {
+  if (m.url && m.url !== PORTAL) return m.url; // los enlaces cambiados en el panel se respetan
+  const regla = SECCION_DE.find(([r]) => r.test(sinTildes(m.titulo)));
+  const s = regla ? seccionPorNombre(regla[1]) : null;
+  return s ? `${BASE_ACTIVA}${s.id}/` : m.url || PORTAL;
+}
+
 export function centroTransparencia(ext) {
   const c = configuracion(ext);
   if (!c.activo) return '';
@@ -79,12 +91,14 @@ export function centroTransparencia(ext) {
       <div><h2 id="ct-titulo">Transparencia Activa</h2><p>${c.intro}</p></div>
       <a class="boton boton-primario" ${attrs(PORTAL)}>${crudo(icono('documento', { tam: 18 }))} Ver todo en el Portal de Transparencia</a>
     </div>
+    ${portal() ? avisoFecha(portal()) : ''}
     <div class="ct-filtro"><label for="ct-buscar" class="sr">Buscar una materia</label>${crudo(icono('buscar', { tam: 18 }))}<input id="ct-buscar" type="search" placeholder="¿Qué busca? Ej.: sueldos, licitaciones, presupuesto…" data-filtrar=".ct-materias > li" autocomplete="off"></div>
-    <ul class="ct-materias">${c.categorias.map((m, i) => html`<li data-filtrable="${(m.claves || '') + ' ' + m.titulo + ' ' + m.texto}">${materiaDe(m) ? html`<a class="ct-docs" href="/transparencia/documentos/?materia=${materiaDe(m).id}">${crudo(icono('carpeta', { tam: 14 }))} ${materiaDe(m).total.toLocaleString('es-CL')} documentos</a>` : ''}<a class="ct-materia" ${attrs(m.url || PORTAL)} style="--i:${i}">
+    <ul class="ct-materias">${c.categorias.map((m, i) => html`<li data-filtrable="${(m.claves || '') + ' ' + m.titulo + ' ' + m.texto}">${materiaDe(m) ? html`<a class="ct-docs" href="/transparencia/documentos/?materia=${materiaDe(m).id}">${crudo(icono('carpeta', { tam: 14 }))} ${materiaDe(m).total.toLocaleString('es-CL')} documentos</a>` : ''}<a class="ct-materia" ${attrs(enlaceActiva(m))} style="--i:${i}">
       <span class="ct-ico">${crudo(icono(m.icono || 'documento', { tam: 22 }))}</span>
       <span class="ct-txt"><b>${m.titulo}</b><small>${m.texto}</small></span>
-      <span class="ct-ir" aria-hidden="true">${crudo(icono(externo(m.url || PORTAL) ? 'enlace' : 'flecha', { tam: 16 }))}</span>${externo(m.url || PORTAL) ? html`<span class="sr"> (abre en otra pestaña)</span>` : ''}
+      <span class="ct-ir" aria-hidden="true">${crudo(icono(externo(enlaceActiva(m)) ? 'enlace' : 'flecha', { tam: 16 }))}</span>${externo(enlaceActiva(m)) ? html`<span class="sr"> (abre en otra pestaña)</span>` : ''}
     </a></li>`)}</ul>
+    ${resumenActiva()}
     ${resumenArchivo()}
     <h2 class="ct-sub">Sus derechos</h2>
     <ul class="ct-derechos">${DERECHOS.map((d) => html`<li><span class="ct-ico">${crudo(icono(d.icono, { tam: 22 }))}</span><div><h3>${d.titulo}</h3><p>${d.texto}</p><a class="ver-todo" ${attrs(d.url)}>${d.boton}</a></div></li>`)}</ul>

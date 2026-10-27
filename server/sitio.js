@@ -15,6 +15,7 @@ import { sha256, tokenAleatorio } from './auth.js';
 import { crearExtensiones } from './extensiones.js';
 import { buscarTransparencia } from './render/transparencia.js';
 import { paginaArchivo, buscarArchivo, inventario, urlDoc } from './render/archivo.js';
+import { paginaActiva, buscarActiva } from './render/portal.js';
 import { Readable } from 'node:stream';
 import { paginaVideos, paginaLista, fichaVideo, prepararVideos, buscarVideos, urlVideo, urlsVideos, indice as indiceVideos } from './render/videos.js';
 
@@ -215,7 +216,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
 
   function sitemap() {
     const base = cfg.PUBLIC_URL.replace(/\/$/, '');
-    const urls = ['/', '/noticias/', '/tramites/', '/eventos/', '/documentos/', '/areas/', '/contacto/', '/oirs/', '/transparencia/', '/transparencia/documentos/', '/concejo/sesiones/', '/mapa-del-sitio/'].map((u) => ({ u, m: null }));
+    const urls = ['/', '/noticias/', '/tramites/', '/eventos/', '/documentos/', '/areas/', '/contacto/', '/oirs/', '/transparencia/', '/transparencia/activa/', '/transparencia/documentos/', '/concejo/sesiones/', '/mapa-del-sitio/'].map((u) => ({ u, m: null }));
     for (const f of db.all("SELECT id, tipo, slug, padre_id, publicado_en, creado, modificado, datos FROM contenidos WHERE estado = 'publicado' AND tipo NOT IN ('slide','acceso','aviso','contacto') AND json_extract(seo, '$.noindex') IS NOT 1")) {
       urls.push({ u: repo.urlDe({ ...f, datos: JSON.parse(f.datos) }), m: f.modificado });
     }
@@ -338,7 +339,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
           .slice(0, 3).map((i) => ({ tipo: 'Acceso directo', clave: 'atajo', titulo: i.texto, url: i.url, externo: /^https?:/.test(i.url) && !i.url.startsWith(base) }));
         const cat = query.get('plataforma') !== '0' ? await tramites.catalogo() : null;
         const en = cat ? cat.tramites.filter((t) => palabras.every((p) => norm(t.nombre + ' ' + t.descripcion).includes(p))).slice(0, 3).map((t) => ({ tipo: 'Trámite en línea', clave: 'en-linea', titulo: t.nombre, url: t.url, externo: true, fragmento: fragmento(t.descripcion) })) : [];
-        const transp = buscarTransparencia(ext.leer(), palabras, norm);
+        const transp = [...buscarTransparencia(ext.leer(), palabras, norm), ...buscarActiva(palabras)].slice(0, 4);
         const docs = buscarArchivo(inventario(), q, { limite: 3 }).map((a) => ({ tipo: 'Documento de Transparencia', clave: 'documento', titulo: a.n, url: urlDoc(a), fragmento: [a.c, a.ar, a.f ? 'publicado el ' + a.f.split('-').reverse().join('-') : ''].filter(Boolean).join(' · ') }));
         const vids = buscarVideos(q, 3).map((v) => ({ tipo: 'Video', clave: 'video', titulo: v.t, url: urlVideo(v), fragmento: [indiceVideos()?.cats.get(v.c)?.nombre, (v.fe || v.f || '').slice(0, 10).split('-').reverse().join('-')].filter(Boolean).join(' · ') }));
         const vistos = new Set();
@@ -565,6 +566,11 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
       else if (/^[\w-]{11}$/.test(seg[1]) && !seg[2]) { const r = fichaVideo(ctx, seg[1]); if (r) return responder(r); }
     }
     if (seg[0] === 'transparencia' && !seg[1]) return responder(V.transparencia(ctx));
+    // Transparencia Activa: secciones y tablas del Portal de Transparencia (copia con fecha).
+    if (seg[0] === 'transparencia' && seg[1] === 'activa' && seg.length <= 3) {
+      const r = paginaActiva(ctx, seg[2] || '', { q: String(q.get('q') || '').slice(0, 100), pagina: Number(q.get('p')) || 1 });
+      return r ? responder(r, { cachear: !q.get('q') }) : noEncontrado(req, res, ctx, ruta);
+    }
     // Las direcciones antiguas del archivo llevan a la nueva lista de documentos.
     if (seg[0] === 'transparencia' && seg[1] === 'archivo') return redirigir(res, '/transparencia/documentos/', 301);
     if (seg[0] === 'transparencia' && seg[1] === 'documentos') {

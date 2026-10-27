@@ -2758,3 +2758,36 @@ html { scrollbar-color: color-mix(in srgb, var(--azul) 45%, transparent) transpa
 :root[data-movimiento="nada"] .tk-cortina, :root[data-movimiento="nada"] .marca-tk, :root:is([data-movimiento="suave"], [data-movimiento="nada"]) .tk-cortina { display: none !important; }
 :root[data-movimiento="nada"] .por-aparecer { opacity: 1 !important; transform: none !important; }
 :root[data-movimiento="nada"] img.por-cargar { opacity: 1; }
+
+/* =====================================================================
+   Transparencia Activa (copia del Portal con fecha)
+   ===================================================================== */
+.pt-aviso-fecha { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 22px; padding: 14px 18px; border: 1px solid color-mix(in srgb, var(--ambar) 45%, transparent); border-radius: var(--r-l); background: color-mix(in srgb, var(--ambar) 12%, var(--superficie)); color: var(--texto); }
+.pt-aviso-fecha .ico { flex-shrink: 0; margin-top: 2px; color: color-mix(in srgb, var(--ambar) 70%, #000); }
+.pt-aviso-fecha p { margin: 0; }
+.pt-aviso-fecha a { font-weight: 700; }
+.pt-secciones .ar-dir, .pt-secciones .ar-ico b { font: 800 1rem/1 var(--fuente-titulo, var(--fuente)); }
+.pt-tabla-cab { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 14px; }
+.pt-tabla-cab .meta { margin: 0; }
+.pt-buscar { margin-bottom: 14px; }
+.pt-tabla-caja { overflow: auto; max-height: 75vh; border: 1px solid var(--linea-suave, var(--borde)); border-radius: var(--r-l); background: var(--superficie); box-shadow: var(--sh-1); }
+.pt-tabla { width: 100%; min-width: 720px; border-collapse: collapse; font-size: .875rem; }
+.pt-tabla th { position: sticky; top: 0; z-index: 1; padding: 10px 12px; background: var(--azul-profundo); color: #fff; font-size: .75rem; font-weight: 700; letter-spacing: .02em; text-align: left; vertical-align: bottom; white-space: nowrap; }
+.pt-tabla td { padding: 9px 12px; border-top: 1px solid var(--linea-suave, var(--borde)); vertical-align: top; overflow-wrap: anywhere; }
+.pt-tabla tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--fondo-2) 55%, transparent); }
+.pt-tabla tbody tr:hover td { background: color-mix(in srgb, var(--azul) 6%, var(--superficie)); }
+.pt-doc { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--azul) 10%, transparent); color: var(--enlace); font-size: .8125rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.pt-doc:hover { background: var(--azul); color: #fff; }
+.pt-doc-portal { background: var(--fondo-2); color: var(--texto-2); }
+.pt-ayuda { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; margin-top: 36px; }
+.pt-ayuda > div { padding: 20px; border-radius: var(--r-l); background: var(--fondo-2); }
+.pt-ayuda h2 { margin: 0 0 8px; font-size: 1.125rem; }
+.pt-botones { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 720px) {
+  .pt-tabla { min-width: 0; }
+  .pt-tabla thead { display: none; }
+  .pt-tabla tr { display: block; padding: 10px 12px; border-top: 1px solid var(--linea-suave, var(--borde)); }
+  .pt-tabla td { display: grid; grid-template-columns: 42% 1fr; gap: 8px; padding: 4px 0; border: 0; background: none !important; }
+  .pt-tabla td::before { content: attr(data-col); color: var(--texto-3); font-size: .75rem; font-weight: 700; }
+  .pt-tabla-caja { max-height: none; }
+}
