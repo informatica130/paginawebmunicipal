@@ -19,6 +19,7 @@ const VISTAS = {
   ajustes: () => import('./vistas/ajustes.js'),
   diseno: () => import('./vistas/diseno.js'),
   extensiones: () => import('./vistas/extensiones.js'),
+  micrositios: () => import('./vistas/micrositios.js'),
   sistema: () => import('./vistas/sistema.js'),
   cuenta: () => import('./vistas/cuenta.js'),
 };
@@ -112,6 +113,7 @@ function estructura() {
         <div class="grupo">Administración</div>
         ${puede('estadisticas.ver') ? enlace('estadisticas', 'Estadísticas', 'grafico') : ''}
         ${puede('ajustes.editar') ? enlace('diseno', 'Diseño del sitio', 'pincel') : ''}
+        ${puede('ajustes.editar') ? enlace('micrositios', 'Micrositios de unidades', 'hoja') : ''}
         ${puede('ajustes.editar') ? enlace('ajustes', 'Ajustes del sitio', 'ajustes') : ''}
         ${puede('ajustes.editar') ? enlace('extensiones', 'Extensiones', 'mas') : ''}
         ${puede('usuarios.gestionar') ? enlace('usuarios', 'Usuarios y permisos', 'usuarios') : ''}

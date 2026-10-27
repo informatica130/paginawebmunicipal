@@ -13,6 +13,7 @@ import { ErrorValidacion } from './contenidos.js';
 import { ahora, parse } from './db.js';
 import { slugify, emailValido, urlSegura, textoPlano, recortar } from '../src/util.js';
 import { normalizar as normalizarDiseno } from '../public/js/diseno.js';
+import { normalizarMicrositios, plantillas as plantillasMicrositio, crearMicrositios } from './micrositios.js';
 import { crearExtensiones, normalizarExtensiones, paraPanel, ZONAS, ZONAS_PORTADA, TIPOS_ZONA, PAGINAS, ESTILOS_EMERGENTE, DISPAROS, FRECUENCIAS, FONDOS, NIVELES } from './extensiones.js';
 import { CATEGORIAS as CATEGORIAS_TRANSPARENCIA } from './render/transparencia.js';
 import { contenidoTrekking } from './render/trekking.js';
@@ -438,6 +439,18 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return { ...paraPanel(limpio), superadmin: u.rol === 'superadmin' };
   });
   ruta('POST', 'extensiones/probar-fuente', 'ajustes.editar', async ({ body }) => motorExt.probar(body || {}));
+
+  // Micrositios de las unidades municipales (Medio Ambiente, Deportes…): cada uno con su portada,
+  // su color y sus módulos. Mientras no se guarden, se muestran las plantillas predeterminadas.
+  const motorMicro = crearMicrositios({ db });
+  ruta('GET', 'micrositios', 'ajustes.editar', () => ({ ...motorMicro.leer(), plantillas: plantillasMicrositio().map((p) => ({ id: p.id, nombre: p.sitio.nombre, unidad: p.sitio.unidad, sitio: p.sitio })) }));
+  ruta('PUT', 'micrositios', 'ajustes.editar', ({ u, body, req }) => {
+    const limpio = normalizarMicrositios(body || {});
+    db.guardarAjuste('micrositios', limpio);
+    auditar(u, 'ajustes.editar', 'micrositios', `${limpio.sitios.length} micrositios: ${limpio.sitios.map((x) => x.slug).join(', ')}`.slice(0, 300), req.ip);
+    invalidar();
+    return limpio;
+  });
   ruta('GET', 'diseno/historial', 'ajustes.editar', () => (db.ajuste('diseno-historial') || []).map((v, i) => ({ i, fecha: v.fecha, usuario: v.usuario, estilo: v.estilo, diseno: v.diseno })));
 
   // Incluye el contenido de la identidad ya completado con lo predeterminado, para editarlo en el panel.

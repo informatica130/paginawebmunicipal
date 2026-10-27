@@ -281,6 +281,32 @@ test('extensiones: ventana emergente, bloques en zonas, HTML aislado, código pr
   await api(s, 'PUT', 'extensiones', { emergentes: [], zonas: [], fuentes: [], codigo: { cabeza: '', cuerpo: '', dominios: '' } });
 });
 
+
+test('micrositios: Medio Ambiente predeterminado, edición desde el panel y borradores', async () => {
+  const r = await pedir('/medioambiente/');
+  assert.equal(r.status, 200);
+  const h = await r.text();
+  assert.match(h, /Melipeuco, comuna sustentable/);
+  assert.match(h, /Horario de recolección de residuos/);
+  assert.match(h, /Comité Ambiental Comunal/);
+  assert.match(h, /data-ms-pestanas/);
+  assert.match(await (await pedir('/sitemap.xml')).text(), /\/medioambiente\//);
+  const s = await admin();
+  const rg = await api(s, 'GET', 'micrositios');
+  const actual = await rg.json();
+  assert.equal(rg.status, 200, JSON.stringify(actual));
+  assert.ok(actual.plantillas.length >= 1);
+  const nuevo = { ...actual.sitios[0], id: 'deportes', nombre: 'Deportes', slug: 'Deportes Melipeuco!', publicado: false, modulos: [{ tipo: 'texto', titulo: 'Hola <b>', html: '<p>Texto<script>alert(1)</script></p>' }, { tipo: 'inventado' }] };
+  const g = await (await api(s, 'PUT', 'micrositios', { sitios: [actual.sitios[0], nuevo, { nombre: 'x', slug: 'admin' }] })).json();
+  assert.equal(g.sitios[1].slug, 'deportes-melipeuco');
+  assert.equal(g.sitios[1].modulos.length, 1);
+  assert.doesNotMatch(g.sitios[1].modulos[0].html, /script/);
+  assert.notEqual(g.sitios[2].slug, 'admin');
+  assert.equal((await pedir('/deportes-melipeuco/')).status, 404); // borrador: sólo con sesión
+  assert.equal((await pedir('/deportes-melipeuco/', { headers: { cookie: s.cookie } })).status, 200);
+  await api(s, 'PUT', 'micrositios', { sitios: [actual.sitios[0]] });
+});
+
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
   const { leerCarpeta, clasificar, nombreVisible, idPublico } = await import('../herramientas/transparencia-drive.js');
   const html = '<div class="flip-entries"><div class="flip-entry" id="entry-ABC123" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/drive/folders/ABC123?resourcekey=0-xyz" target="_blank"><div class="flip-entry-title">05.- ADQUISICIONES</div></a></div><div class="flip-entry-last-modified"><div>8/19/16</div></div></div>'
@@ -520,3 +546,17 @@ test('transparencia activa: copia del Portal con fecha y sin enlaces a Drive', a
   }
   assert.equal((await pedir('/transparencia/activa/no-existe/')).status, 404);
 });
+
+test('diseño: fondos, patrones y estilo propio de cada sección de la portada', () => {
+  const d = normalizarDiseno({ fondos: { patron: 'hojas', intensidad: 999, degradado: 'otro' }, secciones: { videoteca: { fondo: 'oscuro', patron: 'montes', forma: 'tarjeta', color1: 'rojo' }, inventada: { fondo: 'oscuro' } } });
+  assert.equal(d.fondos.intensidad, 40);
+  assert.equal(d.fondos.degradado, 'ninguno');
+  assert.equal(d.secciones.videoteca.color1, '#2F7D4A');
+  assert.equal(d.secciones.inventada, undefined);
+  const css = variablesCss(d);
+  assert.match(css, /\[data-sec="videoteca"\]>\.contenedor\{background:url\("data:image\/svg\+xml/);
+  assert.match(css, /--fp-img:url\(/);
+  assert.doesNotMatch(css, /</);
+  assert.equal(normalizarDiseno({}).secciones.noticias.fondo, 'auto');
+});
+

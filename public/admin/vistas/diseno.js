@@ -4,7 +4,10 @@
 import { h, raw, $, $$, api, aviso, fallo, estado, confirmar, ico } from '../ui.js';
 import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
-import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, normalizar, migrar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada } from '/js/diseno.js';
+import { PREDETERMINADO, ESTILOS, FUENTES, OPCIONES, SECCIONES_PORTADA, normalizar, migrar, aplicarEstilo, variablesCss, atributos, urlFuentes, logoCabecera, fotosPortada, patronUrl } from '/js/diseno.js';
+
+// Sección de la portada que se está personalizando en «Secciones de la portada».
+let secElegida = 'noticias';
 
 // Portadas que llevan el logo vivo y el carrusel de fotos.
 const conLogo = (c) => ['trekking', 'vitrina'].includes(c.portada.composicion) || (c.portada.composicion === 'portal' && c.portal.logoTrekking);
@@ -41,8 +44,18 @@ const GRUPOS = [
     { ruta: 'forma.escala', tipo: 'rango', etiqueta: 'Tamaño general de la interfaz', min: 80, max: 115, paso: 5, unidad: ' %', ayuda: 'Achica o agranda todo el sitio a la vez (textos, botones, espacios y logo). Las personas pueden agrandar el texto con el botón de lectura.' },
     { ruta: 'forma.ancho', tipo: 'rango', etiqueta: 'Ancho máximo del contenido', min: 960, max: 1440, paso: 20, unidad: ' px' },
   ] },
+  { id: 'fondos', titulo: 'Fondos y patrones', ayuda: 'Un dibujo muy suave detrás de todas las páginas y un degradado de color arriba. Para dar un fondo distinto a una sección de la portada, vaya a «Portada → Secciones de la portada».', controles: [
+    { ruta: 'fondos.patron', tipo: 'patron', etiqueta: 'Patrón de fondo de las páginas', opciones: OPCIONES.patronFondo },
+    { ruta: 'fondos.color', tipo: 'botones', etiqueta: 'Color del patrón', opciones: OPCIONES.colorPatron, si: (c) => c.fondos.patron !== 'ninguno' },
+    { ruta: 'fondos.intensidad', tipo: 'rango', etiqueta: 'Intensidad del patrón', min: 1, max: 40, paso: 1, unidad: ' %', si: (c) => c.fondos.patron !== 'ninguno' },
+    { ruta: 'fondos.escala', tipo: 'rango', etiqueta: 'Tamaño del dibujo', min: 50, max: 250, paso: 10, unidad: ' %', si: (c) => c.fondos.patron !== 'ninguno' },
+    { ruta: 'fondos.degradado', tipo: 'lista', etiqueta: 'Degradado de color arriba de cada página', opciones: OPCIONES.degradadoFondo },
+    { ruta: 'fondos.tinte', tipo: 'rango', etiqueta: 'Tinte de las tarjetas (0 = blancas, 100 = del color del fondo)', min: 0, max: 100, paso: 5, unidad: ' %' },
+  ] },
   { id: 'cabecera', titulo: 'Cabecera y logo', controles: [
     { ruta: 'cabecera.estilo', tipo: 'botones', etiqueta: 'Fondo de la cabecera', opciones: OPCIONES.cabeceraEstilo },
+    { ruta: 'cabecera.colorPropio', tipo: 'si', etiqueta: 'Elegir el color de la cabecera', si: (c) => c.cabecera.estilo !== 'blanca' },
+    { ruta: 'cabecera.color', tipo: 'color', etiqueta: 'Color de la cabecera', si: (c) => c.cabecera.estilo !== 'blanca' && c.cabecera.colorPropio },
     { ruta: 'cabecera.centrada', tipo: 'si', etiqueta: 'Escudo y menú centrados' },
     { ruta: 'cabecera.menuAbrir', tipo: 'botones', etiqueta: 'Abrir los menús (en computador)', opciones: OPCIONES.menuAbrir },
     { ruta: 'cabecera.alternarLogo', tipo: 'si', etiqueta: 'Alternar el escudo con el logo animado «Capital del Trekking»', ayuda: 'El escudo cede su lugar al logo de las nueve letras, que se anima, y luego vuelve. Se detiene mientras el cursor está encima.', si: (c) => c.animaciones.activas },
@@ -110,6 +123,24 @@ const GRUPOS = [
     { ruta: 'portal.bannerAjuste', tipo: 'botones', etiqueta: 'Cómo se acomoda la imagen', opciones: OPCIONES.bannerAjuste, si: (c) => c.portal.bannerProporcion !== 'auto' },
     { ruta: 'portal.bannerEfecto', tipo: 'botones', etiqueta: 'Al pasar el cursor por el banner', opciones: OPCIONES.bannerEfecto },
   ] },
+  { id: 'secciones', titulo: 'Secciones de la portada', ayuda: 'Elija una sección y dele su propio fondo, patrón, forma y espacio. También puede hacer clic en una sección de la vista previa con «Tocar para editar». Qué secciones se muestran y en qué orden se elige en Ajustes del sitio → Portada.', controles: [
+    { ruta: '_seccion', tipo: 'elegirSeccion', etiqueta: 'Sección' },
+    ...Object.keys(SECCIONES_PORTADA).flatMap((id) => {
+      const r = (k) => `secciones.${id}.${k}`, es = () => secElegida === id, x = (c) => c.secciones[id];
+      const conFondo = (c) => es() && x(c).fondo !== 'auto' && x(c).fondo !== 'ninguno';
+      return [
+        { ruta: r('fondo'), tipo: 'lista', etiqueta: 'Fondo', opciones: OPCIONES.fondoSeccion, si: es },
+        { ruta: r('color1'), tipo: 'color', etiqueta: (c) => x(c).fondo === 'degradado' ? 'Primer color' : 'Color', si: (c) => es() && ['color', 'degradado'].includes(x(c).fondo) },
+        { ruta: r('color2'), tipo: 'color', etiqueta: 'Segundo color', si: (c) => es() && x(c).fondo === 'degradado' },
+        { ruta: r('angulo'), tipo: 'rango', etiqueta: 'Ángulo del degradado', min: 0, max: 360, paso: 15, unidad: '°', si: (c) => es() && x(c).fondo === 'degradado' },
+        { ruta: r('forma'), tipo: 'botones', etiqueta: 'Forma del fondo', opciones: OPCIONES.formaSeccion, si: conFondo },
+        { ruta: r('patron'), tipo: 'patron', etiqueta: 'Patrón', opciones: OPCIONES.patronFondo, si: es },
+        { ruta: r('intensidad'), tipo: 'rango', etiqueta: 'Intensidad del patrón', min: 2, max: 50, paso: 1, unidad: ' %', si: (c) => es() && x(c).patron !== 'ninguno' },
+        { ruta: r('espacio'), tipo: 'botones', etiqueta: 'Espacio arriba y abajo', opciones: OPCIONES.espacioSeccion, si: es },
+        { ruta: r('titulos'), tipo: 'botones', etiqueta: 'Título de la sección', opciones: OPCIONES.titulosAlinear, si: es },
+      ];
+    }),
+  ] },
   { id: 'identidad', titulo: 'Identidad Capital del Trekking', ayuda: 'Los detalles de la marca en todo el sitio. Los textos de la cinta, los nueve mundos, los lugares y las cifras se editan en Ajustes del sitio → Portada.', controles: [
     { ruta: 'identidad.zonas', tipo: 'si', etiqueta: 'Cada área con el color de su letra (encabezados, anillos, cortina)' },
     { ruta: 'identidad.encabezado', tipo: 'botones', etiqueta: 'Encabezado de las páginas interiores', opciones: OPCIONES.encabezado },
@@ -173,6 +204,8 @@ const GRUPOS = [
     { ruta: 'elementos.categorias', tipo: 'botones', etiqueta: 'Filtros y categorías', opciones: OPCIONES.estiloCategorias },
     { ruta: 'elementos.iconos', tipo: 'botones', etiqueta: 'Fondo de los íconos', opciones: OPCIONES.estiloIconos },
     { ruta: 'elementos.separadores', tipo: 'botones', etiqueta: 'Entre secciones de la portada', opciones: OPCIONES.separadores },
+    { ruta: 'elementos.titulos', tipo: 'lista', etiqueta: 'Títulos de las secciones', opciones: OPCIONES.titulosSeccion },
+    { ruta: 'elementos.titulosAlinear', tipo: 'botones', etiqueta: 'Títulos de la portada', opciones: OPCIONES.titulosAlinear },
   ] },
   { id: 'buscador', titulo: 'Buscador predictivo', ayuda: 'Pruébelo escribiendo en el buscador de la vista previa.', controles: [
     { ruta: 'buscador.predictivo', tipo: 'si', etiqueta: 'Mostrar resultados mientras se escribe' },
@@ -184,27 +217,28 @@ const GRUPOS = [
   ] },
   { id: 'pie', titulo: 'Pie de página', controles: [
     { ruta: 'pie.estilo', tipo: 'botones', etiqueta: 'Fondo del pie', opciones: OPCIONES.pieEstilo },
+    { ruta: 'pie.colorPropio', tipo: 'si', etiqueta: 'Elegir el color del pie', si: (c) => c.pie.estilo !== 'claro' },
+    { ruta: 'pie.color', tipo: 'color', etiqueta: 'Color del pie', si: (c) => c.pie.estilo !== 'claro' && c.pie.colorPropio },
     { ruta: 'pie.emergencias', tipo: 'si', etiqueta: 'Franja de teléfonos de emergencia' },
     { ruta: 'pie.boletin', tipo: 'si', etiqueta: 'Formulario del boletín' },
     { ruta: 'pie.escudo', tipo: 'si', etiqueta: 'Escudo' },
     { ruta: 'pie.marcaGrande', tipo: 'si', etiqueta: 'Logo gigante «Melipeuco Capital del Trekking»' },
   ] },
-  { id: 'animaciones', titulo: 'Animaciones', ayuda: 'Las personas que piden «reducir movimiento» en su equipo nunca ven animaciones.', controles: [
+  { id: 'animaciones', titulo: 'Movimiento general', ayuda: 'Las personas que piden «reducir movimiento» en su equipo nunca ven animaciones.', controles: [
     { ruta: 'animaciones.activas', tipo: 'si', etiqueta: 'Animaciones activas' },
     { ruta: 'animaciones.intensidad', tipo: 'botones', etiqueta: 'Intensidad', opciones: OPCIONES.intensidad, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.curva', tipo: 'botones', etiqueta: 'Carácter del movimiento', opciones: OPCIONES.curva, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.velocidad', tipo: 'rango', etiqueta: 'Velocidad', min: .5, max: 2, paso: .1, unidad: '×', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.controlVisitante', tipo: 'si', etiqueta: 'Permitir que cada persona elija «Completo», «Suave» o «Sin animaciones» en Opciones de lectura', ayuda: 'Para quienes las transiciones resultan molestas. Se recuerda en su navegador.', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.desplazamientoSuave', tipo: 'si', etiqueta: 'Desplazamiento suave al usar enlaces dentro de la página' },
+  ] },
+  { id: 'carga', titulo: 'Pantalla de carga', ayuda: 'Se muestra al abrir la portada. Use «Ver pantalla de carga» en la vista previa.', controles: [
     { ruta: 'animaciones.intro', tipo: 'lista', etiqueta: 'Pantalla de carga de la portada', opciones: OPCIONES.intro, si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.introEstilo', tipo: 'lista', etiqueta: 'Animación de la pantalla de carga', opciones: OPCIONES.introEstilo, ayuda: 'Escudo 3D: cada pieza del escudo (volcán, araucarias, kultrún, trutrucas, laureles, aves y cinta) llega a su manera y el escudo vuela a la cabecera. Logo 3D: las nueve letras se arman y el logo vuela a la portada. Use «Ver pantalla de carga» (guarde antes).', si: (c) => c.animaciones.activas && c.animaciones.intro !== 'nunca' },
     { ruta: 'animaciones.escudoVivo', tipo: 'si', etiqueta: 'Escudo municipal animado en la cabecera y el pie (se mueve al pasar el cursor)', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.profundidad', tipo: 'rango', etiqueta: 'Profundidad del efecto 3D', min: 0, max: 100, paso: 10, unidad: ' %', si: (c) => c.animaciones.activas && /3d$/.test(c.animaciones.introEstilo) },
-    { ruta: 'animaciones.aparicion', tipo: 'si', etiqueta: 'Contenido que aparece al bajar', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.aparicionEstilo', tipo: 'lista', etiqueta: 'Cómo aparece el contenido', opciones: OPCIONES.aparicionEstilo, si: (c) => c.animaciones.activas && c.animaciones.aparicion },
-    { ruta: 'animaciones.cursorLuz', tipo: 'si', etiqueta: 'Luz suave que sigue al cursor sobre las tarjetas', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.ondaClic', tipo: 'si', etiqueta: 'Onda al hacer clic en botones y tarjetas', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.controlVisitante', tipo: 'si', etiqueta: 'Permitir que cada persona elija «Completo», «Suave» o «Sin animaciones» en Opciones de lectura', ayuda: 'Para quienes las transiciones resultan molestas. Se recuerda en su navegador.', si: (c) => c.animaciones.activas },
-    { ruta: 'animaciones.desplazamientoSuave', tipo: 'si', etiqueta: 'Desplazamiento suave al usar enlaces dentro de la página' },
-    { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
+  ] },
+  { id: 'transiciones', titulo: 'Transición entre páginas', ayuda: 'Lo que se ve al pasar de una página a otra. Use «Ver transición» en la vista previa.', controles: [
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.cordillera', tipo: 'si', etiqueta: 'Transición de identidad al cambiar de página', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transicionEstilo', tipo: 'lista', etiqueta: 'Estilo de la transición', opciones: OPCIONES.transicionEstilo, ayuda: 'Use «Ver transición» en la vista previa. «Fluida» usa la transición nativa del navegador (Chrome, Edge y Safari recientes); en los demás la página cambia al instante.', si: (c) => c.animaciones.activas && c.animaciones.cordillera },
@@ -214,16 +248,31 @@ const GRUPOS = [
     { ruta: 'animaciones.precarga', tipo: 'si', etiqueta: 'Adelantar la descarga de la página al pasar el cursor por un enlace (navegación casi instantánea)', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.barraCarga', tipo: 'si', etiqueta: 'Barra de carga al navegar', si: (c) => c.animaciones.activas },
   ] },
+  { id: 'efectos', titulo: 'Efectos al bajar y al tocar', controles: [
+    { ruta: 'animaciones.aparicion', tipo: 'si', etiqueta: 'Contenido que aparece al bajar', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.aparicionEstilo', tipo: 'lista', etiqueta: 'Cómo aparece el contenido', opciones: OPCIONES.aparicionEstilo, si: (c) => c.animaciones.activas && c.animaciones.aparicion },
+    { ruta: 'animaciones.cursorLuz', tipo: 'si', etiqueta: 'Luz suave que sigue al cursor sobre las tarjetas', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.ondaClic', tipo: 'si', etiqueta: 'Onda al hacer clic en botones y tarjetas', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
+  ] },
 ];
 
-// Pestañas del panel: agrupan los grupos para encontrarlos rápido.
-const PESTANAS = [
-  ['todo', 'Todo', null],
-  ['apariencia', 'Apariencia', ['colores', 'tipografia', 'forma', 'elementos']],
-  ['portada', 'Cabecera y portada', ['cabecera', 'portada', 'portal', 'campanas', 'identidad']],
-  ['contenido', 'Contenido', ['noticias', 'videos', 'buscador', 'pie']],
-  ['movimiento', 'Movimiento', ['animaciones']],
+// Categorías del panel: cada una muestra sólo sus grupos (uno a la vez, sin listas eternas).
+const CATEGORIAS = [
+  { id: 'estilos', titulo: 'Estilos listos', icono: 'pincel', texto: 'Diseños completos y versiones guardadas', especial: 'estilos', grupos: [] },
+  { id: 'general', titulo: 'Colores y letras', icono: 'texto', texto: 'Paleta, tipografía y tamaños', grupos: ['colores', 'tipografia'] },
+  { id: 'formas', titulo: 'Formas y fondos', icono: 'capas', texto: 'Esquinas, sombras, patrones, títulos', grupos: ['forma', 'fondos', 'elementos'] },
+  { id: 'cabecera', titulo: 'Cabecera y logo', icono: 'cabecera', texto: 'Menú, logo y su animación', grupos: ['cabecera'] },
+  { id: 'portada', titulo: 'Portada', icono: 'inicio', texto: 'Banner, mosaico y cada sección', grupos: ['portada', 'portal', 'campanas', 'secciones', 'identidad'] },
+  { id: 'contenidos', titulo: 'Noticias y videos', icono: 'video', texto: 'Tarjetas, videoteca y buscador', grupos: ['noticias', 'videos', 'buscador'] },
+  { id: 'pie', titulo: 'Pie de página', icono: 'pie', texto: 'Color, boletín y emergencias', grupos: ['pie'] },
+  { id: 'movimiento', titulo: 'Animaciones', icono: 'movimiento', texto: 'Carga, transiciones y efectos', grupos: ['animaciones', 'carga', 'transiciones', 'efectos'] },
+  { id: 'avanzado', titulo: 'CSS propio', icono: 'llave', texto: 'Reglas avanzadas', especial: 'avanzado', grupos: [], superadmin: true },
 ];
+const categoriaDe = (grupo) => CATEGORIAS.find((k) => k.grupos.includes(grupo))?.id || 'general';
+// Partes de la vista previa que se pueden tocar para ir a sus opciones (la más interior gana).
+const INSPECTOR = [['.cabecera', 'cabecera'], ['.pt-banda', 'portal'], ['.pt-mosaico', 'portal'], ['.campanas', 'campanas'], ['.hero', 'portada'], ['.franja-datos', 'portada'], ['.hero-buscar', 'buscador'],
+  ['[data-sec]', 'secciones'], ['.np, .grilla-noticias, .tarjeta-noticia', 'noticias'], ['.vd-grilla, .vd-tarjeta, .videoteca', 'videos'], ['.pie', 'pie'], ['.encabezado-pagina, .encabezado', 'identidad']];
 
 const PAGINAS = { '/': 'Portada', '/noticias/': 'Noticias', '/videos/': 'Videos', '/tramites/': 'Trámites', '/contacto/': 'Contacto', '/areas/': 'Áreas' };
 const DISPOSITIVOS = { computador: ['Computador', 1366], tablet: ['Tablet', 820], celular: ['Celular', 390] };
@@ -245,20 +294,23 @@ export default async function (vista) {
     <div class="acciones"><button class="btn" data-deshacer disabled>Deshacer</button><button class="btn" data-restablecer>Volver al diseño original</button><button class="btn primario" data-guardar>Guardar y publicar</button></div></div>
     <div class="diseno">
       <div class="diseno-controles">
-        <details class="tarjeta grupo-diseno" data-versiones><summary>Versiones anteriores</summary><p class="chico muted">Cada vez que guarda, la versión anterior queda aquí. «Ver» la carga en la vista previa; si le gusta, pulse «Guardar y publicar».</p><div data-lista-versiones><p class="chico muted">Cargando…</p></div></details>
-        <section class="tarjeta"><h2>Estilos prediseñados</h2><p class="chico muted">Cambian colores, letras y formas de una vez; después puede ajustar cada detalle.</p><div class="estilos" data-estilos></div></section>
         <div class="tarjeta diseno-herramientas">
-          <label class="buscar-opcion"><span class="sr">Buscar una opción</span>${ico('buscar', 16)}<input type="search" data-filtro placeholder="Buscar una opción… (logo, radio, noticias, banner)" autocomplete="off"></label>
-          <div class="pestanas-diseno" role="tablist" aria-label="Secciones del diseño">${PESTANAS.map(([k, t]) => h`<button type="button" role="tab" data-pestana="${k}" aria-selected="${k === 'todo'}">${t}</button>`)}</div>
-          <div class="fila-herramientas"><button type="button" class="btn chico fantasma" data-abrir-todo>Abrir todo</button><button type="button" class="btn chico fantasma" data-cerrar-todo>Cerrar todo</button><label class="interruptor chico"><input type="checkbox" data-solo-cambios><span class="pista" aria-hidden="true"></span><span>Sólo lo que cambié</span></label></div>
+          <label class="buscar-opcion"><span class="sr">Buscar una opción</span>${ico('buscar', 16)}<input type="search" data-filtro placeholder="Buscar una opción… (logo, patrón, videos, radio)" autocomplete="off"></label>
+          <nav class="diseno-nav" aria-label="Partes del diseño">${CATEGORIAS.filter((k) => !k.superadmin || superadmin).map((k) => h`<button type="button" data-cat="${k.id}" title="${k.texto}" aria-pressed="${k.id === 'general'}">${ico(k.icono, 18)}<span><b>${k.titulo}</b><small>${k.texto}</small></span><i class="insignia-cambios" data-cuenta="${k.id}" hidden></i></button>`)}</nav>
+          <div class="fila-herramientas"><label class="interruptor chico"><input type="checkbox" data-solo-cambios><span class="pista" aria-hidden="true"></span><span>Sólo lo que cambié</span></label></div>
+        </div>
+        <div data-especial="estilos" hidden>
+        <details class="tarjeta grupo-diseno" data-versiones><summary>Versiones anteriores</summary><p class="chico muted">Cada vez que guarda, la versión anterior queda aquí. «Ver» la carga en la vista previa; si le gusta, pulse «Guardar y publicar».</p><div data-lista-versiones><p class="chico muted">Cargando…</p></div></details>
+        <section class="tarjeta"><h2>Estilos prediseñados</h2><p class="chico muted">Cambian colores, letras y formas de una vez; después puede ajustar cada detalle en las otras partes.</p><div class="estilos" data-estilos></div></section>
         </div>
         <div data-grupos></div>
-        ${superadmin ? h`<details class="tarjeta grupo-diseno"><summary>CSS propio (avanzado)</summary><p class="chico muted">Reglas CSS que se agregan al final de la hoja de estilos de todas las páginas. Sólo el Super Administrador las puede editar.</p><textarea class="mono" rows="10" data-css spellcheck="false" placeholder=".hero h1 { letter-spacing: 0; }"></textarea></details>` : ''}
+        ${superadmin ? h`<details class="tarjeta grupo-diseno" open data-especial="avanzado" hidden><summary>CSS propio (avanzado)</summary><p class="chico muted">Reglas CSS que se agregan al final de la hoja de estilos de todas las páginas. Sólo el Super Administrador las puede editar.</p><textarea class="mono" rows="10" data-css spellcheck="false" placeholder=".hero h1 { letter-spacing: 0; }"></textarea></details>` : ''}
       </div>
       <div class="diseno-vista">
         <div class="diseno-barra">
           <select data-pagina aria-label="Página de la vista previa">${Object.entries(PAGINAS).map(([u, t]) => h`<option value="${u}">${t}</option>`)}</select>
           <div class="segmentos" role="group" aria-label="Tamaño de pantalla">${Object.entries(DISPOSITIVOS).map(([k, [t]]) => h`<button type="button" data-dispositivo="${k}" aria-pressed="${k === dispositivo}">${t}</button>`)}</div>
+          <button type="button" class="btn chico" data-inspeccionar aria-pressed="false" title="Haga clic en cualquier parte de la vista previa para ir a sus opciones">${ico('cursor', 14)} Tocar para editar</button>
           <button type="button" class="btn chico" data-intro title="Recarga la portada mostrando la pantalla de carga">Ver pantalla de carga</button>
           <button type="button" class="btn chico" data-ver-transicion title="Muestra la transición entre páginas en la vista previa">Ver transición</button>
           <button type="button" class="btn chico" data-reproducir-logo title="Vuelve a reproducir la animación del logo en la vista previa">Animar el logo</button>
@@ -302,8 +354,10 @@ export default async function (vista) {
   };
 
   // ---------------------------------------------------------------- Controles
-  const control = (c) => {
-    const v = leer(cfg, c.ruta), id = 'd-' + c.ruta.replace('.', '-');
+  const etiqueta = (c) => (typeof c.etiqueta === 'function' ? c.etiqueta(cfg) : c.etiqueta);
+  const control = (c0) => {
+    const c = { ...c0, etiqueta: etiqueta(c0) };
+    const v = leer(cfg, c.ruta), id = 'd-' + c.ruta.replace(/\./g, '-');
     const ayuda = c.ayuda ? h`<small class="ayuda">${c.ayuda}</small>` : '';
     switch (c.tipo) {
       case 'color': return h`<label class="campo campo-color" for="${id}"><span>${c.etiqueta}</span><span class="color-doble"><input type="color" id="${id}" data-ruta="${c.ruta}" value="${v}"><input type="text" data-ruta="${c.ruta}" data-hex value="${v}" maxlength="7" aria-label="${c.etiqueta} en hexadecimal"></span>${ayuda}</label>`;
@@ -314,29 +368,31 @@ export default async function (vista) {
       case 'texto': return h`<label class="campo" for="${id}"><span>${c.etiqueta}</span><input id="${id}" data-ruta="${c.ruta}" value="${v}" maxlength="120">${ayuda}</label>`;
       case 'textoLargo': return h`<label class="campo" for="${id}"><span>${c.etiqueta}</span><textarea id="${id}" data-ruta="${c.ruta}" rows="2" maxlength="240">${v}</textarea>${ayuda}</label>`;
       case 'imagen': return h`<div class="campo" data-imagen="${c.ruta}"><span>${c.etiqueta}</span>${ayuda}</div>`;
+      case 'patron': return h`<div class="campo"><span>${c.etiqueta}</span><div class="patrones" role="radiogroup" aria-label="${c.etiqueta}">${Object.entries(c.opciones).map(([k, t]) => h`<button type="button" role="radio" data-ruta="${c.ruta}" data-valor="${k}" aria-checked="${k === v}" title="${t}"><i style="${k === 'ninguno' ? '' : `background-image:${patronUrl(k, { color: cfg.colores.primario, opacidad: .9 })}`}"></i><span>${t}</span></button>`)}</div>${ayuda}</div>`;
+      case 'elegirSeccion': return h`<div class="campo"><span>Elija la sección</span><div class="secciones-elegir" role="radiogroup" aria-label="Sección de la portada">${Object.entries(SECCIONES_PORTADA).map(([k, t]) => { const x = cfg.secciones[k]; const propio = x.fondo !== 'auto' || x.patron !== 'ninguno' || x.espacio !== 'auto' || x.titulos !== 'auto'; return h`<button type="button" role="radio" data-elegir-sec="${k}" aria-checked="${k === secElegida}">${t}${propio ? h`<i class="punto-propio" title="Tiene estilo propio"></i>` : ''}</button>`; })}</div></div>`;
       default: return '';
     }
   };
-  const abiertos = new Set(['colores']);
-  let pestana = 'todo', filtro = '', soloCambios = false;
+  let categoria = 'general', filtro = '', soloCambios = false;
   const DEF = normalizar({});
   const sinTilde = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const cambiado = (ruta) => JSON.stringify(leer(cfg, ruta)) !== JSON.stringify(leer(DEF, ruta));
+  const cambiado = (ruta) => !ruta.startsWith('_') && JSON.stringify(leer(cfg, ruta)) !== JSON.stringify(leer(DEF, ruta));
+  const todos = () => GRUPOS.flatMap((g) => g.controles);
   const pintarGrupos = () => {
-    $$('details[data-grupo]', vista).forEach((d) => (d.open ? abiertos.add(d.dataset.grupo) : abiertos.delete(d.dataset.grupo)));
     const cont = $('[data-grupos]', vista);
-    const enPestana = PESTANAS.find(([k]) => k === pestana)?.[2];
-    const q = sinTilde(filtro.trim());
-    const visibles = GRUPOS.filter((g) => (!g.si || g.si(cfg)) && (!enPestana || enPestana.includes(g.id))).map((g) => {
+    const q = sinTilde(filtro.trim()), global = !!q || soloCambios;
+    const cat = CATEGORIAS.find((k) => k.id === categoria);
+    $$('[data-especial]', vista).forEach((x) => { x.hidden = global || x.dataset.especial !== cat?.especial; });
+    $$('[data-cat]', vista).forEach((b) => b.setAttribute('aria-pressed', String(!global && b.dataset.cat === categoria)));
+    const visibles = GRUPOS.filter((g) => (!g.si || g.si(cfg)) && (global || cat?.grupos.includes(g.id))).map((g) => {
       const coincide = !q || sinTilde(g.titulo).includes(q);
-      const ctl = g.controles.filter((c) => (!c.si || c.si(cfg)) && (coincide || sinTilde(c.etiqueta + ' ' + (c.ayuda || '')).includes(q)) && (!soloCambios || cambiado(c.ruta)));
+      const ctl = g.controles.filter((c) => (!c.si || c.si(cfg)) && (coincide || sinTilde(etiqueta(c) + ' ' + (c.ayuda || '')).includes(q)) && (!soloCambios || cambiado(c.ruta)));
       return { g, ctl, n: g.controles.filter((c) => cambiado(c.ruta)).length };
-    }).filter((x) => x.ctl.length);
-    const forzar = !!q || soloCambios;
-    cont.innerHTML = visibles.length ? String(h`${visibles.map(({ g, ctl, n }) => h`<details class="tarjeta grupo-diseno" data-grupo="${g.id}"${forzar || abiertos.has(g.id) ? raw(' open') : ''}><summary>${g.titulo}${n ? h` <span class="insignia-cambios" title="Opciones cambiadas respecto del diseño original">${n}</span>` : ''}</summary>
-      <div class="grupo-barra">${g.ayuda ? h`<p class="chico muted">${g.ayuda}</p>` : h`<span></span>`}${n ? h`<button type="button" class="btn chico fantasma" data-restablecer-grupo="${g.id}" title="Vuelve este grupo a como viene el diseño original">↺ Restablecer grupo</button>` : ''}</div>
-      <div class="${g.id === 'colores' ? 'rejilla-colores' : 'pila'}">${ctl.map((c) => h`<div class="ctl${cambiado(c.ruta) ? ' cambiado' : ''}" data-ctl="${c.ruta}">${control(c)}<button type="button" class="ctl-volver" data-restablecer-ctl="${c.ruta}" title="Volver al valor original" aria-label="Volver «${c.etiqueta}» al valor original">↺</button></div>`)}</div></details>`)}`)
-      : String(h`<p class="tarjeta muted">No hay opciones que coincidan${q ? h` con «${filtro}»` : ''}.</p>`);
+    }).filter((x) => x.ctl.length && (!soloCambios || x.ctl.some((c) => cambiado(c.ruta))));
+    cont.innerHTML = visibles.length ? String(h`${global ? h`<p class="chico muted diseno-resultados">${visibles.reduce((n, x) => n + x.ctl.length, 0)} opciones${q ? h` para «${filtro}»` : ''} en ${visibles.length} grupos.</p>` : ''}${visibles.map(({ g, ctl, n }) => h`<section class="tarjeta grupo-diseno abierto" data-grupo="${g.id}"><h2>${g.titulo}${n ? h` <span class="insignia-cambios" title="Opciones cambiadas respecto del diseño original">${n}</span>` : ''}${global ? h` <small class="muted">· ${CATEGORIAS.find((k) => k.id === categoriaDe(g.id))?.titulo}</small>` : ''}</h2>
+      <div class="grupo-barra">${g.ayuda ? h`<p class="chico muted">${g.ayuda}</p>` : h`<span></span>`}${n ? h`<button type="button" class="btn chico fantasma" data-restablecer-grupo="${g.id}" title="Vuelve este grupo a como viene el diseño original">↺ Restablecer</button>` : ''}</div>
+      <div class="${g.id === 'colores' ? 'rejilla-colores' : 'pila'}">${ctl.map((c) => h`<div class="ctl${cambiado(c.ruta) ? ' cambiado' : ''}" data-ctl="${c.ruta}">${control(c)}${c.ruta.startsWith('_') ? '' : h`<button type="button" class="ctl-volver" data-restablecer-ctl="${c.ruta}" title="Volver al valor original" aria-label="Volver «${etiqueta(c)}» al valor original">↺</button>`}</div>`)}</div></section>`)}`)
+      : cat?.especial && !global ? '' : String(h`<p class="tarjeta muted">No hay opciones que coincidan${q ? h` con «${filtro}»` : ''}.</p>`);
     // Selectores de imagen (biblioteca de medios)
     $$('[data-imagen]', cont).forEach((caja) => {
       const ruta = caja.dataset.imagen;
@@ -346,6 +402,21 @@ export default async function (vista) {
     });
     const css = $('[data-css]', vista);
     if (css) css.value = cfg.avanzado.css;
+    contarCambios();
+  };
+  const contarCambios = () => CATEGORIAS.forEach((k) => {
+    const n = GRUPOS.filter((g) => k.grupos.includes(g.id)).flatMap((g) => g.controles).filter((c) => cambiado(c.ruta)).length;
+    const el = $(`[data-cuenta="${k.id}"]`, vista);
+    if (el) { el.hidden = !n; el.textContent = n; }
+  });
+  // Abre la parte del diseño de un grupo (desde la vista previa o el buscador) y lo resalta.
+  const irAGrupo = (grupo, sec) => {
+    if (sec && SECCIONES_PORTADA[sec]) secElegida = sec;
+    categoria = categoriaDe(grupo); filtro = ''; soloCambios = false;
+    $('[data-filtro]', vista).value = ''; $('[data-solo-cambios]', vista).checked = false;
+    pintarGrupos();
+    const el = $(`[data-grupo="${grupo}"]`, vista);
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); el.classList.remove('destello'); void el.offsetWidth; el.classList.add('destello'); }
   };
 
   // ---------------------------------------------------------------- Cambios
@@ -354,7 +425,9 @@ export default async function (vista) {
   const ZONAS = { videos: '.videoteca, .seccion-videoteca', noticias: '.seccion-noticias', campanas: '.campanas', 'cabecera.': '.cabecera', 'elementos.accesos': '.accesos-seccion, .pt-mosaico', 'elementos.tramites': '.seccion-tramites', 'elementos.verTodo': '.seccion-tramites', 'elementos.separadores': '.seccion-tramites', buscador: '.hero-buscar, .cabecera', 'portal.mosaico': '.pt-mosaico', pie: '.pie' };
   let ultimaZona = '';
   function irA(ruta) {
-    const k = Object.keys(ZONAS).find((z) => ruta.startsWith(z));
+    const ms = /^secciones\.(\w+)\./.exec(ruta);
+    if (ms) { ZONAS[ruta] = `[data-sec="${ms[1]}"]`; }
+    const k = ms ? ruta : Object.keys(ZONAS).find((z) => ruta.startsWith(z));
     if (!k || k === ultimaZona) return;
     ultimaZona = k;
     try { iframe.contentWindow?.postMessage({ tipo: 'mlp-ir', sel: ZONAS[k] }, location.origin); } catch { /* aún cargando */ }
@@ -365,7 +438,7 @@ export default async function (vista) {
     const nuevo = copia(cfg);
     escribir(nuevo, ruta, valor);
     if (PERSONALIZA.test(ruta)) nuevo.estilo = 'personalizado';
-    const condiciones = () => [...GRUPOS.filter((g) => g.si).map((g) => g.si(cfg)), ...GRUPOS.flatMap((g) => g.controles).filter((c) => c.si).map((c) => c.si(cfg))].join();
+    const condiciones = () => [...GRUPOS.filter((g) => g.si).map((g) => g.si(cfg)), ...todos().filter((c) => c.si).map((c) => c.si(cfg)), ...todos().filter((c) => typeof c.etiqueta === 'function').map(etiqueta)].join();
     const previoSi = condiciones();
     cfg = normalizar(nuevo, { permitirCss: true });
     const ahoraSi = condiciones();
@@ -376,6 +449,7 @@ export default async function (vista) {
     $('[data-deshacer]', vista).disabled = !historial.length;
     $$('[data-ctl]', vista).forEach((x) => x.classList.toggle('cambiado', cambiado(x.dataset.ctl)));
     $$('[data-estilo]', vista).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.estilo === cfg.estilo)));
+    contarCambios();
     enviar();
   }
 
@@ -390,14 +464,14 @@ export default async function (vista) {
     if (el.dataset.hex !== undefined) { if (!/^#[0-9a-f]{6}$/i.test(v)) return; $(`input[type=color][data-ruta="${ruta}"]`, vista).value = v; }
     if (el.type === 'color') $(`input[data-hex][data-ruta="${ruta}"]`, vista).value = v.toUpperCase();
     const salida = $(`[data-salida="${ruta}"]`, vista);
-    if (salida) salida.textContent = v + (GRUPOS.flatMap((g) => g.controles).find((c) => c.ruta === ruta)?.unidad || '');
+    if (salida) salida.textContent = v + (todos().find((c) => c.ruta === ruta)?.unidad || '');
     cambiar(ruta, v, { repintar: el.type === 'checkbox' || el.tagName === 'SELECT' });
   });
   grupos.addEventListener('click', (e) => {
-    const pt = e.target.closest('[data-pestana]');
-    if (pt) { pestana = pt.dataset.pestana; $$('[data-pestana]', vista).forEach((x) => x.setAttribute('aria-selected', String(x === pt))); pintarGrupos(); return; }
-    if (e.target.closest('[data-abrir-todo]')) { $$('details[data-grupo]', vista).forEach((d) => { d.open = true; }); return; }
-    if (e.target.closest('[data-cerrar-todo]')) { $$('details[data-grupo]', vista).forEach((d) => { d.open = false; }); return; }
+    const kt = e.target.closest('[data-cat]');
+    if (kt) { categoria = kt.dataset.cat; filtro = ''; soloCambios = false; $('[data-filtro]', vista).value = ''; $('[data-solo-cambios]', vista).checked = false; pintarGrupos(); $('[data-grupos]', vista).scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
+    const es = e.target.closest('[data-elegir-sec]');
+    if (es) { secElegida = es.dataset.elegirSec; pintarGrupos(); ultimaZona = ''; irA(`secciones.${secElegida}.fondo`); return; }
     const rg = e.target.closest('[data-restablecer-grupo]'), rc = e.target.closest('[data-restablecer-ctl]');
     if (rg || rc) {
       const rutas = rc ? [rc.dataset.restablecerCtl] : GRUPOS.find((g) => g.id === rg.dataset.restablecerGrupo).controles.map((c) => c.ruta);
@@ -430,7 +504,20 @@ export default async function (vista) {
     cancelAnimationFrame(marcoPendiente);
     marcoPendiente = requestAnimationFrame(() => { try { iframe.contentWindow?.postMessage(mensaje(), location.origin); } catch { /* aún cargando */ } });
   }
-  const alListo = (e) => { if (e.origin === location.origin && e.source === iframe.contentWindow && e.data?.tipo === 'mlp-vista-lista') enviar(); };
+  // «Tocar para editar»: la vista previa resalta la parte bajo el cursor y, al hacer clic, avisa
+  // qué grupo de opciones le corresponde.
+  let inspeccionar = false;
+  const NOMBRES = Object.fromEntries(GRUPOS.map((g) => [g.id, g.titulo]));
+  const enviarInspector = () => { try { iframe.contentWindow?.postMessage({ tipo: 'mlp-inspeccionar', activo: inspeccionar, zonas: INSPECTOR, nombres: { ...NOMBRES, ...Object.fromEntries(Object.entries(SECCIONES_PORTADA).map(([k, t]) => ['sec:' + k, 'Sección «' + t + '»'])) } }, location.origin); } catch { /* aún cargando */ } };
+  $('[data-inspeccionar]', vista).addEventListener('click', (e) => {
+    inspeccionar = !inspeccionar; e.currentTarget.setAttribute('aria-pressed', String(inspeccionar)); enviarInspector();
+    if (inspeccionar) aviso('Haga clic en cualquier parte de la vista previa para ver sus opciones. Vuelva a pulsar el botón para navegar normalmente.');
+  });
+  const alListo = (e) => {
+    if (e.origin !== location.origin || e.source !== iframe.contentWindow) return;
+    if (e.data?.tipo === 'mlp-vista-lista') { enviar(); if (inspeccionar) enviarInspector(); }
+    if (e.data?.tipo === 'mlp-elegido' && NOMBRES[e.data.grupo]) irAGrupo(e.data.grupo, e.data.sec);
+  };
   window.addEventListener('message', alListo);
   iframe.addEventListener('load', enviar);
   const cargar = (extra = '') => { iframe.src = pagina + (pagina.includes('?') ? '&' : '?') + 'vista=diseno' + extra; };
