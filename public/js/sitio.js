@@ -275,14 +275,23 @@
       puntos.innerHTML = items.map(function (_, n) { return '<button type="button" role="tab" aria-label="Ir al banner ' + (n + 1) + '"></button>'; }).join('');
       $$('button', puntos).forEach(function (b, n) { b.addEventListener('click', function () { ir(n); detener(); }); });
     }
-    function marcar() { if (puntos) $$('button', puntos).forEach(function (b, n) { b.setAttribute('aria-selected', n === i ? 'true' : 'false'); }); }
-    function ir(n) { i = (n + items.length) % items.length; pista.scrollTo({ left: items[i].offsetLeft, behavior: reducido ? 'auto' : 'smooth' }); marcar(); }
-    pista.addEventListener('scroll', function () { var n = Math.round(pista.scrollLeft / pista.clientWidth); if (n !== i) { i = n; marcar(); } }, { passive: true });
+    // Las campañas toman del diseño la transición (deslizar, fundido, acercamiento o profundidad) y
+    // el intervalo; los demás carruseles se deslizan con su propio intervalo.
+    var esCampana = c.classList.contains('campanas');
+    var desliza = function () { return !esCampana || (raiz.getAttribute('data-camp-trans') || 'deslizar') === 'deslizar'; };
+    function marcar() {
+      if (puntos) $$('button', puntos).forEach(function (b, n) { b.setAttribute('aria-selected', n === i ? 'true' : 'false'); });
+      items.forEach(function (it, n) { it.classList.toggle('activa', n === i); it.classList.toggle('previa', n === (i - 1 + items.length) % items.length); });
+    }
+    function ir(n) { i = (n + items.length) % items.length; if (desliza()) pista.scrollTo({ left: items[i].offsetLeft, behavior: reducido ? 'auto' : 'smooth' }); marcar(); }
+    pista.addEventListener('scroll', function () { if (!desliza()) return; var n = Math.round(pista.scrollLeft / pista.clientWidth); if (n !== i) { i = n; marcar(); } }, { passive: true });
     var ant = $('.carrusel-ant', c), sig = $('.carrusel-sig', c), pausa = $('.carrusel-pausa', c);
     ant && ant.addEventListener('click', function () { ir(i - 1); detener(); });
     sig && sig.addEventListener('click', function () { ir(i + 1); detener(); });
-    var ms = Number(c.getAttribute('data-auto')) || 0;
+    var msDe = function () { return esCampana && raiz.hasAttribute('data-camp-auto') ? Number(raiz.getAttribute('data-camp-auto')) * 1000 : Number(c.getAttribute('data-auto')) || 0; };
+    var ms = msDe();
     if (ms) c.style.setProperty('--dur', ms + 'ms');
+    if (esCampana) d.addEventListener('mlp:diseno', function () { ms = msDe(); if (ms) c.style.setProperty('--dur', ms + 'ms'); if (pausa) pausa.hidden = !ms; if (!desliza()) pista.scrollTo({ left: 0 }); else ir(i); clearInterval(timer); iniciar(); });
     function iniciar() { if (ms && !pausado) { clearInterval(timer); timer = setInterval(function () { ir(i + 1); }, ms); c.classList.remove('en-pausa'); } }
     function detener() { clearInterval(timer); c.classList.add('en-pausa'); }
     if (pausa) {
@@ -446,6 +455,11 @@
   // Cuando la página se muestra dentro del panel, recibe el diseño en edición y lo aplica en vivo.
   if (window.parent !== window) {
     window.addEventListener('message', function (e) {
+      if (e.origin === location.origin && e.source === window.parent && e.data && e.data.tipo === 'mlp-ir') {
+        // El panel lleva la vista previa a la parte de la página que se está ajustando.
+        var destino = $(e.data.sel); if (destino) destino.scrollIntoView({ behavior: 'smooth', block: e.data.sel === '.cabecera' ? 'start' : 'center' });
+        return;
+      }
       if (e.origin !== location.origin || e.source !== window.parent || !e.data || e.data.tipo !== 'mlp-diseno') return;
       var m = e.data;
       var est = d.getElementById('diseno-vars'); if (est) est.textContent = m.css;

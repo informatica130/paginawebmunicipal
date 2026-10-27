@@ -299,3 +299,32 @@ a.indicador:hover { border-color: var(--primario); }
   .diseno-vista { position: static; order: -1; }
   .diseno-marco { height: 70vh; }
 }
+
+/* Diseño del sitio: barra de búsqueda y pestañas, opciones cambiadas y restablecer */
+@media (min-width: 1101px) {
+  .diseno-controles { position: sticky; top: 76px; max-height: calc(100vh - 92px); overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; scrollbar-width: thin; }
+  .diseno-herramientas { position: sticky; top: 0; z-index: 2; box-shadow: 0 8px 18px -14px rgba(16, 24, 40, .35); }
+}
+.diseno-herramientas { display: grid; gap: 10px; }
+.buscar-opcion { display: flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid var(--borde-fuerte); border-radius: 10px; background: var(--superficie); color: var(--texto-3); }
+.buscar-opcion:focus-within { border-color: var(--primario); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primario) 18%, transparent); }
+.buscar-opcion input { flex: 1; min-width: 0; min-height: 40px; padding: 0; border: 0 !important; background: transparent; box-shadow: none !important; outline: none; }
+.pestanas-diseno { display: flex; flex-wrap: wrap; gap: 4px; }
+.pestanas-diseno button { padding: 6px 12px; border: 1px solid var(--borde); border-radius: 999px; background: var(--superficie); color: var(--texto-2); font: inherit; font-size: .84rem; font-weight: 600; cursor: pointer; }
+.pestanas-diseno button:hover { border-color: var(--primario); color: var(--texto); }
+.pestanas-diseno button[aria-selected="true"] { border-color: var(--primario); background: var(--primario); color: #fff; }
+.fila-herramientas { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.fila-herramientas .interruptor { margin-left: auto; font-size: .86rem; }
+.insignia-cambios { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 6px; padding: 0 6px; border-radius: 999px; background: color-mix(in srgb, var(--primario) 14%, transparent); color: var(--primario); font-size: .74rem; font-weight: 800; }
+.grupo-diseno > summary { gap: 8px; }
+.grupo-diseno > summary > .insignia-cambios { margin-right: auto; }
+.grupo-barra { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin: -4px 0 12px; }
+.grupo-barra p { margin: 0; }
+.grupo-barra .btn { flex-shrink: 0; }
+.ctl { position: relative; padding-left: 12px; border-left: 2px solid transparent; transition: border-color .2s; }
+.ctl.cambiado { border-left-color: color-mix(in srgb, var(--primario) 55%, transparent); }
+.ctl-volver { position: absolute; top: -2px; right: 0; display: none; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--texto-3); font-size: .95rem; cursor: pointer; }
+.ctl.cambiado .ctl-volver { display: grid; place-items: center; }
+.ctl-volver:hover { background: var(--superficie-2); color: var(--primario); }
+.ctl.cambiado > .campo > span:first-child, .ctl.cambiado > label > span:first-child { padding-right: 28px; }
+.ctl .campo output { margin-right: 28px; }

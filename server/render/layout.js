@@ -6,7 +6,7 @@ import { textoPlano, recortar } from '../../src/util.js';
 import { plantillaIntro, SCRIPT_INTRO } from './intro.js';
 import { escudoVivo } from './escudo.js';
 import { normalizar, migrar, variablesCss, atributos, urlFuentes, logoCabecera } from '../../public/js/diseno.js';
-import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCordillera } from './trekking.js';
+import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCordillera, logoAnimado } from './trekking.js';
 
 // Diseño personalizado desde el panel (Diseño del sitio), normalizado una vez por versión de ajustes.
 // Sin diseño guardado se usa el predeterminado (Capital del Trekking); los colores antiguos de
@@ -88,6 +88,7 @@ function cabecera(ctx) {
           <img class="marca-emblema logo-claro" src="${logo.src}" alt="" data-diseno-logo="claro">
           <img class="marca-emblema logo-oscuro" src="${logo.oscuro}" alt="" data-diseno-logo="oscuro">
           <span class="marca-texto"${logo.conTexto ? '' : crudo(' hidden')}><small data-diseno="cabecera.subtitulo">${dz.cabecera.subtitulo}</small><b data-diseno="cabecera.nombre">${dz.cabecera.nombre}</b></span>
+          ${dz.animaciones.activas ? crudo(`<span class="marca-tk" aria-hidden="true">${logoAnimado().replace(' role="img" aria-label="Melipeuco Capital del Trekking"', '').replace(/<title>[^<]*<\/title>/, '')}</span>`) : ''}
         </a>
         <nav class="nav" id="nav" aria-label="Menú principal">${menuPrincipal(ctx)}</nav>
         <div class="cabecera-acciones">
@@ -233,7 +234,7 @@ ${pie(ctx)}
 <button type="button" class="arriba" data-arriba aria-label="Volver arriba">${crudo(icono('flecha', { tam: 20, clase: 'arriba-ico' }))}</button>
 <script src="/js/sitio.js?v=${ctx.version}" defer></script>
 <script src="/js/movimiento.js?v=${ctx.version}" defer></script>
-${portada ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}
+${portada || dz.animaciones.activas ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}
 <script src="/js/transiciones.js?v=${ctx.version}" defer></script>
 <script src="/js/escudo-vivo.js?v=${ctx.version}" defer></script>
 ${dz.animaciones.activas && dz.animaciones.precarga && !ctx.usuario ? html`<script type="speculationrules" nonce="${ctx.nonce}">${crudo(REGLAS_PRECARGA)}</script>` : ''}
