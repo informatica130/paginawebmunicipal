@@ -421,6 +421,11 @@
     });
   })();
 
+  // Carpeta de Drive «en vivo» (Archivo de Transparencia): se carga sólo al abrirla.
+  $$('details.ar-vivo').forEach(function (dt) {
+    dt.addEventListener('toggle', function () { var f = $('iframe[data-src]', dt); if (dt.open && f && !f.src) f.src = f.getAttribute('data-src'); });
+  });
+
   // ---------------- Bloques aislados: altura automática
   window.addEventListener('message', function (e) {
     if (!e.data || e.data.tipo !== 'mlp-alto') return;
