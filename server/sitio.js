@@ -12,6 +12,8 @@ import { textoPlano, recortar, emailValido, rutValido, formatoRut, hoyLocal } fr
 import { TIPOS, RUTAS } from '../src/tipos.js';
 import { ahora } from './db.js';
 import { sha256, tokenAleatorio } from './auth.js';
+import { crearExtensiones } from './extensiones.js';
+import { buscarTransparencia } from './render/transparencia.js';
 
 export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version, secreto, leerUsuario, auditar }) {
   const img = crearImagenes(db);
@@ -20,6 +22,9 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
   let visitas = new Map();
 
   const ajustes = () => ({ ...(db.ajuste('sitio') || {}) });
+  const ext = crearExtensiones({ db });
+  // Dominios externos que el código propio necesita (se suman a la política de seguridad).
+  const seguridad = (req, nonce) => req.seguridad(nonce, false, ext.dominios());
   const categoriasDe = (id) => repo.taxonomiasDe(id).filter((t) => t.tipo === 'categoria');
 
   function invalidar() { cacheHtml.clear(); img.invalidar(); }
@@ -137,12 +142,12 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
     return {
       db, repo, cfg, tramites, img, ruta, req, usuario, version, categoriasDe,
       nonce: crypto.randomBytes(16).toString('base64'),
-      ajustes: ajustes(), formulario, encuesta, campoAntispam,
+      ajustes: ajustes(), formulario, encuesta, campoAntispam, ext,
     };
   }
 
   function responderHtml(req, res, ctx, cuerpo, { status = 200, cachear = false } = {}) {
-    const h = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': ctx.usuario ? 'private, no-store' : 'public, max-age=60, stale-while-revalidate=300', ...req.seguridad(ctx.nonce) };
+    const h = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': ctx.usuario ? 'private, no-store' : 'public, max-age=60, stale-while-revalidate=300', ...seguridad(req, ctx.nonce) };
     if (cachear && !ctx.usuario && status === 200) {
       if (cacheHtml.size > 800) cacheHtml.delete(cacheHtml.keys().next().value);
       cacheHtml.set(req.claveCache, { cuerpo: cuerpo.split(ctx.nonce).join(NONCE_CACHE), hasta: Date.now() + 60e3 });
@@ -156,7 +161,7 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
     if (!c || c.hasta < Date.now()) return false;
     const nonce = crypto.randomBytes(16).toString('base64');
     contarVisita(new URL(req.url, 'http://x').pathname, req, 200);
-    enviar(req, res, 200, c.cuerpo.split(NONCE_CACHE).join(nonce), { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60, stale-while-revalidate=300', 'X-Cache': 'HIT', ...req.seguridad(nonce) });
+    enviar(req, res, 200, c.cuerpo.split(NONCE_CACHE).join(nonce), { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60, stale-while-revalidate=300', 'X-Cache': 'HIT', ...seguridad(req, nonce) });
     return true;
   }
 
@@ -226,12 +231,21 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     if (!c || (!repo.visible(c) && !usuario)) throw new ErrorHttp(404, 'No encontrado');
     const b = (c.bloques || []).find((x) => x.id === bid && x.tipo === 'html_aislado');
     if (!b) throw new ErrorHttp(404, 'No encontrado');
+    documentoAislado(req, res, b.html, bid);
+  }
+  // Bloque «HTML con scripts» de una zona (Extensiones).
+  function zonaAislada(req, res, id) {
+    const z = ext.zonaAislada(id);
+    if (!z) throw new ErrorHttp(404, 'No encontrado');
+    documentoAislado(req, res, z.html, id);
+  }
+  function documentoAislado(req, res, codigoHtml, bid) {
     // El marco aislado no tiene origen propio: sin este reemplazo, localStorage lanza un error y
     // corta los scripts de las páginas heredadas.
     const memoria = `<script>(function(){try{window.localStorage.length}catch(e){var m={},s={getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}},key:function(i){return Object.keys(m)[i]||null}};Object.defineProperty(s,'length',{get:function(){return Object.keys(m).length}});try{Object.defineProperty(window,'localStorage',{value:s,configurable:true});Object.defineProperty(window,'sessionStorage',{value:s,configurable:true})}catch(_){}}})();</script>`;
     const ajuste = `<base target="_top"><style>html,body{margin:0;overflow:hidden}</style>${memoria}`;
     const resize = `<script>(function(){var u=0;function m(){var h=Math.max(document.documentElement.scrollHeight,document.body?document.body.scrollHeight:0);if(h!==u){u=h;parent.postMessage({tipo:'mlp-alto',bloque:${JSON.stringify(bid)},alto:h},'*')}}addEventListener('load',m);addEventListener('resize',m);if(window.ResizeObserver)new ResizeObserver(m).observe(document.documentElement);setInterval(m,1500);m()})();</script>`;
-    let h = repararScripts(String(b.html));
+    let h = repararScripts(String(codigoHtml));
     if (/<html[\s>]/i.test(h)) {
       h = /<head[^>]*>/i.test(h) ? h.replace(/<head[^>]*>/i, (m) => m + ajuste) : h.replace(/<html[^>]*>/i, (m) => m + '<head>' + ajuste + '</head>');
       h = /<\/body>/i.test(h) ? h.replace(/<\/body>/i, resize + '</body>') : h + resize;
@@ -295,8 +309,9 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
           .slice(0, 3).map((i) => ({ tipo: 'Acceso directo', clave: 'atajo', titulo: i.texto, url: i.url, externo: /^https?:/.test(i.url) && !i.url.startsWith(base) }));
         const cat = query.get('plataforma') !== '0' ? await tramites.catalogo() : null;
         const en = cat ? cat.tramites.filter((t) => palabras.every((p) => norm(t.nombre + ' ' + t.descripcion).includes(p))).slice(0, 3).map((t) => ({ tipo: 'Trámite en línea', clave: 'en-linea', titulo: t.nombre, url: t.url, externo: true, fragmento: fragmento(t.descripcion) })) : [];
+        const transp = buscarTransparencia(ext.leer(), palabras, norm);
         const vistos = new Set();
-        const items = [...atajos, ...en, ...r].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
+        const items = [...atajos, ...en, ...transp, ...r].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
         return enviarJson({ items, aproximado }, 60);
       }
       default: throw new ErrorHttp(404, 'Recurso no encontrado');
@@ -331,6 +346,8 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     if (ruta === '/eventos.ics') return enviar(req, res, 200, ics(repo.listar({ tipo: 'evento', publico: true, orden: 'eventoDesc', limite: 300 }).items), { 'Content-Type': 'text/calendar; charset=utf-8', 'Content-Disposition': 'attachment; filename="agenda-melipeuco.ics"', 'Cache-Control': 'public, max-age=600' });
     let m = ruta.match(/^\/embed\/bloque\/(\d+)\/([\w-]+)\/?$/);
     if (m) return bloqueAislado(req, res, m[1], m[2], usuario);
+    m = ruta.match(/^\/embed\/zona\/([a-z0-9-]{3,40})\/?$/);
+    if (m) return zonaAislada(req, res, m[1]);
 
     // Formularios
     if (req.method === 'POST') return manejarPost(req, res, ruta, usuario);
@@ -342,12 +359,13 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     const s = ajustes();
     if (s.mantenimiento?.activo && !usuario) {
       const ctx = contexto(req, ruta, { usuario });
-      return enviar(req, res, 503, V.mantenimiento(ctx), { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '600', ...req.seguridad(ctx.nonce) });
+      return enviar(req, res, 503, V.mantenimiento(ctx), { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '600', ...seguridad(req, ctx.nonce) });
     }
 
     req.claveCache = ruta + url.search;
     if (!usuario && desdeCache(req, res)) return;
     const ctx = contexto(req, ruta, { usuario });
+    await ext.preparar(ruta);
     const responder = (cuerpo, op = {}) => responderHtml(req, res, ctx, cuerpo, { cachear: true, ...op });
     const seg = ruta.split('/').filter(Boolean).map((x) => { try { return decodeURIComponent(x); } catch { return x; } });
     const pag = (i) => (seg[i] === 'page' && /^\d+$/.test(seg[i + 1] || '') ? Number(seg[i + 1]) : 1);

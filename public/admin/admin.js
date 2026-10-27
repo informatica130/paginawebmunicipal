@@ -18,6 +18,7 @@ const VISTAS = {
   estadisticas: () => import('./vistas/estadisticas.js'),
   ajustes: () => import('./vistas/ajustes.js'),
   diseno: () => import('./vistas/diseno.js'),
+  extensiones: () => import('./vistas/extensiones.js'),
   sistema: () => import('./vistas/sistema.js'),
   cuenta: () => import('./vistas/cuenta.js'),
 };
@@ -112,6 +113,7 @@ function estructura() {
         ${puede('estadisticas.ver') ? enlace('estadisticas', 'Estadísticas', 'grafico') : ''}
         ${puede('ajustes.editar') ? enlace('diseno', 'Diseño del sitio', 'pincel') : ''}
         ${puede('ajustes.editar') ? enlace('ajustes', 'Ajustes del sitio', 'ajustes') : ''}
+        ${puede('ajustes.editar') ? enlace('extensiones', 'Extensiones', 'mas') : ''}
         ${puede('usuarios.gestionar') ? enlace('usuarios', 'Usuarios y permisos', 'usuarios') : ''}
         ${puede('auditoria.ver') ? enlace('auditoria', 'Auditoría', 'escudo') : ''}
         ${puede('ajustes.editar') || puede('respaldo.gestionar') || puede('redirecciones.editar') ? enlace('sistema', 'Sistema e integraciones', 'servidor') : ''}

@@ -337,6 +337,82 @@
     });
   });
 
+  // ---------------- Ventanas emergentes (Extensiones → Ventanas emergentes)
+  // Se muestran según su disparo (al abrir, a los N segundos, al bajar o al intentar salir) y su
+  // frecuencia (una vez por visita, cada N días, una sola vez o siempre). Se cierran con la ×, con
+  // Escape o haciendo clic fuera; el foco vuelve a donde estaba.
+  (function () {
+    var lista = $$('[data-emergente]');
+    if (!lista.length) return;
+    var abierta = null, previo = null;
+    var clave = function (el) { return 'mlp-em-' + el.getAttribute('data-emergente'); };
+    function toca(el) {
+      var f = el.getAttribute('data-frecuencia'), v = el.getAttribute('data-version');
+      if (f === 'siempre') return true;
+      var dato = null;
+      try { dato = JSON.parse((f === 'sesion' ? sessionStorage.getItem(clave(el)) : leer(clave(el))) || 'null'); } catch (e) { dato = null; }
+      if (!dato || dato.v !== v) return true;
+      if (f === 'dias') return Date.now() - dato.t > Number(el.getAttribute('data-dias') || 7) * 864e5;
+      return false;
+    }
+    function anotar(el) {
+      var f = el.getAttribute('data-frecuencia'), dato = JSON.stringify({ v: el.getAttribute('data-version'), t: Date.now() });
+      if (f === 'siempre') return;
+      if (f === 'sesion') { try { sessionStorage.setItem(clave(el), dato); } catch (e) {} } else guardar(clave(el), dato);
+    }
+    function mostrar(el) {
+      if (abierta || !el.hidden) return;
+      abierta = el; previo = d.activeElement;
+      el.hidden = false; el.classList.add('entrando');
+      requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.remove('entrando'); }); });
+      anotar(el);
+      if (el.classList.contains('emergente-modal')) { d.body.classList.add('con-emergente'); var b = $('.emergente-cerrar', el); b && b.focus({ preventScroll: true }); }
+    }
+    function cerrar(el) {
+      if (!el || el.hidden) return;
+      el.classList.add('saliendo');
+      setTimeout(function () { el.hidden = true; el.classList.remove('saliendo'); }, reducido ? 0 : 260);
+      d.body.classList.remove('con-emergente');
+      abierta = null;
+      if (previo && previo.focus) previo.focus({ preventScroll: true });
+      // Si hay otra esperando, aparece después.
+      setTimeout(revisar, 900);
+    }
+    var pendientes = [];
+    function revisar() { pendientes = pendientes.filter(function (p) { if (p.listo && !abierta) { mostrar(p.el); return false; } return !p.hecha; }); }
+    lista.forEach(function (el) {
+      if (!toca(el)) return;
+      var p = { el: el, listo: false };
+      pendientes.push(p);
+      var listo = function () { if (p.listo) return; p.listo = true; revisar(); };
+      var disparo = el.getAttribute('data-disparo');
+      if (disparo === 'carga') setTimeout(listo, 600);
+      else if (disparo === 'tiempo') setTimeout(listo, Number(el.getAttribute('data-segundos') || 4) * 1000);
+      else if (disparo === 'desplazamiento') {
+        var pct = Number(el.getAttribute('data-porcentaje') || 40) / 100;
+        var al = function () { var alto = d.documentElement.scrollHeight - innerHeight; if (alto > 0 && scrollY / alto >= pct) { removeEventListener('scroll', al); listo(); } };
+        addEventListener('scroll', al, { passive: true });
+      } else if (disparo === 'salida') {
+        d.addEventListener('mouseout', function salir(e) { if (!e.relatedTarget && e.clientY <= 0) { d.removeEventListener('mouseout', salir); listo(); } });
+      }
+      el.addEventListener('click', function (e) {
+        if (e.target.closest('[data-emergente-cerrar]') || e.target === el) cerrar(el);
+        else if (e.target.closest('[data-emergente-accion]')) setTimeout(function () { cerrar(el); }, 50);
+      });
+    });
+    d.addEventListener('keydown', function (e) {
+      if (!abierta) return;
+      if (e.key === 'Escape') cerrar(abierta);
+      // Foco atrapado dentro de la ventana al centro.
+      if (e.key === 'Tab' && abierta.classList.contains('emergente-modal')) {
+        var f = $$('a[href], button, input, select, textarea', abierta).filter(function (x) { return x.offsetParent; });
+        if (!f.length) return;
+        if (e.shiftKey && d.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && d.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+  })();
+
   // ---------------- Bloques aislados: altura automática
   window.addEventListener('message', function (e) {
     if (!e.data || e.data.tipo !== 'mlp-alto') return;

@@ -115,7 +115,7 @@ export async function iniciar(opciones = {}) {
     let url;
     try { url = new URL(req.url, 'http://localhost'); } catch { res.writeHead(400); return res.end(); }
     const ruta = url.pathname;
-    req.seguridad = (nonce, panel = false) => cabecerasSeguridad({ nonce, segura: cfg.SEGURA, tramites: cfg.TRAMITES_URL, panel });
+    req.seguridad = (nonce, panel = false, extra = []) => cabecerasSeguridad({ nonce, segura: cfg.SEGURA, tramites: cfg.TRAMITES_URL, panel, extra });
     res.on('finish', () => { if (cfg.LOG_REQUESTS) console.log(JSON.stringify({ t: new Date().toISOString(), m: req.method, r: ruta, s: res.statusCode, ms: Date.now() - inicio })); });
     try {
       if (ruta.length > 2000 || ruta.includes('\0')) throw new ErrorHttp(400, 'Solicitud inválida');

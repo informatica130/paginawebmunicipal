@@ -13,6 +13,8 @@ import { ErrorValidacion } from './contenidos.js';
 import { ahora, parse } from './db.js';
 import { slugify, emailValido, urlSegura, textoPlano, recortar } from '../src/util.js';
 import { normalizar as normalizarDiseno } from '../public/js/diseno.js';
+import { crearExtensiones, normalizarExtensiones, paraPanel, ZONAS, ZONAS_PORTADA, TIPOS_ZONA, PAGINAS, ESTILOS_EMERGENTE, DISPAROS, FRECUENCIAS, FONDOS, NIVELES } from './extensiones.js';
+import { CATEGORIAS as CATEGORIAS_TRANSPARENCIA } from './render/transparencia.js';
 import { contenidoTrekking } from './render/trekking.js';
 import { qrSvg } from '../src/qr.js';
 import { respaldar } from '../herramientas/respaldo.js';
@@ -423,6 +425,19 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return { clave: p.clave, nombre, items };
   });
 
+  // Extensiones: ventanas emergentes, bloques en zonas, fuentes de datos y código propio.
+  const motorExt = crearExtensiones({ db });
+  ruta('GET', 'extensiones', 'ajustes.editar', ({ u }) => ({ ...paraPanel(db.ajuste('extensiones') || normalizarExtensiones({})), superadmin: u.rol === 'superadmin',
+    opciones: { ZONAS, ZONAS_PORTADA, TIPOS_ZONA, PAGINAS, ESTILOS_EMERGENTE, DISPAROS, FRECUENCIAS, FONDOS, NIVELES, materias: CATEGORIAS_TRANSPARENCIA, iconos: ICONOS }, estadoFuentes: motorExt.estadoFuentes() }));
+  ruta('PUT', 'extensiones', 'ajustes.editar', ({ u, body, req }) => {
+    const previo = db.ajuste('extensiones') || {};
+    const limpio = normalizarExtensiones(body || {}, { previo, superadmin: u.rol === 'superadmin' });
+    db.guardarAjuste('extensiones', limpio);
+    auditar(u, 'ajustes.editar', 'extensiones', `${limpio.emergentes.length} ventanas, ${limpio.zonas.length} bloques, ${limpio.fuentes.length} fuentes`, req.ip);
+    invalidar();
+    return { ...paraPanel(limpio), superadmin: u.rol === 'superadmin' };
+  });
+  ruta('POST', 'extensiones/probar-fuente', 'ajustes.editar', async ({ body }) => motorExt.probar(body || {}));
   ruta('GET', 'diseno/historial', 'ajustes.editar', () => (db.ajuste('diseno-historial') || []).map((v, i) => ({ i, fecha: v.fecha, usuario: v.usuario, estilo: v.estilo, diseno: v.diseno })));
 
   // Incluye el contenido de la identidad ya completado con lo predeterminado, para editarlo en el panel.

@@ -132,6 +132,7 @@ function pie(ctx) {
   const turismo = s.turismo?.url || SITIO_TREKKING;
   return html`<footer class="pie" id="pie">
     <div class="pie-montes" aria-hidden="true">${crudo(montes('var(--pie-fondo)', 'tk-montes'))}</div>
+    ${zona(ctx, 'pie')}
     <div class="pie-emergencias" id="emergencias-pie">
       <div class="contenedor">
         <strong>${crudo(icono('telefono', { tam: 18 }))} Teléfonos de emergencia</strong>
@@ -218,6 +219,7 @@ ${dz.avanzado.css ? html`<style id="diseno-propio">${crudo(dz.avanzado.css)}</st
 <script type="application/ld+json" nonce="${ctx.nonce}">${crudo(JSON.stringify(ld).replace(/</g, '\\u003c'))}</script>
 ${crudo(cabeceraExtra)}
 ${s.analitica?.codigo ? crudo(String(s.analitica.codigo).replace(/<script/g, `<script nonce="${ctx.nonce}"`)) : ''}
+${ctx.ext ? crudo(ctx.ext.codigo('cabeza', ctx.nonce)) : ''}
 </head>
 <body class="${clase}${portada ? ' es-portada' : ''}">
 ${portada ? html`${crudo(plantillaIntro(dz.animaciones.introEstilo === 'logo3d' ? (['vitrina', 'trekking'].includes(dz.portada.composicion) || (dz.portada.composicion === 'portal' && dz.portal.logoTrekking) ? 'logo3d' : 'escudo3d') : dz.animaciones.introEstilo))}<script nonce="${ctx.nonce}">${crudo(SCRIPT_INTRO)}</script>` : ''}
@@ -225,12 +227,18 @@ ${dz.animaciones.activas && dz.animaciones.cordillera ? crudo(cortinaCordillera(
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <div class="tk-progreso" aria-hidden="true"></div>
 ${ctx.usuario ? html`<div class="barra-admin"><div class="contenedor"><span>${crudo(icono('usuario', { tam: 16 }))} ${ctx.usuario.nombre}</span><a href="/admin/">Panel de administración</a>${editar ? html`<a href="/admin/#/editar/${editar}">${crudo(icono('herramienta', { tam: 16 }))} Editar esta página</a>` : ''}</div></div>` : ''}
+${zona(ctx, 'antes-cabecera')}
 ${cabecera(ctx)}
 ${sinAvisos ? '' : avisos(ctx, { portada })}
+${zona(ctx, 'bajo-cabecera')}
 <main id="contenido" tabindex="-1">
+${zona(ctx, 'inicio-contenido')}
 ${cuerpo}
+${zona(ctx, 'final-contenido')}
 </main>
+${zona(ctx, 'antes-pie')}
 ${pie(ctx)}
+${ctx.ext ? crudo(ctx.ext.emergentes(ctx.ruta)) : ''}
 <button type="button" class="arriba" data-arriba aria-label="Volver arriba">${crudo(icono('flecha', { tam: 20, clase: 'arriba-ico' }))}</button>
 <script src="/js/sitio.js?v=${ctx.version}" defer></script>
 <script src="/js/movimiento.js?v=${ctx.version}" defer></script>
@@ -238,9 +246,13 @@ ${portada || dz.animaciones.activas ? html`<script src="/js/logo-vivo.js?v=${ctx
 <script src="/js/transiciones.js?v=${ctx.version}" defer></script>
 <script src="/js/escudo-vivo.js?v=${ctx.version}" defer></script>
 ${dz.animaciones.activas && dz.animaciones.precarga && !ctx.usuario ? html`<script type="speculationrules" nonce="${ctx.nonce}">${crudo(REGLAS_PRECARGA)}</script>` : ''}
+${ctx.ext ? crudo(ctx.ext.codigo('cuerpo', ctx.nonce)) : ''}
 </body>
 </html>`;
 }
+
+// Bloques propios de una zona (Extensiones → Bloques en zonas).
+export const zona = (ctx, nombre) => (ctx.ext ? crudo(ctx.ext.zona(ctx.ruta, nombre)) : '');
 
 // Las páginas del sitio se descargan por adelantado al pasar el cursor sobre un enlace (sólo el
 // HTML, sin ejecutarlas), así la página siguiente aparece casi al instante.

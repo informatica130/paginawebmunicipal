@@ -123,13 +123,14 @@ export function servirArchivo(req, res, raiz, relativa, { maxAge = 3600, inmutab
 }
 
 // Cabeceras de seguridad comunes. `nonce` habilita los <script> en línea propios.
-export function cabecerasSeguridad({ nonce, segura, tramites = '', panel = false }) {
-  const t = tramites ? new URL(tramites).origin : '';
+export function cabecerasSeguridad({ nonce, segura, tramites = '', panel = false, extra = [] }) {
+  // `extra`: dominios https que el código propio del sitio necesita (Extensiones → Código propio).
+  const t = [tramites ? new URL(tramites).origin : '', ...extra.filter((d) => /^https:\/\/[\w.-]+(:\d+)?$/.test(d))].filter(Boolean).join(' ');
   const csp = [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}'${t ? ' ' + t : ''}`,
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com data:",
+    `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com${t ? ' ' + t : ''}`,
+    `font-src 'self' https://fonts.gstatic.com data:${t ? ' ' + t : ''}`,
     "img-src 'self' data: blob: https:",
     "media-src 'self' https:",
     `connect-src 'self'${t ? ' ' + t : ''} https://api.open-meteo.com`,
