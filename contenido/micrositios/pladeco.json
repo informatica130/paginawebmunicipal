@@ -1,0 +1,165 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "pladeco",
+    "nombre": "PLADECO",
+    "slug": "pladeco",
+    "unidad": "Plan de Desarrollo Comunal · SECPLAN",
+    "descripcion": "PLADECO de Melipeuco 2022-2026: visión, diagnóstico, áreas prioritarias y documentos del Plan de Desarrollo Comunal.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#16A0A8",
+      "oscuro": "#0A5155",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "mapa",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/08/Pladeco-banner-2024.png"
+    },
+    "portada": {
+      "antetitulo": "PLADECO Melipeuco 2022 – 2026",
+      "titulo": "Plan de Desarrollo Comunal",
+      "bajada": "La guía que orienta cómo queremos que crezca la comuna: visión compartida, diagnóstico y los proyectos y metas para mejorar la calidad de vida de vecinas y vecinos.",
+      "botones": [
+        {
+          "texto": "Documentos del PLADECO",
+          "url": "#m-documentos"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "secplan@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "que-es",
+        "tipo": "texto",
+        "ancla": "Qué es",
+        "titulo": "¿Qué es el PLADECO?",
+        "html": "<p>El Plan de Desarrollo Comunal es el instrumento rector del desarrollo de la comuna: contempla las acciones para satisfacer las necesidades de la comunidad y promover su avance social, económico y cultural (art. 7 de la Ley 18.695). Lo elabora la Secretaría Comunal de Planificación (SECPLAN) con participación de la comunidad.</p><p>En el PLADECO 2022–2026 encontrará la visión de futuro que compartimos como comunidad, un diagnóstico de la realidad local en lo social, cultural, económico y medioambiental, y los proyectos y metas de cada área.</p>"
+      },
+      {
+        "id": "prioridades",
+        "tipo": "tarjetas",
+        "ancla": "Áreas prioritarias",
+        "titulo": "Áreas prioritarias",
+        "columnas": "4",
+        "items": [
+          {
+            "icono": "salud",
+            "titulo": "Salud",
+            "texto": "",
+            "url": "/salud/"
+          },
+          {
+            "icono": "escuela",
+            "titulo": "Educación",
+            "texto": "",
+            "url": "/educacion/"
+          },
+          {
+            "icono": "casa",
+            "titulo": "Vivienda",
+            "texto": "",
+            "url": "/vivienda/"
+          },
+          {
+            "icono": "cultura",
+            "titulo": "Cultura e identidad",
+            "texto": "",
+            "url": "/cultura/"
+          },
+          {
+            "icono": "montana",
+            "titulo": "Turismo",
+            "texto": "",
+            "url": "/turismo/"
+          },
+          {
+            "icono": "hoja",
+            "titulo": "Medio ambiente",
+            "texto": "",
+            "url": "/medioambiente/"
+          },
+          {
+            "icono": "herramienta",
+            "titulo": "Infraestructura",
+            "texto": "",
+            "url": "/obras/"
+          },
+          {
+            "icono": "trabajo",
+            "titulo": "Desarrollo económico",
+            "texto": "",
+            "url": "/udel/"
+          }
+        ]
+      },
+      {
+        "id": "documentos",
+        "tipo": "documentos",
+        "ancla": "Documentos",
+        "titulo": "Documentos del PLADECO",
+        "items": [
+          {
+            "titulo": "PLADECO Melipeuco 2022 – 2026",
+            "tipo": "Plan",
+            "anio": "2022",
+            "doc": "HN6OgkTwyfI5"
+          },
+          {
+            "titulo": "Decreto PLADECO 2021 – 2024",
+            "tipo": "Decreto",
+            "anio": "2021",
+            "doc": "0qtiYeVXTOGp"
+          },
+          {
+            "titulo": "PLADECO Melipeuco 2012 – 2016",
+            "tipo": "Plan",
+            "anio": "2016",
+            "doc": "FREV-iOL_3_u"
+          },
+          {
+            "titulo": "PLADECO 2006 – 2011",
+            "tipo": "Plan",
+            "anio": "2011",
+            "doc": "HNj-5Wxggbm0"
+          }
+        ]
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "grafico",
+            "texto": "SECPLAN",
+            "descripcion": "Secretaría Comunal de Planificación",
+            "url": "/secplan/"
+          },
+          {
+            "icono": "escudo",
+            "texto": "Municipio",
+            "url": "/municipio/"
+          }
+        ]
+      }
+    ]
+  }
+}

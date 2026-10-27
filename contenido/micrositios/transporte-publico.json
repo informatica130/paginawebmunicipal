@@ -1,0 +1,156 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "transporte-publico",
+    "nombre": "Transporte público",
+    "slug": "transporte-publico",
+    "unidad": "Buses y conexiones de Melipeuco",
+    "descripcion": "Transporte público en Melipeuco: horario de buses, tarifas, terminales y conexión a Santiago.",
+    "organigrama": "",
+    "alias": [
+      "buses",
+      "horario-de-buses"
+    ],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "diagonales",
+      "icono": "bus",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Transporte público",
+      "titulo": "Buses desde y hacia Melipeuco",
+      "bajada": "Horarios de buses a Cunco y Temuco, destinos rurales, tarifas, terminales y conexiones a Santiago.",
+      "botones": [
+        {
+          "texto": "Ver el horario de buses",
+          "url": "/transportepublico/"
+        },
+        {
+          "texto": "Tarifas",
+          "url": "#m-tarifas"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "$3.400",
+          "etiqueta": "Melipeuco ↔ Temuco (persona mayor $1.700)"
+        },
+        {
+          "valor": "$1.200",
+          "etiqueta": "Melipeuco ↔ Cunco"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8829",
+      "email": "transito@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "horario",
+        "tipo": "llamado",
+        "titulo": "Horario de buses en vivo",
+        "texto": "Elija desde dónde viaja y hacia dónde va, y vea la próxima salida, el cronograma del día y los destinos rurales.",
+        "icono": "bus",
+        "boton": "Abrir el horario",
+        "url": "/transportepublico/"
+      },
+      {
+        "id": "tarifas",
+        "tipo": "tabla",
+        "ancla": "Tarifas",
+        "titulo": "Tarifas referenciales",
+        "columnas": [
+          "Tramo",
+          "General",
+          "Persona mayor"
+        ],
+        "filas": "Melipeuco ↔ Temuco | $3.400 | $1.700\nMelipeuco ↔ Cunco | $1.200 | —",
+        "nota": "Los horarios y las tarifas son referenciales y pueden variar por el clima o la ruta."
+      },
+      {
+        "id": "santiago",
+        "tipo": "tabla",
+        "ancla": "Santiago",
+        "titulo": "Conexión a Santiago (desde Cunco)",
+        "columnas": [
+          "Recorrido",
+          "Empresa",
+          "Salidas"
+        ],
+        "filas": "Cunco → Santiago | Nar Bus | 20:40 · 20:55 · 21:20\nCunco → Santiago | Transantin | 21:15\nSantiago → Cunco | Nar Bus | 22:00 · 22:15 · 22:45\nSantiago → Cunco | Transantin | 22:25"
+      },
+      {
+        "id": "terminales",
+        "tipo": "directorio",
+        "ancla": "Terminales",
+        "titulo": "Terminales y contactos",
+        "items": [
+          {
+            "nombre": "Terminal de Temuco",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 45 223 7599",
+            "email": ""
+          },
+          {
+            "nombre": "Terminal de Melipeuco",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 45 258 1108",
+            "email": ""
+          },
+          {
+            "nombre": "Buses Cerrillos",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 9 8456 0126",
+            "email": ""
+          }
+        ]
+      },
+      {
+        "id": "temuco",
+        "tipo": "texto",
+        "titulo": "Pago en Temuco",
+        "html": "<p>En las micros urbanas de Temuco se paga con CuentaRUT o con tarjeta bancaria al subir (BiPay).</p>"
+      },
+      {
+        "id": "relacionadas",
+        "tipo": "enlaces",
+        "titulo": "Unidades relacionadas",
+        "items": [
+          {
+            "icono": "auto",
+            "texto": "Tránsito",
+            "url": "/transito/"
+          },
+          {
+            "icono": "montana",
+            "texto": "Turismo",
+            "url": "/turismo/"
+          }
+        ]
+      }
+    ]
+  }
+}

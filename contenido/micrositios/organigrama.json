@@ -1,0 +1,656 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "organigrama",
+    "nombre": "Organigrama",
+    "slug": "organigrama",
+    "unidad": "Estructura orgánica municipal",
+    "descripcion": "Organigrama de la Municipalidad de Melipeuco según el Reglamento de Organización Interna N° 12 (2025), con enlaces a cada unidad.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#3E3E9A",
+      "oscuro": "#1D1D4F",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "grafico",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Reglamento de Organización Interna N° 12",
+      "titulo": "Organigrama municipal",
+      "bajada": "La estructura de la Municipalidad de Melipeuco: cada dirección, departamento y oficina, con el enlace a su propio sitio.",
+      "botones": [
+        {
+          "texto": "Descargar el organigrama (PDF)",
+          "url": "/wp-content/uploads/2025/10/organigrama-2024.pdf"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "12",
+          "etiqueta": "direcciones y órganos superiores"
+        },
+        {
+          "valor": "63",
+          "etiqueta": "unidades en total"
+        },
+        {
+          "valor": "2025",
+          "etiqueta": "Reglamento N° 12, de 29 de abril"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "norma",
+        "tipo": "texto",
+        "ancla": "Reglamento",
+        "titulo": "Cómo se organiza la Municipalidad",
+        "html": "<p>La estructura orgánica de la Municipalidad de Melipeuco está definida en el <strong>Reglamento de Organización Interna N° 12</strong>, de 29 de abril de 2025, modificación aprobada por el Concejo Municipal en la sesión ordinaria N° 07 de 4 de febrero de 2025. Cada unidad tiene su norma de creación y sus funciones.</p>"
+      },
+      {
+        "id": "rama-alcaldia",
+        "tipo": "tarjetas",
+        "ancla": "Alcaldía",
+        "titulo": "Alcaldía",
+        "intro": "Dirección y administración superior y supervigilancia del funcionamiento de la Municipalidad.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "estrella",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Alcaldía",
+            "texto": "",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "estrella",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Gabinete",
+            "texto": "Mantener informada a la comunidad de las actividades del Municipio.",
+            "url": "/gabinete/"
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Comunicaciones, Relaciones Públicas y Protocolo",
+            "texto": "Crear y mantener canales de información entre el Municipio y la comunidad.",
+            "url": "/comunicaciones/"
+          }
+        ]
+      },
+      {
+        "id": "rama-concejo",
+        "tipo": "tarjetas",
+        "ancla": "Concejo",
+        "titulo": "Concejo Municipal",
+        "intro": "Órgano normativo, resolutivo y fiscalizador (Ley 18.695, título III).",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "personas",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Concejo Municipal",
+            "texto": "",
+            "url": "/concejo-municipal/"
+          }
+        ]
+      },
+      {
+        "id": "rama-cosoc",
+        "tipo": "tarjetas",
+        "ancla": "COSOC",
+        "titulo": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+        "intro": "Órgano asesor para asegurar la participación de la comunidad en el progreso económico, social y cultural de la comuna.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "personas",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "texto": "",
+            "url": "/cosoc/"
+          }
+        ]
+      },
+      {
+        "id": "rama-admin",
+        "tipo": "tarjetas",
+        "ancla": "",
+        "titulo": "Administración Municipal",
+        "intro": "Coordinar y gestionar permanentemente todas las unidades municipales según las instrucciones del Alcalde.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "escudo",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Administración Municipal",
+            "texto": "",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "balanza",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Asesoría Jurídica Municipal",
+            "texto": "Participar en juicios en que la Municipalidad sea parte o tenga interés.",
+            "url": "/asesoria-juridica/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Órgano colegiado",
+            "titulo": "Comité Técnico Administrativo",
+            "texto": "Instancia asesora del Alcalde, presidida por el Administrador Municipal e integrada por los directivos.",
+            "url": "/comite-tecnico/"
+          }
+        ]
+      },
+      {
+        "id": "rama-secmun",
+        "tipo": "tarjetas",
+        "ancla": "Secretaría Municipal",
+        "titulo": "Secretaría Municipal",
+        "intro": "Dirigir la secretaría administrativa del Alcalde y del Concejo.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "documento",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Secretaría Municipal",
+            "texto": "",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "correo",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Partes y Archivo",
+            "texto": "Flujo, control, archivo y conservación de toda la documentación que ingresa y egresa de la Municipalidad.",
+            "url": "/oficina-de-partes/"
+          },
+          {
+            "icono": "chat",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Informaciones, Reclamos y Sugerencias (OIRS)",
+            "texto": "Informar sobre la organización, competencias, requisitos, plazos y procedimientos de las prestaciones municipales.",
+            "url": "/oficina-oirs/"
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina Municipal de Transparencia",
+            "texto": "Cumplir la Ley 20.285 manteniendo permanentemente actualizados los antecedentes del art. 7 (transparencia activa).",
+            "url": "/oficina-de-transparencia/"
+          },
+          {
+            "icono": "documento",
+            "etiqueta": "Oficina",
+            "titulo": "Secretaría del Consejo Comunal de Organizaciones de la Sociedad Civil",
+            "texto": "Redactar y archivar las actas.",
+            "url": "/secretaria-cosoc/"
+          }
+        ]
+      },
+      {
+        "id": "rama-dideco",
+        "tipo": "tarjetas",
+        "ancla": "DIDECO",
+        "titulo": "Dirección de Desarrollo Comunitario",
+        "intro": "Asesorar al Alcalde y al Concejo en la promoción del desarrollo comunitario.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "personas",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Dirección de Desarrollo Comunitario",
+            "texto": "",
+            "url": "/social/"
+          },
+          {
+            "icono": "corazon",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Desarrollo Social",
+            "texto": "Mejorar la situación de pobreza y vulnerabilidad en la comuna.",
+            "url": "/desarrollo-social/"
+          },
+          {
+            "icono": "corazon",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Asistencia Social",
+            "texto": "Diagnósticos de problemas sociales y sectores afectados.",
+            "url": "/asistencia-social/"
+          },
+          {
+            "icono": "casa",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Vivienda",
+            "texto": "Asesorar a postulantes a viviendas sociales y subsidios habitacionales, en coordinación con el SERVIU.",
+            "url": "/vivienda/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Subsidios y Pensiones",
+            "texto": "Administrar pensiones y subsidios de la red social con atención expedita.",
+            "url": "/subsidios-y-pensiones/"
+          },
+          {
+            "icono": "usuario",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
+            "texto": "Planes y programas de desarrollo social del adulto mayor y de inclusión de personas con discapacidad o dependencia.",
+            "url": "/uamis/"
+          },
+          {
+            "icono": "deporte",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Deportes y Recreación",
+            "texto": "Organizar y ejecutar programas deportivos y recreativos.",
+            "url": "/deporte/"
+          },
+          {
+            "icono": "corazon",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de la Mujer y Equidad de Género",
+            "texto": "Mejorar la calidad de vida de las mujeres, su empoderamiento y autonomía.",
+            "url": "/oficina-de-la-mujer/"
+          },
+          {
+            "icono": "estrella",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de la Juventud",
+            "texto": "Integración, información y participación de jóvenes y adolescentes.",
+            "url": "/juventud/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Desarrollo Comunitario",
+            "texto": "",
+            "url": "/desarrollo-comunitario/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Organizaciones Comunitarias",
+            "texto": "Promover la organización, consolidación y participación de las organizaciones comunitarias.",
+            "url": "/organizaciones-comunitarias/"
+          },
+          {
+            "icono": "grafico",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Desarrollo Económico Local",
+            "texto": "Políticas para aumentar las fuentes productivas de la comuna.",
+            "url": "/udel/"
+          },
+          {
+            "icono": "grafico",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Promoción del Fomento Productivo Local",
+            "texto": "Promover fuentes productivas y capacidades locales.",
+            "url": "/fomento-productivo/"
+          },
+          {
+            "icono": "mapa",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Recursos Hídricos y Saneamiento de Títulos",
+            "texto": "Asesoría en acceso y manejo del agua; información sobre la Ley 21.435 (Reforma al Código de Aguas).",
+            "url": "/recursos-hidricos/"
+          },
+          {
+            "icono": "mapa",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Turismo",
+            "texto": "Políticas, planes y proyectos de promoción del turismo.",
+            "url": "/turismo/"
+          },
+          {
+            "icono": "libro",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Cultura",
+            "texto": "Protección de bienes y monumentos nacionales de incidencia comunal.",
+            "url": "/cultura/"
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Programas Sociales",
+            "texto": "Implementar, coordinar y rendir los programas sociales de Gobierno en convenio (niñez, adolescencia, mujeres, adultos mayores, dependencia y otros).",
+            "url": "/programas-sociales/"
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Coordinación de Programas Sociales",
+            "texto": "Coordinar los programas sociales que administra el Municipio.",
+            "url": "/coordinacion-de-programas/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Rendiciones de Programas Sociales",
+            "texto": "Revisión periódica de la ejecución de los programas en convenio.",
+            "url": "/rendiciones-de-programas/"
+          }
+        ]
+      },
+      {
+        "id": "rama-dom",
+        "tipo": "tarjetas",
+        "ancla": "Obras (DOM)",
+        "titulo": "Dirección de Obras Municipales",
+        "intro": "Velar por el cumplimiento de la Ley General de Urbanismo y Construcciones, el Plan Regulador y las ordenanzas.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "herramienta",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Dirección de Obras Municipales",
+            "texto": "",
+            "url": "/obras/"
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Edificación y Urbanización",
+            "texto": "Revisar y aprobar proyectos de subdivisión, fusión, loteo, urbanización y construcción.",
+            "url": "/edificacion-y-urbanizacion/"
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Inspección de Obras",
+            "texto": "Fiscalizar obras de edificación, ampliación, remodelación y demolición.",
+            "url": "/inspeccion-de-obras/"
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Catastros y Archivos",
+            "texto": "Catastro actualizado de obras de urbanización y edificación.",
+            "url": "/catastros-y-archivos/"
+          },
+          {
+            "icono": "alerta",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Emergencia y Protección Civil",
+            "texto": "Prevención, mitigación, atención, control y recuperación ante emergencias y catástrofes.",
+            "url": "/emergencias/"
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Cementerios",
+            "texto": "Dirección administrativa y gestión de los cementerios municipales (Ley 18.096).",
+            "url": "/cementerios/"
+          },
+          {
+            "icono": "hoja",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Aseo y Ornato",
+            "texto": "Aseo de vías públicas, parques, jardines y bienes nacionales de uso público.",
+            "url": "/aseo-y-ornato/"
+          },
+          {
+            "icono": "camion",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Vehículos",
+            "texto": "Coordinación y mantención de los vehículos municipales y sus contratos de reparación.",
+            "url": "/vehiculos-municipales/"
+          },
+          {
+            "icono": "hoja",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Medio Ambiente",
+            "texto": "Asesorar en planificación, gestión y control ambiental del territorio comunal.",
+            "url": "/medioambiente/"
+          },
+          {
+            "icono": "auto",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Tránsito y Transporte Público",
+            "texto": "Otorgar y renovar licencias de conducir.",
+            "url": "/transito/"
+          },
+          {
+            "icono": "licencia",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Licencias de Conducir",
+            "texto": "Otorgar, renovar, restringir o denegar licencias de conducir.",
+            "url": "/licencias-de-conducir/"
+          },
+          {
+            "icono": "documento",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Permisos de Circulación",
+            "texto": "Otorgar y renovar permisos de circulación y sus duplicados.",
+            "url": "/permisos-de-circulacion/"
+          },
+          {
+            "icono": "mapa",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Señalización Vial",
+            "texto": "Mantener señalizadas las vías públicas urbanas.",
+            "url": "/senalizacion-vial/"
+          }
+        ]
+      },
+      {
+        "id": "rama-daf",
+        "tipo": "tarjetas",
+        "ancla": "",
+        "titulo": "Dirección de Administración y Finanzas",
+        "intro": "Asesorar al Alcalde en la administración del personal y financiera de los bienes municipales.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "billete",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Dirección de Administración y Finanzas",
+            "texto": "",
+            "url": "/administracion-y-finanzas/"
+          },
+          {
+            "icono": "grafico",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Contabilidad y Presupuesto",
+            "texto": "Contabilidad patrimonial y presupuestaria; balance anual.",
+            "url": "/contabilidad-y-presupuesto/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Tesorería Municipal",
+            "texto": "Recaudar tributos e ingresos municipales; custodiar fondos, especies valoradas y garantías.",
+            "url": "/tesoreria-municipal/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Patentes Municipales",
+            "texto": "Tramitar otorgamiento, traslado, transferencia y caducidad de patentes comerciales, industriales, de alcoholes y profesionales.",
+            "url": "/patentes-municipales/"
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Inspección Municipal",
+            "texto": "Planificar la fiscalización externa en materias normativas y tributarias.",
+            "url": "/inspeccion-municipal/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Recursos Humanos",
+            "texto": "Proponer políticas de administración de personal y aplicar la carrera funcionaria.",
+            "url": "/recursos-humanos/"
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Prevención de Riesgos",
+            "texto": "Evaluar y controlar riesgos de accidentes y enfermedades profesionales.",
+            "url": "/prevencion-de-riesgos/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Remuneraciones",
+            "texto": "Calcular, registrar y pagar las remuneraciones y planillas de cotizaciones.",
+            "url": "/remuneraciones/"
+          },
+          {
+            "icono": "documento",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Adquisiciones",
+            "texto": "Recibir solicitudes de compra, cotizar y emitir órdenes de compra.",
+            "url": "/adquisiciones/"
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Activo Fijo, Inventarios y Bodega",
+            "texto": "Registros e inventarios valorados de bienes municipales por dependencia.",
+            "url": "/inventarios-y-bodega/"
+          }
+        ]
+      },
+      {
+        "id": "rama-control",
+        "tipo": "tarjetas",
+        "ancla": "Control",
+        "titulo": "Dirección de Control",
+        "intro": "Auditoría operativa interna para fiscalizar la legalidad y eficiencia de la actuación municipal.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "buscar",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Dirección de Control",
+            "texto": "",
+            "url": "/direccion-de-control/"
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Auditorías y Revisión",
+            "texto": "Auditoría operativa interna bajo la supervisión del Director de Control.",
+            "url": "/auditorias/"
+          }
+        ]
+      },
+      {
+        "id": "rama-secplan",
+        "tipo": "tarjetas",
+        "ancla": "SECPLAN",
+        "titulo": "Secretaría Comunal de Planificación",
+        "intro": "Secretaría técnica permanente del Alcalde y del Concejo en políticas, planes, programas y proyectos.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "mapa",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Secretaría Comunal de Planificación",
+            "texto": "",
+            "url": "/secplan/"
+          },
+          {
+            "icono": "wifi",
+            "etiqueta": "Oficina",
+            "titulo": "Oficina de Desarrollo Informático y Transformación Digital Municipal",
+            "texto": "Administrar los sistemas de información, redes y equipos computacionales.",
+            "url": "/transformaciondigital/"
+          }
+        ]
+      },
+      {
+        "id": "rama-dsi",
+        "tipo": "tarjetas",
+        "ancla": "",
+        "titulo": "Dirección de Servicios Incorporados a la Gestión Municipal",
+        "intro": "Asesorar al Alcalde y al Concejo en salud y educación municipal.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "carpeta",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Dirección de Servicios Incorporados a la Gestión Municipal",
+            "texto": "",
+            "url": "/servicios-incorporados/"
+          },
+          {
+            "icono": "corazon",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Salud Municipal",
+            "texto": "Asegurar la atención de los establecimientos de salud municipal.",
+            "url": "/salud/"
+          },
+          {
+            "icono": "libro",
+            "etiqueta": "Departamento",
+            "titulo": "Departamento de Educación Municipal",
+            "texto": "Condiciones óptimas para el proceso educativo en los establecimientos municipales.",
+            "url": "/educacion/"
+          }
+        ]
+      },
+      {
+        "id": "rama-jpl",
+        "tipo": "tarjetas",
+        "ancla": "JPL",
+        "titulo": "Juzgado de Policía Local",
+        "intro": "Depende administrativamente de la Municipalidad y técnicamente de la Corte de Apelaciones (Ley 15.231).",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "balanza",
+            "etiqueta": "Sitio de la dirección",
+            "titulo": "Juzgado de Policía Local",
+            "texto": "",
+            "url": "/juzgado/"
+          }
+        ]
+      },
+      {
+        "id": "pdf",
+        "tipo": "documentos",
+        "titulo": "Documentos",
+        "items": [
+          {
+            "titulo": "Organigrama municipal (PDF)",
+            "tipo": "Organigrama",
+            "url": "/wp-content/uploads/2025/10/organigrama-2024.pdf"
+          },
+          {
+            "titulo": "Organigrama 2024",
+            "tipo": "Organigrama",
+            "anio": "2024",
+            "doc": "OQuJ5_8mLLn0"
+          },
+          {
+            "titulo": "Organigrama oficial 2023",
+            "tipo": "Organigrama",
+            "anio": "2023",
+            "doc": "4_qEaCOm6X9S"
+          }
+        ]
+      }
+    ]
+  }
+}

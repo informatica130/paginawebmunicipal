@@ -1,0 +1,247 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "municipio",
+    "nombre": "Municipio",
+    "slug": "municipio",
+    "unidad": "Ilustre Municipalidad de Melipeuco",
+    "descripcion": "La Municipalidad de Melipeuco: autoridades, áreas, organigrama, PLADECO, historia, transparencia y noticias.",
+    "organigrama": "",
+    "alias": [],
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#1F6FA8",
+      "oscuro": "#0F3A5A",
+      "acento": "#E9A92B",
+      "patron": "curvas",
+      "icono": "escudo",
+      "portada": "dividida",
+      "imagen": "/img/plaza-melipeuco-1536.webp"
+    },
+    "portada": {
+      "antetitulo": "Ilustre Municipalidad de Melipeuco",
+      "titulo": "Conozca su Municipalidad",
+      "bajada": "Autoridades, áreas municipales, organigrama, planificación comunal, historia y transparencia: todo lo que hace la Municipalidad por Melipeuco.",
+      "botones": [
+        {
+          "texto": "Direcciones municipales",
+          "url": "#m-areas"
+        },
+        {
+          "texto": "Transparencia",
+          "url": "/transparencia/"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "1981",
+          "etiqueta": "año en que inicia la Municipalidad de Melipeuco"
+        },
+        {
+          "valor": "63 unidades",
+          "etiqueta": "entre direcciones, departamentos y oficinas"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8813",
+      "email": "oficinadepartes@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "La Municipalidad",
+        "titulo": "La Municipalidad de Melipeuco",
+        "html": "<p>La Ilustre Municipalidad de Melipeuco es una corporación autónoma de derecho público, con personalidad jurídica y patrimonio propio, cuya finalidad es satisfacer las necesidades de la comunidad local y asegurar su participación en el progreso económico, social y cultural de la comuna (Ley 18.695, Orgánica Constitucional de Municipalidades).</p>",
+        "destacado": "La constituyen el Alcalde, su máxima autoridad, y el Concejo Municipal."
+      },
+      {
+        "id": "conozca",
+        "tipo": "tarjetas",
+        "ancla": "Conozca",
+        "titulo": "Conozca su municipio",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "estrella",
+            "titulo": "Alcaldía",
+            "texto": "El Alcalde, sus audiencias, gabinete y cuentas públicas.",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "balanza",
+            "titulo": "Concejo Municipal",
+            "texto": "Integrantes, sesiones, actas y transmisiones en vivo.",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "grafico",
+            "titulo": "Organigrama",
+            "texto": "Todas las unidades municipales y sus sitios.",
+            "url": "/organigrama/"
+          },
+          {
+            "icono": "mapa",
+            "titulo": "PLADECO",
+            "texto": "Plan de Desarrollo Comunal: la hoja de ruta de la comuna.",
+            "url": "/pladeco/"
+          },
+          {
+            "icono": "libro",
+            "titulo": "Nuestra historia",
+            "texto": "Los orígenes de Melipeuco y su municipalidad.",
+            "url": "/historia/"
+          },
+          {
+            "icono": "documento",
+            "titulo": "Transparencia",
+            "texto": "Transparencia activa, documentos y solicitudes de información.",
+            "url": "/transparencia/"
+          },
+          {
+            "icono": "wifi",
+            "titulo": "Transformación digital",
+            "texto": "Convenios y trámites en línea.",
+            "url": "/transformaciondigital/"
+          },
+          {
+            "icono": "camara",
+            "titulo": "Logotipos y material",
+            "texto": "Escudo y material gráfico oficial.",
+            "url": "/logotipos-y-material/"
+          },
+          {
+            "icono": "calendario",
+            "titulo": "Agenda comunal",
+            "texto": "Actividades, fiestas y talleres.",
+            "url": "/eventos/"
+          }
+        ]
+      },
+      {
+        "id": "areas",
+        "tipo": "tarjetas",
+        "ancla": "Direcciones",
+        "titulo": "Direcciones municipales",
+        "intro": "Cada dirección tiene su sitio, con sus oficinas, trámites y contacto.",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "estrella",
+            "etiqueta": "Alcaldía",
+            "titulo": "Alcaldía",
+            "texto": "Dirección y administración superior y supervigilancia del funcionamiento de la Municipalidad.",
+            "url": "/alcaldia/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Órgano colegiado",
+            "titulo": "Concejo Municipal",
+            "texto": "Órgano normativo, resolutivo y fiscalizador (Ley 18.695, título III).",
+            "url": "/concejo-municipal/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Órgano colegiado",
+            "titulo": "Consejo Comunal de Organizaciones de la Sociedad Civil (COSOC)",
+            "texto": "Órgano asesor para asegurar la participación de la comunidad en el progreso económico, social y cultural de la comuna.",
+            "url": "/cosoc/"
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Dirección",
+            "titulo": "Administración Municipal",
+            "texto": "Coordinar y gestionar permanentemente todas las unidades municipales según las instrucciones del Alcalde.",
+            "url": "/administracion-municipal/"
+          },
+          {
+            "icono": "documento",
+            "etiqueta": "Dirección",
+            "titulo": "Secretaría Municipal",
+            "texto": "Dirigir la secretaría administrativa del Alcalde y del Concejo.",
+            "url": "/secretaria-municipal/"
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Dirección",
+            "titulo": "Dirección de Desarrollo Comunitario",
+            "texto": "Asesorar al Alcalde y al Concejo en la promoción del desarrollo comunitario.",
+            "url": "/social/"
+          },
+          {
+            "icono": "herramienta",
+            "etiqueta": "Dirección",
+            "titulo": "Dirección de Obras Municipales",
+            "texto": "Velar por el cumplimiento de la Ley General de Urbanismo y Construcciones, el Plan Regulador y las ordenanzas.",
+            "url": "/obras/"
+          },
+          {
+            "icono": "billete",
+            "etiqueta": "Dirección",
+            "titulo": "Dirección de Administración y Finanzas",
+            "texto": "Asesorar al Alcalde en la administración del personal y financiera de los bienes municipales.",
+            "url": "/administracion-y-finanzas/"
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Dirección",
+            "titulo": "Dirección de Control",
+            "texto": "Auditoría operativa interna para fiscalizar la legalidad y eficiencia de la actuación municipal.",
+            "url": "/direccion-de-control/"
+          },
+          {
+            "icono": "mapa",
+            "etiqueta": "Dirección",
+            "titulo": "Secretaría Comunal de Planificación",
+            "texto": "Secretaría técnica permanente del Alcalde y del Concejo en políticas, planes, programas y proyectos.",
+            "url": "/secplan/"
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Dirección",
+            "titulo": "Dirección de Servicios Incorporados a la Gestión Municipal",
+            "texto": "Asesorar al Alcalde y al Concejo en salud y educación municipal.",
+            "url": "/servicios-incorporados/"
+          },
+          {
+            "icono": "balanza",
+            "etiqueta": "Juzgado",
+            "titulo": "Juzgado de Policía Local",
+            "texto": "Depende administrativamente de la Municipalidad y técnicamente de la Corte de Apelaciones (Ley 15.231).",
+            "url": "/juzgado/"
+          }
+        ]
+      },
+      {
+        "id": "autoridades",
+        "tipo": "contenido",
+        "fuente": "autoridades",
+        "filtro": "alcalde concejal",
+        "cantidad": 6,
+        "ancla": "Autoridades",
+        "titulo": "Autoridades"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de municipio",
+        "categoria": "alcaldia",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

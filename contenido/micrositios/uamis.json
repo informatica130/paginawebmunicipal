@@ -7,7 +7,9 @@
     "unidad": "Oficina de Adulto Mayor e Inclusión Social (UAMIS)",
     "descripcion": "Oficina de Adulto Mayor e Inclusión Social (UAMIS) de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
     "organigrama": "dep-uamis",
-    "alias": [],
+    "alias": [
+      "adulto-mayor"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {

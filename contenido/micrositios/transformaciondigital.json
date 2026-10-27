@@ -1,13 +1,16 @@
 {
   "predeterminado": true,
   "sitio": {
-    "id": "transformacion-digital",
+    "id": "transformaciondigital",
     "nombre": "Informática y TD",
-    "slug": "transformacion-digital",
+    "slug": "transformaciondigital",
     "unidad": "Oficina de Desarrollo Informático y Transformación Digital Municipal",
     "descripcion": "Oficina de Desarrollo Informático y Transformación Digital Municipal de la Municipalidad de Melipeuco: funciones, oficinas, trámites y contacto.",
     "organigrama": "dep-informatica",
-    "alias": [],
+    "alias": [
+      "transformacion-digital",
+      "informatica"
+    ],
     "publicado": true,
     "actualizado": "2026-10-27",
     "tema": {
@@ -42,6 +45,63 @@
     },
     "modulos": [
       {
+        "id": "convenios",
+        "tipo": "pestanas",
+        "ancla": "Convenios",
+        "titulo": "Convenios de transformación digital",
+        "intro": "Alianzas para modernizar la gestión municipal y acercar los servicios a vecinas y vecinos.",
+        "items": [
+          {
+            "titulo": "Municipalidad de Padre Las Casas",
+            "icono": "wifi",
+            "html": "<p><strong>Objetivo:</strong> un marco de colaboración para el desarrollo de ambas municipalidades, enfocado en la implementación de la Ley de Transformación Digital del Estado mediante plataformas tecnológicas.</p><p>Padre Las Casas entrega capacitación, asistencia técnica y el uso de sus plataformas; Melipeuco las usa según las políticas de seguridad y privacidad, comparte las mejoras que desarrolle y no las distribuye ni modifica sin autorización. El convenio tiene vigencia indefinida.</p>"
+          },
+          {
+            "titulo": "Gobierno Regional: DocDigital",
+            "icono": "documento",
+            "html": "<p><strong>Objetivo:</strong> firmar electrónicamente los convenios mediante la plataforma <strong>DocDigital</strong>, con la correcta gestión de usuarios, perfiles y subrogantes.</p><p>El Gobierno Regional de La Araucanía capacita y monitorea el uso de la plataforma; la Municipalidad mantiene actualizados sus usuarios y subrogantes. Incluye autenticación con ClaveÚnica y FirmaGob.</p>"
+          }
+        ]
+      },
+      {
+        "id": "beneficios",
+        "tipo": "tarjetas",
+        "titulo": "Beneficios de la transformación digital",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "reloj",
+            "titulo": "Eficiencia",
+            "texto": "Menos tiempo en los procesos administrativos."
+          },
+          {
+            "icono": "llave",
+            "titulo": "Seguridad de datos",
+            "texto": "Información protegida en plataformas seguras."
+          },
+          {
+            "icono": "billete",
+            "titulo": "Ahorro",
+            "texto": "Menos costos en papel y trámites presenciales."
+          },
+          {
+            "icono": "usuario",
+            "titulo": "Mejor servicio",
+            "texto": "Trámites más rápidos y sencillos para los vecinos."
+          },
+          {
+            "icono": "buscar",
+            "titulo": "Transparencia",
+            "texto": "Más acceso a la información pública municipal."
+          },
+          {
+            "icono": "escuela",
+            "titulo": "Capacitación",
+            "texto": "Funcionarios formados en herramientas digitales."
+          }
+        ]
+      },
+      {
         "id": "ley",
         "tipo": "texto",
         "ancla": "Transformación digital",
@@ -49,12 +109,12 @@
         "html": "<p>La <strong>Ley N° 21.180</strong> establece un marco para modernizar el Estado incorporando tecnologías digitales en los procesos administrativos, para mejorar la eficiencia, la transparencia y la calidad de los servicios a la ciudadanía.</p><ul><li>Modernización de los trámites municipales.</li><li>Digitalización de los procesos internos.</li><li>Más transparencia y acceso a la información.</li></ul>",
         "botones": [
           {
-            "texto": "Convenios de transformación digital",
-            "url": "/transformaciondigital/"
-          },
-          {
             "texto": "Trámites en línea",
             "url": "/tramites/"
+          },
+          {
+            "texto": "Ver el estado de mi trámite",
+            "url": "/tramites/seguimiento/"
           }
         ]
       },
