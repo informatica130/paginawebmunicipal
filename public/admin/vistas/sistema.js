@@ -1,15 +1,16 @@
 import { h, raw, $, api, aviso, fallo, fecha, puede, confirmar, descargar, descargarApi } from '../ui.js';
 
 export default async function (vista) {
-  const [plataforma, respaldos, redirecciones, importacion] = await Promise.all([
+  const [plataforma, respaldos, redirecciones, importacion, facebook] = await Promise.all([
     api('GET', 'plataforma'),
     puede('respaldo.gestionar') ? api('GET', 'respaldos') : null,
     puede('redirecciones.editar') ? api('GET', 'redirecciones') : null,
     puede('respaldo.gestionar') ? api('GET', 'importar-wordpress') : null,
+    puede('respaldo.gestionar') ? api('GET', 'importar-facebook') : null,
   ]);
   const p = plataforma.estado;
   const cat = plataforma.catalogo;
-  vista.innerHTML = String(h`<div class="cabecera-vista"><div><h1>Sistema e integraciones</h1><p>Conexión con la Plataforma Municipal de Trámites, respaldos, importación desde WordPress y redirecciones.</p></div></div>
+  vista.innerHTML = String(h`<div class="cabecera-vista"><div><h1>Sistema e integraciones</h1><p>Conexión con la Plataforma Municipal de Trámites, respaldos, importación desde WordPress y Facebook, y redirecciones.</p></div></div>
     <section class="tarjeta"><h2>Plataforma Municipal de Trámites</h2>
       ${p.configurado ? h`<p class="estado-plataforma"><span class="punto ${p.enLinea ? 'ok' : 'mal'}"></span> <b>${p.enLinea ? 'Conectada' : 'Sin respuesta'}</b> · ${p.base} ${p.version ? '· versión ' + p.version : ''}</p>
         <p class="chico muted">El sitio lee en vivo el catálogo público de la plataforma: cada trámite nuevo que se publique allí aparece solo en «Trámites» y en la página de su área. Las fichas del sitio pueden vincularse a un trámite de la plataforma (campo «Trámite de la Plataforma») para ofrecer reserva de hora, solicitud y seguimiento en línea.</p>
@@ -28,6 +29,10 @@ CORS_ORIGINS=https://tramites.municipalidadmelipeuco.cl</pre><p class="chico">Y 
       <label class="check"><input type="checkbox" data-medios> Descargar también imágenes y archivos al servidor (necesario antes de apagar el WordPress antiguo)</label>
       <label class="check"><input type="checkbox" data-reemplazar> Reemplazar el contenido importado con la versión del WordPress</label>
       <button class="btn" data-importar>Importar ahora</button></section>` : ''}
+    ${facebook ? h`<section class="tarjeta"><h2>Publicaciones de Facebook</h2>
+      <p class="chico">Agrega como noticias las publicaciones públicas de la página de Facebook del municipio (con sus fotos y categorías). Sólo crea las que faltan: no toca las que ya se importaron, aunque se hayan editado o eliminado.</p>
+      <p class="chico">${facebook.disponibles} publicaciones en el paquete · <b>${facebook.importadas} ya están en el sitio</b>${facebook.ultima ? ' · última importación ' + fecha(facebook.ultima.fin, { hora: true }) : ''}</p>
+      <button class="btn" data-facebook ${facebook.importadas >= facebook.disponibles ? 'disabled' : ''}>Importar publicaciones</button></section>` : ''}
     ${redirecciones ? h`<section class="tarjeta"><h2>Redirecciones</h2><p class="chico muted">Envían direcciones antiguas a las nuevas (útil para enlaces impresos o publicados en redes).</p>
       <form class="fila" data-redir><input name="origen" placeholder="/direccion-antigua/" required><input name="destino" placeholder="/direccion-nueva/ o https://…" required><select name="codigo"><option value="301">Permanente (301)</option><option value="302">Temporal (302)</option></select><button class="btn">Agregar</button></form>
       <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Origen</th><th>Destino</th><th>Usos</th><th></th></tr></thead><tbody>${redirecciones.map((r) => h`<tr><td class="mono chico">${r.origen}</td><td class="mono chico">${r.destino}</td><td>${r.visitas}</td><td><button class="btn chico peligro" data-borrar-redir="${r.id}">✕</button></td></tr>`)}</tbody></table></div></section>` : ''}
@@ -45,6 +50,12 @@ CORS_ORIGINS=https://tramites.municipalidadmelipeuco.cl</pre><p class="chico">Y 
         if (!(await confirmar('¿Importar ahora desde el WordPress? Puede tardar varios minutos.', { boton: 'Importar' }))) return;
         await api('POST', 'importar-wordpress', { medios: $('[data-medios]', vista).checked, reemplazar: $('[data-reemplazar]', vista).checked });
         aviso('Importación iniciada. Recargue esta sección en unos minutos para ver el resultado.', 'ok');
+      }
+      if (b.dataset.facebook !== undefined) {
+        if (!(await confirmar('¿Agregar como noticias publicadas las publicaciones de Facebook que faltan?', { boton: 'Importar' }))) return;
+        const r = await api('POST', 'importar-facebook');
+        aviso(`${r.creados} noticias nuevas${r.omitidos ? `, ${r.omitidos} ya estaban` : ''}.`, 'ok');
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
       }
       if (b.dataset.borrarRedir) { await api('DELETE', 'redirecciones/' + b.dataset.borrarRedir); b.closest('tr').remove(); }
       if (b.dataset.reindexar !== undefined) { await api('POST', 'reindexar'); aviso('Índice de búsqueda reconstruido.', 'ok'); }

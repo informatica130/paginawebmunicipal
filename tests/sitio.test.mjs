@@ -328,6 +328,25 @@ test('micrositios: Medio Ambiente predeterminado, edición desde el panel y borr
   await api(s, 'PUT', 'micrositios', { sitios: actual.sitios, eliminados: [] });
 });
 
+test('facebook: las publicaciones se importan una sola vez como noticias con fotos y categoría', async () => {
+  const s = await admin();
+  const antes = await (await api(s, 'GET', 'importar-facebook')).json();
+  assert.ok(antes.disponibles > 100);
+  const r = await (await api(s, 'POST', 'importar-facebook')).json();
+  assert.equal(r.creados + r.omitidos, antes.disponibles);
+  const otra = await (await api(s, 'POST', 'importar-facebook')).json();
+  assert.equal(otra.creados, 0);
+  assert.equal((await (await api(s, 'GET', 'importar-facebook')).json()).importadas, antes.disponibles);
+  const pag = await pedir('/2019/12/12/se-entrega-la-remodelada-plaza-de-armas-de-melipeuco/');
+  assert.equal(pag.status, 200);
+  const h = await pag.text();
+  assert.match(h, /\/img\/facebook\/\d+\.webp/);
+  assert.match(h, /Fuente: Publicación de la página de Facebook/);
+  const foto = h.match(/\/img\/facebook\/\d+\.webp/)[0];
+  assert.equal((await pedir(foto)).headers.get('content-type'), 'image/webp');
+  assert.match(await (await pedir('/buscar/?q=remodelada+Plaza+de+Armas')).text(), /Se entrega la remodelada Plaza de Armas/);
+});
+
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
   const { leerCarpeta, clasificar, nombreVisible, idPublico } = await import('../herramientas/transparencia-drive.js');
   const html = '<div class="flip-entries"><div class="flip-entry" id="entry-ABC123" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/drive/folders/ABC123?resourcekey=0-xyz" target="_blank"><div class="flip-entry-title">05.- ADQUISICIONES</div></a></div><div class="flip-entry-last-modified"><div>8/19/16</div></div></div>'

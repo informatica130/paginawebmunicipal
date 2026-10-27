@@ -19,6 +19,7 @@ import { CATEGORIAS as CATEGORIAS_TRANSPARENCIA } from './render/transparencia.j
 import { contenidoTrekking } from './render/trekking.js';
 import { qrSvg } from '../src/qr.js';
 import { respaldar } from '../herramientas/respaldo.js';
+import { importarFacebook, paqueteFacebook } from './facebook.js';
 
 const MAX_SUBIDA = 40 * 1024 * 1024;
 const FIRMAS = [
@@ -727,6 +728,18 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return { ok: true };
   });
   ruta('GET', 'importar-wordpress', 'respaldo.gestionar', () => db.ajuste('importacion') || { en: 'nunca' });
+  ruta('GET', 'importar-facebook', 'respaldo.gestionar', () => {
+    const paquete = paqueteFacebook();
+    const hechas = db.get("SELECT count(*) n FROM contenidos WHERE url_antigua LIKE 'facebook:%'").n;
+    return { disponibles: paquete.noticias.length, importadas: hechas, ultima: db.ajuste('importacion-facebook') };
+  });
+  ruta('POST', 'importar-facebook', 'respaldo.gestionar', ({ u, req }) => {
+    const r = importarFacebook(db, repo, { usuario: u });
+    db.guardarAjuste('importacion-facebook', { fin: ahora(), por: u.nombre, ...r });
+    auditar(u, 'facebook.importar', '', `${r.creados} nuevas, ${r.omitidos} ya estaban`, req.ip);
+    invalidar();
+    return r;
+  });
   ruta('POST', 'reindexar', 'ajustes.editar', ({ u }) => { repo.reindexarTodo(); auditar(u, 'busqueda.reindexar'); invalidar(); return { ok: true }; });
   ruta('POST', 'cache/limpiar', 'contenido.publicar', ({ u }) => { invalidar(); tramites.limpiarCache(); auditar(u, 'cache.limpiar'); return { ok: true }; });
 
