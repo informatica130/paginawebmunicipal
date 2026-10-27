@@ -248,6 +248,12 @@
       } else if (e === 'portal') {
         anim(portal, [{ clipPath: 'circle(0px at ' + centro + ')' }, { clipPath: 'circle(150vmax at ' + centro + ')' }], { duration: 560, easing: 'cubic-bezier(.7, 0, .3, 1)' });
         t = 300;
+      } else if (e === 'persiana') {
+        columnas.forEach(function (c, i) { anim(c, [{ transform: 'rotateX(92deg)' }, { transform: 'none' }], { duration: 420, delay: i * 32, easing: 'cubic-bezier(.65, 0, .35, 1)' }); });
+        t = 8 * 32 + 300;
+      } else if (e === 'diagonal') {
+        anim(portal, [{ clipPath: 'polygon(0 0, 0 0, 0 0, 0 0)' }, { clipPath: 'polygon(0 0, 200% 0, 200% 0, 0 200%)' }], { duration: 560, easing: 'cubic-bezier(.76, 0, .24, 1)' });
+        t = 320;
       } else if (e === 'telon') {
         // Dos paños se cierran desde los lados con un leve pliegue en 3D.
         telon.forEach(function (p, i) { anim(p, [{ transform: 'translateX(' + (i ? 101 : -101) + '%) rotateY(' + (i ? -24 : 24) + 'deg)' }, { transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.76, 0, .24, 1)' }); });
@@ -269,6 +275,8 @@
       anim(emblema, [{ opacity: 1, transform: 'perspective(600px) rotateY(0) scale(1)' }, { opacity: 0, transform: 'perspective(600px) rotateY(160deg) scale(.6)' }], { duration: 380, easing: 'ease-in' });
       anim(info, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 120 });
       if (e === 'columnas') columnas.forEach(function (c, i) { ultima = anim(c, [{ transform: 'none', transformOrigin: '100% 50%' }, { transform: 'rotateY(92deg)', transformOrigin: '100% 50%' }], { duration: 460, delay: 160 + i * 38, easing: 'cubic-bezier(.65, 0, .35, 1)' }); });
+      else if (e === 'persiana') columnas.forEach(function (c, i) { ultima = anim(c, [{ transform: 'none', transformOrigin: '50% 100%' }, { transform: 'rotateX(-92deg)', transformOrigin: '50% 100%' }], { duration: 460, delay: 160 + i * 36, easing: 'cubic-bezier(.65, 0, .35, 1)' }); });
+      else if (e === 'diagonal') ultima = anim(portal, [{ clipPath: 'polygon(-100% 100%, 100% -100%, 100% 100%, 100% 100%)' }, { clipPath: 'polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%)' }], { duration: 680, delay: 180, easing: 'cubic-bezier(.76, 0, .24, 1)' });
       else if (e === 'telon') telon.forEach(function (p, i) { ultima = anim(p, [{ transform: 'none' }, { transform: 'translateX(' + (i ? 101 : -101) + '%) rotateY(' + (i ? -24 : 24) + 'deg)' }], { duration: 700, delay: 200, easing: 'cubic-bezier(.76, 0, .24, 1)' }); });
       else if (e === 'portal') ultima = anim(portal, [{ clipPath: 'circle(150vmax at 50% 50%)' }, { clipPath: 'circle(0px at 50% 50%)' }], { duration: 640, delay: 180, easing: 'cubic-bezier(.7, 0, .3, 1)' });
       else capas.slice().reverse().forEach(function (c, i) { ultima = anim(c, [{ transform: 'none' }, { transform: 'translate3d(0, calc(-100% - 18vh), 0)' }], { duration: 640, delay: 120 + i * 70, easing: VUELO }); });

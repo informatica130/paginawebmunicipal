@@ -181,7 +181,9 @@
       var t = entrar(modo);
       temporizador = setTimeout(reposar, t / VEL);
     }
-    return { reproducir: reproducir };
+    // La cabecera pide repetir la animación cada vez que muestra este logo.
+    svg.addEventListener('tk:reproducir', reproducir);
+    return { reproducir: reproducir, enCabecera: !!svg.closest('.marca-tk') };
   }
 
   // Espera a que se vaya la pantalla de carga o la cortina antes de empezar.
@@ -195,11 +197,11 @@
 
   var logos = $$('svg.tk-logo').map(crear), iniciado = false;
   if (!logos.length) return;
-  cuandoListo(function () { if (iniciado) return; iniciado = true; logos.forEach(function (l) { l.reproducir(); }); });
+  cuandoListo(function () { if (iniciado) return; iniciado = true; logos.forEach(function (l) { if (!l.enCabecera) l.reproducir(); }); });
   // Vista previa del panel «Diseño del sitio»: al cambiar las opciones del logo se vuelve a reproducir.
   var previo = [attr('data-logo-anim'), attr('data-logo-reposo')].join();
   d.addEventListener('mlp:diseno', function (e) {
     var ahora = [attr('data-logo-anim'), attr('data-logo-reposo')].join();
-    if (ahora !== previo || (e.detail && e.detail.reproducir)) { previo = ahora; logos.forEach(function (l) { l.reproducir(); }); }
+    if (ahora !== previo || (e.detail && e.detail.reproducir)) { previo = ahora; logos.forEach(function (l) { if (!l.enCabecera) l.reproducir(); }); }
   });
 })();

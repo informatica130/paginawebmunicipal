@@ -74,6 +74,35 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { lista.forEach(function (x) { if (e[0].isIntersecting) x.play(); else x.pause(); }); }).observe(svg);
   });
 
+  // Alternancia del logo de la cabecera: el escudo municipal cede su lugar al logo animado de la
+  // Capital del Trekking y luego vuelve, una y otra vez. Opción «Cabecera → Alternar con el logo
+  // de la Capital del Trekking» (cada cuántos segundos y con qué efecto). Se detiene al pasar el
+  // cursor, con la pestaña oculta o fuera de pantalla.
+  $$('.marca').forEach(function (marca) {
+    var tk = marca.querySelector('.marca-tk');
+    if (!tk) return;
+    var svgTk = tk.querySelector('svg'), escudo = marca.querySelector('.marca-viva'), reloj = null, encima = false, visible = true;
+    var cada = function () { return (Number(raiz.getAttribute('data-alternar-cada')) || 7) * 1000; };
+    var activa = function () { return raiz.getAttribute('data-alternar-logo') === 'si'; };
+    function mostrar(tkVisible) {
+      marca.classList.toggle('cara-tk', tkVisible);
+      if (tkVisible && svgTk) setTimeout(function () { svgTk.dispatchEvent(new Event('tk:reproducir')); }, 260);
+      else if (!tkVisible && escudo && activo()) setTimeout(function () { gesto(escudo); }, 300);
+    }
+    function programar() {
+      clearTimeout(reloj);
+      if (!activa()) { marca.classList.remove('cara-tk'); return; }
+      // El logo del trekking se queda un poco menos que el escudo.
+      var t = marca.classList.contains('cara-tk') ? cada() * .8 : cada();
+      reloj = setTimeout(function () { if (!encima && visible && !d.hidden) mostrar(!marca.classList.contains('cara-tk')); programar(); }, t);
+    }
+    marca.addEventListener('pointerenter', function () { encima = true; });
+    marca.addEventListener('pointerleave', function () { encima = false; });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(marca);
+    if (raiz.classList.contains('con-intro')) d.addEventListener('intro:fin', programar, { once: true }); else programar();
+    d.addEventListener('mlp:diseno', programar);
+  });
+
   // Pie: se arma al aparecer en pantalla.
   $$('.pie-escudo.escudo-vivo').forEach(function (svg) {
     if (!('IntersectionObserver' in window) || !activo()) return;

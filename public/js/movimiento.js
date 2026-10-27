@@ -219,7 +219,7 @@
     // Tarjetas de áreas y genéricas: crecen desde un poco más pequeñas.
     { sel: '.tarjeta-area, .tarjetas > .tarjeta, .autoridad, .contacto-boton, .arbol.nivel-0 > li', cuadros: [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], dur: 600, paso: 35, curva: SALIDA },
     // Títulos de sección: el texto sube desde una máscara.
-    { sel: '.seccion-cabecera h2, .bloque-cabecera h2, .ficha-seccion h2, .grupo-tramites h2', cuadros: [{ clipPath: 'inset(0 0 100% 0)', transform: 'translateY(60%)' }, { clipPath: 'inset(0 0 -20% 0)', transform: 'none' }], dur: 700, paso: 0, curva: SALIDA },
+    { titulo: true, sel: '.seccion-cabecera h2, .bloque-cabecera h2, .ficha-seccion h2, .grupo-tramites h2', cuadros: [{ clipPath: 'inset(0 0 100% 0)', transform: 'translateY(60%)' }, { clipPath: 'inset(0 0 -20% 0)', transform: 'none' }], dur: 700, paso: 0, curva: SALIDA },
     // Bloques destacados: aparecen y suben.
     { sel: '.tk-cifra, .tk-foto, .tk-trekking-cabeza > *', cuadros: [{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'none' }], dur: 800, paso: 70, curva: SALIDA },
     { sel: '.tk-mundos-letras li', cuadros: [{ opacity: 0, transform: 'translateY(-60px) rotate(-10deg) scale(.7)' }, { opacity: 1, transform: 'none' }], dur: 900, paso: 60, curva: REBOTE },
@@ -227,6 +227,17 @@
     // Firma gigante del pie: las letras suben desde la base.
     { sel: '.pie-trekking a', cuadros: [{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }], dur: 1400, paso: 0, curva: SALIDA },
   ];
+
+  // Estilo único de aparición elegido en el panel (si no, cada elemento entra a su manera).
+  var APARICION = {
+    subir: [{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'none' }],
+    fundido: [{ opacity: 0 }, { opacity: 1 }],
+    zoom: [{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }],
+    giro3d: [{ opacity: 0, transform: 'perspective(900px) rotateX(28deg) translateY(36px)', transformOrigin: '50% 100%' }, { opacity: 1, transform: 'none', transformOrigin: '50% 100%' }],
+    lateral: [{ opacity: 0, transform: 'translateX(-40px)' }, { opacity: 1, transform: 'none' }],
+    desenfoque: [{ opacity: 0, filter: 'blur(12px)', transform: 'scale(1.03)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }],
+  };
+  function cuadrosDe(ef) { var e = raiz.getAttribute('data-aparicion-estilo'); return !ef.titulo && APARICION[e] ? APARICION[e] : ef.cuadros; }
 
   function aparicion() {
     if (!puede || !activo('aparicion') || !('IntersectionObserver' in window)) return;
@@ -242,7 +253,7 @@
         pendientes.delete(el);
         var n = orden[ef.sel] = (orden[ef.sel] || 0) + 1;
         var retraso = Math.min(n - 1, 8) * ef.paso;
-        var a = anim(el, escalarCuadros(ef.cuadros), { duration: ef.dur, delay: retraso, easing: ef.curva });
+        var a = anim(el, escalarCuadros(cuadrosDe(ef)), { duration: ef.dur, delay: retraso, easing: ef.curva });
         if (ef.extra) ef.extra(el, retraso);
         el.classList.remove('por-aparecer');
         // Al terminar se quita la animación para que no interfiera con los efectos del cursor.
@@ -447,4 +458,30 @@
   contadores();
   titulosPorPalabra();
   // La transición entre páginas la hace public/js/transiciones.js (columnas, portal y cordillera).
+
+  // ================================================================ Luz que sigue al cursor y onda al hacer clic
+  // Opciones «Animaciones → Luz bajo el cursor» y «Onda al hacer clic».
+  var TARJETAS = '.pt-tile, .tarjeta-noticia, .fila-tramite, .tarjeta-area, a.tarjeta, .tarjeta-accion, .accesos a, .tarjeta-evento, .lateral-bloque';
+  if (puede && window.matchMedia && matchMedia('(hover: hover)').matches) {
+    d.addEventListener('pointermove', function (e) {
+      if (raiz.getAttribute('data-cursor-luz') !== 'si') return;
+      var t = e.target.closest && e.target.closest(TARJETAS);
+      if (!t) return;
+      var r = t.getBoundingClientRect();
+      t.style.setProperty('--lx', (e.clientX - r.left) + 'px'); t.style.setProperty('--ly', (e.clientY - r.top) + 'px');
+      t.classList.add('con-luz');
+    }, { passive: true });
+  }
+  d.addEventListener('pointerdown', function (e) {
+    if (!puede || raiz.getAttribute('data-onda-clic') !== 'si') return;
+    var b = e.target.closest && e.target.closest('.boton, .pt-tile, .pt-tema, .chip, .ver-todo, .sug-chip');
+    if (!b) return;
+    var r = b.getBoundingClientRect(), o = d.createElement('span'), lado = Math.max(r.width, r.height) * 2.2;
+    o.className = 'onda-clic';
+    o.style.cssText = 'left:' + (e.clientX - r.left - lado / 2) + 'px;top:' + (e.clientY - r.top - lado / 2) + 'px;width:' + lado + 'px;height:' + lado + 'px';
+    if (getComputedStyle(b).position === 'static') b.style.position = 'relative';
+    b.appendChild(o);
+    var x = o.animate([{ transform: 'scale(0)', opacity: .35 }, { transform: 'scale(1)', opacity: 0 }], { duration: 650, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    x.finished.then(function () { o.remove(); }, function () { o.remove(); });
+  });
 })();

@@ -50,7 +50,7 @@ export function tarjetaNoticia(ctx, c, { grande = false } = {}) {
     <div class="tn-cuerpo">
       ${cat ? html`<a class="etiqueta" href="/categoria/${cat.slug}/">${cat.nombre}</a>` : ''}
       <h3><a href="${url}">${c.titulo}</a></h3>
-      ${grande ? html`<p>${resumenDe(c, 220)}</p>` : ''}
+      ${(() => { const r = resumenDe(c, grande ? 220 : 140); return r ? html`<p class="tn-resumen">${r}</p>` : ''; })()}
       <time datetime="${c.publicado_en || ''}">${fecha(c.publicado_en, { largo: true })}</time>
     </div>
   </article>`;

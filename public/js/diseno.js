@@ -25,7 +25,7 @@ export const PREDETERMINADO = {
   colores: { primario: '#1F6FA8', acento: '#E9A92B', oscuro: '#0F3A5A', fondo: '#F7F3EC', fondoAlterno: '#EDE6D9', texto: '#17191B', exito: '#2F7D4A', peligro: '#C62828' },
   tipografia: { cuerpo: 'public-sans', titulos: 'bricolage', tamano: 16, pesoTitulos: 800, espaciadoTitulos: -3, menuMayusculas: true },
   forma: { radio: 18, radioGrande: 22, tarjetas: 'sombra', botones: 'pildora', densidad: 'normal', ancho: 1240, sombras: 'suaves', escala: 100, maqueta: 'portal', elevacion: 4 },
-  cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, menuAbrir: 'cursor', logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
+  cabecera: { estilo: 'oscura', centrada: true, fija: true, barraSuperior: false, botonTramites: false, menuAbrir: 'cursor', alternarLogo: true, alternarCada: 7, alternarEfecto: 'giro', logo: 'emblema', logoUrl: '', tamanoLogo: 54, subtitulo: 'Ilustre Municipalidad de', nombre: 'Melipeuco' },
   portada: { composicion: 'portal', fotoLado: 'derecha', imagen: '', credito: 'Volcán Llaima desde los senderos de Melipeuco', titulo: 'Municipalidad de Melipeuco', bajada: '', alto: 'alto', alineacion: 'izquierda', velo: 80, franjaDatos: true, populares: false,
     // Portada «Capital del Trekking»
     logoAnimacion: 'vivo', logoReposo: true, logoGestos: true, tamanoLogo: 100, kicker: true, buscador: true, cordillera: true, puntos: true,
@@ -37,13 +37,19 @@ export const PREDETERMINADO = {
     temas: true, temasTitulo: 'Quiero información de…', temasEstilo: 'vidrio', buscador: 'pildora',
     logoTrekking: true, reparto: 'equilibrado', bannerProporcion: 'auto', bannerAjuste: 'cubrir', bannerEfecto: 'zoom',
   },
+  // Banner de campañas (en la portada «portal» y en su sección)
+  campanas: { autoplay: true, intervalo: 7, transicion: 'deslizar', flechas: 'cursor', puntos: 'pildora', pausa: true, marco: 'sombra', proporcionMovil: 'auto' },
+  // Noticias (portada y listados)
+  noticias: { disposicion: 'destacada', columnas: 4, proporcion: '16/10', estilo: 'limpia', resumen: 'destacada', fecha: true, categoria: true, efecto: 'zoom', etiqueta: 'texto' },
+  // Elementos repetidos en todo el sitio
+  elementos: { accesos: 'tarjetas', tramites: 'tarjetas', verTodo: 'pildora', categorias: 'pildora', iconos: 'suaves', separadores: 'ninguno' },
   // Buscador predictivo (portada, cabecera y página de resultados)
   buscador: { predictivo: true, ejemplos: true, ejemplosTexto: 'licencia de conducir, patente comercial, horario de buses, permiso de circulación, certificado de residencia', recientes: true, populares: true, fragmentos: true },
   // Identidad «Capital del Trekking» en todo el sitio
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true },
   animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true,
-    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, precarga: true },
+    introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true },
   avanzado: { css: '' },
 };
 
@@ -115,8 +121,26 @@ export const OPCIONES = {
   intensidad: { sutil: 'Sutil', normal: 'Normal', expresiva: 'Expresiva' },
   intro: { primera: 'Primera visita de cada sesión', siempre: 'Cada vez que se abre la portada', nunca: 'Nunca' },
   introEstilo: { escudo3d: 'El escudo municipal se arma en 3D y vuela a la cabecera', logo3d: 'El logo se reconstruye en 3D, pieza por pieza', escudo: 'El escudo municipal se arma (clásica, plana)' },
-  transicionEstilo: { columnas: 'Nueve columnas que giran en 3D (una por letra)', portal: 'Portal: el emblema del área se abre en círculo', cordillera: 'Cordillera: capas de montaña que suben', telon: 'Telón: dos paños se cierran con el escudo al centro', vista: 'Fluida: la cabecera queda quieta y el contenido se desliza (la más rápida)' },
+  transicionEstilo: { columnas: 'Nueve columnas que giran en 3D (una por letra)', portal: 'Portal: el emblema del área se abre en círculo', cordillera: 'Cordillera: capas de montaña que suben', telon: 'Telón: dos paños se cierran con el escudo al centro', persiana: 'Persiana: nueve franjas horizontales que giran', diagonal: 'Barrido diagonal con los colores del área', vista: 'Fluida: la cabecera queda quieta y el contenido se desliza (la más rápida)' },
   menuAbrir: { cursor: 'Al pasar el cursor', clic: 'Al hacer clic' },
+  alternarEfecto: { giro: 'Giro en 3D', fundido: 'Fundido suave', deslizar: 'Desliza hacia arriba' },
+  transicionCampana: { deslizar: 'Deslizar', fundido: 'Fundido', zoom: 'Fundido con acercamiento', profundidad: 'Profundidad 3D' },
+  flechas: { cursor: 'Al pasar el cursor', siempre: 'Siempre', nunca: 'Nunca' },
+  puntos: { pildora: 'Píldoras', puntos: 'Puntos', barra: 'Barras de progreso', ninguno: 'Ocultos' },
+  marcoCampana: { sombra: 'Con sombra', borde: 'Borde blanco', plano: 'Plano' },
+  disposicionNoticias: { destacada: 'Mosaico con una destacada', grilla: 'Grilla pareja', revista: 'Revista: la primera a lo ancho', lista: 'Lista con foto al lado', carrusel: 'Carrusel deslizable' },
+  proporcionFoto: { '16/10': '16:10', '4/3': '4:3', '3/2': '3:2', '1/1': 'Cuadrada', '21/9': 'Panorámica' },
+  estiloNoticia: { limpia: 'Limpia (foto y texto)', tarjeta: 'Tarjeta con fondo', superpuesta: 'Texto sobre la foto' },
+  resumenNoticia: { destacada: 'Sólo en la destacada', todas: 'En todas', ninguna: 'En ninguna' },
+  efectoNoticia: { zoom: 'Acercar la foto', elevar: 'Elevar la tarjeta', brillo: 'Brillo que cruza', ninguno: 'Sin efecto' },
+  etiquetaNoticia: { texto: 'Texto de color', pildora: 'Píldora suave', solida: 'Píldora de color' },
+  estiloAccesos: { tarjetas: 'Tarjetas con ícono', iconos: 'Íconos grandes en círculo', pildoras: 'Píldoras compactas' },
+  estiloTramites: { tarjetas: 'Tarjetas en grilla', filas: 'Lista en filas' },
+  verTodo: { pildora: 'Botón píldora', enlace: 'Enlace con flecha' },
+  estiloCategorias: { pildora: 'Píldoras', subrayado: 'Pestañas subrayadas' },
+  estiloIconos: { suaves: 'Fondo suave', solidos: 'Fondo de color', lineas: 'Sólo el trazo' },
+  separadores: { ninguno: 'Sin separadores', ondas: 'Ondas entre secciones', montes: 'Cordillera entre secciones' },
+  aparicionEstilo: { mixto: 'Cada elemento a su manera', subir: 'Suben', fundido: 'Aparecen', zoom: 'Crecen', giro3d: 'Giran en 3D', lateral: 'Llegan desde el lado', desenfoque: 'Se enfocan' },
   reparto: { equilibrado: 'Equilibrado', banner: 'Campaña más grande', panel: 'Buscador más ancho' },
   bannerProporcion: { auto: 'La de la imagen', '16/9': 'Panorámica 16:9', '21/9': 'Cine 21:9', '3/1': 'Franja 3:1', '4/3': 'Clásica 4:3', '1/1': 'Cuadrada 1:1' },
   bannerAjuste: { cubrir: 'Llenar el marco (recorta los bordes)', completa: 'Imagen completa (sin recortar)' },
@@ -168,7 +192,7 @@ export function migrar(d) {
 
 export function normalizar(entrada, { permitirCss = true, previo = null } = {}) {
   const e = fusionar(PREDETERMINADO, esObjeto(entrada) ? entrada : {});
-  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador;
+  const P = PREDETERMINADO, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, cp = e.campanas, no = e.noticias, el = e.elementos;
   return {
     revision: REVISION,
     estilo: opcion(e.estilo, { ...ESTILOS, personalizado: 1 }, 'personalizado'),
@@ -183,7 +207,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       densidad: opcion(f.densidad, OPCIONES.densidad, 'normal'), ancho: numero(f.ancho, P.forma.ancho, 960, 1440), sombras: opcion(f.sombras, OPCIONES.sombras, P.forma.sombras), escala: numero(f.escala, 100, 80, 115), radioGrande: numero(f.radioGrande, P.forma.radioGrande, 0, 48), elevacion: numero(f.elevacion, P.forma.elevacion, 0, 14), maqueta: opcion(f.maqueta, OPCIONES.maqueta, P.forma.maqueta),
     },
     cabecera: {
-      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), centrada: bool(ca.centrada, P.cabecera.centrada), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites), menuAbrir: opcion(ca.menuAbrir, OPCIONES.menuAbrir, 'cursor'),
+      estilo: opcion(ca.estilo, OPCIONES.cabeceraEstilo, P.cabecera.estilo), centrada: bool(ca.centrada, P.cabecera.centrada), fija: bool(ca.fija, true), barraSuperior: bool(ca.barraSuperior, P.cabecera.barraSuperior), botonTramites: bool(ca.botonTramites, P.cabecera.botonTramites), menuAbrir: opcion(ca.menuAbrir, OPCIONES.menuAbrir, 'cursor'), alternarLogo: bool(ca.alternarLogo, true), alternarCada: numero(ca.alternarCada, 7, 3, 30), alternarEfecto: opcion(ca.alternarEfecto, OPCIONES.alternarEfecto, 'giro'),
       logo: opcion(ca.logo, OPCIONES.logo, 'emblema'), logoUrl: imagen(ca.logoUrl), tamanoLogo: numero(ca.tamanoLogo, 54, 36, 96),
       subtitulo: texto(ca.subtitulo, P.cabecera.subtitulo, 60), nombre: texto(ca.nombre, P.cabecera.nombre, 60),
     },
@@ -206,6 +230,20 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       logoTrekking: bool(pt.logoTrekking, PP.logoTrekking), reparto: opcion(pt.reparto, OPCIONES.reparto, PP.reparto),
       bannerProporcion: opcion(pt.bannerProporcion, OPCIONES.bannerProporcion, PP.bannerProporcion), bannerAjuste: opcion(pt.bannerAjuste, OPCIONES.bannerAjuste, PP.bannerAjuste), bannerEfecto: opcion(pt.bannerEfecto, OPCIONES.bannerEfecto, PP.bannerEfecto),
     },
+    campanas: {
+      autoplay: bool(cp.autoplay, true), intervalo: numero(cp.intervalo, 7, 3, 20), transicion: opcion(cp.transicion, OPCIONES.transicionCampana, 'deslizar'),
+      flechas: opcion(cp.flechas, OPCIONES.flechas, 'cursor'), puntos: opcion(cp.puntos, OPCIONES.puntos, 'pildora'), pausa: bool(cp.pausa, true),
+      marco: opcion(cp.marco, OPCIONES.marcoCampana, 'sombra'), proporcionMovil: opcion(cp.proporcionMovil, OPCIONES.bannerProporcion, 'auto'),
+    },
+    noticias: {
+      disposicion: opcion(no.disposicion, OPCIONES.disposicionNoticias, 'destacada'), columnas: numero(no.columnas, 4, 2, 4), proporcion: opcion(no.proporcion, OPCIONES.proporcionFoto, '16/10'),
+      estilo: opcion(no.estilo, OPCIONES.estiloNoticia, 'limpia'), resumen: opcion(no.resumen, OPCIONES.resumenNoticia, 'destacada'), fecha: bool(no.fecha, true), categoria: bool(no.categoria, true),
+      efecto: opcion(no.efecto, OPCIONES.efectoNoticia, 'zoom'), etiqueta: opcion(no.etiqueta, OPCIONES.etiquetaNoticia, 'texto'),
+    },
+    elementos: {
+      accesos: opcion(el.accesos, OPCIONES.estiloAccesos, 'tarjetas'), tramites: opcion(el.tramites, OPCIONES.estiloTramites, 'tarjetas'), verTodo: opcion(el.verTodo, OPCIONES.verTodo, 'pildora'),
+      categorias: opcion(el.categorias, OPCIONES.estiloCategorias, 'pildora'), iconos: opcion(el.iconos, OPCIONES.estiloIconos, 'suaves'), separadores: opcion(el.separadores, OPCIONES.separadores, 'ninguno'),
+    },
     buscador: {
       predictivo: bool(bu.predictivo, true), ejemplos: bool(bu.ejemplos, true), ejemplosTexto: texto(bu.ejemplosTexto, P.buscador.ejemplosTexto, 300),
       recientes: bool(bu.recientes, true), populares: bool(bu.populares, true), fragmentos: bool(bu.fragmentos, true),
@@ -220,6 +258,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       introEstilo: opcion(an.introEstilo, OPCIONES.introEstilo, P.animaciones.introEstilo), escudoVivo: bool(an.escudoVivo, true), profundidad: numero(an.profundidad, 70, 0, 100),
       transicionEstilo: opcion(an.transicionEstilo, OPCIONES.transicionEstilo, 'columnas'), transicionColor: opcion(an.transicionColor, OPCIONES.transicionColor, 'zona'),
       transicionNombre: bool(an.transicionNombre, true), precarga: bool(an.precarga, true),
+      aparicionEstilo: opcion(an.aparicionEstilo, OPCIONES.aparicionEstilo, 'mixto'), cursorLuz: bool(an.cursorLuz, true), ondaClic: bool(an.ondaClic, true), desplazamientoSuave: bool(an.desplazamientoSuave, true),
     },
     // El CSS propio sólo lo puede cambiar el Super Administrador; si no, se conserva el anterior.
     avanzado: { css: permitirCss ? String(e.avanzado?.css || '').replace(/<\/?style/gi, '').slice(0, 20000) : String(previo?.avanzado?.css || '') },
@@ -253,7 +292,7 @@ export function variablesCss(cfg) {
     '--anim-vel': cfg.animaciones.velocidad,
     '--interfaz': cfg.forma.escala / 100, '--r-l': `${cfg.forma.radioGrande}px`, '--r-xl': `${Math.round(cfg.forma.radioGrande * 1.3)}px`, '--elevacion': `${cfg.forma.elevacion}px`,
     '--mov': CURVAS[cfg.animaciones.curva], '--pt-angulo': `${cfg.portal.bandaAngulo}deg`, '--pt-patron': cfg.portal.patronIntensidad / 100,
-    '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`, '--pt-banner-ar': cfg.portal.bannerProporcion === 'auto' ? 'auto' : cfg.portal.bannerProporcion.replace('/', ' / '),
+    '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`, '--pt-banner-ar': cfg.portal.bannerProporcion === 'auto' ? 'auto' : cfg.portal.bannerProporcion.replace('/', ' / '), '--camp-ar-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : cfg.campanas.proporcionMovil.replace('/', ' / '), '--camp-dur': `${cfg.campanas.intervalo}s`, '--tn-ar': cfg.noticias.proporcion.replace('/', ' / '), '--tn-cols': cfg.noticias.columnas, '--alternar': `${cfg.cabecera.alternarCada}s`,
     ...(cfg.portal.bandaPropia ? { '--pt-ini': cfg.portal.bandaInicio, '--pt-fin': cfg.portal.bandaFin } : {}), '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
   };
   return ':root{' + Object.entries(v).map(([k, x]) => `${k}:${x}`).join(';') + '}';
@@ -280,6 +319,11 @@ export function atributos(cfg) {
     'data-pt-mosaico': String(cfg.portal.mosaico), 'data-pt-mosaico-estilo': cfg.portal.mosaicoEstilo, 'data-pt-mosaico-colores': cfg.portal.mosaicoColores,
     'data-pt-temas': cfg.portal.temas ? 'si' : 'no', 'data-pt-temas-estilo': cfg.portal.temasEstilo, 'data-pt-buscador': cfg.portal.buscador, 'data-pt-propia': cfg.portal.bandaPropia ? 'si' : 'no',
     'data-pt-logo': cfg.portal.logoTrekking ? 'si' : 'no', 'data-pt-reparto': cfg.portal.reparto, 'data-pt-banner': cfg.portal.bannerProporcion === 'auto' ? 'auto' : 'fijo', 'data-pt-ajuste': cfg.portal.bannerAjuste, 'data-pt-efecto': cfg.portal.bannerEfecto,
+    'data-alternar-logo': a.activas && cfg.cabecera.alternarLogo ? 'si' : 'no', 'data-alternar-efecto': cfg.cabecera.alternarEfecto, 'data-alternar-cada': String(cfg.cabecera.alternarCada),
+    'data-camp-auto': cfg.campanas.autoplay ? String(cfg.campanas.intervalo) : '0', 'data-camp-trans': cfg.campanas.transicion, 'data-camp-flechas': cfg.campanas.flechas, 'data-camp-puntos': cfg.campanas.puntos, 'data-camp-pausa': cfg.campanas.pausa ? 'si' : 'no', 'data-camp-marco': cfg.campanas.marco, 'data-camp-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : 'fijo',
+    'data-noticias': cfg.noticias.disposicion, 'data-tn-estilo': cfg.noticias.estilo, 'data-tn-resumen': cfg.noticias.resumen, 'data-tn-fecha': cfg.noticias.fecha ? 'si' : 'no', 'data-tn-categoria': cfg.noticias.categoria ? 'si' : 'no', 'data-tn-efecto': cfg.noticias.efecto, 'data-tn-etiqueta': cfg.noticias.etiqueta,
+    'data-el-accesos': cfg.elementos.accesos, 'data-el-tramites': cfg.elementos.tramites, 'data-el-ver-todo': cfg.elementos.verTodo, 'data-el-categorias': cfg.elementos.categorias, 'data-el-iconos': cfg.elementos.iconos, 'data-el-separadores': cfg.elementos.separadores,
+    'data-aparicion-estilo': a.aparicionEstilo, 'data-cursor-luz': a.activas && a.cursorLuz ? 'si' : 'no', 'data-onda-clic': a.activas && a.ondaClic ? 'si' : 'no', 'data-desplazamiento': a.desplazamientoSuave ? 'suave' : 'normal',
     'data-menu-abrir': cfg.cabecera.menuAbrir, 'data-transicion-nombre': cfg.animaciones.transicionNombre ? 'si' : 'no', 'data-precarga': cfg.animaciones.precarga ? 'si' : 'no',
     'data-busca-predictivo': cfg.buscador.predictivo ? 'si' : 'no', 'data-busca-ejemplos': cfg.buscador.ejemplos ? 'si' : 'no', 'data-busca-recientes': cfg.buscador.recientes ? 'si' : 'no', 'data-busca-populares': cfg.buscador.populares ? 'si' : 'no', 'data-busca-fragmentos': cfg.buscador.fragmentos ? 'si' : 'no', 'data-busca-lista': cfg.buscador.ejemplosTexto,
     'data-sombras': cfg.forma.sombras, 'data-maqueta': cfg.forma.maqueta, 'data-cabecera-centrada': cfg.cabecera.centrada ? 'si' : 'no', 'data-hero-lado': cfg.portada.fotoLado, 'data-encabezado': cfg.identidad.encabezado,

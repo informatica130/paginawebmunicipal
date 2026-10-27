@@ -25,7 +25,8 @@ export async function portada(ctx) {
 
 // Carrusel de campañas (banners), en su sección o como protagonista de la portada «portal».
 function carruselCampanas(ctx, slides, sizes = '(max-width: 1240px) 100vw, 1200px') {
-  return html`<div class="campanas" data-carrusel data-auto="7000" aria-roledescription="carrusel" aria-label="Campañas municipales">
+  const cp = disenoDe(ctx.ajustes).campanas;
+  return html`<div class="campanas" data-carrusel data-auto="${cp.autoplay ? cp.intervalo * 1000 : 0}" aria-roledescription="carrusel" aria-label="Campañas municipales">
           <div class="carrusel-pista">${slides.map((sl, i) => {
             const img = html`<picture>${sl.datos.imagenMovil ? html`<source media="(max-width: 640px)" srcset="${sl.datos.imagenMovil}">` : ''}${ctx.img.imagen(sl.imagen, { alt: sl.datos.textoAlt || sl.titulo, sizes, prioridad: i === 0 })}</picture>`;
             return html`<div class="carrusel-item" aria-roledescription="diapositiva" aria-label="${i + 1} de ${slides.length}">${sl.datos.enlace ? html`<a ${attrsEnlace(sl.datos.enlace)}>${img}${avisoExterno(sl.datos.enlace)}</a>` : img}</div>`;
@@ -229,12 +230,11 @@ async function seccionPortada(ctx, sec) {
       if (!lista.length) return '';
       const destacada = lista.find((n) => n.destacado) || lista[0];
       const resto = lista.filter((n) => n !== destacada);
-      const lado = resto.slice(0, 4);
-      const mas = resto.slice(4);
+      // Una sola lista: la disposición (mosaico, grilla, revista, lista o carrusel) la decide
+      // «Diseño del sitio → Noticias» con CSS, así la vista previa cambia al instante.
       return html`<section class="seccion seccion-noticias"><div class="contenedor">
         <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Últimas noticias'}</h2></div><a class="ver-todo" href="/noticias/">Todas las noticias</a></div>
-        <div class="noticias-portada">${tarjetaNoticia(ctx, destacada, { grande: true })}<div class="grilla-noticias compacta">${lado.map((c) => tarjetaNoticia(ctx, c))}</div></div>
-        ${mas.length ? html`<div class="grilla-noticias noticias-mas">${mas.map((c) => tarjetaNoticia(ctx, c))}</div>` : ''}
+        <div class="noticias-portada np" data-np>${tarjetaNoticia(ctx, destacada, { grande: true })}<div class="grilla-noticias compacta">${resto.map((c) => tarjetaNoticia(ctx, c))}</div></div>
       </div></section>`;
     }
     case 'eventos': {

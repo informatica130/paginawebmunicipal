@@ -45,6 +45,9 @@ const GRUPOS = [
     { ruta: 'cabecera.estilo', tipo: 'botones', etiqueta: 'Fondo de la cabecera', opciones: OPCIONES.cabeceraEstilo },
     { ruta: 'cabecera.centrada', tipo: 'si', etiqueta: 'Escudo y menú centrados' },
     { ruta: 'cabecera.menuAbrir', tipo: 'botones', etiqueta: 'Abrir los menús (en computador)', opciones: OPCIONES.menuAbrir },
+    { ruta: 'cabecera.alternarLogo', tipo: 'si', etiqueta: 'Alternar el escudo con el logo animado «Capital del Trekking»', ayuda: 'El escudo cede su lugar al logo de las nueve letras, que se anima, y luego vuelve. Se detiene mientras el cursor está encima.', si: (c) => c.animaciones.activas },
+    { ruta: 'cabecera.alternarCada', tipo: 'rango', etiqueta: 'Cambiar cada', min: 3, max: 30, paso: 1, unidad: ' s', si: (c) => c.animaciones.activas && c.cabecera.alternarLogo },
+    { ruta: 'cabecera.alternarEfecto', tipo: 'botones', etiqueta: 'Efecto del cambio', opciones: OPCIONES.alternarEfecto, si: (c) => c.animaciones.activas && c.cabecera.alternarLogo },
     { ruta: 'cabecera.logo', tipo: 'lista', etiqueta: 'Logo', opciones: OPCIONES.logo },
     { ruta: 'cabecera.logoUrl', tipo: 'imagen', etiqueta: 'Imagen del logo propio', si: (c) => c.cabecera.logo === 'personalizado' },
     { ruta: 'cabecera.tamanoLogo', tipo: 'rango', etiqueta: 'Tamaño del logo', min: 36, max: 96, paso: 2, unidad: ' px' },
@@ -102,7 +105,6 @@ const GRUPOS = [
     { ruta: 'portal.buscador', tipo: 'botones', etiqueta: 'Forma del buscador', opciones: OPCIONES.buscador },
     { ruta: 'portal.logoTrekking', tipo: 'si', etiqueta: 'Logo animado «Capital del Trekking» sobre el buscador', ayuda: 'Es el logo vivo de las nueve letras; su animación se elige en «Portada → Animación del logo».' },
     { ruta: 'portal.reparto', tipo: 'botones', etiqueta: 'Reparto entre campaña y buscador', opciones: OPCIONES.reparto },
-    { ruta: 'portal.bannerProporcion', tipo: 'lista', etiqueta: 'Proporción del banner de campañas', opciones: OPCIONES.bannerProporcion, ayuda: 'Para que todas las campañas midan lo mismo aunque las imágenes sean distintas.' },
     { ruta: 'portal.bannerAjuste', tipo: 'botones', etiqueta: 'Cómo se acomoda la imagen', opciones: OPCIONES.bannerAjuste, si: (c) => c.portal.bannerProporcion !== 'auto' },
     { ruta: 'portal.bannerEfecto', tipo: 'botones', etiqueta: 'Al pasar el cursor por el banner', opciones: OPCIONES.bannerEfecto },
   ] },
@@ -116,6 +118,36 @@ const GRUPOS = [
     { ruta: 'identidad.cordilleras', tipo: 'si', etiqueta: 'Siluetas de cordillera entre secciones y en el pie' },
     { ruta: 'identidad.accesosColor', tipo: 'si', etiqueta: 'Accesos rápidos con los nueve colores del logo' },
     { ruta: 'identidad.cinta', tipo: 'rango', etiqueta: 'Velocidad de la cinta (una vuelta cada)', min: 15, max: 120, paso: 5, unidad: ' s' },
+  ] },
+  { id: 'campanas', titulo: 'Banner de campañas', ayuda: 'Las imágenes de las campañas se cargan en «Banners de portada».', controles: [
+    { ruta: 'campanas.autoplay', tipo: 'si', etiqueta: 'Avanzar solo' },
+    { ruta: 'campanas.intervalo', tipo: 'rango', etiqueta: 'Tiempo de cada campaña', min: 3, max: 20, paso: 1, unidad: ' s', si: (c) => c.campanas.autoplay },
+    { ruta: 'campanas.transicion', tipo: 'botones', etiqueta: 'Transición entre campañas', opciones: OPCIONES.transicionCampana },
+    { ruta: 'campanas.puntos', tipo: 'botones', etiqueta: 'Indicadores', opciones: OPCIONES.puntos },
+    { ruta: 'campanas.flechas', tipo: 'botones', etiqueta: 'Flechas', opciones: OPCIONES.flechas },
+    { ruta: 'campanas.pausa', tipo: 'si', etiqueta: 'Botón para pausar', si: (c) => c.campanas.autoplay },
+    { ruta: 'campanas.marco', tipo: 'botones', etiqueta: 'Marco', opciones: OPCIONES.marcoCampana },
+    { ruta: 'portal.bannerProporcion', tipo: 'lista', etiqueta: 'Proporción en computador (portada portal)', opciones: OPCIONES.bannerProporcion, si: (c) => c.portada.composicion === 'portal' },
+    { ruta: 'campanas.proporcionMovil', tipo: 'lista', etiqueta: 'Proporción en celulares', opciones: OPCIONES.bannerProporcion, ayuda: 'Si sube una imagen especial para celulares, use «La de la imagen».' },
+  ] },
+  { id: 'noticias', titulo: 'Noticias', ayuda: 'Se aplica a la portada y, en lo que corresponde, al listado de noticias. La cantidad se elige en Ajustes del sitio → Portada.', controles: [
+    { ruta: 'noticias.disposicion', tipo: 'lista', etiqueta: 'Disposición en la portada', opciones: OPCIONES.disposicionNoticias },
+    { ruta: 'noticias.columnas', tipo: 'rango', etiqueta: 'Columnas', min: 2, max: 4, paso: 1, unidad: '', si: (c) => ['grilla', 'revista'].includes(c.noticias.disposicion) },
+    { ruta: 'noticias.estilo', tipo: 'botones', etiqueta: 'Estilo de cada noticia', opciones: OPCIONES.estiloNoticia },
+    { ruta: 'noticias.proporcion', tipo: 'botones', etiqueta: 'Forma de las fotos', opciones: OPCIONES.proporcionFoto },
+    { ruta: 'noticias.resumen', tipo: 'botones', etiqueta: 'Resumen', opciones: OPCIONES.resumenNoticia },
+    { ruta: 'noticias.fecha', tipo: 'si', etiqueta: 'Mostrar la fecha' },
+    { ruta: 'noticias.categoria', tipo: 'si', etiqueta: 'Mostrar la categoría' },
+    { ruta: 'noticias.etiqueta', tipo: 'botones', etiqueta: 'Estilo de la categoría', opciones: OPCIONES.etiquetaNoticia, si: (c) => c.noticias.categoria },
+    { ruta: 'noticias.efecto', tipo: 'botones', etiqueta: 'Al pasar el cursor', opciones: OPCIONES.efectoNoticia },
+  ] },
+  { id: 'elementos', titulo: 'Elementos del sitio', ayuda: 'Accesos, trámites, botones, categorías, íconos y separadores en todas las páginas.', controles: [
+    { ruta: 'elementos.accesos', tipo: 'botones', etiqueta: 'Accesos rápidos', opciones: OPCIONES.estiloAccesos },
+    { ruta: 'elementos.tramites', tipo: 'botones', etiqueta: 'Trámites de la portada', opciones: OPCIONES.estiloTramites },
+    { ruta: 'elementos.verTodo', tipo: 'botones', etiqueta: 'Botones «Ver todo»', opciones: OPCIONES.verTodo },
+    { ruta: 'elementos.categorias', tipo: 'botones', etiqueta: 'Filtros y categorías', opciones: OPCIONES.estiloCategorias },
+    { ruta: 'elementos.iconos', tipo: 'botones', etiqueta: 'Fondo de los íconos', opciones: OPCIONES.estiloIconos },
+    { ruta: 'elementos.separadores', tipo: 'botones', etiqueta: 'Entre secciones de la portada', opciones: OPCIONES.separadores },
   ] },
   { id: 'buscador', titulo: 'Buscador predictivo', ayuda: 'Pruébelo escribiendo en el buscador de la vista previa.', controles: [
     { ruta: 'buscador.predictivo', tipo: 'si', etiqueta: 'Mostrar resultados mientras se escribe' },
@@ -142,6 +174,10 @@ const GRUPOS = [
     { ruta: 'animaciones.escudoVivo', tipo: 'si', etiqueta: 'Escudo municipal animado en la cabecera y el pie (se mueve al pasar el cursor)', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.profundidad', tipo: 'rango', etiqueta: 'Profundidad del efecto 3D', min: 0, max: 100, paso: 10, unidad: ' %', si: (c) => c.animaciones.activas && /3d$/.test(c.animaciones.introEstilo) },
     { ruta: 'animaciones.aparicion', tipo: 'si', etiqueta: 'Contenido que aparece al bajar', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.aparicionEstilo', tipo: 'lista', etiqueta: 'Cómo aparece el contenido', opciones: OPCIONES.aparicionEstilo, si: (c) => c.animaciones.activas && c.animaciones.aparicion },
+    { ruta: 'animaciones.cursorLuz', tipo: 'si', etiqueta: 'Luz suave que sigue al cursor sobre las tarjetas', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.ondaClic', tipo: 'si', etiqueta: 'Onda al hacer clic en botones y tarjetas', si: (c) => c.animaciones.activas },
+    { ruta: 'animaciones.desplazamientoSuave', tipo: 'si', etiqueta: 'Desplazamiento suave al usar enlaces dentro de la página' },
     { ruta: 'animaciones.inclinacion', tipo: 'si', etiqueta: 'Inclinación 3D al pasar el cursor', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.transiciones', tipo: 'si', etiqueta: 'Transición entre páginas', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.cordillera', tipo: 'si', etiqueta: 'Transición de identidad al cambiar de página', si: (c) => c.animaciones.activas },
@@ -151,6 +187,15 @@ const GRUPOS = [
     { ruta: 'animaciones.precarga', tipo: 'si', etiqueta: 'Adelantar la descarga de la página al pasar el cursor por un enlace (navegación casi instantánea)', si: (c) => c.animaciones.activas },
     { ruta: 'animaciones.barraCarga', tipo: 'si', etiqueta: 'Barra de carga al navegar', si: (c) => c.animaciones.activas },
   ] },
+];
+
+// Pestañas del panel: agrupan los grupos para encontrarlos rápido.
+const PESTANAS = [
+  ['todo', 'Todo', null],
+  ['apariencia', 'Apariencia', ['colores', 'tipografia', 'forma', 'elementos']],
+  ['portada', 'Cabecera y portada', ['cabecera', 'portada', 'portal', 'campanas', 'identidad']],
+  ['contenido', 'Contenido', ['noticias', 'buscador', 'pie']],
+  ['movimiento', 'Movimiento', ['animaciones']],
 ];
 
 const PAGINAS = { '/': 'Portada', '/noticias/': 'Noticias', '/tramites/': 'Trámites', '/contacto/': 'Contacto', '/areas/': 'Áreas' };
@@ -175,6 +220,11 @@ export default async function (vista) {
       <div class="diseno-controles">
         <details class="tarjeta grupo-diseno" data-versiones><summary>Versiones anteriores</summary><p class="chico muted">Cada vez que guarda, la versión anterior queda aquí. «Ver» la carga en la vista previa; si le gusta, pulse «Guardar y publicar».</p><div data-lista-versiones><p class="chico muted">Cargando…</p></div></details>
         <section class="tarjeta"><h2>Estilos prediseñados</h2><p class="chico muted">Cambian colores, letras y formas de una vez; después puede ajustar cada detalle.</p><div class="estilos" data-estilos></div></section>
+        <div class="tarjeta diseno-herramientas">
+          <label class="buscar-opcion"><span class="sr">Buscar una opción</span>${ico('buscar', 16)}<input type="search" data-filtro placeholder="Buscar una opción… (logo, radio, noticias, banner)" autocomplete="off"></label>
+          <div class="pestanas-diseno" role="tablist" aria-label="Secciones del diseño">${PESTANAS.map(([k, t]) => h`<button type="button" role="tab" data-pestana="${k}" aria-selected="${k === 'todo'}">${t}</button>`)}</div>
+          <div class="fila-herramientas"><button type="button" class="btn chico fantasma" data-abrir-todo>Abrir todo</button><button type="button" class="btn chico fantasma" data-cerrar-todo>Cerrar todo</button><label class="interruptor chico"><input type="checkbox" data-solo-cambios><span class="pista" aria-hidden="true"></span><span>Sólo lo que cambié</span></label></div>
+        </div>
         <div data-grupos></div>
         ${superadmin ? h`<details class="tarjeta grupo-diseno"><summary>CSS propio (avanzado)</summary><p class="chico muted">Reglas CSS que se agregan al final de la hoja de estilos de todas las páginas. Sólo el Super Administrador las puede editar.</p><textarea class="mono" rows="10" data-css spellcheck="false" placeholder=".hero h1 { letter-spacing: 0; }"></textarea></details>` : ''}
       </div>
@@ -241,12 +291,25 @@ export default async function (vista) {
     }
   };
   const abiertos = new Set(['colores']);
+  let pestana = 'todo', filtro = '', soloCambios = false;
+  const DEF = normalizar({});
+  const sinTilde = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const cambiado = (ruta) => JSON.stringify(leer(cfg, ruta)) !== JSON.stringify(leer(DEF, ruta));
   const pintarGrupos = () => {
     $$('details[data-grupo]', vista).forEach((d) => (d.open ? abiertos.add(d.dataset.grupo) : abiertos.delete(d.dataset.grupo)));
     const cont = $('[data-grupos]', vista);
-    cont.innerHTML = String(h`${GRUPOS.filter((g) => !g.si || g.si(cfg)).map((g) => h`<details class="tarjeta grupo-diseno" data-grupo="${g.id}"${abiertos.has(g.id) ? raw(' open') : ''}><summary>${g.titulo}</summary>
-      ${g.ayuda ? h`<p class="chico muted">${g.ayuda}</p>` : ''}
-      <div class="${g.id === 'colores' ? 'rejilla-colores' : 'pila'}">${g.controles.filter((c) => !c.si || c.si(cfg)).map(control)}</div></details>`)}`);
+    const enPestana = PESTANAS.find(([k]) => k === pestana)?.[2];
+    const q = sinTilde(filtro.trim());
+    const visibles = GRUPOS.filter((g) => (!g.si || g.si(cfg)) && (!enPestana || enPestana.includes(g.id))).map((g) => {
+      const coincide = !q || sinTilde(g.titulo).includes(q);
+      const ctl = g.controles.filter((c) => (!c.si || c.si(cfg)) && (coincide || sinTilde(c.etiqueta + ' ' + (c.ayuda || '')).includes(q)) && (!soloCambios || cambiado(c.ruta)));
+      return { g, ctl, n: g.controles.filter((c) => cambiado(c.ruta)).length };
+    }).filter((x) => x.ctl.length);
+    const forzar = !!q || soloCambios;
+    cont.innerHTML = visibles.length ? String(h`${visibles.map(({ g, ctl, n }) => h`<details class="tarjeta grupo-diseno" data-grupo="${g.id}"${forzar || abiertos.has(g.id) ? raw(' open') : ''}><summary>${g.titulo}${n ? h` <span class="insignia-cambios" title="Opciones cambiadas respecto del diseño original">${n}</span>` : ''}</summary>
+      <div class="grupo-barra">${g.ayuda ? h`<p class="chico muted">${g.ayuda}</p>` : h`<span></span>`}${n ? h`<button type="button" class="btn chico fantasma" data-restablecer-grupo="${g.id}" title="Vuelve este grupo a como viene el diseño original">↺ Restablecer grupo</button>` : ''}</div>
+      <div class="${g.id === 'colores' ? 'rejilla-colores' : 'pila'}">${ctl.map((c) => h`<div class="ctl${cambiado(c.ruta) ? ' cambiado' : ''}" data-ctl="${c.ruta}">${control(c)}<button type="button" class="ctl-volver" data-restablecer-ctl="${c.ruta}" title="Volver al valor original" aria-label="Volver «${c.etiqueta}» al valor original">↺</button></div>`)}</div></details>`)}`)
+      : String(h`<p class="tarjeta muted">No hay opciones que coincidan${q ? h` con «${filtro}»` : ''}.</p>`);
     // Selectores de imagen (biblioteca de medios)
     $$('[data-imagen]', cont).forEach((caja) => {
       const ruta = caja.dataset.imagen;
@@ -260,7 +323,17 @@ export default async function (vista) {
 
   // ---------------------------------------------------------------- Cambios
   const PERSONALIZA = /^(colores|tipografia|forma|cabecera\.estilo)/;
+  // Parte de la página que muestra cada grupo de opciones (la vista previa se desplaza hasta ella).
+  const ZONAS = { noticias: '.seccion-noticias', campanas: '.campanas', 'cabecera.': '.cabecera', 'elementos.accesos': '.accesos-seccion, .pt-mosaico', 'elementos.tramites': '.seccion-tramites', 'elementos.verTodo': '.seccion-tramites', 'elementos.separadores': '.seccion-tramites', buscador: '.hero-buscar, .cabecera', 'portal.mosaico': '.pt-mosaico', pie: '.pie' };
+  let ultimaZona = '';
+  function irA(ruta) {
+    const k = Object.keys(ZONAS).find((z) => ruta.startsWith(z));
+    if (!k || k === ultimaZona) return;
+    ultimaZona = k;
+    try { iframe.contentWindow?.postMessage({ tipo: 'mlp-ir', sel: ZONAS[k] }, location.origin); } catch { /* aún cargando */ }
+  }
   function cambiar(ruta, valor, { repintar = true } = {}) {
+    irA(ruta);
     historial.push(JSON.stringify(cfg)); if (historial.length > 60) historial.shift();
     const nuevo = copia(cfg);
     escribir(nuevo, ruta, valor);
@@ -274,6 +347,7 @@ export default async function (vista) {
   }
   function actualizar() {
     $('[data-deshacer]', vista).disabled = !historial.length;
+    $$('[data-ctl]', vista).forEach((x) => x.classList.toggle('cambiado', cambiado(x.dataset.ctl)));
     $$('[data-estilo]', vista).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.estilo === cfg.estilo)));
     enviar();
   }
@@ -282,6 +356,8 @@ export default async function (vista) {
   grupos.addEventListener('input', (e) => {
     const el = e.target, ruta = el.dataset.ruta;
     if (el.matches('[data-css]')) { cambiar('avanzado.css', el.value, { repintar: false }); return; }
+    if (el.matches('[data-filtro]')) { filtro = el.value; pintarGrupos(); return; }
+    if (el.matches('[data-solo-cambios]')) { soloCambios = el.checked; pintarGrupos(); return; }
     if (!ruta) return;
     let v = el.type === 'checkbox' ? el.checked : el.type === 'range' ? Number(el.value) : el.value;
     if (el.dataset.hex !== undefined) { if (!/^#[0-9a-f]{6}$/i.test(v)) return; $(`input[type=color][data-ruta="${ruta}"]`, vista).value = v; }
@@ -291,6 +367,20 @@ export default async function (vista) {
     cambiar(ruta, v, { repintar: el.type === 'checkbox' || el.tagName === 'SELECT' });
   });
   grupos.addEventListener('click', (e) => {
+    const pt = e.target.closest('[data-pestana]');
+    if (pt) { pestana = pt.dataset.pestana; $$('[data-pestana]', vista).forEach((x) => x.setAttribute('aria-selected', String(x === pt))); pintarGrupos(); return; }
+    if (e.target.closest('[data-abrir-todo]')) { $$('details[data-grupo]', vista).forEach((d) => { d.open = true; }); return; }
+    if (e.target.closest('[data-cerrar-todo]')) { $$('details[data-grupo]', vista).forEach((d) => { d.open = false; }); return; }
+    const rg = e.target.closest('[data-restablecer-grupo]'), rc = e.target.closest('[data-restablecer-ctl]');
+    if (rg || rc) {
+      const rutas = rc ? [rc.dataset.restablecerCtl] : GRUPOS.find((g) => g.id === rg.dataset.restablecerGrupo).controles.map((c) => c.ruta);
+      historial.push(JSON.stringify(cfg));
+      const nuevo = copia(cfg);
+      rutas.forEach((r) => escribir(nuevo, r, copia({ v: leer(DEF, r) }).v));
+      cfg = normalizar(nuevo, { permitirCss: true });
+      pintarGrupos(); actualizar();
+      return;
+    }
     const b = e.target.closest('[data-valor]');
     if (b) { $$(`[data-ruta="${b.dataset.ruta}"]`, vista).forEach((x) => x.setAttribute('aria-checked', String(x === b))); cambiar(b.dataset.ruta, b.dataset.valor); return; }
     const est = e.target.closest('[data-estilo]');
