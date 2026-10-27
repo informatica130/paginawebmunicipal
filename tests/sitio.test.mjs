@@ -297,6 +297,26 @@ test('archivo de Transparencia: lectura de la vista pública de Drive y nombres'
   assert.equal(idPublico('F1').length, 12);
 });
 
+test('videoteca: listado, filtros, ficha, búsqueda y sesión del Concejo', async () => {
+  const v = await (await pedir('/videos/')).text();
+  assert.match(v, /Videos de Melipeuco/);
+  assert.match(v, /class="vd-tarjeta/);
+  const f = await (await pedir('/videos/?categoria=concejo-municipal&orden=vistos')).text();
+  assert.match(f, /videos\./);
+  assert.doesNotMatch(f, /No encontramos videos/);
+  const ficha = await pedir('/videos/87CPic3eetM/');
+  assert.equal(ficha.status, 200);
+  const h = await ficha.text();
+  assert.match(h, /"@type":"VideoObject"/);
+  assert.match(h, /data-youtube="87CPic3eetM"/);
+  assert.equal((await pedir('/videos/zzzzzzzzzzz/')).status, 404);
+  const sug = await (await pedir('/api/public/buscar?q=baqueano')).json();
+  assert.ok(sug.items.some((i) => i.tipo === 'Video'));
+  const { categorizar } = await import('../server/render/videos.js');
+  assert.equal(categorizar('CONCEJO MUNICIPAL 16 DE OCTUBRE 2026'), 'concejo-municipal');
+  assert.equal(categorizar('Desfile Fiesta del Baqueano 2027'), 'fiesta-del-baqueano');
+});
+
 test('extensiones: plantillas de fuentes de datos', async () => {
   const { plantilla, urlFuenteValida } = await import('../server/extensiones.js');
   assert.equal(plantilla('{{#items}}<li>{{@indice}} {{n}}</li>{{/items}}{{^vacio}}-{{/vacio}}', { items: [{ n: '<b>' }, { n: 'x' }] }), '<li>1 &lt;b&gt;</li><li>2 x</li>-');

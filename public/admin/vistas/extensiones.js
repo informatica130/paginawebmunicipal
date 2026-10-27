@@ -4,7 +4,7 @@ import { h, raw, $, $$, api, aviso, fallo, confirmar, ico } from '../ui.js';
 import { textoRico, campo } from '../campos.js';
 
 const PESTANAS = [['emergentes', 'Ventanas emergentes'], ['zonas', 'Bloques en zonas'], ['fuentes', 'Fuentes de datos (API)'], ['transparencia', 'Transparencia'], ['codigo', 'Código propio']];
-const SECCIONES = { banners: 'la portada principal', campanas: 'las campañas', accesos: 'los accesos rápidos', tramites: 'los trámites', noticias: 'las noticias', eventos: 'la agenda', areas: 'las áreas', turismo: 'turismo', video: 'el video', encuesta: 'la encuesta', boletin: 'el boletín', mundos: 'los nueve mundos', cinta: 'la cinta' };
+const SECCIONES = { banners: 'la portada principal', campanas: 'las campañas', accesos: 'los accesos rápidos', tramites: 'los trámites', noticias: 'las noticias', videoteca: 'los videos', eventos: 'la agenda', areas: 'las áreas', turismo: 'turismo', video: 'el video', encuesta: 'la encuesta', boletin: 'el boletín', mundos: 'los nueve mundos', cinta: 'la cinta' };
 const nuevoId = () => 'x' + Math.random().toString(36).slice(2, 10);
 const copia = (o) => JSON.parse(JSON.stringify(o));
 const opciones = (lista, v) => Object.entries(lista).map(([k, t]) => h`<option value="${k}"${k === v ? raw(' selected') : ''}>${t}</option>`);

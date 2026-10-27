@@ -3,7 +3,7 @@ import { campo } from '../campos.js';
 import { marcarCambios } from '../admin.js';
 import { completarSecciones } from '/js/diseno.js';
 
-const SECCIONES = { avisos: 'Avisos y alertas', banners: 'Portada con el logo de la Capital del Trekking, buscador y «Ahora en Melipeuco»', cinta: 'Cinta de palabras con las nueve letras', campanas: 'Campañas (banners)', mundos: '«Cada letra es una puerta»: nueve áreas del municipio', accesos: 'Accesos rápidos', tramites: 'Trámites en línea', noticias: 'Últimas noticias', eventos: 'Agenda, clima y emergencias', areas: 'Áreas municipales', turismo: 'Capital del Trekking: lugares y cifras', encuesta: 'Encuesta activa', video: 'Último video y Concejo', boletin: 'Suscripción al boletín' };
+const SECCIONES = { avisos: 'Avisos y alertas', banners: 'Portada con el logo de la Capital del Trekking, buscador y «Ahora en Melipeuco»', cinta: 'Cinta de palabras con las nueve letras', campanas: 'Campañas (banners)', mundos: '«Cada letra es una puerta»: nueve áreas del municipio', accesos: 'Accesos rápidos', tramites: 'Trámites en línea', noticias: 'Últimas noticias', eventos: 'Agenda, clima y emergencias', areas: 'Áreas municipales', turismo: 'Capital del Trekking: lugares y cifras', encuesta: 'Encuesta activa', video: 'Último video y Concejo', videoteca: 'Videos de Melipeuco (videoteca de YouTube)', boletin: 'Suscripción al boletín' };
 
 export default async function (vista) {
   const a = await api('GET', 'ajustes');

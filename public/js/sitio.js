@@ -421,6 +421,14 @@
     });
   })();
 
+  // Videoteca: la imagen del reproductor sube a la máxima calidad si YouTube la tiene (si no,
+  // YouTube entrega una imagen gris de 120 px y se conserva la normal).
+  $$('img[data-calidad][data-mini]').forEach(function (img) {
+    var alta = new Image();
+    alta.onload = function () { if (alta.naturalWidth > 200) img.src = alta.src; };
+    alta.src = 'https://i.ytimg.com/vi/' + img.getAttribute('data-mini') + '/' + img.getAttribute('data-calidad') + '.jpg';
+  });
+
   // Filtros que se aplican al elegir una opción (lista de documentos de Transparencia).
   $$('select[data-auto-enviar]').forEach(function (sel) { sel.addEventListener('change', function () { if (sel.form) sel.form.submit(); }); });
 

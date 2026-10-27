@@ -16,6 +16,7 @@ import { crearExtensiones } from './extensiones.js';
 import { buscarTransparencia } from './render/transparencia.js';
 import { paginaArchivo, buscarArchivo, inventario, urlDoc } from './render/archivo.js';
 import { Readable } from 'node:stream';
+import { paginaVideos, paginaLista, fichaVideo, prepararVideos, buscarVideos, urlVideo, urlsVideos, indice as indiceVideos } from './render/videos.js';
 
 export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version, secreto, leerUsuario, auditar }) {
   const img = crearImagenes(db);
@@ -218,6 +219,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     for (const f of db.all("SELECT id, tipo, slug, padre_id, publicado_en, creado, modificado, datos FROM contenidos WHERE estado = 'publicado' AND tipo NOT IN ('slide','acceso','aviso','contacto') AND json_extract(seo, '$.noindex') IS NOT 1")) {
       urls.push({ u: repo.urlDe({ ...f, datos: JSON.parse(f.datos) }), m: f.modificado });
     }
+    urls.push({ u: '/videos/', m: null }, ...urlsVideos());
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((x) => `<url><loc>${esc(base + x.u)}</loc>${x.m ? `<lastmod>${x.m.slice(0, 10)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>`;
   }
 
@@ -338,9 +340,10 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         const en = cat ? cat.tramites.filter((t) => palabras.every((p) => norm(t.nombre + ' ' + t.descripcion).includes(p))).slice(0, 3).map((t) => ({ tipo: 'Trámite en línea', clave: 'en-linea', titulo: t.nombre, url: t.url, externo: true, fragmento: fragmento(t.descripcion) })) : [];
         const transp = buscarTransparencia(ext.leer(), palabras, norm);
         const docs = buscarArchivo(inventario(), q, { limite: 3 }).map((a) => ({ tipo: 'Documento de Transparencia', clave: 'documento', titulo: a.n, url: urlDoc(a), fragmento: [a.c, a.ar, a.f ? 'publicado el ' + a.f.split('-').reverse().join('-') : ''].filter(Boolean).join(' · ') }));
+        const vids = buscarVideos(q, 3).map((v) => ({ tipo: 'Video', clave: 'video', titulo: v.t, url: urlVideo(v), fragmento: [indiceVideos()?.cats.get(v.c)?.nombre, (v.fe || v.f || '').slice(0, 10).split('-').reverse().join('-')].filter(Boolean).join(' · ') }));
         const vistos = new Set();
-        const items = [...atajos, ...en, ...transp, ...r, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
-        return enviarJson({ items, aproximado: aproximado && !atajos.length && !en.length && !transp.length && !docs.length }, 60);
+        const items = [...atajos, ...en, ...transp, ...r, ...vids, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
+        return enviarJson({ items, aproximado: aproximado && !atajos.length && !en.length && !transp.length && !docs.length && !vids.length }, 60);
       }
       default: throw new ErrorHttp(404, 'Recurso no encontrado');
     }
@@ -394,6 +397,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     if (!usuario && desdeCache(req, res)) return;
     const ctx = contexto(req, ruta, { usuario });
     await ext.preparar(ruta);
+    await prepararVideos();
     const responder = (cuerpo, op = {}) => responderHtml(req, res, ctx, cuerpo, { cachear: true, ...op });
     const seg = ruta.split('/').filter(Boolean).map((x) => { try { return decodeURIComponent(x); } catch { return x; } });
     const pag = (i) => (seg[i] === 'page' && /^\d+$/.test(seg[i + 1] || '') ? Number(seg[i + 1]) : 1);
@@ -549,6 +553,16 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         enLinea = (cat?.tramites || []).filter((t) => !vinculados.has(t.id) && partes.every((x) => norm(`${t.nombre} ${t.descripcion} ${t.categoria}`).includes(x))).slice(0, 5);
       }
       return responder(V.busqueda(ctx, { q: term, tipo, pagina: p, resultados, tramitesEnLinea: enLinea }), { cachear: false });
+    }
+    // Videoteca: videos de los canales de YouTube de la Municipalidad.
+    if (seg[0] === 'videos') {
+      if (!seg[1] || seg[1] === 'page') {
+        const filtros = Object.fromEntries(['q', 'categoria', 'anio', 'canal', 'tipo', 'orden'].map((k) => [k, String(q.get(k) || '').slice(0, 100)]));
+        const r = paginaVideos(ctx, filtros, Number(q.get('p')) || 1);
+        if (r) return responder(r, { cachear: !filtros.q });
+      } else if (seg[1] === 'categoria' && seg[2]) return redirigir(res, `/videos/?categoria=${encodeURIComponent(seg[2])}`, 301);
+      else if (seg[1] === 'lista' && seg[2]) { const r = paginaLista(ctx, seg[2]); if (r) return responder(r); }
+      else if (/^[\w-]{11}$/.test(seg[1]) && !seg[2]) { const r = fichaVideo(ctx, seg[1]); if (r) return responder(r); }
     }
     if (seg[0] === 'transparencia' && !seg[1]) return responder(V.transparencia(ctx));
     // Las direcciones antiguas del archivo llevan a la nueva lista de documentos.

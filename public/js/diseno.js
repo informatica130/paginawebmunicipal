@@ -349,7 +349,7 @@ export function logoCabecera(cfg) {
 // ------------------------------------------------------------------ Secciones de la portada
 // Secciones que se agregaron después de la primera versión: si un sitio ya guardó su orden,
 // aparecen activas en el lugar que les corresponde (después de la sección indicada).
-export const SECCIONES_NUEVAS = [['campanas', 'banners', true], ['cinta', 'banners', false], ['mundos', 'noticias', false]];
+export const SECCIONES_NUEVAS = [['campanas', 'banners', true], ['cinta', 'banners', false], ['mundos', 'noticias', false], ['videoteca', 'noticias', true]];
 export function completarSecciones(lista) {
   const todas = (lista || []).map((x) => ({ ...x }));
   for (const [id, despues, activo] of SECCIONES_NUEVAS) {
