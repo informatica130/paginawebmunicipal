@@ -506,13 +506,20 @@
   }
 
   // ---------------- Volver arriba
+  // Alto desplazable de la página, medido sólo cuando cambia (leerlo en cada cuadro obliga al
+  // navegador a recalcular la página entera y traba el desplazamiento en páginas largas).
+  var altoCache = -1;
+  var altoPagina = function () { if (altoCache < 0) altoCache = d.documentElement.scrollHeight - innerHeight; return altoCache; };
+  addEventListener('resize', function () { altoCache = -1; }, { passive: true });
+  if ('ResizeObserver' in window) new ResizeObserver(function () { altoCache = -1; }).observe(d.body);
+  window.mlpAltoPagina = altoPagina;
   var arriba = $('[data-arriba]');
   if (arriba) {
     var marcoArriba = 0;
     window.addEventListener('scroll', function () {
       cancelAnimationFrame(marcoArriba);
       marcoArriba = requestAnimationFrame(function () {
-        var alto = d.documentElement.scrollHeight - innerHeight;
+        var alto = altoPagina();
         arriba.classList.toggle('visible', window.scrollY > 700);
         arriba.style.setProperty('--progreso', alto > 0 ? Math.min(1, scrollY / alto).toFixed(3) : 0);
       });
@@ -672,21 +679,36 @@
   });
   var msNav = $('[data-ms-nav]');
   if (msNav) {
-    // La barra queda justo bajo la cabecera fija (que se compacta al bajar).
-    var cabMs = $('.cabecera'), altoCab = function () { if (cabMs && raiz.getAttribute('data-cabecera-fija') === 'si') raiz.style.setProperty('--alto-cabecera', Math.round(cabMs.getBoundingClientRect().height) + 'px'); else raiz.style.setProperty('--alto-cabecera', '0px'); };
-    altoCab(); addEventListener('resize', altoCab); addEventListener('scroll', function () { requestAnimationFrame(altoCab); }, { passive: true });
+    // La barra queda justo bajo la cabecera fija. La altura se mide sólo cuando la cabecera cambia
+    // de tamaño (no en cada movimiento del scroll: escribir una variable en la raíz obliga a
+    // recalcular los estilos de toda la página y hacía que el desplazamiento se trabara).
+    var cabMs = $('.cabecera'), ultimoAlto = -1;
+    var altoCab = function () {
+      var a = cabMs && raiz.getAttribute('data-cabecera-fija') === 'si' && !cabMs.classList.contains('oculta') ? Math.round(cabMs.offsetHeight) : 0;
+      if (a !== ultimoAlto) { ultimoAlto = a; msNav.style.top = a + 'px'; }
+    };
+    altoCab();
+    if (cabMs && 'ResizeObserver' in window) new ResizeObserver(altoCab).observe(cabMs); else addEventListener('resize', altoCab);
+    // Al bajar, la cabecera se esconde: la barra sube con ella.
+    if (cabMs && 'MutationObserver' in window) new MutationObserver(altoCab).observe(cabMs, { attributes: true, attributeFilter: ['class'] });
   }
   if (msNav && 'IntersectionObserver' in window) {
+    var lista = msNav.querySelector('ul');
     var enlaces = [].slice.call(msNav.querySelectorAll('a'));
-    var vistos = new Map();
+    var vistos = new Map(), activo = null;
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { vistos.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0); });
       var mejor = null, max = 0;
       enlaces.forEach(function (a) { var r = vistos.get(a.hash.slice(1)) || 0; if (r > max) { max = r; mejor = a; } });
-      if (!mejor) return;
-      enlaces.forEach(function (a) { a.setAttribute('aria-current', String(a === mejor)); });
-      mejor.scrollIntoView({ block: 'nearest', inline: 'center' });
-    }, { rootMargin: '-120px 0px -45% 0px', threshold: [0, .1, .3, .6] });
+      if (mejor === activo) return;
+      if (activo) activo.removeAttribute('aria-current');
+      activo = mejor;
+      if (!mejor) return; // arriba de todo (portada) o en una sección sin nombre en la barra
+      activo.setAttribute('aria-current', 'true');
+      // Sólo se desliza la barra (horizontal), nunca la página.
+      var x = activo.offsetLeft - (lista.clientWidth - activo.offsetWidth) / 2;
+      if (Math.abs(lista.scrollLeft - x) > 8) lista.scrollTo({ left: x, behavior: 'smooth' });
+    }, { rootMargin: '-120px 0px -45% 0px', threshold: [0, .25, .6] });
     enlaces.forEach(function (a) { var s = d.getElementById(a.hash.slice(1)); if (s) io.observe(s); });
   }
 

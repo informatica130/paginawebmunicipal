@@ -1,0 +1,370 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "salud",
+    "nombre": "Salud",
+    "slug": "salud",
+    "unidad": "Departamento de Salud Municipal · CESFAM Melipeuco",
+    "descripcion": "Salud municipal de Melipeuco: CESFAM, postas rurales, urgencias, teléfonos y noticias de salud.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#16A0A8",
+      "oscuro": "#0A5155",
+      "acento": "#E9A92B",
+      "patron": "cruces",
+      "icono": "salud",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/10/557783389_1242254967939907_4460040340840564802_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Salud Municipal",
+      "titulo": "Salud cerca de cada familia",
+      "bajada": "CESFAM Melipeuco y postas rurales de Caren, Cumcumllaque y Llaima: atención primaria, programas de salud y urgencias.",
+      "botones": [
+        {
+          "texto": "Autoconsulta SSASUR",
+          "url": "https://autoconsulta.ssasur.cl/auth/login"
+        },
+        {
+          "texto": "Teléfonos del CESFAM",
+          "url": "#m-telefonos"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "1 CESFAM",
+          "etiqueta": "en Melipeuco"
+        },
+        {
+          "valor": "3 postas",
+          "etiqueta": "rurales: Caren, Cumcumllaque y Llaima"
+        },
+        {
+          "valor": "131",
+          "etiqueta": "SAMU, ambulancia de urgencia"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 45 255 7691",
+      "email": "cesfam@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "urgencias",
+        "tipo": "llamado",
+        "titulo": "Urgencias",
+        "texto": "Urgencias CESFAM Melipeuco: 45 255 7691 · Ambulancia SAMU: 131 · Bomberos: 132 · Carabineros: 133.",
+        "icono": "alerta",
+        "boton": "Llamar a urgencias",
+        "url": "tel:+56452557691",
+        "boton2": "Llamar al SAMU",
+        "url2": "tel:131"
+      },
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "El CESFAM",
+        "titulo": "Atención primaria de salud",
+        "html": "<p>El Departamento de Salud Municipal asegura la atención de los establecimientos de salud de la comuna: el <strong>Centro de Salud Familiar (CESFAM) Melipeuco</strong> y las <strong>postas de salud rural</strong> de Caren, Cumcumllaque y Llaima. Desarrolla los programas del Ministerio de Salud para cada etapa de la vida, con un enfoque familiar y comunitario.</p><p>Para revisar sus horas, exámenes o recetas puede usar la Autoconsulta del Servicio de Salud Araucanía Sur.</p>",
+        "botones": [
+          {
+            "texto": "Autoconsulta SSASUR",
+            "url": "https://autoconsulta.ssasur.cl/auth/login"
+          }
+        ]
+      },
+      {
+        "id": "telefonos",
+        "tipo": "directorio",
+        "ancla": "Teléfonos",
+        "titulo": "Teléfonos del CESFAM y las postas",
+        "intro": "Llame directamente a la sección que necesita.",
+        "items": [
+          {
+            "nombre": "SOME",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "56457691",
+            "email": ""
+          },
+          {
+            "nombre": "Farmacia",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "56457699",
+            "email": ""
+          },
+          {
+            "nombre": "Laboratorio",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "56457698",
+            "email": ""
+          },
+          {
+            "nombre": "Enfermería",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "56457695",
+            "email": ""
+          },
+          {
+            "nombre": "Salud Mental",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "56553661",
+            "email": ""
+          },
+          {
+            "nombre": "Farmacia Cunco",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "56452061",
+            "email": ""
+          },
+          {
+            "nombre": "Posta de Caren",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 9 5770 8979",
+            "email": ""
+          },
+          {
+            "nombre": "Posta de Cumcumllaque",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 9 5778 0971",
+            "email": ""
+          },
+          {
+            "nombre": "Posta de Llaima",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "+56 9 5778 0943",
+            "email": ""
+          },
+          {
+            "nombre": "Encargado de Personal CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "personal.dsm@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Directora CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "cesfam@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Digitadora CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "digitadorages@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Área de Contabilidad y Presupuesto CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "finanzasdsm@munimelipeuco.cl"
+          },
+          {
+            "nombre": "SOME",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "some@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Encargado Per Cápita (CESFAM)",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "encargadopercapita@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Participación Social (CESFAM)",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "participacionsocial@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Monitoreo GES",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "monitoreoges@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Coordinación GES",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "coordinacionges@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Dirección Técnica CESFAM",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "direcciontecnicacesfam@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Posta de Salud Rural (PSR) Caren",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "psrcaren@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Posta de Salud Rural (PSR) Cumcumllaque",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "psrcumcumllaque@munimelipeuco.cl"
+          },
+          {
+            "nombre": "Posta de Salud Rural (PSR) Llaima",
+            "sigla": "",
+            "texto": "",
+            "url": "",
+            "telefono": "",
+            "email": "psrllaima@munimelipeuco.cl"
+          }
+        ]
+      },
+      {
+        "id": "programas",
+        "tipo": "tarjetas",
+        "ancla": "Programas",
+        "titulo": "Programas y servicios",
+        "columnas": "4",
+        "items": [
+          {
+            "icono": "personas",
+            "titulo": "Atención familiar",
+            "texto": "Controles de salud para niñas, niños, adultos y personas mayores."
+          },
+          {
+            "icono": "corazon",
+            "titulo": "Salud mental",
+            "texto": "Atención y acompañamiento en salud mental."
+          },
+          {
+            "icono": "casa",
+            "titulo": "Atención domiciliaria",
+            "texto": "Visitas a personas mayores y con dependencia severa."
+          },
+          {
+            "icono": "check",
+            "titulo": "GES",
+            "texto": "Garantías explícitas en salud: consulte en el CESFAM."
+          }
+        ]
+      },
+      {
+        "id": "preguntas",
+        "tipo": "faq",
+        "titulo": "Preguntas frecuentes",
+        "items": [
+          {
+            "pregunta": "¿Cómo pido una hora en el CESFAM?",
+            "respuesta": "Llame al SOME del CESFAM o acérquese personalmente. Para revisar horas y exámenes puede usar la Autoconsulta SSASUR."
+          },
+          {
+            "pregunta": "¿Qué hago ante una urgencia?",
+            "respuesta": "Llame a Urgencias CESFAM Melipeuco (45 255 7691) o al SAMU (131)."
+          },
+          {
+            "pregunta": "¿Dónde están las postas rurales?",
+            "respuesta": "En los sectores de Caren, Cumcumllaque y Llaima. Sus teléfonos están en esta página."
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones del Departamento de Salud",
+        "html": "<ul><li>Asegurar la atención de los establecimientos de salud municipal.</li><li>Dirección administrativa de los establecimientos de salud.</li><li>Concursos y provisión de personal; cumplimiento de normas y programas del Ministerio de Salud.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 68.</small></p>"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de salud",
+        "categoria": "salud",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2025/10/557783389_1242254967939907_4460040340840564802_n.jpg",
+            "alt": "Operativo audiológico benefició a personas mayores en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/556059812_1238507841647953_245624008465520436_n.jpg",
+            "alt": "Melipeuco se unió al Día Mundial contra la Rabia con vacunatorio gratuito para mascotas"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/554324724_1233468855485185_8170011766349853718_n.jpg",
+            "alt": "Pasacalle con batucada en conmemoración del Día de la Prevención del Suicidio"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/490032754_1101789851986420_2342055121719895216_n.jpg",
+            "alt": "Gran Corrida Escolar Comunal reunió a estudiantes de toda Melipeuco en el Día de la Actividad Física"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/486635014_1088977423267663_1487535182980579134_n.jpg",
+            "alt": "Realizan primera mesa comunal de Discapacidad y Rehabilitación en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2022/10/191738202_4834654529884882_8585313726143794271_n.jpg",
+            "alt": "Entrega de 10 estufas a gas (Solución paliativa)"
+          }
+        ]
+      }
+    ]
+  }
+}

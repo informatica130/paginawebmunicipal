@@ -1,0 +1,196 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "udel",
+    "nombre": "Desarrollo Local",
+    "slug": "udel",
+    "unidad": "Departamento de Desarrollo Económico Local (UDEL)",
+    "descripcion": "UDEL Melipeuco: fomento productivo, PDTI, PRODESAL, recursos hídricos, saneamiento de títulos, ferias, turismo y cultura.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#8A5A3B",
+      "oscuro": "#432816",
+      "acento": "#E9A92B",
+      "patron": "montes",
+      "icono": "trabajo",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/762629823_1492560429576025_520058368672760345_n-1.jpg"
+    },
+    "portada": {
+      "antetitulo": "Desarrollo Económico Local",
+      "titulo": "Emprender y producir en Melipeuco",
+      "bajada": "Fomento productivo, apoyo a agricultoras y agricultores, PDTI, recursos hídricos, saneamiento de títulos, turismo y cultura.",
+      "botones": [
+        {
+          "texto": "Programas",
+          "url": "#m-programas"
+        },
+        {
+          "texto": "Oficinas",
+          "url": "#m-oficinas"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "PDTI y PRODESAL",
+          "etiqueta": "programas de apoyo a la agricultura familiar"
+        },
+        {
+          "valor": "Ferias",
+          "etiqueta": "de emprendimiento dentro y fuera de la comuna"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8818",
+      "email": "udel@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "La UDEL",
+        "titulo": "Desarrollo Económico Local",
+        "html": "<p>La UDEL impulsa políticas para aumentar las fuentes productivas de la comuna y apoya a la pequeña empresa campesina en coordinación con los organismos agropecuarios y forestales. Coordina los programas de fomento productivo —como el PDTI y PRODESAL—, los proyectos de riego y drenaje, el saneamiento de títulos rurales y los derechos de agua, y la tenencia responsable de mascotas.</p>"
+      },
+      {
+        "id": "programas",
+        "tipo": "pestanas",
+        "ancla": "Programas",
+        "titulo": "Programas y apoyos",
+        "items": [
+          {
+            "titulo": "Agricultura familiar",
+            "icono": "hoja",
+            "html": "<p>Los programas <strong>PDTI</strong> (Desarrollo Territorial Indígena) y <strong>PRODESAL</strong> acompañan a familias campesinas con asesoría técnica, capacitaciones e incentivos para mejorar su producción.</p>",
+            "puntos": [
+              "Talleres de huerta, conservación de alimentos y cosecha de aguas lluvias.",
+              "Rescate de saberes y productos del bosque nativo."
+            ]
+          },
+          {
+            "titulo": "Emprendimiento",
+            "icono": "trabajo",
+            "html": "<p>La Oficina de Fomento Productivo promueve la regularización de los emprendimientos locales y gestiona ferias, como la feria de la Fiesta del Baqueano y el Festival de la Mosqueta Cordillerana.</p>"
+          },
+          {
+            "titulo": "Agua y títulos",
+            "icono": "agua",
+            "html": "<p>La Oficina de Recursos Hídricos y Saneamiento de Títulos asesora en el acceso y manejo del agua —incluida la Ley 21.435, que reformó el Código de Aguas—, apoya proyectos de riego y la regularización de títulos de dominio con Bienes Nacionales.</p>"
+          },
+          {
+            "titulo": "Mascotas",
+            "icono": "perro",
+            "html": "<p>Operativos gratuitos de vacunación y la atención del Box Veterinario Municipal para promover la tenencia responsable de mascotas.</p>",
+            "enlace": "/boxveterinario/"
+          }
+        ]
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas",
+        "columnas": "4",
+        "items": [
+          {
+            "icono": "trabajo",
+            "etiqueta": "Oficina",
+            "titulo": "Promoción del Fomento Productivo Local",
+            "texto": "Promover fuentes productivas y capacidades locales.",
+            "url": ""
+          },
+          {
+            "icono": "agua",
+            "etiqueta": "Oficina",
+            "titulo": "Recursos Hídricos y Saneamiento de Títulos",
+            "texto": "Asesoría en acceso y manejo del agua; información sobre la Ley 21.435 (Reforma al Código de Aguas).",
+            "url": ""
+          },
+          {
+            "icono": "montana",
+            "etiqueta": "Oficina",
+            "titulo": "Turismo",
+            "texto": "Políticas, planes y proyectos de promoción del turismo.",
+            "url": "/turismo/"
+          },
+          {
+            "icono": "cultura",
+            "etiqueta": "Oficina",
+            "titulo": "Cultura",
+            "texto": "Protección de bienes y monumentos nacionales de incidencia comunal.",
+            "url": "/cultura/"
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones de la UDEL",
+        "html": "<ul><li>Políticas para aumentar las fuentes productivas de la comuna.</li><li>Coordinar con organismos agropecuarios y forestales en apoyo a la pequeña empresa campesina.</li><li>Estadísticas de la situación económica rural; información de apoyo a contribuyentes (cartografía, censos, análisis de aguas).</li><li>Proyectos de riego y drenaje; saneamiento de títulos rurales; derechos de agua.</li><li>Tenencia responsable de mascotas.</li><li>Coordinar y rendir programas de fomento productivo (PDTI, PRODESAL, PRODEMU, entre otros).</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 29.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-del",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": "Para trámites de esta unidad, consulte en la Oficina de Partes o llame al teléfono de contacto."
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de desarrollo local",
+        "categoria": "desarrollo-local",
+        "palabras": "pdti, prodesal, emprendimiento, feria",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2026/08/762629823_1492560429576025_520058368672760345_n-1.jpg",
+            "alt": "PDTI Municipal impulsa taller para rescatar los aromas del bosque nativo"
+          },
+          {
+            "src": "/wp-content/uploads/2025/10/559134223_1241107418054662_3333759552941252892_n.jpg",
+            "alt": "Finalizó con éxito el Curso de Cestería con Fibras Vegetales en Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/10/557677209_1239632234868847_7443942944587705679_n.jpg",
+            "alt": "Melipeuco avanza en el Proyecto de Agua Potable Rural Flor del Valle"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/553414400_1234954352003302_6154028353391023225_n.jpg",
+            "alt": "CORE aprueba inversión para el desarrollo de Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546844383_1222823759883028_770852907037026663_n.jpg",
+            "alt": "Melipeuco avanza en cooperación internacional con delegación de Wenzhou, China"
+          },
+          {
+            "src": "/wp-content/uploads/2025/09/546094051_1221339086698162_8333927953608467209_n-1.jpg",
+            "alt": "Melipeuco presente en la inauguración de la GeoFeria “Saberes y Sabores” y firma de acuerdo internacional con Geoparques de China"
+          }
+        ]
+      }
+    ]
+  }
+}

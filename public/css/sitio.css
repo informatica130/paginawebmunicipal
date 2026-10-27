@@ -2833,19 +2833,19 @@ html.inspeccionando a, html.inspeccionando button { cursor: crosshair; }
 .ms-hero .migas { margin-bottom: 18px; }
 .ms-hero .migas, .ms-hero .migas a { color: rgb(255 255 255 / .82); }
 .ms-hero .migas a:hover { color: #fff; }
-.ms-antetitulo { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px; padding: 6px 14px 6px 10px; border-radius: 999px; background: rgb(255 255 255 / .14); font-size: .875rem; font-weight: 700; letter-spacing: .02em; backdrop-filter: blur(6px); }
+.ms-antetitulo { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px; padding: 6px 14px 6px 10px; border-radius: 999px; background: rgb(255 255 255 / .14); font-size: .875rem; font-weight: 700; letter-spacing: .02em; }
 .ms-hero h1 { margin: 0 0 16px; color: #fff; font-size: clamp(2.3rem, 5.6vw, 4.4rem); line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
 .ms-bajada { max-width: 62ch; margin: 0 0 24px; color: rgb(255 255 255 / .9); font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; }
 .ms-hero .botonera { display: flex; flex-wrap: wrap; gap: 10px; }
 .ms-boton-claro { border: 2px solid rgb(255 255 255 / .7); background: transparent; color: #fff; }
 .ms-boton-claro:hover { background: #fff; color: var(--ms-tinta); }
 .ms-hero-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; margin: clamp(28px, 4vw, 44px) 0 0; padding: 0; list-style: none; }
-.ms-hero-cifras li { display: grid; gap: 2px; padding: 16px 18px; border: 1px solid rgb(255 255 255 / .2); border-radius: var(--r-l); background: rgb(255 255 255 / .1); backdrop-filter: blur(8px); }
+.ms-hero-cifras li { display: grid; gap: 2px; padding: 16px 18px; border: 1px solid rgb(255 255 255 / .2); border-radius: var(--r-l); background: rgb(255 255 255 / .1); }
 .ms-hero-cifras b { font: 800 clamp(1.5rem, 2.6vw, 2rem)/1.05 var(--fuente-titulo); letter-spacing: -.02em; }
 .ms-hero-cifras span { color: rgb(255 255 255 / .85); font-size: .9rem; line-height: 1.35; }
 .ms-hero-onda { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(36px, 6vw, 80px); fill: var(--fondo); }
 
-.ms-nav { position: sticky; top: var(--alto-cabecera, 64px); z-index: 30; margin-top: -1px; background: color-mix(in srgb, var(--fondo) 88%, transparent); border-bottom: 1px solid var(--borde); backdrop-filter: blur(10px) saturate(1.3); }
+.ms-nav { position: sticky; top: 0; z-index: 30; contain: layout paint; transition: top .3s var(--mov); margin-top: -1px; background: var(--fondo); border-bottom: 1px solid var(--borde); box-shadow: 0 6px 14px -12px rgb(0 0 0 / .35); }
 .ms-nav ul { display: flex; gap: 4px; margin: 0; padding: 8px 0; list-style: none; overflow-x: auto; scrollbar-width: none; }
 .ms-nav ul::-webkit-scrollbar { display: none; }
 .ms-nav a { display: block; padding: 8px 14px; border-radius: 999px; color: var(--texto-2); font-size: .9rem; font-weight: 700; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s; }
@@ -3033,3 +3033,9 @@ a.ms-tarjeta:hover { transform: translateY(calc(var(--elevacion, 4px) * -1)); bo
 .ms .prosa a, .ms .ver-todo { color: var(--ms-tinta); }
 .ms-hero .migas li[aria-current] { color: rgb(255 255 255 / .7); }
 @media (max-width: 600px) { .ms-cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .ms-cifra { padding: 16px; } .ms-cifra b { font-size: 1.7rem; } }
+
+/* Micrositios: las secciones fuera de pantalla no se dibujan hasta acercarse (desplazamiento fluido). */
+.ms-modulo { content-visibility: auto; contain-intrinsic-size: auto 720px; }
+/* El destello de los botones queda dentro del botón (una regla general dejaba el desborde visible
+   y el destello se veía como una raya al lado del botón sobre fondos oscuros). */
+:is(.boton-primario, .boton-acento):not([disabled]) { overflow: hidden; isolation: isolate; }

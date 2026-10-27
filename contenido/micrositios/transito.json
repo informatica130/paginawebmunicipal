@@ -1,0 +1,167 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "transito",
+    "nombre": "Tránsito",
+    "slug": "transito",
+    "unidad": "Departamento de Tránsito y Transporte Público",
+    "descripcion": "Departamento de Tránsito de Melipeuco: licencias de conducir, reserva de horas, permisos de circulación, señalización y transporte público.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#D4901A",
+      "oscuro": "#5E3F05",
+      "acento": "#1F6FA8",
+      "patron": "cuadricula",
+      "icono": "auto",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/10/539448951_1211861054312632_672503728134640540_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Tránsito y Transporte Público",
+      "titulo": "Licencias, permisos y una comuna segura",
+      "bajada": "Licencias de conducir, permisos de circulación, señalización vial y transporte público, con reserva de horas en línea.",
+      "botones": [
+        {
+          "texto": "Reservar hora para licencia",
+          "url": "/reservadehora/"
+        },
+        {
+          "texto": "Pagar permiso de circulación",
+          "url": "https://www.sem2.gob.cl/tramites/permisos-de-circulacion/70766500/buscar"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "En línea",
+          "etiqueta": "reserva de horas para licencias"
+        },
+        {
+          "valor": "2 cuotas",
+          "etiqueta": "para pagar el permiso de circulación"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8829",
+      "email": "transito@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "licencias",
+        "tipo": "pestanas",
+        "ancla": "Licencias",
+        "titulo": "Licencias de conducir",
+        "intro": "Revise la guía de su trámite y reserve su hora en línea.",
+        "items": [
+          {
+            "titulo": "Primera licencia",
+            "icono": "licencia",
+            "html": "<p>Para obtener su primera licencia no profesional (clases B, C, D, E y F) debe rendir los exámenes físico, psíquico, teórico y práctico.</p>",
+            "puntos": [
+              "Cédula de identidad vigente.",
+              "Certificado de estudios (mínimo 8° básico) para clases B y C.",
+              "Comprobante de domicilio en la comuna."
+            ],
+            "enlace": "/licenciadeconducir/"
+          },
+          {
+            "titulo": "Renovación (control)",
+            "icono": "reloj",
+            "html": "<p>Renueve su licencia antes de su vencimiento. Rendirá los exámenes físico, psíquico y la entrevista médica.</p>",
+            "enlace": "/renovarlicencia/"
+          },
+          {
+            "titulo": "Ampliación de clase",
+            "icono": "auto",
+            "html": "<p>Agregue una nueva clase a su licencia junto con su control.</p>",
+            "enlace": "/controlconampliacionanuevaclase/"
+          },
+          {
+            "titulo": "Duplicados y cambios",
+            "icono": "documento",
+            "html": "<p>Duplicado por robo o extravío, cambio de domicilio y reemplazo por deterioro.</p>",
+            "enlace": "/duplicadosporrobooextravio/"
+          }
+        ]
+      },
+      {
+        "id": "reserva",
+        "tipo": "llamado",
+        "titulo": "Reserve su hora sin filas",
+        "texto": "Agende en línea su hora para licencias de conducir: sin filas, sin esperas.",
+        "icono": "calendario",
+        "boton": "Reservar hora",
+        "url": "/reservadehora/",
+        "boton2": "Horario de buses",
+        "url2": "/transportepublico/"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas del departamento",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "licencia",
+            "etiqueta": "Oficina",
+            "titulo": "Licencias de Conducir",
+            "texto": "Otorgar, renovar, restringir o denegar licencias de conducir.",
+            "url": ""
+          },
+          {
+            "icono": "auto",
+            "etiqueta": "Oficina",
+            "titulo": "Permisos de Circulación",
+            "texto": "Otorgar y renovar permisos de circulación y sus duplicados.",
+            "url": ""
+          },
+          {
+            "icono": "alerta",
+            "etiqueta": "Oficina",
+            "titulo": "Señalización Vial",
+            "texto": "Mantener señalizadas las vías públicas urbanas.",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones del departamento",
+        "html": "<ul><li>Otorgar y renovar licencias de conducir.</li><li>Determinar el sentido de circulación de vehículos con los organismos competentes.</li><li>Señalizar adecuadamente las vías públicas.</li><li>Aplicar las normas de tránsito y transporte público en la comuna.</li><li>Otorgar y renovar permisos de circulación.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 48.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites de Tránsito",
+        "dependencia": "dep-transito",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": "Para trámites de esta unidad, consulte en la Oficina de Partes o llame al teléfono de contacto."
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de tránsito",
+        "categoria": "departamento-de-transito-y-transporte-publico",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}

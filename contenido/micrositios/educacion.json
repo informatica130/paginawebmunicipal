@@ -1,0 +1,186 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "educacion",
+    "nombre": "Educación",
+    "slug": "educacion",
+    "unidad": "Departamento de Educación Municipal (DAEM)",
+    "descripcion": "Departamento de Educación Municipal de Melipeuco: establecimientos, becas, programas extraescolares y noticias de educación.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#3E3E9A",
+      "oscuro": "#1D1D4F",
+      "acento": "#E9A92B",
+      "patron": "puntos",
+      "icono": "escuela",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2026/08/764069072_1496982915800443_6603088279108769254_n-1.jpg"
+    },
+    "portada": {
+      "antetitulo": "Departamento de Educación Municipal (DAEM)",
+      "titulo": "Educación pública para Melipeuco",
+      "bajada": "Escuelas, liceo y programas para que niñas, niños, jóvenes y personas adultas de la comuna aprendan cerca de su casa.",
+      "botones": [
+        {
+          "texto": "Becas y concursos",
+          "url": "#m-becas"
+        },
+        {
+          "texto": "Establecimientos",
+          "url": "#m-establecimientos"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "Escuela y liceo",
+          "etiqueta": "municipales en la comuna, con escuelas rurales"
+        },
+        {
+          "valor": "Beca Municipal",
+          "etiqueta": "para estudiantes de educación superior"
+        }
+      ]
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8828",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "El DAEM",
+        "titulo": "El Departamento de Educación",
+        "html": "<p>El Departamento de Educación Municipal (DAEM) administra los establecimientos educacionales municipales de Melipeuco y vela por las condiciones óptimas para el proceso educativo: la dirección administrativa de las escuelas y el liceo, sus recursos humanos, financieros y materiales, la capacitación docente y no docente, los programas extraescolares y la educación de madres, padres y apoderados.</p>",
+        "destacado": "Una educación cercana, que valora la cultura de la cordillera y del pueblo mapuche pehuenche."
+      },
+      {
+        "id": "establecimientos",
+        "tipo": "directorio",
+        "ancla": "Establecimientos",
+        "titulo": "Establecimientos y contactos",
+        "intro": "Comuníquese directamente con cada establecimiento para matrículas y consultas.",
+        "items": [
+          {
+            "nombre": "Departamento de Educacion",
+            "sigla": "",
+            "texto": "Administración de la educación municipal.",
+            "url": "",
+            "telefono": "+56 2 3384 8828",
+            "email": ""
+          },
+          {
+            "nombre": "Escuela Volcan Llaima",
+            "sigla": "",
+            "texto": "Educación básica municipal.",
+            "url": "",
+            "telefono": "+56 45 258 1018",
+            "email": ""
+          },
+          {
+            "nombre": "Liceo Los Andes",
+            "sigla": "",
+            "texto": "Enseñanza media en Melipeuco.",
+            "url": "",
+            "telefono": "+56 45 258 1002",
+            "email": ""
+          }
+        ]
+      },
+      {
+        "id": "programas",
+        "tipo": "tarjetas",
+        "ancla": "Programas",
+        "titulo": "Programas y apoyos",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "libro",
+            "etiqueta": "Lectura",
+            "titulo": "Biblioteca y Bibliomóvil",
+            "texto": "La Biblioteca Pública Municipal, renovada en 2025, y el Bibliomóvil que visita las escuelas rurales."
+          },
+          {
+            "icono": "deporte",
+            "etiqueta": "Extraescolar",
+            "titulo": "Deporte y cultura escolar",
+            "texto": "Corridas escolares, campeonatos comunales de cueca y talleres extraescolares."
+          },
+          {
+            "icono": "personas",
+            "etiqueta": "Comunidad",
+            "titulo": "Familias y apoderados",
+            "texto": "Educación de madres, padres y apoderados y trabajo con las comunidades educativas."
+          }
+        ]
+      },
+      {
+        "id": "becas",
+        "tipo": "llamado",
+        "titulo": "Beca Municipal de educación superior",
+        "texto": "Cada año la Municipalidad abre la postulación a la Beca Municipal para estudiantes de la comuna. Revise las bases y fechas en las noticias de Becas y concursos.",
+        "icono": "escuela",
+        "boton": "Ver becas y concursos",
+        "url": "/categoria/becas-y-concursos/"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones del Departamento",
+        "html": "<ul><li>Condiciones óptimas para el proceso educativo en los establecimientos municipales.</li><li>Dirección administrativa de los establecimientos; recursos humanos, financieros y materiales.</li><li>Capacitación docente y no docente; programas extraescolares; educación de padres y apoderados.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 69.</small></p>"
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de educación",
+        "categoria": "educacion",
+        "palabras": "",
+        "cantidad": 6
+      },
+      {
+        "id": "galeria",
+        "tipo": "galeria",
+        "titulo": "En terreno",
+        "imagenes": [
+          {
+            "src": "/wp-content/uploads/2026/08/764069072_1496982915800443_6603088279108769254_n-1.jpg",
+            "alt": "Escuela de Cumcumllaque recibió la visita del Bibliomóvil"
+          },
+          {
+            "src": "/wp-content/uploads/2025/08/533665302_1199732982192106_1198502432195772016_n-1.jpg",
+            "alt": "Se Vivió una Jornada de Tradición y Folclore en el Campeonato Comunal de Cueca Escolar Melipeuco 2025"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/491407811_1106198784878860_2653185343814128426_n.jpg",
+            "alt": "Inauguración de obras de mejoramiento y reapertura de la Biblioteca Pública Municipal de Melipeuco"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/490032754_1101789851986420_2342055121719895216_n.jpg",
+            "alt": "Gran Corrida Escolar Comunal reunió a estudiantes de toda Melipeuco en el Día de la Actividad Física"
+          },
+          {
+            "src": "/wp-content/uploads/2025/04/489328395_1100663092099096_1401661846796088919_n.jpg",
+            "alt": "Melipeuco da inicio oficial al Año Escolar 2025"
+          },
+          {
+            "src": "/wp-content/uploads/2022/10/FB_IMG_1666180845962.jpg",
+            "alt": "Reconocimiento en el día del profesor"
+          }
+        ]
+      }
+    ]
+  }
+}

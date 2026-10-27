@@ -1,0 +1,131 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "juzgado",
+    "nombre": "Juzgado de Policía Local",
+    "slug": "juzgado",
+    "unidad": "Juzgado de Policía Local de Melipeuco",
+    "descripcion": "Juzgado de Policía Local de Melipeuco: materias, escritos y solicitudes, horario y contacto.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#3E3E9A",
+      "oscuro": "#1D1D4F",
+      "acento": "#E9A92B",
+      "patron": "cuadricula",
+      "icono": "balanza",
+      "portada": "degradado",
+      "imagen": ""
+    },
+    "portada": {
+      "antetitulo": "Juzgado de Policía Local de Melipeuco",
+      "titulo": "Juzgado de Policía Local",
+      "bajada": "Infracciones de tránsito, ordenanzas municipales, derechos del consumidor, alcoholes y otras materias de su competencia.",
+      "botones": [
+        {
+          "texto": "Escritos y solicitudes",
+          "url": "#m-tramites"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "Rodrigo Jaramillo Contreras",
+      "cargo": "Juez titular",
+      "telefono": "+56 2 3384 8819",
+      "email": "",
+      "direccion": "Pedro Aguirre Cerda N° 14, tercer piso",
+      "horario": "Lunes a viernes de 08:30 a 14:00 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "El juzgado",
+        "titulo": "Un tribunal cercano",
+        "html": "<p>El Juzgado de Policía Local de Melipeuco es un tribunal especial regido por la Ley N° 15.231. Depende administrativamente de la Municipalidad y está sujeto a la supervigilancia de la Corte de Apelaciones de Temuco.</p><ul><li><strong>Juez titular:</strong> Sr. Rodrigo Jaramillo Contreras</li><li><strong>Secretaria abogada titular:</strong> Sra. Natalia Cofré Vidal</li></ul>"
+      },
+      {
+        "id": "materias",
+        "tipo": "tarjetas",
+        "ancla": "Materias",
+        "titulo": "Qué materias conoce",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "auto",
+            "titulo": "Tránsito",
+            "texto": "Infracciones y accidentes de tránsito y transporte."
+          },
+          {
+            "icono": "documento",
+            "titulo": "Ordenanzas municipales",
+            "texto": "Infracciones a las ordenanzas y a las rentas municipales."
+          },
+          {
+            "icono": "billete",
+            "titulo": "Consumidor",
+            "texto": "Ley 19.496 sobre protección de los derechos de los consumidores."
+          },
+          {
+            "icono": "casa",
+            "titulo": "Urbanismo y copropiedad",
+            "texto": "Urbanismo y construcción, y Ley 19.537 de copropiedad inmobiliaria."
+          },
+          {
+            "icono": "alerta",
+            "titulo": "Alcoholes",
+            "texto": "Infracciones a la ley de alcoholes."
+          },
+          {
+            "icono": "balanza",
+            "titulo": "Otras leyes",
+            "texto": "Leyes 18.700, 19.303 y otras que la ley le encomiende."
+          }
+        ]
+      },
+      {
+        "id": "preguntas",
+        "tipo": "faq",
+        "titulo": "Preguntas frecuentes",
+        "items": [
+          {
+            "pregunta": "¿Cómo presento descargos por una infracción?",
+            "respuesta": "Presente por escrito su defensa en el Juzgado. Revise la ficha «Descargos por infracciones» en los escritos y solicitudes."
+          },
+          {
+            "pregunta": "¿Puedo pedir que se reconsidere una multa?",
+            "respuesta": "Sí, mediante una solicitud de reposición ante el Juzgado."
+          },
+          {
+            "pregunta": "¿Cuál es el horario de atención?",
+            "respuesta": "Lunes a viernes de 08:30 a 14:00 hrs., en el tercer piso del edificio municipal."
+          }
+        ]
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Competencia del Juzgado",
+        "html": "<ul><li>Depende administrativamente de la Municipalidad y técnicamente de la Corte de Apelaciones (Ley 15.231).</li><li>Conoce infracciones de tránsito y transporte, ordenanzas, rentas municipales, urbanismo, alcoholes y otras leyes especiales.</li><li>Ley 18.700, Ley 19.303, Ley 19.496 (consumidor), Ley 19.537 (copropiedad) y otras que la ley le encomiende.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 70 y 71.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Escritos y solicitudes",
+        "dependencia": "dep-jpl",
+        "etiqueta": "juzgado",
+        "cantidad": 12,
+        "vacio": "Para trámites de esta unidad, consulte en la Oficina de Partes o llame al teléfono de contacto."
+      }
+    ]
+  }
+}

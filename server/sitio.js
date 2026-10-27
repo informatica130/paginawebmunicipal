@@ -588,7 +588,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     // Micrositios de las unidades (tienen prioridad sobre una página con la misma dirección)
     if (seg.length === 1) {
       const ms = micro.porSlug(seg[0]);
-      if (ms && (ms.publicado || usuario)) return responder(paginaMicrositio(ctx, ms), { cachear: ms.publicado });
+      if (ms && (ms.publicado || usuario)) return responder(await paginaMicrositio(ctx, ms), { cachear: ms.publicado });
     }
 
     // Páginas por jerarquía de slugs

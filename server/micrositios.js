@@ -70,7 +70,9 @@ export function normalizarMicrositios(entrada) {
     vistos.add(s.slug);
     return s;
   });
-  return { sitios };
+  // Plantillas predeterminadas que se eliminaron a propósito (no vuelven a aparecer solas).
+  const eliminados = [...new Set((Array.isArray(entrada?.eliminados) ? entrada.eliminados : []).map((x) => String(x)).filter((x) => /^[a-z0-9-]{2,40}$/.test(x)))].slice(0, 200);
+  return { sitios, eliminados };
 }
 
 // Plantillas: cada archivo de contenido/micrositios es un micrositio listo para usar o copiar.
@@ -91,7 +93,11 @@ export function crearMicrositios({ db }) {
     if (crudo !== previo || !cache) {
       previo = crudo;
       let a = null; try { a = crudo ? JSON.parse(crudo) : null; } catch { a = null; }
-      cache = a?.sitios ? normalizarMicrositios(a) : { sitios: plantillas().filter((p) => p.predeterminado).map((p) => p.sitio) };
+      // Lo guardado más las plantillas predeterminadas nuevas (las que no están ni se eliminaron).
+      const g = a?.sitios ? normalizarMicrositios(a) : { sitios: [], eliminados: [] };
+      const ids = new Set(g.sitios.map((x) => x.id)), slugs = new Set(g.sitios.map((x) => x.slug)), fuera = new Set(g.eliminados);
+      const nuevas = plantillas().filter((p) => p.predeterminado && !ids.has(p.sitio.id) && !slugs.has(p.sitio.slug) && !fuera.has(p.sitio.id)).map((p) => p.sitio);
+      cache = { sitios: [...g.sitios, ...nuevas], eliminados: g.eliminados };
     }
     return cache;
   };

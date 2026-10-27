@@ -103,6 +103,7 @@ export default async function (vista) {
     if (ds.eliminar !== undefined) {
       const s = sitios[Number(ds.eliminar)];
       if (!(await confirmar(`Se eliminará el micrositio «${s.nombre}» (/${s.slug}/). Se aplica al guardar.`, { titulo: 'Eliminar micrositio', boton: 'Eliminar', peligro: true }))) return;
+      if (datos.plantillas.some((p) => p.sitio.id === s.id)) datos.eliminados = [...new Set([...(datos.eliminados || []), s.id])];
       sitios.splice(Number(ds.eliminar), 1); pintarLista(); return;
     }
     if ('nuevo' in ds) {
@@ -140,7 +141,8 @@ export default async function (vista) {
   $('[data-guardar]', vista).addEventListener('click', async () => {
     recoger();
     try {
-      const r = await api('PUT', 'micrositios', { sitios });
+      const r = await api('PUT', 'micrositios', { sitios, eliminados: datos.eliminados || [] });
+      datos.eliminados = r.eliminados;
       sitios = copia(r.sitios); guardado = JSON.stringify(sitios);
       aviso('Micrositios guardados y publicados.', 'ok');
       if (actual !== null && sitios[actual]) { lectores = []; pintarEditor(); } else pintarLista();

@@ -1,0 +1,167 @@
+{
+  "predeterminado": true,
+  "sitio": {
+    "id": "obras",
+    "nombre": "Obras",
+    "slug": "obras",
+    "unidad": "Dirección de Obras Municipales (DOM)",
+    "descripcion": "Dirección de Obras Municipales de Melipeuco: permisos de edificación, certificados, inspección, vialidad, alumbrado, cementerios, emergencias y solicitud de maquinaria.",
+    "publicado": true,
+    "actualizado": "2026-10-27",
+    "tema": {
+      "color": "#C9552B",
+      "oscuro": "#5B2210",
+      "acento": "#E9A92B",
+      "patron": "triangulos",
+      "icono": "herramienta",
+      "portada": "dividida",
+      "imagen": "/wp-content/uploads/2025/09/554538555_1234320305400040_4583113183754331573_n.jpg"
+    },
+    "portada": {
+      "antetitulo": "Dirección de Obras Municipales (DOM)",
+      "titulo": "Construimos la comuna",
+      "bajada": "Permisos de edificación, urbanización, inspección de obras, alumbrado, caminos, cementerios, emergencias y maquinaria municipal.",
+      "botones": [
+        {
+          "texto": "Solicitar maquinaria",
+          "url": "/solicitud-de-maquinaria/"
+        },
+        {
+          "texto": "Oficinas",
+          "url": "#m-oficinas"
+        }
+      ],
+      "cifras": []
+    },
+    "contacto": {
+      "responsable": "",
+      "cargo": "",
+      "telefono": "+56 2 3384 8825",
+      "email": "obras@munimelipeuco.cl",
+      "direccion": "Pedro Aguirre Cerda N° 14, Melipeuco",
+      "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+      "redes": [
+        {
+          "texto": "Consultas, reclamos y sugerencias (OIRS)",
+          "url": "/oirs/"
+        }
+      ]
+    },
+    "modulos": [
+      {
+        "id": "presentacion",
+        "tipo": "texto",
+        "ancla": "La DOM",
+        "titulo": "La Dirección de Obras",
+        "html": "<p>La Dirección de Obras Municipales vela por el cumplimiento de la Ley General de Urbanismo y Construcciones, el Plan Regulador y las ordenanzas: aprueba subdivisiones y proyectos, otorga permisos de edificación, fiscaliza y recibe las obras, y se encarga de la vialidad urbana y rural, las construcciones municipales, el alumbrado público, las aceras y los pavimentos.</p>"
+      },
+      {
+        "id": "oficinas",
+        "tipo": "tarjetas",
+        "ancla": "Oficinas",
+        "titulo": "Oficinas de la DOM",
+        "columnas": "3",
+        "items": [
+          {
+            "icono": "casa",
+            "etiqueta": "Oficina",
+            "titulo": "Edificación y Urbanización",
+            "texto": "Revisar y aprobar proyectos de subdivisión, fusión, loteo, urbanización y construcción.",
+            "url": ""
+          },
+          {
+            "icono": "buscar",
+            "etiqueta": "Oficina",
+            "titulo": "Inspección de Obras",
+            "texto": "Fiscalizar obras de edificación, ampliación, remodelación y demolición.",
+            "url": ""
+          },
+          {
+            "icono": "carpeta",
+            "etiqueta": "Oficina",
+            "titulo": "Catastros y Archivos",
+            "texto": "Catastro actualizado de obras de urbanización y edificación.",
+            "url": ""
+          },
+          {
+            "icono": "alerta",
+            "etiqueta": "Oficina",
+            "titulo": "Emergencia y Protección Civil",
+            "texto": "Prevención, mitigación, atención, control y recuperación ante emergencias y catástrofes.",
+            "url": ""
+          },
+          {
+            "icono": "escudo",
+            "etiqueta": "Oficina",
+            "titulo": "Cementerios",
+            "texto": "Dirección administrativa y gestión de los cementerios municipales (Ley 18.096).",
+            "url": ""
+          },
+          {
+            "icono": "basura",
+            "etiqueta": "Oficina",
+            "titulo": "Aseo y Ornato",
+            "texto": "Aseo de vías públicas, parques, jardines y bienes nacionales de uso público.",
+            "url": ""
+          },
+          {
+            "icono": "camion",
+            "etiqueta": "Oficina",
+            "titulo": "Vehículos",
+            "texto": "Coordinación y mantención de los vehículos municipales y sus contratos de reparación.",
+            "url": ""
+          },
+          {
+            "icono": "hoja",
+            "etiqueta": "Oficina",
+            "titulo": "Medio Ambiente",
+            "texto": "Asesorar en planificación, gestión y control ambiental del territorio comunal.",
+            "url": "/medioambiente/"
+          },
+          {
+            "icono": "auto",
+            "etiqueta": "Departamento",
+            "titulo": "Tránsito y Transporte Público",
+            "texto": "Otorgar y renovar licencias de conducir.",
+            "url": "/transito/"
+          }
+        ]
+      },
+      {
+        "id": "maquinaria",
+        "tipo": "llamado",
+        "titulo": "Solicitud de maquinaria municipal",
+        "texto": "Apoyo con retroexcavadora, motoniveladora, camión u otros recursos, sujeto a evaluación social y disponibilidad.",
+        "icono": "camion",
+        "boton": "Cómo solicitarla",
+        "url": "/solicitud-de-maquinaria/"
+      },
+      {
+        "id": "funciones",
+        "tipo": "texto",
+        "ancla": "Funciones",
+        "titulo": "Funciones de la Dirección",
+        "html": "<ul><li>Velar por el cumplimiento de la Ley General de Urbanismo y Construcciones, el Plan Regulador y las ordenanzas.</li><li>Aprobar subdivisiones, proyectos de urbanización y construcción; otorgar permisos de edificación, fiscalizar y recibir obras.</li><li>Fiscalizar obras en uso y aplicar normas ambientales de construcción.</li><li>Catastro de obras de urbanización y edificación.</li><li>Vialidad urbana y rural; construcciones municipales; bases técnicas y fiscalización de contratos de obras.</li><li>Mantención y proyectos de alumbrado público, aceras y pavimentos.</li></ul><p><small>Según el Reglamento de Organización Interna N° 12/2025, art. 37 y 38.</small></p>"
+      },
+      {
+        "id": "tramites",
+        "tipo": "tramites",
+        "ancla": "Trámites",
+        "titulo": "Trámites y solicitudes",
+        "dependencia": "dep-dom",
+        "etiqueta": "",
+        "cantidad": 12,
+        "vacio": "Para trámites de esta unidad, consulte en la Oficina de Partes o llame al teléfono de contacto."
+      },
+      {
+        "id": "noticias",
+        "tipo": "noticias",
+        "ancla": "Noticias",
+        "titulo": "Noticias de obras",
+        "categoria": "obras",
+        "palabras": "",
+        "cantidad": 6
+      }
+    ]
+  }
+}
