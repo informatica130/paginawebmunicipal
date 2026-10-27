@@ -4,6 +4,7 @@ import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tar
 import { documento, encabezado, disenoDe, zona } from './layout.js';
 import { centroTransparencia, buscarTransparencia } from './transparencia.js';
 import { inventario, buscarArchivo, filaArchivo } from './archivo.js';
+import { seccionVideosPortada, franjaVideos, videoDeSesion, reproductorVideo, buscarVideos, tarjetaVideo, indice as indiceVideos } from './videos.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
@@ -298,6 +299,7 @@ async function seccionPortada(ctx, sec) {
       const e = ctx.repo.vigentes('encuesta')[0];
       return e ? html`<section class="seccion"><div class="contenedor angosto">${ctx.encuesta(e)}</div></section>` : '';
     }
+    case 'videoteca': return seccionVideosPortada(sec.titulo || 'Videos de Melipeuco');
     case 'video': {
       const v = ctx.ajustes.video;
       if (!v?.url) return '';
@@ -321,7 +323,9 @@ export function listadoNoticias(ctx, { titulo, bajada = '', base, items, pagina,
     cuerpo: html`${encabezado({ titulo, bajada, migas: migas(migasItems), ctx })}
       <div class="contenedor con-lateral">
         <div>
+          <nav class="pestanas-noticias" aria-label="Noticias y videos"><a href="/noticias/" aria-current="page">${crudo(icono('megafono', { tam: 18 }))} Noticias</a><a href="/videos/">${crudo(icono('video', { tam: 18 }))} Videos</a></nav>
           ${filtros}
+          ${base === '/noticias/' && pagina === 1 ? franjaVideos('También en video', { excluir: 'concejo-municipal', cantidad: 3 }) : ''}
           ${items.length ? html`<div class="grilla-noticias">${items.map((c) => tarjetaNoticia(ctx, c))}</div>` : vacio('No encontramos noticias con esos criterios.', 'buscar')}
           ${paginacion(base, pagina, paginas)}
         </div>
@@ -707,6 +711,7 @@ export function listadoSesiones(ctx, { pagina = 1, anio = '' }) {
     titulo: 'Sesiones del Concejo Municipal', descripcion: 'Sesiones ordinarias y extraordinarias del Concejo Municipal de Melipeuco: tablas, actas y transmisiones.',
     cuerpo: html`${encabezado({ titulo: 'Sesiones del Concejo Municipal', bajada: 'Tablas, acuerdos, actas y transmisiones de cada sesión.', migas: migas([{ texto: 'Concejo Municipal', url: '/concejo-municipal/' }, { texto: 'Sesiones' }]), ctx })}
       <div class="contenedor angosto">
+        ${pagina === 1 ? franjaVideos('Sesiones en video', { categoria: 'concejo-municipal', cantidad: 4, enlace: '/videos/?categoria=concejo-municipal' }) : ''}
         ${r.items.length ? html`<ul class="lista-sesiones">${r.items.map((s) => filaSesion(ctx, s))}</ul>` : vacio('Aún no hay sesiones publicadas.', 'balanza')}
         ${paginacion('/concejo/sesiones/', r.pagina, r.paginas)}
       </div>`,
@@ -718,7 +723,7 @@ export async function fichaSesion(ctx, s) {
   return fichaGenerica(ctx, s, {
     migasPadre: [{ texto: 'Concejo Municipal', url: '/concejo-municipal/' }, { texto: 'Sesiones', url: '/concejo/sesiones/' }],
     antes: html`<p class="insignias"><span class="insignia">${crudo(icono('calendario', { tam: 14 }))} ${fecha(d.fecha, { largo: true, diaSemana: true })}${d.fecha?.length > 10 ? ` · ${d.fecha.slice(11, 16)} hrs.` : ''}</span><span class="insignia">${{ ordinaria: 'Sesión ordinaria', extraordinaria: 'Sesión extraordinaria', especial: 'Sesión especial' }[d.tipoSesion]}</span>${d.numero ? html`<span class="insignia">N° ${d.numero}</span>` : ''}${d.lugar ? html`<span class="insignia">${crudo(icono('ubicacion', { tam: 14 }))} ${d.lugar}</span>` : ''}</p>
-      ${d.video ? video(d.video, s.titulo) : ''}
+      ${d.video ? video(d.video, s.titulo) : (() => { const v = videoDeSesion(d.fecha); return v ? html`${reproductorVideo(v)}<p class="meta">Grabación de la sesión · <a href="/videos/${v.id}/">ver la ficha del video</a></p>` : ''; })()}
       ${d.tabla?.length ? html`<section class="ficha-seccion"><h2>Tabla</h2><ol class="pasos">${d.tabla.map((x) => html`<li>${x}</li>`)}</ol></section>` : ''}
       ${d.acuerdos?.length ? html`<section class="ficha-seccion"><h2>Acuerdos</h2><ul class="lista-check">${d.acuerdos.map((x) => html`<li>${x}</li>`)}</ul></section>` : ''}
       ${d.acta ? html`<ul class="lista-documentos">${listaDocumento({ titulo: 'Acta de la sesión', url: d.acta })}</ul>` : ''}`,
@@ -798,6 +803,7 @@ export function busqueda(ctx, { q, tipo = '', pagina = 1, resultados, tramitesEn
         </form>
         ${q ? html`<p class="resultado-conteo" role="status">${resultados.total + tramitesEnLinea.length} resultados para «${q}»</p>` : ''}
         ${(() => { const norm = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); const p = norm(q).split(/\s+/).filter((x) => x.length > 2); const t = p.length && ctx.ext ? buscarTransparencia(ctx.ext.leer(), p, norm) : []; return t.length ? html`<section class="ficha-seccion"><h2>Transparencia</h2><ul class="ct-materias ct-compacta">${t.map((m) => html`<li><a class="ct-materia" href="${m.url}"${m.externo ? crudo(' target="_blank" rel="noopener"') : ''}><span class="ct-ico">${crudo(icono('documento', { tam: 20 }))}</span><span class="ct-txt"><b>${m.titulo}</b><small>${m.fragmento}</small></span></a></li>`)}</ul></section>` : ''; })()}
+        ${(() => { const v = q ? buscarVideos(q, 8) : []; const ix = v.length ? indiceVideos() : null; return v.length ? html`<section class="ficha-seccion"><h2>Videos</h2><div class="vd-grilla vd-compacta">${v.map((x) => tarjetaVideo(ix, x))}</div><a class="ver-todo" href="/videos/?q=${encodeURIComponent(q)}">Ver todos los videos para «${q}»</a></section>` : ''; })()}
         ${(() => { const inv = q ? inventario() : null; const d = inv ? buscarArchivo(inv, q, { limite: 8 }) : []; return d.length ? html`<section class="ficha-seccion"><h2>Documentos de Transparencia</h2><ul class="ar-lista">${d.map((x) => filaArchivo(x))}</ul><a class="ver-todo" href="/transparencia/documentos/?q=${encodeURIComponent(q)}">Ver todos los documentos para «${q}»</a></section>` : ''; })()}
         ${tramitesEnLinea.length ? html`<section class="ficha-seccion"><h2>Trámites en línea</h2><div class="lista-tramites">${tramitesEnLinea.map((t) => filaTramiteEnLinea(t))}</div></section>` : ''}
         ${resultados.items.length ? html`<ol class="resultados">${resultados.items.map((r) => html`<li><span class="etiqueta">${etiquetas[r.tipo] || r.tipo}</span><h2><a href="${ctx.repo.urlDe(r)}">${r.titulo}</a></h2><p>${resaltar(r.fragmento)}</p>${r.tipo === 'noticia' ? html`<p class="meta">${fecha(r.publicado_en, { largo: true })}</p>` : ''}</li>`)}</ol>` : q && !tramitesEnLinea.length ? vacio('No encontramos resultados. Pruebe con otras palabras, revise el catálogo de trámites o escríbanos a la OIRS.', 'buscar') : ''}

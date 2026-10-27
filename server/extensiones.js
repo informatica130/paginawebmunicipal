@@ -30,7 +30,7 @@ export const ZONAS = {
   pie: 'Dentro del pie de página',
 };
 // Zonas de la portada: después de cada sección.
-export const ZONAS_PORTADA = ['banners', 'campanas', 'accesos', 'tramites', 'noticias', 'eventos', 'areas', 'turismo', 'video', 'encuesta', 'boletin', 'mundos', 'cinta'];
+export const ZONAS_PORTADA = ['banners', 'campanas', 'accesos', 'tramites', 'noticias', 'videoteca', 'eventos', 'areas', 'turismo', 'video', 'encuesta', 'boletin', 'mundos', 'cinta'];
 export const TIPOS_ZONA = { html: 'Texto y HTML (saneado)', aviso: 'Aviso destacado', fuente: 'Datos de una fuente externa (API)', aislado: 'HTML con scripts (marco aislado)' };
 export const PAGINAS = { todas: 'Todas las páginas', portada: 'Sólo la portada', interiores: 'Todas menos la portada', rutas: 'Sólo las direcciones indicadas' };
 export const ESTILOS_EMERGENTE = { modal: 'Ventana al centro', esquina: 'Tarjeta en una esquina', barra: 'Barra inferior' };
