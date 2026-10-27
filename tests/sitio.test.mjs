@@ -505,3 +505,18 @@ test('Vercel: con memoria compartida (Redis) los cambios del panel llegan a toda
     assert.equal(salud.memoriaCompartida.activa, true);
   } finally { apps.forEach((x) => x.cerrar()); }
 });
+
+test('transparencia activa: copia del Portal con fecha y sin enlaces a Drive', async () => {
+  const raiz = await pedir('/transparencia/activa/');
+  assert.equal(raiz.status, 200);
+  const h = await raiz.text();
+  assert.match(h, /Información actualizada al 27 de octubre de 2026/);
+  assert.match(h, /Personal y remuneraciones/);
+  assert.match(await (await pedir('/transparencia/')).text(), /Información actualizada al/);
+  for (const ruta of ['/transparencia/activa/personal-y-remuneraciones/', '/transparencia/activa/actos-y-documentos-del-organismo-que-hayan-sido-ob-3/', '/transparencia/activa/actos-y-documentos-del-organismo-que-hayan-sido-ob-3/?q=decreto&p=2']) {
+    const r = await pedir(ruta);
+    assert.equal(r.status, 200, ruta);
+    assert.doesNotMatch(await r.text(), /drive\.google|docs\.google|googleusercontent/, ruta);
+  }
+  assert.equal((await pedir('/transparencia/activa/no-existe/')).status, 404);
+});
