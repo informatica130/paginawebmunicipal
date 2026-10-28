@@ -8,6 +8,30 @@ import { inventario, urlDoc } from './archivo.js';
 import { filaTramite, filaTramiteEnLinea, renderBloques, tarjetaAutoridad } from './bloques.js';
 import { franjaVideos } from './videos.js';
 import { franjaFotos } from './fotos.js';
+import fs from 'node:fs';
+
+// Programas y calendario del CESFAM (de sus publicaciones), para el micrositio de Salud.
+const RUTA_CESFAM = new URL('../../contenido/facebook/cesfam.json', import.meta.url);
+let cesfam = null, cesfamMtime = 0;
+function datosCesfam() {
+  try { const st = fs.statSync(RUTA_CESFAM); if (!cesfam || st.mtimeMs !== cesfamMtime) { cesfam = JSON.parse(fs.readFileSync(RUTA_CESFAM, 'utf8')); cesfamMtime = st.mtimeMs; } } catch { return null; }
+  return cesfam;
+}
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+function seccionesCesfam(ctx) {
+  const d = datosCesfam();
+  if (!d) return [];
+  const programas = d.programas.filter((x) => x.publicaciones);
+  const enlace = (x) => (ctx.db.get("SELECT 1 FROM taxonomias WHERE tipo = 'etiqueta' AND slug = ?", x.etiqueta) ? `/etiqueta/${x.etiqueta}/` : `/buscar/?q=${encodeURIComponent(x.nombre)}`);
+  const hoy = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Santiago' }).slice(5);
+  const cal = [...d.calendario.filter((c) => c.fecha >= hoy), ...d.calendario.filter((c) => c.fecha < hoy)];
+  return [
+    programas.length ? { m: { tipo: 'tarjetas', ancla: 'Programas del CESFAM', id: 'cesfam-programas' }, r: html`${cab({ titulo: 'Programas y actividades del CESFAM', intro: 'Lo que el equipo de salud hace en la comuna, según sus publicaciones. Entre a cada programa para ver sus noticias.' })}
+      <div class="ms-tarjetas col-4">${programas.map((x, i) => html`<a class="ms-tarjeta" style="--i:${i}" href="${enlace(x)}"><span class="ms-ico">${crudo(icono(x.icono, { tam: 26 }))}</span><small class="ms-etiqueta">${x.publicaciones} ${x.publicaciones === 1 ? 'publicación' : 'publicaciones'}</small><h3>${x.nombre}</h3><p>${x.texto}</p><span class="ms-ir">${crudo(icono('flecha', { tam: 18 }))}</span></a>`)}</div>` } : null,
+    { m: { tipo: 'calendario-salud', ancla: 'Calendario', id: 'cesfam-calendario' }, r: html`${cab({ titulo: 'Calendario de la salud', intro: 'Fechas que el CESFAM conmemora cada año con actividades, stands y talleres. La primera es la más próxima.' })}
+      <ol class="ms-calendario-salud">${cal.map((c, i) => html`<li${i === 0 ? crudo(' class="proximo"') : ''}><a href="/buscar/?q=${encodeURIComponent(c.buscar)}"><b>${Number(c.fecha.slice(3))}<small>${MESES[Number(c.fecha.slice(0, 2)) - 1].slice(0, 3)}</small></b><span>${c.nombre}${i === 0 ? html`<em>Próxima</em>` : ''}</span></a></li>`)}</ol>` },
+  ].filter(Boolean);
+}
 import { ORGANIGRAMA_MELIPEUCO } from '../../src/organigrama-melipeuco.js';
 import { patronUrl, tamanoPatron } from '../../public/js/diseno.js';
 import { fecha, hoyLocal, textoPlano, recortar } from '../../src/util.js';
@@ -187,6 +211,7 @@ export async function paginaMicrositio(ctx, s) {
     const fondo = m.tipo === 'llamado' ? 'llamado' : m.fondo === 'auto' ? ((alterno = !alterno) ? 'claro' : 'suave') : m.fondo;
     return { m, fondo, r };
   }).filter(Boolean);
+  if (s.slug === 'salud' || s.organigrama === 'dep-salud') for (const x of seccionesCesfam(ctx)) partes.push({ ...x, fondo: (alterno = !alterno) ? 'claro' : 'suave' });
   // Álbumes de fotos relacionados con el área (de la fototeca), al final de las secciones.
   const fotos = s.modulos.some((m) => m.fuente === 'fotos') ? '' : franjaFotos(ctx, 'Actividades en fotos', { area: s.slug, cantidad: 4 });
   if (String(fotos).trim()) partes.push({ m: { tipo: 'fotos', ancla: 'Fotos', id: 'fotos' }, fondo: (alterno = !alterno) ? 'claro' : 'suave', r: fotos });

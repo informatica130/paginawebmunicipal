@@ -382,6 +382,25 @@ test('facebook: álbumes como fototeca, noticias y eventos pasados de la agenda'
   assert.match(await (await pedir('/buscar/?q=baqueano')).text(), /class="ft-tarjeta"/);
 });
 
+test('CESFAM: publicaciones como noticias por programa, agenda y micrositio de Salud', async () => {
+  const s = await admin();
+  await api(s, 'POST', 'importar-facebook');
+  const salud = await (await pedir('/salud/')).text();
+  assert.match(salud, /Programas y actividades del CESFAM/);
+  assert.match(salud, /href="\/etiqueta\/salud-mental\/"/);
+  assert.match(salud, /class="ms-calendario-salud"/);
+  const etiqueta = await pedir('/etiqueta/salud-mental/');
+  assert.equal(etiqueta.status, 200);
+  const h = await etiqueta.text();
+  const enlace = h.match(/href="(\/\d{4}\/\d{2}\/\d{2}\/[^"]+\/)"/)[1];
+  assert.match(await (await pedir(enlace)).text(), /Fuente: Publicación de la página de Facebook del CESFAM Melipeuco/);
+  // Avisos de un día y objetos perdidos no se publican.
+  const { paqueteFacebook } = await import('../server/facebook.js');
+  const textos = paqueteFacebook().noticias.filter((n) => n.clave.startsWith('cesfam-')).map((n) => n.cuerpo).join(' ');
+  assert.ok(textos.length > 10000);
+  assert.doesNotMatch(textos, /se encontraron estos lentes|Samsung Galax|Volcamiento|10-4/);
+});
+
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
   const { leerCarpeta, clasificar, nombreVisible, idPublico } = await import('../herramientas/transparencia-drive.js');
   const html = '<div class="flip-entries"><div class="flip-entry" id="entry-ABC123" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/drive/folders/ABC123?resourcekey=0-xyz" target="_blank"><div class="flip-entry-title">05.- ADQUISICIONES</div></a></div><div class="flip-entry-last-modified"><div>8/19/16</div></div></div>'
