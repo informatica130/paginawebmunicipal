@@ -2690,6 +2690,16 @@ html { scrollbar-color: color-mix(in srgb, var(--azul) 45%, transparent) transpa
 .pestanas-noticias { display: flex; gap: 6px; margin-bottom: 20px; padding: 4px; border-radius: 999px; background: var(--fondo-2); width: max-content; max-width: 100%; }
 .pestanas-noticias a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 999px; color: var(--texto-2); font-weight: 700; text-decoration: none; transition: background-color .2s, color .2s; }
 .pestanas-noticias a[aria-current] { background: var(--superficie); color: var(--azul); box-shadow: var(--sh-1); }
+/* Micrositio de Salud: calendario de la salud */
+.ms-calendario-salud { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ms-calendario-salud a { display: flex; align-items: center; gap: 14px; height: 100%; padding: 10px 14px; border: 1px solid var(--borde); border-radius: var(--r-l); background: var(--superficie); color: var(--texto); text-decoration: none; transition: border-color .2s, transform .2s; }
+.ms-calendario-salud a:hover { border-color: var(--ms-c, var(--azul)); transform: translateY(-2px); }
+.ms-calendario-salud b { display: grid; place-items: center; flex: none; width: 54px; height: 54px; border-radius: 12px; background: color-mix(in srgb, var(--ms-c, var(--azul)) 12%, transparent); color: var(--ms-o, var(--azul)); font-size: 1.25rem; line-height: 1; }
+.ms-calendario-salud b small { font-size: .6875rem; font-weight: 700; text-transform: uppercase; }
+.ms-calendario-salud span { font-weight: 600; line-height: 1.35; }
+.ms-calendario-salud em { display: block; margin-top: 2px; color: var(--ms-o, var(--azul)); font-size: .75rem; font-style: normal; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.ms-calendario-salud .proximo a { border-color: var(--ms-c, var(--azul)); box-shadow: var(--sh-1); }
+@media (prefers-reduced-motion: reduce) { .ms-calendario-salud a { transition: none; } .ms-calendario-salud a:hover { transform: none; } }
 /* Fototeca: álbumes de fotos */
 .pestanas-noticias { overflow-x: auto; scrollbar-width: none; }
 .pestanas-noticias a { flex: none; }

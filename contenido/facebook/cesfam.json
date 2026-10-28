@@ -1,0 +1,211 @@
+{
+ "version": 1,
+ "origen": "Publicaciones de la página de Facebook del CESFAM Melipeuco (2022–2026)",
+ "programas": [
+  {
+   "etiqueta": "salud-mental",
+   "icono": "corazon",
+   "nombre": "Salud mental",
+   "texto": "Talleres psicosociales y de arte terapia, conversatorios, voluntariado y actividades por la prevención del suicidio y el bienestar emocional.",
+   "publicaciones": 29
+  },
+  {
+   "etiqueta": "promocion-de-la-salud",
+   "icono": "deporte",
+   "nombre": "Promoción de la salud",
+   "texto": "Actividad física en comunidad, ferias saludables, cine preventivo, talleres y entornos saludables junto a la Municipalidad.",
+   "publicaciones": 32
+  },
+  {
+   "etiqueta": "vacunacion",
+   "icono": "check",
+   "nombre": "Vacunatorio",
+   "texto": "Campañas de vacunación contra la influenza y otras enfermedades, en el CESFAM, el Gimnasio Municipal y en terreno.",
+   "publicaciones": 20
+  },
+  {
+   "etiqueta": "salud-cardiovascular",
+   "icono": "grafico",
+   "nombre": "Salud cardiovascular",
+   "texto": "Talleres de automanejo para personas con diabetes e hipertensión, stands informativos y el Mes del Corazón.",
+   "publicaciones": 26
+  },
+  {
+   "etiqueta": "salud-de-la-mujer",
+   "icono": "personas",
+   "nombre": "Salud de la mujer",
+   "texto": "Toma de PAP, mamografías, Octubre Rosa, talleres prenatales y orientación frente a la violencia contra la mujer.",
+   "publicaciones": 20
+  },
+  {
+   "etiqueta": "lactancia-materna",
+   "icono": "mano",
+   "nombre": "Lactancia materna",
+   "texto": "Comité de lactancia del CESFAM, talleres y la Semana Mundial de la Lactancia Materna cada agosto.",
+   "publicaciones": 12
+  },
+  {
+   "etiqueta": "infancia",
+   "icono": "escuela",
+   "nombre": "Salud infantil",
+   "texto": "Controles de salud desde los 7 días hasta los 9 años, Chile Crece Más y visitas a jardines y escuelas.",
+   "publicaciones": 40
+  },
+  {
+   "etiqueta": "personas-mayores",
+   "icono": "usuario",
+   "nombre": "Personas mayores",
+   "texto": "Programa Más Adultos Mayores Autovalentes, PACAM, operativos podológicos y prevención de caídas.",
+   "publicaciones": 19
+  },
+  {
+   "etiqueta": "salud-intercultural",
+   "icono": "cultura",
+   "nombre": "Salud intercultural",
+   "texto": "Asesora cultural, autocuidado con pertinencia cultural, cocina mapuche y encuentros de palikantun escolar.",
+   "publicaciones": 5
+  },
+  {
+   "etiqueta": "postas-rurales",
+   "icono": "casa",
+   "nombre": "Postas de salud rural",
+   "texto": "Atención en las postas de Caren, Cumcumllaque y Santa María de Llaima, con actividades en cada sector.",
+   "publicaciones": 24
+  },
+  {
+   "etiqueta": "prevencion-y-zoonosis",
+   "icono": "escudo",
+   "nombre": "Prevención de enfermedades",
+   "texto": "Tuberculosis, VIH (test rápido), hanta, hidatidosis, rabia, golpes de calor y uso responsable de antibióticos.",
+   "publicaciones": 53
+  },
+  {
+   "etiqueta": "alimentacion-saludable",
+   "icono": "hoja",
+   "nombre": "Alimentación saludable",
+   "texto": "Talleres y consejos de nutricionistas para todas las edades, en el CESFAM, escuelas y jardines.",
+   "publicaciones": 32
+  },
+  {
+   "etiqueta": "participacion-social",
+   "icono": "chat",
+   "nombre": "Participación social",
+   "texto": "Jornadas de participación social en salud, trato usuario y voluntariado.",
+   "publicaciones": 4
+  },
+  {
+   "etiqueta": "piri-ufro",
+   "icono": "libro",
+   "nombre": "Estudiantes PIRI y UFRO",
+   "texto": "Estudiantes de salud de la Universidad de La Frontera que apoyan operativos y actividades educativas en la comuna.",
+   "publicaciones": 16
+  }
+ ],
+ "calendario": [
+  {
+   "fecha": "03-14",
+   "nombre": "Día Mundial del Riñón (segundo jueves de marzo)",
+   "buscar": "riñon"
+  },
+  {
+   "fecha": "03-22",
+   "nombre": "Día Mundial del Agua",
+   "buscar": "agua"
+  },
+  {
+   "fecha": "03-24",
+   "nombre": "Día Mundial de la Tuberculosis",
+   "buscar": "tuberculosis"
+  },
+  {
+   "fecha": "03-26",
+   "nombre": "Día de la Prevención del Cáncer Cervicouterino",
+   "buscar": "cervicouterino"
+  },
+  {
+   "fecha": "04-06",
+   "nombre": "Día Mundial de la Actividad Física",
+   "buscar": "actividad física"
+  },
+  {
+   "fecha": "05-12",
+   "nombre": "Día Internacional de la Enfermería",
+   "buscar": "enfermería"
+  },
+  {
+   "fecha": "05-17",
+   "nombre": "Día Mundial de la Hipertensión",
+   "buscar": "hipertensión"
+  },
+  {
+   "fecha": "05-31",
+   "nombre": "Día Mundial sin Tabaco",
+   "buscar": "tabaco"
+  },
+  {
+   "fecha": "08-01",
+   "nombre": "Semana Mundial de la Lactancia Materna (1 al 7 de agosto)",
+   "buscar": "lactancia"
+  },
+  {
+   "fecha": "08-01",
+   "nombre": "Agosto, Mes del Corazón",
+   "buscar": "corazón"
+  },
+  {
+   "fecha": "08-31",
+   "nombre": "Día de la Matrona y el Matrón",
+   "buscar": "matrona"
+  },
+  {
+   "fecha": "09-10",
+   "nombre": "Día Mundial de la Prevención del Suicidio",
+   "buscar": "suicidio"
+  },
+  {
+   "fecha": "09-28",
+   "nombre": "Día Mundial contra la Rabia",
+   "buscar": "rabia"
+  },
+  {
+   "fecha": "10-01",
+   "nombre": "Octubre Rosa y Mes de las Personas Mayores",
+   "buscar": "octubre rosa"
+  },
+  {
+   "fecha": "10-10",
+   "nombre": "Día Mundial de la Salud Mental",
+   "buscar": "salud mental"
+  },
+  {
+   "fecha": "10-16",
+   "nombre": "Día Mundial de la Alimentación",
+   "buscar": "alimentación"
+  },
+  {
+   "fecha": "10-29",
+   "nombre": "Día Mundial del Accidente Cerebrovascular",
+   "buscar": "cerebrovascular"
+  },
+  {
+   "fecha": "11-14",
+   "nombre": "Día Mundial de la Diabetes",
+   "buscar": "diabetes"
+  },
+  {
+   "fecha": "11-18",
+   "nombre": "Semana de Concientización sobre la Resistencia a los Antimicrobianos",
+   "buscar": "antimicrobianos"
+  },
+  {
+   "fecha": "11-25",
+   "nombre": "Día de la Eliminación de la Violencia contra la Mujer",
+   "buscar": "violencia contra la mujer"
+  },
+  {
+   "fecha": "12-01",
+   "nombre": "Día Mundial del VIH/sida",
+   "buscar": "VIH"
+  }
+ ]
+}
