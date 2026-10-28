@@ -600,3 +600,24 @@ test('diseño: fondos, patrones y estilo propio de cada sección de la portada',
   assert.equal(normalizarDiseno({}).secciones.noticias.fondo, 'auto');
 });
 
+
+test('celular y tablet: opciones del diseño, barra inferior y secciones por pantalla', async () => {
+  const { variablesCss, atributos } = await import('../public/js/diseno.js');
+  const d = normalizarDiseno({ movil: { noticias: 'deslizar', texto: 300, videos: 'otro', tabletColumnas: 9 }, secciones: { videoteca: { celular: false }, eventos: { tablet: false } } });
+  assert.equal(d.movil.noticias, 'deslizar');
+  assert.equal(d.movil.texto, 120);
+  assert.equal(d.movil.videos, 'deslizar');
+  assert.equal(d.movil.tabletColumnas, 3);
+  assert.equal(d.movil.barra, true);
+  const a = atributos(d);
+  assert.equal(a['data-mv-noticias'], 'deslizar');
+  assert.equal(a['data-mv-pie'], 'acordeon');
+  const css = variablesCss(d);
+  assert.match(css, /@media \(max-width:720px\)\{\.pagina-portada \[data-sec="videoteca"\]\{display:none!important\}\}/);
+  assert.match(css, /@media \(min-width:721px\) and \(max-width:1024px\)\{\.pagina-portada \[data-sec="eventos"\]\{display:none!important\}\}/);
+  assert.doesNotMatch(css, /data-sec="noticias"\]\{display:none/);
+  const h = await (await pedir('/')).text();
+  assert.match(h, /<nav class="barra-movil" aria-label="Accesos rápidos">/);
+  assert.match(h, /data-mv-barra="si"/);
+  assert.match(h, /class="bm-item bm-tramites"/);
+});

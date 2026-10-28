@@ -138,6 +138,8 @@ const GRUPOS = [
         { ruta: r('intensidad'), tipo: 'rango', etiqueta: 'Intensidad del patrón', min: 2, max: 50, paso: 1, unidad: ' %', si: (c) => es() && x(c).patron !== 'ninguno' },
         { ruta: r('espacio'), tipo: 'botones', etiqueta: 'Espacio arriba y abajo', opciones: OPCIONES.espacioSeccion, si: es },
         { ruta: r('titulos'), tipo: 'botones', etiqueta: 'Título de la sección', opciones: OPCIONES.titulosAlinear, si: es },
+        { ruta: r('celular'), tipo: 'si', etiqueta: 'Mostrar en celulares', si: es },
+        { ruta: r('tablet'), tipo: 'si', etiqueta: 'Mostrar en tablets', si: es },
       ];
     }),
   ] },
@@ -224,6 +226,21 @@ const GRUPOS = [
     { ruta: 'pie.escudo', tipo: 'si', etiqueta: 'Escudo' },
     { ruta: 'pie.marcaGrande', tipo: 'si', etiqueta: 'Logo gigante «Melipeuco Capital del Trekking»' },
   ] },
+  { id: 'movil', titulo: 'Celular y tablet', ayuda: 'Cómo se ve el sitio en pantallas chicas: celulares (hasta 720 px de ancho) y tablets (hasta 1024 px). La vista previa cambia sola a «Celular»; use los botones de arriba para ver la tablet. Para ocultar una sección sólo en el celular o la tablet, vaya a Portada → Secciones de la portada.', controles: [
+    { ruta: 'movil.barra', tipo: 'si', etiqueta: 'Barra de accesos fija abajo (Inicio, Trámites, Buscar, Noticias, Menú)', ayuda: 'Queda al alcance del pulgar en todas las páginas.' },
+    { ruta: 'movil.barraTramites', tipo: 'si', etiqueta: 'Mostrar «Trámites» en la barra', si: (c) => c.movil.barra },
+    { ruta: 'movil.texto', tipo: 'rango', etiqueta: 'Tamaño del texto en el celular', min: 90, max: 120, paso: 5, unidad: ' %' },
+    { ruta: 'movil.espacio', tipo: 'botones', etiqueta: 'Espacio entre secciones', opciones: OPCIONES.espacioMovil },
+    { ruta: 'movil.temas', tipo: 'botones', etiqueta: 'Botones «Quiero información de…»', opciones: OPCIONES.temasMovil },
+    { ruta: 'movil.mosaico', tipo: 'lista', etiqueta: 'Mosaico de colores bajo la portada', opciones: OPCIONES.mosaicoMovil },
+    { ruta: 'movil.franja', tipo: 'lista', etiqueta: 'Franja de horario, teléfono y clima', opciones: OPCIONES.franjaMovil },
+    { ruta: 'movil.noticias', tipo: 'lista', etiqueta: 'Noticias de la portada', opciones: OPCIONES.noticiasMovil },
+    { ruta: 'movil.videos', tipo: 'lista', etiqueta: 'Videos de la portada', opciones: OPCIONES.videosMovil },
+    { ruta: 'movil.emergencias', tipo: 'si', etiqueta: 'Recuadro de emergencias en la portada', ayuda: 'Los teléfonos de emergencia siguen en el pie de todas las páginas.' },
+    { ruta: 'movil.pie', tipo: 'botones', etiqueta: 'Listas del pie', opciones: OPCIONES.pieMovil },
+    { ruta: 'movil.tablet', tipo: 'lista', etiqueta: 'Portada en la tablet', opciones: OPCIONES.tabletPortada },
+    { ruta: 'movil.tabletColumnas', tipo: 'rango', etiqueta: 'Columnas de noticias y videos en la tablet', min: 2, max: 3, paso: 1 },
+  ] },
   { id: 'animaciones', titulo: 'Movimiento general', ayuda: 'Las personas que piden «reducir movimiento» en su equipo nunca ven animaciones.', controles: [
     { ruta: 'animaciones.activas', tipo: 'si', etiqueta: 'Animaciones activas' },
     { ruta: 'animaciones.intensidad', tipo: 'botones', etiqueta: 'Intensidad', opciones: OPCIONES.intensidad, si: (c) => c.animaciones.activas },
@@ -265,6 +282,7 @@ const CATEGORIAS = [
   { id: 'cabecera', titulo: 'Cabecera y logo', icono: 'cabecera', texto: 'Menú, logo y su animación', grupos: ['cabecera'] },
   { id: 'portada', titulo: 'Portada', icono: 'inicio', texto: 'Banner, mosaico y cada sección', grupos: ['portada', 'portal', 'campanas', 'secciones', 'identidad'] },
   { id: 'contenidos', titulo: 'Noticias y videos', icono: 'video', texto: 'Tarjetas, videoteca y buscador', grupos: ['noticias', 'videos', 'buscador'] },
+  { id: 'movil', titulo: 'Celular y tablet', icono: 'celular', texto: 'Barra inferior, listas y columnas', grupos: ['movil'] },
   { id: 'pie', titulo: 'Pie de página', icono: 'pie', texto: 'Color, boletín y emergencias', grupos: ['pie'] },
   { id: 'movimiento', titulo: 'Animaciones', icono: 'movimiento', texto: 'Carga, transiciones y efectos', grupos: ['animaciones', 'carga', 'transiciones', 'efectos'] },
   { id: 'avanzado', titulo: 'CSS propio', icono: 'llave', texto: 'Reglas avanzadas', especial: 'avanzado', grupos: [], superadmin: true },
@@ -469,7 +487,8 @@ export default async function (vista) {
   });
   grupos.addEventListener('click', (e) => {
     const kt = e.target.closest('[data-cat]');
-    if (kt) { categoria = kt.dataset.cat; filtro = ''; soloCambios = false; $('[data-filtro]', vista).value = ''; $('[data-solo-cambios]', vista).checked = false; pintarGrupos(); $('[data-grupos]', vista).scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
+    if (kt) { if (kt.dataset.cat === 'movil' && dispositivo === 'computador') $('[data-dispositivo="celular"]', vista)?.click();
+      categoria = kt.dataset.cat; filtro = ''; soloCambios = false; $('[data-filtro]', vista).value = ''; $('[data-solo-cambios]', vista).checked = false; pintarGrupos(); $('[data-grupos]', vista).scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
     const es = e.target.closest('[data-elegir-sec]');
     if (es) { secElegida = es.dataset.elegirSec; pintarGrupos(); ultimaZona = ''; irA(`secciones.${secElegida}.fondo`); return; }
     const rg = e.target.closest('[data-restablecer-grupo]'), rc = e.target.closest('[data-restablecer-ctl]');

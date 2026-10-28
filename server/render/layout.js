@@ -13,6 +13,19 @@ import { MUNDOS, SITIO_TREKKING, zonaDe, estiloZona, emblema, montes, cortinaCor
 // la semilla no cuentan como elección propia, los que se hayan cambiado sí.
 const cacheDiseno = new WeakMap();
 const COLORES_SEMILLA = ['#0B4F7C#F2A900#062B45', '#1F6FA8#E9A92B#121417', '#1F6FA8#E9A92B#0F3A5A'];
+// Barra de accesos fija abajo en celulares: lo que más se busca queda a un toque del pulgar.
+function barraMovil(ctx) {
+  const r = ctx.ruta || '/';
+  const item = (url, ico, texto, activo, extra = '') => html`<a href="${url}" class="bm-item ${extra}"${activo ? crudo(' aria-current="page"') : ''}>${crudo(icono(ico, { tam: 22 }))}<span>${texto}</span></a>`;
+  return html`<nav class="barra-movil" aria-label="Accesos rápidos">
+  ${item('/', 'inicio', 'Inicio', r === '/')}
+  ${item('/tramites/', 'licencia', 'Trámites', r.startsWith('/tramites/'), 'bm-tramites')}
+  <button type="button" class="bm-item" data-abrir-buscador aria-controls="buscador">${crudo(icono('buscar', { tam: 22 }))}<span>Buscar</span></button>
+  ${item('/noticias/', 'megafono', 'Noticias', r.startsWith('/noticias/'))}
+  <button type="button" class="bm-item" data-bm-menu aria-controls="nav">${crudo(icono('menu', { tam: 22 }))}<span>Menú</span></button>
+</nav>`;
+}
+
 export function disenoDe(s) {
   if (!cacheDiseno.has(s)) {
     const c = s.colores || {};
@@ -248,6 +261,7 @@ ${zona(ctx, 'antes-pie')}
 ${pie(ctx)}
 ${ctx.ext ? crudo(ctx.ext.emergentes(ctx.ruta)) : ''}
 <button type="button" class="arriba" data-arriba aria-label="Volver arriba">${crudo(icono('flecha', { tam: 20, clase: 'arriba-ico' }))}</button>
+${barraMovil(ctx)}
 <script src="/js/sitio.js?v=${ctx.version}" defer></script>
 <script src="/js/movimiento.js?v=${ctx.version}" defer></script>
 ${portada || dz.animaciones.activas ? html`<script src="/js/logo-vivo.js?v=${ctx.version}" defer></script>` : ''}

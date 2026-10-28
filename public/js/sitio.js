@@ -79,6 +79,31 @@
   var buscador = $('#buscador');
   function cerrarBuscador() { if (buscador && !buscador.hidden) { buscador.hidden = true; var b = $('[data-abrir-buscador]'); b && b.focus(); } }
   $$('[data-abrir-buscador]').forEach(function (b) { b.addEventListener('click', function () { buscador.hidden = !buscador.hidden; if (!buscador.hidden) $('input', buscador).focus(); }); });
+
+  // Barra inferior del celular: «Menú» abre el mismo menú de la cabecera.
+  $$('[data-bm-menu]').forEach(function (b) { b.addEventListener('click', function () { botonMenu && botonMenu.click(); }); });
+
+  // Pie en celulares: cada lista de enlaces se pliega bajo su título (Diseño → Celular y tablet).
+  (function () {
+    var pie = $('.pie-columnas');
+    if (!pie) return;
+    var angosto = window.matchMedia('(max-width: 720px)');
+    $$('section', pie).forEach(function (sec, i) {
+      var h2 = $('h2:not(.sr)', sec), lista = $('ul', sec);
+      if (!h2 || !lista || lista.classList.contains('redes')) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pie-plegar'; b.textContent = h2.textContent;
+      lista.id = lista.id || 'pie-lista-' + i;
+      b.setAttribute('aria-controls', lista.id);
+      h2.textContent = ''; h2.appendChild(b);
+      sec.classList.add('pie-plegable');
+      function plegable() { return angosto.matches && document.documentElement.getAttribute('data-mv-pie') === 'acordeon'; }
+      function aplicar() { var cerrado = plegable() && !sec.classList.contains('abierta'); b.setAttribute('aria-expanded', String(!cerrado)); }
+      b.addEventListener('click', function () { if (!plegable()) return; sec.classList.toggle('abierta'); aplicar(); });
+      angosto.addEventListener ? angosto.addEventListener('change', aplicar) : angosto.addListener(aplicar);
+      aplicar();
+    });
+  })();
   $$('[data-cerrar-buscador]').forEach(function (b) { b.addEventListener('click', cerrarBuscador); });
 
   // Buscador predictivo: resultados mientras se escribe (agrupados y con las palabras resaltadas),
