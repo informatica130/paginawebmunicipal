@@ -8,6 +8,7 @@ import { inventario, urlDoc } from './archivo.js';
 import { filaTramite, filaTramiteEnLinea, renderBloques, tarjetaAutoridad } from './bloques.js';
 import { franjaVideos } from './videos.js';
 import { franjaFotos } from './fotos.js';
+import { llamadoAdministraciones } from './administraciones.js';
 import fs from 'node:fs';
 
 // Programas y calendario del CESFAM (de sus publicaciones), para el micrositio de Salud.
@@ -211,6 +212,8 @@ export async function paginaMicrositio(ctx, s) {
     const fondo = m.tipo === 'llamado' ? 'llamado' : m.fondo === 'auto' ? ((alterno = !alterno) ? 'claro' : 'suave') : m.fondo;
     return { m, fondo, r };
   }).filter(Boolean);
+  // Alcaldía y Concejo: acceso a las administraciones municipales y su comparación.
+  if (['alcaldia', 'concejo-municipal', 'historia', 'municipio'].includes(s.slug)) { const r = llamadoAdministraciones(); if (String(r).trim()) partes.push({ m: { tipo: 'llamado', ancla: 'Administraciones', id: 'administraciones' }, fondo: 'llamado', r }); }
   if (s.slug === 'salud' || s.organigrama === 'dep-salud') for (const x of seccionesCesfam(ctx)) partes.push({ ...x, fondo: (alterno = !alterno) ? 'claro' : 'suave' });
   // Álbumes de fotos relacionados con el área (de la fototeca), al final de las secciones.
   const fotos = s.modulos.some((m) => m.fuente === 'fotos') ? '' : franjaFotos(ctx, 'Actividades en fotos', { area: s.slug, cantidad: 4 });

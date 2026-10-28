@@ -689,3 +689,17 @@ test('celular y tablet: opciones del diseño, barra inferior y secciones por pan
   assert.match(h, /data-mv-barra="si"/);
   assert.match(h, /class="bm-item bm-tramites"/);
 });
+
+test('administraciones: alcaldes, concejos, hitos con enlace y comparación', async () => {
+  const s = await admin();
+  await api(s, 'POST', 'importar-facebook');
+  const r = await pedir('/administraciones/');
+  assert.equal(r.status, 200);
+  const h = await r.text();
+  for (const n of ['Alejandro Cuminao Barros', 'Eduardo Navarrete Fuentes', 'Juan Carlos Espinoza', 'Comparación de administraciones', 'Concejo 2024 – 2028', 'Faumeliza Villanueva Caifal', 'Héctor Carrasco', 'Benjamín Oñate']) assert.ok(h.includes(n), n);
+  // Cada hito con fuente enlaza a una página que existe.
+  const enlaces = [...h.matchAll(/<li class="adm-hito"[^>]*><a href="([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(enlaces.length > 50);
+  for (const u of new Set(enlaces)) assert.equal((await pedir(u)).status, 200, u);
+  assert.match(await (await pedir('/alcaldia/')).text(), /href="\/administraciones\/"/);
+});
