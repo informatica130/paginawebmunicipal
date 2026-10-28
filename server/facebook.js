@@ -21,7 +21,7 @@ export function paqueteFacebook() {
 
 export function importarFacebook(db, repo, { paquete = paqueteFacebook(), usuario = null } = {}) {
   const eventos = paquete.eventos || [];
-  const r = { creados: 0, omitidos: 0, total: paquete.noticias.length + eventos.length, eventos: 0 };
+  const r = { creados: 0, omitidos: 0, total: paquete.noticias.length + eventos.length, eventos: 0, fotos: 0 };
   const categorias = (slugs) => (slugs || []).map((slug) => db.get("SELECT id FROM taxonomias WHERE tipo = 'categoria' AND slug = ?", slug)?.id).filter(Boolean);
   // Etiquetas por programa (salud mental, vacunación…): se crean la primera vez que se usan.
   const nombres = new Map((paquete.etiquetas || []).map((e) => [e.slug, e.nombre]));
@@ -33,7 +33,17 @@ export function importarFacebook(db, repo, { paquete = paqueteFacebook(), usuari
   db.tx(() => {
     for (const n of [...paquete.noticias.map((x) => ({ ...x, tipo: 'noticia' })), ...eventos.map((x) => ({ ...x, tipo: 'evento' }))]) {
       const marca = 'facebook:' + n.clave;
-      if (db.get('SELECT id FROM contenidos WHERE url_antigua = ?', marca)) { r.omitidos++; continue; }
+      const previo = db.get('SELECT id, imagen, datos FROM contenidos WHERE url_antigua = ?', marca);
+      if (previo) {
+        // Lo importado antes sin fotos recibe las que ahora trae el paquete (no toca otra cosa).
+        if (!previo.imagen && n.imagen) {
+          const d = JSON.parse(previo.datos || '{}');
+          if (n.tipo === 'noticia' && !d.galeria?.length) d.galeria = n.galeria || [];
+          db.run('UPDATE contenidos SET imagen = ?, datos = ? WHERE id = ?', n.imagen, JSON.stringify(d), previo.id);
+          r.fotos++;
+        }
+        r.omitidos++; continue;
+      }
       const datos = n.tipo === 'evento'
         ? { inicio: n.inicio, fin: '', todoElDia: n.todoElDia ?? true, lugar: n.lugar || 'Melipeuco', direccion: '' }
         : { galeria: n.galeria || [], fuente: n.fuente || FUENTE };

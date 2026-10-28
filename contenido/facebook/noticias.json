@@ -4354,7 +4354,7 @@
     "personas-mayores",
     "postas-rurales"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/b94f8213ee2a9c5e.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4370,7 +4370,7 @@
    "etiquetas": [
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/788024d881bf4814.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4384,7 +4384,7 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/5593ec7450431700.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4400,7 +4400,7 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/5485ce9c1e0bd2f2.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4416,7 +4416,7 @@
    "etiquetas": [
     "piri-ufro"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/deed35839e5bc677.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4449,8 +4449,21 @@
    "etiquetas": [
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/e0e05cda261af385.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/d75a945ad54dac31.webp",
+     "alt": "Invierno: síntomas y cuidados ante virus respiratorios"
+    },
+    {
+     "src": "/img/facebook/cesfam/8258ffb7e55e2767.webp",
+     "alt": "Invierno: síntomas y cuidados ante virus respiratorios"
+    },
+    {
+     "src": "/img/facebook/cesfam/0f964dffa05d8f12.webp",
+     "alt": "Invierno: síntomas y cuidados ante virus respiratorios"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4553,8 +4566,25 @@
     "infancia",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/41d837c5d8ebbc33.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9f4c03b7e4254ce1.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2022"
+    },
+    {
+     "src": "/img/facebook/cesfam/c4cd507e0478d526.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2022"
+    },
+    {
+     "src": "/img/facebook/cesfam/7f1e81a99520256d.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2022"
+    },
+    {
+     "src": "/img/facebook/cesfam/55ee9b1fbdd0d849.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2022"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4569,8 +4599,17 @@
    "etiquetas": [
     "lactancia-materna"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b398180573626c2c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/248207b903900a28.webp",
+     "alt": "Acciones que UNICEF sugiere para apoyar la lactancia materna"
+    },
+    {
+     "src": "/img/facebook/cesfam/a373b9c148954689.webp",
+     "alt": "Acciones que UNICEF sugiere para apoyar la lactancia materna"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4585,7 +4624,7 @@
    "etiquetas": [
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/2cb4952428b3b9c4.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4604,8 +4643,25 @@
     "infancia",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/09f93fa91f17d9c6.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/ea1928a7da154793.webp",
+     "alt": "Celebración del Día del Niño con el equipo de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/02f9233ee5d9402d.webp",
+     "alt": "Celebración del Día del Niño con el equipo de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/7d843008e894e853.webp",
+     "alt": "Celebración del Día del Niño con el equipo de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/fa4aa3794318ce7b.webp",
+     "alt": "Celebración del Día del Niño con el equipo de salud"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4624,8 +4680,17 @@
     "prevencion-y-zoonosis",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/a7c5279c705a7fa1.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/d6b7b6a1cf6cbab4.webp",
+     "alt": "Mes del Corazón: consejos para prevenir enfermedades cardiovasculares"
+    },
+    {
+     "src": "/img/facebook/cesfam/0cfa31b6502ecb09.webp",
+     "alt": "Mes del Corazón: consejos para prevenir enfermedades cardiovasculares"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4661,8 +4726,25 @@
     "alimentacion-saludable",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d62f8090b8b3e333.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/5f6789a50b7dbea9.webp",
+     "alt": "Equipo de salud y estudiantes PIRI UFRO en el día de pago de las personas mayores"
+    },
+    {
+     "src": "/img/facebook/cesfam/f9f44acb2e7cc995.webp",
+     "alt": "Equipo de salud y estudiantes PIRI UFRO en el día de pago de las personas mayores"
+    },
+    {
+     "src": "/img/facebook/cesfam/71d8e423b9db7110.webp",
+     "alt": "Equipo de salud y estudiantes PIRI UFRO en el día de pago de las personas mayores"
+    },
+    {
+     "src": "/img/facebook/cesfam/f191aa5502661388.webp",
+     "alt": "Equipo de salud y estudiantes PIRI UFRO en el día de pago de las personas mayores"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4680,7 +4762,7 @@
     "postas-rurales",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/983e6af86dc640dc.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4715,7 +4797,7 @@
    "etiquetas": [
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f04b0ede8387caef.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4732,8 +4814,25 @@
    "etiquetas": [
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/5a03f2710dde3e9c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/41f17aaa5cc835ab.webp",
+     "alt": "Segundo operativo de salud con profesionales PIRI"
+    },
+    {
+     "src": "/img/facebook/cesfam/c6deacc022b8569b.webp",
+     "alt": "Segundo operativo de salud con profesionales PIRI"
+    },
+    {
+     "src": "/img/facebook/cesfam/94f7a72af953891f.webp",
+     "alt": "Segundo operativo de salud con profesionales PIRI"
+    },
+    {
+     "src": "/img/facebook/cesfam/e486bdf461113478.webp",
+     "alt": "Segundo operativo de salud con profesionales PIRI"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4748,8 +4847,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/0ceb8225ad4eb88e.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/499c0cd1b034ecde.webp",
+     "alt": "Programa de salud mental realiza actividad de difusión"
+    },
+    {
+     "src": "/img/facebook/cesfam/6bdd57b01139ca17.webp",
+     "alt": "Programa de salud mental realiza actividad de difusión"
+    },
+    {
+     "src": "/img/facebook/cesfam/8c2c71a467492817.webp",
+     "alt": "Programa de salud mental realiza actividad de difusión"
+    },
+    {
+     "src": "/img/facebook/cesfam/b20605d6a1aa03e0.webp",
+     "alt": "Programa de salud mental realiza actividad de difusión"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4765,7 +4881,7 @@
     "prevencion-y-zoonosis",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/e80322fc60b1b1fe.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4781,7 +4897,7 @@
    "etiquetas": [
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/23a62a6ffe69d88c.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4802,8 +4918,25 @@
     "personas-mayores",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/79ea6a032a284883.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/bdc98a3f93774271.webp",
+     "alt": "Mes de las personas mayores: actividad de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/5a74d7365026845d.webp",
+     "alt": "Mes de las personas mayores: actividad de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/590e1e152964e5db.webp",
+     "alt": "Mes de las personas mayores: actividad de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/e973a3515333c5db.webp",
+     "alt": "Mes de las personas mayores: actividad de salud"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4820,7 +4953,7 @@
     "salud-mental",
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f3702a188ade30cc.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4838,7 +4971,7 @@
     "infancia",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/c35517d99b124e83.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4854,8 +4987,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/4da5a0b31e0cd812.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/cba8abb43706439e.webp",
+     "alt": "Cómo se contagia el COVID-19 y cómo prevenirlo"
+    },
+    {
+     "src": "/img/facebook/cesfam/f804857adfbf9e2e.webp",
+     "alt": "Cómo se contagia el COVID-19 y cómo prevenirlo"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4874,8 +5016,21 @@
     "personas-mayores",
     "salud-intercultural"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/41aec343154990d7.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/8b216ad0caec57bc.webp",
+     "alt": "Día Internacional de la Eliminación de la Violencia contra la Mujer"
+    },
+    {
+     "src": "/img/facebook/cesfam/8d8d2c7bc88f33d3.webp",
+     "alt": "Día Internacional de la Eliminación de la Violencia contra la Mujer"
+    },
+    {
+     "src": "/img/facebook/cesfam/358c636671d6ceb8.webp",
+     "alt": "Día Internacional de la Eliminación de la Violencia contra la Mujer"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -4890,7 +5045,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/93d96a9eed649ebb.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4908,7 +5063,7 @@
     "alimentacion-saludable",
     "piri-ufro"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/41340bfedfed8f71.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4924,7 +5079,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f6c24c92759de0de.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4940,7 +5095,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/398cc8d9ac3d189e.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4959,7 +5114,7 @@
     "alimentacion-saludable",
     "piri-ufro"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/0984e6cf6860d20c.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4976,7 +5131,7 @@
     "vacunacion",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/7aca15e38f3830fd.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -4995,8 +5150,25 @@
     "alimentacion-saludable",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/f9b712a87d0038bc.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/156113d392c0ed57.webp",
+     "alt": "Taller de lactancia materna con matrona, nutricionista y alumnas PIRI"
+    },
+    {
+     "src": "/img/facebook/cesfam/a2be494278ed201b.webp",
+     "alt": "Taller de lactancia materna con matrona, nutricionista y alumnas PIRI"
+    },
+    {
+     "src": "/img/facebook/cesfam/0706729ce1e0bbe8.webp",
+     "alt": "Taller de lactancia materna con matrona, nutricionista y alumnas PIRI"
+    },
+    {
+     "src": "/img/facebook/cesfam/3235263153e94de9.webp",
+     "alt": "Taller de lactancia materna con matrona, nutricionista y alumnas PIRI"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5013,7 +5185,7 @@
     "salud-cardiovascular",
     "salud-intercultural"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/0b990205567e1de8.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5030,7 +5202,7 @@
    "etiquetas": [
     "salud-intercultural"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/0745fd1f1f0ed9a3.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5046,8 +5218,17 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/a01d14695c1ef2fe.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/53c344a6f2834e50.webp",
+     "alt": "Nueva línea de prevención del suicidio del Ministerio de Salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/041d8dcc09eb11df.webp",
+     "alt": "Nueva línea de prevención del suicidio del Ministerio de Salud"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5064,8 +5245,13 @@
     "promocion-de-la-salud",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/54dfae7820d71b92.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/2db19323eacfe9c5.webp",
+     "alt": "Taller de ladrillos ecológicos en el Parador Turístico"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5109,7 +5295,7 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/3e13bf0f162d4005.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5142,7 +5328,7 @@
    "etiquetas": [
     "salud-de-la-mujer"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/ffb5f0f418b0258f.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5174,8 +5360,25 @@
    "etiquetas": [
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/4b648c3fa1676117.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/ac114d510fc3d82b.webp",
+     "alt": "Consejos para una alimentación saludable"
+    },
+    {
+     "src": "/img/facebook/cesfam/c7c7106aa26f62f5.webp",
+     "alt": "Consejos para una alimentación saludable"
+    },
+    {
+     "src": "/img/facebook/cesfam/94bb687a22776774.webp",
+     "alt": "Consejos para una alimentación saludable"
+    },
+    {
+     "src": "/img/facebook/cesfam/1d5da24782887dbe.webp",
+     "alt": "Consejos para una alimentación saludable"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5211,8 +5414,25 @@
     "vacunacion",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/cb05389c7181c0b0.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/b551edeb9883fc5b.webp",
+     "alt": "Cómo prevenir la influenza aviar en aves de corral"
+    },
+    {
+     "src": "/img/facebook/cesfam/a50955eba4ecafe5.webp",
+     "alt": "Cómo prevenir la influenza aviar en aves de corral"
+    },
+    {
+     "src": "/img/facebook/cesfam/206a7b940a214485.webp",
+     "alt": "Cómo prevenir la influenza aviar en aves de corral"
+    },
+    {
+     "src": "/img/facebook/cesfam/5a53032c36187983.webp",
+     "alt": "Cómo prevenir la influenza aviar en aves de corral"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5231,8 +5451,25 @@
     "infancia",
     "personas-mayores"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d5f501d835a64de1.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/f1b19f9081ab3def.webp",
+     "alt": "Vacunación contra influenza 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/74c45b4924d76882.webp",
+     "alt": "Vacunación contra influenza 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/abedeed8a516d042.webp",
+     "alt": "Vacunación contra influenza 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/a590df6fda547b86.webp",
+     "alt": "Vacunación contra influenza 2023"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5248,8 +5485,25 @@
     "salud-mental",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/ba467c189486ab04.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/37e00772283de922.webp",
+     "alt": "Material del programa de salud mental para la comunidad"
+    },
+    {
+     "src": "/img/facebook/cesfam/ce1c897922e83918.webp",
+     "alt": "Material del programa de salud mental para la comunidad"
+    },
+    {
+     "src": "/img/facebook/cesfam/5feb04226a5257c1.webp",
+     "alt": "Material del programa de salud mental para la comunidad"
+    },
+    {
+     "src": "/img/facebook/cesfam/e18d4631552f7ac0.webp",
+     "alt": "Material del programa de salud mental para la comunidad"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5281,7 +5535,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/45d4e8123687dae8.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5298,8 +5552,21 @@
     "prevencion-y-zoonosis",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/f88dc059ee0669c4.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/b52bba9de8ed7588.webp",
+     "alt": "Actividad por el Día Mundial de la Tuberculosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/207683c192fbdb86.webp",
+     "alt": "Actividad por el Día Mundial de la Tuberculosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/f218621b9b5fd979.webp",
+     "alt": "Actividad por el Día Mundial de la Tuberculosis"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5317,8 +5584,25 @@
     "promocion-de-la-salud",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/347eb4fbd9c8482c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/8ec3760ad7877c16.webp",
+     "alt": "Día Mundial de la Actividad Física 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/3c6a847d124d1af5.webp",
+     "alt": "Día Mundial de la Actividad Física 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/f4a64ebf15ce2d9d.webp",
+     "alt": "Día Mundial de la Actividad Física 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/bd36138d3dc6c384.webp",
+     "alt": "Día Mundial de la Actividad Física 2023"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5332,8 +5616,13 @@
     "deporte"
    ],
    "etiquetas": [],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/3be9e062b06d924b.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/384dc5bafb9e39dc.webp",
+     "alt": "Masivo fitness en Melipeuco"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5348,8 +5637,13 @@
    "etiquetas": [
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/8bf22e93538d13f4.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/46160a8755b179c3.webp",
+     "alt": "Alimentación saludable y sostenible"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5368,7 +5662,7 @@
     "alimentacion-saludable",
     "piri-ufro"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/47f58b0b5d794a47.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5386,7 +5680,7 @@
     "promocion-de-la-salud",
     "salud-cardiovascular"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/a2ae9299df25ec66.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5404,7 +5698,7 @@
    "etiquetas": [
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/cbd898b876f81859.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5453,7 +5747,7 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f2dd089a7f3c3b96.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5469,7 +5763,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/a6fb908837f7b1be.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5487,7 +5781,7 @@
     "infancia",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/bd6ec338eba2360f.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5503,7 +5797,7 @@
    "etiquetas": [
     "participacion-social"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/bb37d6ba1cc1b629.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5523,8 +5817,21 @@
     "postas-rurales",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/766983fc98f0fd48.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/21c290bda9f962af.webp",
+     "alt": "Taller de alimentación saludable con nutricionista y estudiantes"
+    },
+    {
+     "src": "/img/facebook/cesfam/53559622843c9d35.webp",
+     "alt": "Taller de alimentación saludable con nutricionista y estudiantes"
+    },
+    {
+     "src": "/img/facebook/cesfam/1eb1afde25f90362.webp",
+     "alt": "Taller de alimentación saludable con nutricionista y estudiantes"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5541,8 +5848,25 @@
     "salud-mental",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/dd1400641c4d2550.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/11b6e72d775c94ab.webp",
+     "alt": "Cierre de semestre de los talleres de autocuidado y arte terapia"
+    },
+    {
+     "src": "/img/facebook/cesfam/0fd8a5684d6dc43f.webp",
+     "alt": "Cierre de semestre de los talleres de autocuidado y arte terapia"
+    },
+    {
+     "src": "/img/facebook/cesfam/26dc00420c5c9231.webp",
+     "alt": "Cierre de semestre de los talleres de autocuidado y arte terapia"
+    },
+    {
+     "src": "/img/facebook/cesfam/e7089e4ae910f979.webp",
+     "alt": "Cierre de semestre de los talleres de autocuidado y arte terapia"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5557,8 +5881,25 @@
    "etiquetas": [
     "lactancia-materna"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b5ebea1c5eb68999.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/6a18980675428752.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/0146d3ff35ad41ca.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/7a5ac0c8db6ba843.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/a4e6b7949afdf9cb.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2023"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5577,8 +5918,25 @@
     "lactancia-materna",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/c3b1028eb207735d.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9842fe3a980e1203.webp",
+     "alt": "Lactancia materna: el mejor alimento"
+    },
+    {
+     "src": "/img/facebook/cesfam/44bde812e0714d23.webp",
+     "alt": "Lactancia materna: el mejor alimento"
+    },
+    {
+     "src": "/img/facebook/cesfam/406fa338e5c87349.webp",
+     "alt": "Lactancia materna: el mejor alimento"
+    },
+    {
+     "src": "/img/facebook/cesfam/a66eaaf34f095005.webp",
+     "alt": "Lactancia materna: el mejor alimento"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5593,8 +5951,13 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/86140295977fea84.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/0354a7f925c604f4.webp",
+     "alt": "Agosto, mes del corazón"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5609,7 +5972,7 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/bd70d6e1e3792109.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5625,8 +5988,21 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/2f86e29cd6b76b88.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/da79596b57eb8461.webp",
+     "alt": "Actividad de automanejo para personas con diabetes"
+    },
+    {
+     "src": "/img/facebook/cesfam/ce91851b57c7a3f2.webp",
+     "alt": "Actividad de automanejo para personas con diabetes"
+    },
+    {
+     "src": "/img/facebook/cesfam/46412da0ca8b0ab3.webp",
+     "alt": "Actividad de automanejo para personas con diabetes"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5641,7 +6017,7 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/1c4928ce684f750f.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5658,7 +6034,7 @@
     "salud-de-la-mujer",
     "lactancia-materna"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/6d6e386ab8827fc0.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5676,8 +6052,25 @@
     "infancia",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/324d1df3fc8cf4b8.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/720a4da4295a4861.webp",
+     "alt": "Día de la Alimentación 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/f0a33bc885e107cb.webp",
+     "alt": "Día de la Alimentación 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/4530dcb9c0e2dfaa.webp",
+     "alt": "Día de la Alimentación 2023"
+    },
+    {
+     "src": "/img/facebook/cesfam/21b7e0ff127fd252.webp",
+     "alt": "Día de la Alimentación 2023"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5694,7 +6087,7 @@
     "infancia",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/be944245f83b5840.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5710,7 +6103,7 @@
    "etiquetas": [
     "participacion-social"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/784ed86bc4b276e8.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5726,8 +6119,25 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/49c4424c2ce04a5b.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/72f7978094fddd43.webp",
+     "alt": "Día del Accidente Cerebrovascular: cómo reconocerlo"
+    },
+    {
+     "src": "/img/facebook/cesfam/517f5925245a169f.webp",
+     "alt": "Día del Accidente Cerebrovascular: cómo reconocerlo"
+    },
+    {
+     "src": "/img/facebook/cesfam/6d935db9bc27ed75.webp",
+     "alt": "Día del Accidente Cerebrovascular: cómo reconocerlo"
+    },
+    {
+     "src": "/img/facebook/cesfam/452aad8abef2f771.webp",
+     "alt": "Día del Accidente Cerebrovascular: cómo reconocerlo"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5740,8 +6150,25 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/24bcbde50246e09c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/fed63a8520ed9166.webp",
+     "alt": "Gracias por apoyar la Teletón"
+    },
+    {
+     "src": "/img/facebook/cesfam/7dc6106a96e734a2.webp",
+     "alt": "Gracias por apoyar la Teletón"
+    },
+    {
+     "src": "/img/facebook/cesfam/1cc409ae1983e0da.webp",
+     "alt": "Gracias por apoyar la Teletón"
+    },
+    {
+     "src": "/img/facebook/cesfam/5651c52c25e780ea.webp",
+     "alt": "Gracias por apoyar la Teletón"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5758,8 +6185,25 @@
     "personas-mayores",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/189d84be40560a18.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/5e4d936678366fe8.webp",
+     "alt": "Día Mundial de la Diabetes en el Centro Diurno"
+    },
+    {
+     "src": "/img/facebook/cesfam/7e34a23279b40fbb.webp",
+     "alt": "Día Mundial de la Diabetes en el Centro Diurno"
+    },
+    {
+     "src": "/img/facebook/cesfam/e4430b7c1995c140.webp",
+     "alt": "Día Mundial de la Diabetes en el Centro Diurno"
+    },
+    {
+     "src": "/img/facebook/cesfam/4cde8e94748e4c30.webp",
+     "alt": "Día Mundial de la Diabetes en el Centro Diurno"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5775,8 +6219,21 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/aa0918f3fc502a85.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/129bb9c747c9762d.webp",
+     "alt": "Mesa intersectorial de prevención de la hidatidosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/09f8f67cde594f1c.webp",
+     "alt": "Mesa intersectorial de prevención de la hidatidosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/cd44623311ff00a3.webp",
+     "alt": "Mesa intersectorial de prevención de la hidatidosis"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5791,7 +6248,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/a914348e8e2fa5a1.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5807,7 +6264,7 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/23c42057ef731722.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5823,8 +6280,13 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b85244104b0f45b8.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/a17591a0b5db776a.webp",
+     "alt": "Síntomas y prevención del virus Hanta"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5862,8 +6324,17 @@
     "personas-mayores",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/3a2056a16e9d98df.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/fdc6ea3067762d39.webp",
+     "alt": "Recomendaciones para los días de calor"
+    },
+    {
+     "src": "/img/facebook/cesfam/ab40bb2bd1931b93.webp",
+     "alt": "Recomendaciones para los días de calor"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5878,8 +6349,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/71ad47b8531e4b1f.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/83d6721134d27fea.webp",
+     "alt": "Recomendaciones ante las altas temperaturas en La Araucanía"
+    },
+    {
+     "src": "/img/facebook/cesfam/fd2e2e9b35daf8c1.webp",
+     "alt": "Recomendaciones ante las altas temperaturas en La Araucanía"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5894,8 +6374,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/acbf3430b8af5c96.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/e437fc0a8f0a3643.webp",
+     "alt": "Cómo evitar golpes de calor"
+    },
+    {
+     "src": "/img/facebook/cesfam/e11f0f4995d69f78.webp",
+     "alt": "Cómo evitar golpes de calor"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5911,7 +6400,7 @@
    "etiquetas": [
     "postas-rurales"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/920af1447cb031ee.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5927,8 +6416,25 @@
    "etiquetas": [
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/54bc9760acfa513c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/f15456f7e5090c9d.webp",
+     "alt": "Capacitación en primeros auxilios y RCP para el personal de las postas rurales"
+    },
+    {
+     "src": "/img/facebook/cesfam/541ced8f7f968c16.webp",
+     "alt": "Capacitación en primeros auxilios y RCP para el personal de las postas rurales"
+    },
+    {
+     "src": "/img/facebook/cesfam/1e7802226883c226.webp",
+     "alt": "Capacitación en primeros auxilios y RCP para el personal de las postas rurales"
+    },
+    {
+     "src": "/img/facebook/cesfam/9988799423c6ebbe.webp",
+     "alt": "Capacitación en primeros auxilios y RCP para el personal de las postas rurales"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5941,7 +6447,7 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/796a4c6644d1f224.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -5957,8 +6463,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/e04cd8f19bb43bf2.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/280be83b1e2c727d.webp",
+     "alt": "Cómo reconocer un golpe de calor"
+    },
+    {
+     "src": "/img/facebook/cesfam/b487827d512c1218.webp",
+     "alt": "Cómo reconocer un golpe de calor"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -5989,8 +6504,25 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/ae38f98c3804076c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/20ac0ac59c934c8d.webp",
+     "alt": "Recomendaciones ante las altas temperaturas"
+    },
+    {
+     "src": "/img/facebook/cesfam/4b255b3358f2ec37.webp",
+     "alt": "Recomendaciones ante las altas temperaturas"
+    },
+    {
+     "src": "/img/facebook/cesfam/9af516214f78910f.webp",
+     "alt": "Recomendaciones ante las altas temperaturas"
+    },
+    {
+     "src": "/img/facebook/cesfam/be3dc3471c082886.webp",
+     "alt": "Recomendaciones ante las altas temperaturas"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6007,8 +6539,25 @@
     "salud-mental",
     "promocion-de-la-salud"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/4783831bde017a8a.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/d3e7ff6241078575.webp",
+     "alt": "Salud Palooza"
+    },
+    {
+     "src": "/img/facebook/cesfam/d04c161d79d8c35e.webp",
+     "alt": "Salud Palooza"
+    },
+    {
+     "src": "/img/facebook/cesfam/cdec2a518b63cf67.webp",
+     "alt": "Salud Palooza"
+    },
+    {
+     "src": "/img/facebook/cesfam/7c529e938c25a991.webp",
+     "alt": "Salud Palooza"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6041,8 +6590,25 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/80bf3f0d60332b82.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/666c030da01f2ceb.webp",
+     "alt": "Día Mundial del Riñón: salud renal para todos"
+    },
+    {
+     "src": "/img/facebook/cesfam/1f20ff07e1c8c0e7.webp",
+     "alt": "Día Mundial del Riñón: salud renal para todos"
+    },
+    {
+     "src": "/img/facebook/cesfam/28664aa5bd962aa3.webp",
+     "alt": "Día Mundial del Riñón: salud renal para todos"
+    },
+    {
+     "src": "/img/facebook/cesfam/19be975d2fb3fc8b.webp",
+     "alt": "Día Mundial del Riñón: salud renal para todos"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6057,7 +6623,7 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/ff81f66af42967d6.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6075,7 +6641,7 @@
     "salud-cardiovascular",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f82d8b77a5bafd18.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6092,8 +6658,25 @@
     "salud-cardiovascular",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/28333d1192bb9eaf.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/96c361719b97ec64.webp",
+     "alt": "Taller cardiovascular sobre diabetes mellitus"
+    },
+    {
+     "src": "/img/facebook/cesfam/c8c19a7d0ff308a5.webp",
+     "alt": "Taller cardiovascular sobre diabetes mellitus"
+    },
+    {
+     "src": "/img/facebook/cesfam/8870d16d30c4feaf.webp",
+     "alt": "Taller cardiovascular sobre diabetes mellitus"
+    },
+    {
+     "src": "/img/facebook/cesfam/4c52cd456a285116.webp",
+     "alt": "Taller cardiovascular sobre diabetes mellitus"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6111,8 +6694,17 @@
     "infancia",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/2203cf96a0a92741.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/3c5961e99bd1fb7f.webp",
+     "alt": "Stand por el Día Mundial del Agua"
+    },
+    {
+     "src": "/img/facebook/cesfam/9f94b5ed2f869f5d.webp",
+     "alt": "Stand por el Día Mundial del Agua"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6158,8 +6750,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/694427f6fa06888a.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/87e1a2419ffddab6.webp",
+     "alt": "Día Mundial de la Tuberculosis 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/a436da2de1550b06.webp",
+     "alt": "Día Mundial de la Tuberculosis 2024"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6174,8 +6775,25 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/13a2374094261ad5.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/a106b26bf20f9401.webp",
+     "alt": "Así fue el Día Mundial de la Tuberculosis en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/b26cb1399b11510c.webp",
+     "alt": "Así fue el Día Mundial de la Tuberculosis en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/bfa7f1bcb03291c2.webp",
+     "alt": "Así fue el Día Mundial de la Tuberculosis en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/5e701e5e4e6f4d4a.webp",
+     "alt": "Así fue el Día Mundial de la Tuberculosis en Melipeuco"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6192,8 +6810,25 @@
     "salud-de-la-mujer",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/f24f5a362dd2e90b.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/60e7ebffa502e1e3.webp",
+     "alt": "Día Mundial de la Prevención del Cáncer Cervicouterino"
+    },
+    {
+     "src": "/img/facebook/cesfam/b799f82f74684272.webp",
+     "alt": "Día Mundial de la Prevención del Cáncer Cervicouterino"
+    },
+    {
+     "src": "/img/facebook/cesfam/e4138ad8b6fb52bc.webp",
+     "alt": "Día Mundial de la Prevención del Cáncer Cervicouterino"
+    },
+    {
+     "src": "/img/facebook/cesfam/a60e8abe87ecc405.webp",
+     "alt": "Día Mundial de la Prevención del Cáncer Cervicouterino"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6208,8 +6843,13 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/fc43b62489167f52.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9912148e7232b7bf.webp",
+     "alt": "Colecta de sangre en el CESFAM"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6225,8 +6865,25 @@
     "promocion-de-la-salud",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/2ad5a36d569feee0.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/4305cf5a98c301c6.webp",
+     "alt": "Taller de alimentación saludable con el programa de seguridad alimentaria"
+    },
+    {
+     "src": "/img/facebook/cesfam/97854a46db84bc82.webp",
+     "alt": "Taller de alimentación saludable con el programa de seguridad alimentaria"
+    },
+    {
+     "src": "/img/facebook/cesfam/c466244b3981039f.webp",
+     "alt": "Taller de alimentación saludable con el programa de seguridad alimentaria"
+    },
+    {
+     "src": "/img/facebook/cesfam/e8eb19511176e98d.webp",
+     "alt": "Taller de alimentación saludable con el programa de seguridad alimentaria"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6241,8 +6898,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/61f630a1eae3f0ba.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/1001b1063e8e4782.webp",
+     "alt": "Semana Santa: consumo seguro de mariscos y pescados"
+    },
+    {
+     "src": "/img/facebook/cesfam/23467c0c0783d0b3.webp",
+     "alt": "Semana Santa: consumo seguro de mariscos y pescados"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6257,8 +6923,25 @@
    "etiquetas": [
     "vacunacion"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/ff83965578cd8db1.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/0f9b60a7ddb849d6.webp",
+     "alt": "Vacunación contra la influenza en el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/ad01852dcfba1a65.webp",
+     "alt": "Vacunación contra la influenza en el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/b9f2b8b517c084fe.webp",
+     "alt": "Vacunación contra la influenza en el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/6b4e157ccff42f6d.webp",
+     "alt": "Vacunación contra la influenza en el CESFAM"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6275,8 +6958,13 @@
     "infancia",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/092504dfa3c89ab9.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/c78defa682c408be.webp",
+     "alt": "Campaña de controles de salud infantil"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6295,7 +6983,7 @@
     "salud-cardiovascular",
     "postas-rurales"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/909f2bedbfbdc698.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6315,8 +7003,25 @@
     "infancia",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/96da424a6e2f2edf.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/265fdab99873e1e5.webp",
+     "alt": "Posta Santa María de Llaima agradece la participación en la cicletada"
+    },
+    {
+     "src": "/img/facebook/cesfam/132ccec1bb7a5462.webp",
+     "alt": "Posta Santa María de Llaima agradece la participación en la cicletada"
+    },
+    {
+     "src": "/img/facebook/cesfam/a3b8fce19f9beb55.webp",
+     "alt": "Posta Santa María de Llaima agradece la participación en la cicletada"
+    },
+    {
+     "src": "/img/facebook/cesfam/ccf71d90008c6750.webp",
+     "alt": "Posta Santa María de Llaima agradece la participación en la cicletada"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6333,7 +7038,7 @@
     "salud-de-la-mujer",
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/3f193a7372da34c7.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6366,8 +7071,25 @@
    "etiquetas": [
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/61667ca07222e296.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/3fbd647ae588830a.webp",
+     "alt": "Equipo de salud visita el Jardín Infantil Los Peques"
+    },
+    {
+     "src": "/img/facebook/cesfam/db597a51b8dddcf8.webp",
+     "alt": "Equipo de salud visita el Jardín Infantil Los Peques"
+    },
+    {
+     "src": "/img/facebook/cesfam/a1c68413a6a75d9c.webp",
+     "alt": "Equipo de salud visita el Jardín Infantil Los Peques"
+    },
+    {
+     "src": "/img/facebook/cesfam/051be71b7f743ae3.webp",
+     "alt": "Equipo de salud visita el Jardín Infantil Los Peques"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6380,8 +7102,13 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d3c4b83d6db976de.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9356685d6623ff8d.webp",
+     "alt": "El CESFAM cuenta con asesora cultural"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6415,8 +7142,13 @@
     "salud-mental",
     "participacion-social"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/73a1929700171ead.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/39632b59c63d1e7f.webp",
+     "alt": "Voluntariado en salud y conversatorio de salud mental"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6434,7 +7166,7 @@
     "prevencion-y-zoonosis",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/2510bb584444966d.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6448,7 +7180,7 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/e2f0fd6b4dcc0da2.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6465,8 +7197,25 @@
     "lactancia-materna",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/1905bc2cc9372c47.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/d7830379172db57d.webp",
+     "alt": "Actividad por el mes de la lactancia materna 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/0df888e6988d7129.webp",
+     "alt": "Actividad por el mes de la lactancia materna 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/580dec0f6fb220f3.webp",
+     "alt": "Actividad por el mes de la lactancia materna 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/0bb9f97239f86b90.webp",
+     "alt": "Actividad por el mes de la lactancia materna 2024"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6481,7 +7230,7 @@
    "etiquetas": [
     "salud-cardiovascular"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/2a7081bb2f14b36b.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6498,8 +7247,25 @@
    "etiquetas": [
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b347a93c73bc29f2.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/eef9025b720d1d27.webp",
+     "alt": "Actividad de alimentación saludable en el Colegio Llaima"
+    },
+    {
+     "src": "/img/facebook/cesfam/9861eb287b162add.webp",
+     "alt": "Actividad de alimentación saludable en el Colegio Llaima"
+    },
+    {
+     "src": "/img/facebook/cesfam/0f0ea8d951033e95.webp",
+     "alt": "Actividad de alimentación saludable en el Colegio Llaima"
+    },
+    {
+     "src": "/img/facebook/cesfam/19fdc3c5865220b0.webp",
+     "alt": "Actividad de alimentación saludable en el Colegio Llaima"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6514,8 +7280,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/ae706527d0bed0d0.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/622e4a344e4b44c0.webp",
+     "alt": "Charla sobre prevención del suicidio"
+    },
+    {
+     "src": "/img/facebook/cesfam/becbcb6fbafbe0f6.webp",
+     "alt": "Charla sobre prevención del suicidio"
+    },
+    {
+     "src": "/img/facebook/cesfam/a10278604910908e.webp",
+     "alt": "Charla sobre prevención del suicidio"
+    },
+    {
+     "src": "/img/facebook/cesfam/402a41450b7d1521.webp",
+     "alt": "Charla sobre prevención del suicidio"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6530,8 +7313,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/146f56a76504fd46.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/ba1718b3eed71fc3.webp",
+     "alt": "Día Mundial de la Prevención del Suicidio 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/78a5443512c6600e.webp",
+     "alt": "Día Mundial de la Prevención del Suicidio 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/9e5c27293528f7bc.webp",
+     "alt": "Día Mundial de la Prevención del Suicidio 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/3c564cf923e657b9.webp",
+     "alt": "Día Mundial de la Prevención del Suicidio 2024"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6566,8 +7366,25 @@
     "alimentacion-saludable",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/9f8ae556b03dd200.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/a1b340e659d7382a.webp",
+     "alt": "Estudiantes PIRI UFRO informan sobre prevención en salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/d65012463e610539.webp",
+     "alt": "Estudiantes PIRI UFRO informan sobre prevención en salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/311dd58985266180.webp",
+     "alt": "Estudiantes PIRI UFRO informan sobre prevención en salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/e162ebc0ca96d9b5.webp",
+     "alt": "Estudiantes PIRI UFRO informan sobre prevención en salud"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6583,8 +7400,13 @@
    "etiquetas": [
     "personas-mayores"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/db044ef11c008be4.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/151493c215150b96.webp",
+     "alt": "Llega el programa Más Adultos Mayores Autovalentes"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6599,8 +7421,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/11f0e9d9c29151f3.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/f783feceba39a6b8.webp",
+     "alt": "Celebración del Día Mundial de la Salud Mental"
+    },
+    {
+     "src": "/img/facebook/cesfam/e122318650ee3330.webp",
+     "alt": "Celebración del Día Mundial de la Salud Mental"
+    },
+    {
+     "src": "/img/facebook/cesfam/84cc57aa5c1f3e4f.webp",
+     "alt": "Celebración del Día Mundial de la Salud Mental"
+    },
+    {
+     "src": "/img/facebook/cesfam/58b710c1adfda807.webp",
+     "alt": "Celebración del Día Mundial de la Salud Mental"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6618,8 +7457,25 @@
     "postas-rurales",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d0e20eb0aa83c7dd.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/4b42e8e326b2e0a7.webp",
+     "alt": "Actividad educativa de la SEREMI de Salud y el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/f6f03e9337849f20.webp",
+     "alt": "Actividad educativa de la SEREMI de Salud y el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/8647c692486c16b0.webp",
+     "alt": "Actividad educativa de la SEREMI de Salud y el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/b9a409ce89bf32ce.webp",
+     "alt": "Actividad educativa de la SEREMI de Salud y el CESFAM"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6634,8 +7490,21 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/7fa4a0964ded26d0.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/4232e304f08017d7.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/7a7913779800f63f.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos 2024"
+    },
+    {
+     "src": "/img/facebook/cesfam/751f4078369a0b46.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos 2024"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6650,8 +7519,25 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/0e089ce281d84fff.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/398c20dbb9a24313.webp",
+     "alt": "Profesionales del CESFAM informan sobre el uso de antimicrobianos"
+    },
+    {
+     "src": "/img/facebook/cesfam/bf52ba87f11856e5.webp",
+     "alt": "Profesionales del CESFAM informan sobre el uso de antimicrobianos"
+    },
+    {
+     "src": "/img/facebook/cesfam/63ce3be0ae64e58a.webp",
+     "alt": "Profesionales del CESFAM informan sobre el uso de antimicrobianos"
+    },
+    {
+     "src": "/img/facebook/cesfam/aabc79cff172e849.webp",
+     "alt": "Profesionales del CESFAM informan sobre el uso de antimicrobianos"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6667,8 +7553,13 @@
    "etiquetas": [
     "salud-de-la-mujer"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/f83f1d4145e687c2.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/e2d9bc2672fa22d9.webp",
+     "alt": "La prevención del cáncer cervicouterino salva vidas"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6700,8 +7591,21 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d1f96c92625eb9ae.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/db167f1ec24b5553.webp",
+     "alt": "Diciembre: lucha contra el VIH y otras infecciones de transmisión sexual"
+    },
+    {
+     "src": "/img/facebook/cesfam/d81c7f62ba745025.webp",
+     "alt": "Diciembre: lucha contra el VIH y otras infecciones de transmisión sexual"
+    },
+    {
+     "src": "/img/facebook/cesfam/73294a5276b7d95d.webp",
+     "alt": "Diciembre: lucha contra el VIH y otras infecciones de transmisión sexual"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6716,8 +7620,21 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/a1d1c918ea1e5096.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/68ff02d411ea3201.webp",
+     "alt": "Cómo prevenir la mordedura de la araña de rincón"
+    },
+    {
+     "src": "/img/facebook/cesfam/9f8996c6077971f0.webp",
+     "alt": "Cómo prevenir la mordedura de la araña de rincón"
+    },
+    {
+     "src": "/img/facebook/cesfam/d8aaa3de53ecd293.webp",
+     "alt": "Cómo prevenir la mordedura de la araña de rincón"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6732,8 +7649,17 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/4dd38c8b76b22807.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9c5d62b9d0ec075f.webp",
+     "alt": "Camping sin hanta: recomendaciones"
+    },
+    {
+     "src": "/img/facebook/cesfam/762bc3ae5a25348f.webp",
+     "alt": "Camping sin hanta: recomendaciones"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6778,8 +7704,25 @@
     "salud-mental",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/202eb94954a094c2.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/4cd8fbde6e314d07.webp",
+     "alt": "Taller de vellón agujado del programa de salud mental"
+    },
+    {
+     "src": "/img/facebook/cesfam/988e774eb63b85ce.webp",
+     "alt": "Taller de vellón agujado del programa de salud mental"
+    },
+    {
+     "src": "/img/facebook/cesfam/4983238406af3f51.webp",
+     "alt": "Taller de vellón agujado del programa de salud mental"
+    },
+    {
+     "src": "/img/facebook/cesfam/edfb5614ecfda923.webp",
+     "alt": "Taller de vellón agujado del programa de salud mental"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6796,7 +7739,7 @@
     "salud-mental",
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f931685e41a2c229.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6824,7 +7767,7 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/0b21ee37d0779173.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6853,8 +7796,21 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/302b34d2eb81640b.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/03cf917130a8db13.webp",
+     "alt": "Feria Cupido en el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/b5719c44eb85d48c.webp",
+     "alt": "Feria Cupido en el CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/da83c785c8257682.webp",
+     "alt": "Feria Cupido en el CESFAM"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6869,8 +7825,21 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/51265c675eff32d4.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/5b0dde3f05473641.webp",
+     "alt": "Mitos sobre la tuberculosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/15fcdabcacb253f6.webp",
+     "alt": "Mitos sobre la tuberculosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/094334771aaab58b.webp",
+     "alt": "Mitos sobre la tuberculosis"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6886,7 +7855,7 @@
    "etiquetas": [
     "personas-mayores"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/b3221639716b06a6.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -6905,8 +7874,25 @@
     "personas-mayores",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/1a8aa3271303a80c.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/5aa04e4c709e2081.webp",
+     "alt": "Equipo PIRI en el día de pago"
+    },
+    {
+     "src": "/img/facebook/cesfam/88152b7bba2544f0.webp",
+     "alt": "Equipo PIRI en el día de pago"
+    },
+    {
+     "src": "/img/facebook/cesfam/894cd2dee14fcfb9.webp",
+     "alt": "Equipo PIRI en el día de pago"
+    },
+    {
+     "src": "/img/facebook/cesfam/b69ce2f2bce8c259.webp",
+     "alt": "Equipo PIRI en el día de pago"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6919,8 +7905,17 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/020ec74e77d68c12.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/71c035a2ea05fb01.webp",
+     "alt": "Día Mundial de la Salud Bucodental"
+    },
+    {
+     "src": "/img/facebook/cesfam/157baa44891aa4b5.webp",
+     "alt": "Día Mundial de la Salud Bucodental"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6936,8 +7931,25 @@
     "postas-rurales",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/07eeaaea5e4f19a2.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/a718b7cb74c7b747.webp",
+     "alt": "Día Mundial de la Tuberculosis 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/796a76544ff0f98f.webp",
+     "alt": "Día Mundial de la Tuberculosis 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/020913cf8dfd6534.webp",
+     "alt": "Día Mundial de la Tuberculosis 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/f2db6650920071d1.webp",
+     "alt": "Día Mundial de la Tuberculosis 2025"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6952,8 +7964,13 @@
    "etiquetas": [
     "salud-de-la-mujer"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/f23c23198f8d3e97.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/c9a9cc24c4784481.webp",
+     "alt": "Hazte el PAP"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -6969,8 +7986,21 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b26a387753bf1569.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/a02f66d6a146a05e.webp",
+     "alt": "Abril, mes de la actividad física"
+    },
+    {
+     "src": "/img/facebook/cesfam/c6c467f5440e5f8e.webp",
+     "alt": "Abril, mes de la actividad física"
+    },
+    {
+     "src": "/img/facebook/cesfam/b2c3f10df6b24d4e.webp",
+     "alt": "Abril, mes de la actividad física"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7002,7 +8032,7 @@
    "etiquetas": [
     "personas-mayores"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/b4de5fb508ff15b6.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7016,8 +8046,25 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/fcfeafb110f86661.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/b8661eb73c5a2539.webp",
+     "alt": "Llega la nueva ambulancia 4x4 del CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/8eec52ae6bad6696.webp",
+     "alt": "Llega la nueva ambulancia 4x4 del CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/21be8d4665b3b908.webp",
+     "alt": "Llega la nueva ambulancia 4x4 del CESFAM"
+    },
+    {
+     "src": "/img/facebook/cesfam/de7b8f32460382fe.webp",
+     "alt": "Llega la nueva ambulancia 4x4 del CESFAM"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7065,8 +8112,13 @@
    "etiquetas": [
     "lactancia-materna"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/c4768089298d70e8.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/126ecec3480f6a36.webp",
+     "alt": "Invitación del comité de lactancia materna"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7082,8 +8134,13 @@
     "lactancia-materna",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d85645bae4af63ce.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/dfe5d459b8e60782.webp",
+     "alt": "Concurso por la lactancia materna"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7102,8 +8159,25 @@
     "lactancia-materna",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/dd48e3c1865af81b.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/672e5c58a6021655.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/43f424c93196e77d.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/dd27836385787465.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/e05bd403403c9a56.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2025"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7158,8 +8232,25 @@
     "personas-mayores",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/1de5139a749d2df1.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9bde5fd87a98eba1.webp",
+     "alt": "Pasacalle con batucada en Conmemoración del Día de la Prevención del Suicidio"
+    },
+    {
+     "src": "/img/facebook/cesfam/70342524eabdd21b.webp",
+     "alt": "Pasacalle con batucada en Conmemoración del Día de la Prevención del Suicidio"
+    },
+    {
+     "src": "/img/facebook/cesfam/2536ea4246a1ccaf.webp",
+     "alt": "Pasacalle con batucada en Conmemoración del Día de la Prevención del Suicidio"
+    },
+    {
+     "src": "/img/facebook/cesfam/ab7b5bca397a671f.webp",
+     "alt": "Pasacalle con batucada en Conmemoración del Día de la Prevención del Suicidio"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7176,7 +8267,7 @@
     "vacunacion",
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/c426ac925a6e82c7.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7193,7 +8284,7 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/4cc34353a29e5e7e.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7212,8 +8303,25 @@
     "salud-intercultural",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/93200070ad6b432f.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/6ec96cc48793b674.webp",
+     "alt": "Taller de Cocina Mapuche: «Aliwen, Comida y Territorio»"
+    },
+    {
+     "src": "/img/facebook/cesfam/4d6009afa5cfc8d3.webp",
+     "alt": "Taller de Cocina Mapuche: «Aliwen, Comida y Territorio»"
+    },
+    {
+     "src": "/img/facebook/cesfam/a14a7cdc7e1908b8.webp",
+     "alt": "Taller de Cocina Mapuche: «Aliwen, Comida y Territorio»"
+    },
+    {
+     "src": "/img/facebook/cesfam/4491ce386b32be0a.webp",
+     "alt": "Taller de Cocina Mapuche: «Aliwen, Comida y Territorio»"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7230,7 +8338,7 @@
     "promocion-de-la-salud",
     "infancia"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/86232462dfbc92c8.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7247,7 +8355,7 @@
     "salud-cardiovascular",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/98d703b190999c68.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7267,8 +8375,25 @@
     "salud-de-la-mujer",
     "personas-mayores"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/5a9dcf9dd010e5f7.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/a960a964bcb4cf9b.webp",
+     "alt": "Melipeuco se vistió de rosa"
+    },
+    {
+     "src": "/img/facebook/cesfam/623d2a608d2099d8.webp",
+     "alt": "Melipeuco se vistió de rosa"
+    },
+    {
+     "src": "/img/facebook/cesfam/7b1fbd2514547165.webp",
+     "alt": "Melipeuco se vistió de rosa"
+    },
+    {
+     "src": "/img/facebook/cesfam/c3b640e9d8c1d861.webp",
+     "alt": "Melipeuco se vistió de rosa"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7287,8 +8412,25 @@
     "prevencion-y-zoonosis",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/03db589b813079af.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/985ad5b113c69561.webp",
+     "alt": "Niños de Melipeuco se unen por la prevención de la hidatidosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/5bf718989b686fa8.webp",
+     "alt": "Niños de Melipeuco se unen por la prevención de la hidatidosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/8af67363e0e5fab2.webp",
+     "alt": "Niños de Melipeuco se unen por la prevención de la hidatidosis"
+    },
+    {
+     "src": "/img/facebook/cesfam/57fc641c77420b57.webp",
+     "alt": "Niños de Melipeuco se unen por la prevención de la hidatidosis"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7305,8 +8447,25 @@
     "promocion-de-la-salud",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/fd1933d50567e81d.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/fe5ce1ef642f24a5.webp",
+     "alt": "Campeonato Regional de Futbolito Atención Primaria de Salud 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/a929aceb7a54ae08.webp",
+     "alt": "Campeonato Regional de Futbolito Atención Primaria de Salud 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/b604826166094f87.webp",
+     "alt": "Campeonato Regional de Futbolito Atención Primaria de Salud 2025"
+    },
+    {
+     "src": "/img/facebook/cesfam/30c210be62499565.webp",
+     "alt": "Campeonato Regional de Futbolito Atención Primaria de Salud 2025"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7322,8 +8481,25 @@
     "promocion-de-la-salud",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/dbad4d1537a2b1a0.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/5cbaddad7ebf1c62.webp",
+     "alt": "MeliFest 2025 llega para encender la magia en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/2126f6bc70e0a0d5.webp",
+     "alt": "MeliFest 2025 llega para encender la magia en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/827d5c4957894ff4.webp",
+     "alt": "MeliFest 2025 llega para encender la magia en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/e4f0df4b69ad96cf.webp",
+     "alt": "MeliFest 2025 llega para encender la magia en Melipeuco"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7340,7 +8516,7 @@
     "promocion-de-la-salud",
     "alimentacion-saludable"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/cec8536dfab0269d.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7359,8 +8535,25 @@
     "infancia",
     "salud-intercultural"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/d013cde6bf697dc1.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/8408fa5ceb50e9b7.webp",
+     "alt": "4to Encuentro de Palikantun Escolar – Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/33a837a97be0f5e5.webp",
+     "alt": "4to Encuentro de Palikantun Escolar – Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/d5df8b27b787ba99.webp",
+     "alt": "4to Encuentro de Palikantun Escolar – Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/60a3dc62f93496e8.webp",
+     "alt": "4to Encuentro de Palikantun Escolar – Melipeuco"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7375,8 +8568,25 @@
    "etiquetas": [
     "prevencion-y-zoonosis"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/906bf0f6f12e5797.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/40e58d35d7c83de0.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos"
+    },
+    {
+     "src": "/img/facebook/cesfam/de0ebee4bce6dd33.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos"
+    },
+    {
+     "src": "/img/facebook/cesfam/95c14724dc88c67c.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos"
+    },
+    {
+     "src": "/img/facebook/cesfam/7b15c66361c3619a.webp",
+     "alt": "Semana Mundial de Concientización sobre la Resistencia a los Antimicrobianos"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7392,8 +8602,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b918721170293afb.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/e435db0f7f9665da.webp",
+     "alt": "Talleres de intervención psicosociales, basado en arte terapia"
+    },
+    {
+     "src": "/img/facebook/cesfam/c199755da27fc2a5.webp",
+     "alt": "Talleres de intervención psicosociales, basado en arte terapia"
+    },
+    {
+     "src": "/img/facebook/cesfam/3bb783c3502d88d2.webp",
+     "alt": "Talleres de intervención psicosociales, basado en arte terapia"
+    },
+    {
+     "src": "/img/facebook/cesfam/633231f1a0594ce0.webp",
+     "alt": "Talleres de intervención psicosociales, basado en arte terapia"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7412,8 +8639,25 @@
     "personas-mayores",
     "postas-rurales"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/201c5830b0d848f8.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/12ac5b5b5b8a6f86.webp",
+     "alt": "Así se vivió el 1° Encuentro de Personas Mayores en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/207884b0680eae37.webp",
+     "alt": "Así se vivió el 1° Encuentro de Personas Mayores en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/40577acd250b9bda.webp",
+     "alt": "Así se vivió el 1° Encuentro de Personas Mayores en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/dacffe01568df820.webp",
+     "alt": "Así se vivió el 1° Encuentro de Personas Mayores en Melipeuco"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7428,7 +8672,7 @@
    "etiquetas": [
     "vacunacion"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/8e5b9205117eee7b.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7447,8 +8691,25 @@
     "prevencion-y-zoonosis",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b76495962d201569.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/c5b8ebc5c4cda915.webp",
+     "alt": "Día Mundial contra la Tuberculosis 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/6e5fae3e80b1c991.webp",
+     "alt": "Día Mundial contra la Tuberculosis 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/bc4a3f0c44b5b3a9.webp",
+     "alt": "Día Mundial contra la Tuberculosis 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/adab691384cfe204.webp",
+     "alt": "Día Mundial contra la Tuberculosis 2026"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7467,8 +8728,13 @@
     "promocion-de-la-salud",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/f7494ba23862a0f2.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/cd66cd9697bd1abf.webp",
+     "alt": "Melipeuco se activa en abril"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7486,8 +8752,25 @@
     "promocion-de-la-salud",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/87fc4f362cac84ea.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/7d92ba79aa8d42fe.webp",
+     "alt": "Melipeuco se activó por la salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/4eaec9b9b54665d7.webp",
+     "alt": "Melipeuco se activó por la salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/3ceb51e462e85010.webp",
+     "alt": "Melipeuco se activó por la salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/cf18d32b620d562f.webp",
+     "alt": "Melipeuco se activó por la salud"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7503,8 +8786,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/20755d579bfc6bb0.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/9ffee58b06280f9a.webp",
+     "alt": "Comienzan las intervenciones psicosociales grupales de salud mental 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/6f350838b9a5f220.webp",
+     "alt": "Comienzan las intervenciones psicosociales grupales de salud mental 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/2899e8d3b33baeaa.webp",
+     "alt": "Comienzan las intervenciones psicosociales grupales de salud mental 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/78e588ec9ce5ed2b.webp",
+     "alt": "Comienzan las intervenciones psicosociales grupales de salud mental 2026"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7522,8 +8822,21 @@
     "salud-cardiovascular",
     "alimentacion-saludable"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/7911fa08dd7fcaa3.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/ecbc9be3c82f3e00.webp",
+     "alt": "Stand informativo del equipo de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/94ae111facf3b4f2.webp",
+     "alt": "Stand informativo del equipo de salud"
+    },
+    {
+     "src": "/img/facebook/cesfam/5aa443fa653897b6.webp",
+     "alt": "Stand informativo del equipo de salud"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7536,7 +8849,7 @@
     "salud"
    ],
    "etiquetas": [],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/3561ca35b689046c.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7552,7 +8865,7 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f02dba70445133ae.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7587,8 +8900,25 @@
     "lactancia-materna",
     "infancia"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/9aecdfa4c63a106f.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/c92513b4fd90493b.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/514d3fd837076c05.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/7d6d65b5503ea176.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/b9f3bb13c8ba302c.webp",
+     "alt": "Semana Mundial de la Lactancia Materna 2026"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7603,7 +8933,7 @@
    "etiquetas": [
     "participacion-social"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/b2bf7a5cef1a7b26.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7620,7 +8950,7 @@
     "salud-cardiovascular",
     "postas-rurales"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/654ea219f8674591.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7636,7 +8966,7 @@
    "etiquetas": [
     "salud-de-la-mujer"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/4602d34ce733c3ae.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7668,8 +8998,17 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/68648177c4a052fc.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/030de4de819e56be.webp",
+     "alt": "Septiembre: identifica las señales y acompaña"
+    },
+    {
+     "src": "/img/facebook/cesfam/560471831286402b.webp",
+     "alt": "Septiembre: identifica las señales y acompaña"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7685,8 +9024,25 @@
    "etiquetas": [
     "salud-mental"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/b06385e6f97c25be.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/772e04c9e973563d.webp",
+     "alt": "Día Internacional de la Prevención del Suicidio 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/73de4f87505a65d2.webp",
+     "alt": "Día Internacional de la Prevención del Suicidio 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/0428183dd7a4ae9a.webp",
+     "alt": "Día Internacional de la Prevención del Suicidio 2026"
+    },
+    {
+     "src": "/img/facebook/cesfam/a26003e7c0038762.webp",
+     "alt": "Día Internacional de la Prevención del Suicidio 2026"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
   {
@@ -7702,7 +9058,7 @@
     "salud-mental",
     "salud-de-la-mujer"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/f3501ab52eeaa123.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7719,7 +9075,7 @@
    "etiquetas": [
     "promocion-de-la-salud"
    ],
-   "imagen": "",
+   "imagen": "/img/facebook/cesfam/e121431a0df206af.webp",
    "galeria": [],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   },
@@ -7738,8 +9094,25 @@
     "prevencion-y-zoonosis",
     "piri-ufro"
    ],
-   "imagen": "",
-   "galeria": [],
+   "imagen": "/img/facebook/cesfam/451c7f1e057111e8.webp",
+   "galeria": [
+    {
+     "src": "/img/facebook/cesfam/0833ac6396355530.webp",
+     "alt": "Jornada intersectorial para la prevención y control de la hidatidosis en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/fa6abfdda961e168.webp",
+     "alt": "Jornada intersectorial para la prevención y control de la hidatidosis en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/908843f20357ebb3.webp",
+     "alt": "Jornada intersectorial para la prevención y control de la hidatidosis en Melipeuco"
+    },
+    {
+     "src": "/img/facebook/cesfam/1d58944c0a34f021.webp",
+     "alt": "Jornada intersectorial para la prevención y control de la hidatidosis en Melipeuco"
+    }
+   ],
    "fuente": "Publicación de la página de Facebook del CESFAM Melipeuco"
   }
  ],
@@ -9294,7 +10667,8 @@
    "categorias": [
     "salud"
    ],
-   "etiquetas": []
+   "etiquetas": [],
+   "imagen": "/img/facebook/cesfam/5593ec7450431700.webp"
   },
   {
    "clave": "cesfam-ev-c6662ca3db64",
@@ -9310,7 +10684,8 @@
    ],
    "etiquetas": [
     "piri-ufro"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/deed35839e5bc677.webp"
   },
   {
    "clave": "cesfam-ev-bae610958c93",
@@ -9327,7 +10702,8 @@
    "etiquetas": [
     "vacunacion",
     "prevencion-y-zoonosis"
-   ]
+   ],
+   "imagen": ""
   },
   {
    "clave": "cesfam-ev-dbd707d1d58e",
@@ -9343,7 +10719,8 @@
    ],
    "etiquetas": [
     "vacunacion"
-   ]
+   ],
+   "imagen": ""
   },
   {
    "clave": "cesfam-ev-96ce80d52001",
@@ -9360,7 +10737,8 @@
    "etiquetas": [
     "vacunacion",
     "prevencion-y-zoonosis"
-   ]
+   ],
+   "imagen": ""
   },
   {
    "clave": "cesfam-ev-6053a109666b",
@@ -9376,7 +10754,8 @@
    ],
    "etiquetas": [
     "promocion-de-la-salud"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/3e13bf0f162d4005.webp"
   },
   {
    "clave": "cesfam-ev-dd9dda9b6ae7",
@@ -9396,7 +10775,8 @@
     "salud-de-la-mujer",
     "infancia",
     "personas-mayores"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/d5f501d835a64de1.webp"
   },
   {
    "clave": "cesfam-ev-49c8069e0012",
@@ -9413,7 +10793,8 @@
    ],
    "etiquetas": [
     "promocion-de-la-salud"
-   ]
+   ],
+   "imagen": ""
   },
   {
    "clave": "cesfam-ev-fa3054b3be4c",
@@ -9428,7 +10809,8 @@
     "salud",
     "deporte"
    ],
-   "etiquetas": []
+   "etiquetas": [],
+   "imagen": "/img/facebook/cesfam/3be9e062b06d924b.webp"
   },
   {
    "clave": "cesfam-ev-6409d045e450",
@@ -9446,7 +10828,8 @@
    "etiquetas": [
     "promocion-de-la-salud",
     "salud-cardiovascular"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/a2ae9299df25ec66.webp"
   },
   {
    "clave": "cesfam-ev-d73e5426b92f",
@@ -9464,7 +10847,8 @@
    "etiquetas": [
     "infancia",
     "alimentacion-saludable"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/bd6ec338eba2360f.webp"
   },
   {
    "clave": "cesfam-ev-5b2b27da2d8f",
@@ -9480,7 +10864,8 @@
    ],
    "etiquetas": [
     "participacion-social"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/bb37d6ba1cc1b629.webp"
   },
   {
    "clave": "cesfam-ev-52e424f557c1",
@@ -9496,7 +10881,8 @@
    ],
    "etiquetas": [
     "participacion-social"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/784ed86bc4b276e8.webp"
   },
   {
    "clave": "cesfam-ev-3cdbdb441f01",
@@ -9512,7 +10898,8 @@
    ],
    "etiquetas": [
     "salud-cardiovascular"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/49c4424c2ce04a5b.webp"
   },
   {
    "clave": "cesfam-ev-1ea88c1d4096",
@@ -9528,7 +10915,8 @@
    ],
    "etiquetas": [
     "salud-cardiovascular"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/ff81f66af42967d6.webp"
   },
   {
    "clave": "cesfam-ev-a8cfe0a53de9",
@@ -9544,7 +10932,8 @@
    ],
    "etiquetas": [
     "prevencion-y-zoonosis"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/fc43b62489167f52.webp"
   },
   {
    "clave": "cesfam-ev-d1b49fb876fc",
@@ -9562,7 +10951,8 @@
     "vacunacion",
     "salud-de-la-mujer",
     "infancia"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/3f193a7372da34c7.webp"
   },
   {
    "clave": "cesfam-ev-5e9a0f9e2e53",
@@ -9580,7 +10970,8 @@
    "etiquetas": [
     "vacunacion",
     "personas-mayores"
-   ]
+   ],
+   "imagen": ""
   },
   {
    "clave": "cesfam-ev-bbdb86c17ceb",
@@ -9597,7 +10988,8 @@
    "etiquetas": [
     "salud-mental",
     "participacion-social"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/73a1929700171ead.webp"
   },
   {
    "clave": "cesfam-ev-87b67d353376",
@@ -9616,7 +11008,8 @@
     "promocion-de-la-salud",
     "prevencion-y-zoonosis",
     "alimentacion-saludable"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/2510bb584444966d.webp"
   },
   {
    "clave": "cesfam-ev-f994bf33af85",
@@ -9632,7 +11025,8 @@
    ],
    "etiquetas": [
     "salud-cardiovascular"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/2a7081bb2f14b36b.webp"
   },
   {
    "clave": "cesfam-ev-46efcebbd7fe",
@@ -9648,7 +11042,8 @@
    ],
    "etiquetas": [
     "prevencion-y-zoonosis"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/d1f96c92625eb9ae.webp"
   },
   {
    "clave": "cesfam-ev-d72f7e81cf1f",
@@ -9664,7 +11059,8 @@
    ],
    "etiquetas": [
     "lactancia-materna"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/c4768089298d70e8.webp"
   },
   {
    "clave": "cesfam-ev-c922c62f8687",
@@ -9682,7 +11078,8 @@
    "etiquetas": [
     "promocion-de-la-salud",
     "alimentacion-saludable"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/cec8536dfab0269d.webp"
   },
   {
    "clave": "cesfam-ev-fbb760636dc2",
@@ -9698,7 +11095,8 @@
    ],
    "etiquetas": [
     "participacion-social"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/b2bf7a5cef1a7b26.webp"
   },
   {
    "clave": "cesfam-ev-2baede8f9ed8",
@@ -9715,7 +11113,8 @@
    "etiquetas": [
     "salud-mental",
     "salud-de-la-mujer"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/f3501ab52eeaa123.webp"
   },
   {
    "clave": "cesfam-ev-4e35940ccc1a",
@@ -9732,7 +11131,8 @@
    ],
    "etiquetas": [
     "promocion-de-la-salud"
-   ]
+   ],
+   "imagen": "/img/facebook/cesfam/e121431a0df206af.webp"
   }
  ],
  "etiquetas": [

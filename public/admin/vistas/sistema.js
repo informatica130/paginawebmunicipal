@@ -32,7 +32,7 @@ CORS_ORIGINS=https://tramites.municipalidadmelipeuco.cl</pre><p class="chico">Y 
     ${facebook ? h`<section class="tarjeta"><h2>Publicaciones de Facebook</h2>
       <p class="chico">Agrega como noticias las publicaciones y los álbumes con texto de la página de Facebook del municipio (con sus fotos y categorías) y las publicaciones del CESFAM Melipeuco (con etiquetas por programa de salud), y como eventos pasados de la agenda las fiestas y actividades de los álbumes. Los álbumes completos se ven en la fototeca (/fotos/). Sólo crea las que faltan: no toca las que ya se importaron, aunque se hayan editado o eliminado.</p>
       <p class="chico">${facebook.noticias ?? facebook.disponibles} noticias y ${facebook.eventos || 0} eventos en el paquete · <b>${facebook.importadas} ya están en el sitio</b>${facebook.ultima ? ' · última importación ' + fecha(facebook.ultima.fin, { hora: true }) : ''}</p>
-      <button class="btn" data-facebook ${facebook.importadas >= facebook.disponibles ? 'disabled' : ''}>Importar publicaciones</button></section>` : ''}
+      <button class="btn" data-facebook>Importar publicaciones</button></section>` : ''}
     ${redirecciones ? h`<section class="tarjeta"><h2>Redirecciones</h2><p class="chico muted">Envían direcciones antiguas a las nuevas (útil para enlaces impresos o publicados en redes).</p>
       <form class="fila" data-redir><input name="origen" placeholder="/direccion-antigua/" required><input name="destino" placeholder="/direccion-nueva/ o https://…" required><select name="codigo"><option value="301">Permanente (301)</option><option value="302">Temporal (302)</option></select><button class="btn">Agregar</button></form>
       <div class="tabla-envoltura"><table class="tabla"><thead><tr><th>Origen</th><th>Destino</th><th>Usos</th><th></th></tr></thead><tbody>${redirecciones.map((r) => h`<tr><td class="mono chico">${r.origen}</td><td class="mono chico">${r.destino}</td><td>${r.visitas}</td><td><button class="btn chico peligro" data-borrar-redir="${r.id}">✕</button></td></tr>`)}</tbody></table></div></section>` : ''}
@@ -54,7 +54,7 @@ CORS_ORIGINS=https://tramites.municipalidadmelipeuco.cl</pre><p class="chico">Y 
       if (b.dataset.facebook !== undefined) {
         if (!(await confirmar('¿Agregar las noticias y eventos de Facebook que faltan?', { boton: 'Importar' }))) return;
         const r = await api('POST', 'importar-facebook');
-        aviso(`${r.creados - (r.eventos || 0)} noticias y ${r.eventos || 0} eventos nuevos${r.omitidos ? `, ${r.omitidos} ya estaban` : ''}.`, 'ok');
+        aviso(`${r.creados - (r.eventos || 0)} noticias y ${r.eventos || 0} eventos nuevos${r.omitidos ? `, ${r.omitidos} ya estaban` : ''}${r.fotos ? `; ${r.fotos} recibieron sus fotos` : ''}.`, 'ok');
         window.dispatchEvent(new HashChangeEvent('hashchange'));
       }
       if (b.dataset.borrarRedir) { await api('DELETE', 'redirecciones/' + b.dataset.borrarRedir); b.closest('tr').remove(); }
