@@ -20,6 +20,7 @@ import { paginaArchivo, buscarArchivo, inventario, urlDoc } from './render/archi
 import { paginaActiva, buscarActiva } from './render/portal.js';
 import { Readable } from 'node:stream';
 import { paginaVideos, paginaLista, fichaVideo, prepararVideos, buscarVideos, urlVideo, urlsVideos, indice as indiceVideos } from './render/videos.js';
+import { paginaFotos, fichaAlbum, urlsFotos } from './render/fotos.js';
 
 export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version, secreto, leerUsuario, auditar }) {
   const img = crearImagenes(db);
@@ -223,7 +224,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     for (const f of db.all("SELECT id, tipo, slug, padre_id, publicado_en, creado, modificado, datos FROM contenidos WHERE estado = 'publicado' AND tipo NOT IN ('slide','acceso','aviso','contacto') AND json_extract(seo, '$.noindex') IS NOT 1")) {
       urls.push({ u: repo.urlDe({ ...f, datos: JSON.parse(f.datos) }), m: f.modificado });
     }
-    urls.push({ u: '/videos/', m: null }, ...urlsVideos(), ...micro.publicados().map((x) => ({ u: `/${x.slug}/`, m: x.actualizado || null })));
+    urls.push({ u: '/videos/', m: null }, ...urlsVideos(), { u: '/fotos/', m: null }, ...urlsFotos(), ...micro.publicados().map((x) => ({ u: `/${x.slug}/`, m: x.actualizado || null })));
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((x) => `<url><loc>${esc(base + x.u)}</loc>${x.m ? `<lastmod>${x.m.slice(0, 10)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>`;
   }
 
@@ -568,6 +569,14 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
       } else if (seg[1] === 'categoria' && seg[2]) return redirigir(res, `/videos/?categoria=${encodeURIComponent(seg[2])}`, 301);
       else if (seg[1] === 'lista' && seg[2]) { const r = paginaLista(ctx, seg[2]); if (r) return responder(r); }
       else if (/^[\w-]{11}$/.test(seg[1]) && !seg[2]) { const r = fichaVideo(ctx, seg[1]); if (r) return responder(r); }
+    }
+    // Fototeca: álbumes de fotos de la página de Facebook de la Municipalidad.
+    if (seg[0] === 'fotos') {
+      if (!seg[1] || seg[1] === 'page') {
+        const filtros = Object.fromEntries(['q', 'categoria', 'anio'].map((k) => [k, String(q.get(k) || '').slice(0, 100)]));
+        const r = paginaFotos(ctx, filtros, Number(q.get('p')) || 1);
+        if (r) return responder(r, { cachear: !filtros.q });
+      } else if (!seg[2]) { const r = fichaAlbum(ctx, seg[1]); if (r) return responder(r); }
     }
     if (seg[0] === 'transparencia' && !seg[1]) return responder(V.transparencia(ctx));
     // Transparencia Activa: secciones y tablas del Portal de Transparencia (copia con fecha).

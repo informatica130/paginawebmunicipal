@@ -60,9 +60,9 @@ export const MODULOS = {
   tramites: { n: 'Trámites del área', d: 'Las fichas de trámites del sitio y los trámites en línea de la Plataforma de la unidad.', icono: 'licencia', campos: [titulo, intro,
     { k: 'dependencia', t: 'texto', l: 'Código de la unidad en el organigrama (ej.: dep-transito; incluye sus oficinas)' }, { k: 'etiqueta', t: 'texto', l: 'O trámites con esta etiqueta (slug)' }, { k: 'cantidad', t: 'numero', l: 'Cantidad máxima', def: 12 },
     { k: 'vacio', t: 'texto', l: 'Texto si no hay trámites', def: 'Consulte los trámites de esta unidad en la Oficina de Partes.' }] },
-  contenido: { n: 'Contenido del sitio', d: 'Autoridades, sesiones del Concejo, agenda, directorio telefónico, lugares, formularios o videos, siempre al día.', icono: 'carpeta', campos: [titulo, intro,
-    { k: 'fuente', t: 'opcion', l: 'Qué mostrar', opciones: { autoridades: 'Autoridades', sesiones: 'Sesiones del Concejo', eventos: 'Próximos eventos de la agenda', directorio: 'Directorio telefónico', lugares: 'Lugares turísticos', formulario: 'Formulario', videos: 'Videos de la videoteca' }, def: 'eventos' },
-    { k: 'filtro', t: 'texto', l: 'Filtro (autoridades: alcalde o concejal · directorio: municipal, salud, educacion, emergencia · lugares: tipo · formulario: contacto, oirs o suscripcion · videos: categoría)' },
+  contenido: { n: 'Contenido del sitio', d: 'Autoridades, sesiones del Concejo, agenda, directorio telefónico, lugares, formularios, fotos o videos, siempre al día.', icono: 'carpeta', campos: [titulo, intro,
+    { k: 'fuente', t: 'opcion', l: 'Qué mostrar', opciones: { autoridades: 'Autoridades', sesiones: 'Sesiones del Concejo', eventos: 'Próximos eventos de la agenda', directorio: 'Directorio telefónico', lugares: 'Lugares turísticos', formulario: 'Formulario', videos: 'Videos de la videoteca', fotos: 'Álbumes de la fototeca' }, def: 'eventos' },
+    { k: 'filtro', t: 'texto', l: 'Filtro (autoridades: alcalde o concejal · directorio: municipal, salud, educacion, emergencia · lugares: tipo · formulario: contacto, oirs o suscripcion · videos: categoría · fotos: área, vacío = la de este micrositio)' },
     { k: 'cantidad', t: 'numero', l: 'Cantidad', def: 6 }] },
   video: { n: 'Video', d: 'Un video de YouTube o Vimeo.', icono: 'video', campos: [titulo, intro, { k: 'url', t: 'url', l: 'Enlace del video' }] },
 };

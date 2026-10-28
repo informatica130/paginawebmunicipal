@@ -15,7 +15,7 @@ import { NOMBRES_ICONOS } from './render/iconos.js';
 const DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'contenido', 'micrositios');
 const ICONOS = new Set(NOMBRES_ICONOS);
 // Direcciones del sitio que un micrositio no puede ocupar.
-const RESERVADAS = new Set(['admin', 'api', 'embed', 'vista-previa', 'noticias', 'page', 'category', 'tag', 'categoria', 'etiqueta', 'tramites', 'eventos', 'documentos', 'areas', 'autoridades', 'concejo', 'descubre', 'participa', 'directorio', 'contacto', 'oirs', 'boletin', 'buscar', 'videos', 'transparencia', 'mapa-del-sitio', 'accesibilidad', 'feed', 'img', 'css', 'js', 'fuentes', 'medios', 'wp-content', 'sitemap.xml', 'robots.txt']);
+const RESERVADAS = new Set(['admin', 'api', 'embed', 'vista-previa', 'noticias', 'page', 'category', 'tag', 'categoria', 'etiqueta', 'tramites', 'eventos', 'documentos', 'areas', 'autoridades', 'concejo', 'descubre', 'participa', 'directorio', 'contacto', 'oirs', 'boletin', 'buscar', 'videos', 'fotos', 'transparencia', 'mapa-del-sitio', 'accesibilidad', 'feed', 'img', 'css', 'js', 'fuentes', 'medios', 'wp-content', 'sitemap.xml', 'robots.txt']);
 
 const txt = (v, n = 300) => String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/[<>]/g, '').trim().slice(0, n);
 const parrafo = (v, n = 4000) => String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/[<>]/g, '').trim().slice(0, n);
