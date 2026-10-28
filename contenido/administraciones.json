@@ -1,0 +1,555 @@
+{
+ "version": 1,
+ "nota": "Reconstruido a partir de las publicaciones de la Municipalidad (sitio web anterior y Facebook, 2013–2026), las publicaciones del CESFAM Melipeuco y la sección «Autoridades de elección popular» de Transparencia Activa. Las fechas de inicio y término corresponden a los períodos municipales nacionales.",
+ "administraciones": [
+  {
+   "id": "cuminao",
+   "alcalde": "Alejandro Cuminao Barros",
+   "desde": "2021-06-28",
+   "hasta": "",
+   "resumen": "Alcalde desde el 28 de junio de 2021 y reelecto para el período 2024–2028. Su gestión destaca por la vivienda, los servicios que antes obligaban a viajar fuera de la comuna, la gestión ambiental «Melipeuco Cero Basura» y la proyección internacional del territorio.",
+   "concejos": [
+    {
+     "periodo": "2024 – 2028",
+     "desde": "2024-12-06",
+     "hasta": "",
+     "fuente": "Transparencia Activa: autoridades de elección popular (2024–2026)",
+     "concejales": [
+      "Antonio Massa Sanhueza",
+      "Eloísa Herrera Cuevas",
+      "Faumeliza Villanueva Caifal",
+      "María Teresa Huenchumán Arias",
+      "Nelson Sepúlveda Reumay",
+      "René Epulef Zavala"
+     ]
+    },
+    {
+     "periodo": "2021 – 2024",
+     "desde": "2021-06-28",
+     "hasta": "2024-12-06",
+     "fuente": "Transparencia Activa: autoridades de elección popular (2023–2024)",
+     "concejales": [
+      "Claudio Melillán Melillán",
+      "Dany Maldonado Cayumán",
+      "Eloísa Herrera Cuevas",
+      "Erick Burgos Sánchez",
+      "Nelson Sepúlveda Reumay",
+      "René Epulef Zavala"
+     ]
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "140",
+     "etiqueta": "viviendas entregadas en 2025",
+     "nota": "y 170 en construcción"
+    },
+    {
+     "valor": "$5.766 MM",
+     "etiqueta": "invertidos en vivienda",
+     "nota": "Cuenta Pública 2025"
+    },
+    {
+     "valor": "+86%",
+     "etiqueta": "presupuesto municipal 2021–2025",
+     "nota": "Cuenta Pública 2025"
+    },
+    {
+     "valor": "40+",
+     "etiqueta": "convenios con instituciones",
+     "nota": "Cuenta Pública 2025"
+    },
+    {
+     "valor": "$170 MM",
+     "etiqueta": "menos al año en traslado de basura",
+     "nota": "programa Basura Cero"
+    },
+    {
+     "valor": "1.400+",
+     "etiqueta": "usuarios de tenencia responsable",
+     "nota": "box veterinario y operativos"
+    }
+   ],
+   "hitos": [
+    {
+     "fecha": "2021-06-29",
+     "area": "obras",
+     "titulo": "Trabajo en conectividad rural desde el primer día",
+     "texto": "Mejoramiento de caminos en Pangueco, Santa Julia y Santa María de Llaima.",
+     "noticia": "trabajando-desde-el-primer-dia"
+    },
+    {
+     "fecha": "2021-07-02",
+     "area": "educacion",
+     "titulo": "Planta fotovoltaica en la Escuela Volcán Llaima",
+     "texto": "Energía solar para la escuela municipal.",
+     "noticia": "construccion-de-una-planta-fotovoltaica-en-la-escuela-municipal-volcan-llaima-2"
+    },
+    {
+     "fecha": "2021-07-10",
+     "area": "emergencias",
+     "titulo": "Nuevo recinto para el Cuerpo de Bomberos",
+     "texto": "Inauguración del nuevo cuartel de Bomberos de Melipeuco.",
+     "noticia": "se-inagura-el-nuevo-recinto-para-el-cuerpo-de-bomberos-de-melipeuco"
+    },
+    {
+     "fecha": "2021-08-13",
+     "area": "educacion",
+     "titulo": "Tablets para los establecimientos municipales",
+     "texto": "Entrega de equipos a las escuelas y el liceo.",
+     "album": "entrega-de-tablets-a-establecimientos-municipales-2021"
+    },
+    {
+     "fecha": "2022-01-13",
+     "area": "social",
+     "titulo": "Primera oficina PRODEMU en Melipeuco",
+     "texto": "Apoyo a la autonomía económica de las mujeres de la comuna.",
+     "noticia": "inauguracion-de-primera-oficina-prodemu-en-melipeuco"
+    },
+    {
+     "fecha": "2022-02-08",
+     "area": "box-veterinario",
+     "titulo": "Ordenanza de tenencia responsable de mascotas",
+     "texto": "Base del programa de tenencia responsable y del box veterinario municipal.",
+     "noticia": "ordenanza-001-tenencia-responsable-de-mascotas-o-animales-de-compania"
+    },
+    {
+     "fecha": "2022-08-18",
+     "area": "social",
+     "titulo": "Proyecto adjudicado para el ELEAM Las Araucarias",
+     "texto": "Hoy atiende a 30 personas mayores con un equipo de 43 funcionarios.",
+     "noticia": "adjudicacion-de-proyecto-para-eleam-las-araucarias"
+    },
+    {
+     "fecha": "2022-10-07",
+     "area": "obras",
+     "titulo": "Planta de revisión técnica en Melipeuco",
+     "texto": "Un trámite que ya no exige viajar a otra comuna.",
+     "noticia": "revision-tecnica-en-melipeuco"
+    },
+    {
+     "fecha": "2022-10-21",
+     "area": "vivienda",
+     "titulo": "Entrega e inauguración de viviendas",
+     "texto": "Jornada de entrega de nuevas viviendas a familias de la comuna.",
+     "noticia": "jornada-de-entrega-e-inauguracion-de-viviendas"
+    },
+    {
+     "fecha": "2022-12-26",
+     "area": "alcaldia",
+     "titulo": "Plan de Desarrollo Comunal 2022–2026",
+     "texto": "PLADECO con la hoja de ruta del desarrollo comunal.",
+     "noticia": "pladeco-2022-2026"
+    },
+    {
+     "fecha": "2023-01-19",
+     "area": "obras",
+     "titulo": "Proyecto de electrificación rural",
+     "texto": "Reunión con las familias beneficiadas.",
+     "album": "reunion-familias-beneficiadas-proyecto-de-electrificacion-rural-2023"
+    },
+    {
+     "fecha": "2023-01-26",
+     "area": "turismo",
+     "titulo": "Programa «Melipeuco conoce su parque»",
+     "texto": "Vecinos y vecinas recorren el Parque Nacional Conguillío.",
+     "album": "comenzo-el-programa-melipeuco-conoce-su-parque-2023"
+    },
+    {
+     "fecha": "2023-02-16",
+     "area": "medio-ambiente",
+     "titulo": "Entrega masiva de composteras",
+     "texto": "Inicio del modelo «Melipeuco Cero Basura» en los hogares.",
+     "album": "municipio-realiza-entrega-de-composteras-masiva-2023"
+    },
+    {
+     "fecha": "2023-03-16",
+     "area": "social",
+     "titulo": "Oficina Local de la Niñez",
+     "texto": "Atención y protección de derechos de niñas, niños y adolescentes.",
+     "album": "oficina-local-de-la-ninez-melipeuco-2023"
+    },
+    {
+     "fecha": "2023-05-26",
+     "area": "vivienda",
+     "titulo": "Subsidios del programa Habitabilidad Rural",
+     "texto": "Entrega de subsidios a familias rurales.",
+     "album": "entrega-de-subsidios-del-programa-habitabilidad-rural-2023"
+    },
+    {
+     "fecha": "2023-08-31",
+     "area": "medio-ambiente",
+     "titulo": "Nuevo punto limpio comunal",
+     "texto": "Proyección del punto limpio, hoy parte del programa Basura Cero.",
+     "album": "proyeccion-del-nuevo-punto-limpio-comunal-2023"
+    },
+    {
+     "fecha": "2024-02-05",
+     "area": "obras",
+     "titulo": "Melipeuco entrega sus propias licencias de conducir",
+     "texto": "Comienza a funcionar la Dirección de Tránsito: las licencias ya no exigen viajar a otra comuna.",
+     "noticia": "desde-hoy-melipeuco-entrega-licencias-de-conducir"
+    },
+    {
+     "fecha": "2024-03-04",
+     "area": "vivienda",
+     "titulo": "Viviendas del Comité Las Rosas",
+     "texto": "Inauguración y cierre del proyecto habitacional.",
+     "album": "inauguracion-y-ceremonia-de-cierre-comite-las-rosas-2024"
+    },
+    {
+     "fecha": "2024-07-31",
+     "area": "obras",
+     "titulo": "Apertura de la sucursal de BancoEstado",
+     "texto": "Melipeuco cuenta con sucursal bancaria propia."
+    },
+    {
+     "fecha": "2025-02-21",
+     "area": "vivienda",
+     "titulo": "Viviendas para los comités Allipén y Valle del Llaima",
+     "texto": "Entrega de viviendas a las familias de ambos comités.",
+     "album": "entrega-de-viviendas-a-los-comites-allipen-y-valle-del-llaima-2025"
+    },
+    {
+     "fecha": "2025-03-28",
+     "area": "vivienda",
+     "titulo": "Viviendas rurales para familias de sectores apartados",
+     "texto": "Entrega de cinco viviendas rurales.",
+     "noticia": "entregan-cinco-viviendas-rurales-a-familias-de-sectores-apartados-de-melipeuco"
+    },
+    {
+     "fecha": "2025-03-31",
+     "area": "medio-ambiente",
+     "titulo": "«Basura Cero»: $170 millones menos al año en traslado de residuos",
+     "texto": "Compostera municipal, retiro diferenciado con vehículos eléctricos y educación ambiental.",
+     "noticia": "melipeuco-lidera-en-sustentabilidad-reduce-en-mas-de-90-millones-anuales-el-gasto-en-basura-gracias-a-programa-basura-cero"
+    },
+    {
+     "fecha": "2025-04-08",
+     "area": "box-veterinario",
+     "titulo": "Box Veterinario Municipal",
+     "texto": "Consulta, vacunación y esterilización para las mascotas de familias de la comuna.",
+     "url": "/boxveterinario/"
+    },
+    {
+     "fecha": "2025-04-15",
+     "area": "cultura",
+     "titulo": "Reapertura de la Biblioteca Pública Municipal",
+     "texto": "Obras de mejoramiento y reapertura a la comunidad.",
+     "noticia": "inauguracion-de-obras-de-mejoramiento-y-reapertura-de-la-biblioteca-publica-municipal-de-melipeuco"
+    },
+    {
+     "fecha": "2025-04-30",
+     "area": "vivienda",
+     "titulo": "Certificados y escrituras de viviendas",
+     "texto": "Familias reciben la documentación de sus viviendas.",
+     "album": "entrega-de-certificados-y-escrituras-de-viviendas-2025"
+    },
+    {
+     "fecha": "2025-06-19",
+     "area": "salud",
+     "titulo": "Nueva ambulancia 4x4 para el CESFAM",
+     "texto": "Reposición de ambulancia para la atención de urgencias rurales.",
+     "facebook": "cesfam-d38750e42521"
+    },
+    {
+     "fecha": "2025-08-26",
+     "area": "social",
+     "titulo": "30 mujeres obtienen su licencia clase B",
+     "texto": "Curso de conducción para la autonomía de las mujeres de la comuna.",
+     "noticia": "30-mujeres-de-melipeuco-reciben-certificacion-en-curso-de-conduccion-clase-b"
+    },
+    {
+     "fecha": "2025-08-28",
+     "area": "desarrollo-local",
+     "titulo": "Melipeuco, territorio SIPAM de la FAO",
+     "texto": "Evaluación internacional en agosto de 2025; la Cuenta Pública 2025 informa el reconocimiento del sistema productivo ancestral de la cordillera pehuenche como patrimonio agrícola de importancia mundial.",
+     "noticia": "melipeuco-recibe-delegacion-nacional-y-evaluadora-internacional-en-proceso-de-postulacion-a-sello-sipam"
+    },
+    {
+     "fecha": "2025-09-08",
+     "area": "turismo",
+     "titulo": "Conferencia Mundial de Geoparques UNESCO",
+     "texto": "Melipeuco recibe delegaciones internacionales como parte del Geoparque Kütralkura.",
+     "noticia": "melipeuco-presente-en-el-lanzamiento-oficial-de-la-11-conferencia-de-geoparques-mundiales-de-unesco"
+    },
+    {
+     "fecha": "2025-09-24",
+     "area": "obras",
+     "titulo": "CORE aprueba $524 millones para una motoniveladora 6x6",
+     "texto": "Maquinaria para caminos y accesos rurales.",
+     "noticia": "core-aprueba-inversion-para-el-desarrollo-de-melipeuco"
+    },
+    {
+     "fecha": "2025-09-30",
+     "area": "obras",
+     "titulo": "Agua Potable Rural Flor del Valle",
+     "texto": "Inversión de $302 millones para 278 familias.",
+     "noticia": "melipeuco-avanza-en-el-proyecto-de-agua-potable-rural-flor-del-valle"
+    },
+    {
+     "fecha": "2025-10-01",
+     "area": "vivienda",
+     "titulo": "Nueve casas de emergencia",
+     "texto": "Construcción de viviendas de emergencia para familias de la comuna.",
+     "noticia": "9-casas-de-emergencia-seran-construidas-en-melipeuco"
+    },
+    {
+     "fecha": "2026-04-25",
+     "area": "alcaldia",
+     "titulo": "Cuenta Pública 2025",
+     "texto": "140 viviendas entregadas, Centro Comunitario de Cuidados, Red Local de Cuidados de 31 a 101 usuarios y adjudicación del FIGEM.",
+     "noticia": "melipeuco-presenta-su-cuenta-publica-2025"
+    },
+    {
+     "fecha": "2026-09-01",
+     "area": "salud",
+     "titulo": "El CESFAM es reconocido como SUR Alto",
+     "texto": "Reconocimiento a las condiciones de ruralidad y dispersión del territorio.",
+     "facebook": "cesfam-78819effb3fe"
+    }
+   ]
+  },
+  {
+   "id": "navarrete",
+   "alcalde": "Eduardo Navarrete Fuentes",
+   "desde": "2016-12-06",
+   "hasta": "2021-06-28",
+   "resumen": "Alcalde entre diciembre de 2016 y junio de 2021 (el período se extendió por la pandemia). Su gestión destaca por la remodelación de la Plaza de Armas, nuevas sedes comunitarias, agua potable rural, maquinaria para caminos y subsidios de vivienda.",
+   "concejos": [
+    {
+     "periodo": "2016 – 2021",
+     "desde": "2016-12-06",
+     "hasta": "2021-06-28",
+     "fuente": "Publicaciones de la Municipalidad, 2017–2020",
+     "concejales": [
+      "Erick Burgos Sánchez",
+      "Héctor Carrasco",
+      "María Teresa Huenchumán Arias",
+      "Juan Reumay",
+      "Nelson Sepúlveda Reumay",
+      "René Epulef Zavala"
+     ]
+    }
+   ],
+   "cifras": [],
+   "hitos": [
+    {
+     "fecha": "2017-11-14",
+     "area": "vivienda",
+     "titulo": "Entrega de viviendas en sectores urbano y rural",
+     "texto": "Y más de cien subsidios de vivienda gestionados ese año.",
+     "noticia": "municipio-entrega-viviendas-en-sector-urbano-y-rural"
+    },
+    {
+     "fecha": "2017-11-24",
+     "area": "obras",
+     "titulo": "Nuevas sedes comunitarias",
+     "texto": "Carén, El Membrillo y We Mapu estrenan sede.",
+     "noticia": "inaugurada-nueva-sede-comunitaria-caren"
+    },
+    {
+     "fecha": "2017-12-11",
+     "area": "obras",
+     "titulo": "Agua Potable Rural El Escorial",
+     "texto": "Se da el vamos al proyecto de APR.",
+     "noticia": "se-dio-el-vamos-para-apr-el-escorial"
+    },
+    {
+     "fecha": "2017-12-21",
+     "area": "salud",
+     "titulo": "Ampliación del CESFAM",
+     "texto": "Inauguración de la ampliación del centro de salud.",
+     "noticia": "lista-ampliacion-del-cesfam"
+    },
+    {
+     "fecha": "2017-12-21",
+     "area": "emergencias",
+     "titulo": "Nuevo carro para Bomberos",
+     "texto": "",
+     "noticia": "bomberos-tiene-nuevo-carro"
+    },
+    {
+     "fecha": "2018-03-27",
+     "area": "box-veterinario",
+     "titulo": "Plan de esterilización de mascotas",
+     "texto": "Operativos de esterilización en la comuna.",
+     "noticia": "comienza-plan-para-esterilizar-mascotas"
+    },
+    {
+     "fecha": "2018-06-30",
+     "area": "deporte",
+     "titulo": "Sede deportiva en Alpehue",
+     "texto": "",
+     "noticia": "inaugurada-sede-deportiva-en-alpehue"
+    },
+    {
+     "fecha": "2018-10-31",
+     "area": "obras",
+     "titulo": "Nueva maquinaria municipal",
+     "texto": "Maquinaria para la mantención de caminos rurales.",
+     "noticia": "nueva-maquinaria-para-melipeuco"
+    },
+    {
+     "fecha": "2018-11-06",
+     "area": "obras",
+     "titulo": "$1.500 millones para Melipeuco",
+     "texto": "Recursos regionales para proyectos de la comuna.",
+     "noticia": "recursos-por-mil-500-millones-de-pesos-para-melipeuco"
+    },
+    {
+     "fecha": "2019-02-28",
+     "area": "vivienda",
+     "titulo": "41 familias del Comité Las Rosas 2 con mejoramientos",
+     "texto": "",
+     "noticia": "41-familias-del-comite-las-rosas-2-se-adjudicaron-beneficio-de-mejoramientos-y-ampliaciones-para-sus-viviendas"
+    },
+    {
+     "fecha": "2019-04-01",
+     "area": "turismo",
+     "titulo": "Primera Fiesta de la Mosqueta Cordillerana",
+     "texto": "",
+     "album": "primera-fiesta-de-la-mosqueta-cordillerana-melipeuco-2019"
+    },
+    {
+     "fecha": "2019-09-02",
+     "area": "medio-ambiente",
+     "titulo": "Concejo vota en contra de la central de pasada en el río Truful Truful",
+     "texto": "",
+     "facebook": "fb-00bf21480105"
+    },
+    {
+     "fecha": "2019-09-09",
+     "area": "obras",
+     "titulo": "Plazoleta Los Volcanes recuperada",
+     "texto": "",
+     "facebook": "fb-9780b3d67a2f"
+    },
+    {
+     "fecha": "2019-10-29",
+     "area": "social",
+     "titulo": "Sede del adulto mayor «La Alegría de Vivir»",
+     "texto": "",
+     "facebook": "fb-c328e193f650"
+    },
+    {
+     "fecha": "2019-11-08",
+     "area": "obras",
+     "titulo": "Tres nuevas maquinarias para caminos rurales",
+     "texto": "",
+     "facebook": "fb-3e8187e58c91"
+    },
+    {
+     "fecha": "2019-12-12",
+     "area": "obras",
+     "titulo": "Remodelada Plaza de Armas",
+     "texto": "Entrega de la plaza remodelada a la comunidad.",
+     "facebook": "fb-9cf8fc2429a5"
+    },
+    {
+     "fecha": "2020-01-14",
+     "area": "obras",
+     "titulo": "Mejoramiento de la ruta S-61 Melipeuco–Icalma",
+     "texto": "Primera piedra del contrato del MOP y anuncio de 10 km de asfalto en Sahuelhue, Cumcumllaque y Carén.",
+     "facebook": "fb-ee7ff6c14248"
+    },
+    {
+     "fecha": "2020-02-16",
+     "area": "desarrollo-local",
+     "titulo": "Feria Campesina Mapuche de Santa María de Llaima",
+     "texto": "",
+     "album": "feria-campesina-mapuche-de-santa-maria-de-llaima-2020"
+    },
+    {
+     "fecha": "2020-07-29",
+     "area": "obras",
+     "titulo": "Consulta ciudadana por la planta de tratamiento de aguas servidas",
+     "texto": "",
+     "album": "consulta-ciudadana-por-planta-de-tratamiento-de-aguas-servidas-2020"
+    }
+   ]
+  },
+  {
+   "id": "espinoza",
+   "alcalde": "Juan Carlos Espinoza",
+   "desde": "",
+   "hasta": "2016-12-06",
+   "resumen": "Alcalde hasta diciembre de 2016; las publicaciones disponibles cubren desde 2013. Su gestión dio origen a la Fiesta del Baqueano y a la Ruta del Baqueano, y abrió el proyecto de mejoramiento de la Plaza de Armas.",
+   "concejos": [
+    {
+     "periodo": "2012 – 2016",
+     "desde": "2012-12-06",
+     "hasta": "2016-12-06",
+     "fuente": "Publicaciones de la Municipalidad, 2013–2016",
+     "concejales": [
+      "Benjamín Oñate",
+      "María Teresa Huenchumán Arias",
+      "René Fuentes Rickemberg",
+      "Jacinto Mariano",
+      "Joanna Melo Matus",
+      "Víctor Hugo Huenchullán"
+     ]
+    }
+   ],
+   "cifras": [],
+   "hitos": [
+    {
+     "fecha": "2013-05-31",
+     "area": "medio-ambiente",
+     "titulo": "Convenio de cooperación con CONAF",
+     "texto": "",
+     "album": "convenio-de-cooperacion-entre-conaf-y-municipalidad-de-melipeuco-2013"
+    },
+    {
+     "fecha": "2013-10-23",
+     "area": "turismo",
+     "titulo": "Primera Fiesta del Baqueano",
+     "texto": "Nace la fiesta más grande de la comuna.",
+     "album": "1-fiesta-del-baqueano-2013"
+    },
+    {
+     "fecha": "2014-01-13",
+     "area": "medio-ambiente",
+     "titulo": "Primera planta de secado de leña",
+     "texto": "",
+     "album": "inauguracion-de-la-primera-planta-de-secado-de-lena-2014"
+    },
+    {
+     "fecha": "2014-01-24",
+     "area": "obras",
+     "titulo": "Sede social de la comunidad Melivilu Melirayen",
+     "texto": "",
+     "album": "alcalde-inaugura-sede-social-en-comunidad-melivilu-melirayen-2014"
+    },
+    {
+     "fecha": "2014-04-23",
+     "area": "turismo",
+     "titulo": "Inauguración de la Ruta del Baqueano",
+     "texto": "Ruta S-575 que une Melipeuco con Curarrehue.",
+     "album": "se-inaugura-la-ruta-del-baqueano-2014"
+    },
+    {
+     "fecha": "2014-05-12",
+     "area": "educacion",
+     "titulo": "Patio techado en la escuela de La Suerte",
+     "texto": "",
+     "album": "alcalde-inaugura-patio-techado-en-la-suerte-2014"
+    },
+    {
+     "fecha": "2014-06-02",
+     "area": "obras",
+     "titulo": "Proyecto de mejoramiento de la Plaza de Armas",
+     "texto": "Proceso participativo con la comunidad.",
+     "album": "mejoramiento-plaza-de-armas-2014"
+    },
+    {
+     "fecha": "2016-07-19",
+     "area": "obras",
+     "titulo": "Sede de Loncotriuque y Cuatro Puentes",
+     "texto": "",
+     "album": "inauguracion-sede-loncotriuque-y-cuatro-puentes-2016"
+    }
+   ]
+  }
+ ]
+}
