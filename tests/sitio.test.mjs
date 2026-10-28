@@ -702,4 +702,10 @@ test('administraciones: alcaldes, concejos, hitos con enlace y comparación', as
   assert.ok(enlaces.length > 50);
   for (const u of new Set(enlaces)) assert.equal((await pedir(u)).status, 200, u);
   assert.match(await (await pedir('/alcaldia/')).text(), /href="\/administraciones\/"/);
+  for (const t of ['La alcaldía antes de 2012', 'Carlos Mohor', 'Finanzas municipales 2020–2025', 'Melipeuco del futuro', 'Unidad de Tenencia Responsable de Mascotas']) assert.ok(h.includes(t), t);
+  assert.match(await (await pedir('/municipio/')).text(), /Melipeuco en cifras/);
+  // Del estudio no se publican direcciones IP ni enlaces de Drive.
+  const fs = await import('node:fs');
+  const todo = ['contenido/facebook/noticias.json', 'contenido/administraciones.json', 'contenido/comuna.json'].map((f) => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8')).join(' ');
+  assert.doesNotMatch(todo, /Dirección IP|drive\.google|(?<![\d.$])\d{1,3}(\.\d{1,3}){3}(?![\d.])/);
 });

@@ -11,6 +11,27 @@ import { franjaFotos } from './fotos.js';
 import { llamadoAdministraciones } from './administraciones.js';
 import fs from 'node:fs';
 
+// «Melipeuco en cifras» (contenido/comuna.json): territorio, población y servicios, para Municipio e Historia.
+const RUTA_COMUNA = new URL('../../contenido/comuna.json', import.meta.url);
+let comuna = null, comunaMtime = 0;
+function seccionCifras() {
+  try { const st = fs.statSync(RUTA_COMUNA); if (!comuna || st.mtimeMs !== comunaMtime) { comuna = JSON.parse(fs.readFileSync(RUTA_COMUNA, 'utf8')); comunaMtime = st.mtimeMs; } } catch { return null; }
+  const c = comuna, n = (x) => Number(x).toLocaleString('es-CL');
+  const censos = Object.entries(c.poblacion), max = Math.max(...censos.map(([, v]) => v));
+  const cifras = [[n(c.censo_2024.hombres + c.censo_2024.mujeres), 'habitantes (Censo 2024)', `+${n(c.censo_2024.variacion_2017_2024_pct)}% desde 2017`], [`${n(c.superficie_km2)} km²`, 'de superficie', 'cerca de la mitad en áreas protegidas'],
+    [`${n(c.censo_2024.ruralidad_pct)}%`, 'vive en sectores rurales', 'Censo 2024'], [`${n(c.censo_2024.pueblos_originarios_pct)}%`, 'se identifica con un pueblo originario', 'Censo 2024'],
+    [n(c.salud.inscritos_percapita_dic2025), 'personas inscritas en la salud municipal', 'diciembre de 2025'], [n(c.educacion.matricula_total_comuna['2025']), 'estudiantes matriculados', `${c.educacion.establecimientos_comuna['2025']} establecimientos (2025)`],
+    [`${n(c.electores_2025.participacion_pct)}%`, 'de participación electoral', `${n(c.electores_2025.inscritos)} electores (noviembre 2025)`], [`${n(c.censo_2024.escolaridad_promedio_anios)} años`, 'de escolaridad promedio', 'Censo 2024']];
+  return { m: { tipo: 'cifras', ancla: 'En cifras', id: 'melipeuco-cifras' }, r: html`${cab({ titulo: 'Melipeuco en cifras', intro: `«${c.significado.split(' (')[0]}». ${c.creacion}` })}
+    <div class="ms-cifras">${cifras.map(([v, e, nota], i) => html`<div class="ms-cifra" style="--i:${i}"><b>${v}</b><span>${e}</span><em>${nota}</em></div>`)}</div>
+    <div class="cifras-dos">
+      <div><h3>Población según los censos</h3><ol class="adm-barras">${censos.map(([y, v]) => html`<li><span>${y}</span><span class="adm-barra" style="--p:${Math.round((v / max) * 100)}%"><b>${n(v)}</b></span></li>`)}</ol></div>
+      <div><h3>Pobreza por ingresos (Casen 2024)</h3><ol class="adm-barras">${[['Melipeuco', c.pobreza.ingresos_pct], ['La Araucanía', c.pobreza.region_pct], ['Chile', c.pobreza.pais_pct]].map(([t, v]) => html`<li class="ancho"><span>${t}</span><span class="adm-barra" style="--p:${Math.round((v / c.pobreza.ingresos_pct) * 100)}%"><b>${n(v)}%</b></span></li>`)}</ol>
+        <p class="ms-fuente">Pobreza multidimensional en Melipeuco: ${n(c.pobreza.multidimensional_pct)}%.</p></div>
+    </div>
+    <p class="ms-fuente">Áreas protegidas: ${c.areas_protegidas} Fuentes: ${c.fuente}</p>` };
+}
+
 // Programas y calendario del CESFAM (de sus publicaciones), para el micrositio de Salud.
 const RUTA_CESFAM = new URL('../../contenido/facebook/cesfam.json', import.meta.url);
 let cesfam = null, cesfamMtime = 0;
@@ -213,6 +234,7 @@ export async function paginaMicrositio(ctx, s) {
     return { m, fondo, r };
   }).filter(Boolean);
   // Alcaldía y Concejo: acceso a las administraciones municipales y su comparación.
+  if (['municipio', 'historia'].includes(s.slug)) { const x = seccionCifras(); if (x) partes.push({ ...x, fondo: (alterno = !alterno) ? 'claro' : 'suave' }); }
   if (['alcaldia', 'concejo-municipal', 'historia', 'municipio'].includes(s.slug)) { const r = llamadoAdministraciones(); if (String(r).trim()) partes.push({ m: { tipo: 'llamado', ancla: 'Administraciones', id: 'administraciones' }, fondo: 'llamado', r }); }
   if (s.slug === 'salud' || s.organigrama === 'dep-salud') for (const x of seccionesCesfam(ctx)) partes.push({ ...x, fondo: (alterno = !alterno) ? 'claro' : 'suave' });
   // Álbumes de fotos relacionados con el área (de la fototeca), al final de las secciones.

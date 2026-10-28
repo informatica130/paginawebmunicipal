@@ -1,0 +1,61 @@
+{
+ "fuente": "Biblioteca del Congreso Nacional, Reporte Comunal 2026; INE, censos de población; Encuesta Casen 2024; DEIS–MINSAL; MINEDUC; SERVEL.",
+ "significado": "Del mapudungun: 'encuentro de cuatro aguas' (versión alternativa vincula el nombre a la comunidad de Juan Meli).",
+ "superficie_km2": 1107.3,
+ "areas_protegidas": "≈50% de la superficie en SNASPE: Parque Nacional Conguillío, Reserva Nacional China Muerta, Reserva Nacional Villarrica; Geoparque Kütralkura (UNESCO); Reserva de la Biósfera Araucarias.",
+ "creacion": "Comuna creada por decreto dado a conocer el 5 de julio de 1980; funciona desde enero de 1981, separada de Cunco. El pueblo se fundó en 1941.",
+ "poblacion": {
+  "1970": 6837,
+  "1982": 5593,
+  "1992": 5313,
+  "2002": 5628,
+  "2017": 6138,
+  "2024": 6796
+ },
+ "censo_2024": {
+  "hombres": 3342,
+  "mujeres": 3454,
+  "variacion_2017_2024_pct": 10.7,
+  "ruralidad_pct": 59.8,
+  "pueblos_originarios_pct": 52.1,
+  "discapacidad_5mas_pct": 14.6,
+  "escolaridad_promedio_anios": 8.9
+ },
+ "pobreza": {
+  "ingresos_pct": 32.7,
+  "region_pct": 28.6,
+  "pais_pct": 17.3,
+  "multidimensional_pct": 16.8
+ },
+ "salud": {
+  "establecimientos_2026": "1 CESFAM, 3 Postas de Salud Rural (Carén/Alto Carén, Cumcumllaque, Santa María de Llaima), 1 SUR; estaciones médico rurales",
+  "inscritos_percapita_dic2025": 8148,
+  "inscritos_validados_fonasa_dic2025": 7988,
+  "natalidad_2023_x1000": 9.99,
+  "mortalidad_2023_x1000": 9.7
+ },
+ "educacion": {
+  "establecimientos_comuna": {
+   "2023": 12,
+   "2025": 13
+  },
+  "matricula_total_comuna": {
+   "2023": 1226,
+   "2025": 1197
+  },
+  "simce_2025_preliminar": {
+   "4b_lectura": 272,
+   "4b_matematica": 239,
+   "8b_lectura": 220,
+   "8b_matematica": 227,
+   "8b_historia": 228,
+   "2m_lectura": 247,
+   "2m_matematica": 232
+  }
+ },
+ "electores_2025": {
+  "inscritos": 8038,
+  "votantes_generales_nov2025": 5894,
+  "participacion_pct": 73.3
+ }
+}
