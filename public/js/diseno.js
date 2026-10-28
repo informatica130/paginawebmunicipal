@@ -55,6 +55,8 @@ export const PREDETERMINADO = {
   // Identidad «Capital del Trekking» en todo el sitio
   identidad: { zonas: true, encabezado: 'claro', emblemaEncabezado: true, titulosPalabra: true, progreso: true, lineaCabecera: false, cordilleras: true, accesosColor: true, cinta: 42 },
   pie: { estilo: 'oscuro', emergencias: true, boletin: true, escudo: true, marcaGrande: true, colorPropio: false, color: '#0F3A5A' },
+  // Celulares (hasta 720 px) y tablets (721 a 1024 px).
+  movil: { barra: true, barraTramites: true, texto: 100, temas: 'deslizar', mosaico: 'compacto', noticias: 'lista', videos: 'deslizar', franja: 'compacta', emergencias: false, pie: 'acordeon', espacio: 'compacto', tablet: 'dos', tabletColumnas: 2 },
   animaciones: { activas: true, intensidad: 'normal', velocidad: 1, intro: 'primera', transiciones: true, aparicion: true, inclinacion: false, barraCarga: true, cordillera: true,
     introEstilo: 'escudo3d', escudoVivo: true, profundidad: 70, transicionEstilo: 'columnas', transicionColor: 'zona', transicionNombre: true, transicionLetras: 'logo', precarga: true, aparicionEstilo: 'mixto', cursorLuz: true, ondaClic: true, desplazamientoSuave: true, controlVisitante: true },
   avanzado: { css: '' },
@@ -174,6 +176,14 @@ export const OPCIONES = {
   fondoSeccion: { auto: 'Como el diseño', ninguno: 'Transparente', alterno: 'Fondo de bandas', superficie: 'Blanco (tarjeta)', suave: 'Tinte del color principal', acentoSuave: 'Tinte del acento', primario: 'Color principal', oscuro: 'Profundo', color: 'Un color a elección', degradado: 'Degradado de dos colores' },
   formaSeccion: { completa: 'A todo el ancho', tarjeta: 'Recuadro redondeado' },
   espacioSeccion: { auto: 'Como el diseño', compacto: 'Compacto', normal: 'Normal', amplio: 'Amplio' },
+  temasMovil: { deslizar: 'En una fila que se desliza', envolver: 'En varias filas', ocultos: 'Ocultos' },
+  mosaicoMovil: { compacto: 'Compactos (ícono al lado del texto)', grande: 'Grandes (como en el computador)', deslizar: 'En una fila que se desliza', ocultos: 'Ocultos' },
+  noticiasMovil: { lista: 'La primera grande y el resto en lista', tarjetas: 'Todas en tarjetas grandes', deslizar: 'Carrusel para deslizar con el dedo' },
+  videosMovil: { deslizar: 'Carrusel para deslizar con el dedo', lista: 'Lista con miniatura al lado', grilla: 'Tarjetas grandes una debajo de otra' },
+  franjaMovil: { compacta: 'Compacta: horario y teléfono en dos columnas', completa: 'Completa', oculta: 'Oculta' },
+  pieMovil: { acordeon: 'Listas que se abren al tocarlas', abierto: 'Todo abierto' },
+  espacioMovil: { compacto: 'Compacto (más contenido a la vista)', normal: 'Como en el computador' },
+  tabletPortada: { dos: 'Dos columnas: campaña y buscador lado a lado', una: 'Una columna, como en el celular' },
   logoAnimacion: { vivo: 'Logo vivo: cada símbolo se anima', caida: 'Las letras caen una a una', aparecer: 'Aparece suavemente', ninguna: 'Sin animación de entrada' },
 };
 
@@ -243,7 +253,7 @@ export function migrar(d) {
 
 export function normalizar(entrada, { permitirCss = true, previo = null } = {}) {
   const e = fusionar(PREDETERMINADO, esObjeto(entrada) ? entrada : {});
-  const P = PREDETERMINADO, fo = e.fondos, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, vi = e.videos, cp = e.campanas, no = e.noticias, el = e.elementos;
+  const P = PREDETERMINADO, fo = e.fondos, c = e.colores, t = e.tipografia, f = e.forma, ca = e.cabecera, po = e.portada, pi = e.pie, an = e.animaciones, id = e.identidad, pt = e.portal, PP = P.portal, bu = e.buscador, vi = e.videos, cp = e.campanas, no = e.noticias, el = e.elementos, mv = esObjeto(e.movil) ? e.movil : {};
   return {
     revision: REVISION,
     estilo: opcion(e.estilo, { ...ESTILOS, personalizado: 1 }, 'personalizado'),
@@ -305,6 +315,7 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       fondo: opcion(x.fondo, OPCIONES.fondoSeccion, 'auto'), forma: opcion(x.forma, OPCIONES.formaSeccion, 'completa'), color1: color(x.color1, SECCION_DEF.color1), color2: color(x.color2, SECCION_DEF.color2),
       angulo: numero(x.angulo, 135, 0, 360), patron: opcion(x.patron, OPCIONES.patronFondo, 'ninguno'), intensidad: numero(x.intensidad, 10, 2, 50),
       espacio: opcion(x.espacio, OPCIONES.espacioSeccion, 'auto'), titulos: opcion(x.titulos, OPCIONES.titulosAlinear, 'auto'),
+      celular: bool(x.celular, true), tablet: bool(x.tablet, true),
     }]; })),
     videos: {
       destacado: bool(vi.destacado, true), destacadoTema: opcion(vi.destacadoTema, OPCIONES.temaDestacado, 'oscuro'), tarjeta: opcion(vi.tarjeta, OPCIONES.tarjetaVideo, 'clasica'), tam: opcion(vi.tam, OPCIONES.tamVideo, 'normal'),
@@ -316,6 +327,13 @@ export function normalizar(entrada, { permitirCss = true, previo = null } = {}) 
       recientes: bool(bu.recientes, true), populares: bool(bu.populares, true), fragmentos: bool(bu.fragmentos, true),
     },
     identidad: Object.fromEntries(Object.entries(P.identidad).map(([k, v]) => [k, k === 'cinta' ? numero(id.cinta, v, 15, 120) : k === 'encabezado' ? opcion(id.encabezado, OPCIONES.encabezado, v) : bool(id[k], v)])),
+    movil: {
+      barra: bool(mv.barra, true), barraTramites: bool(mv.barraTramites, true), texto: numero(mv.texto, 100, 90, 120),
+      temas: opcion(mv.temas, OPCIONES.temasMovil, 'deslizar'), mosaico: opcion(mv.mosaico, OPCIONES.mosaicoMovil, 'compacto'), noticias: opcion(mv.noticias, OPCIONES.noticiasMovil, 'lista'),
+      videos: opcion(mv.videos, OPCIONES.videosMovil, 'deslizar'), franja: opcion(mv.franja, OPCIONES.franjaMovil, 'compacta'), emergencias: bool(mv.emergencias, false),
+      pie: opcion(mv.pie, OPCIONES.pieMovil, 'acordeon'), espacio: opcion(mv.espacio, OPCIONES.espacioMovil, 'compacto'),
+      tablet: opcion(mv.tablet, OPCIONES.tabletPortada, 'dos'), tabletColumnas: numero(mv.tabletColumnas, 2, 2, 3),
+    },
     pie: { estilo: opcion(pi.estilo, OPCIONES.pieEstilo, 'oscuro'), emergencias: bool(pi.emergencias, true), boletin: bool(pi.boletin, true), escudo: bool(pi.escudo, true), marcaGrande: bool(pi.marcaGrande, true), colorPropio: bool(pi.colorPropio, false), color: color(pi.color, P.pie.color) },
     animaciones: {
       activas: bool(an.activas, true), intensidad: opcion(an.intensidad, OPCIONES.intensidad, 'normal'), velocidad: numero(an.velocidad, 1, .5, 2),
@@ -360,7 +378,7 @@ export function variablesCss(cfg) {
     '--interfaz': cfg.forma.escala / 100, '--r-l': `${cfg.forma.radioGrande}px`, '--r-xl': `${Math.round(cfg.forma.radioGrande * 1.3)}px`, '--elevacion': `${cfg.forma.elevacion}px`,
     '--mov': CURVAS[cfg.animaciones.curva], '--pt-angulo': `${cfg.portal.bandaAngulo}deg`, '--pt-patron': cfg.portal.patronIntensidad / 100,
     '--pt-montes': `${cfg.portal.cordilleraAlto}px`, '--pt-tile-alto': `${cfg.portal.mosaicoAlto}px`, '--pt-banner-ar': cfg.portal.bannerProporcion === 'auto' ? 'auto' : cfg.portal.bannerProporcion.replace('/', ' / '), '--camp-ar-movil': cfg.campanas.proporcionMovil === 'auto' ? 'auto' : cfg.campanas.proporcionMovil.replace('/', ' / '), '--camp-dur': `${cfg.campanas.intervalo}s`, '--tn-ar': cfg.noticias.proporcion.replace('/', ' / '), '--tn-cols': cfg.noticias.columnas, '--vd-ar': cfg.videos.proporcion.replace('/', ' / '), '--vd-min': { compacta: '200px', normal: '250px', amplia: '330px' }[cfg.videos.tam], '--alternar': `${cfg.cabecera.alternarCada}s`,
-    ...(cfg.portal.bandaPropia ? { '--pt-ini': cfg.portal.bandaInicio, '--pt-fin': cfg.portal.bandaFin } : {}), '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`,
+    ...(cfg.portal.bandaPropia ? { '--pt-ini': cfg.portal.bandaInicio, '--pt-fin': cfg.portal.bandaFin } : {}), '--tk-logo-escala': cfg.portada.tamanoLogo / 100, '--cinta-dur': `${cfg.identidad.cinta}s`, '--mv-texto': cfg.movil.texto / 100, '--tab-cols': cfg.movil.tabletColumnas,
   };
   const fo = cfg.fondos;
   if (fo.patron !== 'ninguno') Object.assign(v, { '--fp-img': patronUrl(fo.patron), '--fp-tam': tamanoPatron(fo.patron, fo.escala), '--fp-color': COLOR_PATRON[fo.color], '--fp-op': fo.intensidad / 100 });
@@ -396,6 +414,9 @@ export function cssSecciones(cfg) {
     if (x.forma === 'tarjeta' && base) reglas.push(`${caja}{border-radius:var(--r-xl);padding:clamp(22px,4vw,48px)}`);
     if (base && x.forma !== 'tarjeta') reglas.push(`${sel}{padding-top:calc(${ESPACIOS[x.espacio] || 56}px * var(--esp,1))}`);
     if (x.espacio !== 'auto') reglas.push(`${sel}{padding-block:calc(${ESPACIOS[x.espacio]}px * var(--esp,1))}`);
+    // Mostrar u ocultar la sección según el tamaño de pantalla.
+    if (!x.celular) reglas.push(`@media (max-width:720px){${sel}{display:none!important}}`);
+    if (!x.tablet) reglas.push(`@media (min-width:721px) and (max-width:1024px){${sel}{display:none!important}}`);
     // Sobre un fondo oscuro la sección entera pasa a tinta clara (como el modo oscuro).
     if (oscuro) reglas.push(`${caja}{--texto:#F4F1EA;--texto-2:rgb(255 255 255/.82);--texto-3:rgb(255 255 255/.66);--superficie:rgb(255 255 255/.08);--fondo-2:rgb(255 255 255/.06);--borde:rgb(255 255 255/.16);--borde-fuerte:rgb(255 255 255/.28);--enlace:#fff;color:var(--texto)}${sel} :is(.seccion-cabecera,.seccion-cabecera h2,.seccion-cabecera p,.seccion-cabecera .ver-todo){color:#fff}${sel} .seccion-cabecera .ver-todo{border-color:rgb(255 255 255/.5)}`);
     if (x.titulos === 'centro') reglas.push(`${sel} .seccion-cabecera{flex-direction:column;align-items:center;text-align:center}`);
@@ -437,6 +458,8 @@ export function atributos(cfg) {
     'data-menu-abrir': cfg.cabecera.menuAbrir, 'data-transicion-nombre': cfg.animaciones.transicionNombre ? 'si' : 'no', 'data-precarga': cfg.animaciones.precarga ? 'si' : 'no',
     'data-busca-predictivo': cfg.buscador.predictivo ? 'si' : 'no', 'data-busca-ejemplos': cfg.buscador.ejemplos ? 'si' : 'no', 'data-busca-recientes': cfg.buscador.recientes ? 'si' : 'no', 'data-busca-populares': cfg.buscador.populares ? 'si' : 'no', 'data-busca-fragmentos': cfg.buscador.fragmentos ? 'si' : 'no', 'data-busca-lista': cfg.buscador.ejemplosTexto,
     'data-fondo-patron': cfg.fondos.patron, 'data-fondo-deg': cfg.fondos.degradado, 'data-titulos': cfg.elementos.titulos, 'data-titulos-alinear': cfg.elementos.titulosAlinear, 'data-cab-propio': cfg.cabecera.colorPropio ? 'si' : 'no', 'data-pie-propio': cfg.pie.colorPropio ? 'si' : 'no',
+    'data-mv-barra': cfg.movil.barra ? 'si' : 'no', 'data-mv-barra-tramites': cfg.movil.barraTramites ? 'si' : 'no', 'data-mv-temas': cfg.movil.temas, 'data-mv-mosaico': cfg.movil.mosaico, 'data-mv-noticias': cfg.movil.noticias, 'data-mv-videos': cfg.movil.videos,
+    'data-mv-franja': cfg.movil.franja, 'data-mv-emergencias': cfg.movil.emergencias ? 'si' : 'no', 'data-mv-pie': cfg.movil.pie, 'data-mv-espacio': cfg.movil.espacio, 'data-mv-tablet': cfg.movil.tablet,
     'data-sombras': cfg.forma.sombras, 'data-maqueta': cfg.forma.maqueta, 'data-cabecera-centrada': cfg.cabecera.centrada ? 'si' : 'no', 'data-hero-lado': cfg.portada.fotoLado, 'data-encabezado': cfg.identidad.encabezado,
     ...Object.fromEntries(Object.entries(cfg.identidad).filter(([k]) => k !== 'cinta' && k !== 'encabezado').map(([k, v]) => ['data-id-' + k.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()), v ? 'si' : 'no'])),
   };
