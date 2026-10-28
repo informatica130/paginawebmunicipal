@@ -347,6 +347,41 @@ test('facebook: las publicaciones se importan una sola vez como noticias con fot
   assert.match(await (await pedir('/buscar/?q=remodelada+Plaza+de+Armas')).text(), /Se entrega la remodelada Plaza de Armas/);
 });
 
+test('facebook: álbumes como fototeca, noticias y eventos pasados de la agenda', async () => {
+  const s = await admin();
+  await api(s, 'POST', 'importar-facebook');
+  const estado = await (await api(s, 'GET', 'importar-facebook')).json();
+  assert.ok(estado.eventos > 50);
+  assert.equal(estado.importadas, estado.disponibles);
+  const f = await (await pedir('/fotos/')).text();
+  assert.match(f, /Fotos de Melipeuco/);
+  assert.match(f, /class="ft-tarjeta"/);
+  assert.match(await (await pedir('/fotos/?categoria=baqueano')).text(), /Fiesta del Baqueano/);
+  const anio = await (await pedir('/fotos/?anio=2014')).text();
+  assert.doesNotMatch(anio, /No encontramos álbumes/);
+  const { indice } = await import('../server/render/fotos.js');
+  const a = indice().albumes.find((x) => x.fotos.length > 1);
+  const ficha = await pedir(`/fotos/${a.slug}/`);
+  assert.equal(ficha.status, 200);
+  const h = await ficha.text();
+  assert.match(h, /"@type":"ImageGallery"/);
+  assert.match(h, /data-lightbox/);
+  assert.equal((await pedir(a.fotos[1])).headers.get('content-type'), 'image/webp');
+  assert.equal((await pedir('/fotos/no-existe-este-album/')).status, 404);
+  // Nada interno del respaldo: ni nombres de archivo, ni enlaces a Facebook, ni datos de Drive.
+  const datos = JSON.stringify(indice().albumes) + (await import('node:fs')).readFileSync(new URL('../contenido/facebook/noticias.json', import.meta.url), 'utf8');
+  assert.doesNotMatch(datos, /facebook\.com|drive\.google|this_profile|your_activity|https?:\/\//);
+  // Eventos pasados en la agenda, con enlace a sus fotos.
+  const ev = await (await pedir('/eventos/?pasados=1')).text();
+  assert.match(ev, /Fiesta del Baqueano/);
+  const enlace = ev.match(/href="(\/eventos\/[^"]*baqueano[^"]*)"/)[1];
+  assert.match(await (await pedir(enlace)).text(), /href="\/fotos\/[^"]+\/">Ver las fotos de la actividad/);
+  // Los micrositios muestran las fotos de su área.
+  const cultura = await (await pedir('/cultura/')).text();
+  assert.match(cultura, /Actividades en fotos/);
+  assert.match(await (await pedir('/buscar/?q=baqueano')).text(), /class="ft-tarjeta"/);
+});
+
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
   const { leerCarpeta, clasificar, nombreVisible, idPublico } = await import('../herramientas/transparencia-drive.js');
   const html = '<div class="flip-entries"><div class="flip-entry" id="entry-ABC123" tabindex="0" role="link"><div class="flip-entry-info"><a href="https://drive.google.com/drive/folders/ABC123?resourcekey=0-xyz" target="_blank"><div class="flip-entry-title">05.- ADQUISICIONES</div></a></div><div class="flip-entry-last-modified"><div>8/19/16</div></div></div>'

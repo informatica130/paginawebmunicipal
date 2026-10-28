@@ -7,6 +7,7 @@ import { documento } from './layout.js';
 import { inventario, urlDoc } from './archivo.js';
 import { filaTramite, filaTramiteEnLinea, renderBloques, tarjetaAutoridad } from './bloques.js';
 import { franjaVideos } from './videos.js';
+import { franjaFotos } from './fotos.js';
 import { ORGANIGRAMA_MELIPEUCO } from '../../src/organigrama-melipeuco.js';
 import { patronUrl, tamanoPatron } from '../../public/js/diseno.js';
 import { fecha, hoyLocal, textoPlano, recortar } from '../../src/util.js';
@@ -34,6 +35,7 @@ async function modulo(ctx, s, m) {
         const lista = ctx.repo.listar({ tipo: 'autoridad', publico: true, orden: 'orden', limite: 50 }).items.filter((a) => !f || f.split(/[,\s]+/).includes(a.datos.cargo));
         return lista.length ? html`${cab(m)}<div class="autoridades">${lista.map((a) => tarjetaAutoridad(ctx, a))}</div>` : '';
       }
+      if (m.fuente === 'fotos') { const v = franjaFotos(ctx, m.titulo || 'Fotos', { area: f || s.slug, cantidad: n }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
       if (m.fuente === 'videos') { const v = franjaVideos(m.titulo || 'Videos', { categoria: f, cantidad: n, enlace: f ? `/videos/?categoria=${encodeURIComponent(f)}` : '/videos/' }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
       const b = { id: 'c' + m.id, tipo: m.fuente, titulo: '', cantidad: n, grupo: f, tipoLugar: f, formulario: f || 'contacto' };
       const r = (await renderBloques(ctx, [b])).map(String).join('');
@@ -185,6 +187,9 @@ export async function paginaMicrositio(ctx, s) {
     const fondo = m.tipo === 'llamado' ? 'llamado' : m.fondo === 'auto' ? ((alterno = !alterno) ? 'claro' : 'suave') : m.fondo;
     return { m, fondo, r };
   }).filter(Boolean);
+  // Álbumes de fotos relacionados con el área (de la fototeca), al final de las secciones.
+  const fotos = s.modulos.some((m) => m.fuente === 'fotos') ? '' : franjaFotos(ctx, 'Actividades en fotos', { area: s.slug, cantidad: 4 });
+  if (String(fotos).trim()) partes.push({ m: { tipo: 'fotos', ancla: 'Fotos', id: 'fotos' }, fondo: (alterno = !alterno) ? 'claro' : 'suave', r: fotos });
   const nav = partes.filter((x) => x.m.ancla);
   const foto = po && t.imagen ? ctx.img.imagen(t.imagen, { alt: '', sizes: t.portada === 'dividida' ? '(max-width: 900px) 100vw, 50vw' : '100vw', prioridad: true }) : '';
   const cuerpo = html`<div class="ms" style="${estiloTema(t)}">

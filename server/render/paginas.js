@@ -4,6 +4,7 @@ import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tar
 import { documento, encabezado, disenoDe, zona } from './layout.js';
 import { centroTransparencia, buscarTransparencia } from './transparencia.js';
 import { inventario, buscarArchivo, filaArchivo } from './archivo.js';
+import { buscarAlbumes, tarjeta as tarjetaAlbum, indice as indiceFotos } from './fotos.js';
 import { seccionVideosPortada, franjaVideos, videoDeSesion, reproductorVideo, buscarVideos, tarjetaVideo, indice as indiceVideos } from './videos.js';
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
@@ -324,7 +325,7 @@ export function listadoNoticias(ctx, { titulo, bajada = '', base, items, pagina,
     cuerpo: html`${encabezado({ titulo, bajada, migas: migas(migasItems), ctx })}
       <div class="contenedor con-lateral">
         <div>
-          <nav class="pestanas-noticias" aria-label="Noticias y videos"><a href="/noticias/" aria-current="page">${crudo(icono('megafono', { tam: 18 }))} Noticias</a><a href="/videos/">${crudo(icono('video', { tam: 18 }))} Videos</a></nav>
+          <nav class="pestanas-noticias" aria-label="Noticias, fotos y videos"><a href="/noticias/" aria-current="page">${crudo(icono('megafono', { tam: 18 }))} Noticias</a><a href="/fotos/">${crudo(icono('camara', { tam: 18 }))} Fotos</a><a href="/videos/">${crudo(icono('video', { tam: 18 }))} Videos</a></nav>
           ${filtros}
           ${base === '/noticias/' && pagina === 1 ? franjaVideos('También en video', { excluir: 'concejo-municipal', cantidad: 3 }) : ''}
           ${items.length ? html`<div class="grilla-noticias">${items.map((c) => tarjetaNoticia(ctx, c))}</div>` : vacio('No encontramos noticias con esos criterios.', 'buscar')}
@@ -805,6 +806,7 @@ export function busqueda(ctx, { q, tipo = '', pagina = 1, resultados, tramitesEn
         </form>
         ${q ? html`<p class="resultado-conteo" role="status">${resultados.total + tramitesEnLinea.length} resultados para «${q}»</p>` : ''}
         ${(() => { const norm = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); const p = norm(q).split(/\s+/).filter((x) => x.length > 2); const t = p.length && ctx.ext ? buscarTransparencia(ctx.ext.leer(), p, norm) : []; return t.length ? html`<section class="ficha-seccion"><h2>Transparencia</h2><ul class="ct-materias ct-compacta">${t.map((m) => html`<li><a class="ct-materia" href="${m.url}"${m.externo ? crudo(' target="_blank" rel="noopener"') : ''}><span class="ct-ico">${crudo(icono('documento', { tam: 20 }))}</span><span class="ct-txt"><b>${m.titulo}</b><small>${m.fragmento}</small></span></a></li>`)}</ul></section>` : ''; })()}
+        ${(() => { const a = q ? buscarAlbumes(q, 8) : []; return a.length ? html`<section class="ficha-seccion"><h2>Fotos</h2><div class="ft-grilla ft-compacta">${a.map((x) => tarjetaAlbum(ctx, indiceFotos(), x))}</div><a class="ver-todo" href="/fotos/?q=${encodeURIComponent(q)}">Ver todos los álbumes para «${q}»</a></section>` : ''; })()}
         ${(() => { const v = q ? buscarVideos(q, 8) : []; const ix = v.length ? indiceVideos() : null; return v.length ? html`<section class="ficha-seccion"><h2>Videos</h2><div class="vd-grilla vd-compacta">${v.map((x) => tarjetaVideo(ix, x))}</div><a class="ver-todo" href="/videos/?q=${encodeURIComponent(q)}">Ver todos los videos para «${q}»</a></section>` : ''; })()}
         ${(() => { const inv = q ? inventario() : null; const d = inv ? buscarArchivo(inv, q, { limite: 8 }) : []; return d.length ? html`<section class="ficha-seccion"><h2>Documentos de Transparencia</h2><ul class="ar-lista">${d.map((x) => filaArchivo(x))}</ul><a class="ver-todo" href="/transparencia/documentos/?q=${encodeURIComponent(q)}">Ver todos los documentos para «${q}»</a></section>` : ''; })()}
         ${tramitesEnLinea.length ? html`<section class="ficha-seccion"><h2>Trámites en línea</h2><div class="lista-tramites">${tramitesEnLinea.map((t) => filaTramiteEnLinea(t))}</div></section>` : ''}

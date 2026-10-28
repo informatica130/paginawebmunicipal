@@ -731,12 +731,12 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
   ruta('GET', 'importar-facebook', 'respaldo.gestionar', () => {
     const paquete = paqueteFacebook();
     const hechas = db.get("SELECT count(*) n FROM contenidos WHERE url_antigua LIKE 'facebook:%'").n;
-    return { disponibles: paquete.noticias.length, importadas: hechas, ultima: db.ajuste('importacion-facebook') };
+    return { disponibles: paquete.noticias.length + paquete.eventos.length, noticias: paquete.noticias.length, eventos: paquete.eventos.length, importadas: hechas, ultima: db.ajuste('importacion-facebook') };
   });
   ruta('POST', 'importar-facebook', 'respaldo.gestionar', ({ u, req }) => {
     const r = importarFacebook(db, repo, { usuario: u });
     db.guardarAjuste('importacion-facebook', { fin: ahora(), por: u.nombre, ...r });
-    auditar(u, 'facebook.importar', '', `${r.creados} nuevas, ${r.omitidos} ya estaban`, req.ip);
+    auditar(u, 'facebook.importar', '', `${r.creados} nuevas (${r.eventos} eventos), ${r.omitidos} ya estaban`, req.ip);
     invalidar();
     return r;
   });
