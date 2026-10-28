@@ -399,6 +399,20 @@ test('CESFAM: publicaciones como noticias por programa, agenda y micrositio de S
   const textos = paqueteFacebook().noticias.filter((n) => n.clave.startsWith('cesfam-')).map((n) => n.cuerpo).join(' ');
   assert.ok(textos.length > 10000);
   assert.doesNotMatch(textos, /se encontraron estos lentes|Samsung Galax|Volcamiento|10-4/);
+  // Las noticias del CESFAM salen en Noticias con sus fotos.
+  const conFoto = paqueteFacebook().noticias.find((n) => n.clave.startsWith('cesfam-') && n.galeria.length);
+  assert.match(conFoto.imagen, /^\/img\/facebook\/cesfam\/[0-9a-f]{16}\.webp$/);
+  assert.equal((await pedir(conFoto.imagen)).headers.get('content-type'), 'image/webp');
+  const lista = await (await pedir('/noticias/?q=' + encodeURIComponent(conFoto.titulo))).text();
+  assert.match(lista, new RegExp(conFoto.titulo.slice(0, 20).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  // Lo importado antes sin fotos las recibe al volver a importar.
+  const { importarFacebook } = await import('../server/facebook.js');
+  const sinFoto = { noticias: [{ ...conFoto, clave: 'prueba-foto', imagen: '', galeria: [] }], eventos: [] };
+  assert.equal(importarFacebook(app.db, app.repo, { paquete: sinFoto }).creados, 1);
+  assert.equal(importarFacebook(app.db, app.repo, { paquete: { noticias: [{ ...conFoto, clave: 'prueba-foto' }], eventos: [] } }).fotos, 1);
+  const fila = app.db.get("SELECT imagen, datos FROM contenidos WHERE url_antigua = 'facebook:prueba-foto'");
+  assert.equal(fila.imagen, conFoto.imagen);
+  assert.equal(JSON.parse(fila.datos).galeria.length, conFoto.galeria.length);
 });
 
 test('archivo de Transparencia: lectura de la vista pública de Drive y nombres', async () => {
