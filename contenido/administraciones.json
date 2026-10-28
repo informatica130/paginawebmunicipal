@@ -1,13 +1,13 @@
 {
  "version": 1,
- "nota": "Reconstruido a partir de las publicaciones de la Municipalidad (sitio web anterior y Facebook, 2013–2026), las publicaciones del CESFAM Melipeuco y la sección «Autoridades de elección popular» de Transparencia Activa. Las fechas de inicio y término corresponden a los períodos municipales nacionales.",
+ "nota": "Reconstruido a partir de las publicaciones de la Municipalidad (sitio web anterior y Facebook, 2013–2026), de las publicaciones del CESFAM Melipeuco, de las cuentas públicas 2012, 2014, 2019, 2020, 2021, 2024 y 2025, de las actas del Concejo, de Transparencia Activa y de los reportes comunales de la Biblioteca del Congreso Nacional (SINIM). Los montos son los informados por la Municipalidad en cada documento (aprobados, adjudicados o contratados) y no siempre equivalen al gasto final.",
  "administraciones": [
   {
    "id": "cuminao",
    "alcalde": "Alejandro Cuminao Barros",
    "desde": "2021-06-28",
    "hasta": "",
-   "resumen": "Alcalde desde el 28 de junio de 2021 y reelecto para el período 2024–2028. Su gestión destaca por la vivienda, los servicios que antes obligaban a viajar fuera de la comuna, la gestión ambiental «Melipeuco Cero Basura» y la proyección internacional del territorio.",
+   "resumen": "Alcalde desde el 28 de junio de 2021 y reelecto para el período 2024–2028. Su gestión destaca por la vivienda, los servicios que antes obligaban a viajar fuera de la comuna (licencias de conducir, BancoEstado, revisión técnica), la gestión ambiental «Melipeuco Cero Basura», la creación de nuevas unidades municipales y la proyección internacional del territorio.",
    "concejos": [
     {
      "periodo": "2024 – 2028",
@@ -21,7 +21,8 @@
       "María Teresa Huenchumán Arias",
       "Nelson Sepúlveda Reumay",
       "René Epulef Zavala"
-     ]
+     ],
+     "actividad": "Sesiones renumeradas desde la N°001 (13 de diciembre de 2024)."
     },
     {
      "periodo": "2021 – 2024",
@@ -35,7 +36,8 @@
       "Erick Burgos Sánchez",
       "Nelson Sepúlveda Reumay",
       "René Epulef Zavala"
-     ]
+     ],
+     "actividad": "2024: 43 sesiones (36 ordinarias y 7 extraordinarias), 989 oficios y 88 convenios."
     }
    ],
    "cifras": [
@@ -65,9 +67,14 @@
      "nota": "programa Basura Cero"
     },
     {
-     "valor": "1.400+",
-     "etiqueta": "usuarios de tenencia responsable",
-     "nota": "box veterinario y operativos"
+     "valor": "$6.830 MM",
+     "etiqueta": "ingresos municipales 2025",
+     "nota": "$3.665 MM en 2021"
+    },
+    {
+     "valor": "$1.645 MM",
+     "etiqueta": "en proyectos ejecutados en 2024",
+     "nota": "CP 2024"
     }
    ],
    "hitos": [
@@ -100,6 +107,20 @@
      "album": "entrega-de-tablets-a-establecimientos-municipales-2021"
     },
     {
+     "fecha": "2021-10-01",
+     "area": "box-veterinario",
+     "titulo": "Unidad de Tenencia Responsable de Mascotas",
+     "texto": "Hoy más de 1.400 usuarios y miles de atenciones veterinarias (CP 2025).",
+     "url": "/boxveterinario/",
+     "fechaTexto": "octubre de 2021"
+    },
+    {
+     "fecha": "2021-10-19",
+     "area": "obras",
+     "titulo": "Agua Potable Rural para Tracura y Cherquén",
+     "texto": "$135 millones de SUBDERE para 15 familias."
+    },
+    {
      "fecha": "2022-01-13",
      "area": "social",
      "titulo": "Primera oficina PRODEMU en Melipeuco",
@@ -119,6 +140,12 @@
      "titulo": "Proyecto adjudicado para el ELEAM Las Araucarias",
      "texto": "Hoy atiende a 30 personas mayores con un equipo de 43 funcionarios.",
      "noticia": "adjudicacion-de-proyecto-para-eleam-las-araucarias"
+    },
+    {
+     "fecha": "2022-09-09",
+     "area": "emergencias",
+     "titulo": "Inauguración de la 2ª Compañía de Bomberos Llaima",
+     "texto": ""
     },
     {
      "fecha": "2022-10-07",
@@ -170,6 +197,12 @@
      "album": "oficina-local-de-la-ninez-melipeuco-2023"
     },
     {
+     "fecha": "2023-04-07",
+     "area": "obras",
+     "titulo": "Primer asfalto sustentable de La Araucanía",
+     "texto": ""
+    },
+    {
      "fecha": "2023-05-26",
      "area": "vivienda",
      "titulo": "Subsidios del programa Habitabilidad Rural",
@@ -182,6 +215,19 @@
      "titulo": "Nuevo punto limpio comunal",
      "texto": "Proyección del punto limpio, hoy parte del programa Basura Cero.",
      "album": "proyeccion-del-nuevo-punto-limpio-comunal-2023"
+    },
+    {
+     "fecha": "2023-09-01",
+     "area": "educacion",
+     "titulo": "Escuela Cumcumllaque renovada",
+     "texto": "Conservación con aislación térmica y termopaneles (MINEDUC)."
+    },
+    {
+     "fecha": "2023-12-22",
+     "area": "vivienda",
+     "titulo": "12 viviendas para el Comité Truful Truful",
+     "texto": "Inversión de $590 millones.",
+     "facebook": "fbx-c1e71266410d"
     },
     {
      "fecha": "2024-02-05",
@@ -204,11 +250,31 @@
      "texto": "Melipeuco cuenta con sucursal bancaria propia."
     },
     {
+     "fecha": "2024-08-13",
+     "area": "educacion",
+     "titulo": "$472 millones para la Escuela Volcán Llaima",
+     "texto": "Mejoras de infraestructura del Ministerio de Educación.",
+     "facebook": "fbx-77c37b592cfe"
+    },
+    {
+     "fecha": "2024-12-31",
+     "area": "obras",
+     "titulo": "Luminarias solares en sectores rurales",
+     "texto": "Carén, Huallerupe, Casa Blanca, Alpehue, Pangueco y Santa Julia: $566 millones.",
+     "fechaTexto": "2024"
+    },
+    {
      "fecha": "2025-02-21",
      "area": "vivienda",
      "titulo": "Viviendas para los comités Allipén y Valle del Llaima",
      "texto": "Entrega de viviendas a las familias de ambos comités.",
      "album": "entrega-de-viviendas-a-los-comites-allipen-y-valle-del-llaima-2025"
+    },
+    {
+     "fecha": "2025-03-14",
+     "area": "social",
+     "titulo": "Centro Comunitario de Cuidados y Protección",
+     "texto": "Inaugurado en la junta de vecinos Villa Los Volcanes."
     },
     {
      "fecha": "2025-03-28",
@@ -223,13 +289,6 @@
      "titulo": "«Basura Cero»: $170 millones menos al año en traslado de residuos",
      "texto": "Compostera municipal, retiro diferenciado con vehículos eléctricos y educación ambiental.",
      "noticia": "melipeuco-lidera-en-sustentabilidad-reduce-en-mas-de-90-millones-anuales-el-gasto-en-basura-gracias-a-programa-basura-cero"
-    },
-    {
-     "fecha": "2025-04-08",
-     "area": "box-veterinario",
-     "titulo": "Box Veterinario Municipal",
-     "texto": "Consulta, vacunación y esterilización para las mascotas de familias de la comuna.",
-     "url": "/boxveterinario/"
     },
     {
      "fecha": "2025-04-15",
@@ -253,6 +312,13 @@
      "facebook": "cesfam-d38750e42521"
     },
     {
+     "fecha": "2025-07-30",
+     "area": "alcaldia",
+     "titulo": "Fondo de Incentivo a la Gestión Municipal (FIGEM)",
+     "texto": "$95,9 millones para terrenos del cementerio municipal y de la planta de tratamiento de aguas servidas.",
+     "fechaTexto": "julio de 2025"
+    },
+    {
      "fecha": "2025-08-26",
      "area": "social",
      "titulo": "30 mujeres obtienen su licencia clase B",
@@ -265,6 +331,13 @@
      "titulo": "Melipeuco, territorio SIPAM de la FAO",
      "texto": "Evaluación internacional en agosto de 2025; la Cuenta Pública 2025 informa el reconocimiento del sistema productivo ancestral de la cordillera pehuenche como patrimonio agrícola de importancia mundial.",
      "noticia": "melipeuco-recibe-delegacion-nacional-y-evaluadora-internacional-en-proceso-de-postulacion-a-sello-sipam"
+    },
+    {
+     "fecha": "2025-09-02",
+     "area": "obras",
+     "titulo": "Conservación de la ruta S-575, sector Socavón",
+     "texto": "$505 millones para Cumcumllaque, Carén, Huechelepún y Flor del Valle.",
+     "facebook": "fbx-134a571a1809"
     },
     {
      "fecha": "2025-09-08",
@@ -295,6 +368,21 @@
      "noticia": "9-casas-de-emergencia-seran-construidas-en-melipeuco"
     },
     {
+     "fecha": "2025-12-11",
+     "area": "turismo",
+     "titulo": "Primera señalética de Melipeuco en la Ruta 5 Sur",
+     "texto": "",
+     "facebook": "fbx-1d0de4fcdd67"
+    },
+    {
+     "fecha": "2026-01-31",
+     "area": "medio-ambiente",
+     "titulo": "Certificación Ambiental Municipal nivel Excelencia",
+     "texto": "Y el programa «ME SUMO», finalista del concurso «Mentes en Verde» del BID (7 de 270 propuestas de 18 países).",
+     "noticia": "melipeuco-presenta-su-cuenta-publica-2025",
+     "fechaTexto": "2025 (Cuenta Pública 2025)"
+    },
+    {
      "fecha": "2026-04-25",
      "area": "alcaldia",
      "titulo": "Cuenta Pública 2025",
@@ -302,12 +390,128 @@
      "noticia": "melipeuco-presenta-su-cuenta-publica-2025"
     },
     {
+     "fecha": "2026-08-15",
+     "area": "obras",
+     "titulo": "Llega la nueva motoniveladora 6x6",
+     "texto": "Adquirida por $449 millones con fondos del Gobierno Regional.",
+     "fechaTexto": "agosto de 2026"
+    },
+    {
      "fecha": "2026-09-01",
      "area": "salud",
      "titulo": "El CESFAM es reconocido como SUR Alto",
      "texto": "Reconocimiento a las condiciones de ruralidad y dispersión del territorio.",
      "facebook": "cesfam-78819effb3fe"
+    },
+    {
+     "fecha": "2026-09-08",
+     "area": "salud",
+     "titulo": "Primera piedra del Centro de Diálisis",
+     "texto": "Proyecto de $750 millones, en el 85° aniversario del pueblo.",
+     "facebook": "fbx-7acdbb32436f"
+    },
+    {
+     "fecha": "2026-10-23",
+     "area": "social",
+     "titulo": "10 organizaciones firman convenios FNDR 8%",
+     "texto": "",
+     "facebook": "fbx-6edc3546ef09"
     }
+   ],
+   "nuevas_unidades": [
+    "Unidad de Medio Ambiente",
+    "Comité Ambiental Comunal",
+    "Unidad de Tenencia Responsable de Mascotas",
+    "Consejo Comunal de Seguridad Pública",
+    "Unidad de Cultura",
+    "Oficina de la Mujer",
+    "Oficina Local de la Niñez",
+    "Oficina de la Juventud",
+    "Red Local de Apoyos y Cuidados",
+    "UAMIS y Sala de Rehabilitación",
+    "Centro de Negocios",
+    "Oficina de Recurso Hídrico y Saneamiento de Títulos",
+    "Oficina de Emergencia y Seguridad Pública",
+    "Dirección de Tránsito"
+   ],
+   "cartera": {
+    "titulo": "Cartera «Melipeuco del futuro»",
+    "total": "$6.563 millones",
+    "texto": "Proyectos en diseño, postulación o ejecución informados en las cuentas públicas 2024 y 2025.",
+    "items": [
+     {
+      "nombre": "Centro de Diálisis",
+      "monto": "$750 MM",
+      "estado": "En ejecución"
+     },
+     {
+      "nombre": "Parador de Artesanos Rayenche",
+      "monto": "$750 MM",
+      "estado": "Aprobado"
+     },
+     {
+      "nombre": "Reposición del puente Chufquén y accesos",
+      "monto": "$2.115 MM",
+      "estado": "Con recomendación técnica"
+     },
+     {
+      "nombre": "Reposición posta Cumcumllaque",
+      "monto": "$1.124 MM",
+      "estado": "Postula a ejecución"
+     },
+     {
+      "nombre": "Reposición posta Alto Carén",
+      "monto": "$1.043 MM",
+      "estado": "Postula a ejecución"
+     },
+     {
+      "nombre": "Reposición del Complejo Educacional",
+      "monto": "$531 MM",
+      "estado": "Diseño"
+     },
+     {
+      "nombre": "Colectores y planta de tratamiento de aguas servidas",
+      "monto": "$385 MM",
+      "estado": "Prefactibilidad a diseño"
+     },
+     {
+      "nombre": "Electrificación rural El Escorial, El Membrillo y otros",
+      "monto": "$249 MM",
+      "estado": "En ejecución"
+     },
+     {
+      "nombre": "Reposición del CESFAM",
+      "monto": "$234 MM",
+      "estado": "Diseño"
+     },
+     {
+      "nombre": "Terminal de buses",
+      "monto": "$120 MM",
+      "estado": "Diseño"
+     },
+     {
+      "nombre": "Ampliación del edificio consistorial",
+      "monto": "$119 MM",
+      "estado": "Diseño"
+     },
+     {
+      "nombre": "Diseño APR Alpehue–Casa Blanca",
+      "monto": "$112 MM",
+      "estado": "En ejecución"
+     },
+     {
+      "nombre": "Mercado Municipal",
+      "monto": "$85 MM",
+      "estado": "Diseño"
+     }
+    ]
+   },
+   "cuentas": [
+    "2021",
+    "2022 (sin texto disponible)",
+    "2023 (sin texto disponible)",
+    "2024",
+    "2025"
    ]
   },
   {
@@ -315,24 +519,46 @@
    "alcalde": "Eduardo Navarrete Fuentes",
    "desde": "2016-12-06",
    "hasta": "2021-06-28",
-   "resumen": "Alcalde entre diciembre de 2016 y junio de 2021 (el período se extendió por la pandemia). Su gestión destaca por la remodelación de la Plaza de Armas, nuevas sedes comunitarias, agua potable rural, maquinaria para caminos y subsidios de vivienda.",
+   "resumen": "Alcalde entre 2008 y 2012 y nuevamente entre diciembre de 2016 y junio de 2021 (el período se extendió por la pandemia). En este segundo período destacan la inauguración del Estadio Municipal, la remodelación de la Plaza de Armas, el acuerdo por el APR de Santa María de Llaima, la ruta S-61, el inicio del box veterinario y 242 soluciones habitacionales en 2020.",
    "concejos": [
     {
      "periodo": "2016 – 2021",
      "desde": "2016-12-06",
      "hasta": "2021-06-28",
-     "fuente": "Publicaciones de la Municipalidad, 2017–2020",
+     "fuente": "Ficha de autoridades SUBDERE; Cuentas Públicas 2019 y 2020",
      "concejales": [
-      "Erick Burgos Sánchez",
-      "Héctor Carrasco",
+      "René Epulef Zavala",
       "María Teresa Huenchumán Arias",
-      "Juan Reumay",
+      "Héctor Carrasco Ruiz",
+      "Juan Basilio Reumay Paineguir",
       "Nelson Sepúlveda Reumay",
-      "René Epulef Zavala"
-     ]
+      "Erick Burgos Sánchez"
+     ],
+     "actividad": "2019: 40 sesiones (35 ordinarias y 5 extraordinarias) · 2020: 38 sesiones (36 y 2)."
     }
    ],
-   "cifras": [],
+   "cifras": [
+    {
+     "valor": "242",
+     "etiqueta": "soluciones habitacionales en 2020",
+     "nota": "$3.742 millones, CP 2020"
+    },
+    {
+     "valor": "4.468",
+     "etiqueta": "ayudas sociales en 2020",
+     "nota": "incluye 1.460 cajas de alimentos"
+    },
+    {
+     "valor": "422",
+     "etiqueta": "becas JUNAEB en 2020",
+     "nota": "$149 millones"
+    },
+    {
+     "valor": "$3.466 MM",
+     "etiqueta": "ingresos municipales 2020",
+     "nota": "CP 2024"
+    }
+   ],
    "hitos": [
     {
      "fecha": "2017-11-14",
@@ -412,6 +638,19 @@
      "album": "primera-fiesta-de-la-mosqueta-cordillerana-melipeuco-2019"
     },
     {
+     "fecha": "2019-04-27",
+     "area": "deporte",
+     "titulo": "Inauguración del Estadio Municipal",
+     "texto": "Parque deportivo con cancha sintética y pista atlética."
+    },
+    {
+     "fecha": "2019-07-19",
+     "area": "obras",
+     "titulo": "Acuerdo por el Agua Potable Rural de Santa María de Llaima",
+     "texto": "Firma con el Gobierno Regional y el MOP.",
+     "facebook": "fbx-f6272f288694"
+    },
+    {
      "fecha": "2019-09-02",
      "area": "medio-ambiente",
      "titulo": "Concejo vota en contra de la central de pasada en el río Truful Truful",
@@ -466,33 +705,101 @@
      "titulo": "Consulta ciudadana por la planta de tratamiento de aguas servidas",
      "texto": "",
      "album": "consulta-ciudadana-por-planta-de-tratamiento-de-aguas-servidas-2020"
+    },
+    {
+     "fecha": "2020-09-01",
+     "area": "box-veterinario",
+     "titulo": "Programa Mascota Protegida y box veterinario",
+     "texto": "Más de 300 mascotas atendidas en sus primeros seis meses.",
+     "url": "/boxveterinario/",
+     "fechaTexto": "septiembre de 2020"
+    },
+    {
+     "fecha": "2020-12-03",
+     "area": "social",
+     "titulo": "Celulares para 52 personas mayores",
+     "texto": "Convenio con la Fundación Conecta Mayor.",
+     "facebook": "fbx-1a0f0aa92640"
+    },
+    {
+     "fecha": "2020-12-31",
+     "area": "vivienda",
+     "titulo": "242 soluciones habitacionales en 2020",
+     "texto": "Habitabilidad rural, mejoramientos DS10, banco de materiales y subsidios: $3.742 millones.",
+     "fechaTexto": "2020"
     }
+   ],
+   "cuentas": [
+    "2019",
+    "2020"
    ]
   },
   {
    "id": "espinoza",
-   "alcalde": "Juan Carlos Espinoza",
-   "desde": "",
+   "alcalde": "Juan Carlos Espinoza Pérez",
+   "desde": "2012-12-06",
    "hasta": "2016-12-06",
-   "resumen": "Alcalde hasta diciembre de 2016; las publicaciones disponibles cubren desde 2013. Su gestión dio origen a la Fiesta del Baqueano y a la Ruta del Baqueano, y abrió el proyecto de mejoramiento de la Plaza de Armas.",
+   "resumen": "Alcalde electo para el período 2012–2016. Su gestión dio origen a la Fiesta del Baqueano y a la Ruta del Baqueano, puso en marcha el Juzgado de Policía Local y gestionó el Parque Deportivo y el Parador Turístico con fondos regionales, además de la cartera de reconstrucción tras el incendio de China Muerta (2015).",
    "concejos": [
     {
      "periodo": "2012 – 2016",
      "desde": "2012-12-06",
      "hasta": "2016-12-06",
-     "fuente": "Publicaciones de la Municipalidad, 2013–2016",
+     "fuente": "Cuenta Pública 2014",
      "concejales": [
-      "Benjamín Oñate",
+      "Benjamín Oñate Namuncura",
       "María Teresa Huenchumán Arias",
-      "René Fuentes Rickemberg",
-      "Jacinto Mariano",
-      "Joanna Melo Matus",
-      "Víctor Hugo Huenchullán"
-     ]
+      "René Fuentes Rickenberg",
+      "Jacinto Mariano Morales",
+      "Joana Melo Matus",
+      "Víctor Hugo Huenchullán Huenupi"
+     ],
+     "actividad": "2014: 42 sesiones (36 ordinarias y 6 extraordinarias) y 83 acuerdos, todos por unanimidad."
     }
    ],
-   "cifras": [],
+   "cifras": [
+    {
+     "valor": "$941 MM",
+     "etiqueta": "Parque Deportivo y Estadio Municipal",
+     "nota": "FNDR, CP 2014"
+    },
+    {
+     "valor": "$944 MM",
+     "etiqueta": "Parador Turístico",
+     "nota": "FNDR, CP 2014"
+    },
+    {
+     "valor": "$703 MM",
+     "etiqueta": "cartera de reconstrucción por el incendio",
+     "nota": "SUBDERE 2015"
+    },
+    {
+     "valor": "38",
+     "etiqueta": "convenios vigentes",
+     "nota": "CP 2012"
+    }
+   ],
    "hitos": [
+    {
+     "fecha": "2012-12-03",
+     "area": "alcaldia",
+     "titulo": "Comienza a funcionar el Juzgado de Policía Local",
+     "texto": ""
+    },
+    {
+     "fecha": "2013-04-30",
+     "area": "obras",
+     "titulo": "Reposición del Puente Medina, ruta S-51",
+     "texto": "186 metros, $2.597 millones del MOP (obra iniciada en 2011).",
+     "fechaTexto": "2011 – 2013"
+    },
+    {
+     "fecha": "2013-04-30",
+     "area": "medio-ambiente",
+     "titulo": "Plan de cierre del vertedero municipal",
+     "texto": "$212 millones del FNDR.",
+     "fechaTexto": "2012 (Cuenta Pública 2012)"
+    },
     {
      "fecha": "2013-05-31",
      "area": "medio-ambiente",
@@ -543,13 +850,147 @@
      "album": "mejoramiento-plaza-de-armas-2014"
     },
     {
+     "fecha": "2015-04-24",
+     "area": "deporte",
+     "titulo": "Parque Deportivo y Estadio Municipal",
+     "texto": "Cancha sintética y pista atlética: $941 millones del FNDR (inaugurado en 2019).",
+     "fechaTexto": "2014 (Cuenta Pública 2014)"
+    },
+    {
+     "fecha": "2015-04-24",
+     "area": "turismo",
+     "titulo": "Parador Turístico",
+     "texto": "667 m² con sala de cine 4D: $944 millones del FNDR.",
+     "fechaTexto": "2014 (Cuenta Pública 2014)"
+    },
+    {
+     "fecha": "2015-04-24",
+     "area": "obras",
+     "titulo": "Ampliación del APR de Melipeuco a Los Mallines",
+     "texto": "$187 millones (SUBDERE PMB 2014).",
+     "fechaTexto": "2014"
+    },
+    {
+     "fecha": "2015-04-24",
+     "area": "obras",
+     "titulo": "Pavimentación de las calles Eugenio Matte y Aníbal Pincheira",
+     "texto": "Pavimentación participativa SERVIU–Municipio por $465 millones.",
+     "fechaTexto": "2014"
+    },
+    {
+     "fecha": "2015-06-01",
+     "area": "emergencias",
+     "titulo": "Reconstrucción tras el incendio de China Muerta",
+     "texto": "Cartera de $703 millones de SUBDERE: sedes, refugio y puentes de Loncotriuque y El Mirador.",
+     "fechaTexto": "2015"
+    },
+    {
      "fecha": "2016-07-19",
      "area": "obras",
      "titulo": "Sede de Loncotriuque y Cuatro Puentes",
      "texto": "",
      "album": "inauguracion-sede-loncotriuque-y-cuatro-puentes-2016"
     }
+   ],
+   "cuentas": [
+    "2012",
+    "2014"
    ]
   }
- ]
+ ],
+ "historia": [
+  {
+   "periodo": "c. 1981",
+   "nombre": "Carlos Mohor",
+   "texto": "Alcalde designado; primer alcalde según la historia oficial de la Municipalidad. Impulsó la construcción de la Plaza de Armas, con piedra granítica y cuatro peucos de bronce."
+  },
+  {
+   "periodo": "1985",
+   "nombre": "Alcalde designado",
+   "texto": "Designación por Decreto N°704 del Ministerio del Interior; el nombre no figura en las fuentes disponibles."
+  },
+  {
+   "periodo": "1992 – 2008",
+   "nombre": "Alcaldes electos",
+   "texto": "Elecciones de 1992, 1996, 2000 y 2004; los nombres aún no se han verificado en registros oficiales."
+  },
+  {
+   "periodo": "2008 – 2012",
+   "nombre": "Eduardo Navarrete Fuentes",
+   "texto": "Primer período como alcalde electo; volvió a la alcaldía entre 2016 y 2021."
+  }
+ ],
+ "comuna": {
+  "creacion": "La comuna fue creada por decreto dado a conocer el 5 de julio de 1980 y funciona desde enero de 1981, separada de Cunco. El pueblo de Melipeuco se fundó en 1941."
+ },
+ "finanzas": {
+  "fuente": "Cuenta Pública 2024 y SINIM (Biblioteca del Congreso Nacional). Pesos nominales.",
+  "ingresos": {
+   "2020": 3466181000,
+   "2021": 3664928000,
+   "2022": 4330259000,
+   "2023": 5918754000,
+   "2024": 6312602438,
+   "2025": 6830413000
+  },
+  "permisos_circulacion": {
+   "2020": 113000000,
+   "2021": 147000000,
+   "2022": 214000000,
+   "2023": 274701000,
+   "2024": 364728000
+  },
+  "detalle": {
+   "2023": {
+    "fcm_pct": 66.1,
+    "ipp_pct": 5.8,
+    "transf_pct": 21.7,
+    "gasto_total": 5461826000,
+    "programas_sociales": 695602000
+   },
+   "2024": {
+    "fcm_pct": 71.4,
+    "ipp_pct": 7.2,
+    "transf_pct": 14.0,
+    "gasto_total": 6546229000,
+    "programas_sociales": 788937000
+   },
+   "2025": {
+    "fcm_pct": 75.8,
+    "ipp_pct": 11.0,
+    "transf_pct": 7.5,
+    "gasto_total": 6696511000,
+    "programas_sociales": 602571000
+   }
+  },
+  "salud": {
+   "ingresos": {
+    "2019": 1216076083,
+    "2020": 1232870977,
+    "2021": 1486300848,
+    "2023": 2056058000,
+    "2024": 2421648000,
+    "2025": 2716616000
+   },
+   "aporte_municipal": {
+    "2023": 193036000,
+    "2024": 200827000,
+    "2025": 330000000
+   }
+  },
+  "educacion": {
+   "ingresos": {
+    "2021": 2379216000,
+    "2023": 2218713000,
+    "2024": 2538945000,
+    "2025": 2511884000
+   },
+   "aporte_municipal": {
+    "2020": 95035000,
+    "2023": 165000000,
+    "2024": 240400000,
+    "2025": 345500000
+   }
+  }
+ }
 }
