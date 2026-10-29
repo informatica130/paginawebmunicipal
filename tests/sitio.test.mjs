@@ -702,6 +702,7 @@ test('administraciones: alcaldes, concejos, hitos con enlace y comparación', as
   assert.ok(enlaces.length > 50);
   for (const u of new Set(enlaces)) assert.equal((await pedir(u)).status, 200, u);
   assert.match(await (await pedir('/alcaldia/')).text(), /href="\/administraciones\/"/);
+  for (const t of ['Cómo ha cambiado Melipeuco', 'Servicios que llegaron a la comuna', 'Ingresos municipales por año', '+86%', '+230%', '-70%', 'Reelecto en 2024']) assert.ok(h.includes(t), t);
   for (const t of ['La alcaldía antes de 2012', 'Carlos Mohor', 'Finanzas municipales 2020–2025', 'Melipeuco del futuro', 'Unidad de Tenencia Responsable de Mascotas']) assert.ok(h.includes(t), t);
   assert.match(await (await pedir('/municipio/')).text(), /Melipeuco en cifras/);
   // Del estudio no se publican direcciones IP ni enlaces de Drive.
