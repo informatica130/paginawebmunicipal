@@ -2749,6 +2749,73 @@ html { scrollbar-color: color-mix(in srgb, var(--azul) 45%, transparent) transpa
 .cifras-dos h3 { font-size: 1.0625rem; }
 .adm-barras li.ancho { grid-template-columns: 110px 1fr; }
 .adm-finanzas td, .adm-cartera td:nth-child(2) { white-space: nowrap; }
+/* Administraciones: gestión actual destacada */
+.adm-actual { --graf: var(--azul); --graf-suave: color-mix(in srgb, var(--azul) 35%, var(--superficie)); --graf-gris: var(--borde-fuerte); margin: 8px 0 44px; }
+:root[data-tema="oscuro"] .adm-actual { --graf: var(--enlace); --graf-suave: color-mix(in srgb, var(--enlace) 40%, var(--superficie)); }
+.adm-actual-hero { position: relative; overflow: hidden; padding: clamp(24px, 4vw, 44px); border-radius: 22px; background: linear-gradient(135deg, var(--azul-profundo), var(--azul) 70%); color: #fff; }
+.adm-actual-hero::after { content: ''; position: absolute; right: -60px; bottom: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgb(242 169 0 / .35), transparent 70%); pointer-events: none; }
+.adm-actual-ante { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 5px 12px; border-radius: 999px; background: var(--ambar); color: var(--ambar-tinta); font-size: .8125rem; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+.adm-actual-hero h2 { margin: 0; color: #fff; font-size: clamp(1.75rem, 4.5vw, 2.75rem); line-height: 1.1; }
+.adm-actual-reel { max-width: 760px; margin: 10px 0 18px; color: rgb(255 255 255 / .88); font-size: 1.0625rem; }
+.adm-periodos { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; padding: 0; list-style: none; }
+.adm-periodos li { display: flex; flex-direction: column; gap: 2px; min-width: 210px; padding: 10px 14px; border: 1px solid rgb(255 255 255 / .25); border-radius: 14px; background: rgb(255 255 255 / .08); }
+.adm-periodos b { font-size: 1.125rem; }
+.adm-periodos span { color: rgb(255 255 255 / .8); font-size: .875rem; }
+.adm-periodos em { align-self: flex-start; margin-top: 4px; padding: 1px 8px; border-radius: 999px; background: var(--ambar); color: var(--ambar-tinta); font-size: .75rem; font-style: normal; font-weight: 800; }
+.adm-grandes { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.adm-grandes li { display: flex; flex-direction: column; gap: 2px; padding: 16px; border-radius: 16px; background: rgb(255 255 255 / .12); }
+.adm-grandes b { color: var(--ambar); font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1; font-weight: 800; }
+.adm-grandes span { font-weight: 700; }
+.adm-grandes small { color: rgb(255 255 255 / .78); font-size: .8125rem; }
+.adm-sub { margin: 36px 0 6px; font-size: 1.375rem; }
+.adm-sub-intro { max-width: 760px; margin: 0 0 16px; color: var(--texto-2); }
+.adm-cambios { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.adm-cambio { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; border: 1px solid var(--borde); border-radius: 16px; background: var(--superficie); }
+.adm-cambio-t { margin: 0; color: var(--texto-2); font-weight: 700; }
+.adm-cambio-v { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0; }
+.adm-cambio-v b { font-size: 1.625rem; line-height: 1.1; }
+.adm-delta { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: .875rem; font-weight: 800; }
+.adm-delta { background: var(--fondo-2); color: var(--texto-2); }
+.adm-delta.adm-mejora { background: color-mix(in srgb, var(--ok) 14%, transparent); color: var(--ok); }
+.adm-delta.adm-sube svg { transform: rotate(-90deg); }
+.adm-delta.adm-baja svg { transform: rotate(90deg); }
+.adm-antes-ahora { display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 4px 8px; }
+.adm-antes-ahora span { display: block; width: var(--p); min-width: 6px; height: 14px; border-radius: 0 4px 4px 0; background: var(--graf-gris); }
+.adm-antes-ahora span.ahora { background: var(--graf); }
+.adm-antes-ahora i { color: var(--texto-3); font-size: .75rem; font-style: normal; font-weight: 700; }
+.adm-cambio-n { margin: 0; color: var(--texto-3); font-size: .8125rem; }
+.adm-graficos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; margin: 20px 0 0; }
+.graf { margin: 0; padding: 18px; border: 1px solid var(--borde); border-radius: 16px; background: var(--superficie); }
+.graf figcaption { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+.graf figcaption small { color: var(--texto-3); font-size: .8125rem; }
+.graf-col { display: grid; grid-template-columns: repeat(var(--n), 1fr); align-items: end; gap: 8px; height: 220px; margin: 0; padding: 0 0 0; border-bottom: 1px solid var(--borde-fuerte); list-style: none; }
+.graf-col li { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+.graf-barra { display: block; width: min(100%, 46px); height: var(--p); border-radius: 4px 4px 0 0; background: var(--graf-gris); transition: filter .2s; }
+.graf-col li.resalta .graf-barra { background: var(--graf); }
+.graf-col li.transicion .graf-barra { background: repeating-linear-gradient(135deg, var(--graf) 0 4px, var(--graf-suave) 4px 8px); }
+.graf-col li:hover .graf-barra { filter: brightness(1.15); }
+.graf-valor { margin-bottom: 4px; color: var(--texto); font-size: .75rem; font-weight: 800; white-space: nowrap; }
+.graf-col li:hover .graf-valor.sr { position: static; width: auto; height: auto; clip: auto; margin: 0 0 4px; }
+.graf-eje { position: relative; top: 22px; height: 0; color: var(--texto-2); font-size: .75rem; font-weight: 700; }
+.graf-col { margin-bottom: 26px; }
+.adm-servicios { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 12px; margin: 10px 0 0; padding: 0; list-style: none; }
+.adm-servicios li { display: flex; flex-direction: column; gap: 6px; padding: 16px; border: 1px solid var(--borde); border-radius: 16px; background: var(--superficie); }
+.adm-serv-ico { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: var(--azul-suave); color: var(--enlace); }
+.adm-servicios small { color: var(--texto-3); font-weight: 700; }
+.adm-servicios b { font-size: 1.125rem; }
+.adm-servicios p { margin: 0; font-size: .9375rem; }
+.adm-servicios p span { display: inline-block; min-width: 52px; margin-right: 6px; padding: 0 6px; border-radius: 6px; font-size: .75rem; font-weight: 800; text-align: center; text-transform: uppercase; }
+.adm-antes { color: var(--texto-3); }
+.adm-antes span { background: var(--fondo-2); color: var(--texto-2); }
+.adm-ahora span { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ok); }
+.adm-areas { display: grid; gap: 8px; max-width: 760px; margin: 10px 0 16px; padding: 0; list-style: none; }
+.adm-areas li { display: grid; grid-template-columns: minmax(150px, 220px) 1fr; align-items: center; gap: 10px; }
+.adm-area-n { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; }
+.adm-area-barra { display: block; width: var(--p); min-width: 30px; padding: 3px 8px; border-radius: 0 4px 4px 0; background: var(--graf); color: #fff; text-align: right; }
+:root[data-tema="oscuro"] .adm-area-barra { color: var(--fondo); }
+.adm-area-barra b { font-size: .8125rem; }
+@media (max-width: 600px) { .adm-areas li { grid-template-columns: 1fr; gap: 2px; } .graf-col { height: 180px; gap: 4px; } .adm-grandes li { padding: 12px; } .adm-grandes b { font-size: 1.875rem; } .adm-periodos li { min-width: 0; flex: 1 1 100%; } }
+@media (prefers-reduced-motion: reduce) { .graf-barra { transition: none; } }
 .adm-finanzas tbody th { min-width: 170px; }
 /* Micrositio de Salud: calendario de la salud */
 .ms-calendario-salud { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }

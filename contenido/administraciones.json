@@ -512,6 +512,131 @@
     "2023 (sin texto disponible)",
     "2024",
     "2025"
+   ],
+   "reeleccion": {
+    "texto": "Reelecto en octubre de 2024: primer alcalde de Melipeuco en ser reelecto para un período consecutivo desde 2008, el período que cubren los registros disponibles.",
+    "periodos": [
+     {
+      "periodo": "2021 – 2024",
+      "texto": "Primer período, desde el 28 de junio de 2021"
+     },
+     {
+      "periodo": "2024 – 2028",
+      "texto": "Segundo período, desde el 6 de diciembre de 2024"
+     }
+    ]
+   },
+   "cambios": [
+    {
+     "titulo": "Ingresos municipales",
+     "valor": 6830413000,
+     "anio": "2025",
+     "base": 3664928000,
+     "anio_base": "2021",
+     "tipo": "dinero",
+     "nota": "Presupuesto ejecutado del municipio."
+    },
+    {
+     "titulo": "Ingresos propios permanentes",
+     "valor": 752167000,
+     "anio": "2025",
+     "base": 345689000,
+     "anio_base": "2023",
+     "tipo": "dinero",
+     "nota": "Patentes, permisos y derechos que genera la propia comuna."
+    },
+    {
+     "titulo": "Patentes municipales",
+     "valor": 339633000,
+     "anio": "2025",
+     "base": 102947000,
+     "anio_base": "2023",
+     "tipo": "dinero",
+     "nota": "Empresas que operan en la comuna ahora tributan en Melipeuco."
+    },
+    {
+     "titulo": "Permisos de circulación y licencias",
+     "valor": 364728000,
+     "anio": "2024",
+     "base": 147000000,
+     "anio_base": "2021",
+     "tipo": "dinero",
+     "nota": "Con Dirección de Tránsito propia desde 2024."
+    },
+    {
+     "titulo": "Aporte municipal a Educación",
+     "valor": 345500000,
+     "anio": "2025",
+     "base": 95035000,
+     "anio_base": "2020",
+     "tipo": "dinero",
+     "nota": "Recursos propios para escuelas y liceo."
+    },
+    {
+     "titulo": "Ingresos de la salud municipal",
+     "valor": 2716616000,
+     "anio": "2025",
+     "base": 1486300848,
+     "anio_base": "2021",
+     "tipo": "dinero",
+     "nota": "CESFAM y postas rurales."
+    },
+    {
+     "titulo": "Gasto en traslado de basura",
+     "valor": 72000000,
+     "anio": "2024",
+     "base": 242082648,
+     "anio_base": "2021",
+     "tipo": "dinero",
+     "baja_es_buena": true,
+     "nota": "Programa «Melipeuco Cero Basura»."
+    },
+    {
+     "titulo": "Personas en la Red Local de Cuidados",
+     "valor": 101,
+     "anio": "2025",
+     "base": 31,
+     "anio_base": "2024",
+     "tipo": "numero",
+     "nota": "Atención domiciliaria y profesional."
+    }
+   ],
+   "servicios": [
+    {
+     "nombre": "Revisión técnica",
+     "anio": "2022",
+     "antes": "Había que viajar a otra comuna",
+     "ahora": "Planta de revisión técnica en Melipeuco",
+     "icono": "bus"
+    },
+    {
+     "nombre": "Licencias de conducir",
+     "anio": "2024",
+     "antes": "Trámite fuera de la comuna",
+     "ahora": "Dirección de Tránsito municipal",
+     "icono": "licencia"
+    },
+    {
+     "nombre": "Banco",
+     "anio": "2024",
+     "antes": "Sin sucursal bancaria",
+     "ahora": "Sucursal de BancoEstado",
+     "icono": "billete"
+    },
+    {
+     "nombre": "Diálisis",
+     "anio": "2026",
+     "antes": "Traslados a Temuco varias veces por semana",
+     "ahora": "Centro de Diálisis en construcción",
+     "icono": "salud"
+    },
+    {
+     "nombre": "Basura",
+     "anio": "2023",
+     "antes": "Toda la basura se enviaba fuera de la comuna",
+     "ahora": "Compostaje, punto limpio y retiro diferenciado",
+     "icono": "basura"
+    }
    ]
   },
   {
@@ -946,21 +1071,30 @@
     "ipp_pct": 5.8,
     "transf_pct": 21.7,
     "gasto_total": 5461826000,
-    "programas_sociales": 695602000
+    "programas_sociales": 695602000,
+    "ipp": 345689000,
+    "patentes": 102947000,
+    "permisos": 103013000
    },
    "2024": {
     "fcm_pct": 71.4,
     "ipp_pct": 7.2,
     "transf_pct": 14.0,
     "gasto_total": 6546229000,
-    "programas_sociales": 788937000
+    "programas_sociales": 788937000,
+    "ipp": 455765000,
+    "patentes": 142721000,
+    "permisos": 120203000
    },
    "2025": {
     "fcm_pct": 75.8,
     "ipp_pct": 11.0,
     "transf_pct": 7.5,
     "gasto_total": 6696511000,
-    "programas_sociales": 602571000
+    "programas_sociales": 602571000,
+    "ipp": 752167000,
+    "patentes": 339633000,
+    "permisos": 135164000
    }
   },
   "salud": {
@@ -991,6 +1125,10 @@
     "2024": 240400000,
     "2025": 345500000
    }
+  },
+  "transito": {
+   "2024": 58300390,
+   "2025": 103557550
   }
  }
 }

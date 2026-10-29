@@ -92,6 +92,80 @@ function finanzas(d) {
     <p class="meta">Fuente: ${f.fuente}</p></section>`;
 }
 
+// ------------------------------------------------------------------ Gestión actual destacada
+const num = (n) => Number(n).toLocaleString('es-CL');
+const valorDe = (c, v) => (c.tipo === 'dinero' ? pesos(v) : num(v));
+const pct = (c) => Math.round(((c.valor - c.base) / c.base) * 100);
+
+// Columnas en HTML (texto nítido en celular). Cada barra lleva su valor como tooltip y para lectores
+// de pantalla; se rotulan la primera y la última, y las resaltadas usan el color de la marca.
+function columnas(titulo, datos, { formato = pesos, nota = '', etiquetaTodas = false } = {}) {
+  const max = Math.max(...datos.map((x) => x.valor));
+  return html`<figure class="graf"><figcaption><b>${titulo}</b>${nota ? html`<small>${nota}</small>` : ''}</figcaption>
+    <ol class="graf-col" style="--n:${datos.length}">${datos.map((x, i) => html`<li class="${x.clase || ''}" title="${x.etiqueta}: ${formato(x.valor)}">
+      <span class="graf-valor${etiquetaTodas || i === 0 || i === datos.length - 1 ? '' : ' sr'}">${formato(x.valor)}</span>
+      <span class="graf-barra" style="--p:${Math.max(2, Math.round((x.valor / max) * 100))}%"></span><span class="graf-eje">${x.etiqueta}</span></li>`)}</ol></figure>`;
+}
+
+function destacadoActual(d, a) {
+  const f = d.finanzas || {};
+  const ing = Object.entries(f.ingresos || {}).sort();
+  const det = Object.entries(f.detalle || {}).sort();
+  const perm = Object.entries(f.permisos_circulacion || {}).sort();
+  const areas = Object.entries(a.hitos.reduce((m, h) => ({ ...m, [h.area]: (m[h.area] || 0) + 1 }), {})).sort((x, y) => y[1] - x[1]).slice(0, 8);
+  const maxArea = areas[0]?.[1] || 1;
+  const primero = ing[0]?.[1], ultimo = ing.at(-1)?.[1];
+  const vivienda = a.cifras.find((c) => /viviendas entregadas/.test(c.etiqueta));
+  const grandes = [
+    ['+' + pct(a.cambios[0]) + '%', 'ingresos municipales', `de ${pesos(a.cambios[0].base)} (2021) a ${pesos(a.cambios[0].valor)} (2025)`],
+    [vivienda?.valor || '—', 'viviendas entregadas en 2025', vivienda?.nota || ''],
+    [String(a.nuevas_unidades?.length || 0), 'nuevas unidades y oficinas', 'Medio Ambiente, Tránsito, Mujer, Niñez y más'],
+    [String(a.hitos.length), 'hitos documentados', `entre ${a.desde.slice(0, 4)} y hoy`],
+  ];
+  return html`<section class="adm-actual" aria-labelledby="adm-actual-t">
+    <div class="adm-actual-hero">
+      <p class="adm-actual-ante">${crudo(icono('estrella', { tam: 18 }))} Administración actual · ${a.reeleccion ? 'Reelecto en 2024' : periodo(a)}</p>
+      <h2 id="adm-actual-t">${a.alcalde}</h2>
+      ${a.reeleccion ? html`<p class="adm-actual-reel">${a.reeleccion.texto}</p>
+        <ol class="adm-periodos">${a.reeleccion.periodos.map((x, i) => html`<li><b>${x.periodo}</b><span>${x.texto}</span>${i === a.reeleccion.periodos.length - 1 ? html`<em>En curso</em>` : ''}</li>`)}</ol>` : ''}
+      <ul class="adm-grandes">${grandes.map(([v, e, n]) => html`<li><b>${v}</b><span>${e}</span><small>${n}</small></li>`)}</ul>
+    </div>
+
+    <h3 class="adm-sub">Cómo ha cambiado Melipeuco</h3>
+    <p class="adm-sub-intro">Cada indicador compara el último dato disponible con el primero registrado de esta gestión (o el año anterior a ella). Montos en pesos nominales, sin ajustar por inflación.</p>
+    <ul class="adm-cambios">${a.cambios.map((c) => {
+      const p = pct(c), mejora = c.baja_es_buena ? p < 0 : p > 0, maxV = Math.max(c.valor, c.base);
+      return html`<li class="adm-cambio">
+        <p class="adm-cambio-t">${c.titulo}</p>
+        <p class="adm-cambio-v"><b>${valorDe(c, c.valor)}</b><span class="adm-delta ${p >= 0 ? 'adm-sube' : 'adm-baja'}${mejora ? ' adm-mejora' : ''}">${crudo(icono('flecha', { tam: 14 }))}${p > 0 ? '+' : ''}${p}%</span></p>
+        <div class="adm-antes-ahora" aria-hidden="true">
+          <i>${c.anio_base}</i><span style="--p:${Math.round((c.base / maxV) * 100)}%"></span>
+          <i>${c.anio}</i><span class="ahora" style="--p:${Math.round((c.valor / maxV) * 100)}%"></span>
+        </div>
+        <p class="adm-cambio-n">${c.anio_base}: ${valorDe(c, c.base)} → ${c.anio}: ${valorDe(c, c.valor)}. ${c.nota}</p>
+      </li>`; })}</ul>
+
+    <div class="adm-graficos">
+      ${ing.length ? columnas('Ingresos municipales por año', ing.map(([y, v]) => ({ etiqueta: y, valor: v, clase: y >= '2022' ? 'resalta' : y === '2021' ? 'transicion' : '' })),
+        { nota: `${pesos(primero)} en ${ing[0][0]} y ${pesos(ultimo)} en ${ing.at(-1)[0]}. En color, los años completos de la gestión actual; 2021 fue año de cambio (asumió el 28 de junio).` }) : ''}
+      ${perm.length ? columnas('Permisos de circulación y licencias', perm.map(([y, v]) => ({ etiqueta: y, valor: v, clase: y >= '2022' ? 'resalta' : y === '2021' ? 'transicion' : '' })),
+        { nota: 'Lo que pagan los vehículos y conductores de la comuna; desde 2024 con licencias de conducir propias.' }) : ''}
+      ${det.length ? columnas('Peso de los ingresos propios en el presupuesto', det.map(([y, x]) => ({ etiqueta: y, valor: x.ipp_pct, clase: 'resalta' })),
+        { formato: (v) => `${num(v)}%`, etiquetaTodas: true, nota: 'Porcentaje de los ingresos que genera la propia comuna (SINIM). Más ingresos propios significa menos dependencia de otros fondos.' }) : ''}
+      ${det.length ? columnas('Patentes municipales', det.map(([y, x]) => ({ etiqueta: y, valor: x.patentes, clase: 'resalta' })),
+        { etiquetaTodas: true, nota: 'Regularización de patentes: las empresas que operan en el territorio tributan en Melipeuco.' }) : ''}
+    </div>
+
+    ${a.servicios?.length ? html`<h3 class="adm-sub">Servicios que llegaron a la comuna</h3>
+      <ol class="adm-servicios">${a.servicios.map((x) => html`<li><span class="adm-serv-ico">${crudo(icono(x.icono, { tam: 26 }))}</span><small>${x.anio}</small><b>${x.nombre}</b>
+        <p class="adm-antes"><span>Antes</span>${x.antes}</p><p class="adm-ahora"><span>Ahora</span>${x.ahora}</p></li>`)}</ol>` : ''}
+
+    <h3 class="adm-sub">Hitos de la gestión por área</h3>
+    <ol class="adm-areas">${areas.map(([k, n]) => html`<li><span class="adm-area-n">${crudo(icono((AREAS[k] || [, 'escudo'])[1], { tam: 18 }))} ${(AREAS[k] || [k])[0]}</span><span class="adm-area-barra" style="--p:${Math.round((n / maxArea) * 100)}%"><b>${n}</b></span></li>`)}</ol>
+    <p class="adm-saltos"><a href="#${a.id}">Ver todos los hitos, concejos y la cartera de proyectos</a> · <a href="#finanzas">Tabla de finanzas</a></p>
+  </section>`;
+}
+
 export function paginaAdministraciones(ctx) {
   const d = cargar();
   if (!d) return null;
@@ -103,6 +177,8 @@ export function paginaAdministraciones(ctx) {
   <div class="contenedor adm">
     <p class="adm-saltos"><a href="#comparar">Comparación</a> · <a href="#finanzas">Finanzas municipales</a></p>
     <nav class="adm-linea" aria-label="Administraciones">${adms.map((a, i) => html`<a href="#${a.id}" class="adm-linea-item${i === 0 ? ' actual' : ''}"><small>${periodo(a)}</small><b>${a.alcalde}</b><span>${i === 0 ? 'Administración actual' : duracion(a)}</span></a>`)}</nav>
+
+    ${adms[0]?.cambios ? destacadoActual(d, adms[0]) : ''}
 
     ${d.historia?.length ? html`<section class="adm-historia" aria-labelledby="adm-historia-t"><h2 id="adm-historia-t">La alcaldía antes de 2012</h2>${d.comuna?.creacion ? html`<p>${d.comuna.creacion}</p>` : ''}
       <ol class="adm-historia-lista">${d.historia.map((x) => html`<li><b>${x.periodo}</b><span><strong>${x.nombre}</strong> ${x.texto}</span></li>`)}</ol></section>` : ''}
