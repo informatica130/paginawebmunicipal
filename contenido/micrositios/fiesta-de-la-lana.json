@@ -1,0 +1,288 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "fiesta-de-la-lana",
+  "nombre": "Fiesta de la Lana",
+  "slug": "fiesta-de-la-lana",
+  "unidad": "Grupo de Mujeres Campesinas de Melipeuco, con apoyo de la Municipalidad",
+  "descripcion": "Fiesta de la Lana de Melipeuco: artesanía en lana, gastronomía campesina, talleres y música en pleno invierno, desde 2015.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#9A3B66",
+   "oscuro": "#3F1429",
+   "acento": "#E9A92B",
+   "patron": "ondas",
+   "icono": "mano",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/667811252050951.webp"
+  },
+  "portada": {
+   "antetitulo": "Cada invierno · 10 versiones",
+   "titulo": "Fiesta de la Lana",
+   "bajada": "La fiesta que rompe el invierno: tejidos, hilados y teñidos naturales de las artesanas de la cordillera, gastronomía campesina, talleres, desfile de modas y música en vivo en el Gimnasio Municipal.",
+   "botones": [
+    {
+     "texto": "Versión por versión",
+     "url": "#m-historia"
+    },
+    {
+     "texto": "Fotos",
+     "url": "#m-fotos"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "10",
+     "etiqueta": "versiones (2026)"
+    },
+    {
+     "valor": "3 días",
+     "etiqueta": "de fiesta, a fines de junio o comienzos de julio"
+    },
+    {
+     "valor": "Gimnasio",
+     "etiqueta": "Municipal de Melipeuco"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La fiesta",
+    "titulo": "Lana, manos y memoria",
+    "html": "<p>La Fiesta de la Lana reúne cada invierno a las artesanas y artesanos de la comuna para mostrar y vender sus piezas: tejidos a telar y a palillo, hilados, fieltro, teñidos naturales y también artesanía en madera, bisutería con piedras locales y esencias naturales.</p><p>La organiza el Grupo de Mujeres Campesinas de Melipeuco con el apoyo de la Municipalidad, y busca poner en valor el trabajo, los conocimientos y el esfuerzo de quienes mantienen vivas las tradiciones del territorio.</p>",
+    "imagen": "/img/facebook/albumes/1406177156065987.webp",
+    "lado": "derecha",
+    "destacado": "Una fiesta costumbrista que llega a romper la estacionalidad del año con lo mejor de nuestra identidad local.",
+    "botones": []
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Lo que vas a encontrar",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "mano",
+      "etiqueta": "Artesanía",
+      "titulo": "Tejidos y artesanía",
+      "texto": "Piezas en lana, madera, piedra y esencias naturales hechas en la comuna."
+     },
+     {
+      "icono": "fuego",
+      "etiqueta": "Sabores",
+      "titulo": "Gastronomía campesina",
+      "texto": "Cocina de la cordillera para pasar el frío."
+     },
+     {
+      "icono": "libro",
+      "etiqueta": "Aprender",
+      "titulo": "Talleres y conversatorios",
+      "texto": "Tejido de calcetines, flores a crochet, fieltro y más."
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Moda",
+      "titulo": "Desfile de modas",
+      "texto": "Prendas de lana presentadas por las propias artesanas."
+     },
+     {
+      "icono": "cultura",
+      "etiqueta": "Música",
+      "titulo": "Música en vivo",
+      "texto": "Artistas locales durante las tres jornadas."
+     },
+     {
+      "icono": "personas",
+      "etiqueta": "Familia",
+      "titulo": "Actividades para niñas y niños",
+      "texto": "Talleres y juegos para los más pequeños."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "2027",
+      "titulo": "11ª versión",
+      "texto": "Fecha por confirmar.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2026",
+      "titulo": "10ª versión",
+      "texto": "27, 28 y 29 de junio de 2026, Gimnasio Municipal.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "9ª versión",
+      "texto": "Viernes 4 al domingo 6 de julio de 2025, Gimnasio Municipal.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "8ª versión",
+      "texto": "Lanzamiento en junio de 2024.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2023",
+      "titulo": "7ª versión",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2022",
+      "titulo": "6ª versión",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2019",
+      "titulo": "5ª versión",
+      "texto": "Viernes 19 al domingo 21 de julio de 2019.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2018",
+      "titulo": "4ª versión",
+      "texto": "Tres días en el Gimnasio Municipal, con talleres de tejido, desfile de modas de la Agrupación de Mujeres Campesinas y música en vivo.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2017",
+      "titulo": "3ª versión",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2016",
+      "titulo": "2ª versión",
+      "texto": "Lanzamiento en julio de 2016.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2015",
+      "titulo": "1ª versión",
+      "texto": "",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: fiesta de la lana",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "buscar: fiesta de la lana",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Fiesta de la Lana",
+    "cantidad": 6
+   },
+   {
+    "id": "galeria",
+    "tipo": "galeria",
+    "titulo": "Postales de la fiesta",
+    "imagenes": [
+     {
+      "src": "/img/facebook/albumes/667812138717529.webp",
+      "alt": "Fiesta de la Lana 2023"
+     },
+     {
+      "src": "/img/facebook/albumes/1406207466062956.webp",
+      "alt": "Fiesta de la Lana 2016"
+     },
+     {
+      "src": "/img/facebook/albumes/2891261774224177.webp",
+      "alt": "Fiesta de la Lana 2019"
+     },
+     {
+      "src": "/img/facebook/albumes/1395722263778143.webp",
+      "alt": "Lanzamiento de la segunda versión, 2016"
+     }
+    ]
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Cuándo es la Fiesta de la Lana?",
+      "respuesta": "En invierno, a fines de junio o comienzos de julio, durante tres días desde las 10:00 horas."
+     },
+     {
+      "pregunta": "¿Dónde se realiza?",
+      "respuesta": "En el Gimnasio Municipal de Melipeuco."
+     },
+     {
+      "pregunta": "¿Quién la organiza?",
+      "respuesta": "El Grupo de Mujeres Campesinas de Melipeuco, con el apoyo de la Municipalidad."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

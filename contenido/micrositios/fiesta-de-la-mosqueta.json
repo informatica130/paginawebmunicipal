@@ -1,0 +1,232 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "fiesta-de-la-mosqueta",
+  "nombre": "Festival de la Mosqueta Cordillerana",
+  "slug": "fiesta-de-la-mosqueta",
+  "unidad": "Red de Turismo de Melipeuco, con apoyo de la Municipalidad",
+  "descripcion": "Festival Gastronómico de la Mosqueta Cordillerana de Melipeuco: el fruto silvestre del otoño en mermeladas, postres y cocina, desde 2019.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#B3261E",
+   "oscuro": "#4A0E0A",
+   "acento": "#E9A92B",
+   "patron": "hojas",
+   "icono": "hoja",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/2689787787704911.webp"
+  },
+  "portada": {
+   "antetitulo": "Cada otoño · desde 2019",
+   "titulo": "Festival de la Mosqueta Cordillerana",
+   "bajada": "Con el otoño, los cerros de Melipeuco se tiñen de rojo y llega el tiempo de cosechar la rosa mosqueta. La celebramos con cocina en vivo, productos de la zona y el concurso Master Mosqueta.",
+   "botones": [
+    {
+     "texto": "Versión por versión",
+     "url": "#m-historia"
+    },
+    {
+     "texto": "Fotos",
+     "url": "#m-fotos"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "6",
+     "etiqueta": "versiones (2026)"
+    },
+    {
+     "valor": "+40",
+     "etiqueta": "stands en la primera fiesta"
+    },
+    {
+     "valor": "Mayo",
+     "etiqueta": "temporada de mosqueta"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La fiesta",
+    "titulo": "Una joya silvestre entre volcanes",
+    "html": "<p>La rosa mosqueta es un fruto silvestre que crece entre los bosques cordilleranos y guarda muchas historias de las familias de Melipeuco que la cosechan cada otoño.</p><p>La primera Fiesta de la Mosqueta Cordillerana se realizó en 2019 frente a la Municipalidad, con más de 40 stands de las socias y socios de la Red de Turismo, una muestra fotográfica de la historia de la comuna y artistas invitados. Hoy es un festival gastronómico en el Gimnasio Municipal, con elaboración de mermelada en vivo y recetas heredadas de generación en generación.</p>",
+    "imagen": "/img/facebook/albumes/2689789157704774.webp",
+    "lado": "derecha",
+    "destacado": "Rescatar, promover y revitalizar el patrimonio cultural y el turismo de Melipeuco.",
+    "botones": []
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Lo que vas a encontrar",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "fuego",
+      "etiqueta": "En vivo",
+      "titulo": "Mermelada en vivo",
+      "texto": "Cómo el fruto silvestre se transforma paso a paso en mermelada artesanal."
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Concurso",
+      "titulo": "Master Mosqueta",
+      "texto": "Concurso de preparaciones con mosqueta para cocineras y cocineros de la comuna."
+     },
+     {
+      "icono": "trabajo",
+      "etiqueta": "Feria",
+      "titulo": "Productos de la zona",
+      "texto": "Productos de la zona elaborados con rosa mosqueta."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "2027",
+      "titulo": "Próxima versión",
+      "texto": "Otoño de 2027, fecha por confirmar.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2026",
+      "titulo": "6ª versión",
+      "texto": "Mayo de 2026.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "5ª versión",
+      "texto": "Sábado 31 de mayo de 2025, Gimnasio Municipal, con elaboración de mermelada en vivo y el concurso Master Mosqueta. Se promocionó también en Villa Pehuenia, Argentina.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "Festival Gastronómico de la Mosqueta Cordillerana",
+      "texto": "Mayo de 2024.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2022",
+      "titulo": "2ª versión",
+      "texto": "Sábado 28 de mayo de 2022.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2019",
+      "titulo": "1ª versión",
+      "texto": "Frente a la Municipalidad, con más de 40 stands de la Red de Turismo y artistas invitados.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: mosqueta",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "buscar: mosqueta",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Mosqueta",
+    "cantidad": 6
+   },
+   {
+    "id": "galeria",
+    "tipo": "galeria",
+    "titulo": "Postales de la fiesta",
+    "imagenes": [
+     {
+      "src": "/img/facebook/albumes/1141392838026121.webp",
+      "alt": "Fiesta de la Mosqueta 2025"
+     },
+     {
+      "src": "/img/facebook/albumes/862115135953894.webp",
+      "alt": "Festival gastronómico 2024"
+     },
+     {
+      "src": "/img/facebook/albumes/5889507721066219.webp",
+      "alt": "Fiesta de la Mosqueta Cordillerana 2022"
+     }
+    ]
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Cuándo es el festival?",
+      "respuesta": "En otoño, a fines de mayo, cuando termina la temporada de cosecha de la mosqueta."
+     },
+     {
+      "pregunta": "¿Cómo participo en el concurso Master Mosqueta?",
+      "respuesta": "La Municipalidad publica las bases cada año en mayo, en el sitio y en sus redes."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

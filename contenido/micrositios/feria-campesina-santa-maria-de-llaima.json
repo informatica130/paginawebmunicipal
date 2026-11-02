@@ -1,0 +1,162 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "feria-campesina-santa-maria-de-llaima",
+  "nombre": "Feria Campesina de Santa María de Llaima",
+  "slug": "feria-campesina-santa-maria-de-llaima",
+  "unidad": "Agrupación del sector Santa María de Llaima, con apoyo de la Municipalidad",
+  "descripcion": "Feria Campesina Mapuche de Santa María de Llaima: dos días de tradiciones, gastronomía y artesanía cada verano.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#6B7D2A",
+   "oscuro": "#262E0C",
+   "acento": "#E9A92B",
+   "patron": "curvas",
+   "icono": "casa",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/3355828751100808.webp"
+  },
+  "portada": {
+   "antetitulo": "Santa María de Llaima · cada verano",
+   "titulo": "Feria Campesina de Santa María de Llaima",
+   "bajada": "Dos días de verano para disfrutar en familia del entorno del sector Santa María de Llaima, su gastronomía, su artesanía y sus tradiciones ancestrales.",
+   "botones": [
+    {
+     "texto": "Versión por versión",
+     "url": "#m-historia"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "5",
+     "etiqueta": "versiones (2025)"
+    },
+    {
+     "valor": "2 días",
+     "etiqueta": "en febrero"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La feria",
+    "titulo": "Tradiciones que unen a la comunidad",
+    "html": "<p>La Feria Campesina Mapuche de Santa María de Llaima es organizada por las socias de la agrupación del sector con el apoyo de la Municipalidad. Rescata las tradiciones ancestrales y fortalece la unión de la comunidad, con gastronomía, artesanía y una gala con show en vivo.</p>",
+    "imagen": "",
+    "lado": "derecha",
+    "destacado": "",
+    "botones": []
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "2027",
+      "titulo": "Próxima versión",
+      "texto": "Verano, fecha por confirmar.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "5ª versión",
+      "texto": "Febrero de 2025, con gala y show.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2023",
+      "titulo": "4ª versión",
+      "texto": "Febrero de 2023.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2020",
+      "titulo": "3ª versión",
+      "texto": "Dos días en febrero de 2020.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: feria campesina",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "buscar: feria campesina",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Feria Campesina",
+    "cantidad": 6
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Dónde está Santa María de Llaima?",
+      "respuesta": "Es un sector rural de la comuna, que cuenta con su propia posta de salud rural."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

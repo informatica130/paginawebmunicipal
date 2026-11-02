@@ -1,0 +1,287 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "aniversario-de-melipeuco",
+  "nombre": "Aniversario de Melipeuco",
+  "slug": "aniversario-de-melipeuco",
+  "unidad": "Municipalidad de Melipeuco",
+  "descripcion": "Aniversario de la comuna de Melipeuco: cada enero, acto cívico, Feria del Llaima, shows, deporte y actividades para toda la familia.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#0B4F7C",
+   "oscuro": "#062B45",
+   "acento": "#E9A92B",
+   "patron": "puntos",
+   "icono": "estrella",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/6585553428128308.webp"
+  },
+  "portada": {
+   "antetitulo": "Cada enero · desde 1981",
+   "titulo": "Aniversario de Melipeuco",
+   "bajada": "La comuna funciona desde enero de 1981, cuando se separó de Cunco. Cada verano lo celebramos con acto cívico, la Feria del Llaima, shows en vivo, deporte y actividades para toda la familia.",
+   "botones": [
+    {
+     "texto": "Feria del Llaima",
+     "url": "#m-feria"
+    },
+    {
+     "texto": "Así lo celebramos",
+     "url": "#m-historia"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "45",
+     "etiqueta": "aniversarios (enero de 2026)"
+    },
+    {
+     "valor": "XVIII",
+     "etiqueta": "Feria del Llaima (2023)"
+    },
+    {
+     "valor": "+100",
+     "etiqueta": "emprendedores en la feria"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La fiesta",
+    "titulo": "Una comuna joven de la cordillera",
+    "html": "<p>La comuna de Melipeuco fue creada por decreto dado a conocer el 5 de julio de 1980 y comenzó a funcionar en enero de 1981, separada de Cunco. Por eso cada enero, en plena temporada de verano, la comuna celebra su aniversario con varios días de actividades.</p><p>La celebración comienza con el acto cívico y la misa en la Plaza de Armas, y sigue con la Feria del Llaima, shows en vivo, juegos de agua, corrida y cicletada familiar, fiestas costumbristas en los sectores y competencias deportivas.</p>",
+    "imagen": "/img/facebook/albumes/6592498774100440.webp",
+    "lado": "derecha",
+    "destacado": "",
+    "botones": []
+   },
+   {
+    "id": "feria",
+    "tipo": "texto",
+    "ancla": "Feria del Llaima",
+    "titulo": "La Feria del Llaima",
+    "html": "<p>Es la feria de emprendedores del aniversario: más de cien artesanas, artesanos y cocineras de la comuna venden sus productos durante los días de fiesta. En 2020 se realizó la XVI versión, en 2022 la 17ª y en 2023 la XVIII.</p>",
+    "imagen": "/img/facebook/albumes/6585555244794793.webp",
+    "lado": "izquierda",
+    "destacado": "Una feria hecha con el esfuerzo y la perseverancia de cada emprendedor.",
+    "botones": []
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Lo que vas a encontrar",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "escudo",
+      "etiqueta": "Ceremonia",
+      "titulo": "Acto cívico y misa",
+      "texto": "Izamiento del pabellón, saludo de autoridades y misa en la parroquia."
+     },
+     {
+      "icono": "trabajo",
+      "etiqueta": "Feria",
+      "titulo": "Feria del Llaima",
+      "texto": "Artesanía y gastronomía de más de cien emprendedores locales."
+     },
+     {
+      "icono": "cultura",
+      "etiqueta": "Escenario",
+      "titulo": "Shows en vivo",
+      "texto": "Varias noches de música con artistas nacionales y locales."
+     },
+     {
+      "icono": "deporte",
+      "etiqueta": "Deporte",
+      "titulo": "Corrida, cicletada y enduro",
+      "texto": "Corrida familiar 6K, cicletada Jaime Cid, raid enduro y veladas de boxeo."
+     },
+     {
+      "icono": "agua",
+      "etiqueta": "Familia",
+      "titulo": "Juegos de agua y tardes infantiles",
+      "texto": "Piscinas, juegos inflables y actividades para niñas y niños."
+     },
+     {
+      "icono": "casa",
+      "etiqueta": "Sectores",
+      "titulo": "Fiestas costumbristas",
+      "texto": "Del Yugo al Huerto, la Fiesta de la Esquila y otras celebraciones en los sectores rurales."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "Enero 2027",
+      "titulo": "46° aniversario",
+      "texto": "El programa se publicará en la agenda municipal.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2026",
+      "titulo": "45° aniversario",
+      "texto": "Primer Encuentro de Personas Mayores de Melipeuco.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "44° aniversario",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "43° aniversario",
+      "texto": "Fiesta costumbrista Del Yugo al Huerto, enduro en Molulco y velada de boxeo.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2023",
+      "titulo": "42° aniversario",
+      "texto": "XVIII Feria del Llaima, misa, acto cívico y shows del 25 al 28 de enero.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2022",
+      "titulo": "41° aniversario",
+      "texto": "17ª Feria del Llaima con más de cien emprendedores, corrida familiar 6K, juegos de agua y show de cierre.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2020",
+      "titulo": "39° aniversario",
+      "texto": "XVI Feria del Llaima.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2019",
+      "titulo": "38° aniversario",
+      "texto": "Seis días de actividades, del 15 al 20 de enero.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2014",
+      "titulo": "33° aniversario",
+      "texto": "Programa del 14 al 19 de enero: acto cívico, muestra de palín, noches de artistas y fiesta juvenil.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: aniversario, feria del llaima",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "aniversario-melipeuco",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Aniversario, Feria del Llaima",
+    "cantidad": 6
+   },
+   {
+    "id": "galeria",
+    "tipo": "galeria",
+    "titulo": "Postales de la fiesta",
+    "imagenes": [
+     {
+      "src": "/img/facebook/albumes/6594435470573437.webp",
+      "alt": "Show del aniversario 42"
+     },
+     {
+      "src": "/img/facebook/albumes/5510347828982212.webp",
+      "alt": "Corrida familiar 6K, aniversario 41"
+     },
+     {
+      "src": "/img/facebook/albumes/5522856881064640.webp",
+      "alt": "Show de cierre del aniversario 41"
+     },
+     {
+      "src": "/img/facebook/albumes/6629554997061484.webp",
+      "alt": "Show de aniversario 2023"
+     }
+    ]
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Cuándo es el aniversario de la comuna?",
+      "respuesta": "En enero. Las actividades suelen concentrarse en la segunda mitad del mes, con el acto cívico como inicio."
+     },
+     {
+      "pregunta": "¿Y el aniversario del pueblo?",
+      "respuesta": "Es otra fecha: el pueblo de Melipeuco se fundó en 1941 y su aniversario se celebra en septiembre, junto a las Fiestas Patrias."
+     },
+     {
+      "pregunta": "¿Cómo participo en la Feria del Llaima?",
+      "respuesta": "La Municipalidad abre la inscripción de emprendedores en diciembre o comienzos de enero y lo informa en el sitio y en sus redes."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

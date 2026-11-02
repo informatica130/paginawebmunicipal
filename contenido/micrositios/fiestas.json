@@ -1,0 +1,250 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "fiestas",
+  "nombre": "Fiestas y tradiciones",
+  "slug": "fiestas",
+  "unidad": "Municipalidad de Melipeuco",
+  "descripcion": "Calendario de fiestas y tradiciones de Melipeuco: Fiesta del Baqueano, Aniversario, Fiesta de la Lana, Mosqueta, We Tripantu, San Juan, Fiestas Patrias y más.",
+  "organigrama": "",
+  "alias": [
+   "fiestas-y-tradiciones",
+   "tradiciones"
+  ],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#7A3E91",
+   "oscuro": "#3A1748",
+   "acento": "#E9A92B",
+   "patron": "hexagonos",
+   "icono": "calendario",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/6594435470573437.webp"
+  },
+  "portada": {
+   "antetitulo": "Calendario de celebraciones",
+   "titulo": "Fiestas y tradiciones de Melipeuco",
+   "bajada": "Cada mes la cordillera celebra algo: la historia de los baqueanos, la lana, la mosqueta, el Año Nuevo Mapuche, el aniversario de la comuna y del pueblo. Conozca cada fiesta, su historia y cuándo se celebra.",
+   "botones": [
+    {
+     "texto": "Calendario del año",
+     "url": "#m-calendario"
+    },
+    {
+     "texto": "Agenda municipal",
+     "url": "/eventos/"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "8",
+     "etiqueta": "grandes fiestas con su sitio"
+    },
+    {
+     "valor": "12",
+     "etiqueta": "celebraciones a lo largo del año"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "grandes",
+    "tipo": "tarjetas",
+    "ancla": "Fiestas",
+    "titulo": "Las grandes fiestas",
+    "intro": "Cada una tiene su propio sitio con su historia, fotos, videos y noticias.",
+    "columnas": "4",
+    "items": [
+     {
+      "icono": "montana",
+      "etiqueta": "Noviembre · desde 2013",
+      "titulo": "Fiesta del Baqueano",
+      "texto": "La gran fiesta costumbrista de la cordillera: desfile, destrezas y feria.",
+      "url": "/fiesta-del-baqueano/"
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Enero · desde 1981",
+      "titulo": "Aniversario de Melipeuco",
+      "texto": "Acto cívico, Feria del Llaima, shows y deporte.",
+      "url": "/aniversario-de-melipeuco/"
+     },
+     {
+      "icono": "mano",
+      "etiqueta": "Junio–julio · 10 versiones",
+      "titulo": "Fiesta de la Lana",
+      "texto": "Artesanía en lana, cocina campesina y talleres en pleno invierno.",
+      "url": "/fiesta-de-la-lana/"
+     },
+     {
+      "icono": "hoja",
+      "etiqueta": "Mayo · desde 2019",
+      "titulo": "Festival de la Mosqueta",
+      "texto": "El fruto silvestre del otoño en mermeladas, postres y cocina.",
+      "url": "/fiesta-de-la-mosqueta/"
+     },
+     {
+      "icono": "sol",
+      "etiqueta": "21–24 de junio",
+      "titulo": "We Tripantu",
+      "texto": "Año Nuevo Mapuche: ceremonia en el Aliwen y mizawün.",
+      "url": "/we-tripantu/"
+     },
+     {
+      "icono": "fuego",
+      "etiqueta": "Junio · Alpehue Alto",
+      "titulo": "Fiesta de San Juan",
+      "texto": "Estofado, tejo, talleres y Ballet Municipal en el sector.",
+      "url": "/fiesta-de-san-juan/"
+     },
+     {
+      "icono": "casa",
+      "etiqueta": "Febrero",
+      "titulo": "Feria Campesina de Santa María de Llaima",
+      "texto": "Dos días de tradiciones y gastronomía en el sector.",
+      "url": "/feria-campesina-santa-maria-de-llaima/"
+     },
+     {
+      "icono": "escudo",
+      "etiqueta": "Septiembre · desde 1941",
+      "titulo": "Fiestas Patrias y Aniversario del Pueblo",
+      "texto": "Desfile, Feria de la Chilenidad, ramadas y cueca.",
+      "url": "/fiestas-patrias/"
+     }
+    ]
+   },
+   {
+    "id": "calendario",
+    "tipo": "tabla",
+    "ancla": "Calendario",
+    "titulo": "El año en fiestas",
+    "intro": "Las fechas exactas de cada año se publican en la agenda municipal.",
+    "columnas": [
+     "Mes",
+     "Fiesta",
+     "Dónde"
+    ],
+    "filas": "Enero | Aniversario de Melipeuco y Feria del Llaima | Plaza de Armas y sectores\nEnero | Fiesta costumbrista Del Yugo al Huerto y Fiesta de la Esquila | Sectores rurales\nFebrero | Feria Campesina de Santa María de Llaima | Santa María de Llaima\nMayo | Festival de la Mosqueta Cordillerana | Gimnasio Municipal\nJunio | We Tripantu, Año Nuevo Mapuche | Aliwen y Gimnasio Municipal\nJunio | Fiesta Gastronómica del Changle | Gimnasio Municipal\nJunio – julio | Fiesta Costumbrista de San Juan | Alpehue Alto\nJunio – julio | Fiesta de la Lana | Gimnasio Municipal\nJulio – agosto | Fiesta de la Cerveza en Invierno | Gimnasio Municipal\nSeptiembre | Fiestas Patrias y Aniversario del Pueblo | Plaza de Armas\nNoviembre | Fiesta del Baqueano | Parque Estadio y Recinto de la Agrupación de Baqueanos\nDiciembre | Tardes Navideñas en los sectores | Sectores rurales",
+    "nota": "Según las celebraciones registradas entre 2013 y 2026."
+   },
+   {
+    "id": "otras-fiestas",
+    "tipo": "tarjetas",
+    "ancla": "Más fiestas",
+    "titulo": "Otras celebraciones de la comuna",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "casa",
+      "etiqueta": "Enero · aniversario",
+      "titulo": "Del Yugo al Huerto",
+      "texto": "Fiesta costumbrista del aniversario, con inauguración y show (2023 y 2024).",
+      "url": "/fotos/?q=yugo"
+     },
+     {
+      "icono": "mano",
+      "etiqueta": "Enero · Sahuelhue",
+      "titulo": "Fiesta de la Esquila",
+      "texto": "La esquila tradicional de ovejas en el sector Sahuelhue (2022).",
+      "url": "/fotos/?q=esquila"
+     },
+     {
+      "icono": "hoja",
+      "etiqueta": "Junio · desde 2025",
+      "titulo": "Fiesta Gastronómica del Changle",
+      "texto": "El hongo de los bosques de Melipeuco, organizada por la Agrupación Gastronómica Sabores de la Tierra.",
+      "url": "/buscar/?q=changle"
+     },
+     {
+      "icono": "fuego",
+      "etiqueta": "Julio–agosto · 3 versiones",
+      "titulo": "Fiesta de la Cerveza en Invierno",
+      "texto": "Más de 15 variedades de cerveza artesanal de la Agrupación de Cerveceros Kutralkura.",
+      "url": "/buscar/?q=cerveza"
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Febrero · 2025",
+      "titulo": "Fiesta del Huevo",
+      "texto": "Celebración costumbrista del verano.",
+      "url": "/fotos/?q=huevo"
+     },
+     {
+      "icono": "corazon",
+      "etiqueta": "Diciembre",
+      "titulo": "Tardes Navideñas",
+      "texto": "Navidad en los sectores Dahuelhue, Cumcumllaque y Santa María de Llaima.",
+      "url": "/fotos/?q=tardes+navide"
+     },
+     {
+      "icono": "personas",
+      "etiqueta": "Febrero · Alpehue",
+      "titulo": "Fiesta de la Hermandad Chile–Argentina",
+      "texto": "Encuentro binacional en Alpehue (2015).",
+      "url": "/fotos/?q=hermandad"
+     },
+     {
+      "icono": "cultura",
+      "etiqueta": "Julio",
+      "titulo": "Campeonato comunal de cueca escolar",
+      "texto": "Escuelas rurales y urbanas eligen a sus parejas para el provincial.",
+      "url": "/fotos/?q=cueca"
+     }
+    ]
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Fiestas en fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: fiesta, feria, tripant, aniversario",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Fiestas en video",
+    "fuente": "videos",
+    "filtro": "fiestas-costumbristas",
+    "cantidad": 4
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fiestas",
+    "items": [],
+    "categoria": "cultura",
+    "vacio": "Revise la agenda municipal para las próximas fechas."
+   },
+   {
+    "id": "participa",
+    "tipo": "llamado",
+    "titulo": "¿Quieres participar con un stand?",
+    "texto": "Las convocatorias para emprendedores de cada fiesta se publican en las noticias y en las redes de la Municipalidad, normalmente unas semanas antes.",
+    "icono": "trabajo",
+    "boton": "Ver noticias",
+    "url": "/noticias/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}
