@@ -1,0 +1,316 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "fiesta-del-baqueano",
+  "nombre": "Fiesta del Baqueano",
+  "slug": "fiesta-del-baqueano",
+  "unidad": "Municipalidad de Melipeuco y Agrupación de Baqueanos",
+  "descripcion": "Fiesta del Baqueano de Melipeuco: la gran fiesta costumbrista de la cordillera, con desfile, destrezas baqueanas, feria y música, desde 2013.",
+  "organigrama": "",
+  "alias": [
+   "fiestadelbaqueano",
+   "baqueano"
+  ],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#8B4A1F",
+   "oscuro": "#3D1E0A",
+   "acento": "#E9A92B",
+   "patron": "montes",
+   "icono": "montana",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/753279920170750.webp"
+  },
+  "portada": {
+   "antetitulo": "La gran fiesta de la cordillera · desde 2013",
+   "titulo": "Fiesta del Baqueano",
+   "bajada": "Cada fin de año Melipeuco revive la historia de los baqueanos: arrieros, campesinos y conocedores de la montaña que abrieron los caminos de la cordillera. Desfile, destrezas baqueanas, feria, gastronomía y música.",
+   "botones": [
+    {
+     "texto": "Versión por versión",
+     "url": "#m-historia"
+    },
+    {
+     "texto": "Fotos y videos",
+     "url": "#m-fotos"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "12",
+     "etiqueta": "versiones (2013–2025)"
+    },
+    {
+     "valor": "170",
+     "etiqueta": "stands en la feria 2025"
+    },
+    {
+     "valor": "Nov.",
+     "etiqueta": "se celebra a fines de año"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La fiesta",
+    "titulo": "¿Qué es un baqueano?",
+    "html": "<p>Decirle a alguien de Melipeuco que es un baqueano es un elogio: el baqueano conoce la tierra, los pasos de la cordillera y los caminos que recorrieron por generaciones los arrieros en las faenas madereras y ganaderas y en las veranadas.</p><p>La primera Fiesta del Baqueano se celebró el sábado 12 de octubre de 2013, con el apoyo de la Cámara de Comercio, la Cámara de Turismo, el Gobierno Regional, Sercotec y la Municipalidad, con un propósito claro: que la historia de Melipeuco y su gente no se cuente, sino que se muestre. Desde entonces se ha convertido en la celebración emblemática de la comuna, organizada junto a la Agrupación de Baqueanos.</p>",
+    "imagen": "/img/facebook/albumes/1255076937842677.webp",
+    "lado": "derecha",
+    "destacado": "Aquí no se cuenta la historia: se muestra en carne viva la historia de Melipeuco y su gente.",
+    "botones": [
+     {
+      "texto": "Ruta del Baqueano",
+      "url": "/fotos/se-inaugura-la-ruta-del-baqueano-2014/"
+     }
+    ]
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Lo que vas a encontrar",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "mapa",
+      "etiqueta": "Tradición",
+      "titulo": "Desfile baqueano",
+      "texto": "El tradicional desfile de la fiesta recorre el pueblo con agrupaciones y baqueanos de la comuna."
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Campo",
+      "titulo": "Destrezas baqueanas",
+      "texto": "Las destrezas de los baqueanos, en el recinto de la Agrupación de Baqueanos."
+     },
+     {
+      "icono": "trabajo",
+      "etiqueta": "Feria",
+      "titulo": "Feria de emprendedores",
+      "texto": "Artesanía, talabartería, agroelaborados, cerveza artesanal, plantas y gastronomía: 170 stands en 2025."
+     },
+     {
+      "icono": "fuego",
+      "etiqueta": "Sabores",
+      "titulo": "Asados y cocina de la cordillera",
+      "texto": "Asados en el recinto de la Agrupación y gastronomía típica en la feria."
+     },
+     {
+      "icono": "cultura",
+      "etiqueta": "Música",
+      "titulo": "Música en vivo",
+      "texto": "Artistas locales y grupos invitados durante las dos jornadas."
+     },
+     {
+      "icono": "casa",
+      "etiqueta": "Patrimonio",
+      "titulo": "Casa del Baqueano",
+      "texto": "Utensilios y oficios de antaño, y talleres como el de herraje en la Casa del Baqueano."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "2026",
+      "titulo": "13ª versión",
+      "texto": "Fecha por confirmar: se publicará en la agenda municipal.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "12ª versión",
+      "texto": "Sábado 29 y domingo 30 de noviembre de 2025, en el Parque Estadio Municipal y el Recinto de la Agrupación de Baqueanos, con 170 stands.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "11ª versión",
+      "texto": "Fines de noviembre de 2024.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2023",
+      "titulo": "10ª versión",
+      "texto": "Lanzamiento oficial en Temuco y dos días de fiesta a fines de noviembre.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2022",
+      "titulo": "9ª versión",
+      "texto": "Desfile y destrezas baqueanas en noviembre de 2022.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2021",
+      "titulo": "8ª versión",
+      "texto": "Noviembre de 2021.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2020",
+      "titulo": "7ª versión",
+      "texto": "Suspendida en noviembre de 2019; se realizó el 22 y 23 de febrero de 2020 en el recinto de la Agrupación y la Plaza de Armas, con lanzamiento en Temuco.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2018",
+      "titulo": "6ª versión",
+      "texto": "Noviembre de 2018.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2017",
+      "titulo": "5ª versión",
+      "texto": "Noviembre de 2017.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2016",
+      "titulo": "4ª versión",
+      "texto": "Museo en el Parador Turístico con utensilios de las faenas de antaño.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2015",
+      "titulo": "3ª versión",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2014",
+      "titulo": "2ª versión",
+      "texto": "En abril de ese año se inauguró además la Ruta del Baqueano (S-575), que une Melipeuco con Curarrehue.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2013",
+      "titulo": "1ª versión",
+      "texto": "Sábado 12 de octubre de 2013. Nace la fiesta con la Cámara de Comercio, la Cámara de Turismo, el Gobierno Regional, Sercotec y la Municipalidad.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "fiesta-del-baqueano",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: baquean",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "fiesta-del-baqueano",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Baqueano",
+    "cantidad": 6
+   },
+   {
+    "id": "galeria",
+    "tipo": "galeria",
+    "titulo": "Postales de la fiesta",
+    "imagenes": [
+     {
+      "src": "/img/facebook/albumes/753289086836500.webp",
+      "alt": "Fiesta del Baqueano 2023"
+     },
+     {
+      "src": "/img/facebook/albumes/1292312749600795.webp",
+      "alt": "Fiesta del Baqueano 2025"
+     },
+     {
+      "src": "/img/facebook/albumes/2489718227711869.webp",
+      "alt": "Fiesta del Baqueano 2018"
+     },
+     {
+      "src": "/img/facebook/albumes/1542212032462498.webp",
+      "alt": "Museo en el Parador Turístico"
+     },
+     {
+      "src": "/img/facebook/albumes/1255054237844947.webp",
+      "alt": "Fiesta del Baqueano 2015"
+     },
+     {
+      "src": "/img/facebook/albumes/972777742739266.webp",
+      "alt": "Lanzamiento de la segunda versión, 2014"
+     }
+    ]
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Cuándo es la Fiesta del Baqueano?",
+      "respuesta": "Se celebra a fines de año, entre fines de noviembre y comienzos de diciembre. La fecha de cada versión se publica en la agenda municipal y en las redes de la Municipalidad."
+     },
+     {
+      "pregunta": "¿Dónde se realiza?",
+      "respuesta": "En 2025 se realizó en dos lugares a la vez: el Parque Estadio Municipal y el Recinto de la Agrupación de Baqueanos. En versiones anteriores también se usó la Plaza de Armas."
+     },
+     {
+      "pregunta": "¿Cómo participo con un stand en la feria?",
+      "respuesta": "La Municipalidad abre una convocatoria en línea unas semanas antes (en 2025, del 1 al 5 de noviembre) para artesanía, gastronomía, cerveza artesanal, agroelaborados, talabartería, food trucks, plantas y asados. Los seleccionados se publican en el sitio."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

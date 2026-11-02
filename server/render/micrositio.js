@@ -81,8 +81,8 @@ async function modulo(ctx, s, m) {
         const lista = ctx.repo.listar({ tipo: 'autoridad', publico: true, orden: 'orden', limite: 50 }).items.filter((a) => !f || f.split(/[,\s]+/).includes(a.datos.cargo));
         return lista.length ? html`${cab(m)}<div class="autoridades">${lista.map((a) => tarjetaAutoridad(ctx, a))}</div>` : '';
       }
-      if (m.fuente === 'fotos') { const v = franjaFotos(ctx, m.titulo || 'Fotos', { area: f || s.slug, cantidad: n }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
-      if (m.fuente === 'videos') { const v = franjaVideos(m.titulo || 'Videos', { categoria: f, cantidad: n, enlace: f ? `/videos/?categoria=${encodeURIComponent(f)}` : '/videos/' }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
+      if (m.fuente === 'fotos') { const q = /^buscar:/i.test(f) ? f.slice(7).trim() : ''; const v = franjaFotos(ctx, m.titulo || 'Fotos', q ? { buscar: q, cantidad: n } : { area: f || s.slug, cantidad: n }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
+      if (m.fuente === 'videos') { const q = /^buscar:/i.test(f) ? f.slice(7).trim() : ''; const v = franjaVideos(m.titulo || 'Videos', q ? { buscar: q, cantidad: n, enlace: `/videos/?q=${encodeURIComponent(q.split(',')[0].trim())}` } : { categoria: f, cantidad: n, enlace: f ? `/videos/?categoria=${encodeURIComponent(f)}` : '/videos/' }); return String(v) ? html`${m.intro ? html`<p class="ms-intro-suelta">${m.intro}</p>` : ''}${v}` : ''; }
       const b = { id: 'c' + m.id, tipo: m.fuente, titulo: '', cantidad: n, grupo: f, tipoLugar: f, formulario: f || 'contacto' };
       const r = (await renderBloques(ctx, [b])).map(String).join('');
       return r.trim() ? html`${cab(m)}${crudo(r)}` : '';

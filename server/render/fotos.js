@@ -118,11 +118,13 @@ export function fichaAlbum(ctx, slug) {
 }
 
 // Fotos de un área municipal (para su micrositio) o de una categoría.
-export function franjaFotos(ctx, titulo, { area = '', categoria = '', cantidad = 4 } = {}) {
+// «buscar»: frases separadas por coma; vale el álbum cuyo título nombre cualquiera de ellas (ej.: fiestas).
+export function franjaFotos(ctx, titulo, { area = '', categoria = '', buscar = '', cantidad = 4 } = {}) {
   const ix = indice();
   if (!ix) return '';
-  const lista = ix.albumes.filter((a) => a.fotos.length && (!area || (a.areas || []).includes(area)) && (!categoria || a.categoria === categoria)).slice(0, cantidad);
-  const enlace = categoria ? `${BASE}?categoria=${categoria}` : BASE;
+  const frases = buscar.split(',').map((x) => norm(x).trim()).filter(Boolean);
+  const lista = ix.albumes.filter((a) => a.fotos.length && (!area || (a.areas || []).includes(area)) && (!categoria || a.categoria === categoria) && (!frases.length || frases.some((f) => norm(a.titulo).includes(f)))).slice(0, cantidad);
+  const enlace = frases.length ? `${BASE}?q=${encodeURIComponent(buscar.split(',')[0].trim())}` : categoria ? `${BASE}?categoria=${categoria}` : BASE;
   return lista.length ? html`<section class="vd-franja ft-franja"><div class="vd-fila-cab"><h2>${titulo}</h2><a class="ver-todo" href="${enlace}">Ver todas las fotos</a></div><div class="ft-grilla ft-compacta">${lista.map((a) => tarjetaAlbum(ctx, ix, a))}</div></section>` : '';
 }
 

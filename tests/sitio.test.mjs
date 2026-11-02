@@ -710,3 +710,22 @@ test('administraciones: alcaldes, concejos, hitos con enlace y comparación', as
   const todo = ['contenido/facebook/noticias.json', 'contenido/administraciones.json', 'contenido/comuna.json'].map((f) => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8')).join(' ');
   assert.doesNotMatch(todo, /Dirección IP|drive\.google|(?<![\d.$])\d{1,3}(\.\d{1,3}){3}(?![\d.])/);
 });
+
+test('fiestas: un micrositio por fiesta, portada con calendario y dirección antigua', async () => {
+  const s = await admin();
+  await api(s, 'POST', 'importar-facebook');
+  const hub = await (await pedir('/fiestas/')).text();
+  for (const t of ['Fiestas y tradiciones de Melipeuco', 'El año en fiestas', 'Otras celebraciones de la comuna']) assert.ok(hub.includes(t), t);
+  for (const slug of ['fiesta-del-baqueano', 'aniversario-de-melipeuco', 'fiesta-de-la-lana', 'fiesta-de-la-mosqueta', 'we-tripantu', 'fiesta-de-san-juan', 'feria-campesina-santa-maria-de-llaima', 'fiestas-patrias']) {
+    assert.ok(hub.includes(`href="/${slug}/"`), slug);
+    const r = await pedir(`/${slug}/`);
+    assert.equal(r.status, 200, slug);
+    const h = await r.text();
+    assert.match(h, /Versión por versión|ms-hito/, slug);
+  }
+  const baq = await (await pedir('/fiesta-del-baqueano/')).text();
+  assert.match(baq, /12 de octubre de 2013/);
+  assert.match(baq, /class="ft-tarjeta"/);
+  const vieja = await pedir('/fiestadelbaqueano/');
+  assert.ok([200, 301, 302].includes(vieja.status));
+});

@@ -1,0 +1,217 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "fiesta-de-san-juan",
+  "nombre": "Fiesta Costumbrista de San Juan",
+  "slug": "fiesta-de-san-juan",
+  "unidad": "Junta de Vecinos N°16 de Alpehue Alto, Taller Laboral Siempre Vivas, PDTI y Municipalidad",
+  "descripcion": "Fiesta Costumbrista de San Juan en Alpehue Alto, Melipeuco: tradición, estofado, tejo, mizawün y talleres cada junio desde 2022.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#2F6B3F",
+   "oscuro": "#11291A",
+   "acento": "#E9A92B",
+   "patron": "araucarias",
+   "icono": "fuego",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/5977832772233713.webp"
+  },
+  "portada": {
+   "antetitulo": "Alpehue Alto · cada junio desde 2022",
+   "titulo": "Fiesta Costumbrista de San Juan",
+   "bajada": "En la noche más larga del año, el sector Alpehue Alto se reúne a celebrar San Juan con estofado, juegos tradicionales, talleres de fieltro y la presentación del Ballet Municipal.",
+   "botones": [
+    {
+     "texto": "Versión por versión",
+     "url": "#m-historia"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "5",
+     "etiqueta": "versiones (2026)"
+    },
+    {
+     "valor": "Alpehue Alto",
+     "etiqueta": "Gimnasio del sector"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La fiesta",
+    "titulo": "Una fiesta hecha por el sector",
+    "html": "<p>La Fiesta Costumbrista de San Juan nació en 2022 por iniciativa de la Junta de Vecinos N°16 de Alpehue Alto y del Taller Laboral Siempre Vivas, junto a usuarios del PDTI y la Municipalidad. Se celebra en el gimnasio del sector, en torno a la fecha de San Juan (24 de junio).</p>",
+    "imagen": "",
+    "lado": "derecha",
+    "destacado": "Seguir celebrando las tradiciones que dan vida a nuestra cordillera.",
+    "botones": []
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Lo que vas a encontrar",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "fuego",
+      "etiqueta": "Sabores",
+      "titulo": "Estofado y cocina tradicional",
+      "texto": "Preparado por la organización para compartir."
+     },
+     {
+      "icono": "mano",
+      "etiqueta": "Talleres",
+      "titulo": "Fieltro en lana y pita",
+      "texto": "Talleres de artesanía abiertos a la comunidad."
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Juegos",
+      "titulo": "Competencia de tejo",
+      "texto": "Y otros juegos tradicionales para toda la familia."
+     },
+     {
+      "icono": "cultura",
+      "etiqueta": "Danza",
+      "titulo": "Ballet Municipal",
+      "texto": "Presentación del Ballet Municipal de Melipeuco."
+     },
+     {
+      "icono": "personas",
+      "etiqueta": "Compartir",
+      "titulo": "Mizawün",
+      "texto": "Encuentro tradicional en torno a los alimentos."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "2027",
+      "titulo": "6ª versión",
+      "texto": "Fecha por confirmar.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2026",
+      "titulo": "5ª versión",
+      "texto": "Sábado 4 de julio de 2026, con Ballet Municipal, mizawün, estofado, talleres y competencia de tejo.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "4ª versión",
+      "texto": "Viernes 20 de junio de 2025.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "3ª versión",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2023",
+      "titulo": "2ª versión",
+      "texto": "Sábado 24 de junio de 2023, con gastronomía, artesanía, talabartería, amistoso de fútbol infantil y taller de fieltro.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2022",
+      "titulo": "1ª versión",
+      "texto": "Sábado 25 de junio de 2022, Gimnasio Municipal de Alpehue Alto.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: san juan",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "buscar: fiesta de san juan",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "San Juan",
+    "cantidad": 6
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Dónde es la fiesta?",
+      "respuesta": "En el sector Alpehue Alto, en el gimnasio de la junta de vecinos."
+     },
+     {
+      "pregunta": "¿Cuándo?",
+      "respuesta": "En torno a la fecha de San Juan, a fines de junio o comienzos de julio."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

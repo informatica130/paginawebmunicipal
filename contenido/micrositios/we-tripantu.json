@@ -1,0 +1,232 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "we-tripantu",
+  "nombre": "We Tripantu",
+  "slug": "we-tripantu",
+  "unidad": "Comunidades mapuche de Melipeuco y Municipalidad",
+  "descripcion": "We Tripantu, Año Nuevo Mapuche, en Melipeuco: ceremonia en el Aliwen, mizawün y actividades culturales cada 21 a 24 de junio.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#1F4E79",
+   "oscuro": "#0B2238",
+   "acento": "#E9A92B",
+   "patron": "triangulos",
+   "icono": "sol",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/1161377879360950.webp"
+  },
+  "portada": {
+   "antetitulo": "Año Nuevo Mapuche · cada junio",
+   "titulo": "We Tripantu",
+   "bajada": "Con el solsticio de invierno comienza un nuevo ciclo. Junto a las comunidades mapuche, Melipeuco lo celebra con una ceremonia en el Aliwen y un encuentro de alimentos y cultura.",
+   "botones": [
+    {
+     "texto": "Cómo se celebra",
+     "url": "#m-fiesta"
+    },
+    {
+     "texto": "Fotos",
+     "url": "#m-fotos"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "21–24",
+     "etiqueta": "de junio, solsticio de invierno"
+    },
+    {
+     "valor": "52%",
+     "etiqueta": "de la comuna se identifica con un pueblo originario (Censo 2024)"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La celebración",
+    "titulo": "Wiñoy Tripantu: vuelve el sol",
+    "html": "<p>El We Tripantu, o Wiñoy Tripantu, marca el regreso del sol tras la noche más larga del año y el inicio de un nuevo ciclo de la naturaleza. Es una de las celebraciones más significativas del territorio de Melipeuco, donde más de la mitad de la población se identifica con un pueblo originario.</p><p>La celebración comunal comienza con una ceremonia (llellipun) en el Aliwen, el espacio ceremonial ubicado frente a la Municipalidad, y continúa con un mizawün —donde se comparten los alimentos tradicionales traídos por las comunidades— y actividades culturales en el Gimnasio Municipal. Escuelas y jardines infantiles realizan también sus propias celebraciones.</p>",
+    "imagen": "/img/facebook/albumes/1161380116027393.webp",
+    "lado": "derecha",
+    "destacado": "Una fecha que marca el inicio de un nuevo ciclo y nos invita a reencontrarnos con nuestras raíces.",
+    "botones": []
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Cómo se celebra",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "sol",
+      "etiqueta": "Ceremonia",
+      "titulo": "Llellipun en el Aliwen",
+      "texto": "Rogativa junto a las comunidades en el espacio ceremonial frente a la Municipalidad."
+     },
+     {
+      "icono": "personas",
+      "etiqueta": "Compartir",
+      "titulo": "Mizawün",
+      "texto": "Se comparten los alimentos tradicionales que traen las comunidades."
+     },
+     {
+      "icono": "escuela",
+      "etiqueta": "Escuelas",
+      "titulo": "Celebraciones escolares",
+      "texto": "Jardines interculturales y escuelas de la comuna celebran con sus familias."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "Junio 2027",
+      "titulo": "Próximo We Tripantu",
+      "texto": "Entre el 21 y el 24 de junio.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2026",
+      "titulo": "We Tripantu comunal",
+      "texto": "22 de junio: ceremonia en el Aliwen y actividades culturales en el Gimnasio Municipal.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "We Tripantü comunal",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "We Tripantü comunal",
+      "texto": "Y celebración en la Escuela Volcán Llaima.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2016",
+      "titulo": "Celebraciones en escuelas y jardines",
+      "texto": "Jardín Infantil Los Peques, Jardín Intercultural Pehuen, Escuela Carén y celebración municipal.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2013",
+      "titulo": "We Tripantu en el Aliwen",
+      "texto": "26 de junio: rogativa en el espacio ceremonial y mizawün en el Gimnasio Municipal, junto a la comisión de comunidades indígenas.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: tripant",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "buscar: tripantu",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Tripantu",
+    "cantidad": 6
+   },
+   {
+    "id": "galeria",
+    "tipo": "galeria",
+    "titulo": "Postales de la fiesta",
+    "imagenes": [
+     {
+      "src": "/img/facebook/albumes/1388455394504830.webp",
+      "alt": "We Tripantu municipal 2016"
+     },
+     {
+      "src": "/img/facebook/albumes/885066130325461.webp",
+      "alt": "We Tripantü en la Escuela Volcán Llaima, 2024"
+     },
+     {
+      "src": "/img/facebook/albumes/1387643584586011.webp",
+      "alt": "Jardín Intercultural Pehuen, 2016"
+     },
+     {
+      "src": "/img/facebook/albumes/671499912867052.webp",
+      "alt": "We Tripantu 2013"
+     }
+    ]
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Qué es el We Tripantu?",
+      "respuesta": "Es el Año Nuevo Mapuche: celebra el solsticio de invierno y el comienzo de un nuevo ciclo de la naturaleza."
+     },
+     {
+      "pregunta": "¿Puedo asistir?",
+      "respuesta": "Sí. La celebración comunal es abierta; se pide respeto por la ceremonia y seguir las indicaciones de las autoridades tradicionales."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

@@ -1,0 +1,258 @@
+{
+ "predeterminado": true,
+ "sitio": {
+  "id": "fiestas-patrias",
+  "nombre": "Fiestas Patrias y Aniversario del Pueblo",
+  "slug": "fiestas-patrias",
+  "unidad": "Municipalidad de Melipeuco",
+  "descripcion": "Septiembre en Melipeuco: aniversario del pueblo (fundado en 1941), desfile, Feria de la Chilenidad, ramadas, cueca y actividades patrias.",
+  "organigrama": "",
+  "alias": [],
+  "publicado": true,
+  "actualizado": "2026-11-02",
+  "tema": {
+   "color": "#B3261E",
+   "oscuro": "#4A0B0B",
+   "acento": "#1C5F99",
+   "patron": "diagonales",
+   "icono": "escudo",
+   "portada": "dividida",
+   "imagen": "/img/facebook/albumes/944574887707918.webp"
+  },
+  "portada": {
+   "antetitulo": "Cada septiembre · pueblo fundado en 1941",
+   "titulo": "Fiestas Patrias y Aniversario del Pueblo",
+   "bajada": "Septiembre se vive doble en Melipeuco: celebramos el aniversario del pueblo, fundado en 1941, y las Fiestas Patrias con desfile, Feria de la Chilenidad, ramadas, cueca y actividades para toda la familia.",
+   "botones": [
+    {
+     "texto": "Así lo celebramos",
+     "url": "#m-historia"
+    },
+    {
+     "texto": "Fotos",
+     "url": "#m-fotos"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "85",
+     "etiqueta": "años del pueblo (2026)"
+    },
+    {
+     "valor": "1941",
+     "etiqueta": "fundación del pueblo"
+    }
+   ]
+  },
+  "contacto": {
+   "responsable": "",
+   "cargo": "",
+   "telefono": "",
+   "email": "",
+   "direccion": "Municipalidad de Melipeuco, Pedro Aguirre Cerda N° 14",
+   "horario": "Lunes a viernes de 08:30 a 13:30 y de 14:30 a 17:30 hrs.",
+   "redes": [
+    {
+     "texto": "Consultas, reclamos y sugerencias (OIRS)",
+     "url": "/oirs/"
+    }
+   ]
+  },
+  "modulos": [
+   {
+    "id": "fiesta",
+    "tipo": "texto",
+    "ancla": "La fiesta",
+    "titulo": "Un mes de celebraciones",
+    "html": "<p>El pueblo de Melipeuco se fundó en 1941 y cada septiembre celebra su aniversario junto a las Fiestas Patrias. El mes incluye el acto cívico y desfile en honor a las Glorias del Ejército, la misa y el Te Deum, la inauguración de las ramadas, la Feria de la Chilenidad en la Plaza de Armas, la Peña Folclórica Inclusiva, la cicletada familiar y campeonatos de cueca.</p>",
+    "imagen": "/img/facebook/albumes/944582517707155.webp",
+    "lado": "derecha",
+    "destacado": "",
+    "botones": []
+   },
+   {
+    "id": "que-hay",
+    "tipo": "tarjetas",
+    "ancla": "Qué hay",
+    "titulo": "Lo que vas a encontrar",
+    "columnas": "3",
+    "items": [
+     {
+      "icono": "mapa",
+      "etiqueta": "Ceremonia",
+      "titulo": "Desfile y acto cívico",
+      "texto": "Instituciones, escuelas y agrupaciones desfilan en honor a las Glorias del Ejército."
+     },
+     {
+      "icono": "trabajo",
+      "etiqueta": "Feria",
+      "titulo": "Feria de la Chilenidad",
+      "texto": "Gastronomía, artesanía y música folclórica en la Plaza de Armas."
+     },
+     {
+      "icono": "cultura",
+      "etiqueta": "Folclor",
+      "titulo": "Cueca y peña folclórica",
+      "texto": "Campeonatos de cueca y la Peña Folclórica Inclusiva."
+     },
+     {
+      "icono": "casa",
+      "etiqueta": "Ramadas",
+      "titulo": "Ramadas y fondas",
+      "texto": "Inauguración oficial de las ramadas de la comuna."
+     },
+     {
+      "icono": "deporte",
+      "etiqueta": "Familia",
+      "titulo": "Cicletada y juegos populares",
+      "texto": "Actividades para disfrutar en familia."
+     },
+     {
+      "icono": "estrella",
+      "etiqueta": "Aniversario",
+      "titulo": "Aniversario del pueblo",
+      "texto": "Shows, ferias y actividades especiales, como los globos aerostáticos del 85° aniversario."
+     }
+    ]
+   },
+   {
+    "id": "historia",
+    "tipo": "hitos",
+    "ancla": "Historia",
+    "titulo": "Versión por versión",
+    "intro": "Las ediciones registradas en las publicaciones de la Municipalidad.",
+    "items": [
+     {
+      "periodo": "Septiembre 2027",
+      "titulo": "86 años del pueblo",
+      "texto": "El programa se publicará en la agenda municipal.",
+      "estado": "pendiente"
+     },
+     {
+      "periodo": "2026",
+      "titulo": "85 años del pueblo",
+      "texto": "Feria de la Chilenidad con Entremares en la Plaza de Armas, show infantil con globos aerostáticos y primera piedra del Centro de Diálisis.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2025",
+      "titulo": "Fiestas Patrias 2025",
+      "texto": "Desfile, Peña Folclórica Inclusiva y Cicletada Familiar.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2024",
+      "titulo": "83 años del pueblo",
+      "texto": "Feria del aniversario y conmemoración de las Glorias del Ejército.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2021",
+      "titulo": "80 años del pueblo",
+      "texto": "Acto cívico del aniversario.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2018",
+      "titulo": "Misa y desfile de septiembre",
+      "texto": "",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2015",
+      "titulo": "Fiestas Patrias 2015",
+      "texto": "Desfile e inauguración de ramadas.",
+      "estado": "hecho"
+     },
+     {
+      "periodo": "2014",
+      "titulo": "73 años del pueblo",
+      "texto": "Celebración del aniversario, provincial de cueca y desfile con inauguración de fondas.",
+      "estado": "hecho"
+     }
+    ]
+   },
+   {
+    "id": "agenda",
+    "tipo": "calendario",
+    "ancla": "Agenda",
+    "titulo": "Próximas fechas",
+    "items": [],
+    "categoria": "",
+    "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
+   },
+   {
+    "id": "fotos",
+    "tipo": "contenido",
+    "ancla": "Fotos",
+    "titulo": "Álbumes de fotos",
+    "fuente": "fotos",
+    "filtro": "buscar: fiestas patrias, desfile, ramadas, glorias del ejercito, cueca",
+    "cantidad": 8
+   },
+   {
+    "id": "videos",
+    "tipo": "contenido",
+    "ancla": "Videos",
+    "titulo": "Videos",
+    "fuente": "videos",
+    "filtro": "fiestas-patrias",
+    "cantidad": 4
+   },
+   {
+    "id": "noticias",
+    "tipo": "noticias",
+    "ancla": "Noticias",
+    "titulo": "Noticias",
+    "categoria": "",
+    "palabras": "Fiestas Patrias, aniversario del pueblo, Chilenidad",
+    "cantidad": 6
+   },
+   {
+    "id": "galeria",
+    "tipo": "galeria",
+    "titulo": "Postales de la fiesta",
+    "imagenes": [
+     {
+      "src": "/img/facebook/albumes/2385545258129167.webp",
+      "alt": "Misa y desfile de septiembre, 2018"
+     },
+     {
+      "src": "/img/facebook/albumes/1203448419672196.webp",
+      "alt": "Inauguración de ramadas 2015"
+     },
+     {
+      "src": "/img/facebook/albumes/2994804193869934.webp",
+      "alt": "Desfile en honor a las Glorias del Ejército, 2019"
+     },
+     {
+      "src": "/img/facebook/albumes/951117111571996.webp",
+      "alt": "Provincial de cueca en Melipeuco, 2014"
+     }
+    ]
+   },
+   {
+    "id": "preguntas",
+    "tipo": "faq",
+    "titulo": "Preguntas frecuentes",
+    "items": [
+     {
+      "pregunta": "¿Cuándo es el aniversario del pueblo?",
+      "respuesta": "En septiembre: el pueblo de Melipeuco se fundó en 1941. El aniversario de la comuna, en cambio, se celebra en enero."
+     }
+    ]
+   },
+   {
+    "id": "otras",
+    "tipo": "llamado",
+    "titulo": "Fiestas y tradiciones de Melipeuco",
+    "texto": "Cada mes del año hay una fiesta: conozca el calendario completo de celebraciones de la comuna.",
+    "icono": "calendario",
+    "boton": "Calendario de fiestas",
+    "url": "/fiestas/",
+    "boton2": "Agenda municipal",
+    "url2": "/eventos/"
+   }
+  ]
+ }
+}

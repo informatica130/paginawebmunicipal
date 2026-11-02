@@ -259,10 +259,12 @@ export function seccionVideosPortada(titulo = 'Videos de Melipeuco', cantidad = 
     <nav class="vd-categorias" aria-label="Categorías de videos">${cats.map((c) => html`<a class="vd-chip" href="${BASE}?categoria=${c.id}" style="--c:${c.color}">${c.nombre}<small>${c.total}</small></a>`)}</nav>
   </div></section>`;
 }
-export function franjaVideos(titulo, { categoria = '', excluir = '', cantidad = 4, enlace = BASE } = {}) {
+export function franjaVideos(titulo, { categoria = '', excluir = '', buscar = '', cantidad = 4, enlace = BASE } = {}) {
   const ix = indice();
   if (!ix) return '';
-  const lista = ix.videos.filter((v) => v.tp !== 'short' && (!categoria || v.c === categoria) && (!excluir || v.c !== excluir)).slice(0, cantidad);
+  // «buscar»: frases separadas por coma (videos cuyo título nombre cualquiera de ellas).
+  const frases = buscar.split(',').map((x) => norm(x).trim()).filter(Boolean);
+  const lista = ix.videos.filter((v) => v.tp !== 'short' && (!categoria || v.c === categoria) && (!excluir || v.c !== excluir) && (!frases.length || frases.some((f) => norm(v.t).includes(f)))).slice(0, cantidad);
   return lista.length ? html`<section class="vd-franja"><div class="vd-fila-cab"><h2>${titulo}</h2><a class="ver-todo" href="${enlace}">Ver todos</a></div><div class="vd-grilla vd-compacta">${lista.map((v) => tarjetaVideo(ix, v))}</div></section>` : '';
 }
 // Video del Concejo grabado en una fecha (para la ficha de cada sesión).

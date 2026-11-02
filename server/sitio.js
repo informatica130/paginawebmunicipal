@@ -349,7 +349,8 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         const vids = buscarVideos(q, 3).map((v) => ({ tipo: 'Video', clave: 'video', titulo: v.t, url: urlVideo(v), fragmento: [indiceVideos()?.cats.get(v.c)?.nombre, (v.fe || v.f || '').slice(0, 10).split('-').reverse().join('-')].filter(Boolean).join(' · ') }));
         const sitiosU = micro.publicados().map((x) => [x, norm(x.nombre + ' ' + x.unidad)]).sort((a, b) => palabras.filter((p) => b[1].includes(p)).length - palabras.filter((p) => a[1].includes(p)).length).map(([x]) => x).filter((x) => palabras.every((p) => norm(textoMicrositio(x)).includes(p))).slice(0, 2).map((x) => ({ tipo: 'Sitio de la unidad', clave: 'micrositio', titulo: x.nombre, url: `/${x.slug}/`, fragmento: fragmento(x.descripcion || x.portada.bajada) }));
         const vistos = new Set();
-        const items = [...atajos, ...sitiosU, ...en, ...transp, ...r, ...vids, ...docs].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
+        // Grupos intercalados para que haya variedad (contenidos, videos, documentos) dentro de las 10 sugerencias.
+        const items = [...atajos, ...sitiosU, ...en, ...transp, ...r.slice(0, 4), ...vids.slice(0, 2), ...docs.slice(0, 1), ...r.slice(4), ...vids.slice(2), ...docs.slice(1)].filter((i) => { const k = i.url.replace(/\/$/, ''); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 10);
         return enviarJson({ items, aproximado: aproximado && !atajos.length && !en.length && !transp.length && !docs.length && !vids.length }, 60);
       }
       default: throw new ErrorHttp(404, 'Recurso no encontrado');
