@@ -11,7 +11,7 @@ import { resumenDe } from './contenidos.js';
 import { textoPlano, recortar, emailValido, rutValido, formatoRut, hoyLocal } from '../src/util.js';
 import { TIPOS, RUTAS } from '../src/tipos.js';
 import { ahora } from './db.js';
-import { sha256, tokenAleatorio } from './auth.js';
+import { sha256, tokenAleatorio, leerCookies } from './auth.js';
 import { crearExtensiones } from './extensiones.js';
 import { crearMicrositios } from './micrositios.js';
 import { paginaMicrositio, textoMicrositio } from './render/micrositio.js';
@@ -40,6 +40,13 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
 
   // ---------------------------------------------------------------- Antispam
   function firmar(v) { return crypto.createHmac('sha256', secreto).update(String(v)).digest('base64url').slice(0, 22); }
+  // Texto de error de un formulario, sólo si lo firmó este sitio (un enlace con «?error=» inventado no se muestra).
+  function errorFirmado(q) {
+    const e = String(q.get('error') || '').slice(0, 300), f = String(q.get('f') || '');
+    if (!e || f.length !== 22) return '';
+    const esperada = Buffer.from(firmar('error|' + e)), dada = Buffer.from(f);
+    return esperada.length === dada.length && crypto.timingSafeEqual(esperada, dada) ? e : '';
+  }
   function campoAntispam() {
     const t = Date.now();
     return `<input type="hidden" name="tk" value="${t}.${firmar(t)}"><div class="trampa" aria-hidden="true"><label>No completar <input name="sitio_web" tabindex="-1" autocomplete="off"></label></div>`;
@@ -519,7 +526,7 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
       return responder(await V.fichaGenerica(ctx, { ...e, cuerpo: '' }, { migasPadre: [{ texto: 'Participación ciudadana', url: '/participa/' }], despues: encuesta(e, { votado: true }) }), { cachear: false });
     }
     if (seg[0] === 'directorio') return redirigir(res, '/contacto/', 301);
-    if (seg[0] === 'contacto' && !seg[1]) return responder(V.contacto(ctx, { mensaje: q.get('error') ? html`<div class="caja caja-alerta" role="alert">${crudo(icono('alerta'))}<div>${q.get('error')}</div></div>` : '' }), { cachear: !q.get('error') });
+    if (seg[0] === 'contacto' && !seg[1]) return responder(V.contacto(ctx, { mensaje: errorFirmado(q) ? html`<div class="caja caja-alerta" role="alert">${crudo(icono('alerta'))}<div>${errorFirmado(q)}</div></div>` : '' }), { cachear: !q.get('error') });
     if (seg[0] === 'oirs') {
       if (seg[1] === 'seguimiento') {
         const codigo = String(q.get('codigo') || '').trim().toUpperCase();
@@ -531,11 +538,14 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
         return responder(V.resultadoMensaje(ctx, msg), { cachear: false });
       }
       if (seg[1] === 'enviado') {
-        const msg = db.get('SELECT * FROM mensajes WHERE codigo = ?', String(q.get('codigo') || ''));
+        const codigo = String(q.get('codigo') || '').slice(0, 20);
+        if (limitador.exceso('enviado:' + req.ip, 30, 600)) throw new ErrorHttp(429, 'Demasiadas consultas. Espere unos minutos.');
+        const propia = leerCookies(req).mlp_oirs === firmar('oirs|' + codigo);
+        const msg = propia ? db.get('SELECT * FROM mensajes WHERE codigo = ?', codigo) : null;
         if (!msg || Date.parse(msg.creado) < Date.now() - 3600e3) return redirigir(res, '/oirs/');
         return responder(V.resultadoMensaje(ctx, msg, { recien: true }), { cachear: false });
       }
-      return responder(V.oirs(ctx, { tipo: q.get('tipo') || 'consulta', area: q.get('area') || '', mensaje: q.get('error') ? html`<div class="caja caja-alerta" role="alert">${crudo(icono('alerta'))}<div>${q.get('error')}</div></div>` : '' }), { cachear: !q.toString() });
+      return responder(V.oirs(ctx, { tipo: q.get('tipo') || 'consulta', area: q.get('area') || '', mensaje: errorFirmado(q) ? html`<div class="caja caja-alerta" role="alert">${crudo(icono('alerta'))}<div>${errorFirmado(q)}</div></div>` : '' }), { cachear: !q.toString() });
     }
     if (seg[0] === 'boletin') {
       if (seg[1] === 'confirmar' || seg[1] === 'baja') {
@@ -651,14 +661,17 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
 
   async function manejarPost(req, res, ruta, usuario) {
     // Protección CSRF básica para formularios públicos: el origen debe ser este sitio.
-    const origen = req.headers.origin || req.headers.referer || '';
-    if (origen && !origen.startsWith(cfg.PUBLIC_URL.replace(/\/$/, '')) && !origen.startsWith(`http://${req.headers.host}`) && !origen.startsWith(`https://${req.headers.host}`)) throw new ErrorHttp(403, 'Origen no permitido.');
+    let origen = req.headers.origin || '';
+    if (!origen && req.headers.referer) { try { origen = new URL(req.headers.referer).origin; } catch { origen = 'invalido'; } }
+    const propios = [new URL(cfg.PUBLIC_URL).origin, `http://${req.headers.host}`, `https://${req.headers.host}`];
+    if (origen && !propios.includes(origen)) throw new ErrorHttp(403, 'Origen no permitido.');
     const body = await leerFormulario(req, 32 * 1024);
     const ip = req.ip;
-    const volver = (base, error) => redirigir(res, `${base}?error=${encodeURIComponent(error)}${body.tipo && base === '/oirs/' ? '&tipo=' + encodeURIComponent(body.tipo) : ''}#${base === '/contacto/' ? 'escribanos' : 'contenido'}`, 303);
+    const volver = (base, error) => redirigir(res, `${base}?error=${encodeURIComponent(error)}&f=${firmar('error|' + error)}${body.tipo && base === '/oirs/' ? '&tipo=' + encodeURIComponent(body.tipo) : ''}#${base === '/contacto/' ? 'escribanos' : 'contenido'}`, 303);
     if (ruta === '/oirs/' || ruta === '/contacto/') {
       try {
         const m = await recibirMensaje(req, { ...body, tipo: ruta === '/contacto/' ? 'contacto' : body.tipo === 'contacto' ? 'consulta' : body.tipo }, ip);
+        res.setHeader('Set-Cookie', `mlp_oirs=${firmar('oirs|' + m.codigo)}; Path=/oirs/; Max-Age=3600; SameSite=Lax; HttpOnly${cfg.SEGURA ? '; Secure' : ''}`);
         return redirigir(res, `/oirs/enviado/?codigo=${m.codigo}`, 303);
       } catch (e) {
         if (e.status) return volver(ruta, e.message);

@@ -156,6 +156,7 @@
     function abrir(htmlCaja) { caja.innerHTML = htmlCaja; caja.hidden = false; input.setAttribute('aria-expanded', 'true'); sel = -1; }
     function cerrar() { caja.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); fantasma.textContent = ''; }
     var opcionHtml = function (i, url, titulo, extra, ico, externo, datos) {
+      if (!/^(\/|https?:|mailto:|tel:)/i.test(String(url || ''))) url = '#';
       return '<a role="option" id="' + caja.id + '-' + i + '" href="' + esc(url) + '"' + (externo ? ' target="_blank" rel="noopener"' : '') + (datos || '') + '><span class="sug-ico">' + icoTipo(ico) + '</span><span class="sug-txt"><span class="sug-titulo">' + titulo + '</span>' + (extra || '') + '</span><svg class="ico sug-ir" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="' + (externo ? 'M7 17 17 7M8 7h9v9' : 'M5 12h14M13 6l6 6-6 6') + '"/></svg></a>';
     };
     // Al entrar al campo vacío: recientes y lo más buscado.

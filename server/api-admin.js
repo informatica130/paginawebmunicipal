@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { json, leerJson, leerCuerpo, ErrorHttp, enviar } from './http.js';
-import { hashClave, verificarClave, problemaClave, claveTemporal, crearSesion, cookieSesion, leerCookies, leerSesion, COOKIE, nuevoSecretoTotp, verificarTotp } from './auth.js';
+import { hashClave, verificarClave, problemaClave, claveTemporal, crearSesion, cookieSesion, leerCookies, leerSesion, revocarSesion, marcarCambioCredenciales, COOKIE, nuevoSecretoTotp, verificarTotp } from './auth.js';
 import { TIPOS, TAXONOMIAS, ESTADOS, PERMISOS, ROLES, RUTAS, ICONOS, tienePermiso } from '../src/tipos.js';
 import { ErrorValidacion } from './contenidos.js';
 import { ahora, parse } from './db.js';
@@ -71,6 +71,16 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     return tienePermiso(u, 'contenido.editar_propio') && c.autor_id === u.id && (c.estado !== 'publicado' || tienePermiso(u, 'contenido.publicar'));
   }
 
+  // Tras cambiar la contraseña o el segundo factor, las cookies firmadas anteriores dejan de valer
+  // en todas las instancias y la sesión actual recibe una nueva.
+  function renovarSesion(u, sesion, req, res) {
+    marcarCambioCredenciales(db, u.email);
+    const fresco = db.get('SELECT * FROM usuarios WHERE id = ?', u.id);
+    db.run('DELETE FROM sesiones WHERE id = ?', sesion.sesion.id);
+    const token = crearSesion(db, fresco, { ip: req.ip, agente: req.headers['user-agent'], paso: 'ok', csrf: sesion.sesion.csrf, expira: sesion.sesion.expira });
+    res.setHeader('Set-Cookie', cookieSesion(token, { segura: cfg.SEGURA }));
+  }
+
   function nombreUsuario(id) { return id ? db.get('SELECT nombre FROM usuarios WHERE id = ?', id)?.nombre || '' : ''; }
 
   // ---------------------------------------------------------------- Ingreso
@@ -117,7 +127,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
   });
 
   ruta('POST', 'logout', null, ({ res, sesion }) => {
-    if (sesion) { db.run('DELETE FROM sesiones WHERE id = ?', sesion.sesion.id); auditar(sesion.usuario, 'salida', sesion.usuario.email); }
+    if (sesion) { db.run('DELETE FROM sesiones WHERE id = ?', sesion.sesion.id); revocarSesion(db, sesion.sesion.id, sesion.sesion.expira); auditar(sesion.usuario, 'salida', sesion.usuario.email); }
     res.setHeader('Set-Cookie', cookieSesion('', { segura: cfg.SEGURA, borrar: true }));
     return { ok: true };
   });
@@ -129,13 +139,14 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     areasPermitidas: areasPermitidas(u) ? [...areasPermitidas(u)] : null,
   }));
 
-  ruta('POST', 'clave', '*', async ({ u, body, sesion, req }) => {
+  ruta('POST', 'clave', '*', async ({ u, body, sesion, req, res }) => {
     if (!(await verificarClave(String(body.actual || ''), u.clave))) throw new ErrorHttp(400, 'La contraseña actual no es correcta.');
     const p = problemaClave(body.nueva, u);
     if (p) throw new ErrorHttp(400, p);
     if (await verificarClave(String(body.nueva), u.clave)) throw new ErrorHttp(400, 'La nueva contraseña debe ser distinta de la actual.');
     db.run('UPDATE usuarios SET clave = ?, debe_cambiar_clave = 0, clave_cambiada = ? WHERE id = ?', await hashClave(body.nueva), ahora(), u.id);
     db.run('DELETE FROM sesiones WHERE usuario_id = ? AND id != ?', u.id, sesion.sesion.id);
+    renovarSesion(u, sesion, req, res);
     auditar(u, 'clave.cambiada', u.email, 'Se cerraron las demás sesiones', req.ip);
     return { ok: true };
   });
@@ -146,22 +157,28 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     const otpauth = `otpauth://totp/${encodeURIComponent('Sitio Melipeuco:' + u.email)}?secret=${secreto}&issuer=${encodeURIComponent('Sitio Melipeuco')}&digits=6&period=30`;
     return { secreto, otpauth, qr: qrSvg(otpauth, { tam: 200 }) };
   });
-  ruta('POST', 'totp/activar', '*', ({ u, body }) => {
+  ruta('POST', 'totp/activar', '*', ({ u, body, sesion, req, res }) => {
     const f = db.get('SELECT totp_secreto FROM usuarios WHERE id = ?', u.id);
     const paso = verificarTotp(f.totp_secreto, body.codigo, 0);
     if (!paso) throw new ErrorHttp(400, 'El código no coincide. Escanee de nuevo el código QR e intente con el código que aparece ahora.');
     db.run('UPDATE usuarios SET totp_activo = 1, totp_ultimo = ? WHERE id = ?', paso, u.id);
+    renovarSesion(u, sesion, req, res);
     auditar(u, 'totp.activado', u.email);
     return { ok: true };
   });
-  ruta('POST', 'totp/desactivar', '*', async ({ u, body }) => {
+  ruta('POST', 'totp/desactivar', '*', async ({ u, body, sesion, req, res }) => {
     if (!(await verificarClave(String(body.clave || ''), u.clave))) throw new ErrorHttp(400, 'Contraseña incorrecta.');
     db.run('UPDATE usuarios SET totp_activo = 0, totp_secreto = NULL WHERE id = ?', u.id);
+    renovarSesion(u, sesion, req, res);
     auditar(u, 'totp.desactivado', u.email);
     return { ok: true };
   });
   ruta('GET', 'mis-sesiones', '*', ({ u, sesion }) => db.all('SELECT id, ip, agente, creado, ultimo_uso FROM sesiones WHERE usuario_id = ? ORDER BY ultimo_uso DESC', u.id).map((s) => ({ ...s, id: s.id.slice(0, 12), actual: s.id === sesion.sesion.id })));
-  ruta('DELETE', 'mis-sesiones/:id', '*', ({ u, p }) => { db.run('DELETE FROM sesiones WHERE usuario_id = ? AND substr(id, 1, 12) = ?', u.id, p.id); return { ok: true }; });
+  ruta('DELETE', 'mis-sesiones/:id', '*', ({ u, p }) => {
+    for (const s of db.all('SELECT id, expira FROM sesiones WHERE usuario_id = ? AND substr(id, 1, 12) = ?', u.id, p.id)) revocarSesion(db, s.id, s.expira);
+    db.run('DELETE FROM sesiones WHERE usuario_id = ? AND substr(id, 1, 12) = ?', u.id, p.id);
+    return { ok: true };
+  });
 
   // ---------------------------------------------------------------- Escritorio
   ruta('GET', 'escritorio', 'contenido.ver', async ({ u }) => {
@@ -337,7 +354,8 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
 
   ruta('POST', 'medios', 'medios.subir', async ({ u, req }) => {
     if (limitador.exceso('subida:' + u.id, 300, 3600)) throw new ErrorHttp(429, 'Demasiadas subidas en poco tiempo.');
-    const nombreOriginal = decodeURIComponent(String(req.headers['x-nombre'] || 'archivo')).slice(0, 200);
+    const decodificar = (v) => { try { return decodeURIComponent(String(v || '')); } catch { throw new ErrorHttp(400, 'Nombre de archivo inválido.'); } };
+    const nombreOriginal = decodificar(req.headers['x-nombre'] || 'archivo').slice(0, 200);
     const buf = await leerCuerpo(req, MAX_SUBIDA);
     if (!buf.length) throw new ErrorHttp(400, 'El archivo está vacío.');
     const ext = path.extname(nombreOriginal).toLowerCase();
@@ -375,7 +393,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
       return { url, ancho };
     }
     const r = db.run('INSERT INTO medios(url, ruta, nombre, mime, tamano, ancho, alto, alt, titulo, carpeta, huella, subido_por, creado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      url, archivo, nombreOriginal, tipo, buf.length, ancho, alto, String(decodeURIComponent(req.headers['x-alt'] || '')).slice(0, 300), path.basename(nombreOriginal, ext).slice(0, 200), String(req.headers['x-carpeta'] || '').slice(0, 60), huella, u.id, ahora());
+      url, archivo, nombreOriginal, tipo, buf.length, ancho, alto, decodificar(req.headers['x-alt']).slice(0, 300), path.basename(nombreOriginal, ext).slice(0, 200), String(req.headers['x-carpeta'] || '').slice(0, 60), huella, u.id, ahora());
     auditar(u, 'medio.subir', url, `${nombreOriginal} (${(buf.length / 1024).toFixed(0)} KB)`, req.ip);
     return { ...db.get('SELECT * FROM medios WHERE id = ?', Number(r.lastInsertRowid)), variantes: {} };
   });
@@ -629,7 +647,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     if (previo.id === u.id && (rol !== previo.rol || !activo)) throw new ErrorHttp(400, 'No puede cambiar su propio rol ni desactivarse.');
     if (previo.rol === 'superadmin' && (rol !== 'superadmin' || !activo) && db.get("SELECT count(*) n FROM usuarios WHERE rol = 'superadmin' AND activo = 1").n <= 1) throw new ErrorHttp(400, 'Debe quedar al menos un Super Administrador activo.');
     db.run('UPDATE usuarios SET nombre = ?, cargo = ?, rol = ?, areas = ?, activo = ?, acceso_hasta = ? WHERE id = ?', String(body.nombre ?? previo.nombre).slice(0, 120), String(body.cargo ?? previo.cargo).slice(0, 120), rol, JSON.stringify((body.areas ?? parse(previo.areas, [])).map(Number).filter(Boolean)), activo, body.acceso_hasta === undefined ? previo.acceso_hasta : /^\d{4}-\d{2}-\d{2}$/.test(body.acceso_hasta || '') ? body.acceso_hasta : null, previo.id);
-    if (!activo || rol !== previo.rol) db.run('DELETE FROM sesiones WHERE usuario_id = ?', previo.id);
+    if (!activo || rol !== previo.rol) { db.run('DELETE FROM sesiones WHERE usuario_id = ?', previo.id); marcarCambioCredenciales(db, previo.email); }
     auditar(u, 'usuario.editar', previo.email, `rol ${rol}${activo ? '' : ', desactivado'}`, req.ip);
     return usuarioPublico(db.get('SELECT * FROM usuarios WHERE id = ?', previo.id));
   });
@@ -640,6 +658,7 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     const temporal = claveTemporal();
     db.run('UPDATE usuarios SET clave = ?, debe_cambiar_clave = 1, intentos = 0, bloqueado_hasta = NULL WHERE id = ?', await hashClave(temporal), x.id);
     db.run('DELETE FROM sesiones WHERE usuario_id = ?', x.id);
+    marcarCambioCredenciales(db, x.email);
     auditar(u, 'usuario.restablecer', x.email, '', req.ip);
     return { temporal };
   });
@@ -648,6 +667,8 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
     if (!x) throw new ErrorHttp(404, 'No encontrado');
     validarUsuario(u, { rol: x.rol }, x);
     db.run('UPDATE usuarios SET totp_activo = 0, totp_secreto = NULL WHERE id = ?', x.id);
+    db.run('DELETE FROM sesiones WHERE usuario_id = ?', x.id);
+    marcarCambioCredenciales(db, x.email);
     auditar(u, 'usuario.totp_quitado', x.email, 'Pérdida del teléfono', req.ip);
     return { ok: true };
   });

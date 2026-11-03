@@ -68,7 +68,7 @@ export function urlPermitida(valor, { imagen = false } = {}) {
   if (/^(https?:|mailto:|tel:)/i.test(v)) return v;
   if (imagen && /^data:image\/(png|jpe?g|gif|webp|avif);base64,[a-z0-9+/=]+$/i.test(v)) return v;
   if (/^[a-z][a-z0-9+.-]*:/i.test(v)) return null; // javascript:, vbscript:, data: y otros
-  if (v.startsWith('//')) return 'https:' + v;
+  if (/^[\/\\]{2}/.test(v)) return 'https://' + v.replace(/^[\/\\]+/, '');
   return v; // relativa
 }
 

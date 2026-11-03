@@ -217,6 +217,11 @@ test('formulario OIRS: antispam, registro y envío a la Plataforma', async () =>
   const ok = await enviar(datos);
   assert.equal(ok.status, 303);
   const codigo = /codigo=(OIRS-\w+)/.exec(ok.headers.get('location'))[1];
+  // La página de confirmación solo la ve quien envió el formulario (cookie firmada), no quien adivine el código.
+  const galleta = (ok.headers.get('set-cookie') || '').split(';')[0];
+  assert.match(galleta, /^mlp_oirs=/);
+  assert.equal((await pedir(ok.headers.get('location'), { headers: { cookie: galleta } })).status, 200);
+  assert.notEqual((await pedir(ok.headers.get('location'))).status, 200);
   await new Promise((r) => setTimeout(r, 100));
   assert.equal(enviadas.at(-1).cuerpo.procedureCode, 'SEC-OIRS-01');
   assert.equal(enviadas.at(-1).cabeceras['X-Api-Key'], 'llave');
@@ -224,6 +229,28 @@ test('formulario OIRS: antispam, registro y envío a la Plataforma', async () =>
   const seg = await pedir(`/oirs/seguimiento/?codigo=${codigo}&email=juan@example.cl`);
   assert.equal(seg.status, 200);
   assert.equal((await pedir(`/oirs/seguimiento/?codigo=${codigo}&email=otro@example.cl`)).status, 404);
+});
+
+test('seguridad: cookies malformadas, origen falso y mensajes de error inyectados', async () => {
+  // Una cookie con «%» suelto no tumba el servidor.
+  assert.equal((await pedir('/', { headers: { cookie: 'mlp_admin=%E0%A4%A; otra=%' } })).status, 200);
+  assert.equal((await pedir('/api/admin/sesion', { headers: { cookie: 'mlp_admin=%' } })).status, 401);
+  // Un origen que solo empieza igual que el sitio no pasa.
+  const pagina = await (await pedir('/contacto/')).text();
+  const tk = /name="tk" value="([^"]+)"/.exec(pagina)?.[1] || '';
+  const r = await pedir('/contacto/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', origin: new URL(base).origin + '.atacante.com' }, body: new URLSearchParams({ nombre: 'x', email: 'x@x.cl', mensaje: 'x', tk }) });
+  assert.equal(r.status, 403);
+  // Un ?error= escrito a mano no aparece en la página (phishing con el dominio municipal).
+  const falso = await (await pedir('/contacto/?error=' + encodeURIComponent('Llame al +56 9 1234 5678 para validar'))).text();
+  assert.doesNotMatch(falso, /1234 5678/);
+  // Rutas de medios con bytes inválidos no rompen nada.
+  assert.ok([400, 404].includes((await pedir('/medios/%E0%A4%A')).status));
+});
+
+test('seguridad: las fuentes externas no pueden apuntar a la red interna', async () => {
+  const { ipInterna } = await import('../server/extensiones.js');
+  for (const ip of ['127.0.0.1', '10.1.2.3', '172.16.0.1', '192.168.1.1', '169.254.169.254', '100.64.0.1', '0.0.0.0', '::1', 'fd00::1', 'fe80::1', '::ffff:127.0.0.1']) assert.ok(ipInterna(ip), ip);
+  for (const ip of ['8.8.8.8', '200.27.1.1', '2800:150::1']) assert.ok(!ipInterna(ip), ip);
 });
 
 // ------------------------------------------------------------------ Panel
@@ -637,6 +664,12 @@ test('Vercel: con memoria compartida (Redis) los cambios del panel llegan a toda
     assert.match(await (await fetch(url(apps[2]) + '/noticias/')).text(), /Noticia compartida entre instancias/);
     const salud = await (await fetch(url(apps[2]) + '/api/salud')).json();
     assert.equal(salud.memoriaCompartida.activa, true);
+    // Cerrar sesión en una instancia invalida la cookie firmada también en las demás.
+    assert.equal((await fetch(url(apps[1]) + '/api/admin/sesion', { headers: { cookie } })).status, 200);
+    assert.equal((await fetch(url(apps[0]) + '/api/admin/logout', { method: 'POST', headers: { cookie, 'X-CSRF': csrf } })).status, 200);
+    await new Promise((ok) => setTimeout(ok, 2600));
+    assert.equal((await fetch(url(apps[1]) + '/api/admin/sesion', { headers: { cookie } })).status, 401);
+    assert.equal((await fetch(url(apps[2]) + '/api/admin/sesion', { headers: { cookie } })).status, 401);
   } finally { apps.forEach((x) => x.cerrar()); }
 });
 
