@@ -127,9 +127,26 @@ function leerFirmado(llave, token) {
   try { return JSON.parse(Buffer.from(cuerpo, 'base64url').toString('utf8')); } catch { return null; }
 }
 
+// Cambio de contraseña o de segundo factor: las sesiones firmadas emitidas antes dejan de valer en
+// todas las instancias (la fecha queda en un ajuste compartido; el hash de la clave no sirve de
+// huella porque cada instancia sin base común la cifra con su propia sal).
+export function marcarCambioCredenciales(db, email) {
+  if (!FIRMAS.get(db)) return;
+  db.guardarAjuste('credenciales-cambiadas', { ...(db.ajuste('credenciales-cambiadas') || {}), [email]: Date.now() });
+}
+// Sesiones cerradas (cierre de sesión, cambio de clave): en Vercel la cookie firmada seguiría valiendo
+// en otra instancia, así que su huella queda en un ajuste compartido hasta que vence.
+export function revocarSesion(db, idSesion, expira) {
+  if (!FIRMAS.get(db)) return;
+  const n = new Date().toISOString();
+  const lista = Object.fromEntries(Object.entries(db.ajuste('sesiones-revocadas') || {}).filter(([, x]) => x > n));
+  lista[idSesion] = expira || new Date(Date.now() + MAX_HORAS * 3600e3).toISOString();
+  db.guardarAjuste('sesiones-revocadas', lista);
+}
+
 export function crearSesion(db, usuario, { ip, agente, paso = 'ok', csrf = tokenAleatorio(24), expira = new Date(Date.now() + MAX_HORAS * 3600e3).toISOString() }) {
   const firma = FIRMAS.get(db);
-  const token = firma ? tokenFirmado(firma, { e: usuario.email, c: csrf, p: paso, x: expira }) : tokenAleatorio(32);
+  const token = firma ? tokenFirmado(firma, { e: usuario.email, c: csrf, p: paso, x: expira, t: Date.now() }) : tokenAleatorio(32);
   const t = ahora();
   db.run('INSERT INTO sesiones(id, usuario_id, csrf, paso, ip, agente, creado, ultimo_uso, expira) VALUES(?,?,?,?,?,?,?,?,?)',
     sha256(token), usuario.id, csrf, paso, ip || null, String(agente || '').slice(0, 300), t, t, expira);
@@ -142,14 +159,19 @@ export function leerSesion(db, token) {
   const firma = FIRMAS.get(db);
   if (!token || token.length > (firma ? 1000 : 100)) return null;
   let s = db.get('SELECT * FROM sesiones WHERE id = ?', sha256(token));
-  if (!s && firma) {
-    // Sesión iniciada en otra instancia: se reconstruye si la firma es válida y no venció.
+  if (firma) {
+    // Con sesiones firmadas otra instancia puede haber cerrado la sesión o cambiado la clave: se
+    // revisa en cada lectura (aunque la sesión ya esté copiada en esta instancia).
     const d = leerFirmado(firma, token);
-    const u = d && Date.parse(d.x) > Date.now() && db.get('SELECT * FROM usuarios WHERE email = ?', d.e);
-    if (!u) return null;
-    const t = ahora();
-    db.run('INSERT OR IGNORE INTO sesiones(id, usuario_id, csrf, paso, ip, agente, creado, ultimo_uso, expira) VALUES(?,?,?,?,?,?,?,?,?)', sha256(token), u.id, String(d.c), d.p === 'ok' ? 'ok' : 'totp', null, '', t, t, d.x);
-    s = db.get('SELECT * FROM sesiones WHERE id = ?', sha256(token));
+    const u = d && Date.parse(d.x) > Date.now() && !(db.ajuste('sesiones-revocadas') || {})[sha256(token)] && db.get('SELECT * FROM usuarios WHERE email = ?', d.e);
+    const vale = u && Number(d.t) >= ((db.ajuste('credenciales-cambiadas') || {})[u.email] || 0);
+    if (d && !vale) { if (s) db.run('DELETE FROM sesiones WHERE id = ?', s.id); return null; }
+    if (!s && vale) {
+      // Sesión iniciada en otra instancia: se reconstruye.
+      const t = ahora();
+      db.run('INSERT OR IGNORE INTO sesiones(id, usuario_id, csrf, paso, ip, agente, creado, ultimo_uso, expira) VALUES(?,?,?,?,?,?,?,?,?)', sha256(token), u.id, String(d.c), d.p === 'ok' ? 'ok' : 'totp', null, '', t, t, d.x);
+      s = db.get('SELECT * FROM sesiones WHERE id = ?', sha256(token));
+    }
   }
   if (!s) return null;
   const n = Date.now();
@@ -178,7 +200,9 @@ export function leerCookies(req) {
   const out = {};
   for (const p of String(req.headers.cookie || '').split(';')) {
     const i = p.indexOf('=');
-    if (i > 0) out[p.slice(0, i).trim()] = decodeURIComponent(p.slice(i + 1).trim());
+    if (i <= 0) continue;
+    const v = p.slice(i + 1).trim();
+    try { out[p.slice(0, i).trim()] = decodeURIComponent(v); } catch { out[p.slice(0, i).trim()] = v; }
   }
   return out;
 }

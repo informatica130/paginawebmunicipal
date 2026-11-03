@@ -18,6 +18,8 @@
 // que los demás ajustes.
 
 import crypto from 'node:crypto';
+import dns from 'node:dns';
+import net from 'node:net';
 import { sanitizarHtml } from './sanitizar.js';
 import { esc, hoyLocal } from '../src/util.js';
 
@@ -48,6 +50,23 @@ const urlSitio = (v) => { const s = txt(v, 500); return /^\/(?!\/)[^\s"'<>]*$/.t
 const rutas = (v) => txt(v, 2000).split(/\r?\n/).map((r) => r.trim()).filter((r) => /^\/[^\s"'<>]*$/.test(r)).slice(0, 40).join('\n');
 
 // Sólo APIs públicas por https: nada de direcciones internas.
+// IP privada, local, de enlace o de metadatos: una fuente pública no puede apuntar ahí.
+export function ipInterna(ip) {
+  if (net.isIPv4(ip)) {
+    const [a, b] = ip.split('.').map(Number);
+    return a === 0 || a === 10 || a === 127 || (a === 100 && b >= 64 && b <= 127) || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || (a === 198 && (b === 18 || b === 19)) || a >= 224;
+  }
+  const x = ip.toLowerCase();
+  if (x.startsWith('::ffff:')) return ipInterna(x.slice(7));
+  return x === '::' || x === '::1' || /^(fc|fd|fe[89ab])/.test(x);
+}
+// Antes de consultar se resuelve el nombre: «api.algo.cl» no puede llevar a la red interna.
+async function hostPublico(url) {
+  const h = new URL(url).hostname;
+  const ips = await dns.promises.lookup(h, { all: true, verbatim: true });
+  if (!ips.length || ips.some((x) => ipInterna(x.address))) throw new Error('la dirección no es pública');
+}
+
 export function urlFuenteValida(v) {
   try {
     const u = new URL(String(v || ''));
@@ -142,7 +161,10 @@ export function plantilla(t, datos) {
 }
 
 // ------------------------------------------------------------------ Motor
-export function crearExtensiones({ db, registrar = console, fetchImpl = (...a) => fetch(...a) }) {
+export function crearExtensiones({ db, registrar = console, fetchImpl, comprobarHost } = {}) {
+  // Con el fetch real se comprueba la IP de destino; las pruebas inyectan su propio fetch.
+  if (comprobarHost === undefined) comprobarHost = fetchImpl ? null : hostPublico;
+  fetchImpl ||= (...a) => fetch(...a);
   const leer = () => db.ajuste('extensiones') || {};
   const cache = new Map(); // id → { datos, hasta, error, pendiente }
 
@@ -162,6 +184,7 @@ export function crearExtensiones({ db, registrar = console, fetchImpl = (...a) =
       try {
         const h = { Accept: 'application/json' };
         if (f.encabezado?.nombre && f.encabezado?.valor) h[f.encabezado.nombre] = f.encabezado.valor;
+        if (comprobarHost) await comprobarHost(f.url);
         const r = await fetchImpl(f.url, { headers: h, redirect: 'error', signal: AbortSignal.timeout(4000) });
         if (!r.ok) throw new Error('respondió ' + r.status);
         const texto = await r.text();

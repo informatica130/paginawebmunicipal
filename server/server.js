@@ -136,8 +136,9 @@ export async function iniciar(opciones = {}) {
       // Medios subidos y heredados de WordPress
       if (ruta.startsWith('/medios/')) {
         if (servirArchivo(req, res, path.join(UPLOADS, 'sitio'), ruta.slice('/medios'.length), { inmutable: true })) return;
-        const relativa = decodeURIComponent(ruta.slice('/medios/'.length));
-        const guardado = persistencia && !relativa.includes('..') ? await persistencia.leerArchivo(relativa) : null;
+        let relativa = '';
+        try { relativa = decodeURIComponent(ruta.slice('/medios/'.length)); } catch { throw new ErrorHttp(404, 'Archivo no encontrado'); }
+        const guardado = persistencia && !relativa.includes('..') && !relativa.includes('\0') ? await persistencia.leerArchivo(relativa) : null;
         if (guardado) {
           const destino = path.join(UPLOADS, 'sitio', relativa);
           fs.mkdirSync(path.dirname(destino), { recursive: true });
@@ -163,7 +164,9 @@ export async function iniciar(opciones = {}) {
             const r = await fetch(respaldoMedios + ruta.slice(1), { signal: AbortSignal.timeout(8000) });
             const buf = r.ok ? Buffer.from(await r.arrayBuffer()) : null;
             if (buf && buf.length < 5 * 1024 * 1024) {
-              const destino = path.join(UPLOADS, 'wp', decodeURIComponent(ruta.slice('/wp-content/uploads/'.length)));
+              const carpeta = path.join(UPLOADS, 'wp');
+              const destino = path.join(carpeta, decodeURIComponent(ruta.slice('/wp-content/uploads/'.length)));
+              if (!destino.startsWith(carpeta + path.sep)) throw new ErrorHttp(404, 'Archivo no encontrado');
               fs.mkdirSync(path.dirname(destino), { recursive: true });
               fs.writeFileSync(destino, buf);
               if (servirArchivo(req, res, path.join(UPLOADS, 'wp'), ruta.slice('/wp-content/uploads'.length), { maxAge: 30 * 86400, cabeceras: { 'Access-Control-Allow-Origin': '*' } })) return;
