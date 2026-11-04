@@ -355,6 +355,49 @@ test('micrositios: Medio Ambiente predeterminado, edición desde el panel y borr
   await api(s, 'PUT', 'micrositios', { sitios: actual.sitios, eliminados: [] });
 });
 
+test('agenda: fechas de las noticias (explícitas, rangos y relativas)', async () => {
+  const { fechasDelTexto, actividadesDeNoticia } = await import('../server/agenda.js');
+  const f = (t, pub) => fechasDelTexto(t, pub).map((x) => x.fecha + (x.fin ? '→' + x.fin : ''));
+  assert.deepEqual(f('El pasado viernes 26 de abril de 2013, se realizó una reunión.', '2013-04-29'), ['2013-04-26', '2013-04-26']);
+  assert.deepEqual(f('Postulación del 2 al 6 de noviembre.', '2026-11-02'), ['2026-11-02→2026-11-06']);
+  assert.deepEqual(f('Se realizará el sábado 28 y domingo 29 de noviembre.', '2026-11-02'), ['2026-11-28→2026-11-29']);
+  assert.deepEqual(f('En enero se celebró el aniversario.', '2026-01-20'), []);
+  // Sin año: el más cercano a la publicación (una nota de diciembre que anuncia enero).
+  assert.deepEqual(f('Te esperamos el 12 de enero.', '2025-12-20'), ['2026-01-12']);
+  // Lo que se informó, con su fecha; lo que se anuncia, como próximas fechas con su nombre.
+  const a = actividadesDeNoticia({ k: 'x', titulo: 'Feria', cuerpo: '<p>Ayer se realizó la feria.</p><ul><li>Publicación de seleccionados: viernes 13 de noviembre a las 13:30 horas.</li></ul>', publicado_en: '2026-11-05T12:00:00Z', url: '/x/' });
+  assert.equal(a[0].tipo, 'actividad');
+  assert.equal(a[0].inicio, '2026-11-04');
+  assert.equal(a[1].titulo, 'Publicación de seleccionados');
+  assert.equal(a[1].inicio, '2026-11-13');
+  assert.equal(a[1].hora, '13:30');
+});
+
+test('agenda: lo sabe todo aunque el paquete no se haya importado', async () => {
+  // El evento del Baqueano 2026 viene en el paquete: aparece en su mes con ficha propia.
+  const nov = await (await pedir('/eventos/?mes=2026-11')).text();
+  assert.match(nov, /13° Fiesta del Baqueano 2026/);
+  assert.match(nov, /Publicación de seleccionados/);
+  assert.match(nov, /href="\/eventos\/actividad\/wp-ev-baqueano-2026\/"/);
+  const ficha = await pedir('/eventos/actividad/wp-ev-baqueano-2026/');
+  assert.equal(ficha.status, 200);
+  assert.match(await ficha.text(), /Plaza de Armas de Melipeuco/);
+  assert.equal((await pedir('/eventos/actividad/no-existe/')).status, 404);
+  // Las direcciones originales de esas publicaciones llevan a su ficha mientras no se importen.
+  assert.equal((await pedir('/2026/11/02/13-fiestadelbaqueano-2/')).headers.get('location'), '/eventos/actividad/wp-10126/');
+  assert.equal((await pedir('/2026/11/02/13-fiestadelbaqueano/')).headers.get('location'), '/eventos/actividad/wp-10126/');
+  // Las noticias son actividades: un año antiguo tiene registros, y se puede buscar en toda la historia.
+  assert.match(await (await pedir('/eventos/?anio=2019')).text(), /2019 · \d+ actividades/);
+  const b = await (await pedir('/eventos/?q=baqueano')).text();
+  assert.match(b, /\d+ resultados para «baqueano»/);
+  assert.match(b, /Línea de tiempo/);
+  // Un evento futuro sin fecha de término figura entre los próximos.
+  const futuro = new Date(Date.now() + 5 * 864e5).toISOString().slice(0, 10);
+  app.repo.guardar({ tipo: 'evento', titulo: 'Operativo de prueba sin término', estado: 'publicado', datos: { inicio: futuro + 'T10:00', fin: '', lugar: 'Gimnasio Municipal' } });
+  assert.ok(app.repo.eventosProximos(500).some((e) => e.titulo === 'Operativo de prueba sin término'));
+  assert.match(await (await pedir('/eventos/')).text(), /Operativo de prueba sin término/);
+});
+
 test('facebook: las publicaciones se importan una sola vez como noticias con fotos y categoría', async () => {
   const s = await admin();
   const antes = await (await api(s, 'GET', 'importar-facebook')).json();
@@ -400,7 +443,9 @@ test('facebook: álbumes como fototeca, noticias y eventos pasados de la agenda'
   // Sólo se admiten enlaces a formularios públicos oficiales (p. ej. la postulación a la feria del Baqueano).
   assert.doesNotMatch(datos.replace(/https:\/\/tally\.so\/r\/\w+/g, ''), /facebook\.com|drive\.google|this_profile|your_activity|https?:\/\//);
   // Eventos pasados en la agenda, con enlace a sus fotos.
-  const ev = await (await pedir('/eventos/?pasados=1')).text();
+  // Ya importado, la ficha provisoria lleva a su evento.
+  assert.equal((await pedir('/eventos/actividad/wp-ev-baqueano-2026/')).status, 301);
+  const ev = await (await pedir('/eventos/?pasados=1&q=baqueano')).text();
   assert.match(ev, /Fiesta del Baqueano/);
   const enlace = [...ev.matchAll(/href="(\/eventos\/[^"]*baqueano[^"]*)"/g)].map((m) => m[1]).find((x) => !x.includes('2026'));
   assert.match(await (await pedir(enlace)).text(), /href="\/fotos\/[^"]+\/">Ver las fotos de la actividad/);

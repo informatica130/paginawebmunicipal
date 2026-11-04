@@ -108,11 +108,11 @@ export function crearRepositorio(db) {
   function eventosProximos(limite = 6) {
     const hoy = hoyLocal();
     return db.all(`SELECT * FROM contenidos WHERE tipo = 'evento' AND estado = 'publicado'
-      AND coalesce(json_extract(datos, '$.fin'), json_extract(datos, '$.inicio')) >= ? ORDER BY json_extract(datos, '$.inicio') ASC LIMIT ?`, hoy, limite).map(filaContenido);
+      AND coalesce(nullif(json_extract(datos, '$.fin'), ''), json_extract(datos, '$.inicio')) >= ? ORDER BY json_extract(datos, '$.inicio') ASC LIMIT ?`, hoy, limite).map(filaContenido);
   }
   function eventosEntre(desde, hasta) {
     return db.all(`SELECT * FROM contenidos WHERE tipo = 'evento' AND estado = 'publicado'
-      AND json_extract(datos, '$.inicio') < ? AND coalesce(json_extract(datos, '$.fin'), json_extract(datos, '$.inicio')) >= ? ORDER BY json_extract(datos, '$.inicio')`, hasta, desde).map(filaContenido);
+      AND json_extract(datos, '$.inicio') < ? AND coalesce(nullif(json_extract(datos, '$.fin'), ''), json_extract(datos, '$.inicio')) >= ? ORDER BY json_extract(datos, '$.inicio')`, hasta, desde).map(filaContenido);
   }
 
   // Avisos, banners y encuestas vigentes hoy.

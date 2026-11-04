@@ -58,6 +58,8 @@ export function importarFacebook(db, repo, { paquete = paqueteFacebook(), usuari
       r.creados++;
       if (n.tipo === 'evento') r.eventos++;
     }
+    // Lo que ya pasó por el importador: la agenda no vuelve a mostrar lo que el equipo eliminó.
+    db.guardarAjuste('facebook-vistas', [...new Set([...(db.ajuste('facebook-vistas') || []), ...[...paquete.noticias, ...eventos].map((n) => n.url_antigua || 'facebook:' + n.clave)])]);
     for (const x of paquete.redirecciones || []) db.run('INSERT OR IGNORE INTO redirecciones(origen, destino, codigo, creado) VALUES(?,?,301,?)', x.origen, x.destino, new Date().toISOString());
   });
   return r;
