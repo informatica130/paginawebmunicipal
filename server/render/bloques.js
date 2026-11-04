@@ -2,7 +2,7 @@
 // desde el panel (texto, galería, botones, tarjetas, acordeón, video, mapa, noticias,
 // trámites en vivo de la Plataforma, contactos, documentos, formularios, etc.).
 
-import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, video, telefonoHref, telefonoTexto, vacio } from './comun.js';
+import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, tarjetaAgenda, video, telefonoHref, telefonoTexto, vacio } from './comun.js';
 import { fecha } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
 
@@ -65,9 +65,9 @@ async function bloque(ctx, b, contenido) {
         <div class="grilla-noticias">${lista.map((c) => tarjetaNoticia(ctx, c))}</div>`;
     }
     case 'eventos': {
-      const lista = ctx.repo.eventosProximos(b.cantidad);
+      const lista = ctx.agenda ? ctx.agenda.proximas(b.cantidad || 4, { tipo: 'eventos' }) : [];
       return html`<div class="bloque-cabecera">${titulo(b.titulo || 'Próximos eventos')}<a class="ver-todo" href="/eventos/">Agenda completa</a></div>
-        ${lista.length ? html`<div class="lista-eventos">${lista.map((c) => tarjetaEvento(ctx, c))}</div>` : vacio('No hay eventos programados por ahora. Revise la agenda completa o las noticias.', 'calendario')}`;
+        ${lista.length ? html`<div class="ag-lista">${lista.map((x) => tarjetaAgenda(ctx, x, { compacta: true }))}</div>` : vacio('No hay eventos programados por ahora. Revise la agenda completa o las noticias.', 'calendario')}`;
     }
     case 'tramites': return bloqueTramites(ctx, b);
     case 'tramite_en_linea': return bloqueTramiteEnLinea(ctx, b);

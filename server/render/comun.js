@@ -1,6 +1,6 @@
 // Piezas de interfaz reutilizadas por las plantillas públicas.
 
-import { html, crudo, esc, fecha, recortar } from '../../src/util.js';
+import { html, crudo, esc, fecha, recortar, hoyLocal } from '../../src/util.js';
 import { icono } from './iconos.js';
 import { resumenDe } from '../contenidos.js';
 
@@ -53,6 +53,34 @@ export function tarjetaNoticia(ctx, c, { grande = false } = {}) {
       ${(() => { const r = resumenDe(c, grande ? 220 : 140); return r ? html`<p class="tn-resumen">${r}</p>` : ''; })()}
       <time datetime="${c.publicado_en || ''}">${fecha(c.publicado_en, { largo: true })}</time>
     </div>
+  </article>`;
+}
+
+// Una entrada de la agenda comunal (server/agenda.js): evento, actividad realizada, fecha
+// anunciada o día de la salud.
+export function etiquetaAgenda(x, hoy = hoyLocal()) {
+  if (x.tipo === 'evento') return x.hasta < hoy ? 'Evento realizado' : 'Evento';
+  if (x.tipo === 'fecha') return x.hasta < hoy ? 'Fecha anunciada' : 'Próxima fecha';
+  if (x.tipo === 'salud') return 'Calendario de la salud';
+  if (x.tipo === 'anuncio') return 'Convocatoria';
+  return 'Actividad';
+}
+export function tarjetaAgenda(ctx, x, { imagen = true, compacta = false } = {}) {
+  const dt = new Date(x.dia + 'T12:00:00');
+  const dia = dt.toLocaleDateString('es-CL', { day: 'numeric' });
+  const mes = dt.toLocaleDateString('es-CL', { month: 'short' }).replace('.', '');
+  const hasta = x.hasta !== x.dia ? ` al ${fecha(x.hasta, { largo: true })}` : '';
+  const hora = x.horaTexto || (x.hora ? `${x.hora} hrs.` : '');
+  return html`<article class="ag-item ag-${x.tipo}${compacta ? ' compacta' : ''}">
+    <div class="te-fecha" aria-hidden="true"><b>${dia}</b><span>${mes}</span></div>
+    <div class="ag-texto">
+      <p class="ag-tipo">${etiquetaAgenda(x)}${x.cats[0]?.nombre ? html` · ${x.cats[0].nombre}` : ''}</p>
+      <h3><a href="${x.url}">${x.titulo}</a></h3>
+      <p class="meta"><time datetime="${x.dia}">${fecha(x.dia, { largo: true, diaSemana: true })}${hasta}</time>${hora ? ` · ${hora}` : ''}${x.lugar ? html` · ${crudo(icono('ubicacion', { tam: 14 }))} ${x.lugar}` : ''}</p>
+      ${!compacta && x.detalle ? html`<p class="ag-detalle">${x.detalle}</p>` : ''}
+      ${!compacta && x.contexto ? html`<p class="ag-contexto">${crudo(icono('documento', { tam: 14 }))} ${x.contexto}</p>` : ''}
+    </div>
+    ${imagen && !compacta && x.imagen ? html`<a class="ag-foto" href="${x.url}" tabindex="-1" aria-hidden="true">${ctx.img.imagen(x.imagen, { alt: '', sizes: '120px' })}</a>` : ''}
   </article>`;
 }
 

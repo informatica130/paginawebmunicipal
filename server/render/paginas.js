@@ -1,6 +1,6 @@
 // Plantillas de las vistas públicas.
 
-import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, paginacion, migas, compartir, video, telefonoHref, telefonoTexto, vacio } from './comun.js';
+import { html, crudo, esc, icono, attrsEnlace, avisoExterno, tarjetaNoticia, tarjetaEvento, tarjetaAgenda, paginacion, migas, compartir, video, telefonoHref, telefonoTexto, vacio } from './comun.js';
 import { documento, encabezado, disenoDe, zona } from './layout.js';
 import { centroTransparencia, buscarTransparencia } from './transparencia.js';
 import { inventario, buscarArchivo, filaArchivo } from './archivo.js';
@@ -9,6 +9,7 @@ import { seccionVideosPortada, franjaVideos, videoDeSesion, reproductorVideo, bu
 import { renderBloques, tarjetaContacto, listaDocumento, tarjetasPaginas, tarjetasAreas, tarjetaAutoridad, filaSesion, directorio, filaTramite, filaTramiteEnLinea } from './bloques.js';
 import { fecha, recortar, lectura, hoyLocal } from '../../src/util.js';
 import { resumenDe } from '../contenidos.js';
+import { sanitizarHtml } from '../sanitizar.js';
 import { completarSecciones, fotosPortada } from '../../public/js/diseno.js';
 import { PALETA, SITIO_TREKKING, emblema, logoAnimado, montes, contenidoTrekking } from './trekking.js';
 
@@ -246,12 +247,12 @@ async function seccionPortada(ctx, sec) {
       </div></section>`;
     }
     case 'eventos': {
-      const lista = ctx.repo.eventosProximos(sec.cantidad || 4);
+      const lista = ctx.agenda.proximas(sec.cantidad || 4, { tipo: 'eventos' });
       const s2 = ctx.ajustes;
       return html`<section class="seccion seccion-agenda"><div class="contenedor agenda-portada">
         <div>
           <div class="seccion-cabecera"><div><h2>${sec.titulo || 'Agenda comunal'}</h2></div><a class="ver-todo" href="/eventos/">Ver agenda</a></div>
-          ${lista.length ? html`<div class="lista-eventos">${lista.map((c) => tarjetaEvento(ctx, c))}</div>` : vacio('No hay actividades programadas en este momento. Revise la agenda o síganos en redes sociales.', 'calendario')}
+          ${lista.length ? html`<div class="ag-lista">${lista.map((x) => tarjetaAgenda(ctx, x, { compacta: true }))}</div>` : vacio('No hay actividades programadas en este momento. Revise la agenda o síganos en redes sociales.', 'calendario')}
         </div>
         <aside class="lateral-portada">
           <div class="emergencias-portada"><h3>${crudo(icono('telefono', { tam: 20 }))} Emergencias</h3><ul>${(s2.emergencias || []).map((e) => html`<li><a href="${telefonoHref(e.telefono)}"><span>${e.nombre}</span><b>${telefonoTexto(e.telefono)}</b></a></li>`)}</ul></div>
@@ -547,46 +548,184 @@ export function seguimiento(ctx, { codigo = '', rut = '' } = {}) {
   });
 }
 
-// ------------------------------------------------------------------ Eventos
-export function agenda(ctx, { mes, pasados = false, pagina = 1 }) {
+// ------------------------------------------------------------------ Agenda comunal
+// Todo lo que la Municipalidad ha hecho y lo que viene (server/agenda.js): calendario del mes,
+// lo que viene, línea de tiempo por año, búsqueda y las fiestas de cada mes.
+const MESES_AG = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const TIPOS_AG = [['', 'Todo'], ['eventos', 'Eventos y fechas'], ['actividades', 'Actividades realizadas']];
+
+function filtrosAgenda(f) {
+  const p = new URLSearchParams();
+  if (f.q) p.set('q', f.q);
+  if (f.tipo) p.set('tipo', f.tipo);
+  if (f.cat) p.set('cat', f.cat);
+  return p;
+}
+const urlAgenda = (f, extra = {}) => {
+  const p = filtrosAgenda(f);
+  for (const [k, v] of Object.entries(extra)) if (v) p.set(k, v);
+  const s = p.toString();
+  return '/eventos/' + (s ? '?' + s : '');
+};
+
+// Fiestas que se celebran en un mes, según el micrositio «Fiestas y tradiciones».
+function fiestasDelMes(ctx, m) {
+  const s = ctx.micro?.porSlug('fiestas');
+  const t = s?.modulos?.find((x) => x.tipo === 'tabla');
+  if (!t) return [];
+  const nombre = MESES_AG[m - 1];
+  return String(t.filas || '').split('\n').map((l) => l.split('|').map((x) => x.trim())).filter((c) => c.length >= 2 && c[0].toLowerCase().includes(nombre)).map((c) => ({ nombre: c[1], lugar: c[2] || '' }));
+}
+
+function lineaDeTiempo(resumen, { anioActivo, mesActivo, f }) {
+  const max = Math.max(1, ...resumen.flatMap((r) => r.meses));
+  return html`<div class="lateral-bloque ag-linea"><h2>Línea de tiempo</h2>
+    <p class="ag-ayuda">Cada barra es un mes. Toque una para verlo en el calendario.</p>
+    <ol>${resumen.map((r) => html`<li${r.anio === anioActivo ? crudo(' class="activo"') : ''}>
+      <a class="ag-anio" href="${urlAgenda(f, { anio: String(r.anio) })}"><b>${r.anio}</b><span>${r.total}</span></a>
+      <span class="ag-barras">${r.meses.map((n, i) => {
+        const mes = `${r.anio}-${String(i + 1).padStart(2, '0')}`;
+        return html`<a href="${urlAgenda(f, { mes })}" class="${mes === mesActivo ? 'activo' : ''}" style="--h:${Math.round((n / max) * 100)}%" title="${MESES_AG[i]} ${r.anio}: ${n} ${n === 1 ? 'actividad' : 'actividades'}"><span class="sr">${MESES_AG[i]} ${r.anio}: ${n}</span></a>`;
+      })}</span></li>`)}</ol></div>`;
+}
+
+export function agenda(ctx, { mes, anio = null, pasados = false, pagina = 1, q = '', tipo = '', cat = '' }) {
+  const ag = ctx.agenda;
   const hoy = hoyLocal();
+  const f = { q: q.slice(0, 80), tipo: TIPOS_AG.some(([v]) => v === tipo) ? tipo : '', cat: /^[a-z0-9-]{1,60}$/.test(cat) ? cat : '' };
+  const filtro = { q: f.q, tipo: f.tipo, cat: f.cat };
+  const hayFiltro = !!(f.q || f.tipo || f.cat);
   const [a, m] = (mes || hoy.slice(0, 7)).split('-').map(Number);
-  const ini = `${a}-${String(m).padStart(2, '0')}-01`;
+  const mm = String(m).padStart(2, '0');
+  const ini = `${a}-${mm}-01`;
   const sigMes = m === 12 ? `${a + 1}-01` : `${a}-${String(m + 1).padStart(2, '0')}`;
   const antMes = m === 1 ? `${a - 1}-12` : `${a}-${String(m - 1).padStart(2, '0')}`;
-  const delMes = ctx.repo.eventosEntre(ini, sigMes + '-01');
-  const porDia = new Map();
-  for (const e of delMes) { const d = (e.datos.inicio || '').slice(0, 10); if (!porDia.has(d)) porDia.set(d, []); porDia.get(d).push(e); }
-  const primerDia = (new Date(a, m - 1, 1).getDay() + 6) % 7;
-  const diasMes = new Date(a, m, 0).getDate();
-  const celdas = [];
-  for (let i = 0; i < primerDia; i++) celdas.push(html`<td></td>`);
-  for (let d = 1; d <= diasMes; d++) {
-    const iso = `${a}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-    const evs = porDia.get(iso) || [];
-    celdas.push(html`<td class="${iso === hoy ? 'hoy' : ''}${evs.length ? ' con-eventos' : ''}"><span class="dia">${d}</span>${evs.slice(0, 3).map((e) => html`<a href="${ctx.repo.urlDe(e)}">${recortar(e.titulo, 34)}</a>`)}${evs.length > 3 ? html`<small>+${evs.length - 3} más</small>` : ''}</td>`);
+  const resumen = ag.resumen();
+  const total = resumen.reduce((s, r) => s + r.total, 0);
+  const desde = resumen.at(-1)?.anio;
+  const proximas = ag.proximas(200, { ...filtro, tipo: f.tipo || 'eventos' });
+  const cats = ag.categorias().slice(0, 18);
+  const nombreMes = `${MESES_AG[m - 1]} ${a}`;
+
+  // Formulario de búsqueda y filtros.
+  const formulario = html`<form class="ag-filtros" method="get" action="/eventos/" role="search">
+    <div class="campo ag-q"><label for="ag-q">Buscar en la agenda</label><input id="ag-q" type="search" name="q" value="${f.q}" placeholder="Baqueano, operativo, taller, Truful…" autocomplete="off"></div>
+    <div class="campo"><label for="ag-tipo">Mostrar</label><select id="ag-tipo" name="tipo">${TIPOS_AG.map(([v, t]) => html`<option value="${v}"${v === f.tipo ? crudo(' selected') : ''}>${t}</option>`)}</select></div>
+    <div class="campo"><label for="ag-cat">Tema</label><select id="ag-cat" name="cat"><option value="">Todos los temas</option>${cats.map((c) => html`<option value="${c.slug}"${c.slug === f.cat ? crudo(' selected') : ''}>${c.nombre} (${c.total})</option>`)}</select></div>
+    ${mes ? html`<input type="hidden" name="mes" value="${mes}">` : ''}
+    <button class="boton boton-primario" type="submit">${crudo(icono('buscar', { tam: 16 }))} Buscar</button>
+    ${hayFiltro ? html`<a class="ag-limpiar" href="/eventos/${mes ? '?mes=' + mes : ''}">Quitar filtros</a>` : ''}
+  </form>`;
+
+  let principal;
+  if (pasados || (hayFiltro && !mes && !anio)) {
+    // Listado: todo lo anterior, o los resultados de una búsqueda a lo largo de los años.
+    const lista = pasados && !hayFiltro ? ag.anteriores(filtro) : ag.buscar(filtro);
+    const porPagina = 40, paginas = Math.max(1, Math.ceil(lista.length / porPagina));
+    const pg = Math.min(pagina, paginas);
+    const items = lista.slice((pg - 1) * porPagina, pg * porPagina);
+    const grupos = [];
+    for (const x of items) { const y = x.dia.slice(0, 4); if (grupos.at(-1)?.anio !== y) grupos.push({ anio: y, items: [] }); grupos.at(-1).items.push(x); }
+    const extra = (() => { const p = filtrosAgenda(f); if (pasados) p.set('pasados', '1'); const s = p.toString(); return s ? '?' + s : ''; })();
+    principal = html`<section aria-labelledby="ag-lista-t">
+      <h2 id="ag-lista-t">${pasados && !hayFiltro ? 'Todo lo que hemos hecho' : `${lista.length} ${lista.length === 1 ? 'resultado' : 'resultados'}${f.q ? ` para «${f.q}»` : ''}`}</h2>
+      ${items.length ? grupos.map((g) => html`<h3 class="ag-grupo">${g.anio}</h3><div class="ag-lista">${g.items.map((x) => tarjetaAgenda(ctx, x))}</div>`) : vacio('No encontramos actividades con esos filtros. Pruebe con otra palabra o quite los filtros.', 'calendario')}
+      ${paginacion('/eventos/', pg, paginas, extra)}
+    </section>`;
+  } else if (anio) {
+    // Un año completo, mes por mes.
+    const delAnio = ag.entre(`${anio}-01-01`, `${anio + 1}-01-01`, filtro);
+    const meses = MESES_AG.map((n, i) => ({ n, i, items: delAnio.filter((x) => Number(x.dia.slice(5, 7)) === i + 1) }));
+    principal = html`<section aria-labelledby="ag-anio-t">
+      <div class="calendario-cabecera"><a href="${urlAgenda(f, { anio: String(anio - 1) })}" aria-label="Año anterior">${crudo(icono('flechaIzq'))}</a><h2 id="ag-anio-t">${anio} · ${delAnio.length} actividades</h2><a href="${urlAgenda(f, { anio: String(anio + 1) })}" aria-label="Año siguiente">${crudo(icono('flecha'))}</a></div>
+      <div class="ag-anio-grilla">${meses.map((x) => html`<a class="ag-mes${x.items.length ? '' : ' vacio'}" href="${urlAgenda(f, { mes: `${anio}-${String(x.i + 1).padStart(2, '0')}` })}">
+        <h3>${x.n}</h3><p class="ag-cuenta">${x.items.length ? `${x.items.length} ${x.items.length === 1 ? 'actividad' : 'actividades'}` : 'Sin registros'}</p>
+        <ul>${x.items.slice(0, 4).map((e) => html`<li><b>${Number(e.dia.slice(8, 10))}</b> ${recortar(e.titulo, 64)}</li>`)}</ul>${x.items.length > 4 ? html`<p class="ag-mas">y ${x.items.length - 4} más</p>` : ''}</a>`)}</div>
+    </section>`;
+  } else {
+    // Mes: calendario y todo lo del mes, día por día.
+    const delMes = ag.entre(ini, sigMes + '-01', filtro);
+    const porDia = new Map();
+    for (const x of delMes) {
+      // Un evento de varios días aparece en cada uno.
+      for (let d = x.dia < ini ? ini : x.dia; d <= x.hasta && d < sigMes + '-01'; d = new Date(new Date(d + 'T12:00:00Z').getTime() + 864e5).toISOString().slice(0, 10)) {
+        if (!porDia.has(d)) porDia.set(d, []);
+        porDia.get(d).push(x);
+      }
+    }
+    const primerDia = (new Date(a, m - 1, 1).getDay() + 6) % 7;
+    const diasMes = new Date(a, m, 0).getDate();
+    const celdas = [];
+    for (let i = 0; i < primerDia; i++) celdas.push(html`<td></td>`);
+    for (let d = 1; d <= diasMes; d++) {
+      const dIso = `${a}-${mm}-${String(d).padStart(2, '0')}`;
+      const evs = porDia.get(dIso) || [];
+      celdas.push(html`<td class="${dIso === hoy ? 'hoy' : ''}${evs.length ? ' con-eventos' : ''}"><span class="dia">${d}</span>${evs.slice(0, 3).map((e) => html`<a class="ag-c ag-${e.tipo}" href="${e.url}" title="${e.titulo}">${recortar(e.titulo, 34)}</a>`)}${evs.length > 3 ? html`<a class="ag-mas-dia" href="#dia-${dIso}">+${evs.length - 3} más</a>` : ''}</td>`);
+    }
+    while (celdas.length % 7) celdas.push(html`<td></td>`);
+    const filas = [];
+    for (let i = 0; i < celdas.length; i += 7) filas.push(html`<tr>${celdas.slice(i, i + 7)}</tr>`);
+    const dias = [...new Set(delMes.map((x) => (x.dia < ini ? ini : x.dia)))].sort();
+    const fiestas = fiestasDelMes(ctx, m);
+    principal = html`<section class="calendario" aria-labelledby="cal-titulo">
+        <div class="calendario-cabecera"><a href="${urlAgenda(f, { mes: antMes })}" aria-label="Mes anterior">${crudo(icono('flechaIzq'))}</a><h2 id="cal-titulo">${nombreMes}</h2><a href="${urlAgenda(f, { mes: sigMes })}" aria-label="Mes siguiente">${crudo(icono('flecha'))}</a></div>
+        <p class="ag-leyenda"><span class="ag-evento">Eventos</span><span class="ag-fecha">Fechas y plazos</span><span class="ag-actividad">Actividades realizadas</span><span class="ag-anuncio">Convocatorias</span><span class="ag-salud">Calendario de la salud</span></p>
+        <div class="tabla-desplazable"><table><thead><tr>${['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map((d) => html`<th scope="col">${d}</th>`)}</tr></thead><tbody>${filas}</tbody></table></div>
+        <p class="ag-ir"><a href="${urlAgenda(f, { anio: String(a) })}">Ver todo ${a}</a>${hoy.slice(0, 7) !== `${a}-${mm}` ? html` · <a href="${urlAgenda(f)}">Volver a este mes</a>` : ''}</p>
+      </section>
+      ${fiestas.length ? html`<div class="ag-fiestas">${crudo(icono('estrella', { tam: 18 }))}<p><b>En ${MESES_AG[m - 1]} se celebra:</b> ${fiestas.map((x, i) => html`${i ? ', ' : ''}${x.nombre}${x.lugar ? html` <small>(${x.lugar})</small>` : ''}`)}. <a href="/fiestas/">Calendario de fiestas</a></p></div>` : ''}
+      <section aria-labelledby="ag-mes-t">
+        <h2 id="ag-mes-t">Todo lo de ${nombreMes} <small class="ag-cuenta">${delMes.length} ${delMes.length === 1 ? 'actividad' : 'actividades'}</small></h2>
+        ${dias.length ? dias.map((d) => html`<h3 class="ag-grupo" id="dia-${d}">${fecha(d, { largo: true, diaSemana: true })}</h3><div class="ag-lista">${delMes.filter((x) => (x.dia < ini ? ini : x.dia) === d).map((x) => tarjetaAgenda(ctx, x))}</div>`)
+          : vacio(`No hay actividades registradas en ${nombreMes}${hayFiltro ? ' con estos filtros' : ''}. Use la línea de tiempo para ver otros meses.`, 'calendario')}
+      </section>`;
   }
-  const filas = [];
-  for (let i = 0; i < celdas.length; i += 7) filas.push(html`<tr>${celdas.slice(i, i + 7)}</tr>`);
-  const proximos = ctx.repo.eventosProximos(30);
-  const nombreMes = new Date(a, m - 1, 15).toLocaleDateString('es-CL', { month: 'long', year: 'numeric' });
-  const anteriores = pasados ? ctx.repo.listar({ tipo: 'evento', publico: true, orden: 'eventoDesc', limite: 20, pagina }) : null;
+
   return documento(ctx, {
-    titulo: 'Agenda comunal', descripcion: 'Actividades, ferias, ceremonias, deportes y cultura en Melipeuco.',
-    cuerpo: html`${encabezado({ titulo: 'Agenda comunal', bajada: 'Actividades municipales y comunitarias en Melipeuco.', migas: migas([{ texto: 'Agenda' }]), ctx, extra: html`<p><a class="boton boton-secundario" href="/eventos.ics">${crudo(icono('calendario', { tam: 16 }))} Agregar la agenda a mi calendario</a></p>` })}
+    titulo: 'Agenda comunal', descripcion: `Agenda de Melipeuco: lo que viene y ${total} actividades municipales y comunitarias registradas desde ${desde || 2013}.`,
+    cuerpo: html`${encabezado({ titulo: 'Agenda comunal', bajada: 'Lo que viene y todo lo que hemos hecho en Melipeuco: eventos, fiestas, operativos, talleres, convocatorias y plazos.', migas: migas([{ texto: 'Agenda' }]), ctx,
+      extra: html`<ul class="ag-cifras"><li><b>${total.toLocaleString('es-CL')}</b> actividades registradas</li><li><b>${desde || '—'}</b> primer registro</li><li><b>${proximas.length}</b> próximas fechas</li></ul>
+        <p><a class="boton boton-secundario" href="/eventos.ics">${crudo(icono('calendario', { tam: 16 }))} Agregar la agenda a mi calendario</a></p>` })}
+      <div class="contenedor">
+        ${formulario}
+        ${!pasados ? html`<section class="ag-viene" aria-labelledby="ag-viene-t"><div class="seccion-cabecera"><div><h2 id="ag-viene-t">Lo que viene</h2></div></div>
+          ${proximas.length ? html`<div class="ag-carrusel">${proximas.slice(0, 12).map((x) => tarjetaAgenda(ctx, x, { imagen: false }))}</div>` : vacio('No hay fechas próximas con estos filtros.', 'calendario')}</section>` : ''}
+      </div>
       <div class="contenedor con-lateral">
-        <div>
-          <section class="calendario" aria-labelledby="cal-titulo">
-            <div class="calendario-cabecera"><a href="/eventos/?mes=${antMes}" aria-label="Mes anterior">${crudo(icono('flechaIzq'))}</a><h2 id="cal-titulo">${nombreMes}</h2><a href="/eventos/?mes=${sigMes}" aria-label="Mes siguiente">${crudo(icono('flecha'))}</a></div>
-            <div class="tabla-desplazable"><table><thead><tr>${['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map((d) => html`<th scope="col">${d}</th>`)}</tr></thead><tbody>${filas}</tbody></table></div>
-          </section>
-          ${anteriores ? html`<h2>Eventos anteriores</h2><div class="lista-eventos">${anteriores.items.map((e) => tarjetaEvento(ctx, e))}</div>${paginacion('/eventos/', anteriores.pagina, anteriores.paginas, '?pasados=1')}` : ''}
-        </div>
+        <div>${principal}</div>
         <aside class="lateral">
-          <div class="lateral-bloque"><h2>Próximos eventos</h2>${proximos.length ? html`<div class="lista-eventos compacta">${proximos.map((e) => tarjetaEvento(ctx, e))}</div>` : html`<p>No hay eventos programados.</p>`}</div>
-          <p><a href="/eventos/?pasados=1">Ver eventos anteriores</a></p>
+          ${lineaDeTiempo(resumen, { anioActivo: anio || a, mesActivo: anio ? '' : `${a}-${mm}`, f })}
+          <div class="lateral-bloque"><h2>Explorar</h2><ul class="lista-categorias">
+            <li><a href="/eventos/?pasados=1">Todo lo que hemos hecho</a></li>
+            <li><a href="/eventos/?tipo=eventos">Solo eventos y fechas</a></li>
+            <li><a href="/fiestas/">Fiestas y tradiciones</a></li>
+            <li><a href="/noticias/">Noticias</a></li>
+            <li><a href="/fotos/">Fotos</a></li></ul></div>
         </aside>
       </div>`,
+  });
+}
+
+// Ficha de una publicación (noticia o evento) del paquete que todavía no se importó en el panel.
+export function actividadPaquete(ctx, n) {
+  const d = n.tipo === 'evento' ? n.inicio : n.publicado_en;
+  return documento(ctx, {
+    titulo: n.titulo, descripcion: n.resumen || '', imagen: n.imagen,
+    cuerpo: html`<article class="articulo">
+      <header class="articulo-cabecera contenedor angosto">
+        ${migas([{ texto: 'Agenda', url: '/eventos/' }, { texto: n.titulo }])}
+        <h1>${n.titulo}</h1>
+        ${n.resumen ? html`<p class="bajada">${n.resumen}</p>` : ''}
+        <p class="meta"><time datetime="${d}">${fecha(d, { largo: true, diaSemana: true })}</time>${n.lugar ? ` · ${n.lugar}` : ''}</p>
+      </header>
+      ${n.imagen ? html`<figure class="articulo-imagen contenedor">${ctx.img.imagen(n.imagen, { alt: '', sizes: '(max-width: 1100px) 100vw, 1100px', prioridad: true })}</figure>` : ''}
+      <div class="contenedor angosto">
+        <div class="prosa">${crudo(sanitizarHtml(n.cuerpo || ''))}</div>
+        ${n.galeria?.length ? html`<div class="galeria" data-galeria>${n.galeria.map((i) => html`<a href="${i.src}" class="galeria-item" data-lightbox>${ctx.img.imagen(i.src, { alt: i.alt || '', sizes: '300px' })}</a>`)}</div>` : ''}
+        ${n.fuente ? html`<p class="meta">Fuente: ${n.fuente}</p>` : ''}
+        <p><a class="boton boton-secundario" href="/eventos/?mes=${String(d).slice(0, 7)}">${crudo(icono('calendario', { tam: 16 }))} Ver ese mes en la agenda</a></p>
+      </div>
+    </article>`,
   });
 }
 

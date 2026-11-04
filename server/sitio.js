@@ -14,6 +14,7 @@ import { ahora } from './db.js';
 import { sha256, tokenAleatorio, leerCookies } from './auth.js';
 import { crearExtensiones } from './extensiones.js';
 import { crearMicrositios } from './micrositios.js';
+import { crearAgenda, elementoDelPaquete, claveDelPaqueteParaRuta } from './agenda.js';
 import { paginaMicrositio, textoMicrositio } from './render/micrositio.js';
 import { buscarTransparencia } from './render/transparencia.js';
 import { paginaArchivo, buscarArchivo, inventario, urlDoc } from './render/archivo.js';
@@ -32,6 +33,7 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
   const ajustes = () => ({ ...(db.ajuste('sitio') || {}) });
   const ext = crearExtensiones({ db });
   const micro = crearMicrositios({ db });
+  const agenda = crearAgenda({ db, repo, micro });
   // Dominios externos que el código propio necesita (se suman a la política de seguridad).
   const seguridad = (req, nonce) => req.seguridad(nonce, false, ext.dominios());
   const categoriasDe = (id) => repo.taxonomiasDe(id).filter((t) => t.tipo === 'categoria');
@@ -158,7 +160,7 @@ export function crearSitio({ db, repo, cfg, tramites, mailer, limitador, version
     return {
       db, repo, cfg, tramites, img, ruta, req, usuario, version, categoriasDe,
       nonce: crypto.randomBytes(16).toString('base64'),
-      ajustes: ajustes(), formulario, encuesta, campoAntispam, ext, micro,
+      ajustes: ajustes(), formulario, encuesta, campoAntispam, ext, micro, agenda,
     };
   }
 
@@ -483,7 +485,18 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
 
     // Agenda
     if (seg[0] === 'eventos') {
-      if (!seg[1] || seg[1] === 'page') return responder(V.agenda(ctx, { mes: /^\d{4}-\d{2}$/.test(q.get('mes') || '') ? q.get('mes') : null, pasados: q.get('pasados') === '1', pagina: pag(1) }));
+      if (!seg[1] || seg[1] === 'page') {
+        const anio = /^\d{4}$/.test(q.get('anio') || '') ? Number(q.get('anio')) : null;
+        return responder(V.agenda(ctx, { mes: /^\d{4}-(0[1-9]|1[0-2])$/.test(q.get('mes') || '') ? q.get('mes') : null, anio: anio >= 1980 && anio <= 2100 ? anio : null, pasados: q.get('pasados') === '1', pagina: pag(1), q: q.get('q') || '', tipo: q.get('tipo') || '', cat: q.get('cat') || '' }));
+      }
+      // Publicaciones del paquete que aún no se importan: ficha propia; una vez importadas, a su noticia.
+      if (seg[1] === 'actividad' && seg[2]) {
+        const n = /^[\w-]{1,80}$/.test(seg[2]) ? elementoDelPaquete(seg[2]) : null;
+        if (!n) return noEncontrado(req, res, ctx, ruta);
+        const ya = db.get("SELECT * FROM contenidos WHERE url_antigua = ? AND estado = 'publicado'", n.url_antigua || 'facebook:' + n.clave);
+        if (ya) return redirigir(res, repo.urlDe(ya), 301);
+        return responder(V.actividadPaquete(ctx, n));
+      }
       const c = repo.porSlug('evento', seg[1]);
       if (!c || !(repo.visible(c) || usuario)) return noEncontrado(req, res, ctx, ruta);
       if (seg[2] === 'ics') return enviar(req, res, 200, ics([c]), { 'Content-Type': 'text/calendar; charset=utf-8', 'Content-Disposition': `attachment; filename="${c.slug}.ics"` });
@@ -648,6 +661,9 @@ ${items.map((c) => `<item><title>${x(c.titulo)}</title><link>${x(base + repo.url
     if (r) { db.run('UPDATE redirecciones SET visitas = visitas + 1 WHERE id = ?', r.id); return redirigir(res, r.destino, r.codigo); }
     const antiguo = db.get("SELECT id FROM contenidos WHERE url_antigua = ? AND estado = 'publicado'", ruta);
     if (antiguo) { const c = repo.obtener(antiguo.id); const nueva = repo.urlDe(c); if (nueva !== ruta) return redirigir(res, nueva, 301); }
+    // Publicación del paquete aún no importada: su ficha provisoria en la agenda (redirección temporal).
+    const delPaquete = claveDelPaqueteParaRuta(ruta);
+    if (delPaquete) return redirigir(res, `/eventos/actividad/${delPaquete}/`, 302);
     const ultimo = ruta.split('/').filter(Boolean).pop();
     if (ultimo) {
       const c = db.get("SELECT id FROM contenidos WHERE slug = ? AND estado = 'publicado' AND tipo IN ('noticia','pagina','tramite','evento','documento') LIMIT 1", ultimo);
