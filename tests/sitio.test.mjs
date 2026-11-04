@@ -397,11 +397,12 @@ test('facebook: álbumes como fototeca, noticias y eventos pasados de la agenda'
   assert.equal((await pedir('/fotos/no-existe-este-album/')).status, 404);
   // Nada interno del respaldo: ni nombres de archivo, ni enlaces a Facebook, ni datos de Drive.
   const datos = JSON.stringify(indice().albumes) + (await import('node:fs')).readFileSync(new URL('../contenido/facebook/noticias.json', import.meta.url), 'utf8');
-  assert.doesNotMatch(datos, /facebook\.com|drive\.google|this_profile|your_activity|https?:\/\//);
+  // Sólo se admiten enlaces a formularios públicos oficiales (p. ej. la postulación a la feria del Baqueano).
+  assert.doesNotMatch(datos.replace(/https:\/\/tally\.so\/r\/\w+/g, ''), /facebook\.com|drive\.google|this_profile|your_activity|https?:\/\//);
   // Eventos pasados en la agenda, con enlace a sus fotos.
   const ev = await (await pedir('/eventos/?pasados=1')).text();
   assert.match(ev, /Fiesta del Baqueano/);
-  const enlace = ev.match(/href="(\/eventos\/[^"]*baqueano[^"]*)"/)[1];
+  const enlace = [...ev.matchAll(/href="(\/eventos\/[^"]*baqueano[^"]*)"/g)].map((m) => m[1]).find((x) => !x.includes('2026'));
   assert.match(await (await pedir(enlace)).text(), /href="\/fotos\/[^"]+\/">Ver las fotos de la actividad/);
   // Los micrositios muestran las fotos de su área.
   const cultura = await (await pedir('/cultura/')).text();

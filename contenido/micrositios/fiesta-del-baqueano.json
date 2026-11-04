@@ -12,7 +12,7 @@
    "baqueano"
   ],
   "publicado": true,
-  "actualizado": "2026-11-02",
+  "actualizado": "2026-11-04",
   "tema": {
    "color": "#8B4A1F",
    "oscuro": "#3D1E0A",
@@ -23,10 +23,14 @@
    "imagen": "/img/facebook/albumes/753279920170750.webp"
   },
   "portada": {
-   "antetitulo": "La gran fiesta de la cordillera · desde 2013",
+   "antetitulo": "13ª versión · sábado 28 y domingo 29 de noviembre de 2026",
    "titulo": "Fiesta del Baqueano",
    "bajada": "Cada fin de año Melipeuco revive la historia de los baqueanos: arrieros, campesinos y conocedores de la montaña que abrieron los caminos de la cordillera. Desfile, destrezas baqueanas, feria, gastronomía y música.",
    "botones": [
+    {
+     "texto": "Feria 2026: bases y postulación",
+     "url": "/2026/11/02/13-fiestadelbaqueano-2/"
+    },
     {
      "texto": "Versión por versión",
      "url": "#m-historia"
@@ -83,6 +87,17 @@
     ]
    },
    {
+    "id": "feria-2026",
+    "tipo": "llamado",
+    "titulo": "Feria 2026: postula tu emprendimiento",
+    "texto": "La 13ª versión se celebra el sábado 28 y domingo 29 de noviembre en la Plaza de Armas y el Recinto de la Agrupación de Baqueanos. Emprendedores, artesanos y microempresarios mayores de 18 años pueden postular en línea hasta el viernes 6 de noviembre a las 23:59; los seleccionados se publican el 13 de noviembre.",
+    "icono": "trabajo",
+    "boton": "Bases y postulación",
+    "url": "/2026/11/02/13-fiestadelbaqueano-2/",
+    "boton2": "Bases en PDF",
+    "url2": "/wp-content/uploads/2026/11/BASES-DE-CONVOCATORIA-FERIA-FIESTA-DEL-BAQUEANO-2026-1.pdf"
+   },
+   {
     "id": "que-hay",
     "tipo": "tarjetas",
     "ancla": "Qué hay",
@@ -137,8 +152,8 @@
      {
       "periodo": "2026",
       "titulo": "13ª versión",
-      "texto": "Fecha por confirmar: se publicará en la agenda municipal.",
-      "estado": "pendiente"
+      "texto": "Sábado 28 y domingo 29 de noviembre de 2026, de manera simultánea en la Plaza de Armas de Melipeuco y el Recinto de la Agrupación de Baqueanos. Postulación a la feria del 2 al 6 de noviembre.",
+      "estado": "curso"
      },
      {
       "periodo": "2025",
@@ -219,7 +234,61 @@
     "tipo": "calendario",
     "ancla": "Agenda",
     "titulo": "Próximas fechas",
-    "items": [],
+    "items": [
+     {
+      "titulo": "Cierre de la postulación a la feria",
+      "fecha": "2026-11-06",
+      "hora": "23:59",
+      "lugar": "En línea",
+      "tipo": "Feria 2026",
+      "texto": "Formulario en línea para emprendedores, artesanos y microempresarios.",
+      "url": "/2026/11/02/13-fiestadelbaqueano-2/"
+     },
+     {
+      "titulo": "Publicación de seleccionados",
+      "fecha": "2026-11-13",
+      "hora": "13:30",
+      "lugar": "Contacto telefónico y redes sociales",
+      "tipo": "Feria 2026"
+     },
+     {
+      "titulo": "Pago presencial de derechos",
+      "fecha": "2026-11-18",
+      "hora": "09:00 a 17:30",
+      "lugar": "Tesorería Municipal",
+      "tipo": "Feria 2026",
+      "texto": "Quien no asista ese día pierde el cupo."
+     },
+     {
+      "titulo": "Reunión de coordinación y venta de vasos reutilizables",
+      "fecha": "2026-11-26",
+      "hora": "09:00",
+      "lugar": "Recinto de la Agrupación de Baqueanos",
+      "tipo": "Feria 2026"
+     },
+     {
+      "titulo": "Reunión de coordinación y venta de vasos reutilizables",
+      "fecha": "2026-11-27",
+      "hora": "09:00",
+      "lugar": "Plaza de Armas de Melipeuco",
+      "tipo": "Feria 2026"
+     },
+     {
+      "titulo": "Inauguración de la 13° Fiesta del Baqueano",
+      "fecha": "2026-11-28",
+      "hora": "15:00 a 21:00",
+      "lugar": "Plaza de Armas de Melipeuco y Recinto de la Agrupación de Baqueanos",
+      "tipo": "Fiesta",
+      "texto": "Inauguración en la Plaza de Armas y show artístico hasta las 21:00."
+     },
+     {
+      "titulo": "Segundo día de fiesta",
+      "fecha": "2026-11-29",
+      "hora": "10:00 a 21:00",
+      "lugar": "Plaza de Armas de Melipeuco y Recinto de la Agrupación de Baqueanos",
+      "tipo": "Fiesta"
+     }
+    ],
     "categoria": "fiesta-del-baqueano",
     "vacio": "La fecha de la próxima versión se publicará aquí y en la agenda municipal."
    },
