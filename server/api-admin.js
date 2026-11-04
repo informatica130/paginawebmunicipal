@@ -751,7 +751,9 @@ export function crearApiAdmin({ db, repo, cfg, tramites, mailer, limitador, audi
   ruta('GET', 'importar-wordpress', 'respaldo.gestionar', () => db.ajuste('importacion') || { en: 'nunca' });
   ruta('GET', 'importar-facebook', 'respaldo.gestionar', () => {
     const paquete = paqueteFacebook();
-    const hechas = db.get("SELECT count(*) n FROM contenidos WHERE url_antigua LIKE 'facebook:%'").n;
+    // Cada elemento se reconoce por su marca (la del importador): «facebook:clave» o su dirección antigua.
+    const marcas = new Set([...paquete.noticias, ...paquete.eventos].map((n) => n.url_antigua || 'facebook:' + n.clave));
+    const hechas = db.all("SELECT url_antigua FROM contenidos WHERE url_antigua IS NOT NULL").filter((x) => marcas.has(x.url_antigua)).length;
     return { disponibles: paquete.noticias.length + paquete.eventos.length, noticias: paquete.noticias.length, eventos: paquete.eventos.length, importadas: hechas, ultima: db.ajuste('importacion-facebook') };
   });
   ruta('POST', 'importar-facebook', 'respaldo.gestionar', ({ u, req }) => {

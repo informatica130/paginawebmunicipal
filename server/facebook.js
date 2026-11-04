@@ -7,7 +7,10 @@
 // programa de salud); los eventos, de los álbumes de fiestas y de las invitaciones con fecha.
 // Importar sólo agrega lo que falta: cada elemento lleva su clave en url_antigua
 // («facebook:fb-…»), así que repetir la importación no duplica nada y lo que el equipo ya editó
-// o eliminó a mano no se vuelve a tocar.
+// o eliminó a mano no se vuelve a tocar. Las entradas nuevas del sitio web anterior (publicadas
+// después de la copia de contenido/semilla) llegan por el mismo paquete con su dirección original
+// en url_antigua, para que los enlaces antiguos sigan llevando a la noticia; «redirecciones»
+// lleva las direcciones antiguas duplicadas o vacías a la entrada que corresponde.
 
 import fs from 'node:fs';
 import { RAIZ } from './config.js';
@@ -32,7 +35,7 @@ export function importarFacebook(db, repo, { paquete = paqueteFacebook(), usuari
   };
   db.tx(() => {
     for (const n of [...paquete.noticias.map((x) => ({ ...x, tipo: 'noticia' })), ...eventos.map((x) => ({ ...x, tipo: 'evento' }))]) {
-      const marca = 'facebook:' + n.clave;
+      const marca = n.url_antigua || 'facebook:' + n.clave;
       const previo = db.get('SELECT id, imagen, datos FROM contenidos WHERE url_antigua = ?', marca);
       if (previo) {
         // Lo importado antes sin fotos recibe las que ahora trae el paquete (no toca otra cosa).
@@ -45,7 +48,7 @@ export function importarFacebook(db, repo, { paquete = paqueteFacebook(), usuari
         r.omitidos++; continue;
       }
       const datos = n.tipo === 'evento'
-        ? { inicio: n.inicio, fin: '', todoElDia: n.todoElDia ?? true, lugar: n.lugar || 'Melipeuco', direccion: '' }
+        ? { inicio: n.inicio, fin: n.fin || '', todoElDia: n.todoElDia ?? true, lugar: n.lugar || 'Melipeuco', direccion: '' }
         : { galeria: n.galeria || [], fuente: n.fuente || FUENTE };
       repo.guardar({
         tipo: n.tipo, titulo: n.titulo, resumen: n.resumen, cuerpo: n.cuerpo, estado: 'publicado', publicado_en: n.publicado_en,
@@ -55,6 +58,7 @@ export function importarFacebook(db, repo, { paquete = paqueteFacebook(), usuari
       r.creados++;
       if (n.tipo === 'evento') r.eventos++;
     }
+    for (const x of paquete.redirecciones || []) db.run('INSERT OR IGNORE INTO redirecciones(origen, destino, codigo, creado) VALUES(?,?,301,?)', x.origen, x.destino, new Date().toISOString());
   });
   return r;
 }
